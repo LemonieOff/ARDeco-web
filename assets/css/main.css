@@ -4,6 +4,13 @@
 @tailwind utilities;
 
 @layer base {
+
+    @font-face {
+        src: url('https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2');
+        font-family:'Compressa VF';
+        font-style: normal;
+    }
+
     html {
         scroll-behavior: smooth;
     }

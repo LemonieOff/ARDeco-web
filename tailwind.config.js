@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['acumin-pro', 'sans-serif']
+        sans: [ 'acumin-pro', 'sans-serif'],
+        display: ['Compressa VF', 'sans-serif']
       },
       colors: {
         'light-black': '#010D00',
