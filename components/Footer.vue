@@ -2,13 +2,13 @@
   <div class="flex bg-port-brown flex-row border-ARgrey border-t-4 pb-8" >
     <div class="w-1/3 flex flex-col justify-around mx-auto justify-center ml-14">
       <h1 class="font-display font-black text-ARgrey text-3xl mt-8 mb-8">Stay tuned</h1>
-      <p class="font-display text-ARgrey text-xl font-bold decoration-0 mb-2">+33 6 31 99 95 71</p>
-      <p class="font-display text-ARgrey text-xl font-bold decoration-0 mb-8">ardecoofficiel@gmail.com</p>
+      <a class="font-display text-ARgrey text-xl font-bold decoration-0 mb-2 hover:text-white decoration-0" href="https://instagram.com/ardeco_officiel">@ardeco_officiel</a>
+      <a class="font-display text-ARgrey text-xl font-bold decoration-0 mb-8 hover:text-white decoration-0" href="https://linkedin.com/company/ardeco-nice">ARdeco</a>
     </div>
     <div class="w-1/3 flex flex-col justify-around ml-14">
       <h1 class="font-display font-black text-ARgrey text-3xl mt-8 mb-8">Contact us</h1>
       <p class="font-display text-ARgrey text-xl font-bold decoration-0 mb-2 hover:text-white">+33 6 31 99 95 71</p>
-      <p class="font-display text-ARgrey text-xl font-bold decoration-0 mb-8 hover:text-white">ardecoofficiel@gmail.com</p>
+      <p class="font-display text-ARgrey text-xl font-bold decoration-0 mb-8 hover:text-white">ardeco.officiel@gmail.com</p>
     </div>
     <div class="w-1/3 flex flex-col justify-around ml-14">
       <h1 class="font-display font-black text-ARgrey text-3xl mt-8 mb-8">Join our newsletter</h1>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Footer"
 }

@@ -1,5 +1,4 @@
 <template>
-    <body>
         <div class="profile">
             <p class="center-text">Hugo Becart</p>
             <a class="center" href="https://www.linkedin.com/in/hugo-becart/">
@@ -20,7 +19,7 @@
             <a class="center" href="https://www.linkedin.com/in/louis-villedieu-8866091b9/">
                 <img src="../assets/images/profile-pictures/LOUIS.png">
             </a>
-            <p class="center-text">AR developer</p>
+            <p class="center-text">Web / AR developer</p>
         </div>
         <div class="profile">
             <p class="center-text">Ugo Lena</p>
@@ -43,14 +42,9 @@
             </a>
             <p class="center-text">Design and partners</p>
         </div>
-    </body>
-    <ClientOnly>
-        <Navbar></Navbar>
-    </ClientOnly>
 </template>
   
 <script setup lang="ts">
-import Navbar from "~/components/Navbar.vue";
 </script>
 
 <style lang="scss" scoped>

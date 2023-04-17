@@ -35,21 +35,53 @@
       </div>
     </div>
   </div>
-  <div class="h-screen bg-[#F2EBDF] flex">
-    <img class="ml-32 w-1/2 h-2/3 my-auto rounded-xl" src="~assets/images/intro.gif" alt="this slowpoke moves" />
+  <div class="h-screen bg-gradient-to-t from-port-brown to-[#F2EBDF] flex">
+    <img class="ml-32 w-1/2 h-2/3 my-auto rounded-xl" src="~assets/images/ar_illu.png" alt="this slowpoke moves" />
     <div class="font-display font-medium w-1/3 ml-9 text-4xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4">
-      <h2 class="underline mb-5">ARDECO</h2>
+      <h2 class="underline mb-5">Augmented Reality</h2>
       <p>
-        Is innovative application that revolutionizes your interior design experience using Augmented Reality (AR) and Artificial Intelligence (AI). Effortlessly scan your room with your phone, and our intelligent AI algorithms will analyze the space to create personalized, visually stunning decorations tailored to your preferences. Explore new design possibilities and bring your dream space to life with ARDeco.
+        We chose Augmented Reality for this project because it offers an immersive, interactive <experien></experien>ce, allowing you to visualize and experiment with various design elements in real-time, right in your own space. ARDeco eliminates the guesswork and the need for costly, time-consuming redesigns by giving you a true-to-life preview of your dream space. Discover endless possibilities and unleash your creativity with ARDeco – the future of interior design is here.
       </p>
     </div>
   </div>
-  <!--test threeJS-->
-
+  <div class="flex flex-col items-center justify-center bg-gradient-to-b h-screen w-screen from-port-brown to-[#F2EBDF]">
+    <span class="text-9xl font-bold mb-12 w-full text-center outline-text">Key Points</span>
+    <ul class="flex flex-wrap justify-center">
+      <li v-for="(feature, index) in features" :key="index" class="m-3 flex flex-col justify-between bg-port-brown border border-ARgrey text-ARgrey p-4 rounded-md shadow-md w-1/3 font-sans hover:bg-ARgrey hover:text-port-brown">
+        <h3 class="text-xl font-semibold mb-2">{{ feature.title }}</h3>
+        <p class="">{{ feature.description }}</p>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
 import backgroundUrl from '~/assets/images/homeHero.jpg'
+
+import { ref } from 'vue';
+
+const features = ref([
+  {
+    title: 'AI-Powered Design Recommendations',
+    description: 'Our intelligent algorithms analyze your space and offer personalized design suggestions based on your unique preferences and requirements.',
+  },
+  {
+    title: 'Real-Time Visualization',
+    description: 'See how different furniture, colors, and accessories look in your space instantly, making it easy to compare and choose the perfect design elements.',
+  },
+  {
+    title: 'Easy-to-Use Interface',
+    description: 'With a user-friendly design and intuitive controls, ARDeco lets you transform your space in just a few taps.',
+  },
+  {
+    title: 'Share Your Designs',
+    description: 'Collaborate with friends, family, or professionals by sharing your designs, getting feedback, and fine-tuning your space together.',
+  },
+  {
+    title: 'Endless Inspiration',
+    description: 'Explore a vast library of styles, trends, and design ideas to help you create a space that truly reflects your personality.',
+  },
+]);
 
 </script>
 
@@ -67,6 +99,11 @@ import backgroundUrl from '~/assets/images/homeHero.jpg'
       color: transparent;
     }
   }
+}
+
+span.outline-text {
+  -webkit-text-stroke: 1px theme('colors.ARgrey');
+  color: transparent;
 }
 
 @keyframes scrollText {
