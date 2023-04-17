@@ -3,7 +3,9 @@
         <a class="navbar-option" href="/">Home</a>
         <a class="navbar-option" href="/team">Team</a>
         <a class="navbar-option" href="/product">Our product</a>
+        <a class="navbar-option" href="/profile">Profile</a>
     </div>
+
 </template>
 
 <script>
@@ -13,8 +15,6 @@ export default {
 </script>
 
 <style scoped>
-.navbar-option {
-}
 
 .navbar {
     text-align: center;
