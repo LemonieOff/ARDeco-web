@@ -1,0 +1,152 @@
+@import 'ColorVariables.scss';
+
+.profile-page-content {
+    height: 100vh;
+    display: flex;
+}
+
+.sub-content {
+    display: flex;
+    margin-top: 2.5%;
+    height: 80%;
+    width: 80%;
+    margin-left: 10%;
+    // border: 3px solid pink;
+}
+
+.personal-content {
+    margin-top: 7.5%;
+    width: 50%;
+    height: 70%;
+    // border: 3px solid orange;
+    text-align: center;
+    display: grid;
+}
+
+.profile-picture {
+    // border: 3px solid green;
+    display: block;
+    margin: auto;
+    height: 30vh;
+}
+
+.black-separation-bar {
+    margin-top: -2.5%;
+    margin-left: 35%;
+    width: 30%;
+    height: 8px;
+    background: #000000;
+    border-radius: 50px;
+}
+
+.orange-separation-bar {
+    margin-top: -5%;
+    margin-left: 40%;
+    width: 20%;
+    height: 8px;
+    background: $timeline-active;
+    border-radius: 50px;
+}
+
+.name {
+    margin-top: -5%;
+    font-size: 24px;
+    font-weight : bold;
+}
+
+.role {
+    margin-top: -5%;
+    font-size: 24px;
+    color: #6C6C6C;
+    font-weight : bold;
+}
+
+.timeline-content {
+    display: flex;
+    margin-top: 7.5%;
+    width: 50%;
+    height: 70%;
+    // border: 3px solid blue;
+}
+
+.timeline-inactive {
+    align-self: center;
+    width: 15%;
+    height: 8px;
+    background: $timeline-inactive;
+}
+
+.timeline-active {
+    align-self: center;
+    width: 15%;
+    height: 8px;
+    background: $timeline-active;
+}
+
+.year-bubble-active {
+    margin-top: -0.25vw;
+    margin-left: -0.25vw;
+    height: 1vw;
+    width: 1vw;
+    background-color: $timeline-active;
+    border-radius: 50%;
+}
+
+.year-bubble-inactive {
+    margin-top: -0.25vw;
+    margin-left: -0.25vw;
+    height: 1vw;
+    width: 1vw;
+    background-color: $timeline-inactive;
+    border-radius: 50%;
+}
+
+.end-year-bubble-active {
+    margin-top: -0.25vw; 
+    margin-left: 99%;
+	width: 0;
+	height: 0;
+	border-top: 0.5vw solid transparent;
+	border-left: 1vw solid $timeline-active;
+	border-bottom: 0.5vw solid transparent;
+}
+
+.end-year-bubble-inactive {
+    margin-top: -0.25vw; 
+    margin-left: 99%;
+	width: 0;
+	height: 0;
+	border-top: 0.5vw solid transparent;
+	border-left: 1vw solid $timeline-inactive;
+	border-bottom: 0.5vw solid transparent;
+}
+
+.year-2020 {
+    margin-top: 0.5%;
+    margin-right: 2vw;
+    align-self: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.year-2023 {
+    margin-top: 0.5%;
+    margin-left: 3vw;
+    align-self: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.internship-logo {
+    margin: 2vh;
+    width: 3vw
+}
+
+.internship-role {
+    text-align: center;
+}
+
+.epitech-logo-timeline {
+    margin-top: -15vh;
+    margin-left: -2vw;
+}
