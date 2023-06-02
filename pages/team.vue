@@ -1,14 +1,12 @@
 <template>
-    <body>
-        <Navbar></Navbar>
-        <PagePresentation></PagePresentation>
-        <ProfileHugo></ProfileHugo>
-        <ProfileEvan></ProfileEvan>
-        <ProfileLouis></ProfileLouis>
-        <ProfileUgo></ProfileUgo>
-        <ProfileMathias></ProfileMathias>
-        <ProfileValentin></ProfileValentin>
-    </body>
+    <Navbar></Navbar>
+    <PagePresentation></PagePresentation>
+    <ProfileHugo></ProfileHugo>
+    <ProfileEvan></ProfileEvan>
+    <ProfileLouis></ProfileLouis>
+    <ProfileUgo></ProfileUgo>
+    <ProfileMathias></ProfileMathias>
+    <ProfileValentin></ProfileValentin>
 </template>
 
 <script setup lang="ts">
@@ -23,12 +21,4 @@ import ProfileValentin from "~/components/Profiles/ProfileValentin.vue";
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.cdnfonts.com/css/happy-monkey');
-@import '../styles/ColorVariables.scss';
-
-body {
-    font-family: 'Happy Monkey', sans-serif;
-    background-color: $background-main-theme;
-}
-
 </style>

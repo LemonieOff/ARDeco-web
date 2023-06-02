@@ -1,0 +1,71 @@
+@import 'ColorVariables.scss';
+
+.faq-page-content {
+    height: 100vh;
+}
+
+.faq-into-question {
+    margin-top: 5%;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 48px;
+    margin-top: 6%;
+    font-weight : bold;
+}
+
+.title {
+    text-align: center;
+    font-size: 32px;
+    font-weight : bold;
+}
+
+.sub-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight : bold;
+}
+
+.text {
+    font-size: 18px;
+    font-weight : bold;
+}
+
+.gray-text-color {
+    color: #6C6C6C;
+}
+
+.sub-content {
+    height: 75%;
+    width: 80%;
+    margin-left: 10%;
+    // border: 3px solid pink;
+}
+
+.questions-list {
+    margin-top: 5%;
+    margin-left: 20%;
+    height: 60%;
+    width: 60%;
+    // border: 3px solid red;
+}
+
+.questions-list-element-right {
+    margin-right: 10%;
+    text-align: right;
+    height: 15%;
+    // border: 3px solid green;
+}
+
+.questions-list-element-left {
+    margin-left: 10%;
+    text-align: left;
+    height: 15%;
+    // border: 3px solid blue;
+}
+
+.question-content {
+    width: 60%;
+    margin-left: 20%;
+}
