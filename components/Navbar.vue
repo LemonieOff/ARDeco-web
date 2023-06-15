@@ -18,7 +18,7 @@ export default {
 
 .navbar {
     text-align: center;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: #333;
     position: fixed;
     top: 0;

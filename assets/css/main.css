@@ -1,4 +1,6 @@
 @import url("https://use.typekit.net/bpw8gft.css");
+@import url('https://fonts.cdnfonts.com/css/happy-monkey');
+@import '../../styles/ColorVariables.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,6 +15,11 @@
 
     html {
         scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Happy Monkey', sans-serif;
+        background-color: #F2EBDF;
     }
 
     button {
