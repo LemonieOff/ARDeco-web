@@ -8,22 +8,22 @@
             </div>
             <div class="questions-list">
                 <div class="questions-list-element-left">
-                    <a class="text gray-text-color"> What is ARDeco ? </a>
+                    <a class="text gray-text-color" href="#what-is-ardeco"> What is ARDeco ? </a>
                 </div>
                 <div class="questions-list-element-right">
-                    <a class="text gray-text-color"> How to use ARDeco ? </a>
+                    <a class="text gray-text-color" href="#how-to-use-ardeco"> How to use ARDeco ? </a>
                 </div>
                 <div class="questions-list-element-left">
-                    <a class="text gray-text-color"> How are my furniture chosen ? </a>
+                    <a class="text gray-text-color" href="#how-are-furnitures-chosen"> How are my furniture chosen ? </a>
                 </div>
                 <div class="questions-list-element-right">
-                    <a class="text gray-text-color"> Where do the models come from ? </a>
+                    <a class="text gray-text-color" href="#where-are-models-from"> Where do the models come from ? </a>
                 </div>
                 <div class="questions-list-element-left">
-                    <a class="text gray-text-color"> Why should I use ARDeco ? </a>
+                    <a class="text gray-text-color" href="#why-choose-ardeco"> Why should I use ARDeco ? </a>
                 </div>
                 <div class="questions-list-element-right">
-                    <a class="text gray-text-color"> Can I buy furniture from the app ? </a>
+                    <a class="text gray-text-color" href="#in-app-purchases"> Can I buy furniture from the app ? </a>
                 </div>
             </div>
         </div>
