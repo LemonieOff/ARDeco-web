@@ -15,7 +15,7 @@ import Navbar from "~/components/Navbar.vue";
 
 .title {
   display: inline-block;
-  font-size: 300%;
+  font-size: 1.75vw;
   top: 10%;
   text-align: center;
   position: relative;
