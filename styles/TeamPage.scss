@@ -34,31 +34,31 @@
     margin-top: -2.5%;
     margin-left: 35%;
     width: 30%;
-    height: 8px;
+    height: 0.417vw;
     background: #000000;
-    border-radius: 50px;
+    border-radius: 2.5vw;
 }
 
 .orange-separation-bar {
     margin-top: -5%;
     margin-left: 40%;
     width: 20%;
-    height: 8px;
+    height: 0.417vw;
     background: $timeline-active;
-    border-radius: 50px;
+    border-radius: 2.5vw;
 }
 
 .name {
     margin-top: -5%;
-    font-size: 24px;
+    font-size: 1.25vw;
     font-weight : bold;
 }
 
 .role {
     margin-top: -5%;
-    font-size: 24px;
     color: #6C6C6C;
     font-weight : bold;
+    font-size: 1.25vw;
 }
 
 .timeline-content {
@@ -72,14 +72,14 @@
 .timeline-inactive {
     align-self: center;
     width: 15%;
-    height: 8px;
+    height: 0.417vw;
     background: $timeline-inactive;
 }
 
 .timeline-active {
     align-self: center;
     width: 15%;
-    height: 8px;
+    height: 0.417vw;
     background: $timeline-active;
 }
 
@@ -126,7 +126,7 @@
     margin-right: 2vw;
     align-self: center;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 1.25vw;
 }
 
 .year-2023 {
@@ -134,7 +134,7 @@
     margin-left: 3vw;
     align-self: center;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 1.25vw;
 }
 
 .internship-logo {
@@ -144,9 +144,11 @@
 
 .internship-role {
     text-align: center;
+    font-size: 0.65vw;
 }
 
 .epitech-logo-timeline {
     margin-top: -15vh;
     margin-left: -2vw;
+    width: 10vw;
 }

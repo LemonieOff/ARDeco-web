@@ -66,6 +66,11 @@ export default {
 
 <style lang="scss" scoped>
 
+img {
+    height: auto;
+    width: 100%;
+}
+
 .page-presentation-content {
     height: 100vh;
     // border: 3px solid blue;
@@ -74,7 +79,7 @@ export default {
 .title {
     text-align: center;
     margin-top: 6%;
-    font-size: 48px;
+    font-size: 1.75vw;
     font-weight : bold;
 }
 
@@ -94,13 +99,13 @@ export default {
 
 .team-content .title {
     text-align: center;
-    font-size: 28px;
+    font-size: 1vw;
     font-weight : bold;
 }
 
 .sub-title {
     text-align: center;
-    font-size: 18px;
+    font-size: 0.75vw;
     color: #6C6C6C;
     font-weight : bold;
 }
@@ -128,11 +133,11 @@ export default {
 
 .school-content .title {
     text-align: center;
-    font-size: 28px;
+    font-size: 1vw;
 }
 
 .school-content .text {
-    font-size: 18px;
+    font-size: 0.75vw;
     text-align: center;
     padding-left: 5%;
     padding-right: 5%;
