@@ -1,7 +1,7 @@
 <template>
     <div class="faq-page-content">
-        <div class="question-content" id="why-choose-ardeco">
-            <div class="title">Why should I use ARDeco ?</div>
+        <div class="question-content background-card" id="why-choose-ardeco">
+            <div class="title underline">Why should I use ARDeco ?</div>
             <br>
             <div class="sub-title gray-text-color">
                 The project therefore saves time when furnishing your room.
@@ -20,8 +20,8 @@
         <br>
         <br>
         <br>
-        <div class="question-content" id="in-app-purchases">
-            <div class="title">Can I buy furniture from the app ?</div>
+        <div class="question-content background-card" id="in-app-purchases">
+            <div class="title underline">Can I buy furniture from the app ?</div>
             <br>
             <div class="sub-title gray-text-color">
                 Yes. Our goal is to make life simpler and faster for the user, and we continue

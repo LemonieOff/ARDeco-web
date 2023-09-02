@@ -6,47 +6,42 @@
 
 .faq-into-question {
     margin-top: 5%;
+    width: 40%;
+    margin-left: 30%;
 }
 
-.main-title {
-    text-align: center;
-    font-size: 2.5vw;
-    margin-top: 6%;
-    font-weight : bold;
+.background-card {
+    border-radius: 10px;
+    border: 3px solid #846700;
+    background: #F5DBAF;
 }
 
-.title {
-    text-align: center;
-    font-size: 1.67vw;
-    font-weight : bold;
+.underline {
+    border-bottom: 3px solid #846700;
 }
 
-.sub-title {
-    text-align: center;
-    font-size: 1.25vw;
-    font-weight : bold;
-}
 
-.text {
-    font-size: 0.94vw;
-    font-weight : bold;
-}
-
-.gray-text-color {
-    color: #6C6C6C;
-}
-
-.sub-content {
+.question-card {
+    margin: 5%;
+    width: 25%;
     height: 75%;
-    width: 80%;
-    margin-left: 10%;
-    // border: 3px solid pink;
+    text-align: center;
+    padding: 1%;
+}
+
+.question-icon {
+    height: auto;
+    width: 40%;
+    padding: 30%;
+    padding-top: 10%;
 }
 
 .questions-list {
+    justify-content: center;
+    display: flex;
     margin-top: 5%;
     margin-left: 20%;
-    height: 60%;
+    height: 30%;
     width: 60%;
     // border: 3px solid red;
 }
@@ -68,4 +63,37 @@
 .question-content {
     width: 60%;
     margin-left: 20%;
+}
+
+
+.main-title {
+    text-align: center;
+    font-size: 2.5vw;
+    margin-top: 6%;
+}
+
+.title {
+    text-align: center;
+    font-size: 1.67vw;
+}
+
+.sub-title {
+    padding: 2%;
+    text-align: center;
+    font-size: 1.25vw;
+}
+
+.text {
+    font-size: 0.94vw;
+}   
+
+.gray-text-color {
+    color: #6C6C6C;
+}
+
+.sub-content {
+    height: 75%;
+    width: 80%;
+    margin-left: 10%;
+    // border: 3px solid pink;
 }

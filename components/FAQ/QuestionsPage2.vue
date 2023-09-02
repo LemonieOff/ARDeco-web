@@ -1,7 +1,7 @@
 <template>
     <div class="faq-page-content">
-        <div class="question-content" id="how-are-furnitures-chosen">
-            <div class="title">How are my furniture chosen ?</div>
+        <div class="question-content background-card" id="how-are-furnitures-chosen">
+            <div class="title underline">How are my furniture chosen ?</div>
             <br>
             <div class="sub-title gray-text-color">
                 The application offers layout and decoration for a completely empty room,
@@ -17,8 +17,8 @@
         <br>
         <br>
         <br>
-        <div class="question-content" id="where-are-models-from">
-            <div class="title">Where do the models come from ?</div>
+        <div class="question-content background-card" id="where-are-models-from">
+            <div class="title underline">Where do the models come from ?</div>
             <br>
             <div class="sub-title gray-text-color">
                 These 3D models are provided to us directly by the partner brands whose catalog is

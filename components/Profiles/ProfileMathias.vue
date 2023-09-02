@@ -1,7 +1,8 @@
 <template>
-    <div class="profile-page-content" id="mathias-profile">
+    <div class="profile-page-content top-left-yellow-fade-background" id="mathias-profile">
         <div class="sub-content">
-            <div class="personal-content">
+            <div class="personal-content card">
+                <img class="hobby" src="../../assets/images/profile-hobbies/robot.png">
                 <a href="https://www.linkedin.com/in/mathias-blanchard-a54818182/">
                     <img class="profile-picture" src="../../assets/images/profile-pictures/MATHIAS.png">
                 </a>

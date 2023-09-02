@@ -1,5 +1,6 @@
 <template>
-    <div class="page-presentation-content">
+    <div class="page-presentation-content top-right-yellow-fade-background">
+        <div class="line-jump"></div>
         <div class="title">Meet our dream team</div>
         <div class="sub-content">
             <div class="team-content">
@@ -10,16 +11,13 @@
                         <a href="#hugo-profile">
                             <img src="../../assets/images/profile-pictures/Hugo.png">
                         </a>
-                        <a href="#ugo-profile">
-                            <img src="../../assets/images/profile-pictures/Ugo.png">
-                        </a>
                     </div>
                     <div class="profile-pictures">
                         <a href="#louis-profile">
                             <img src="../../assets/images/profile-pictures/Louis.png">
                         </a>
                         <a href="#mathias-profile">
-                            <img src="../../assets/images/profile-pictures/Mathias.png">
+                            <img class="bottom-picture" src="../../assets/images/profile-pictures/Mathias.png">
                         </a>
                     </div>
                     <div class="profile-pictures">
@@ -27,7 +25,7 @@
                             <img src="../../assets/images/profile-pictures/Evan.png">
                         </a>
                         <a href="#valentin-profile">
-                            <img src="../../assets/images/profile-pictures/Valentin.png">
+                            <img class="bottom-picture" src="../../assets/images/profile-pictures/Valentin.png">
                         </a>
                     </div>
                 </div>
@@ -71,9 +69,17 @@ img {
     width: 100%;
 }
 
+.line-jump {
+    height: 5vh;
+}
+
 .page-presentation-content {
     height: 100vh;
     // border: 3px solid blue;
+}
+
+.top-right-yellow-fade-background {
+    background: linear-gradient(312deg, rgba(242, 235, 223, 0.91) 64.31%, rgba(255, 199, 0, 0.65) 100%);
 }
 
 .title {
@@ -113,6 +119,10 @@ img {
 .profile-pictures-content {
     display: flex;
     // border: 3px solid green;
+}
+
+.bottom-picture {
+    margin-left: -75%;
 }
 
 .epitech-details {

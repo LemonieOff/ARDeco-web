@@ -4,7 +4,6 @@
     <ProfileHugo></ProfileHugo>
     <ProfileEvan></ProfileEvan>
     <ProfileLouis></ProfileLouis>
-    <ProfileUgo></ProfileUgo>
     <ProfileMathias></ProfileMathias>
     <ProfileValentin></ProfileValentin>
 </template>
@@ -16,7 +15,6 @@ import ProfileEvan from "~/components/Profiles/ProfileEvan.vue";
 import ProfileHugo from "~/components/Profiles/ProfileHugo.vue";
 import ProfileLouis from "~/components/Profiles/ProfileLouis.vue";
 import ProfileMathias from "~/components/Profiles/ProfileMathias.vue";
-import ProfileUgo from "~/components/Profiles/ProfileUgo.vue";
 import ProfileValentin from "~/components/Profiles/ProfileValentin.vue";
 </script>
 
