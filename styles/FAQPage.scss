@@ -97,3 +97,11 @@
     margin-left: 10%;
     // border: 3px solid pink;
 }
+
+img {
+    transition: .3s ease-in-out;
+}
+
+img:hover{
+	transform: scale(1.25);
+}

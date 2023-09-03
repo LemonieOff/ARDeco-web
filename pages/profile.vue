@@ -1,10 +1,8 @@
 <template>
+  <Navbar></Navbar>
   <div class="h-screen" style="background-color: #F2EBDF;">
     <div class="title"> Your profile </div>
   </div>
-  <ClientOnly>
-      <Navbar></Navbar>
-  </ClientOnly>
 </template>
 
 <script setup lang="ts">

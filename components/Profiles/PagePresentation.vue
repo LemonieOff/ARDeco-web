@@ -136,6 +136,14 @@ img {
     // border: 3px solid yellow;
 }
 
+img {
+    transition: .3s ease-in-out;
+}
+
+img:hover{
+	transform: rotate(5deg) scale(1.25);
+}
+
 .school-content {
     width: 50%;
     // border: 3px solid orangered;
