@@ -8,15 +8,15 @@
                 <div class="sub-title">Click on these pictures to learn more about us !</div>
                 <div class="profile-pictures-content">
                     <div class="profile-pictures">
-                        <a href="#hugo-profile">
+                        <a class="shaking-effect" href="#hugo-profile">
                             <img src="../../assets/images/profile-pictures/Hugo.png">
                         </a>
                     </div>
                     <div class="profile-pictures">
-                        <a href="#louis-profile">
+                        <a class="shaking-effect" href="#louis-profile">
                             <img src="../../assets/images/profile-pictures/Louis.png">
                         </a>
-                        <a href="#mathias-profile">
+                        <a class="shaking-effect" href="#mathias-profile">
                             <img class="bottom-picture" src="../../assets/images/profile-pictures/Mathias.png">
                         </a>
                     </div>
@@ -63,112 +63,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-img {
-    height: auto;
-    width: 100%;
-}
-
-.line-jump {
-    height: 5vh;
-}
-
-.page-presentation-content {
-    height: 100vh;
-    // border: 3px solid blue;
-}
-
-.top-right-yellow-fade-background {
-    background: linear-gradient(312deg, rgba(242, 235, 223, 0.91) 64.31%, rgba(255, 199, 0, 0.65) 100%);
-}
-
-.title {
-    text-align: center;
-    margin-top: 6%;
-    font-size: 1.75vw;
-    font-weight : bold;
-}
-
-.sub-content {
-    display: flex;
-    margin-top: 2.5%;
-    height: 70%;
-    width: 80%;
-    margin-left: 10%;
-    // border: 3px solid pink;
-}
-
-.team-content {
-    width: 50%;
-    // border: 3px solid orange;
-}
-
-.team-content .title {
-    text-align: center;
-    font-size: 1vw;
-    font-weight : bold;
-}
-
-.sub-title {
-    text-align: center;
-    font-size: 0.75vw;
-    color: #6C6C6C;
-    font-weight : bold;
-}
-
-.profile-pictures-content {
-    display: flex;
-    // border: 3px solid green;
-}
-
-.bottom-picture {
-    margin-left: -75%;
-}
-
-.epitech-details {
-    margin: 5%;
-    display: grid;
-    // border: 3px solid green;
-}
-
-.profile-pictures {
-    margin: 5%;
-    // border: 3px solid yellow;
-}
-
-img {
-    transition: .3s ease-in-out;
-}
-
-img:hover{
-	transform: rotate(5deg) scale(1.25);
-}
-
-.school-content {
-    width: 50%;
-    // border: 3px solid orangered;
-}
-
-.school-content .title {
-    text-align: center;
-    font-size: 1vw;
-}
-
-.school-content .text {
-    font-size: 0.75vw;
-    text-align: center;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 5%;
-}
-
-.team-content img {
-    margin-top: 15%;
-}
-
-.school-content img {
-    width: 20%;
-    margin-left: 40%;
-}
-
+@import "../../styles/PagePresentation.scss";
 </style>

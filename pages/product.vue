@@ -16,5 +16,4 @@ import QuestionsPage3 from "~/components/FAQ/QuestionsPage3.vue";
 </script>
 
 <style lang="scss" scoped>
-// @import '../styles/ColorVariables.scss';
 </style>

@@ -1,4 +1,12 @@
-@import 'ColorVariables.scss';
+@import 'variables/ColorVariables.scss';
+
+@keyframes tilt-shaking {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(2.5deg); }
+    50% { transform: rotate(0eg); }
+    75% { transform: rotate(-2.5deg); }
+    100% { transform: rotate(0deg); }
+} 
 
 .faq-page-content {
     height: 100vh;
@@ -27,6 +35,10 @@
     height: 75%;
     text-align: center;
     padding: 1%;
+}
+
+.question-card:hover {
+    animation: tilt-shaking 0.25s infinite;
 }
 
 .question-icon {
