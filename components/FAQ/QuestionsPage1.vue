@@ -2,7 +2,6 @@
     <div class="faq-page-content">
         <div class="question-content background-card" id="what-is-ardeco">
             <div class="title underline">What is ARDeco ?</div>
-            <br>
             <div class="sub-title gray-text-color">
                 ARDeco is a mobile application for scanning the room using the phone.
                 Our AI then generates an interior layout and decoration based on the budget
@@ -11,14 +10,9 @@
                 directly from the application.
             </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <div class="space-between-questions"></div>
         <div class="question-content background-card" id="how-to-use-ardeco">
             <div class="title underline">How to use ARDeco ?</div>
-            <br>
             <div class="sub-title gray-text-color">
                 The user can first enter a budget range and/or a maximum budget not to be exceeded.
                 He can also select different styles that he would like in his room (for example zen,

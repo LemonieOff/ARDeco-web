@@ -101,3 +101,125 @@ img:hover{
     width: 20%;
     margin-left: 40%;
 }
+
+@media screen and (max-width: 1181px) {
+    .page-presentation-content {
+        height: 100vh;
+    }
+    
+    .title {
+        font-size: 34px;
+    }
+
+    .team-content {
+        width: 100%;
+    }
+
+    .school-content {
+        width: 100%;
+    }
+    
+    .team-content .title {
+        font-size: 18px;
+    }
+    
+    .sub-title {
+        font-size: 16px;
+    }
+    
+    .sub-content {
+        display: inherit;
+        margin-top: 5%;
+        height: 80%;
+        width: 100%;
+        margin-left: 0%;
+        text-align: center;
+    }
+    
+    .school-content .title {
+        text-align: center;
+        font-size: 20px;
+    }
+    
+    .school-content .text {
+        font-size: 14px;
+        text-align: center;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 5%;
+    }
+
+    .profile-pictures-content {
+        margin-left: 7.5%;
+    }
+    
+    .team-content img {
+        margin-top: 15%;
+        width: 70%;
+    }
+    
+    .school-content img {
+        width: 20%;
+    }    
+}
+
+@media screen and (max-width: 852px) {
+    .page-presentation-content {
+        height: 100vh;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+
+    .team-content {
+        width: 100%;
+    }
+
+    .school-content {
+        width: 100%;
+    }
+    
+    .team-content .title {
+        font-size: 14px;
+    }
+    
+    .sub-title {
+        font-size: 12px;
+    }
+    
+    .sub-content {
+        display: inherit;
+        margin-top: 5%;
+        height: 80%;
+        width: 100%;
+        margin-left: 0%;
+        text-align: center;
+    }
+    
+    .school-content .title {
+        text-align: center;
+        font-size: 16px;
+    }
+    
+    .school-content .text {
+        font-size: 10px;
+        text-align: center;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 5%;
+    }
+
+    .profile-pictures-content {
+        margin-left: 7.5%;
+    }
+    
+    .team-content img {
+        margin-top: 15%;
+        width: 70%;
+    }
+    
+    .school-content img {
+        width: 20%;
+    }
+}

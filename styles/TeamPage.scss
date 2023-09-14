@@ -193,3 +193,106 @@ img {
 img:hover{
 	transform: scale(1.25);
 }
+
+@media screen and (max-width: 1181px) {
+    .profile-page-content {
+        height: 40vh;
+    }
+    
+    .sub-content {
+        height: 40vh;
+        width: 90%;
+        margin-left: 10%;
+    }
+    
+    .personal-content {
+        margin-top: 0%;
+        margin-left: 0%;
+        width: 25%;
+        height: 70%;
+    }
+    
+    .name {
+        font-size: 16px;
+    }
+    
+    .role {
+        font-size: 16px;
+    }
+    
+    .year-2020 {
+        font-size: 24px;
+    }
+    
+    .year-2023 {
+        font-size: 24px;
+    }
+    
+    .internship-logo {
+        margin-left: 5px;
+        margin-top: 10px;
+        width: 100px;
+    }
+    
+    .internship-role {
+        font-size: 10px;
+    }
+    
+    .epitech-logo-timeline {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .profile-page-content {
+        height: 40vh;
+    }
+    
+    .sub-content {
+        height: 40vh;
+        width: 90%;
+        margin-left: 10%;
+    }
+    
+    .personal-content {
+        margin-top: 0%;
+        margin-left: 0%;
+        width: 40%;
+        height: 70%;
+    }
+    
+    .name {
+        font-size: 11px;
+    }
+    
+    .role {
+        font-size: 11px;
+    }
+
+    .timeline-content {
+        margin-left: 5%;
+        margin-top: -2.5%;
+    }
+    
+    .year-2020 {
+        font-size: 14px;
+    }
+    
+    .year-2023 {
+        font-size: 14px;
+    }
+    
+    .internship-logo {
+        margin-left: 5px;
+        margin-top: 10px;
+        width: 80px;
+    }
+    
+    .internship-role {
+        font-size: 8px;
+    }
+    
+    .epitech-logo-timeline {
+        display: none;
+    }
+}

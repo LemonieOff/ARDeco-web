@@ -22,3 +22,14 @@
     background: #F2EBDF;
     color: black;
 }
+
+@media screen and (max-width: 768px) {
+    .navbar a {
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+
+    .navbar-option {
+        font-size: 12px;
+    }
+}

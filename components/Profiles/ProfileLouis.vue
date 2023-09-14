@@ -50,5 +50,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/TeamPage.scss';
+@import '~/styles/TeamPage.scss';
 </style>

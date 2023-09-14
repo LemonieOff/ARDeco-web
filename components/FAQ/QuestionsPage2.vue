@@ -2,7 +2,7 @@
     <div class="faq-page-content">
         <div class="question-content background-card" id="how-are-furnitures-chosen">
             <div class="title underline">How are my furniture chosen ?</div>
-            <br>
+            
             <div class="sub-title gray-text-color">
                 The application offers layout and decoration for a completely empty room,
                 such as helping to rearrange and redecorate an already furnished and furnished room.
@@ -12,14 +12,9 @@
                 their color and style. To generate the result in 3D or augmented reality, we decided to use 3D models.
             </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <div class="space-between-questions"></div>
         <div class="question-content background-card" id="where-are-models-from">
             <div class="title underline">Where do the models come from ?</div>
-            <br>
             <div class="sub-title gray-text-color">
                 These 3D models are provided to us directly by the partner brands whose catalog is
                 present in the application. If the partners do not have 3D models, we will offer them
