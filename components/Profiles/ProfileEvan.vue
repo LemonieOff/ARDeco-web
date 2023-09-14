@@ -1,7 +1,8 @@
 <template>
-    <div class="profile-page-content" id="evan-profile">
+    <div class="profile-page-content top-right-yellow-fade-background" id="evan-profile">
         <div class="sub-content">
-            <div class="personal-content">
+            <div class="personal-content card">
+                <img class="hobby" src="../../assets/images/profile-hobbies/controller.png">
                 <a href="https://www.linkedin.com/in/evan-blachier-65036120b/">
                     <img class="profile-picture" src="../../assets/images/profile-pictures/EVAN.png">
                 </a>

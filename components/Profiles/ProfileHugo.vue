@@ -1,7 +1,8 @@
 <template>
-    <div class="profile-page-content" id="hugo-profile">
+    <div class="profile-page-content bottom-right-yellow-fade-background" id="hugo-profile">
         <div class="sub-content">
-            <div class="personal-content">
+            <div class="personal-content card">
+                <img class="hobby" src="../../assets/images/profile-hobbies/lemon.png">
                 <a href="https://www.linkedin.com/in/hugo-becart/">
                     <img class="profile-picture" src="../../assets/images/profile-pictures/HUGO.png">
                 </a>

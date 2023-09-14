@@ -1,7 +1,8 @@
 <template>
-    <div class="profile-page-content" id="louis-profile">
+    <div class="profile-page-content bottom-left-yellow-fade-background" id="louis-profile">
         <div class="sub-content">
-            <div class="personal-content">
+            <div class="personal-content card">
+                <img class="hobby" src="../../assets/images/profile-hobbies/croissant.png">
                 <a href="https://www.linkedin.com/in/louis-villedieu-8866091b9/">
                     <img class="profile-picture" src="../../assets/images/profile-pictures/LOUIS.png">
                 </a>

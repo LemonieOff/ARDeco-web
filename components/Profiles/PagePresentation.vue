@@ -1,5 +1,6 @@
 <template>
-    <div class="page-presentation-content">
+    <div class="page-presentation-content top-right-yellow-fade-background">
+        <div class="line-jump"></div>
         <div class="title">Meet our dream team</div>
         <div class="sub-content">
             <div class="team-content">
@@ -7,19 +8,16 @@
                 <div class="sub-title">Click on these pictures to learn more about us !</div>
                 <div class="profile-pictures-content">
                     <div class="profile-pictures">
-                        <a href="#hugo-profile">
+                        <a class="shaking-effect" href="#hugo-profile">
                             <img src="../../assets/images/profile-pictures/Hugo.png">
-                        </a>
-                        <a href="#ugo-profile">
-                            <img src="../../assets/images/profile-pictures/Ugo.png">
                         </a>
                     </div>
                     <div class="profile-pictures">
-                        <a href="#louis-profile">
+                        <a class="shaking-effect" href="#louis-profile">
                             <img src="../../assets/images/profile-pictures/Louis.png">
                         </a>
-                        <a href="#mathias-profile">
-                            <img src="../../assets/images/profile-pictures/Mathias.png">
+                        <a class="shaking-effect" href="#mathias-profile">
+                            <img class="bottom-picture" src="../../assets/images/profile-pictures/Mathias.png">
                         </a>
                     </div>
                     <div class="profile-pictures">
@@ -27,7 +25,7 @@
                             <img src="../../assets/images/profile-pictures/Evan.png">
                         </a>
                         <a href="#valentin-profile">
-                            <img src="../../assets/images/profile-pictures/Valentin.png">
+                            <img class="bottom-picture" src="../../assets/images/profile-pictures/Valentin.png">
                         </a>
                     </div>
                 </div>
@@ -65,92 +63,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-img {
-    height: auto;
-    width: 100%;
-}
-
-.page-presentation-content {
-    height: 100vh;
-    // border: 3px solid blue;
-}
-
-.title {
-    text-align: center;
-    margin-top: 6%;
-    font-size: 1.75vw;
-    font-weight : bold;
-}
-
-.sub-content {
-    display: flex;
-    margin-top: 2.5%;
-    height: 70%;
-    width: 80%;
-    margin-left: 10%;
-    // border: 3px solid pink;
-}
-
-.team-content {
-    width: 50%;
-    // border: 3px solid orange;
-}
-
-.team-content .title {
-    text-align: center;
-    font-size: 1vw;
-    font-weight : bold;
-}
-
-.sub-title {
-    text-align: center;
-    font-size: 0.75vw;
-    color: #6C6C6C;
-    font-weight : bold;
-}
-
-.profile-pictures-content {
-    display: flex;
-    // border: 3px solid green;
-}
-
-.epitech-details {
-    margin: 5%;
-    display: grid;
-    // border: 3px solid green;
-}
-
-.profile-pictures {
-    margin: 5%;
-    // border: 3px solid yellow;
-}
-
-.school-content {
-    width: 50%;
-    // border: 3px solid orangered;
-}
-
-.school-content .title {
-    text-align: center;
-    font-size: 1vw;
-}
-
-.school-content .text {
-    font-size: 0.75vw;
-    text-align: center;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 5%;
-}
-
-.team-content img {
-    margin-top: 15%;
-}
-
-.school-content img {
-    width: 20%;
-    margin-left: 40%;
-}
-
+@import "../../styles/PagePresentation.scss";
 </style>

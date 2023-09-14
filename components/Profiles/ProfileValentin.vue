@@ -1,7 +1,8 @@
 <template>
-    <div class="profile-page-content" id="valentin-profile">
+    <div class="profile-page-content bottom-right-yellow-fade-background" id="valentin-profile">
         <div class="sub-content">
-            <div class="personal-content">
+            <div class="personal-content card">
+                <img class="hobby" src="../../assets/images/profile-hobbies/football.png">
                 <a href="https://www.linkedin.com/in/valentin-astic-85a514205/">
                     <img class="profile-picture" src="../../assets/images/profile-pictures/VALENTIN.png">
                 </a>

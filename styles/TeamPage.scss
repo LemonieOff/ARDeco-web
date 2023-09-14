@@ -1,4 +1,4 @@
-@import 'ColorVariables.scss';
+@import 'variables/ColorVariables.scss';
 
 .profile-page-content {
     height: 100vh;
@@ -16,22 +16,38 @@
 
 .personal-content {
     margin-top: 7.5%;
-    width: 50%;
+    margin-left: 12.5%;
+    width: 25%;
     height: 70%;
     // border: 3px solid orange;
     text-align: center;
     display: grid;
 }
 
+.card {
+    border-radius: 2vw;
+    border: 5px solid #846700;
+    background: linear-gradient(156deg, rgba(255, 199, 0, 0.40) 0%, rgba(132, 103, 0, 0.00) 50%), linear-gradient(0deg, #FFC700 0%, rgba(242, 235, 223, 0.00) 50%);
+}
+
+.hobby {
+    margin-top: -15%;
+    margin-left: -15%;
+    width: 35%;
+    height: auto;
+}
+
 .profile-picture {
     // border: 3px solid green;
     display: block;
     margin: auto;
-    height: 30vh;
+    margin-top: -5%;
+    height: 75%;
+    width: auto;
 }
 
 .black-separation-bar {
-    margin-top: -2.5%;
+    margin-top: -25%;
     margin-left: 35%;
     width: 30%;
     height: 0.417vw;
@@ -40,7 +56,7 @@
 }
 
 .orange-separation-bar {
-    margin-top: -5%;
+    margin-top: -22.5%;
     margin-left: 40%;
     width: 20%;
     height: 0.417vw;
@@ -49,13 +65,13 @@
 }
 
 .name {
-    margin-top: -5%;
+    margin-top: -17.5%;
     font-size: 1.25vw;
     font-weight : bold;
 }
 
 .role {
-    margin-top: -5%;
+    margin-top: -10%;
     color: #6C6C6C;
     font-weight : bold;
     font-size: 1.25vw;
@@ -64,6 +80,7 @@
 .timeline-content {
     display: flex;
     margin-top: 7.5%;
+    margin-left: 12.5%;
     width: 50%;
     height: 70%;
     // border: 3px solid blue;
@@ -151,4 +168,28 @@
     margin-top: -15vh;
     margin-left: -2vw;
     width: 10vw;
+}
+
+.bottom-right-yellow-fade-background {
+    background: linear-gradient(132deg, #F2EBDF 64.31%, rgba(255, 199, 0, 0.65) 100%);
+}
+
+.top-right-yellow-fade-background {
+    background: linear-gradient(48deg, #F2EBDF 64.31%, rgba(255, 199, 0, 0.65) 100%);
+}
+
+.bottom-left-yellow-fade-background {
+    background: linear-gradient(228deg, #F2EBDF 64.31%, rgba(255, 199, 0, 0.65) 100%);
+}
+
+.top-left-yellow-fade-background {
+    background: linear-gradient(312deg, #F2EBDF 64.31%, rgba(255, 199, 0, 0.65) 100%);
+}
+
+img {
+    transition: .3s ease-in-out;
+}
+
+img:hover{
+	transform: scale(1.25);
 }
