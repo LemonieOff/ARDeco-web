@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen" style="background-color: #F2EBDF;">
+    <div class="h-screen">
         <div class="title"> Your profile </div>
         <div class="content">
             <div class="favorite-themes">
