@@ -25,7 +25,6 @@ export default {
 
         const body = document.body
         if (isDarkModeActive == "") {
-            console.log(backgroundCards)
             body.style = "background-color: rgba(0, 4, 65, 0.91); color: white";
 
             if (document.URL.includes("team")) {
@@ -44,8 +43,6 @@ export default {
                 }
             }
         } else {
-            console.log("'isDarkModeActive' == " + "'" + isDarkModeActive + "'" + " != " + "'darkslategray'")
-            console.log(backgroundCards)
             body.style = ""
 
             if (document.URL.includes("team")) {
@@ -64,7 +61,6 @@ export default {
                 }
             }
         }
-        console.log(body);
     },
   },
 };
