@@ -2,27 +2,24 @@
     <div class="h-screen">
         <div class="title"> Your profile </div>
         <div class="content">
-            <div class="favorite-themes">
-                <div class="sub-title">
-                    Your favorites themes
-                </div>
-                <div class="empty-text-content"></div>
-            </div>
-            <div class="profile-details">
-                <img class="profile-picture" src="../../assets/images/profile-settings/default-profile-picture.png">
-                <div class="first-and-last-names">First and last name</div>
-            </div>
-            <div class="recent-purchases">
-                <div class="sub-title">Your recent purchases</div>
-                <div class="empty-text-content"></div>
-            </div>
+            <FavoriteThemes></FavoriteThemes>
+            <ProfileDetails></ProfileDetails>
+            <RecentPurchases></RecentPurchases>
         </div>
     </div>
 </template>
 
 <script>
+import FavoriteThemes from "~/components/UserProfile/FavoriteThemes.vue"
+import ProfileDetails from "~/components/UserProfile/ProfileDetails.vue"
+import RecentPurchases from "~/components/UserProfile/RecentPurchases.vue"
 export default {
-    name: "ProfileSettings"
+    name: "ProfileSettings",
+    components: {
+        FavoriteThemes,
+        ProfileDetails,
+        RecentPurchases
+    }
 }
 </script>
 
