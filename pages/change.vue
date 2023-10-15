@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     submitEmail() {
-      axios.post('http://localhost:8000/reset', { email: this.email })
+      axios.post('https://ardeco.app/reset', { email: this.email })
         .then(response => {
           // La requête a réussi, vous pouvez traiter la réponse ici
           console.log('Réponse du serveur :', response.data);
