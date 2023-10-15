@@ -4,7 +4,7 @@
             <div class="personal-content card">
                 <img class="hobby" src="../../assets/images/profile-hobbies/croissant.png">
                 <a href="https://www.linkedin.com/in/louis-villedieu-8866091b9/">
-                    <img class="profile-picture" src="../../assets/images/profile-pictures/LOUIS.png">
+                    <img class="profile-picture" src="../../assets/images/profile-pictures/LOUIS_.png">
                 </a>
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>

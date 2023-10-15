@@ -4,7 +4,7 @@
             <div class="personal-content card">
                 <img class="hobby" src="../../assets/images/profile-hobbies/lemon.png">
                 <a href="https://www.linkedin.com/in/hugo-becart/">
-                    <img class="profile-picture" src="../../assets/images/profile-pictures/HUGO.png">
+                    <img class="profile-picture" src="../../assets/images/profile-pictures/HUGO_.png">
                 </a>
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>

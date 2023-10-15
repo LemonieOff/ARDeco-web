@@ -4,7 +4,7 @@
             <div class="personal-content card">
                 <img class="hobby" src="../../assets/images/profile-hobbies/football.png">
                 <a href="https://www.linkedin.com/in/valentin-astic-85a514205/">
-                    <img class="profile-picture" src="../../assets/images/profile-pictures/VALENTIN.png">
+                    <img class="profile-picture" src="../../assets/images/profile-pictures/VALENTIN_.png">
                 </a>
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>
