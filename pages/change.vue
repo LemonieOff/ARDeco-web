@@ -26,7 +26,7 @@ export default {
           console.log('Réponse du serveur :', response.data);
         })
         .catch(error => {
-          // La requête a échoué, vous pouvez traiter l'erreur ici
+          // La requête a échoué, vous pouvez traiter l'erreur ici.
           console.error('Erreur lors de la requête :', error);
         });
       },

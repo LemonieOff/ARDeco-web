@@ -30,7 +30,7 @@ export default {
       axios.post('https://api.ardeco.app/resetConfirm', { password: this.newPassword, token: this.token })
         .then(response => {
           // La requête a réussi, vous pouvez traiter la réponse ici
-          console.log('Réponse du serveur :', response.data);
+          console.log('Réponse du serveur  :', response.data);
         })
         .catch(error => {
           // La requête a échoué, vous pouvez traiter l'erreur ici
