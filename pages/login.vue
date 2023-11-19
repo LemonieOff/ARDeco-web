@@ -29,6 +29,8 @@ const login = async () => {
         const li = document.createElement("li");
         li.innerHTML = result.description;
         general_success.appendChild(li);
+        localStorage.setItem("userID", result.data["userID"]);
+        location.reload();
     } else {
         console.log("fail");
         if (Array.isArray(result.message)) {
