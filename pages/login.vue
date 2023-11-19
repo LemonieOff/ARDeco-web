@@ -179,6 +179,10 @@ const logout = async () => {
                         <label for="city_register">City : </label><input type="text" id="city_register" name="city" placeholder="Berlin">
                         <ul id="city_errors_register" class="login-error"></ul>
                     </div>
+                    <div id="phone_section_register">
+                        <label for="phone_register">Phone : </label><input type="tel" id="phone_register" name="phone" placeholder="+33601020304">
+                        <ul id="phone_errors_register" class="login-error"></ul>
+                    </div>
                     <div id="general_section_register">
                         <ul id="general_errors_register" class="login-error"></ul>
                         <ul id="general_success_register" class="login-success"></ul>
