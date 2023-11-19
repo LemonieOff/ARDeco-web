@@ -7,6 +7,12 @@ node_modules
 .env
 dist
 .DS_Store
+
+.idea
+.fleet
+.vs
+.vscode
+
 /test-results/
 /playwright-report/
 /blob-report/
