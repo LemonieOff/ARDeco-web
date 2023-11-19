@@ -49,11 +49,23 @@ const login = async () => {
             });
         } else if (response.statusCode === 500 && result.message) {
             const li = document.createElement("li");
-            li.innerHTML = result.message;
+            if (result.message) {
+                li.innerHTML = result.message;
+            } else if (result.description) {
+                li.innerHTML = result.description;
+            } else {
+                li.innerHTML = "Unknown error";
+            }
             general_errors.appendChild(li);
         } else {
             const li = document.createElement("li");
-            li.innerHTML = result.message;
+            if (result.message) {
+                li.innerHTML = result.message;
+            } else if (result.description) {
+                li.innerHTML = result.description;
+            } else {
+                li.innerHTML = "Unknown error";
+            }
             general_errors.appendChild(li);
         }
     }
