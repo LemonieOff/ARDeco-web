@@ -17,6 +17,7 @@ onMounted(async () => {
             console.log("Logged in");
             document.getElementById("login-form").style.display = "none";
             document.getElementById("user-form").style.display = "default";
+            document.getElementById("user-welcome").innerHTML = "Welcome user N°" + userID + "!";
         } else {
             console.log("Not logged in");
             document.getElementById("login-form").style.display = "default";
@@ -151,6 +152,7 @@ const logout = async () => {
                 <button @click="login">Login</button>
             </div>
             <div id="user-form" class="form">
+                <div id="user-welcome"></div>
                 <button @click="getSettings">Get settings</button>
                 <button @click="logout">Logout</button>
             </div>
