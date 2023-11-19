@@ -78,7 +78,7 @@ const login = async () => {
 </template>
 
 <style scoped lang="scss">
-.login-form {
+.form {
     display: flex;
     flex-direction: column;
     align-items: center;
