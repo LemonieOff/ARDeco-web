@@ -59,21 +59,32 @@ const login = async () => {
 </script>
 
 <template>
-    <div class="login-form">
-        <div id="email_section">
-            <label for="email">Email : </label><input type="text" id="email" name="email" placeholder="Email">
-            <ul id="email_errors" class="login-error"></ul>
+    <div id="forms-container">
+        <div id="forms-loading" class="form">
+            Chargement en cours...
         </div>
-        <div id="password_section">
-            <label for="password">Password : </label><input type="password" id="password" name="password"
-                                                            placeholder="Password">
-            <ul id="password_errors" class="login-error"></ul>
+        <div id="forms-wrapper" style="display: none">
+            <div id="login-form" class="form">
+                <div id="email_section">
+                    <label for="email">Email : </label><input type="text" id="email" name="email" placeholder="Email">
+                    <ul id="email_errors" class="login-error"></ul>
+                </div>
+                <div id="password_section">
+                    <label for="password">Password : </label><input type="password" id="password" name="password"
+                                                                    placeholder="Password">
+                    <ul id="password_errors" class="login-error"></ul>
+                </div>
+                <div id="general_section">
+                    <ul id="general_errors" class="login-error"></ul>
+                    <ul id="general_success" class="login-success"></ul>
+                </div>
+                <button @click="login">Login</button>
+            </div>
+            <div id="user-form" class="form">
+                <button @click="getSettings">Get settings</button>
+                <button @click="logout">Logout</button>
+            </div>
         </div>
-        <div id="general_section">
-            <ul id="general_errors" class="login-error"></ul>
-            <ul id="general_success" class="login-success"></ul>
-        </div>
-        <button @click="login">Login</button>
     </div>
 </template>
 
