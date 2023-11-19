@@ -8,6 +8,8 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.8.10",
     "@types/three": "^0.150.0",
     "autoprefixer": "^10.4.13",
     "nuxt": "^3.2.3",

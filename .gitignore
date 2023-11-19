@@ -12,3 +12,8 @@ dist
 .fleet
 .vs
 .vscode
+
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
