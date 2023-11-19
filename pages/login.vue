@@ -1,4 +1,37 @@
 <script setup>
+let loggedIn = false;
+
+onMounted(async () => {
+    const userID = localStorage.getItem("userID");
+    if (userID) {
+        const response = await fetch('https://api.ardeco.app/checkjwt/' + userID, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        });
+        const result = await response.json();
+        loggedIn = result["status"] === "OK";
+        if (loggedIn) {
+            console.log("Logged in");
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("user-form").style.display = "default";
+        } else {
+            console.log("Not logged in");
+            document.getElementById("login-form").style.display = "default";
+            document.getElementById("user-form").style.display = "none";
+        }
+    } else {
+        console.log("No local stored userID, not logged in");
+        loggedIn = false;
+        document.getElementById("login-form").style.display = "default";
+        document.getElementById("user-form").style.display = "none";
+    }
+    document.getElementById("forms-loading").style.display = "none";
+    document.getElementById("forms-wrapper").style.display = "block";
+});
+
 const login = async () => {
     const email_field = document.getElementById("email").value;
     const password_field = document.getElementById("password").value;
