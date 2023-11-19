@@ -15,54 +15,47 @@ onMounted(async () => {
         loggedIn = result["status"] === "OK";
         if (loggedIn) {
             console.log("Logged in");
-            document.getElementById("login-form").style.display = "none";
+            document.getElementById("login-register-wrapper").style.display = "none";
             document.getElementById("user-form").style.display = "default";
             document.getElementById("user-welcome").innerHTML = "Welcome user N°" + userID + "!";
         } else {
             console.log("Not logged in");
-            document.getElementById("login-form").style.display = "default";
+            document.getElementById("login-register-wrapper").style.display = "default";
             document.getElementById("user-form").style.display = "none";
         }
     } else {
         console.log("No local stored userID, not logged in");
         loggedIn = false;
-        document.getElementById("login-form").style.display = "default";
+        document.getElementById("login-register-wrapper").style.display = "default";
         document.getElementById("user-form").style.display = "none";
     }
     document.getElementById("forms-loading").style.display = "none";
     document.getElementById("forms-wrapper").style.display = "block";
 });
 
-const login = async () => {
-    const email_field = document.getElementById("email").value;
-    const password_field = document.getElementById("password").value;
-
-    const response = await fetch('https://api.ardeco.app/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify({email: email_field, password: password_field, deleted: false})
+const displayHTMLErrors = (result, response, type) => {
+    const errors = {
+        "email": document.getElementById(`email_errors_${type}`),
+        "password": document.getElementById(`password_errors_${type}`),
+        "password_confirm": document.getElementById(`password_confirm_errors_${type}`),
+        "first_name": document.getElementById(`first_name_errors_${type}`),
+        "last_name": document.getElementById(`last_name_errors_${type}`),
+        "city": document.getElementById(`city_errors_${type}`),
+        "phone": document.getElementById(`phone_errors_${type}`),
+        "general": document.getElementById(`general_errors_${type}`),
+        "success": document.getElementById(`general_success_${type}`)
+    }
+    Object.values(errors).forEach(error => {
+        if (error) {
+            error.innerHTML = "";
+        }
     });
-
-    const result = await response.json();
-    console.log(result);
-
-    const email_errors = document.getElementById("email_errors");
-    const password_errors = document.getElementById("password_errors");
-    const general_errors = document.getElementById("general_errors");
-    const general_success = document.getElementById("general_success");
-    email_errors.innerHTML = "";
-    password_errors.innerHTML = "";
-    general_errors.innerHTML = "";
-    general_success.innerHTML = "";
 
     if (result.status === "OK") {
         console.log("success");
         const li = document.createElement("li");
         li.innerHTML = result.description;
-        general_success.appendChild(li);
+        errors.success.appendChild(li);
         localStorage.setItem("userID", result.data["userID"]);
         location.reload();
     } else {
@@ -73,12 +66,11 @@ const login = async () => {
                 li.innerHTML = error;
 
                 const split = error.split(" ");
-                if (split[0] === "email") {
-                    email_errors.appendChild(li);
-                } else if (split[0] === "password") {
-                    password_errors.appendChild(li);
+
+                if (Object.keys(errors).includes(split[0])) {
+                    errors[split[0]].appendChild(li);
                 } else {
-                    general_errors.appendChild(li);
+                    errors.general.appendChild(li);
                 }
             });
         } else if (response.statusCode === 500 && result.message) {
@@ -90,7 +82,7 @@ const login = async () => {
             } else {
                 li.innerHTML = "Unknown error";
             }
-            general_errors.appendChild(li);
+            errors.general.appendChild(li);
         } else {
             const li = document.createElement("li");
             if (result.message) {
@@ -100,7 +92,7 @@ const login = async () => {
             } else {
                 li.innerHTML = "Unknown error";
             }
-            general_errors.appendChild(li);
+            errors.general.appendChild(li);
         }
     }
 }
