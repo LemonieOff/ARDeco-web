@@ -8,6 +8,7 @@ const login = async () => {
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({email: email_field, password: password_field, deleted: false})
     });
 
