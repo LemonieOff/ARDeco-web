@@ -56,6 +56,29 @@ const login = async () => {
         }
     }
 }
+
+const getSettings = async () => {
+    const response = await fetch('https://api.ardeco.app/settings', {
+        method: 'GET',
+        credentials: 'include',
+    });
+
+    const result = await response.json();
+    console.log(result);
+}
+
+const logout = async () => {
+    const response = await fetch('https://api.ardeco.app/logout', {
+        method: 'GET',
+        credentials: 'include',
+    });
+
+    const result = await response.text();
+    console.log(result);
+    loggedIn = false;
+    localStorage.removeItem("userID");
+    location.reload();
+}
 </script>
 
 <template>
