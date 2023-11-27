@@ -20,7 +20,6 @@ export default {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Cookie': 'jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoidG90b0BnbWFpbC5jb20iLCJpYXQiOjE3MDA5NTkzMzAsImV4cCI6MTcwMTA0NTczMH0.VIETut94ViiIDE7MCHGmD034CUbI7VgUndpq7b0VOUI; Path=/; Domain=api.ardeco.app;'
                 },
                 credentials: 'include',
             });
