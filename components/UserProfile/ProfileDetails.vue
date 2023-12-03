@@ -7,6 +7,7 @@
         <hr>
         <button class="buttonSettings" @click="getSettings">Get user settings</button>
         <button class="buttonSettings" @click="getGallery">Get user gallery</button>
+        <button class="buttonSettings" @click="getApiToken">Reset company API key</button>
         <div id="reponseText" class="buttonSettingsResponse"></div>
     </div>
 </template>
@@ -31,7 +32,14 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            document.getElementById('reponseText').innerHTML = result.description;
+            if (result.code == 200) {
+                document.getElementById('reponseText').innerHTML =
+                    'Language: ' + `${result.data.language}` +
+                    '<br>Notifications: ' + `${result.data.notifications_enabled}` + 
+                    '<br>Audio: ' + `${result.data.sounds_enabled}`;
+            } else {
+                document.getElementById('reponseText').innerHTML = result.description;
+            }
         },
         async getGallery() {
             const userID = localStorage.getItem('userID');
@@ -41,6 +49,25 @@ export default {
                 return;
             };
             const response = await fetch('https://api.ardeco.app/gallery/user/' + `${userID}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            document.getElementById('reponseText').innerHTML = result.description;
+        },
+        async getApiToken() {
+            const userID = localStorage.getItem('userID');
+            if (userID == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            };
+            const response = await fetch('https://api.ardeco.app/company/requestToken', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
