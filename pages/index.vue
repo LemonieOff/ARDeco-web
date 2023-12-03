@@ -40,7 +40,7 @@
     <div class="font-display font-medium w-1/3 ml-9 text-4xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4">
       <h2 class="underline mb-5">Augmented Reality</h2>
       <p>
-        We chose Augmented Reality for this project because it offers an immersive, interactive <experien></experien>ce, allowing you to visualize and experiment with various design elements in real-time, right in your own space. ARDeco eliminates the guesswork and the need for costly, time-consuming redesigns by giving you a true-to-life preview of your dream space. Discover endless possibilities and unleash your creativity with ARDeco – the future of interior design is here.
+        We chose Augmented Reality for this project because it offers an immersive, interactive experience, allowing you to visualize and experiment with various design elements in real-time, right in your own space. ARDeco eliminates the guesswork and the need for costly, time-consuming redesigns by giving you a true-to-life preview of your dream space. Discover endless possibilities and unleash your creativity with ARDeco – the future of interior design is here.
       </p>
     </div>
   </div>
