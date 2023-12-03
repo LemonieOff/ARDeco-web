@@ -48,6 +48,7 @@ const displayHTMLErrors = (result, response, type) => {
         } else {
             localStorage.setItem("userID", result.data["id"]);
         }
+        localStorage.setItem("role", result.data["role"]);
         location.reload();
     } else {
         console.log("fail");
