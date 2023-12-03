@@ -1,31 +1,18 @@
 <script setup>
-let loggedIn = false;
+import {isLogged, loggedIn, disconnect} from "public/js/checkLogin";
 
 onMounted(async () => {
-    const userID = localStorage.getItem("userID");
-    if (userID && userID !== "undefined") {
-        const response = await fetch('https://api.ardeco.app/checkjwt/' + userID, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-        });
-        const result = await response.json();
-        loggedIn = result["status"] === "OK";
+    const userID = await isLogged();
+    if (userID) {
         if (loggedIn) {
-            console.log("Logged in");
             document.getElementById("login-register-wrapper").style.display = "none";
             document.getElementById("user-form").style.display = "default";
             document.getElementById("user-welcome").innerHTML = "Welcome user N°" + userID + "!";
         } else {
-            console.log("Not logged in");
             document.getElementById("login-register-wrapper").style.display = "default";
             document.getElementById("user-form").style.display = "none";
         }
     } else {
-        console.log("No local stored userID, not logged in");
-        loggedIn = false;
         document.getElementById("login-register-wrapper").style.display = "default";
         document.getElementById("user-form").style.display = "none";
     }
@@ -61,6 +48,7 @@ const displayHTMLErrors = (result, response, type) => {
         } else {
             localStorage.setItem("userID", result.data["id"]);
         }
+        localStorage.setItem("role", result.data["role"]);
         location.reload();
     } else {
         console.log("fail");
@@ -167,11 +155,9 @@ const logout = async () => {
         method: 'GET',
         credentials: 'include',
     });
-
+    await disconnect();
     const result = await response.text();
     console.log(result);
-    loggedIn = false;
-    localStorage.removeItem("userID");
     location.reload();
 }
 </script>
