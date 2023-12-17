@@ -117,18 +117,18 @@ export default {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                json: {
-                    'language': lang,
-                    'notifications_enabled': notifs,
-                    'sounds_enabled': audio
-                },
+                body: JSON.stringify({
+                    "language": lang,
+                    "notifications_enabled": notifs,
+                    "sounds_enabled": audio
+                }),
                 credentials: 'include',
             });
 
             const result = await response.json();
             console.log(result);
             if (result.code == 200) {
-                console.log('Settings modified !');
+                document.getElementById('reponseText').innerHTML = result.description;
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
