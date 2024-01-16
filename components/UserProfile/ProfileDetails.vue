@@ -29,7 +29,7 @@
         </div>
         <button class="buttonSettings" @click="setSettings">Set user settings</button>
         <button class="buttonSettings" @click="getGallery">Get user gallery</button>
-        <!-- <button class="buttonSettings" @click="getCatalog">Get compagny catalog</button> -->
+        <button class="buttonSettings" @click="getCatalog">Get compagny catalog</button>
         <button class="buttonSettings" @click="setItemVisibility">Change gallery item visibility</button>
         <input class="buttonSettings" id="itemInputID" placeholder="Item ID">
         <div style="text-align: center;">
@@ -38,8 +38,8 @@
         </div>
         <button class="buttonSettings" @click="getArchive">Get compagny archive</button>
         <button class="buttonSettings" @click="deleteArchive">Empty compagny archive</button>
-        <!-- <button class="buttonSettings" @click="archiveItem">Archive item</button>
-        <button class="buttonSettings" @click="restoreItem">Restore item from archive</button> -->
+        <button class="buttonSettings" @click="archiveItem">Archive item</button>
+        <button class="buttonSettings" @click="restoreItem">Restore item from archive</button>
         <button class="buttonSettings" @click="getApiToken">Reset company API key</button>
         <div id="reponseText" class="buttonSettingsResponse"></div>
     </div>
@@ -73,57 +73,57 @@ export default {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
         },
-        // async archiveItem() {
-        //     if (localStorage.getItem('userID') == null) {
-        //         console.log('No user found, redirecting to login');
-        //         window.location.href = 'http://localhost:3000/login';
-        //         return;
-        //     };
-        //     const userID = localStorage.getItem('userID');
-        //     const itemInputID = document.getElementById('itemInputID').value;
-        //     const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-        //     console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`);
-        //     const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-        //         method: 'DELETE',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         credentials: 'include',
-        //     });
+        async archiveItem() {
+            if (localStorage.getItem('userID') == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            };
+            const userID = localStorage.getItem('userID');
+            const itemInputID = document.getElementById('itemInputID').value;
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`);
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
 
-        //     const result = await response.json();
-        //     console.log(result);
-        //     if (result.code == 200) {
-        //         document.getElementById('reponseText').innerHTML = result.description;
-        //     } else {
-        //         document.getElementById('reponseText').innerHTML = result.description;
-        //     }
-        // },
-        // async restoreItem() {
-        //     if (localStorage.getItem('userID') == null) {
-        //         console.log('No user found, redirecting to login');
-        //         window.location.href = 'http://localhost:3000/login';
-        //         return;
-        //     };
-        //     const userID = localStorage.getItem('userID');
-        //     const itemInputID = document.getElementById('itemInputID').value;
-        //     const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-        //     const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-        //         method: 'PUT',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         credentials: 'include',
-        //     });
+            const result = await response.json();
+            console.log(result);
+            if (result.code == 200) {
+                document.getElementById('reponseText').innerHTML = result.description;
+            } else {
+                document.getElementById('reponseText').innerHTML = result.description;
+            }
+        },
+        async restoreItem() {
+            if (localStorage.getItem('userID') == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            };
+            const userID = localStorage.getItem('userID');
+            const itemInputID = document.getElementById('itemInputID').value;
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
 
-        //     const result = await response.json();
-        //     console.log(result);
-        //     if (result.code == 200) {
-        //         document.getElementById('reponseText').innerHTML = result.description;
-        //     } else {
-        //         document.getElementById('reponseText').innerHTML = result.description;
-        //     }
-        // },
+            const result = await response.json();
+            console.log(result);
+            if (result.code == 200) {
+                document.getElementById('reponseText').innerHTML = result.description;
+            } else {
+                document.getElementById('reponseText').innerHTML = result.description;
+            }
+        },
         async getArchive() {
             if (localStorage.getItem('userID') == null) {
                 console.log('No user found, redirecting to login');
@@ -152,7 +152,8 @@ export default {
                         ' - ' + `${result.data[i].name}` + 
                         ' - ' + `${result.data[i].rooms}` +
                         ' - ' + `${result.data[i].styles}` +
-                        ' - ' + `${result.data[i].price}` + '€' +  '</p>';
+                        ' - ' + `${result.data[i].price}` + '€' +
+                        ' - ' + `${result.data[i].object_id}` +  '</p>';
                 }
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
@@ -248,37 +249,37 @@ export default {
                 }
             }
         },
-        // async getCatalog() {
-        //     const userID = localStorage.getItem('userID');
-        //     if (userID == null) {
-        //         console.log('No user found, redirecting to login');
-        //         window.location.href = 'http://localhost:3000/login';
-        //         return;
-        //     };
-        //     const response = await fetch('https://api.ardeco.app/catalog', {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         credentials: 'include',
-        //     });
+        async getCatalog() {
+            const userID = localStorage.getItem('userID');
+            if (userID == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            };
+            const response = await fetch('https://api.ardeco.app/catalog', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
 
-        //     const result = await response.json();
-        //     console.log(result);
-        //     document.getElementById('reponseText').innerHTML = '';
-        //     if (result.code == 200 && result.length == 0) {
-        //         document.getElementById('reponseText').innerHTML = 'Catalog empty';
-        //     } else {
-        //         for (let i = 0; i < result.length; i++) {
-        //             document.getElementById('reponseText').innerHTML += 
-        //                 '<p>' + (i + 1) + '. ' + `${result[i].name}` +
-        //                 ' - ' + `${result[i].styles}` + 
-        //                 ' - ' + `${result[i].price}` +
-        //                 '€ - ' + `${result[i].id}` +
-        //                 ' - ' + `${result[i].object_id}` + '</p>';
-        //         }
-        //     }
-        // },
+            const result = await response.json();
+            console.log(result);
+            document.getElementById('reponseText').innerHTML = '';
+            if (result.code == 200 && result.length == 0) {
+                document.getElementById('reponseText').innerHTML = 'Catalog empty';
+            } else {
+                for (let i = 0; i < result.length; i++) {
+                    document.getElementById('reponseText').innerHTML += 
+                        '<p>' + (i + 1) + '. ' + `${result[i].name}` +
+                        ' - ' + `${result[i].styles}` + 
+                        ' - ' + `${result[i].price}` +
+                        '€ - ' + `${result[i].id}` +
+                        ' - ' + `${result[i].object_id}` + '</p>';
+                }
+            }
+        },
         async setItemVisibility() {
             if (localStorage.getItem('userID') == null) {
                 console.log('No user found, redirecting to login');
