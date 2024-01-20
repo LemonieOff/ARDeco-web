@@ -38,13 +38,13 @@
         <input class="buttonSettings" id="furnitureColors" placeholder="Furniture colors">
         <button class="buttonSettings" @click="addFurniture">Add a furniture to the catalog</button>
         <button class="buttonSettings" @click="getGallery">Get user gallery</button>
-        <button class="buttonSettings" @click="getCatalog">Get compagny catalog</button>
         <button class="buttonSettings" @click="setItemVisibility">Change gallery item visibility</button>
         <input class="buttonSettings" id="itemInputID" placeholder="Item ID">
         <div style="text-align: center;">
             <button id="visibilityButton" style="background-color: green;" @click="changeVisibility">Visible</button>
             <br>
         </div>
+        <button class="buttonSettings" @click="getCatalog">Get compagny catalog</button>
         <button class="buttonSettings" @click="getArchive">Get compagny archive</button>
         <button class="buttonSettings" @click="deleteArchive">Empty compagny archive</button>
         <button class="buttonSettings" @click="archiveItem">Archive item</button>
