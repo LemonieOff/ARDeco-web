@@ -29,6 +29,12 @@
         </div>
         <button class="buttonSettings" @click="setSettings">Set user settings</button>
         <button class="buttonSettings" @click="getGallery">Get user gallery</button>
+        <button class="buttonSettings" @click="setItemVisibility">Change gallery item visibility</button>
+        <input class="buttonSettings" id="itemInputID" placeholder="Item ID">
+        <div style="text-align: center;">
+            <button id="visibilityButton" style="background-color: green;" @click="changeVisibility">Visible</button>
+            <br>
+        </div>
         <button class="buttonSettings" @click="getArchive">Get compagny archive</button>
         <button class="buttonSettings" @click="deleteArchive">Empty compagny archive</button>
         <button class="buttonSettings" @click="getApiToken">Reset company API key</button>
@@ -183,8 +189,54 @@ export default {
                     document.getElementById('reponseText').innerHTML += 
                         '<p>' + (i + 1) + '. ' + `${result.data[i].name}` +
                         ' - ' + `${result.data[i].room_type}` + 
-                        ' - ' + `${result.data[i].description}` + '</p>';
+                        ' - ' + `${result.data[i].description}` +
+                        ' - ' + `${result.data[i].id}` + '</p>';
                 }
+            }
+        },
+        async setItemVisibility() {
+            if (localStorage.getItem('userID') == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            } else if (document.getElementById('itemInputID').value == "") {
+                document.getElementById('reponseText').innerHTML = "Please precise the id of the item you want to change.";
+                return;
+            }
+            let bool = false;
+            if (document.getElementById('visibilityButton').innerHTML == 'Visible') {
+                bool = true;
+            }
+            const itemInputID = document.getElementById('itemInputID').value;
+            console.log('https://api.ardeco.app/gallery/' + itemInputID);
+            const response = await fetch('https://api.ardeco.app/gallery/' + itemInputID, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "visibility": bool
+                }),
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code == 200) {
+                document.getElementById('reponseText').innerHTML = result.description;
+                document.getElementById('itemInputID').value = "";
+            } else {
+                document.getElementById('reponseText').innerHTML = result.description;
+            }
+        },
+        async changeVisibility() {
+            let content = document.getElementById('visibilityButton').innerHTML;
+            if (content == 'Visible') {
+                document.getElementById('visibilityButton').innerHTML = 'Invisible';
+                document.getElementById('visibilityButton').style = "background-color: red;";
+            } else if (content == 'Invisible') {
+                document.getElementById('visibilityButton').innerHTML = 'Visible';
+                document.getElementById('visibilityButton').style = "background-color: green;";
             }
         },
         async getApiToken() {
