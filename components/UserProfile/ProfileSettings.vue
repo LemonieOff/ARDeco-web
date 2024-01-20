@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen">
+    <div>
         <div class="title"> Your profile </div>
         <div class="content">
             <FavoriteThemes></FavoriteThemes>

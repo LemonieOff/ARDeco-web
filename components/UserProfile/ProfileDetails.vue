@@ -28,6 +28,15 @@
             ON
         </div>
         <button class="buttonSettings" @click="setSettings">Set user settings</button>
+        <input class="buttonSettings" id="furnitureName" placeholder="Furniture name">
+        <input class="buttonSettings" id="furniturePrice" placeholder="Furniture price">
+        <input class="buttonSettings" id="furnitureStyles" placeholder="Furniture styles">
+        <input class="buttonSettings" id="furnitureRooms" placeholder="Furniture rooms">
+        <input class="buttonSettings" id="furnitureHeight" placeholder="Furniture height">
+        <input class="buttonSettings" id="furnitureWidth" placeholder="Furniture width">
+        <input class="buttonSettings" id="furnitureDepth" placeholder="Furniture depth">
+        <input class="buttonSettings" id="furnitureColors" placeholder="Furniture colors">
+        <button class="buttonSettings" @click="addFurniture">Add a furniture to the catalog</button>
         <button class="buttonSettings" @click="getGallery">Get user gallery</button>
         <button class="buttonSettings" @click="setItemVisibility">Change gallery item visibility</button>
         <input class="buttonSettings" id="itemInputID" placeholder="Item ID">
@@ -35,8 +44,11 @@
             <button id="visibilityButton" style="background-color: green;" @click="changeVisibility">Visible</button>
             <br>
         </div>
+        <button class="buttonSettings" @click="getCatalog">Get compagny catalog</button>
         <button class="buttonSettings" @click="getArchive">Get compagny archive</button>
         <button class="buttonSettings" @click="deleteArchive">Empty compagny archive</button>
+        <button class="buttonSettings" @click="archiveItem">Archive item</button>
+        <button class="buttonSettings" @click="restoreItem">Restore item from archive</button>
         <button class="buttonSettings" @click="getApiToken">Reset company API key</button>
         <div id="reponseText" class="buttonSettingsResponse"></div>
     </div>
@@ -70,6 +82,57 @@ export default {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
         },
+        async archiveItem() {
+            if (localStorage.getItem('userID') == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            };
+            const userID = localStorage.getItem('userID');
+            const itemInputID = document.getElementById('itemInputID').value;
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`);
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code == 200) {
+                document.getElementById('reponseText').innerHTML = result.description;
+            } else {
+                document.getElementById('reponseText').innerHTML = result.description;
+            }
+        },
+        async restoreItem() {
+            if (localStorage.getItem('userID') == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            };
+            const userID = localStorage.getItem('userID');
+            const itemInputID = document.getElementById('itemInputID').value;
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code == 200) {
+                document.getElementById('reponseText').innerHTML = result.description;
+            } else {
+                document.getElementById('reponseText').innerHTML = result.description;
+            }
+        },
         async getArchive() {
             if (localStorage.getItem('userID') == null) {
                 console.log('No user found, redirecting to login');
@@ -93,12 +156,13 @@ export default {
                 document.getElementById('reponseText').innerHTML = 'Archive empty';
             } else if (result.code == 200) {
                 for (let i = 0; i < result.data.length; i++) {
-                    document.getElementById('reponseText').innerHTML += 
+                    document.getElementById('reponseText').innerHTML +=
                         '<p>' + (i + 1) + '. ' + `${result.data[i].company_name}` +
-                        ' - ' + `${result.data[i].name}` + 
+                        ' - ' + `${result.data[i].name}` +
                         ' - ' + `${result.data[i].rooms}` +
                         ' - ' + `${result.data[i].styles}` +
-                        ' - ' + `${result.data[i].price}` + '€' +  '</p>';
+                        ' - ' + `${result.data[i].price}` + '€' +
+                        ' - ' + `${result.data[i].object_id}` +  '</p>';
                 }
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
@@ -135,6 +199,62 @@ export default {
             console.log(result);
             if (result.code == 200) {
                 document.getElementById('reponseText').innerHTML = result.description;
+            } else {
+                document.getElementById('reponseText').innerHTML = result.description;
+            }
+        },
+        async addFurniture() {
+            if (localStorage.getItem('userID') == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            };
+            const userID = localStorage.getItem('userID');
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const furnitureName = document.querySelector('#furnitureName').value;
+            const furniturePrice = document.querySelector('#furniturePrice').value;
+            const furnitureStyles = document.querySelector('#furnitureStyles').value;
+            const furnitureRooms = document.querySelector('#furnitureRooms').value;
+            const furnitureHeight = document.querySelector('#furnitureHeight').value;
+            const furnitureWidth = document.querySelector('#furnitureWidth').value;
+            const furnitureDepth = document.querySelector('#furnitureDepth').value;
+            const furnitureColors = document.querySelector('#furnitureColors').value;
+            if ( furnitureName == "" || furniturePrice == "" || furnitureStyles == "" || furnitureRooms == "" ||
+            furnitureHeight == "" || furnitureWidth == "" || furnitureDepth == "" || furnitureColors == "") {
+                document.getElementById('reponseText').innerHTML = "At least one of the furniture element is empty, please fill every possible element and try again.";
+                return;
+            }
+            console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`);
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify([{
+                    "name": furnitureName,
+                    "price": furniturePrice,
+                    "styles": furnitureStyles,
+                    "rooms": furnitureRooms,
+                    "height": furnitureHeight,
+                    "width": furnitureWidth,
+                    "depth": furnitureDepth,
+                    "colors": furnitureColors
+                }]),
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code == 201) {
+                document.getElementById('reponseText').innerHTML = result.description;
+                document.querySelector('#furnitureName').value = "";
+                document.querySelector('#furniturePrice').value = "";
+                document.querySelector('#furnitureStyles').value = "";
+                document.querySelector('#furnitureRooms').value = "";
+                document.querySelector('#furnitureHeight').value = "";
+                document.querySelector('#furnitureWidth').value = "";
+                document.querySelector('#furnitureDepth').value = "";
+                document.querySelector('#furnitureColors').value = "";
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
@@ -191,6 +311,37 @@ export default {
                         ' - ' + `${result.data[i].room_type}` + 
                         ' - ' + `${result.data[i].description}` +
                         ' - ' + `${result.data[i].id}` + '</p>';
+                }
+            }
+        },
+        async getCatalog() {
+            const userID = localStorage.getItem('userID');
+            if (userID == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            };
+            const response = await fetch('https://api.ardeco.app/catalog', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            document.getElementById('reponseText').innerHTML = '';
+            if (result.code == 200 && result.length == 0) {
+                document.getElementById('reponseText').innerHTML = 'Catalog empty';
+            } else {
+                for (let i = 0; i < result.length; i++) {
+                    document.getElementById('reponseText').innerHTML += 
+                        '<p>' + (i + 1) + '. ' + `${result[i].name}` +
+                        ' - ' + `${result[i].styles}` + 
+                        ' - ' + `${result[i].price}` +
+                        '€ - ' + `${result[i].id}` +
+                        ' - ' + `${result[i].object_id}` + '</p>';
                 }
             }
         },
@@ -274,8 +425,8 @@ export default {
 
 .buttonSettingsResponse {
     text-align: center;
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
+    margin-left: 0%;
     margin-top: 5%;
 }
 
