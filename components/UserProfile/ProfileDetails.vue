@@ -332,16 +332,16 @@ export default {
             const result = await response.json();
             console.log(result);
             document.getElementById('reponseText').innerHTML = '';
-            if (result.code == 200 && result.length == 0) {
+            if (result.code == 200 && result.data.length == 0) {
                 document.getElementById('reponseText').innerHTML = 'Catalog empty';
             } else {
-                for (let i = 0; i < result.length; i++) {
+                for (let i = 0; i < result.data.length; i++) {
                     document.getElementById('reponseText').innerHTML += 
-                        '<p>' + (i + 1) + '. ' + `${result[i].name}` +
-                        ' - ' + `${result[i].styles}` + 
-                        ' - ' + `${result[i].price}` +
-                        '€ - ' + `${result[i].id}` +
-                        ' - ' + `${result[i].object_id}` + '</p>';
+                        '<p>' + (i + 1) + '. ' + `${result.data[i].name}` +
+                        ' - ' + `${result.data[i].styles}` + 
+                        ' - ' + `${result.data[i].price}` +
+                        '€ - ' + `${result.data[i].id}` +
+                        ' - ' + `${result.data[i].object_id}` + '</p>';
                 }
             }
         },
