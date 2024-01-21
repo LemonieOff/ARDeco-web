@@ -417,6 +417,10 @@ export default {
 <style lang="scss" scoped>
 @import "~/styles/ProfileSettings.scss";
 
+.button {
+    outline-style: solid;
+}
+
 .buttonSettings {
     width: 60%;
     margin-left: 20%;
