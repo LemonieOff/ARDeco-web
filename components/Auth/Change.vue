@@ -21,7 +21,7 @@ export default {
   methods: {
     submitEmail() {
       console.log("AZEAZE")
-      axios.post('https://localhost:8000/change', { email: this.email })
+      axios.post('https://api.ardeco.app/change', { email: this.email })
         .then(response => {
           // La requête a réussi, vous pouvez traiter la réponse ici
           console.log('Réponse du serveur :', response.data);

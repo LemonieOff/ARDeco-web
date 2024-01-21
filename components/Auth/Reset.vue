@@ -28,7 +28,7 @@ export default {
   methods: {
     changePassword() {
       // Effectuer une requête POST vers le serveur avec axios
-      axios.post('https://localhost:8000/resetConfirm', { password: this.newPassword, token: this.token })
+      axios.post('https://api.ardeco.app/resetConfirm', { password: this.newPassword, token: this.token })
         .then(response => {
           // La requête a réussi, vous pouvez traiter la réponse ici
           console.log('Réponse du serveur  :', response.data);
