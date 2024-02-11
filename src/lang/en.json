@@ -1,0 +1,57 @@
+{
+  "navBar": {
+    "home": "Home",
+    "team": "Team",
+    "product": "Our product",
+    "profile": "Profile",
+    "darkmode": "Toggle dark mode"
+  },
+  "profilePages": {
+    "presentationPage": {
+      "title": "Meet our dream team",
+      "picturesTitle": "Want to know us better ?",
+      "picturesSubtitle": "Click on these pictures to learn more about us !",
+      "presentationTitle": "Want to know what got us here ?",
+      "presentationSubtitle": "Learn more bout our school program and our previous professional experiences !",
+      "presentationTextPart1": "Our school program takes place over 5 years to train us into computer experts. It offers a dense and evolving technical content, including a variety of programming projects and covering many languages that will allow each of us to approach all new technologies.",
+      "presentationTextPart2": "During those 5 years, we are asked to to find internships or part time jobs to learn everything we need to know about life in the professional world. Since all of us are 3rd years, we can comfortably say that we all spent at least half a year in a company already, which turns out to be very beneficial to the development of our ARDeco project."
+    },
+    "evan": {
+      "role":"AR Developer",
+      "internshipRole1":"Junior Frontend Developer"
+    },
+    "hugo": {
+      "role":"Project Leader",
+      "internshipRole1":"Backend Developer",
+      "internshipRole2":"Video Game Developer"
+    },
+    "louis": {
+      "role":"AR Developer",
+      "internshipRole1":"Junior Software Developer",
+      "internshipRole2":"Web Developer",
+      "internshipRole3":"Video Game Developer"
+    },
+    "valentin": {
+      "role":"Design and Partners",
+      "internshipRole1":"Tech and Web Support",
+      "internshipRole2":"Frontend Developer",
+      "internshipRole3":"Junior Frontend Developer"
+    }
+  },
+  "productPages": {
+    "projectDetailsTitle": "Discover the details of our project",
+    "findYourAnswersSubtitle": "Find the answers to your questions  in our FAQ !",
+    "furnitureChoiceTitle":"How are my furniture chosen ?",
+    "furnitureChoiceText":"The application offers layout and decoration for a completely empty room, such as helping to rearrange and redecorate an already furnished and furnished room. At the end, the application offers to view the result in 3D in the application, but also (and above all) in augmented reality directly in the room! At this stage, he can even move the furniture displayed, select others, delete or add them manually and change their color and style. To generate the result in 3D or augmented reality, we decided to use 3D models.",
+    "whatIsArdecoTitle":"What is ARDeco ?",
+    "whatIsArdecoText":"ARDeco is a mobile application for scanning the room using the phone. Our AI then generates an interior layout and decoration based on the budget and style defined by the user. He will visualize the result in augmented reality and will be able to buy the furniture (automatically arranged) from the partners directly from the application.",
+    "howToUseArdecoTitle":"How to use ARDeco ?",
+    "howToUseArdecoText":"The user can first enter a budget range and/or a maximum budget not to be exceeded. He can also select different styles that he would like in his room (for example zen, industrial, classic, forest, etc...). He will then simply have to use his phone camera, and perform a scan of the room by following the instructions indicated on the screen and checking the veracity of the information calculated and transcribed. It is possible that the application asks the user to enter one or more distances manually to perform more precise calculations.",
+    "modelsOriginsTitle":"Where do the models come from ?",
+    "modelsOriginsText":"These 3D models are provided to us directly by the partner brands whose catalog is present in the application. If the partners do not have 3D models, we will offer them conversion solutions in order to be compatible with our service. In the worst case, we can adapt to them and offer support for additional formats according to the needs of our partners.",
+    "whyUseArdecoTitle":"Why should I use ARDeco ?",
+    "whyUseArdecoText":"The project therefore saves time when furnishing your room. Thanks to the budget and style selection, the scanning of the room to capture the dimensions of the walls and furniture (if present in the room) and the AI previously described which retrieves furniture corresponding to the criteria and dimensions then pose, saving user time and agent. Another improvement that the project brings to the user is that he is sure of the final rendering of his room and will not be disappointed, since he can visualize in augmented reality in his room the final arrangement, and even carry out tests to be sure.",
+    "inAppPurchaseTitle":"Can I buy furniture from the app ?",
+    "inAppPurchaseText":"Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user."
+  }
+}

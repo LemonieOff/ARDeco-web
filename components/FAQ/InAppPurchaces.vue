@@ -1,21 +1,26 @@
 <template>
     <div class="question-content background-card" id="in-app-purchases">
-        <div class="title underline">Can I buy furniture from the app ?</div>
-        <div class="sub-title gray-text-color">
-            Yes. Our goal is to make life simpler and faster for the user, and we continue
-            in this direction by saving him the time to go to the websites (or in-store) of
-            the brands, to look for the reference, to check that it is indeed the right piece
-            of furniture and then to buy it. Indeed, from the application, simply press "Buy"
-            on a piece of furniture or press "Buy all furniture" and after having entered the
-            payment method and the delivery or collection address, the The application will take
-            care of contacting the brands and making purchases on behalf of the user.
-        </div>
+        <div id="inAppPurchaseTitle" class="title underline"></div>
+        <div id="inAppPurchaseText" class="sub-title gray-text-color"></div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "InAppPurchaces"
+    name: "InAppPurchaces",
+    mounted() {
+        let lang = localStorage.getItem('lang')
+        if (lang == null || lang == 'en') {
+            document.getElementById('inAppPurchaseTitle').innerText = en.productPages.inAppPurchaseTitle
+            document.getElementById('inAppPurchaseText').innerText = en.productPages.inAppPurchaseText
+        } else {
+            document.getElementById('inAppPurchaseTitle').innerText = fr.productPages.inAppPurchaseTitle
+            document.getElementById('inAppPurchaseText').innerText = fr.productPages.inAppPurchaseText
+        }
+    },
 }
 </script>
 

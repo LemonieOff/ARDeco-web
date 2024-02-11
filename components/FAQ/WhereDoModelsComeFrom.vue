@@ -1,18 +1,26 @@
 <template>
     <div class="question-content background-card" id="where-are-models-from">
-        <div class="title underline">Where do the models come from ?</div>
-        <div class="sub-title gray-text-color">
-            These 3D models are provided to us directly by the partner brands whose catalog is
-            present in the application. If the partners do not have 3D models, we will offer them
-            conversion solutions in order to be compatible with our service. In the worst case,
-            we can adapt to them and offer support for additional formats according to the needs of our partners.
-        </div>
+        <div id="modelsOriginsTitle" class="title underline"></div>
+        <div id="modelsOriginsText" class="sub-title gray-text-color"></div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "WhereDoModelsComeFrom"
+    name: "WhereDoModelsComeFrom",
+    mounted() {
+        let lang = localStorage.getItem('lang')
+        if (lang == null || lang == 'en') {
+            document.getElementById('modelsOriginsTitle').innerText = en.productPages.modelsOriginsTitle
+            document.getElementById('modelsOriginsText').innerText = en.productPages.modelsOriginsText
+        } else {
+            document.getElementById('modelsOriginsTitle').innerText = fr.productPages.modelsOriginsTitle
+            document.getElementById('modelsOriginsText').innerText = fr.productPages.modelsOriginsText
+        }
+    },
 }
 </script>
 

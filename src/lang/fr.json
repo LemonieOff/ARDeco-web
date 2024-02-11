@@ -1,0 +1,57 @@
+{
+  "navBar": {
+    "home": "Accueil",
+    "team": "Équipe",
+    "product": "Notre produit",
+    "profile": "Profil",
+    "darkmode": "Activer le mode sombre"
+  },
+  "profilePages": {
+    "presentationPage": {
+      "title": "Rencontrez notre équipe de rêve",
+      "picturesTitle": "Vous voulez mieux nous connaître ?",
+      "picturesSubtitle": "Cliquez sur ces images pour en savoir plus sur nous !",
+      "presentationTitle": "Vous voulez savoir ce qui nous a amenés ici ?",
+      "presentationSubtitle": "Apprenez-en plus sur notre programme scolaire et nos expériences professionnelles précédentes !",
+      "presentationTextPart1": "Notre programme scolaire se déroule sur 5 ans pour nous former en experts en informatique. Il propose un contenu technique dense et évolutif, comprenant une variété de projets de programmation et couvrant de nombreux langages qui nous permettront d'aborder toutes les nouvelles technologies.",
+      "presentationTextPart2": "Pendant ces 5 ans, nous sommes amenés à trouver des stages ou des emplois à temps partiel pour apprendre tout ce dont nous avons besoin pour connaître la vie dans le monde professionnel. Comme nous sommes tous en troisième année, nous pouvons confortablement dire que nous avons tous passé au moins un semestre dans une entreprise déjà, ce qui s'avère très bénéfique pour le développement de notre projet ARDeco."
+    },
+    "evan": {
+      "role":"Développeur AR",
+      "internshipRole1":"Développeur Frontend Junior"
+    },
+    "hugo": {
+      "role":"Chef de projet",
+      "internshipRole1":"Développeur Backend",
+      "internshipRole2":"Développeur de jeux vidéo"
+    },
+    "louis": {
+      "role":"Développeur AR",
+      "internshipRole1":"Développeur logiciel Junior",
+      "internshipRole2":"Développeur Web",
+      "internshipRole3":"Développeur de jeux vidéo"
+    },
+    "valentin": {
+      "role":"Conception et Partenariats",
+      "internshipRole1":"Support technique et Web",
+      "internshipRole2":"Développeur Frontend",
+      "internshipRole3":"Développeur Frontend Junior"
+    }
+  },
+  "productPages": {
+    "projectDetailsTitle": "Découvrez les détails de notre projet",
+    "findYourAnswersSubtitle": "Trouvez les réponses à vos questions dans notre FAQ !",
+    "furnitureChoiceTitle":"Comment sont choisis mes meubles ?",
+    "furnitureChoiceText":"L'application offre une disposition et une décoration pour une pièce complètement vide, tout en aidant à réorganiser et à redécorer une pièce déjà meublée. À la fin, l'application propose de visualiser le résultat en 3D dans l'application, mais aussi (et surtout) en réalité augmentée directement dans la pièce ! À ce stade, il peut même déplacer les meubles affichés, en sélectionner d'autres, les supprimer ou les ajouter manuellement et changer leur couleur et leur style. Pour générer le résultat en 3D ou en réalité augmentée, nous avons décidé d'utiliser des modèles 3D.",
+    "whatIsArdecoTitle":"Qu'est-ce que ARDeco ?",
+    "whatIsArdecoText":"ARDeco est une application mobile pour scanner la pièce à l'aide du téléphone. Notre IA génère ensuite une disposition intérieure et une décoration en fonction du budget et du style définis par l'utilisateur. Il visualisera le résultat en réalité augmentée et pourra acheter les meubles (automatiquement disposés) auprès des partenaires directement depuis l'application.",
+    "howToUseArdecoTitle":"Comment utiliser ARDeco ?",
+    "howToUseArdecoText":"L'utilisateur peut d'abord entrer une fourchette de budget et/ou un budget maximum à ne pas dépasser. Il peut également sélectionner différents styles qu'il souhaiterait dans sa pièce (par exemple zen, industriel, classique, forestier, etc.). Il lui suffira ensuite d'utiliser l'appareil photo de son téléphone, et de scanner la pièce en suivant les instructions indiquées à l'écran et en vérifiant la véracité des informations calculées et transcrites. Il est possible que l'application demande à l'utilisateur d'entrer une ou plusieurs distances manuellement pour effectuer des calculs plus précis.",
+    "modelsOriginsTitle":"D'où viennent les modèles ?",
+    "modelsOriginsText":"Ces modèles 3D nous sont directement fournis par les marques partenaires dont le catalogue est présent dans l'application. Si les partenaires n'ont pas de modèles 3D, nous leur proposerons des solutions de conversion afin d'être compatibles avec notre service. Dans le pire des cas, nous pouvons nous adapter et offrir un support pour des formats supplémentaires selon les besoins de nos partenaires.",
+    "whyUseArdecoTitle":"Pourquoi utiliser ARDeco ?",
+    "whyUseArdecoText":"Le projet permet donc de gagner du temps lors de l'aménagement de votre pièce. Grâce à la sélection du budget et du style, au balayage de la pièce pour capturer les dimensions des murs et des meubles (si présents dans la pièce) et à l'IA précédemment décrite qui récupère les meubles correspondant aux critères et dimensions puis les pose, l'utilisateur et l'agent gagnent du temps. Une autre amélioration que le projet apporte à l'utilisateur est qu'il est sûr du rendu final de sa pièce et ne sera pas déçu, car il peut visualiser en réalité augmentée dans sa pièce l'arrangement final, et même effectuer des tests pour être sûr.",
+    "inAppPurchaseTitle":"Puis-je acheter des meubles depuis l'application ?",
+    "inAppPurchaseText":"Oui. Notre objectif est de simplifier et d'accélérer la vie de l'utilisateur, et nous continuons dans cette direction en lui faisant gagner du temps pour se rendre sur les sites Web (ou en magasin) des marques, pour rechercher la référence, pour vérifier qu'il s'agit bien de la bonne pièce de mobilier, puis pour l'acheter. En effet, depuis l'application, il suffit d'appuyer sur \"Acheter\" sur un meuble ou d'appuyer sur \"Acheter tous les meubles\" et après avoir saisi le mode de paiement et l'adresse de livraison ou de retrait, l'application se chargera de contacter les marques et de faire les achats au nom de l'utilisateur."
+  }
+}

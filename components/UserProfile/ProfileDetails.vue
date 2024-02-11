@@ -199,6 +199,7 @@ export default {
             console.log(result);
             if (result.code == 200) {
                 document.getElementById('reponseText').innerHTML = result.description;
+                localStorage.setItem('lang', lang);
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
@@ -280,6 +281,7 @@ export default {
                     'Language: ' + `${result.data.language}` +
                     '<br>Notifications: ' + `${result.data.notifications_enabled}` + 
                     '<br>Audio: ' + `${result.data.sounds_enabled}`;
+                localStorage.setItem('lang', result.data.language);
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }

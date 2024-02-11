@@ -9,7 +9,7 @@
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>
                 <div class="name">Valentin Astic</div>
-                <div class="role">Design and Partners</div>
+                <div id="role-valentin" class="role"></div>
             </div>
             <div class="timeline-content">
                 <div class="year-2020">2020</div>
@@ -20,7 +20,7 @@
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
-                    <div class="internship-role">Tech and Web Support</div>
+                    <div id="internshipRole1-valentin" class="internship-role"></div>
                 </div>
                 <div class="timeline-inactive">
                     <a href="https://www.epitech.eu/en/">
@@ -30,22 +30,39 @@
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/MathaLogo.png">
-                    <div class="internship-role">Frontend Developer</div>
+                    <div id="internshipRole2-valentin" class="internship-role"></div>
                 </div>
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
-                    <div class="internship-role">Junior Frontend Developer</div>
+                    <div id="internshipRole3-valentin" class="internship-role"></div>
                 </div>
                 <div class="year-2023">2023</div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "ProfileValentin"
+    name: "ProfileValentin",
+    mounted() {
+        let lang = localStorage.getItem('lang')
+        if (lang == null || lang == 'en') {
+            document.getElementById('role-valentin').innerText = en.profilePages.valentin.role
+            document.getElementById('internshipRole1-valentin').innerText = en.profilePages.valentin.internshipRole1
+            document.getElementById('internshipRole2-valentin').innerText = en.profilePages.valentin.internshipRole2
+            document.getElementById('internshipRole3-valentin').innerText = en.profilePages.valentin.internshipRole3
+        } else {
+            document.getElementById('role-valentin').innerText = fr.profilePages.valentin.role
+            document.getElementById('internshipRole1-valentin').innerText = fr.profilePages.valentin.internshipRole1
+            document.getElementById('internshipRole2-valentin').innerText = fr.profilePages.valentin.internshipRole2
+            document.getElementById('internshipRole3-valentin').innerText = fr.profilePages.valentin.internshipRole3
+        }
+    },
 }
 </script>
 

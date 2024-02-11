@@ -9,7 +9,7 @@
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>
                 <div class="name">Louis Villedieu</div>
-                <div class="role">AR Developer</div>
+                <div id="role-louis" class="role"></div>
             </div>
             <div class="timeline-content">
                 <div class="year-2020">2020</div>
@@ -20,7 +20,7 @@
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/BCAExpertiseLogo.png">
-                    <div class="internship-role">Junior Software Developer</div>
+                    <div id="internshipRole1-louis" class="internship-role"></div>
                 </div>
                 <div class="timeline-inactive">
                     <a href="https://www.epitech.eu/en/">
@@ -30,22 +30,39 @@
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/VersityLogo.png">
-                    <div class="internship-role">Web Developer</div>
+                    <div id="internshipRole2-louis" class="internship-role"></div>
                 </div>
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/WorkingGameLogo.png">
-                    <div class="internship-role">Video Game Developer</div>
+                    <div id="internshipRole3-louis" class="internship-role"></div>
                 </div>
                 <div class="year-2023">2023</div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "ProfileLouis"
+    name: "ProfileLouis",
+    mounted() {
+        let lang = localStorage.getItem('lang')
+        if (lang == null || lang == 'en') {
+            document.getElementById('role-louis').innerText = en.profilePages.louis.role
+            document.getElementById('internshipRole1-louis').innerText = en.profilePages.louis.internshipRole1
+            document.getElementById('internshipRole2-louis').innerText = en.profilePages.louis.internshipRole2
+            document.getElementById('internshipRole3-louis').innerText = en.profilePages.louis.internshipRole3
+        } else {
+            document.getElementById('role-louis').innerText = fr.profilePages.louis.role
+            document.getElementById('internshipRole1-louis').innerText = fr.profilePages.louis.internshipRole1
+            document.getElementById('internshipRole2-louis').innerText = fr.profilePages.louis.internshipRole2
+            document.getElementById('internshipRole3-louis').innerText = fr.profilePages.louis.internshipRole3
+        }
+    },
 }
 </script>
 

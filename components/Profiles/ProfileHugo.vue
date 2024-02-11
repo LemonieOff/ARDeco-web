@@ -9,7 +9,7 @@
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>
                 <div class="name">Hugo Becart</div>
-                <div class="role">Project Leader</div>
+                <div id="role-hugo" class="role"></div>
             </div>
             <div class="timeline-content">
                 <div class="year-2020">2020</div>
@@ -20,7 +20,7 @@
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/MyFlyingBoxLogo.png">
-                    <div class="internship-role">Backend Developer</div>
+                    <div id="internshipRole1-hugo" class="internship-role"></div>
                 </div>
                 <div class="timeline-inactive">
                     <a href="https://www.epitech.eu/en/">
@@ -33,17 +33,32 @@
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/WorkingGameLogo.png">
-                    <div class="internship-role">Video Game Developer</div>
+                    <div id="internshipRole2-hugo" class="internship-role"></div>
                 </div>
                 <div class="year-2023">2023</div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "ProfileHugo"
+    name: "ProfileHugo",
+    mounted() {
+        let lang = localStorage.getItem('lang')
+        if (lang == null || lang == 'en') {
+            document.getElementById('role-hugo').innerText = en.profilePages.hugo.role
+            document.getElementById('internshipRole1-hugo').innerText = en.profilePages.hugo.internshipRole1
+            document.getElementById('internshipRole2-hugo').innerText = en.profilePages.hugo.internshipRole2
+        } else {
+            document.getElementById('role-hugo').innerText = fr.profilePages.hugo.role
+            document.getElementById('internshipRole1-hugo').innerText = fr.profilePages.hugo.internshipRole1
+            document.getElementById('internshipRole2-hugo').innerText = fr.profilePages.hugo.internshipRole2
+        }
+    },
 }
 </script>
 
