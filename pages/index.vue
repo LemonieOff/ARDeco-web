@@ -56,6 +56,8 @@
 </template>
 
 <script setup lang="ts">
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
 import backgroundUrl from '~/assets/images/homeHero.jpg'
 
 import { ref } from 'vue';
@@ -82,7 +84,6 @@ const features = ref([
     description: 'Explore a vast library of styles, trends, and design ideas to help you create a space that truly reflects your personality.',
   },
 ]);
-
 </script>
 
 <style lang="scss" scoped>

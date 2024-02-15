@@ -53,5 +53,23 @@
     "whyUseArdecoText":"The project therefore saves time when furnishing your room. Thanks to the budget and style selection, the scanning of the room to capture the dimensions of the walls and furniture (if present in the room) and the AI previously described which retrieves furniture corresponding to the criteria and dimensions then pose, saving user time and agent. Another improvement that the project brings to the user is that he is sure of the final rendering of his room and will not be disappointed, since he can visualize in augmented reality in his room the final arrangement, and even carry out tests to be sure.",
     "inAppPurchaseTitle":"Can I buy furniture from the app ?",
     "inAppPurchaseText":"Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user."
+  },
+  "footer": {
+    "stayTuned": "Stay tuned",
+    "contactUs": "Contact us",
+    "newsletter": "Join our newsletter",
+    "subscribe": "Subscribe"
+  },
+  "home": {
+    "welcomeTitle": "Welcome to ARDeco",
+    "productPresentation": "Is innovative application that revolutionizes your interior design experience using Augmented Reality (AR) and Artificial Intelligence (AI). Effortlessly scan your room with your phone, and our intelligent AI algorithms will analyze the space to create personalized, visually stunning decorations tailored to your preferences. Explore new design possibilities and bring your dream space to life with ARDeco.",
+    "transitionEffect": {
+      "team": "Team",
+      "discover": "Discover",
+      "clickHere": "Click here!"
+    },
+    "augmentedRealityTitle": "Augmented Reality",
+    "augmentedRealityText": "We chose Augmented Reality for this project because it offers an immersive, interactive experience, allowing you to visualize and experiment with various design elements in real-time, right in your own space. ARDeco eliminates the guesswork and the need for costly, time-consuming redesigns by giving you a true-to-life preview of your dream space. Discover endless possibilities and unleash your creativity with ARDeco – the future of interior design is here.",
+    "keyPoints": "Key Points"
   }
 }
