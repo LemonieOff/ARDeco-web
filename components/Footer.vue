@@ -27,19 +27,18 @@ import fr from "~/src/lang/fr.json";
 export default {
   name: "Footer",
   mounted() {
-      let lang = localStorage.getItem('lang')
-      console.log("lang:", lang)
-      if (lang == null || lang == 'en') {
-          document.getElementById('stayTuned').innerText = en.footer.stayTuned
-          document.getElementById('contactUs').innerText = en.footer.contactUs
-          document.getElementById('newsletter').innerText = en.footer.newsletter
-          document.getElementById('subscribe').innerText = en.footer.subscribe
-      } else {
-          document.getElementById('stayTuned').innerText = fr.footer.stayTuned
-          document.getElementById('contactUs').innerText = fr.footer.contactUs
-          document.getElementById('newsletter').innerText = fr.footer.newsletter
-          document.getElementById('subscribe').innerText = fr.footer.subscribe
-      }
+    let lang = localStorage.getItem('lang')
+    if (lang == null || lang == 'en') {
+        document.getElementById('stayTuned').innerText = en.footer.stayTuned
+        document.getElementById('contactUs').innerText = en.footer.contactUs
+        document.getElementById('newsletter').innerText = en.footer.newsletter
+        document.getElementById('subscribe').innerText = en.footer.subscribe
+    } else {
+        document.getElementById('stayTuned').innerText = fr.footer.stayTuned
+        document.getElementById('contactUs').innerText = fr.footer.contactUs
+        document.getElementById('newsletter').innerText = fr.footer.newsletter
+        document.getElementById('subscribe').innerText = fr.footer.subscribe
+    }
   },
 }
 </script>

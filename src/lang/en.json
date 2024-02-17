@@ -71,5 +71,37 @@
     "augmentedRealityTitle": "Augmented Reality",
     "augmentedRealityText": "We chose Augmented Reality for this project because it offers an immersive, interactive experience, allowing you to visualize and experiment with various design elements in real-time, right in your own space. ARDeco eliminates the guesswork and the need for costly, time-consuming redesigns by giving you a true-to-life preview of your dream space. Discover endless possibilities and unleash your creativity with ARDeco – the future of interior design is here.",
     "keyPoints": "Key Points"
+  },
+  "login": {
+    "welcome": "Welcome user N°",
+    "logout": "Logout"
+  },
+  "profile": {
+    "yourFavoriteThemes": "Your favorites themes",
+    "yourRecentPurchaces": "Your recent purchases",
+    "informations": {
+      "firstName": "First name : ",
+      "lastName": "Last name : ",
+      "email": "Email : ",
+      "phone": "Phone : ",
+      "city": "City : ",
+      "savedItems": "Saved items in gallery : ",
+      "commandsOrdered": "Commands ordered : ",
+      "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)"
+    },
+    "settings": {
+      "firstAndLastName": "First and last name",
+      "getUserSettings": "Get user settings",
+      "setUserSettings": "Set user settings",
+      "addFurnitureToCatalog": "Add a furniture to the catalog",
+      "getUserGallery": "Get user gallery",
+      "changeGalleryVisibility": "Change gallery item visibility",
+      "getCompagnyCatalog": "Get compagny catalog",
+      "getCompagnyArchive": "Get compagny archive",
+      "emptyCompagnyArchive": "Empty compagny archive",
+      "archiveItem": "Archive item",
+      "restoreItemFromArchive": "Restore item from archive",
+      "resetCompagnyApiKey": "Reset company API key"
+    }
   }
 }

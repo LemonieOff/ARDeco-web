@@ -1,13 +1,22 @@
 <script setup>
 import {isLogged, loggedIn, disconnect} from "public/js/checkLogin";
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
 
 onMounted(async () => {
     const userID = await isLogged();
+    let lang = localStorage.getItem('lang')
     if (userID) {
         if (loggedIn) {
             document.getElementById("login-register-wrapper").style.display = "none";
             document.getElementById("user-form").style.display = "default";
-            document.getElementById("user-welcome").innerHTML = "Welcome user N°" + userID + "!";
+            if (lang == null || lang == 'en') {
+                document.getElementById("user-welcome").innerHTML = en.login.welcome + userID + "!";
+                document.getElementById("logout").innerHTML = en.login.logout;
+            } else {
+                document.getElementById("user-welcome").innerHTML = fr.login.welcome + userID + "!";
+                document.getElementById("logout").innerHTML = fr.login.logout;
+            }
         } else {
             document.getElementById("login-register-wrapper").style.display = "default";
             document.getElementById("user-form").style.display = "none";
@@ -140,16 +149,6 @@ const register = async () => {
     displayHTMLErrors(result, response, "register");
 }
 
-const getSettings = async () => {
-    const response = await fetch('https://api.ardeco.app/settings', {
-        method: 'GET',
-        credentials: 'include',
-    });
-
-    const result = await response.json();
-    console.log(result);
-}
-
 const logout = async () => {
     const response = await fetch('https://api.ardeco.app/logout', {
         method: 'GET',
@@ -238,14 +237,18 @@ const logout = async () => {
             </div>
             <div id="user-form" class="form">
                 <div id="user-welcome"></div>
-                <button @click="getSettings">Get settings</button>
-                <button @click="logout">Logout</button>
+                <button id="logout" @click="logout"></button>
             </div>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
+
+#logout {
+    outline-style: solid;
+    outline-width: thin;
+}
 .form {
     display: flex;
     flex-direction: column;

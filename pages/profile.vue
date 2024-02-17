@@ -7,16 +7,16 @@
         </div>
         <div id="profile-wrapper" style="display: none">
             <div id="profile-retrieve">
-                <h1>Profile</h1>
+                <h1 id="profile">Profile</h1>
                 <div>ID : <span ref="id" id="id"></span></div>
-                <div>First name : <span ref="first_name" id="first_name"></span></div>
-                <div>Last name : <span ref="last_name" id="last_name"></span></div>
-                <div>Email : <span ref="email" id="email"></span></div>
-                <div>Phone : <span ref="phone" id="phone"></span></div>
-                <div>City : <span ref="city" id="city"></span></div>
+                <div id="firstName">First name : <span ref="first_name" id="first_name"></span></div>
+                <div id="lastName">Last name : <span ref="last_name" id="last_name"></span></div>
+                <div id="email">Email : <span ref="email" id="email"></span></div>
+                <div id="phone">Phone : <span ref="phone" id="phone"></span></div>
+                <div id="city">City : <span ref="city" id="city"></span></div>
                 <div>Role : <span ref="role" id="role"></span></div>
-                <div>Saved items in gallery : <span ref="gallery_nb" id="gallery_nb"></span></div>
-                <div>Commands ordered : <span ref="commands_ordered" id="commands_ordered">0</span></div>
+                <div id="savedItems">Saved items in gallery : <span ref="gallery_nb" id="gallery_nb"></span></div>
+                <div id="commandsOrdered">Commands ordered : <span ref="commands_ordered" id="commands_ordered">0</span></div>
                 <!--            <div>Address : <span ref="address"></span></div>
                             <div>State : <span ref="state"></span></div>
                             <div>Zip : <span ref="zip"></span></div>
@@ -30,38 +30,35 @@
         <div id="profile-edit">
             <div id="profile-edit-form" class="form">
                 <div id="email_section_edit">
-                    <label for="email_edit">Email : </label><input type="text" id="email_edit" name="email"
-                                                                   placeholder="Email">
+                    <label id="email2" for="email_edit">Email : </label>
+                    <input type="text" id="email_edit" name="email" placeholder="Email">
                     <ul id="email_errors_edit" class="edit-error"></ul>
                 </div>
                 <div id="first_name_section_edit">
-                    <label for="first_name_edit">First name : </label><input type="text"
-                                                                             id="first_name_edit"
-                                                                             name="first_name"
-                                                                             placeholder="Hugo">
+                    <label id="firstName2" for="first_name_edit">First name : </label>
+                    <input type="text" id="first_name_edit" name="first_name" placeholder="Hugo">
                     <ul id="first_name_errors_edit" class="edit-error"></ul>
                 </div>
                 <div id="last_name_section_edit">
-                    <label for="last_name_edit">Last name : </label><input type="text" id="last_name_edit"
-                                                                           name="last_name"
-                                                                           placeholder="BECART">
+                    <label id="lastName2" for="last_name_edit">Last name : </label>
+                    <input type="text" id="last_name_edit" name="last_name" placeholder="BECART">
                     <ul id="last_name_errors_edit" class="edit-error"></ul>
                 </div>
                 <div id="city_section_edit">
-                    <label for="city_edit">City : </label><input type="text" id="city_edit" name="city"
-                                                                 placeholder="Berlin">
+                    <label id="city2" for="city_edit">City : </label>
+                    <input type="text" id="city_edit" name="city" placeholder="Berlin">
                     <ul id="city_errors_edit" class="edit-error"></ul>
                 </div>
                 <div id="phone_section_edit">
-                    <label for="phone_edit">Phone : </label><input type="tel" id="phone_edit" name="phone"
-                                                                   placeholder="+33601020304">
+                    <label id="phone2" for="phone_edit">Phone : </label>
+                    <input type="tel" id="phone_edit" name="phone" placeholder="+33601020304">
                     <ul id="phone_errors_edit" class="edit-error"></ul>
                 </div>
                 <div id="general_section_edit">
                     <ul id="general_errors_edit" class="edit-error"></ul>
                     <ul id="general_success_edit" class="edit-success"></ul>
                 </div>
-                <button @click="edit">Edit profile (only modified fields will be updated, empty ones will be ignored)</button>
+                <button id="editProfile" @click="edit">Edit profile (only modified fields will be updated, empty ones will be ignored)</button>
             </div>
         </div>
     </div>
@@ -70,15 +67,14 @@
 <script setup>
 import Navbar from "~/components/Navbar.vue";
 import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
 
 import {isLogged, loggedIn} from "public/js/checkLogin";
 
 onMounted(async () => {
     const userID = await isLogged();
-
-    if (!loggedIn) {
-        location.href = "/login";
-    }
+    let lang = localStorage.getItem('lang')
 
     // get profile data
     const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
@@ -89,11 +85,6 @@ onMounted(async () => {
     const result_profile = data_profile.data;
 
     document.getElementById("id").innerText = result_profile.id;
-    document.getElementById("first_name").innerText = result_profile.firstname;
-    document.getElementById("last_name").innerText = result_profile.lastname;
-    document.getElementById("email").innerText = result_profile.email;
-    document.getElementById("phone").innerText = result_profile.phone;
-    document.getElementById("city").innerText = result_profile.city;
     document.getElementById("role").innerText = result_profile.role;
 
     // get gallery number data
@@ -104,11 +95,42 @@ onMounted(async () => {
     const data_gallery = await response_gallery.json();
     const result_gallery = data_gallery.data;
 
-    document.getElementById("gallery_nb").innerText = result_gallery.length;
-
     // Remove loading and display profile
     document.getElementById("profile-loading").style.display = "none";
     document.getElementById("profile-wrapper").style.display = "block";
+
+    if (lang == null || lang == 'en') {
+            document.getElementById("firstName").innerHTML = en.profile.informations.firstName + result_profile.firstname;
+            document.getElementById("lastName").innerHTML = en.profile.informations.lastName + result_profile.lastname;
+            document.getElementById("email").innerHTML = en.profile.informations.email + result_profile.email;
+            document.getElementById("phone").innerHTML = en.profile.informations.phone + result_profile.phone;
+            document.getElementById("city").innerHTML = en.profile.informations.city + result_profile.city;
+            document.getElementById("savedItems").innerHTML = en.profile.informations.savedItems + result_gallery.length;
+            document.getElementById("commandsOrdered").innerHTML = en.profile.informations.commandsOrdered + "0";
+            document.getElementById("editProfile").innerHTML = en.profile.informations.editProfile;
+            document.getElementById("firstName2").innerHTML = en.profile.informations.firstName;
+            document.getElementById("lastName2").innerHTML = en.profile.informations.lastName;
+            document.getElementById("email2").innerHTML = en.profile.informations.email;
+            document.getElementById("phone2").innerHTML = en.profile.informations.phone;
+            document.getElementById("city2").innerHTML = en.profile.informations.city;
+        } else {
+            document.getElementById("firstName").innerHTML = fr.profile.informations.firstName + result_profile.firstname;
+            document.getElementById("lastName").innerHTML = fr.profile.informations.lastName + result_profile.lastname;
+            document.getElementById("email").innerHTML = fr.profile.informations.email + result_profile.email;
+            document.getElementById("phone").innerHTML = fr.profile.informations.phone + result_profile.phone;
+            document.getElementById("city").innerHTML = fr.profile.informations.city + result_profile.city;
+            document.getElementById("savedItems").innerHTML = fr.profile.informations.savedItems + result_gallery.length;
+            document.getElementById("commandsOrdered").innerHTML = fr.profile.informations.commandsOrdered + "0";
+            document.getElementById("editProfile").innerHTML = fr.profile.informations.editProfile;
+            document.getElementById("firstName2").innerHTML = fr.profile.informations.firstName;
+            document.getElementById("lastName2").innerHTML = fr.profile.informations.lastName;
+            document.getElementById("email2").innerHTML = fr.profile.informations.email;
+            document.getElementById("phone2").innerHTML = fr.profile.informations.phone;
+            document.getElementById("city2").innerHTML = fr.profile.informations.city;
+        }
+    if (!loggedIn) {
+        location.href = "/login";
+    }
 });
 
 const edit = async () => {
@@ -217,5 +239,10 @@ const displayHTMLErrors = (result, response, type) => {
 
 .edit-success {
     color: green;
+}
+
+button {
+    outline-style: solid;
+    outline-width: thin;
 }
 </style>
