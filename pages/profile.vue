@@ -99,7 +99,7 @@ onMounted(async () => {
     document.getElementById("profile-loading").style.display = "none";
     document.getElementById("profile-wrapper").style.display = "block";
 
-    if (lang == null || lang == 'en') {
+    if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById("firstName").innerHTML = en.profile.informations.firstName + result_profile.firstname;
             document.getElementById("lastName").innerHTML = en.profile.informations.lastName + result_profile.lastname;
             document.getElementById("email").innerHTML = en.profile.informations.email + result_profile.email;

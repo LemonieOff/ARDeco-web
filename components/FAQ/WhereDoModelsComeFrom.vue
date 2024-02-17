@@ -13,7 +13,7 @@ export default {
     name: "WhereDoModelsComeFrom",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('modelsOriginsTitle').innerText = en.productPages.modelsOriginsTitle
             document.getElementById('modelsOriginsText').innerText = en.productPages.modelsOriginsText
         } else {

@@ -13,7 +13,7 @@ export default {
     name: "RecentPurchases",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('yourRecentPurchaces').innerText = en.profile.yourRecentPurchaces
         } else {
             document.getElementById('yourRecentPurchaces').innerText = fr.profile.yourRecentPurchaces

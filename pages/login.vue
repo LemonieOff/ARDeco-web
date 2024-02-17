@@ -10,7 +10,7 @@ onMounted(async () => {
         if (loggedIn) {
             document.getElementById("login-register-wrapper").style.display = "none";
             document.getElementById("user-form").style.display = "default";
-            if (lang == null || lang == 'en') {
+            if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
                 document.getElementById("user-welcome").innerHTML = en.login.welcome + userID + "!";
                 document.getElementById("logout").innerHTML = en.login.logout;
             } else {

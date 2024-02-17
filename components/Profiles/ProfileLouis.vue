@@ -51,7 +51,7 @@ export default {
     name: "ProfileLouis",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('role-louis').innerText = en.profilePages.louis.role
             document.getElementById('internshipRole1-louis').innerText = en.profilePages.louis.internshipRole1
             document.getElementById('internshipRole2-louis').innerText = en.profilePages.louis.internshipRole2

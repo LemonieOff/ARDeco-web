@@ -39,7 +39,7 @@ export default {
     name: "QuestionsList",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('projectDetailsTitle').innerText = en.productPages.projectDetailsTitle
             document.getElementById('findYourAnswersSubtitle').innerText = en.productPages.findYourAnswersSubtitle
             document.getElementById('q-furnitureChoiceTitle').innerText = en.productPages.furnitureChoiceTitle

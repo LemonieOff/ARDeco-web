@@ -13,7 +13,7 @@ export default {
     name: "WhyShouldIUseArdeco",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('whyUseArdecoTitle').innerText = en.productPages.whyUseArdecoTitle
             document.getElementById('whyUseArdecoText').innerText = en.productPages.whyUseArdecoText
         } else {

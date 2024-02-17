@@ -49,7 +49,7 @@ export default {
     name: "ProfileHugo",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('role-hugo').innerText = en.profilePages.hugo.role
             document.getElementById('internshipRole1-hugo').innerText = en.profilePages.hugo.internshipRole1
             document.getElementById('internshipRole2-hugo').innerText = en.profilePages.hugo.internshipRole2

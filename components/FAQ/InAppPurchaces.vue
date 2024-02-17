@@ -13,7 +13,7 @@ export default {
     name: "InAppPurchaces",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('inAppPurchaseTitle').innerText = en.productPages.inAppPurchaseTitle
             document.getElementById('inAppPurchaseText').innerText = en.productPages.inAppPurchaseText
         } else {

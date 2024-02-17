@@ -53,7 +53,7 @@ export default {
     name: "PagePresentation",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('title').innerText = en.profilePages.presentationPage.title
             document.getElementById('picturesTitle').innerText = en.profilePages.presentationPage.picturesTitle
             document.getElementById('picturesSubtitle').innerText = en.profilePages.presentationPage.picturesSubtitle

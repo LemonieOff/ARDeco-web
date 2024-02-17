@@ -17,7 +17,7 @@ export default {
     mounted() {
         let lang = localStorage.getItem('lang')
         console.log("lang:", lang)
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('home').innerText = en.navBar.home
             document.getElementById('team').innerText = en.navBar.team
             document.getElementById('product').innerText = en.navBar.product

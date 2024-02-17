@@ -13,7 +13,7 @@ export default {
     name: "WhatIsArdeco",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('whatIsArdecoTitle').innerText = en.productPages.whatIsArdecoTitle
             document.getElementById('whatIsArdecoText').innerText = en.productPages.whatIsArdecoText
         } else {

@@ -13,7 +13,7 @@ export default {
     name: "HowAreMyFurnitureChosen",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('furnitureChoiceTitle').innerText = en.productPages.furnitureChoiceTitle
             document.getElementById('furnitureChoiceText').innerText = en.productPages.furnitureChoiceText
         } else {

@@ -13,7 +13,7 @@ export default {
     name: "FavoriteThemes",
     mounted() {
         let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en') {
+        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
             document.getElementById('yourFavoriteThemes').innerText = en.profile.yourFavoriteThemes
         } else {
             document.getElementById('yourFavoriteThemes').innerText = fr.profile.yourFavoriteThemes
