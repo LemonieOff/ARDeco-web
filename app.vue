@@ -1,17 +1,18 @@
 <template>
   <div class="overflow-x-hidden">
-    <ClientOnly>
-    </ClientOnly>
+    <ClientOnly/>
     <NuxtPage class="z-1"/>
-    <Footer></Footer>
+    <Footer/>
+    <LanguageChanger/>
   </div>
 </template>
 <script>
 import Header from "./components/Header";
 import Navbar from "~/components/Navbar.vue";
 import Footer from "~/components/Footer.vue";
+import LanguageChanger from "~/components/LanguageChanger.vue";
 
 export default {
-  components: {Header, Navbar, Footer}
+  components: { Header, Navbar, Footer, LanguageChanger }
 }
 </script>

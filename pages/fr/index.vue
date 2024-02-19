@@ -2,12 +2,12 @@
   <Navbar urlLang="fr"/>
   <div id="hero" class="flex h-screen w-full font-black bg-port-brown text-9xl bg-no-repeat bg-cover"
   :style="{backgroundImage: `url(${backgroundUrl})`}">
-    <h1 ref=test class="font-black md:mt-16 justify-center text-7xl md:text-9xl mt-72 text-center mx-auto bg-port-brown md:bg-transparent h-fit text-ARgrey w-fit md:w-1/2">Welcome to ARDeco</h1>
+    <h1 id="welcomeTitle" ref=test class="font-black md:mt-16 justify-center text-7xl md:text-9xl mt-72 text-center mx-auto bg-port-brown md:bg-transparent h-fit text-ARgrey w-fit md:w-1/2">Welcome to ARDeco</h1>
   </div>
     <div class="h-screen bg-[#F2EBDF] flex">
       <div class="font-display font-medium w-1/3 ml-9 text-4xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4">
       <h2 class="underline mb-5">ARDECO</h2>
-        <p>
+        <p id="productPresentation">
           Is innovative application that revolutionizes your interior design experience using Augmented Reality (AR) and Artificial Intelligence (AI). Effortlessly scan your room with your phone, and our intelligent AI algorithms will analyze the space to create personalized, visually stunning decorations tailored to your preferences. Explore new design possibilities and bring your dream space to life with ARDeco.
         </p>
       </div>
@@ -19,18 +19,18 @@
         <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap',
         'transition duration-1000 pointer-events-none select-none">
           <div v-for="j in 10" :key="j" class="font-black leading-none text-3 mr-4 text-[3rem] md:text-[5rem] text-port-brown">
-            <span class="mr-4">Discover</span><span class="outline-text">Team</span>
+            <span id="discover" class="mr-4">Discover</span><span id="team" class="outline-text">Team</span>
           </div>
         </div>
 
         <div class="mx-auto" >
-          <a class="p-5 rounded-full flex h-fit text-port-brown font-extrabold text-3xl md:text-5xl bg-ARgrey ease-in-out
+          <a id="clickHere" class="p-5 rounded-full flex h-fit text-port-brown font-extrabold text-3xl md:text-5xl bg-ARgrey ease-in-out
       duration-700 hover:text-ARgrey hover:bg-port-brown  hover:border-2 hover:border-ARgrey hover:p-8" href="/team">Click here!</a>
         </div>
         <div class=" auto-scroll-text flex items-center justify-start w-full whitespace-nowrap',
         'transition duration-1000 pointer-events-none select-none ">
           <div v-for="j in 10" :key="j" class="font-black leading-none mr-4 text-3  text-[3rem] md:text-[5rem] text-port-brown animation-reverse">
-            <span class="mr-4">Discover</span><span class="outline-text">Team</span>
+            <span id="discover2" class="mr-4">Discover</span><span id="team2" class="outline-text">Team</span>
           </div>
         </div>
       </div>
@@ -39,14 +39,14 @@
   <div class="h-screen bg-gradient-to-t from-port-brown to-[#F2EBDF] flex">
     <img class="ml-32 w-1/2 h-2/3 my-auto rounded-xl" src="~assets/images/ar_illu.png" alt="this slowpoke moves" />
     <div class="font-display font-medium w-1/3 ml-9 text-4xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4">
-      <h2 class="underline mb-5">Augmented Reality</h2>
-      <p>
+      <h2 id="augmentedRealityTitle" class="underline mb-5">Augmented Reality</h2>
+      <p id="augmentedRealityText">
         We chose Augmented Reality for this project because it offers an immersive, interactive experience, allowing you to visualize and experiment with various design elements in real-time, right in your own space. ARDeco eliminates the guesswork and the need for costly, time-consuming redesigns by giving you a true-to-life preview of your dream space. Discover endless possibilities and unleash your creativity with ARDeco – the future of interior design is here.
       </p>
     </div>
   </div>
   <div class="flex flex-col items-center justify-center bg-gradient-to-b h-screen w-screen from-port-brown to-[#F2EBDF]">
-    <span class="text-9xl font-bold mb-12 w-full text-center outline-text">Key Points</span>
+    <span id="keyPoints" class="text-9xl font-bold mb-12 w-full text-center outline-text">Key Points</span>
     <ul class="flex flex-wrap justify-center">
       <li v-for="(feature, index) in features" :key="index" class="m-3 flex flex-col justify-between bg-port-brown border border-ARgrey text-ARgrey p-4 rounded-md shadow-md w-1/3 font-sans hover:bg-ARgrey hover:text-port-brown">
         <h3 class="text-xl font-semibold mb-2">{{ feature.title }}</h3>
@@ -65,26 +65,43 @@ import { ref } from 'vue';
 
 const features = ref([
   {
-    title: 'AI-Powered Design Recommendations',
-    description: 'Our intelligent algorithms analyze your space and offer personalized design suggestions based on your unique preferences and requirements.',
+    title: 'Recommandations de conception alimentées par l\'IA',
+    description: 'Nos algorithmes intelligents analysent votre espace et proposent des suggestions de conception personnalisées basées sur vos préférences et vos besoins uniques.',
   },
   {
-    title: 'Real-Time Visualization',
-    description: 'See how different furniture, colors, and accessories look in your space instantly, making it easy to compare and choose the perfect design elements.',
+    title: 'Visualisation en temps réel',
+    description: 'Voyez comment différents meubles, couleurs et accessoires apparaissent dans votre espace instantanément, ce qui facilite la comparaison et le choix des éléments de conception parfaits.',
   },
   {
-    title: 'Easy-to-Use Interface',
-    description: 'With a user-friendly design and intuitive controls, ARDeco lets you transform your space in just a few taps.',
+    title: 'Interface facile à utiliser',
+    description: 'Avec une conception conviviale et des commandes intuitives, ARDeco vous permet de transformer votre espace en quelques tapes seulement.',
   },
   {
-    title: 'Share Your Designs',
-    description: 'Collaborate with friends, family, or professionals by sharing your designs, getting feedback, and fine-tuning your space together.',
+    title: 'Partagez vos conceptions',
+    description: 'Collaborez avec des amis, de la famille ou des professionnels en partageant vos conceptions, en obtenant des commentaires et en peaufinant votre espace ensemble.',
   },
   {
-    title: 'Endless Inspiration',
-    description: 'Explore a vast library of styles, trends, and design ideas to help you create a space that truly reflects your personality.',
+    title: 'Inspiration infinie',
+    description: 'Explorez une vaste bibliothèque de styles, de tendances et d\'idées de conception pour vous aider à créer un espace qui reflète vraiment votre personnalité.',
   },
 ]);
+
+
+onMounted(() => {
+  let lang = localStorage.getItem('lang')
+  console.log('index/vue lang :', lang)
+
+  document.getElementById('welcomeTitle').innerText = fr.home.welcomeTitle
+  document.getElementById('productPresentation').innerText = fr.home.productPresentation
+  document.getElementById('team').innerText = fr.home.transitionEffect.team
+  document.getElementById('team2').innerText = fr.home.transitionEffect.team
+  document.getElementById('discover').innerText = fr.home.transitionEffect.discover
+  document.getElementById('discover2').innerText = fr.home.transitionEffect.discover
+  document.getElementById('clickHere').innerText = fr.home.transitionEffect.clickHere
+  document.getElementById('augmentedRealityTitle').innerText = fr.home.augmentedRealityTitle
+  document.getElementById('augmentedRealityText').innerText = fr.home.augmentedRealityText
+  document.getElementById('keyPoints').innerText = fr.home.keyPoints
+});
 </script>
 
 <style lang="scss" scoped>

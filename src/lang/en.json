@@ -103,5 +103,6 @@
       "restoreItemFromArchive": "Restore item from archive",
       "resetCompagnyApiKey": "Reset company API key"
     }
-  }
+  },
+  "languageChangerText": "Translate to FR"
 }

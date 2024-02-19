@@ -104,5 +104,6 @@
       "restoreItemFromArchive": "Restaurer cet élement de l'archive",
       "resetCompagnyApiKey": "Réinitialiser mon clé API"
     }
-  }
+  },
+  "languageChangerText": "Traduire en EN"
 }
