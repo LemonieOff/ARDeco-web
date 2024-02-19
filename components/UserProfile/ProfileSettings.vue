@@ -1,10 +1,9 @@
 <template>
     <div>
-        <div class="title"> Your profile </div>
         <div class="content">
-            <FavoriteThemes></FavoriteThemes>
-            <ProfileDetails></ProfileDetails>
-            <RecentPurchases></RecentPurchases>
+            <FavoriteThemes :urlLang=this.urlLang />
+            <ProfileDetails :urlLang=this.urlLang />
+            <RecentPurchases :urlLang=this.urlLang />
         </div>
     </div>
 </template>
@@ -15,6 +14,9 @@ import ProfileDetails from "~/components/UserProfile/ProfileDetails.vue"
 import RecentPurchases from "~/components/UserProfile/RecentPurchases.vue"
 export default {
     name: "ProfileSettings",
+    props: {
+        urlLang: String
+    },
     components: {
         FavoriteThemes,
         ProfileDetails,

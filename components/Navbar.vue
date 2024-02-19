@@ -14,10 +14,18 @@ import fr from "~/src/lang/fr.json";
 
 export default {
     name: "Navbar",
+    props: {
+        urlLang: String
+    },
     mounted() {
-        let lang = localStorage.getItem('lang')
-        console.log("lang:", lang)
-        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
+        // Change the language of the website
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+        console.log("localStorage.getItem('lang') : ", localStorage.getItem('lang'))
+        console.log("lang = ", lang)
+        if (lang == 'en') {
             document.getElementById('home').innerText = en.navBar.home
             document.getElementById('team').innerText = en.navBar.team
             document.getElementById('product').innerText = en.navBar.product
@@ -29,6 +37,19 @@ export default {
             document.getElementById('product').innerText = fr.navBar.product
             document.getElementById('profile').innerText = fr.navBar.profile
             document.getElementById('dark-mode-button').innerText = fr.navBar.darkmode
+        }
+        
+        // Change the url links between /fr and /en depending on the language
+        if (lang == 'en') {
+            document.getElementById('home').setAttribute("href", "/en/")
+            document.getElementById('team').setAttribute("href", "/en/team")
+            document.getElementById('product').setAttribute("href", "/en/product")
+            document.getElementById('profile').setAttribute("href", "/en/profile")
+        } else {
+            document.getElementById('home').setAttribute("href", "/fr/")
+            document.getElementById('team').setAttribute("href", "/fr/team")
+            document.getElementById('product').setAttribute("href", "/fr/product")
+            document.getElementById('profile').setAttribute("href", "/fr/profile")
         }
     },
     methods: {

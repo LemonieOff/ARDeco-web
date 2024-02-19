@@ -5,18 +5,12 @@ import fr from "~/src/lang/fr.json";
 
 onMounted(async () => {
     const userID = await isLogged();
-    let lang = localStorage.getItem('lang')
     if (userID) {
         if (loggedIn) {
             document.getElementById("login-register-wrapper").style.display = "none";
             document.getElementById("user-form").style.display = "default";
-            if (lang == 'en') {
-                document.getElementById("user-welcome").innerHTML = en.login.welcome + userID + "!";
-                document.getElementById("logout").innerHTML = en.login.logout;
-            } else {
-                document.getElementById("user-welcome").innerHTML = fr.login.welcome + userID + "!";
-                document.getElementById("logout").innerHTML = fr.login.logout;
-            }
+            document.getElementById("user-welcome").innerHTML = en.login.welcome + userID + "!";
+            document.getElementById("logout").innerHTML = en.login.logout;
         } else {
             document.getElementById("login-register-wrapper").style.display = "default";
             document.getElementById("user-form").style.display = "none";
@@ -155,7 +149,6 @@ const logout = async () => {
         credentials: 'include',
     });
     await disconnect();
-    localStorage.setItem('lang', null)
     const result = await response.text();
     console.log(result);
     location.reload();
@@ -163,7 +156,7 @@ const logout = async () => {
 </script>
 
 <template>
-    <Navbar/>
+    <Navbar urlLang="en"/>
     <div id="forms-container">
         <div id="forms-loading" class="form">
             Chargement en cours...

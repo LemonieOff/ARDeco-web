@@ -1,7 +1,7 @@
 <!-- ChangePassword.vue -->
 <template>
-  <Navbar/>
-  <Reset/>
+  <Navbar></Navbar>
+  <Reset></Reset>
 </template>
 
 

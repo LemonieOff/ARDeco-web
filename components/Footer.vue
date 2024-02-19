@@ -28,7 +28,7 @@ export default {
   name: "Footer",
   mounted() {
     let lang = localStorage.getItem('lang')
-    if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
+    if (lang == 'en') {
         document.getElementById('stayTuned').innerText = en.footer.stayTuned
         document.getElementById('contactUs').innerText = en.footer.contactUs
         document.getElementById('newsletter').innerText = en.footer.newsletter

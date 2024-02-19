@@ -11,9 +11,22 @@ import fr from "~/src/lang/fr.json";
 
 export default {
     name: "WhereDoModelsComeFrom",
+    props: {
+        urlLang: String
+    },
     mounted() {
-        let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
+
+        if (lang == 'en') {
             document.getElementById('modelsOriginsTitle').innerText = en.productPages.modelsOriginsTitle
             document.getElementById('modelsOriginsText').innerText = en.productPages.modelsOriginsText
         } else {

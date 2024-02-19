@@ -1,5 +1,5 @@
 <template>
-  <Navbar/>
+  <Navbar urlLang="fr"/>
   <div id="hero" class="flex h-screen w-full font-black bg-port-brown text-9xl bg-no-repeat bg-cover"
   :style="{backgroundImage: `url(${backgroundUrl})`}">
     <h1 ref=test class="font-black md:mt-16 justify-center text-7xl md:text-9xl mt-72 text-center mx-auto bg-port-brown md:bg-transparent h-fit text-ARgrey w-fit md:w-1/2">Welcome to ARDeco</h1>

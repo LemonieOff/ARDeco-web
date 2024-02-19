@@ -49,9 +49,22 @@ import fr from "~/src/lang/fr.json";
 
 export default {
     name: "ProfileValentin",
+    props: {
+        urlLang: String
+    },
     mounted() {
-        let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
+
+        if (lang == 'en') {
             document.getElementById('role-valentin').innerText = en.profilePages.valentin.role
             document.getElementById('internshipRole1-valentin').innerText = en.profilePages.valentin.internshipRole1
             document.getElementById('internshipRole2-valentin').innerText = en.profilePages.valentin.internshipRole2

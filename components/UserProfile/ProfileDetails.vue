@@ -58,10 +58,22 @@
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 export default {
-    name: "ProfileDetails",
+    props: {
+        urlLang: String
+    },
     mounted() {
-        let lang = localStorage.getItem('lang')
-        if (lang == null || lang == 'en' || localStorage.getItem('userID') == null) {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
+
+        if (lang == 'en') {
             document.getElementById('firstAndLastName').innerText = en.profile.settings.firstAndLastName
             document.getElementById('getUserSettings').innerText = en.profile.settings.getUserSettings
             document.getElementById('setUserSettings').innerText = en.profile.settings.setUserSettings
@@ -235,6 +247,7 @@ export default {
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
+            location.reload()
         },
         async addFurniture() {
             if (localStorage.getItem('userID') == null) {

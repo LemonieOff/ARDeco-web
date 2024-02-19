@@ -1,7 +1,6 @@
 <template>
   <div class="overflow-x-hidden">
     <ClientOnly>
-      <Navbar class="z-30"></Navbar>
     </ClientOnly>
     <NuxtPage class="z-1"/>
     <Footer></Footer>
