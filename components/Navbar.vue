@@ -18,6 +18,11 @@ export default {
         urlLang: String
     },
     mounted() {
+        // If no user is connected, deletes the 'lang' item
+        if (localStorage.getItem('userID') == null) {
+            localStorage.setItem('lang', null)
+        }
+
         // Change the language of the website
         let lang = this.urlLang
         if (lang == null) {
