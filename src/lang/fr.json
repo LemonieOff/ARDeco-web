@@ -75,7 +75,16 @@
   "login": {
     "welcome": "Bienvenue utilisateur N°",
     "getSettings": "Mes paramètres actuels",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "login": "Se connecter",
+    "register": "Créer un compte",
+    "email": "Email : ",
+    "password": "Mot de passe : ",
+    "passwordConfirm": "Confirmer le mot de passe : ",
+    "firstName": "Nom : ",
+    "lastName": "Prénom : ",
+    "city": "Ville : ",
+    "phone": "Téléhone : "
   },
   "profile": {
     "yourFavoriteThemes": "Vos thèmes favoris",

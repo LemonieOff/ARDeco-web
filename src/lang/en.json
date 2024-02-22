@@ -74,7 +74,16 @@
   },
   "login": {
     "welcome": "Welcome user N°",
-    "logout": "Logout"
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "email": "Email : ",
+    "password": "Password : ",
+    "passwordConfirm": "Confirm password : ",
+    "firstName": "First name : ",
+    "lastName": "Last name : ",
+    "city": "City : ",
+    "phone": "Phone : "
   },
   "profile": {
     "yourFavoriteThemes": "Your favorites themes",

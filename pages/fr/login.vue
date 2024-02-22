@@ -5,11 +5,6 @@ import fr from "~/src/lang/fr.json";
 
 onMounted(async () => {
     const userID = await isLogged();
-
-    if (localStorage.getItem('lang') == "en") {
-        location.href = location.href.replace("/fr/", "/en/")
-    }
-
     if (userID) {
         if (loggedIn) {
             document.getElementById("login-register-wrapper").style.display = "none";
@@ -23,6 +18,17 @@ onMounted(async () => {
     } else {
         document.getElementById("login-register-wrapper").style.display = "default";
         document.getElementById("user-form").style.display = "none";
+        document.getElementById("login").innerHTML = fr.login.login;
+        document.getElementById("register").innerHTML = fr.login.register;
+        document.getElementById("email").innerHTML = fr.login.email;
+        document.getElementById("password").innerHTML = fr.login.password;
+        document.getElementById("email2").innerHTML = fr.login.email;
+        document.getElementById("password2").innerHTML = fr.login.password;
+        document.getElementById("passwordConfirm").innerHTML = fr.login.passwordConfirm;
+        document.getElementById("firstName").innerHTML = fr.login.firstName;
+        document.getElementById("lastName").innerHTML = fr.login.lastName;
+        document.getElementById("city").innerHTML = fr.login.city;
+        document.getElementById("phone").innerHTML = fr.login.phone;
     }
     document.getElementById("forms-loading").style.display = "none";
     document.getElementById("forms-wrapper").style.display = "block";
@@ -154,6 +160,7 @@ const logout = async () => {
         credentials: 'include',
     });
     await disconnect();
+    localStorage.setItem('lang', null)
     const result = await response.text();
     console.log(result);
     location.reload();
@@ -161,7 +168,7 @@ const logout = async () => {
 </script>
 
 <template>
-    <Navbar urlLang="fr"/>
+    <Navbar/>
     <div id="forms-container">
         <div id="forms-loading" class="form">
             Chargement en cours...
@@ -170,69 +177,62 @@ const logout = async () => {
             <div id="login-register-wrapper" class="login-register-wrapper">
                 <div id="login-form" class="form">
                     <div id="email_section_login">
-                        <label for="email">Email : </label><input type="text" id="email_login" name="email"
-                                                                  placeholder="Email">
+                        <label id="email" for="email"></label>
+                        <input type="text" id="email_login" name="email" placeholder="Email">
                         <ul id="email_errors_login" class="login-error"></ul>
                     </div>
                     <div id="password_section_login">
-                        <label for="password">Password : </label><input type="password" id="password_login"
-                                                                        name="password"
-                                                                        placeholder="Password">
+                        <label id="password" for="password"></label>
+                        <input type="password" id="password_login" name="password" placeholder="Password">
                         <ul id="password_errors_login" class="login-error"></ul>
                     </div>
                     <div id="general_section_login">
                         <ul id="general_errors_login" class="login-error"></ul>
                         <ul id="general_success_login" class="login-success"></ul>
                     </div>
-                    <button @click="login">Login</button>
+                    <button id="login" @click="login">Login</button>
                 </div>
                 <div id="register-form" class="form">
                     <div id="email_section_register">
-                        <label for="email">Email : </label><input type="text" id="email_register" name="email"
-                                                                  placeholder="Email">
+                        <label id="email2" for="email"></label>
+                        <input type="text" id="email_register" name="email" placeholder="Email">
                         <ul id="email_errors_register" class="login-error"></ul>
                     </div>
                     <div id="password_section_register">
-                        <label for="password">Password : </label><input type="password" id="password_register"
-                                                                        name="password"
-                                                                        placeholder="Password">
+                        <label id="password2" for="password"></label>
+                        <input type="password" id="password_register" name="password" placeholder="Password">
                         <ul id="password_errors_register" class="login-error"></ul>
                     </div>
                     <div id="password_confirm_section_register">
-                        <label for="password_confirm_register">Password confirm : </label><input type="password"
-                                                                                                 id="password_confirm_register"
-                                                                                                 name="password_confirm"
-                                                                                                 placeholder="Password">
+                        <label id="passwordConfirm" for="password_confirm_register"></label>
+                        <input type="password" id="password_confirm_register" name="password_confirm" placeholder="Password">
                         <ul id="password_confirm_errors_register" class="login-error"></ul>
                     </div>
                     <div id="first_name_section_register">
-                        <label for="first_name_register">First name : </label><input type="text"
-                                                                                     id="first_name_register"
-                                                                                     name="first_name"
-                                                                                     placeholder="Hugo">
+                        <label id="firstName" for="first_name_register"></label>
+                        <input type="text" id="first_name_register" name="first_name" placeholder="Hugo">
                         <ul id="first_name_errors_register" class="login-error"></ul>
                     </div>
                     <div id="last_name_section_register">
-                        <label for="last_name_register">Last name : </label><input type="text" id="last_name_register"
-                                                                                   name="last_name"
-                                                                                   placeholder="BECART">
+                        <label id="lastName" for="last_name_register"></label>
+                        <input type="text" id="last_name_register" name="last_name" placeholder="BECART">
                         <ul id="last_name_errors_register" class="login-error"></ul>
                     </div>
                     <div id="city_section_register">
-                        <label for="city_register">City : </label><input type="text" id="city_register" name="city"
-                                                                         placeholder="Berlin">
+                        <label id="city" for="city_register"></label>
+                        <input type="text" id="city_register" name="city" placeholder="Berlin">
                         <ul id="city_errors_register" class="login-error"></ul>
                     </div>
                     <div id="phone_section_register">
-                        <label for="phone_register">Phone : </label><input type="tel" id="phone_register" name="phone"
-                                                                           placeholder="+33601020304">
+                        <label id="phone" for="phone_register"></label>
+                        <input type="tel" id="phone_register" name="phone" placeholder="+33601020304">
                         <ul id="phone_errors_register" class="login-error"></ul>
                     </div>
                     <div id="general_section_register">
                         <ul id="general_errors_register" class="login-error"></ul>
                         <ul id="general_success_register" class="login-success"></ul>
                     </div>
-                    <button @click="register">Register</button>
+                    <button id="register" @click="register"></button>
                 </div>
             </div>
             <div id="user-form" class="form">
@@ -244,6 +244,11 @@ const logout = async () => {
 </template>
 
 <style scoped lang="scss">
+
+button {
+    outline-style: solid;
+    outline-width: thin;
+}
 
 #logout {
     outline-style: solid;
