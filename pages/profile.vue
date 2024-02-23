@@ -17,6 +17,8 @@
                 <div>Role : <span ref="role" id="role"></span></div>
                 <div>Saved items in gallery : <span ref="gallery_nb" id="gallery_nb"></span></div>
                 <div>Commands ordered : <span ref="commands_ordered" id="commands_ordered">0</span></div>
+                <div><a href="/favFourniture" class="button">Vos Furniture Favorie</a></div>
+                <div><a href="/favGallery" class="button">Vos Gallery Favorie</a></div>
                 <!--            <div>Address : <span ref="address"></span></div>
                             <div>State : <span ref="state"></span></div>
                             <div>Zip : <span ref="zip"></span></div>
