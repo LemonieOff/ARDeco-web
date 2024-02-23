@@ -50,6 +50,7 @@
         <button class="buttonSettings" @click="archiveItem">Archive item</button>
         <button class="buttonSettings" @click="restoreItem">Restore item from archive</button>
         <button class="buttonSettings" @click="getApiToken">Reset company API key</button>
+        <button class="buttonSettings" @click="getFavFurniture">Get Favorite Furniture</button>
         <div id="reponseText" class="buttonSettingsResponse"></div>
     </div>
 </template>
@@ -345,6 +346,39 @@ export default {
                 }
             }
         },
+        
+        async getFavFurniture() {
+            const userID = localStorage.getItem('userID');
+            if (userID == null) {
+                console.log('No user found, redirecting to login');
+                window.location.href = 'http://localhost:3000/login';
+                return;
+            };
+            const response = await fetch('https://api.ardeco.app/favorite/furniture', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            document.getElementById('reponseText').innerHTML = '';
+            if (result.code == 200 && result.data.length == 0) {
+                document.getElementById('reponseText').innerHTML = 'Catalog empty';
+            } else {
+                for (let i = 0; i < result.data.length; i++) {
+                    document.getElementById('reponseText').innerHTML += 
+                        '<p>' + (i + 1) + '. ' + `${result.data[i].id}` +
+                        ' - ' + `${result.data[i].userID}` + 
+                        ' - ' + `${result.data[i].furniture_id}` +
+                        '€ - ' + `${result.data[i].timestamp}` +
+                        ' - ' + `${result.data[i].object_id}` + '</p>';
+                }
+            }
+        },
+
         async setItemVisibility() {
             if (localStorage.getItem('userID') == null) {
                 console.log('No user found, redirecting to login');
