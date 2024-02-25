@@ -38,8 +38,11 @@
         </div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
     name: "ProfileMathias"
 }

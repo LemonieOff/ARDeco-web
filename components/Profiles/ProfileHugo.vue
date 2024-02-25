@@ -9,7 +9,7 @@
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>
                 <div class="name">Hugo Becart</div>
-                <div class="role">Project Leader</div>
+                <div id="role-hugo" class="role"></div>
             </div>
             <div class="timeline-content">
                 <div class="year-2020">2020</div>
@@ -20,7 +20,7 @@
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/MyFlyingBoxLogo.png">
-                    <div class="internship-role">Backend Developer</div>
+                    <div id="internshipRole1-hugo" class="internship-role"></div>
                 </div>
                 <div class="timeline-inactive">
                     <a href="https://www.epitech.eu/en/">
@@ -33,17 +33,45 @@
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/WorkingGameLogo.png">
-                    <div class="internship-role">Video Game Developer</div>
+                    <div id="internshipRole2-hugo" class="internship-role"></div>
                 </div>
                 <div class="year-2023">2023</div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "ProfileHugo"
+    name: "ProfileHugo",
+    props: {
+        urlLang: String
+    },
+    mounted() {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
+
+        if (lang == 'en') {
+            document.getElementById('role-hugo').innerText = en.profilePages.hugo.role
+            document.getElementById('internshipRole1-hugo').innerText = en.profilePages.hugo.internshipRole1
+            document.getElementById('internshipRole2-hugo').innerText = en.profilePages.hugo.internshipRole2
+        } else {
+            document.getElementById('role-hugo').innerText = fr.profilePages.hugo.role
+            document.getElementById('internshipRole1-hugo').innerText = fr.profilePages.hugo.internshipRole1
+            document.getElementById('internshipRole2-hugo').innerText = fr.profilePages.hugo.internshipRole2
+        }
+    },
 }
 </script>
 

@@ -1,11 +1,11 @@
 <template>
     <div class="profile-details">
         <img class="profile-picture" src="../../assets/images/profile-settings/default-profile-picture.png">
-        <div class="first-and-last-names">First and last name</div>
+        <div id="firstAndLastName" class="first-and-last-names">First and last name</div>
         <br>
         <br>
         <hr>
-        <button class="buttonSettings" @click="getSettings">Get user settings</button>
+        <button id="getUserSettings" class="buttonSettings" @click="getSettings">Get user settings</button>
         <div class="switches">
             Language: ENG
             <label class="switch">
@@ -27,7 +27,7 @@
             </label>
             ON
         </div>
-        <button class="buttonSettings" @click="setSettings">Set user settings</button>
+        <button id="setUserSettings" class="buttonSettings" @click="setSettings">Set user settings</button>
         <input class="buttonSettings" id="furnitureName" placeholder="Furniture name">
         <input class="buttonSettings" id="furniturePrice" placeholder="Furniture price">
         <input class="buttonSettings" id="furnitureStyles" placeholder="Furniture styles">
@@ -36,27 +36,71 @@
         <input class="buttonSettings" id="furnitureWidth" placeholder="Furniture width">
         <input class="buttonSettings" id="furnitureDepth" placeholder="Furniture depth">
         <input class="buttonSettings" id="furnitureColors" placeholder="Furniture colors">
-        <button class="buttonSettings" @click="addFurniture">Add a furniture to the catalog</button>
-        <button class="buttonSettings" @click="getGallery">Get user gallery</button>
-        <button class="buttonSettings" @click="setItemVisibility">Change gallery item visibility</button>
+        <button id="addFurnitureToCatalog" class="buttonSettings" @click="addFurniture">Add a furniture to the catalog</button>
+        <button id="getUserGallery" class="buttonSettings" @click="getGallery">Get user gallery</button>
+        <button id="changeGalleryVisibility" class="buttonSettings" @click="setItemVisibility">Change gallery item visibility</button>
         <input class="buttonSettings" id="itemInputID" placeholder="Item ID">
         <div style="text-align: center;">
             <button id="visibilityButton" style="background-color: green;" @click="changeVisibility">Visible</button>
             <br>
         </div>
-        <button class="buttonSettings" @click="getCatalog">Get compagny catalog</button>
-        <button class="buttonSettings" @click="getArchive">Get compagny archive</button>
-        <button class="buttonSettings" @click="deleteArchive">Empty compagny archive</button>
-        <button class="buttonSettings" @click="archiveItem">Archive item</button>
-        <button class="buttonSettings" @click="restoreItem">Restore item from archive</button>
-        <button class="buttonSettings" @click="getApiToken">Reset company API key</button>
+        <button id="getCompagnyCatalog" class="buttonSettings" @click="getCatalog">Get compagny catalog</button>
+        <button id="getCompagnyArchive" class="buttonSettings" @click="getArchive">Get compagny archive</button>
+        <button id="emptyCompagnyArchive" class="buttonSettings" @click="deleteArchive">Empty compagny archive</button>
+        <button id="archiveItem" class="buttonSettings" @click="archiveItem">Archive item</button>
+        <button id="restoreItemFromArchive" class="buttonSettings" @click="restoreItem">Restore item from archive</button>
+        <button id="resetCompagnyApiKey" class="buttonSettings" @click="getApiToken">Reset company API key</button>
         <div id="reponseText" class="buttonSettingsResponse"></div>
     </div>
 </template>
 
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
 export default {
-    name: "ProfileDetails",
+    props: {
+        urlLang: String
+    },
+    mounted() {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
+
+        if (lang == 'en') {
+            document.getElementById('firstAndLastName').innerText = en.profile.settings.firstAndLastName
+            document.getElementById('getUserSettings').innerText = en.profile.settings.getUserSettings
+            document.getElementById('setUserSettings').innerText = en.profile.settings.setUserSettings
+            document.getElementById('addFurnitureToCatalog').innerText = en.profile.settings.addFurnitureToCatalog
+            document.getElementById('getUserGallery').innerText = en.profile.settings.getUserGallery
+            document.getElementById('changeGalleryVisibility').innerText = en.profile.settings.changeGalleryVisibility
+            document.getElementById('getCompagnyCatalog').innerText = en.profile.settings.getCompagnyCatalog
+            document.getElementById('getCompagnyArchive').innerText = en.profile.settings.getCompagnyArchive
+            document.getElementById('emptyCompagnyArchive').innerText = en.profile.settings.emptyCompagnyArchive
+            document.getElementById('archiveItem').innerText = en.profile.settings.archiveItem
+            document.getElementById('restoreItemFromArchive').innerText = en.profile.settings.restoreItemFromArchive
+            document.getElementById('resetCompagnyApiKey').innerText = en.profile.settings.resetCompagnyApiKey
+        } else {
+            document.getElementById('firstAndLastName').innerText = fr.profile.settings.firstAndLastName
+            document.getElementById('getUserSettings').innerText = fr.profile.settings.getUserSettings
+            document.getElementById('setUserSettings').innerText = fr.profile.settings.setUserSettings
+            document.getElementById('addFurnitureToCatalog').innerText = fr.profile.settings.addFurnitureToCatalog
+            document.getElementById('getUserGallery').innerText = fr.profile.settings.getUserGallery
+            document.getElementById('changeGalleryVisibility').innerText = fr.profile.settings.changeGalleryVisibility
+            document.getElementById('getCompagnyCatalog').innerText = fr.profile.settings.getCompagnyCatalog
+            document.getElementById('getCompagnyArchive').innerText = fr.profile.settings.getCompagnyArchive
+            document.getElementById('emptyCompagnyArchive').innerText = fr.profile.settings.emptyCompagnyArchive
+            document.getElementById('archiveItem').innerText = fr.profile.settings.archiveItem
+            document.getElementById('restoreItemFromArchive').innerText = fr.profile.settings.restoreItemFromArchive
+            document.getElementById('resetCompagnyApiKey').innerText = fr.profile.settings.resetCompagnyApiKey
+        }
+    },
     methods: {
         async deleteArchive() {
             if (localStorage.getItem('userID') == null) {
@@ -199,9 +243,11 @@ export default {
             console.log(result);
             if (result.code == 200) {
                 document.getElementById('reponseText').innerHTML = result.description;
+                localStorage.setItem('lang', lang);
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
+            location.reload()
         },
         async addFurniture() {
             if (localStorage.getItem('userID') == null) {
@@ -280,6 +326,7 @@ export default {
                     'Language: ' + `${result.data.language}` +
                     '<br>Notifications: ' + `${result.data.notifications_enabled}` + 
                     '<br>Audio: ' + `${result.data.sounds_enabled}`;
+                localStorage.setItem('lang', result.data.language);
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
@@ -417,8 +464,9 @@ export default {
 <style lang="scss" scoped>
 @import "~/styles/ProfileSettings.scss";
 
-.button {
+button {
     outline-style: solid;
+    outline-width: thin;
 }
 
 .buttonSettings {

@@ -1,10 +1,10 @@
 <template>
-    <Navbar/>
-    <PagePresentation/>
-    <ProfileHugo/>
-    <ProfileEvan/>
-    <ProfileLouis/>
-    <ProfileValentin/>
+    <Navbar urlLang="fr"/>
+    <PagePresentation urlLang="fr"/>
+    <ProfileHugo urlLang="fr"/>
+    <ProfileEvan urlLang="fr"/>
+    <ProfileLouis urlLang="fr"/>
+    <ProfileValentin urlLang="fr"/>
 </template>
 
 <script setup lang="ts">

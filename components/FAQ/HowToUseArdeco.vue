@@ -1,21 +1,39 @@
 <template>
     <div class="question-content background-card" id="how-to-use-ardeco">
-        <div class="title underline">How to use ARDeco ?</div>
-        <div class="sub-title gray-text-color">
-            The user can first enter a budget range and/or a maximum budget not to be exceeded.
-            He can also select different styles that he would like in his room (for example zen,
-            industrial, classic, forest, etc...). He will then simply have to use his phone camera,
-            and perform a scan of the room by following the instructions indicated on the screen and
-            checking the veracity of the information calculated and transcribed. It is possible that
-            the application asks the user to enter one or more distances manually to perform more
-            precise calculations.
-        </div>
+        <div id="howToUseArdecoTitle" class="title underline"></div>
+        <div id="howToUseArdecoText" class="sub-title gray-text-color"></div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "HowToUseArdeco"
+    name: "HowToUseArdeco",
+    props: {
+        urlLang: String
+    },
+    mounted() {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
+
+        if (lang == 'en') {
+            document.getElementById('howToUseArdecoTitle').innerText = en.productPages.howToUseArdecoTitle
+            document.getElementById('howToUseArdecoText').innerText = en.productPages.howToUseArdecoText
+        } else {
+            document.getElementById('howToUseArdecoTitle').innerText = fr.productPages.howToUseArdecoTitle
+            document.getElementById('howToUseArdecoText').innerText = fr.productPages.howToUseArdecoText
+        }
+    },
 }
 </script>
 

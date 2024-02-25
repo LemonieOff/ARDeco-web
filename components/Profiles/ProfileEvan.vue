@@ -9,7 +9,7 @@
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>
                 <div class="name">Evan Blachier</div>
-                <div class="role">AR Developer</div>
+                <div id="role-evan" class="role"></div>
             </div>
             <div class="timeline-content">
                 <div class="year-2020">2020</div>
@@ -31,17 +31,43 @@
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
-                    <div class="internship-role">Junior Frontend Developer</div>
+                    <div id="internshipRole1-evan" class="internship-role"></div>
                 </div>
                 <div class="year-2023">2023</div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "ProfileEvan"
+    name: "ProfileEvan",
+    props: {
+        urlLang: String
+    },
+    mounted() {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
+
+        if (lang == 'en') {
+            document.getElementById('role-evan').innerText = en.profilePages.evan.role
+            document.getElementById('internshipRole1-evan').innerText = en.profilePages.evan.internshipRole1
+        } else {
+            document.getElementById('role-evan').innerText = fr.profilePages.evan.role
+            document.getElementById('internshipRole1-evan').innerText = fr.profilePages.evan.internshipRole1
+        }
+    },
 }
 </script>
 

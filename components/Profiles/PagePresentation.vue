@@ -1,11 +1,11 @@
 <template>
     <div class="page-presentation-content top-right-yellow-fade-background">
         <div class="line-jump"></div>
-        <div class="title">Meet our dream team</div>
+        <div id="title" class="title"></div>
         <div class="sub-content">
             <div class="team-content">
-                <div class="title">Want to know us better ?</div>
-                <div class="sub-title">Click on these pictures to learn more about us !</div>
+                <div id="picturesTitle" class="title"></div>
+                <div id="picturesSubtitle" class="sub-title"></div>
                 <div class="profile-pictures-content">
                     <div class="profile-pictures">
                         <a class="shaking-effect" href="#hugo-profile">
@@ -31,34 +31,59 @@
                 </div>
             </div>
             <div class="school-content">
-                <div class="title">Want to know what got us here ?</div>
-                <div class="sub-title">Learn more bout our school program and our previous professional experiences !</div>
+                <div id="presentationTitle" class="title"></div>
+                <div id="presentationSubtitle" class="sub-title"></div>
                 <div class="epitech-details">
                     <a href="https://www.epitech.eu/en/">
                         <img src="../../assets/images/profile-pictures/Epitech.png">
                     </a>
-                    <div class="text">
-                        Our school program takes place over 5 years to train us into computer experts. 
-                        It offers a dense and evolving technical content, 
-                        including a variety of programming projects and covering many 
-                        languages that will allow each of us to approach all new technologies.
-                    </div>
-                    <div class="text">
-                        During those 5 years, we are asked to to find internships or part 
-                        time jobs to learn everything we need to know about life in the professional world. 
-                        Since all of us are 3rd years, we can comfortably say that we all spent at least half 
-                        a year in a company already, which turns out to be very beneficial to the development 
-                        of our ARDeco project.
-                    </div>
+                    <div id="presentationTextPart1" class="text"></div>
+                    <div id="presentationTextPart2" class="text"></div>
                 </div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "PagePresentation"
+    name: "PagePresentation",
+    props: {
+        urlLang: String
+    },
+    mounted() {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
+
+        if (lang == 'en') {
+            document.getElementById('title').innerText = en.profilePages.presentationPage.title
+            document.getElementById('picturesTitle').innerText = en.profilePages.presentationPage.picturesTitle
+            document.getElementById('picturesSubtitle').innerText = en.profilePages.presentationPage.picturesSubtitle
+            document.getElementById('presentationTitle').innerText = en.profilePages.presentationPage.presentationTitle
+            document.getElementById('presentationSubtitle').innerText = en.profilePages.presentationPage.presentationSubtitle
+            document.getElementById('presentationTextPart1').innerText = en.profilePages.presentationPage.presentationTextPart1
+            document.getElementById('presentationTextPart2').innerText = en.profilePages.presentationPage.presentationTextPart2
+        } else {
+            document.getElementById('title').innerText = fr.profilePages.presentationPage.title
+            document.getElementById('picturesTitle').innerText = fr.profilePages.presentationPage.picturesTitle
+            document.getElementById('picturesSubtitle').innerText = fr.profilePages.presentationPage.picturesSubtitle
+            document.getElementById('presentationTitle').innerText = fr.profilePages.presentationPage.presentationTitle
+            document.getElementById('presentationSubtitle').innerText = fr.profilePages.presentationPage.presentationSubtitle
+            document.getElementById('presentationTextPart1').innerText = fr.profilePages.presentationPage.presentationTextPart1
+            document.getElementById('presentationTextPart2').innerText = fr.profilePages.presentationPage.presentationTextPart2
+        }
+    },
 }
 </script>
 

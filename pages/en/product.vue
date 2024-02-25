@@ -1,17 +1,17 @@
 <template>
-    <Navbar/>
-    <QuestionsList/>
-    <WhatIsArdeco/>
+    <Navbar urlLang="en"/>
+    <QuestionsList urlLang="en"/>
+    <WhatIsArdeco urlLang="en"/>
     <div class="space-between-questions"></div>
-    <HowToUseArdeco/>
+    <HowToUseArdeco urlLang="en"/>
     <div class="space-between-questions"></div>
-    <HowAreMyFurnitureChosen/>
+    <HowAreMyFurnitureChosen urlLang="en"/>
     <div class="space-between-questions"></div>
-    <WhereDoModelsComeFrom/>
+    <WhereDoModelsComeFrom urlLang="en"/>
     <div class="space-between-questions"></div>
-    <WhyShouldIUseArdeco/>
+    <WhyShouldIUseArdeco urlLang="en"/>
     <div class="space-between-questions"></div>
-    <InAppPurchaces/>
+    <InAppPurchaces urlLang="en"/>
 </template>
   
 <script setup lang="ts">
