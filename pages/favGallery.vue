@@ -1,4 +1,5 @@
 <template>
+  <div class="title">Amenagements Favoris</div>
     <div class="form">
       <div class="grid">
         <div class="grid-header">
@@ -152,6 +153,13 @@
   border-right: 1px solid #ddd; /* Lighter border */
   border-bottom: 1px solid #ddd; /* Add bottom border */
 }
+
+.title {
+  text-align : center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
 
 
   </style>
