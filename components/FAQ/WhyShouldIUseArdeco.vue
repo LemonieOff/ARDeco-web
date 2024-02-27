@@ -1,24 +1,39 @@
 <template>
     <div class="question-content background-card" id="why-choose-ardeco">
-        <div class="title underline">Why should I use ARDeco ?</div>
-        
-        <div class="sub-title gray-text-color">
-            The project therefore saves time when furnishing your room.
-            Thanks to the budget and style selection, the scanning of
-            the room to capture the dimensions of the walls and furniture
-            (if present in the room) and the AI previously described which
-            retrieves furniture corresponding to the criteria and dimensions
-            then pose, saving user time and agent. Another improvement that the
-            project brings to the user is that he is sure of the final rendering
-            of his room and will not be disappointed, since he can visualize in augmented
-            reality in his room the final arrangement, and even carry out tests to be sure.
-        </div>
+        <div id="whyUseArdecoTitle" class="title underline"></div>
+        <div id="whyUseArdecoText" class="sub-title gray-text-color"></div>
     </div>
 </template>
-  
+
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+
 export default {
-    name: "WhyShouldIUseArdeco"
+    name: "WhyShouldIUseArdeco",
+    props: {
+        urlLang: String
+    },
+    mounted() {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
+
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
+
+        if (lang == 'en') {
+            document.getElementById('whyUseArdecoTitle').innerText = en.productPages.whyUseArdecoTitle
+            document.getElementById('whyUseArdecoText').innerText = en.productPages.whyUseArdecoText
+        } else {
+            document.getElementById('whyUseArdecoTitle').innerText = fr.productPages.whyUseArdecoTitle
+            document.getElementById('whyUseArdecoText').innerText = fr.productPages.whyUseArdecoText
+        }
+    },
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
-    <Navbar/>
-    <ProfileSettings/>
+    <Navbar urlLang="en"/>
+    <ProfileSettings urlLang="en"/>
     <div id="profile-container">
         <div id="profile-loading" class="form">
             Chargement en cours...
@@ -17,8 +17,6 @@
                 <div>Role : <span ref="role" id="role"></span></div>
                 <div id="savedItems">Saved items in gallery : <span ref="gallery_nb" id="gallery_nb"></span></div>
                 <div id="commandsOrdered">Commands ordered : <span ref="commands_ordered" id="commands_ordered">0</span></div>
-                <div><a href="/favFourniture" class="button">Vos Furniture Favorie</a></div>
-                <div><a href="/favGallery" class="button">Vos Gallery Favorie</a></div>
                 <!--            <div>Address : <span ref="address"></span></div>
                             <div>State : <span ref="state"></span></div>
                             <div>Zip : <span ref="zip"></span></div>
@@ -76,7 +74,8 @@ import {isLogged, loggedIn} from "public/js/checkLogin";
 
 onMounted(async () => {
     const userID = await isLogged();
-    let lang = localStorage.getItem('lang')
+    if (localStorage.getItem('userID') == null)
+        location.href = "/fr/login";
 
     // get profile data
     const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
@@ -101,35 +100,20 @@ onMounted(async () => {
     document.getElementById("profile-loading").style.display = "none";
     document.getElementById("profile-wrapper").style.display = "block";
 
-    if (lang == 'en') {
-            document.getElementById("firstName").innerHTML = en.profile.informations.firstName + result_profile.firstname;
-            document.getElementById("lastName").innerHTML = en.profile.informations.lastName + result_profile.lastname;
-            document.getElementById("email").innerHTML = en.profile.informations.email + result_profile.email;
-            document.getElementById("phone").innerHTML = en.profile.informations.phone + result_profile.phone;
-            document.getElementById("city").innerHTML = en.profile.informations.city + result_profile.city;
-            document.getElementById("savedItems").innerHTML = en.profile.informations.savedItems + result_gallery.length;
-            document.getElementById("commandsOrdered").innerHTML = en.profile.informations.commandsOrdered + "0";
-            document.getElementById("editProfile").innerHTML = en.profile.informations.editProfile;
-            document.getElementById("firstName2").innerHTML = en.profile.informations.firstName;
-            document.getElementById("lastName2").innerHTML = en.profile.informations.lastName;
-            document.getElementById("email2").innerHTML = en.profile.informations.email;
-            document.getElementById("phone2").innerHTML = en.profile.informations.phone;
-            document.getElementById("city2").innerHTML = en.profile.informations.city;
-        } else {
-            document.getElementById("firstName").innerHTML = fr.profile.informations.firstName + result_profile.firstname;
-            document.getElementById("lastName").innerHTML = fr.profile.informations.lastName + result_profile.lastname;
-            document.getElementById("email").innerHTML = fr.profile.informations.email + result_profile.email;
-            document.getElementById("phone").innerHTML = fr.profile.informations.phone + result_profile.phone;
-            document.getElementById("city").innerHTML = fr.profile.informations.city + result_profile.city;
-            document.getElementById("savedItems").innerHTML = fr.profile.informations.savedItems + result_gallery.length;
-            document.getElementById("commandsOrdered").innerHTML = fr.profile.informations.commandsOrdered + "0";
-            document.getElementById("editProfile").innerHTML = fr.profile.informations.editProfile;
-            document.getElementById("firstName2").innerHTML = fr.profile.informations.firstName;
-            document.getElementById("lastName2").innerHTML = fr.profile.informations.lastName;
-            document.getElementById("email2").innerHTML = fr.profile.informations.email;
-            document.getElementById("phone2").innerHTML = fr.profile.informations.phone;
-            document.getElementById("city2").innerHTML = fr.profile.informations.city;
-        }
+    document.getElementById("firstName").innerHTML = en.profile.informations.firstName + result_profile.firstname;
+    document.getElementById("lastName").innerHTML = en.profile.informations.lastName + result_profile.lastname;
+    document.getElementById("email").innerHTML = en.profile.informations.email + result_profile.email;
+    document.getElementById("phone").innerHTML = en.profile.informations.phone + result_profile.phone;
+    document.getElementById("city").innerHTML = en.profile.informations.city + result_profile.city;
+    document.getElementById("savedItems").innerHTML = en.profile.informations.savedItems + result_gallery.length;
+    document.getElementById("commandsOrdered").innerHTML = en.profile.informations.commandsOrdered + "0";
+    document.getElementById("editProfile").innerHTML = en.profile.informations.editProfile;
+    document.getElementById("firstName2").innerHTML = en.profile.informations.firstName;
+    document.getElementById("lastName2").innerHTML = en.profile.informations.lastName;
+    document.getElementById("email2").innerHTML = en.profile.informations.email;
+    document.getElementById("phone2").innerHTML = en.profile.informations.phone;
+    document.getElementById("city2").innerHTML = en.profile.informations.city;
+
     if (!loggedIn) {
         location.href = "/login";
     }

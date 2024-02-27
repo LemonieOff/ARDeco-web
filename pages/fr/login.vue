@@ -5,18 +5,12 @@ import fr from "~/src/lang/fr.json";
 
 onMounted(async () => {
     const userID = await isLogged();
-    let lang = localStorage.getItem('lang')
     if (userID) {
         if (loggedIn) {
             document.getElementById("login-register-wrapper").style.display = "none";
             document.getElementById("user-form").style.display = "default";
-            if (lang == 'en') {
-                document.getElementById("user-welcome").innerHTML = en.login.welcome + userID + "!";
-                document.getElementById("logout").innerHTML = en.login.logout;
-            } else {
-                document.getElementById("user-welcome").innerHTML = fr.login.welcome + userID + "!";
-                document.getElementById("logout").innerHTML = fr.login.logout;
-            }
+            document.getElementById("user-welcome").innerHTML = fr.login.welcome + userID + "!";
+            document.getElementById("logout").innerHTML = fr.login.logout;
         } else {
             document.getElementById("login-register-wrapper").style.display = "default";
             document.getElementById("user-form").style.display = "none";
@@ -24,31 +18,17 @@ onMounted(async () => {
     } else {
         document.getElementById("login-register-wrapper").style.display = "default";
         document.getElementById("user-form").style.display = "none";
-        if (lang == "en") {
-            document.getElementById("login").innerHTML = en.login.login;
-            document.getElementById("register").innerHTML = en.login.register;
-            document.getElementById("email").innerHTML = en.login.email;
-            document.getElementById("password").innerHTML = en.login.password;
-            document.getElementById("email2").innerHTML = en.login.email;
-            document.getElementById("password2").innerHTML = en.login.password;
-            document.getElementById("passwordConfirm").innerHTML = en.login.passwordConfirm;
-            document.getElementById("firstName").innerHTML = en.login.firstName;
-            document.getElementById("lastName").innerHTML = en.login.lastName;
-            document.getElementById("city").innerHTML = en.login.city;
-            document.getElementById("phone").innerHTML = en.login.phone;
-        } else {
-            document.getElementById("login").innerHTML = fr.login.login;
-            document.getElementById("register").innerHTML = fr.login.register;
-            document.getElementById("email").innerHTML = fr.login.email;
-            document.getElementById("password").innerHTML = fr.login.password;
-            document.getElementById("email2").innerHTML = fr.login.email;
-            document.getElementById("password2").innerHTML = fr.login.password;
-            document.getElementById("passwordConfirm").innerHTML = fr.login.passwordConfirm;
-            document.getElementById("firstName").innerHTML = fr.login.firstName;
-            document.getElementById("lastName").innerHTML = fr.login.lastName;
-            document.getElementById("city").innerHTML = fr.login.city;
-            document.getElementById("phone").innerHTML = fr.login.phone;
-        }
+        document.getElementById("login").innerHTML = fr.login.login;
+        document.getElementById("register").innerHTML = fr.login.register;
+        document.getElementById("email").innerHTML = fr.login.email;
+        document.getElementById("password").innerHTML = fr.login.password;
+        document.getElementById("email2").innerHTML = fr.login.email;
+        document.getElementById("password2").innerHTML = fr.login.password;
+        document.getElementById("passwordConfirm").innerHTML = fr.login.passwordConfirm;
+        document.getElementById("firstName").innerHTML = fr.login.firstName;
+        document.getElementById("lastName").innerHTML = fr.login.lastName;
+        document.getElementById("city").innerHTML = fr.login.city;
+        document.getElementById("phone").innerHTML = fr.login.phone;
     }
     document.getElementById("forms-loading").style.display = "none";
     document.getElementById("forms-wrapper").style.display = "block";

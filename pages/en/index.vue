@@ -1,5 +1,5 @@
 <template>
-  <Navbar urlLang="fr"/>
+  <Navbar urlLang="en"/>
   <div id="hero" class="flex h-screen w-full font-black bg-port-brown text-9xl bg-no-repeat bg-cover"
   :style="{backgroundImage: `url(${backgroundUrl})`}">
     <h1 id="welcomeTitle" ref=test class="font-black md:mt-16 justify-center text-7xl md:text-9xl mt-72 text-center mx-auto bg-port-brown md:bg-transparent h-fit text-ARgrey w-fit md:w-1/2">Welcome to ARDeco</h1>
@@ -65,42 +65,41 @@ import { ref } from 'vue';
 
 const features = ref([
   {
-    title: 'Recommandations de conception alimentées par l\'IA',
-    description: 'Nos algorithmes intelligents analysent votre espace et proposent des suggestions de conception personnalisées basées sur vos préférences et vos besoins uniques.',
+    title: 'AI-Powered Design Recommendations',
+    description: 'Our intelligent algorithms analyze your space and offer personalized design suggestions based on your unique preferences and requirements.',
   },
   {
-    title: 'Visualisation en temps réel',
-    description: 'Voyez comment différents meubles, couleurs et accessoires apparaissent dans votre espace instantanément, ce qui facilite la comparaison et le choix des éléments de conception parfaits.',
+    title: 'Real-Time Visualization',
+    description: 'See how different furniture, colors, and accessories look in your space instantly, making it easy to compare and choose the perfect design elements.',
   },
   {
-    title: 'Interface facile à utiliser',
-    description: 'Avec une conception conviviale et des commandes intuitives, ARDeco vous permet de transformer votre espace en quelques tapes seulement.',
+    title: 'Easy-to-Use Interface',
+    description: 'With a user-friendly design and intuitive controls, ARDeco lets you transform your space in just a few taps.',
   },
   {
-    title: 'Partagez vos conceptions',
-    description: 'Collaborez avec des amis, de la famille ou des professionnels en partageant vos conceptions, en obtenant des commentaires et en peaufinant votre espace ensemble.',
+    title: 'Share Your Designs',
+    description: 'Collaborate with friends, family, or professionals by sharing your designs, getting feedback, and fine-tuning your space together.',
   },
   {
-    title: 'Inspiration infinie',
-    description: 'Explorez une vaste bibliothèque de styles, de tendances et d\'idées de conception pour vous aider à créer un espace qui reflète vraiment votre personnalité.',
+    title: 'Endless Inspiration',
+    description: 'Explore a vast library of styles, trends, and design ideas to help you create a space that truly reflects your personality.',
   },
 ]);
-
 
 onMounted(() => {
   let lang = localStorage.getItem('lang')
   console.log('index/vue lang :', lang)
 
-  document.getElementById('welcomeTitle').innerText = fr.home.welcomeTitle
-  document.getElementById('productPresentation').innerText = fr.home.productPresentation
-  document.getElementById('team').innerText = fr.home.transitionEffect.team
-  document.getElementById('team2').innerText = fr.home.transitionEffect.team
-  document.getElementById('discover').innerText = fr.home.transitionEffect.discover
-  document.getElementById('discover2').innerText = fr.home.transitionEffect.discover
-  document.getElementById('clickHere').innerText = fr.home.transitionEffect.clickHere
-  document.getElementById('augmentedRealityTitle').innerText = fr.home.augmentedRealityTitle
-  document.getElementById('augmentedRealityText').innerText = fr.home.augmentedRealityText
-  document.getElementById('keyPoints').innerText = fr.home.keyPoints
+  document.getElementById('welcomeTitle').innerText = en.home.welcomeTitle
+  document.getElementById('productPresentation').innerText = en.home.productPresentation
+  document.getElementById('team').innerText = en.home.transitionEffect.team
+  document.getElementById('team2').innerText = en.home.transitionEffect.team
+  document.getElementById('discover').innerText = en.home.transitionEffect.discover
+  document.getElementById('discover2').innerText = en.home.transitionEffect.discover
+  document.getElementById('clickHere').innerText = en.home.transitionEffect.clickHere
+  document.getElementById('augmentedRealityTitle').innerText = en.home.augmentedRealityTitle
+  document.getElementById('augmentedRealityText').innerText = en.home.augmentedRealityText
+  document.getElementById('keyPoints').innerText = en.home.keyPoints
 });
 </script>
 
