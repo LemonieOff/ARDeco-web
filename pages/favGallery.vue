@@ -1,5 +1,6 @@
 <template>
-  <div class="title">Amenagements Favoris</div>
+  <Navbar/>
+  <div class="title">Aménagements favoris</div>
     <div class="form">
       <div class="grid">
         <div class="grid-header">
@@ -11,7 +12,7 @@
           <div class="grid-item">Tableau des items</div>
           <div class="grid-item">Action</div>
         </div>
-        <div v-for="(item, index) in GalleryData" :key="index" class="grid-row">
+        <div v-for="(item) in GalleryData"  class="grid-row">
           <div class="grid-item">{{ item.gallery.id }}</div>
           <div class="grid-item">{{ item.gallery.name }}</div>
           <div class="grid-item">{{ item.gallery.description }}</div>
@@ -26,7 +27,10 @@
     </div>
 </template>
   
-  <script>
+<script>
+  import {isLogged} from "public/js/checkLogin";
+
+
   export default {
     name: "FavFourniture",
     data() {
@@ -37,9 +41,17 @@
       };
     },
     created() {
+      this.checkLogin();
       this.getFavGallery();
     },
     methods: {
+      async checkLogin() {
+        const userID = await isLogged();
+        if (!userID) {
+          location.href = "/login";
+        }
+      },
+
       async getFavGallery() {
         try {
           const userID = localStorage.getItem('userID');
@@ -88,7 +100,7 @@
       }
     }
   }
-  </script>
+</script>
   
 <style scoped lang="scss">
   .form {
@@ -124,6 +136,7 @@
 }
 
 .grid-header {
+  min-width: 1400px;
   display: flex;
   font-weight: bold;
 

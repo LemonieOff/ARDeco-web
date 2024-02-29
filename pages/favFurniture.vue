@@ -1,5 +1,6 @@
 <template>
-  <div class="title">Meubles Favoris</div>
+  <Navbar/>
+  <div class="title">Meubles favoris</div>
   <div class="form">
     <div class="grid">
       <div class="grid-header">
@@ -31,6 +32,8 @@
 </template>
   
 <script>
+import {isLogged} from "public/js/checkLogin";
+
   export default {
     name: "FavFourniture",
     data() {
@@ -41,9 +44,17 @@
       };
     },
     created() {
+      this.checkLogin();
       this.getFavFurniture();
     },
     methods: {
+      async checkLogin() {
+        const userID = await isLogged();
+        if (!userID) {
+          location.href = "/login";
+        }
+      },
+
       async getFavFurniture() {
         try {
           const userID = localStorage.getItem('userID');
@@ -128,6 +139,7 @@
 }
 
 .grid-header {
+  min-width: 1400px;
   display: flex;
   font-weight: bold;
 
