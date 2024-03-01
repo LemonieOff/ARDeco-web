@@ -392,6 +392,7 @@ export default {
                 }
             }
         },
+
         async setItemVisibility() {
             if (localStorage.getItem('userID') == null) {
                 console.log('No user found, redirecting to login');
