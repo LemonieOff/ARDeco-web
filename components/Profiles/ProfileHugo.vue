@@ -30,11 +30,7 @@
                 </div>
 
                 <!-- Semestre 4 (Tech 2 - partie 2) -->
-                <div class="timeline-inactive">
-                    <a href="https://www.epitech.eu/en/">
-                        <img class="epitech-logo-timeline" src="../../assets/images/profile-pictures/Epitech.png">
-                    </a>
-                </div>
+                <div class="timeline-inactive"></div>
 
                 <!-- Semestre 5 (Tech 3 - partie 1) -->
                 <div class="timeline-inactive">
@@ -43,6 +39,7 @@
 
                 <!-- Semestre 6 (Tech 3 - partie 2) -->
                 <div class="timeline-active">
+                    <div class="year-invisible-bubble"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/WorkingGameLogo.png">
                     <div id="internshipRole2-hugo" class="internship-role"></div>
                 </div>

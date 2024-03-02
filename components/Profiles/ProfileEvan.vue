@@ -32,13 +32,11 @@
                 <!-- Semestre 5 (Tech 3 - partie 1) -->
                 <div class="timeline-inactive">
                     <div class="year-bubble-inactive"></div>
-                    <a href="https://www.epitech.eu/en/">
-                        <img class="epitech-logo-timeline" src="../../assets/images/profile-pictures/Epitech.png">
-                    </a>
                 </div>
 
                 <!-- Semestre 6 (Tech 3 - partie 2) -->
                 <div class="timeline-active">
+                    <div class="year-invisible-bubble"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
                     <div id="internshipRole1-evan" class="internship-role"></div>
                 </div>
