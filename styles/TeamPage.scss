@@ -100,6 +100,15 @@
     background: $timeline-active;
 }
 
+.year-invisible-bubble {
+    margin-top: -0.25vw;
+    margin-left: -0.25vw;
+    height: 1vw;
+    width: 1vw;
+    background-color: transparent;
+    border-radius: 50%;
+}
+
 .year-bubble-active {
     margin-top: -0.25vw;
     margin-left: -0.25vw;
