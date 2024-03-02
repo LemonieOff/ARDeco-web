@@ -13,27 +13,47 @@
             </div>
             <div class="timeline-content">
                 <div class="year-2020">2020</div>
+                <!-- Semestre 1 (Tech 1 - partie 1) -->
                 <div class="timeline-inactive">
                     <div class="year-bubble-inactive"></div>
                 </div>
+
+                <!-- Semestre 2 (Tech 1 - partie 2) -->
                 <div class="timeline-inactive"></div>
+
+                <!-- Semestre 3 (Tech 2 - partie 1) -->
                 <div class="timeline-inactive">
                     <div class="year-bubble-inactive"></div>
                 </div>
+
+                <!-- Semestre 4 (Tech 2 - partie 2) -->
+                <div class="timeline-inactive"></div>
+
+                <!-- Semestre 5 (Tech 3 - partie 1) -->
                 <div class="timeline-inactive">
+                    <div class="year-bubble-inactive"></div>
                     <a href="https://www.epitech.eu/en/">
                         <img class="epitech-logo-timeline" src="../../assets/images/profile-pictures/Epitech.png">
                     </a>
                 </div>
-                <div class="timeline-inactive">
-                    <div class="year-bubble-inactive"></div>
-                </div>
+
+                <!-- Semestre 6 (Tech 3 - partie 2) -->
                 <div class="timeline-active">
-                    <div class="end-year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
                     <div id="internshipRole1-evan" class="internship-role"></div>
                 </div>
-                <div class="year-2023">2023</div>
+
+                <!-- Semestre 7 (Tech 4 - partie 1) -->
+                <div class="timeline-inactive">
+                    <div class="year-bubble-inactive"></div>
+                </div>
+
+                <!-- Semestre 8 (Tech 4 - partie 2) -->
+                <div class="timeline-inactive">
+                    <div class="end-year-bubble-inactive"></div>
+                </div>
+
+                <div class="year-2023">2024</div>
             </div>
         </div>
     </div>
