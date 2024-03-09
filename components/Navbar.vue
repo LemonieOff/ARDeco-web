@@ -56,11 +56,52 @@ export default {
             document.getElementById('product').setAttribute("href", "/fr/product")
             document.getElementById('profile').setAttribute("href", "/fr/profile")
         }
+        this.checkDarkMode();
     },
     methods: {
-        toggleDarkMode() {
+        async checkDarkMode() {
+            const dark_mode = localStorage.getItem('dark_mode');
+
+            const backgoundFade = document.getElementsByClassName("top-right-yellow-fade-background")
+            const background1 = document.getElementsByClassName("bottom-right-yellow-fade-background")
+            const background2 = document.getElementsByClassName("top-right-yellow-fade-background")
+            const background3 = document.getElementsByClassName("bottom-left-yellow-fade-background")
+            const backgroundCards = document.getElementsByClassName("background-card");
+
+            const body = document.body
+            if (dark_mode == 'true') {
+                body.style = "background-color: #474E68; color: #BB86FC";
+
+                if (document.URL.includes("team")) {
+                    backgoundFade[0].style = "background: #474E68"
+                    background1[0].style = "background: #474E68"
+                    background1[1].style = "background: #474E68"
+                    background2[1].style = "background: #474E68"
+                    background3[0].style = "background: #474E68"
+                } else if (document.URL.includes("product")) {
+                    for (let i = 0; i < backgroundCards.length; i++) {
+                        backgroundCards[i].style = "background: #001A7A; color: #BB86FC"
+                    }
+                }
+            } else {
+                body.style = ""
+
+                if (document.URL.includes("team")) {
+                    backgoundFade[0].style = ""
+                    background1[0].style = ""
+                    background1[1].style = ""
+                    background2[1].style = ""
+                    background3[0].style = ""
+                } else if (document.URL.includes("product")) {
+                    for (let i = 0; i < backgroundCards.length; i++) {
+                        backgroundCards[i].style = ""
+                    }
+                }
+            }
+        },
+        async toggleDarkMode() {
+            const dark_mode = localStorage.getItem('dark_mode');
             console.log("button activated, on url:", document.URL.includes("product"))
-            const isDarkModeActive = document.body.style.getPropertyValue("background-color")
             const backgoundFade = document.getElementsByClassName("top-right-yellow-fade-background")
             const background1 = document.getElementsByClassName("bottom-right-yellow-fade-background")
             const background2 = document.getElementsByClassName("top-right-yellow-fade-background")
@@ -70,8 +111,9 @@ export default {
             const backgroundCards = document.getElementsByClassName("background-card");
 
             const body = document.body
-            if (isDarkModeActive == "") {
-                body.style = "background-color: rgba(0, 4, 65, 0.91); color: white";
+            if (dark_mode == 'false') {
+                localStorage.setItem('dark_mode', 'true');
+                body.style = "background-color: #474E68; color: #BB86FC";
 
                 if (document.URL.includes("team")) {
                     backgoundFade[0].style = "background: linear-gradient(312deg, rgba(0, 4, 65, 0.91) 64.31%, rgba(3, 0, 182, 0.692) 100%)"
@@ -85,11 +127,23 @@ export default {
                     }
                 } else if (document.URL.includes("product")) {
                     for (let i = 0; i < backgroundCards.length; i++) {
-                        backgroundCards[i].style = "background: #001A7A; color: white"
+                        backgroundCards[i].style = "background: #001A7A; color: #BB86FC"
                     }
                 }
+
+                await fetch('https://api.ardeco.app/settings', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "dark_mode": true,
+                    }),
+                    credentials: 'include',
+                });
             } else {
                 body.style = ""
+                localStorage.setItem('dark_mode', 'false');
 
                 if (document.URL.includes("team")) {
                     backgoundFade[0].style = "background: linear-gradient(312deg, rgba(242, 235, 223, 0.91) 64.31%, rgba(255, 199, 0, 0.65) 100%)"
@@ -106,6 +160,17 @@ export default {
                         backgroundCards[i].style = ""
                     }
                 }
+
+                await fetch('https://api.ardeco.app/settings', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "dark_mode": false,
+                    }),
+                    credentials: 'include',
+                });
             }
         },
     },

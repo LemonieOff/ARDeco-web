@@ -40,7 +40,6 @@
                     <button class="optionSetter" id="notificationsSetterButton" @click="changeNotificationsButton">ON</button>
                 </div>
             </div>
-            <!-- <button id="getUserSettings" class="buttonSettings" @click="getSettings">Get user settings</button> -->
             <div class="addFurnitureDiv">
                 <button id="addFurnitureToCatalog" class="buttonSettings" @click="addFurniture">Add a furniture to the catalog</button>
                 <input class="buttonSettings" id="furnitureName" placeholder="Furniture name">
@@ -80,7 +79,6 @@ export default {
         }
 
         if (lang == 'en') {
-            // document.getElementById('getUserSettings').innerText = en.profile.settings.getUserSettings
             document.getElementById('setUserSettings').innerText = en.profile.settings.setUserSettings
             document.getElementById('addFurnitureToCatalog').innerText = en.profile.settings.addFurnitureToCatalog
             document.getElementById('getUserGallery').innerText = en.profile.settings.getUserGallery
@@ -92,7 +90,6 @@ export default {
             document.getElementById('restoreItemFromArchive').innerText = en.profile.settings.restoreItemFromArchive
             document.getElementById('resetCompagnyApiKey').innerText = en.profile.settings.resetCompagnyApiKey
         } else {
-            // document.getElementById('getUserSettings').innerText = fr.profile.settings.getUserSettings
             document.getElementById('setUserSettings').innerText = fr.profile.settings.setUserSettings
             document.getElementById('addFurnitureToCatalog').innerText = fr.profile.settings.addFurnitureToCatalog
             document.getElementById('getUserGallery').innerText = fr.profile.settings.getUserGallery
@@ -261,7 +258,6 @@ export default {
                 body: JSON.stringify({
                     "language": lang,
                     "notifications_enabled": notifs,
-                    "sounds_enabled": true  // Useless
                 }),
                 credentials: 'include',
             });
@@ -354,6 +350,8 @@ export default {
                 } else {
                     document.getElementById('currentNotifications').innerHTML = "OFF";
                 }
+                localStorage.setItem('dark_mode', result.data.dark_mode);
+                console.log('result.data.dark_mode : ', result.data.dark_mode);
                 localStorage.setItem('lang', result.data.language);
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
