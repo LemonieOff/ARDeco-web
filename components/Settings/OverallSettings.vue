@@ -9,7 +9,7 @@
             <button id="getCompagnyArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="getArchive">Get compagny archive</button>
             <button id="emptyCompagnyArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="deleteArchive">Empty compagny archive</button>
             <button id="resetCompagnyApiKey" class="buttonSettings" style="margin-top: 2.5%;" @click="getApiToken">Reset company API key</button>
-            <div style="margin-top: 10%;">
+            <div style="margin-top: 12%;">
                 <input class="buttonSettings" style="width: 45%;" id="itemInputID" placeholder="Item ID">
                 <button id="visibilityButton" style="background-color: green; width: 15%;" @click="changeVisibility">Visible</button>
             </div>
@@ -33,7 +33,7 @@
                 <button id="setUserSettings" class="buttonSettings" @click="setSettings">Change user settings</button>
                 <div class="settingsSetter">
                     <span id="languageSetter">Language : </span>
-                    <button class="optionSetter" id="languageSetterButton" @click="changeLanguageButton">ON</button>
+                    <button class="optionSetter" id="languageSetterButton" @click="changeLanguageButton">FR</button>
                 </div>
                 <div class="settingsSetter">
                     <span id="notificationsSetter">Notifications : </span>
@@ -67,54 +67,59 @@ export default {
     props: {
         urlLang: String
     },
-    // mounted() {
-    //     let lang = this.urlLang
-    //     if (lang == null) {
-    //         lang = localStorage.getItem('lang')
-    //     }
+    mounted() {
+        let lang = this.urlLang
+        if (lang == null) {
+            lang = localStorage.getItem('lang')
+        }
 
-    //     if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
-    //         location.href = location.href.replace("/fr/", "/en/")
-    //     } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
-    //         location.href = location.href.replace("/en/", "/fr/")
-    //     }
+        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
+            location.href = location.href.replace("/fr/", "/en/")
+        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
+            location.href = location.href.replace("/en/", "/fr/")
+        }
 
-    //     if (lang == 'en') {
-    //         document.getElementById('firstAndLastName').innerText = en.profile.settings.firstAndLastName
-    //         document.getElementById('getUserSettings').innerText = en.profile.settings.getUserSettings
-    //         document.getElementById('setUserSettings').innerText = en.profile.settings.setUserSettings
-    //         document.getElementById('addFurnitureToCatalog').innerText = en.profile.settings.addFurnitureToCatalog
-    //         document.getElementById('getUserGallery').innerText = en.profile.settings.getUserGallery
-    //         document.getElementById('changeGalleryVisibility').innerText = en.profile.settings.changeGalleryVisibility
-    //         document.getElementById('getCompagnyCatalog').innerText = en.profile.settings.getCompagnyCatalog
-    //         document.getElementById('getCompagnyArchive').innerText = en.profile.settings.getCompagnyArchive
-    //         document.getElementById('emptyCompagnyArchive').innerText = en.profile.settings.emptyCompagnyArchive
-    //         document.getElementById('archiveItem').innerText = en.profile.settings.archiveItem
-    //         document.getElementById('restoreItemFromArchive').innerText = en.profile.settings.restoreItemFromArchive
-    //         document.getElementById('resetCompagnyApiKey').innerText = en.profile.settings.resetCompagnyApiKey
-    //     } else {
-    //         document.getElementById('firstAndLastName').innerText = fr.profile.settings.firstAndLastName
-    //         document.getElementById('getUserSettings').innerText = fr.profile.settings.getUserSettings
-    //         document.getElementById('setUserSettings').innerText = fr.profile.settings.setUserSettings
-    //         document.getElementById('addFurnitureToCatalog').innerText = fr.profile.settings.addFurnitureToCatalog
-    //         document.getElementById('getUserGallery').innerText = fr.profile.settings.getUserGallery
-    //         document.getElementById('changeGalleryVisibility').innerText = fr.profile.settings.changeGalleryVisibility
-    //         document.getElementById('getCompagnyCatalog').innerText = fr.profile.settings.getCompagnyCatalog
-    //         document.getElementById('getCompagnyArchive').innerText = fr.profile.settings.getCompagnyArchive
-    //         document.getElementById('emptyCompagnyArchive').innerText = fr.profile.settings.emptyCompagnyArchive
-    //         document.getElementById('archiveItem').innerText = fr.profile.settings.archiveItem
-    //         document.getElementById('restoreItemFromArchive').innerText = fr.profile.settings.restoreItemFromArchive
-    //         document.getElementById('resetCompagnyApiKey').innerText = fr.profile.settings.resetCompagnyApiKey
-    //     }
-    // },
+        if (lang == 'en') {
+            // document.getElementById('getUserSettings').innerText = en.profile.settings.getUserSettings
+            document.getElementById('setUserSettings').innerText = en.profile.settings.setUserSettings
+            document.getElementById('addFurnitureToCatalog').innerText = en.profile.settings.addFurnitureToCatalog
+            document.getElementById('getUserGallery').innerText = en.profile.settings.getUserGallery
+            document.getElementById('changeGalleryVisibility').innerText = en.profile.settings.changeGalleryVisibility
+            document.getElementById('getCompagnyCatalog').innerText = en.profile.settings.getCompagnyCatalog
+            document.getElementById('getCompagnyArchive').innerText = en.profile.settings.getCompagnyArchive
+            document.getElementById('emptyCompagnyArchive').innerText = en.profile.settings.emptyCompagnyArchive
+            document.getElementById('archiveItem').innerText = en.profile.settings.archiveItem
+            document.getElementById('restoreItemFromArchive').innerText = en.profile.settings.restoreItemFromArchive
+            document.getElementById('resetCompagnyApiKey').innerText = en.profile.settings.resetCompagnyApiKey
+        } else {
+            // document.getElementById('getUserSettings').innerText = fr.profile.settings.getUserSettings
+            document.getElementById('setUserSettings').innerText = fr.profile.settings.setUserSettings
+            document.getElementById('addFurnitureToCatalog').innerText = fr.profile.settings.addFurnitureToCatalog
+            document.getElementById('getUserGallery').innerText = fr.profile.settings.getUserGallery
+            document.getElementById('changeGalleryVisibility').innerText = fr.profile.settings.changeGalleryVisibility
+            document.getElementById('getCompagnyCatalog').innerText = fr.profile.settings.getCompagnyCatalog
+            document.getElementById('getCompagnyArchive').innerText = fr.profile.settings.getCompagnyArchive
+            document.getElementById('emptyCompagnyArchive').innerText = fr.profile.settings.emptyCompagnyArchive
+            document.getElementById('archiveItem').innerText = fr.profile.settings.archiveItem
+            document.getElementById('restoreItemFromArchive').innerText = fr.profile.settings.restoreItemFromArchive
+            document.getElementById('resetCompagnyApiKey').innerText = fr.profile.settings.resetCompagnyApiKey
+        }
+        this.getSettings();
+    },
     methods: {
-        async deleteArchive() {
-            if (localStorage.getItem('userID') == null) {
+        async checkUserConnected () {
+            const userID = localStorage.getItem('userID');
+            if (userID == null) {
                 console.log('No user found, redirecting to login');
                 window.location.href = 'http://localhost:3000/login';
-                return;
+                return -1;
             };
-            const userID = localStorage.getItem('userID');
+            return userID;
+        },
+        async deleteArchive() {
+            const userID = this.checkUserConnected();
+            if (userID == -1)
+                return;
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
@@ -133,12 +138,9 @@ export default {
             }
         },
         async archiveItem() {
-            if (localStorage.getItem('userID') == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
+            const userID = this.checkUserConnected();
+            if (userID == -1)
                 return;
-            };
-            const userID = localStorage.getItem('userID');
             const itemInputID = document.getElementById('itemInputID').value;
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`);
@@ -159,12 +161,9 @@ export default {
             }
         },
         async restoreItem() {
-            if (localStorage.getItem('userID') == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
+            const userID = this.checkUserConnected();
+            if (userID == -1)
                 return;
-            };
-            const userID = localStorage.getItem('userID');
             const itemInputID = document.getElementById('itemInputID').value;
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
@@ -184,12 +183,9 @@ export default {
             }
         },
         async getArchive() {
-            if (localStorage.getItem('userID') == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
+            const userID = this.checkUserConnected();
+            if (userID == -1)
                 return;
-            };
-            const userID = localStorage.getItem('userID');
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'GET',
@@ -218,20 +214,45 @@ export default {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
         },
-        async setSettings() {
-            if (localStorage.getItem('userID') == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
+        async changeLanguageButton() {
+            const userID = this.checkUserConnected();
+            if (userID == -1)
                 return;
-            };
-            const userID = localStorage.getItem('userID');
-            let lang = 'en';
-            const notifs = document.querySelector('#notif').checked;
-            const audio = document.querySelector('#audio').checked;
-            if (document.querySelector('#lang').checked) {
-                lang = 'fr';
+            console.log("document.getElementById('languageSetterButton').innerHTML = ", document.getElementById('languageSetterButton').innerHTML)
+            if (document.getElementById('languageSetterButton').innerHTML == "FR") {
+                document.getElementById('languageSetterButton').innerHTML = "EN";
+                document.getElementById('languageSetterButton').style.backgroundColor = "red";
+            } else {
+                document.getElementById('languageSetterButton').innerHTML = "FR";
+                document.getElementById('languageSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
             }
-            console.log(lang, notifs, audio, userID, 'https://api.ardeco.app/settings');
+        },
+        async changeNotificationsButton() {
+            const userID = this.checkUserConnected();
+            if (userID == -1)
+                return;
+            console.log("document.getElementById('notificationsSetterButton').innerHTML = ", document.getElementById('notificationsSetterButton').innerHTML)
+            if (document.getElementById('notificationsSetterButton').innerHTML == "ON") {
+                document.getElementById('notificationsSetterButton').innerHTML = "OFF";
+                document.getElementById('notificationsSetterButton').style.backgroundColor = "red";
+            } else {
+                document.getElementById('notificationsSetterButton').innerHTML = "ON";
+                document.getElementById('notificationsSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
+            }
+        },
+        async setSettings() {
+            const userID = this.checkUserConnected();
+            if (userID == -1)
+                return;
+            let lang = 'fr';
+            let notifs = true;
+            if (document.querySelector('#languageSetterButton').innerHTML == "EN") {
+                lang = 'en';
+            }
+            if (document.querySelector('#notificationsSetterButton').innerHTML == "OFF") {
+                notifs = false;
+            }
+            console.log(lang, notifs, true, userID, 'https://api.ardeco.app/settings');
             const response = await fetch('https://api.ardeco.app/settings', {
                 method: 'PUT',
                 headers: {
@@ -240,7 +261,7 @@ export default {
                 body: JSON.stringify({
                     "language": lang,
                     "notifications_enabled": notifs,
-                    "sounds_enabled": audio
+                    "sounds_enabled": true  // Useless
                 }),
                 credentials: 'include',
             });
@@ -256,12 +277,9 @@ export default {
             location.reload()
         },
         async addFurniture() {
-            if (localStorage.getItem('userID') == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
+            const userID = this.checkUserConnected();
+            if (userID == -1)
                 return;
-            };
-            const userID = localStorage.getItem('userID');
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const furnitureName = document.querySelector('#furnitureName').value;
             const furniturePrice = document.querySelector('#furniturePrice').value;
@@ -312,11 +330,9 @@ export default {
             }
         },
         async getSettings() {
-            if (localStorage.getItem('userID') == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
+            const userID = this.checkUserConnected();
+            if (userID == -1)
                 return;
-            };
             const response = await fetch('https://api.ardeco.app/settings', {
                 method: 'GET',
                 headers: {
@@ -328,22 +344,25 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code == 200) {
-                document.getElementById('reponseText').innerHTML =
-                    'Language: ' + `${result.data.language}` +
-                    '<br>Notifications: ' + `${result.data.notifications_enabled}` + 
-                    '<br>Audio: ' + `${result.data.sounds_enabled}`;
+                if (result.data.language == "fr") {
+                    document.getElementById('currentLang').innerHTML = "FR";
+                } else {
+                    document.getElementById('currentLang').innerHTML = "EN";
+                }
+                if (result.data.notifications_enabled == true) {
+                    document.getElementById('currentNotifications').innerHTML = "ON";
+                } else {
+                    document.getElementById('currentNotifications').innerHTML = "OFF";
+                }
                 localStorage.setItem('lang', result.data.language);
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
         },
         async getGallery() {
-            const userID = localStorage.getItem('userID');
-            if (userID == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
+            const userID = this.checkUserConnected();
+            if (userID == -1)
                 return;
-            };
             const response = await fetch('https://api.ardeco.app/gallery/user/' + `${userID}`, {
                 method: 'GET',
                 headers: {
@@ -368,12 +387,9 @@ export default {
             }
         },
         async getCatalog() {
-            const userID = localStorage.getItem('userID');
-            if (userID == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
+            const userID = this.checkUserConnected();
+            if (userID == -1)
                 return;
-            };
             const response = await fetch('https://api.ardeco.app/catalog', {
                 method: 'GET',
                 headers: {
@@ -400,6 +416,9 @@ export default {
         },
 
         async setItemVisibility() {
+            const userID = this.checkUserConnected();
+            if (userID == -1)
+                return;
             if (localStorage.getItem('userID') == null) {
                 console.log('No user found, redirecting to login');
                 window.location.href = 'http://localhost:3000/login';
@@ -435,22 +454,22 @@ export default {
             }
         },
         async changeVisibility() {
+            const userID = this.checkUserConnected();
+            if (userID == -1)
+                return;
             let content = document.getElementById('visibilityButton').innerHTML;
             if (content == 'Visible') {
                 document.getElementById('visibilityButton').innerHTML = 'Invisible';
-                document.getElementById('visibilityButton').style = "background-color: red;";
+                document.getElementById('visibilityButton').style = "background-color: red; width: 15%;";
             } else if (content == 'Invisible') {
                 document.getElementById('visibilityButton').innerHTML = 'Visible';
-                document.getElementById('visibilityButton').style = "background-color: green;";
+                document.getElementById('visibilityButton').style = "background-color: green; width: 15%;";
             }
         },
         async getApiToken() {
-            const userID = localStorage.getItem('userID');
-            if (userID == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
+            const userID = this.checkUserConnected();
+            if (userID == -1)
                 return;
-            };
             const response = await fetch('https://api.ardeco.app/company/requestToken', {
                 method: 'GET',
                 headers: {
@@ -538,6 +557,12 @@ export default {
     border-radius: 5px;
     font-weight: bold;
     background-color: rgb(0, 122, 0);
+}
+
+.secondOptionSetter {
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: red;
 }
 
 .addFurnitureDiv {
