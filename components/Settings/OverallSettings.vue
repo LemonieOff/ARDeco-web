@@ -505,13 +505,11 @@ export default {
 }
 
 .left-side-parameters {
-    border: 1px solid red;
     width: 33.3%;
     text-align: center;
 }
 
 .center-side-parameters {
-    border: 1px solid red;
     width: 33.3%;
     text-align: center;
 }
@@ -570,7 +568,6 @@ export default {
 }
 
 .right-side-parameters {
-    border: 1px solid red;
     width: 33.3%;
 }
 
