@@ -114,7 +114,7 @@ export default {
             return userID;
         },
         async deleteArchive() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
@@ -135,7 +135,7 @@ export default {
             }
         },
         async archiveItem() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             const itemInputID = document.getElementById('itemInputID').value;
@@ -158,7 +158,7 @@ export default {
             }
         },
         async restoreItem() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             const itemInputID = document.getElementById('itemInputID').value;
@@ -180,7 +180,7 @@ export default {
             }
         },
         async getArchive() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
@@ -212,7 +212,7 @@ export default {
             }
         },
         async changeLanguageButton() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             console.log("document.getElementById('languageSetterButton').innerHTML = ", document.getElementById('languageSetterButton').innerHTML)
@@ -225,7 +225,7 @@ export default {
             }
         },
         async changeNotificationsButton() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             console.log("document.getElementById('notificationsSetterButton').innerHTML = ", document.getElementById('notificationsSetterButton').innerHTML)
@@ -238,7 +238,7 @@ export default {
             }
         },
         async setSettings() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             let lang = 'fr';
@@ -273,7 +273,7 @@ export default {
             location.reload()
         },
         async addFurniture() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
@@ -326,7 +326,7 @@ export default {
             }
         },
         async getSettings() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             const response = await fetch('https://api.ardeco.app/settings', {
@@ -358,7 +358,7 @@ export default {
             }
         },
         async getGallery() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             const response = await fetch('https://api.ardeco.app/gallery/user/' + `${userID}`, {
@@ -385,7 +385,7 @@ export default {
             }
         },
         async getCatalog() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             const response = await fetch('https://api.ardeco.app/catalog', {
@@ -414,7 +414,7 @@ export default {
         },
 
         async setItemVisibility() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             if (localStorage.getItem('userID') == null) {
@@ -452,7 +452,7 @@ export default {
             }
         },
         async changeVisibility() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             let content = document.getElementById('visibilityButton').innerHTML;
@@ -465,7 +465,7 @@ export default {
             }
         },
         async getApiToken() {
-            const userID = this.checkUserConnected();
+            const userID = await this.checkUserConnected();
             if (userID == -1)
                 return;
             const response = await fetch('https://api.ardeco.app/company/requestToken', {
