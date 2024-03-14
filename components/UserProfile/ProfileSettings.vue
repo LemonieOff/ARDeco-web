@@ -2,7 +2,7 @@
     <div>
         <div class="content">
             <FavoriteThemes :urlLang=this.urlLang />
-            <ProfileDetails :urlLang=this.urlLang />
+            <!-- <ProfileDetails :urlLang=this.urlLang /> -->
             <RecentPurchases :urlLang=this.urlLang />
         </div>
     </div>
