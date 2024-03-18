@@ -87,8 +87,10 @@
     "phone": "Téléhone : "
   },
   "profile": {
-    "yourFavoriteThemes": "Vos thèmes favoris",
-    "yourRecentPurchaces": "Vos récents achats",
+    "yourFavoriteThemes": "Mes thèmes favoris",
+    "yourRecentPurchaces": "Mes récents achats",
+    "yourFavoriteFurnitures": "Mes meubles favoris",
+    "yourFavoriteGalleries": "Mes galleries favorites",
     "informations": {
       "firstName": "Nom de famille : ",
       "lastName": "Prénom : ",
@@ -98,6 +100,11 @@
       "savedItems": "Élements sauvegardés dans la gallerie : ",
       "commandsOrdered": "Nombre de commandes : ",
       "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)"
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "update": "Modifier",
+      "confirm": "Confirmer"
     },
     "settings": {
       "firstAndLastName": "Nom de famille et Prénom",

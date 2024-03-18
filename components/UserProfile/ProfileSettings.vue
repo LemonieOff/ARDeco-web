@@ -2,6 +2,7 @@
     <div>
         <div class="content">
             <FavoriteThemes :urlLang=this.urlLang />
+            <img class="profile-picture" src="../../assets/images/profile-settings/default-profile-picture.png">
             <!-- <ProfileDetails :urlLang=this.urlLang /> -->
             <RecentPurchases :urlLang=this.urlLang />
         </div>
