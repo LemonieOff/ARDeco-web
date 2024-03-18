@@ -56,9 +56,12 @@
   },
   "footer": {
     "stayTuned": "Restez à l'écoute",
-    "contactUs": "Nos contacter",
+    "contactUs": "Nous contacter",
     "newsletter": "Rejoignez notre newsletter",
-    "subscribe": "S'abonner"
+    "subscribe": "S'abonner",
+    "rules": "Règles légales",
+    "privacyPolicy": "Politique de confidentialité",
+    "cgu": "Conditions Générales d'Utilisation"
   },
   "home": {
     "welcomeTitle": "Bienvenue sur ARDeco",

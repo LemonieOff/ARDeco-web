@@ -58,7 +58,10 @@
     "stayTuned": "Stay tuned",
     "contactUs": "Contact us",
     "newsletter": "Join our newsletter",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "rules": "Legal rules",
+    "privacyPolicy": "Privacy Policy",
+    "cgu": "Terms of use"
   },
   "home": {
     "welcomeTitle": "Welcome to ARDeco",
