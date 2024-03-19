@@ -4,6 +4,7 @@
         <a id="team" class="navbar-option" href="/team">Team</a>
         <a id="product" class="navbar-option" href="/product">Our product</a>
         <a id="profile" class="navbar-option" href="/profile">Profile</a>
+        <a id="settings" class="navbar-option" href="/settings">Settings</a>
         <button id="dark-mode-button" style="color: #F2EBDF;" @click="toggleDarkMode">Dark mode</button>
     </div>
 </template>
@@ -35,12 +36,14 @@ export default {
             document.getElementById('team').innerText = en.navBar.team
             document.getElementById('product').innerText = en.navBar.product
             document.getElementById('profile').innerText = en.navBar.profile
+            document.getElementById('settings').innerText = en.navBar.settings
             document.getElementById('dark-mode-button').innerText = en.navBar.darkmode
         } else {
             document.getElementById('home').innerText = fr.navBar.home
             document.getElementById('team').innerText = fr.navBar.team
             document.getElementById('product').innerText = fr.navBar.product
             document.getElementById('profile').innerText = fr.navBar.profile
+            document.getElementById('settings').innerText = fr.navBar.settings
             document.getElementById('dark-mode-button').innerText = fr.navBar.darkmode
         }
         
