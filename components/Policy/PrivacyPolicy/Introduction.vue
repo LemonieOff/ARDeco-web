@@ -1,7 +1,9 @@
 <template>
-    <div class="question-content background-card" id="what-is-ardeco">
-        <div id="whatIsArdecoTitle" class="title underline" style="margin-top: 500px;">{{content}}</div>
-        <div id="whatIsArdecoText" class="sub-title gray-text-color"></div>
+    <div class="question-content background-card">
+        <div class="title underline">{{content.title}}</div>
+        <div class="sub-title gray-text-color">{{content.objective}}</div>
+        <div class="sub-title gray-text-color">{{content.engagement}}</div>
+        <div class="sub-title gray-text-color">{{content.readCarefully}}</div>
     </div>
 </template>
 
@@ -34,7 +36,7 @@ export default {
         }
 
         // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.privacyPolicy : fr.privacyPolicy;
+        this.content = lang === 'en' ? en.privacyPolicy.introduction : fr.privacyPolicy.introduction;
 
         // Prefix for links
         if (location.href.includes("/fr/")) {
