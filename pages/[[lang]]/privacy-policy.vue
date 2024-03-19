@@ -1,5 +1,5 @@
 <template>
-    <Navbar/>
+    <Navbar :urlLang=lang></Navbar>
     <div class="space-between-questions"></div>
     <Introduction :urlLang=lang></Introduction>
     <div class="space-between-questions"></div>

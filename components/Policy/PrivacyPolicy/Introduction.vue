@@ -19,12 +19,11 @@ export default {
     data() {
         return {
             content: {},
-            langPrefix: ""
+            langPrefix: "/"
         }
     },
     mounted() {
         let lang = this.urlLang;
-        console.log(lang);
 
         // If lang selector is not passed in url, get the user's one or set it to french
         if (lang !== 'en' && lang !== 'fr') {
