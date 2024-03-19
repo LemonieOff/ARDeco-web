@@ -123,5 +123,75 @@
       "resetCompagnyApiKey": "Reset company API key"
     }
   },
-  "languageChangerText": "Translate to FR"
+  "languageChangerText": "Translate to FR",
+  "privacyPolicy": {
+    "introduction": {
+      "title": "Introduction",
+      "objective": "The purpose of this privacy policy is to inform you about the way in which ARDeco collects, uses and protects your personal data.",
+      "engagement": "We are committed to respecting your privacy and protecting your personal data.",
+      "readCarefully": "We invite you to read this privacy policy carefully to understand our practices regarding your personal data and how we treat it."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "cookies": "We use cookies for the sole purpose of identifying users and providing access to authorized services.",
+      "collection": "These cookies are automatically collected by our web server and stored in the user's browser from the moment they log in or register until they log out.",
+      "usage": "We do not store any personal data other than the internal unique identifier in cookies.",
+      "consent": "By using our services, users consent to the use of these cookies.",
+      "share": "We do not share these cookies with third parties and their use remains internal."
+    },
+    "identification": {
+      "title": "Identification data",
+      "collection": "We collect and process certain private data in the course of our activities to identify and authenticate each user.",
+      "dataTypes": "Identifying Data includes, but is not limited to, names, addresses, email addresses, phone numbers, demographic information, and any other information voluntarily provided by Users in connection with our Services.",
+      "usage": "This data is collected for the purpose of providing and personalizing our services, communicating with users, as well as responding to their requests."
+    },
+    "bank": {
+      "title": "Bank data",
+      "collection": "We collect and process banking information necessary to process payments and transactions made on our platform.",
+      "dataTypes": "This data may include credit/debit card numbers, banking details and any other information associated with financial transactions (such as order history).",
+      "usage": "We take appropriate security measures to protect this sensitive data and ensure its confidentiality."
+    },
+    "social": {
+      "title": "Social data",
+      "collection": "We collect and process certain social data as part of our services to enable users to share information and interact with each other.",
+      "dataTypes": "This data may include usernames, profile photos, saved rooms, posts, comments, likes, shares and any other information voluntarily shared by users.",
+      "usage": "This data is collected with the aim of facilitating social interactions between users and personalizing their experience."
+    },
+    "private": {
+      "title": "Private data",
+      "collection": "We collect and process certain private data as part of our services to enable our algorithms to function properly.",
+      "dataTypes": "This data may include any relevant information obtained when analyzing images submitted by users during and following a scan. This may concern the measurements obtained following submission of the image, the inventory of elements present in the image as well as any other information useful to the operation of the algorithm.",
+      "usage": "This data is only used ephemerally for the proper functioning of the furniture suggestion and placement algorithm."
+    },
+    "statistics": {
+      "title": "Statistic data",
+      "collection": "We collect and process statistical data as part of our services to generate reports and analyzes on the use of our services.",
+      "usage": "This data is used to analyze trends, calibrate the recommendation and placement algorithm, share user preferences (on average and anonymously) with partner companies and generate general usage statistics to improve our services."
+    },
+    "internal": {
+      "title": "Internal data",
+      "collection": "We collect and process internal data, used solely for the purposes of optimizing the user experience on our services.",
+      "dataTypeCart": "This data includes the user's basket data, in order to facilitate purchases within the application, this data does not generate statistics and can be deleted or modified by the user at any time.",
+      "dataTypeFavorites": "This data includes the user's favorite data, in order to facilitate the saving of their favorite furniture or rooms within the application, this data can be deleted or modified by the user at any time.",
+      "dataTypeTickets": "This data includes the user's support tickets, which are not deleted in order to preserve the history, however their permanent deletion is possible upon written request or automatically upon closure of the account.",
+      "usage": "This data is collected in order to optimize user experience and personalize our services. It is stored internally and is not shared or processed externally or for legal purposes."
+    },
+    "device": {
+      "title": "Device data",
+      "collection": "We collect and process data from the devices used to ensure the correct startup and operation of the application and to allow the system to adapt and make use of available device technologies.",
+      "dataTypes": "This data may include model, manufacturer, operating system version, kernel version, specific features available to each device, automatic application crash reports, automatic application startup reports , characteristics of peripherals such as processors and its associated data, chips and graphics cards and their associated data, RAM and its associated data, internal storage and its associated data, external storage and its associated data, statistics of resources taken by the application and the version of the application used.",
+      "usage": "This data is collected in order to ensure the proper functioning of the application and to personalize our services. It is stored internally and is not shared or processed externally or for legal purposes."
+    },
+    "conclusion": {
+      "title": "Conclusion",
+      "usage": "All data collected is used solely within the framework of our services and in accordance with applicable data protection laws.",
+      "share": "We will not share this data with unauthorized third parties unless necessary to provide our services, to comply with a legal obligation, or with the explicit consent of the user.",
+      "userRights": "Users have the right to request access, rectification, deletion or limitation of the processing of their personal data, as well as to object to their processing and request portability of their data.",
+      "keep": "We retain this data for as long as necessary to provide our services, to achieve the purposes described in this policy, unless a longer retention period is required or permitted by law, or until the user requests its deletion .",
+      "acceptance": "By using our services, users consent to the collection, processing and use of their private and banking data in accordance with this privacy policy.",
+      "questions": "If you have any questions regarding this privacy policy, please contact us by email or through our support.",
+      "update": "We reserve the right to update this privacy policy at any time."
+    }
+  }
+
 }
