@@ -73,7 +73,29 @@
     },
     "augmentedRealityTitle": "Réalité Augmentée",
     "augmentedRealityText": "Nous avons choisi la Réalité Augmentée pour ce projet car elle offre une expérience immersive et interactive, vous permettant de visualiser et d'expérimenter différents éléments de design en temps réel, directement dans votre propre espace. ARDeco élimine les conjectures et la nécessité de coûteuses et chronophages refontes en vous offrant un aperçu fidèle de votre espace de rêve. Découvrez des possibilités infinies et libérez votre créativité avec ARDeco - le futur du design intérieur est là.",
-    "keyPoints": "Points Clés"
+    "keyPoints": "Points Clés",
+    "keyPointsBlocks": [
+      {
+        "title": "Recommandations de conception alimentées par l'IA",
+        "description": "Nos algorithmes intelligents analysent votre espace et proposent des suggestions de conception personnalisées basées sur vos préférences et vos besoins uniques."
+      },
+      {
+        "title": "Visualisation en temps réel",
+        "description": "Voyez comment différents meubles, couleurs et accessoires apparaissent dans votre espace instantanément, ce qui facilite la comparaison et le choix des éléments de conception parfaits."
+      },
+      {
+        "title": "Interface facile à utiliser",
+        "description": "Avec une conception conviviale et des commandes intuitives, ARDeco vous permet de transformer votre espace en quelques tapes seulement."
+      },
+      {
+        "title": "Partagez vos conceptions",
+        "description": "Collaborez avec des amis, de la famille ou des professionnels en partageant vos conceptions, en obtenant des commentaires et en peaufinant votre espace ensemble."
+      },
+      {
+        "title": "Inspiration infinie",
+        "description": "Explorez une vaste bibliothèque de styles, de tendances et d'idées de conception pour vous aider à créer un espace qui reflète vraiment votre personnalité."
+      }
+    ]
   },
   "login": {
     "welcome": "Bienvenue utilisateur N°",

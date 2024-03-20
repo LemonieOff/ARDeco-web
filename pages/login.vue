@@ -180,7 +180,7 @@ const logout = async () => {
         credentials: 'include',
     });
     await disconnect();
-    localStorage.setItem('lang', null)
+    localStorage.removeItem('lang');
     const result = await response.text();
     console.log(result);
     location.reload();

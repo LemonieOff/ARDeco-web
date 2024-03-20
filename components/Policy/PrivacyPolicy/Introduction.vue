@@ -27,8 +27,9 @@ export default {
 
         // If lang selector is not passed in url, get the user's one or set it to french
         if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
+            const localStorageLang = localStorage.getItem('lang');
+            if (localStorageLang) {
+                lang = localStorageLang;
             } else {
                 lang = 'fr';
             }

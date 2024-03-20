@@ -73,7 +73,29 @@
     },
     "augmentedRealityTitle": "Augmented Reality",
     "augmentedRealityText": "We chose Augmented Reality for this project because it offers an immersive, interactive experience, allowing you to visualize and experiment with various design elements in real-time, right in your own space. ARDeco eliminates the guesswork and the need for costly, time-consuming redesigns by giving you a true-to-life preview of your dream space. Discover endless possibilities and unleash your creativity with ARDeco – the future of interior design is here.",
-    "keyPoints": "Key Points"
+    "keyPoints": "Key Points",
+    "keyPointsBlocks": [
+      {
+        "title": "AI-Powered Design Recommendations",
+        "description": "Our intelligent algorithms analyze your space and offer personalized design suggestions based on your unique preferences and requirements."
+      },
+      {
+        "title": "Real-Time Visualization",
+        "description": "See how different furniture, colors, and accessories look in your space instantly, making it easy to compare and choose the perfect design elements."
+      },
+      {
+        "title": "Easy-to-Use Interface",
+        "description": "With a user-friendly design and intuitive controls, ARDeco lets you transform your space in just a few taps."
+      },
+      {
+        "title": "Share Your Designs",
+        "description": "Collaborate with friends, family, or professionals by sharing your designs, getting feedback, and fine-tuning your space together."
+      },
+      {
+        "title": "Endless Inspiration",
+        "description": "Explore a vast library of styles, trends, and design ideas to help you create a space that truly reflects your personality."
+      }
+    ]
   },
   "login": {
     "welcome": "Welcome user N°",
