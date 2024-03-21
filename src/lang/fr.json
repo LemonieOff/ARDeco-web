@@ -4,7 +4,7 @@
     "team": "Équipe",
     "product": "Notre produit",
     "profile": "Profil",
-    "settings": "Parametres",
+    "settings": "Paramètres",
     "darkmode": "Activer le mode sombre"
   },
   "profilePages": {
@@ -191,7 +191,7 @@
     "statistics": {
       "title": "Données statistiques",
       "collection": "Nous collectons et traitons des données statistiques dans le cadre de nos services pour générer des rapports et des analyses sur l'utilisation de nos services.",
-      "usage": "Ces données sont utilisées afin d'analyser les tendances, de calibrer de l'algorithme de recommandation et de placement, de partager des préférences utilisateurs (en moyenne et de façon anonyme) aux entreprises partenaires et de générer des statistiques d'utilisation générale pour améliorer nos services."
+      "usage": "Ces données sont utilisées afin d'analyser les tendances, de calibrer l'algorithme de recommandation et de placement, de partager des préférences utilisateurs (en moyenne et de façon anonyme) aux entreprises partenaires et de générer des statistiques d'utilisation générale pour améliorer nos services."
     },
     "internal": {
       "title": "Données internes",
