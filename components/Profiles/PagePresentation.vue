@@ -16,16 +16,16 @@
                         </a>
                     </div>
                     <div class="profile-pictures">
-                        <a class="shaking-effect" href="#louis-profile">
-                            <img src="../../assets/images/profile-pictures/Louis.png">
+                        <a href="#evan-profile">
+                            <img src="../../assets/images/profile-pictures/Evan.png">
                         </a>
                         <a href="#unknown-profile">
                             <img src="../../assets/images/profile-pictures/Unknown.png">
                         </a>
                     </div>
                     <div class="profile-pictures">
-                        <a href="#evan-profile">
-                            <img src="../../assets/images/profile-pictures/Evan.png">
+                        <a class="shaking-effect" href="#louis-profile">
+                            <img src="../../assets/images/profile-pictures/Louis.png">
                         </a>
                         <a href="#unknown-profile">
                             <img src="../../assets/images/profile-pictures/Unknown.png">
