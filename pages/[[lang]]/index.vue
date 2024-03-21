@@ -11,7 +11,3 @@ const route = useRoute();
 
 let lang = route.params.lang;
 </script>
-
-<style lang="scss" scoped>
-
-</style>

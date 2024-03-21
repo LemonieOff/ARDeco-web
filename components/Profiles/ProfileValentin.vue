@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-page-content bottom-right-yellow-fade-background" id="valentin-profile">
+    <div class="profile-page-content top-left-yellow-fade-background" id="valentin-profile">
         <div class="sub-content">
             <div class="personal-content card">
                 <img class="hobby" src="../../assets/images/profile-hobbies/football.png">
@@ -9,7 +9,7 @@
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>
                 <div class="name">Valentin Astic</div>
-                <div id="role-valentin" class="role"></div>
+                <div id="role-valentin" class="role">{{ content.role }}</div>
             </div>
             <div class="timeline-content">
                 <div class="year-2020">2020</div>
@@ -20,7 +20,7 @@
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
-                    <div id="internshipRole1-valentin" class="internship-role"></div>
+                    <div id="internshipRole1-valentin" class="internship-role">{{ content.internshipRole1 }}</div>
                 </div>
                 <div class="timeline-inactive">
                     <a href="https://www.epitech.eu/en/">
@@ -30,12 +30,12 @@
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/MathaLogo.png">
-                    <div id="internshipRole2-valentin" class="internship-role"></div>
+                    <div id="internshipRole2-valentin" class="internship-role">{{ content.internshipRole2 }}</div>
                 </div>
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
-                    <div id="internshipRole3-valentin" class="internship-role"></div>
+                    <div id="internshipRole3-valentin" class="internship-role">{{ content.internshipRole3 }}</div>
                 </div>
                 <div class="year-2023">2023</div>
             </div>
@@ -50,32 +50,37 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "ProfileValentin",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
-        let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
+        let lang = this.urlLang;
+
+        // If lang selector is not passed in url, get the user's one or set it to french
+        if (lang !== 'en' && lang !== 'fr') {
+            const localStorageLang = localStorage.getItem('lang');
+            if (localStorageLang) {
+                lang = localStorageLang;
+            } else {
+                lang = 'fr';
+            }
         }
 
-        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
-            location.href = location.href.replace("/fr/", "/en/")
-        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
-            location.href = location.href.replace("/en/", "/fr/")
-        }
+        // Set the content variable to the correct language
+        this.content = lang === 'en' ? en.profilePages.valentin : fr.profilePages.valentin;
 
-        if (lang == 'en') {
-            document.getElementById('role-valentin').innerText = en.profilePages.valentin.role
-            document.getElementById('internshipRole1-valentin').innerText = en.profilePages.valentin.internshipRole1
-            document.getElementById('internshipRole2-valentin').innerText = en.profilePages.valentin.internshipRole2
-            document.getElementById('internshipRole3-valentin').innerText = en.profilePages.valentin.internshipRole3
-        } else {
-            document.getElementById('role-valentin').innerText = fr.profilePages.valentin.role
-            document.getElementById('internshipRole1-valentin').innerText = fr.profilePages.valentin.internshipRole1
-            document.getElementById('internshipRole2-valentin').innerText = fr.profilePages.valentin.internshipRole2
-            document.getElementById('internshipRole3-valentin').innerText = fr.profilePages.valentin.internshipRole3
+        // Prefix for links
+        if (location.href.includes("/fr/")) {
+            this.langPrefix = "/fr/";
+        } else if (location.href.includes("/en/")) {
+            this.langPrefix = "/en/";
         }
-    },
+    }
 }
 </script>
 

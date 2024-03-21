@@ -1,7 +1,7 @@
 <template>
     <div class="question-content background-card" id="in-app-purchases">
-        <div id="inAppPurchaseTitle" class="title underline"></div>
-        <div id="inAppPurchaseText" class="sub-title gray-text-color"></div>
+        <div id="inAppPurchaseTitle" class="title underline">{{ content.inAppPurchaseTitle }}</div>
+        <div id="inAppPurchaseText" class="sub-title gray-text-color">{{ content.inAppPurchaseText }}</div>
     </div>
 </template>
 
@@ -12,26 +12,35 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "InAppPurchaces",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
-        let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
+        let lang = this.urlLang;
+
+        // If lang selector is not passed in url, get the user's one or set it to french
+        if (lang !== 'en' && lang !== 'fr') {
+            const localStorageLang = localStorage.getItem('lang');
+            if (localStorageLang) {
+                lang = localStorageLang;
+            } else {
+                lang = 'fr';
+            }
         }
 
-        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
-            location.href = location.href.replace("/fr/", "/en/")
-        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
-            location.href = location.href.replace("/en/", "/fr/")
-        }
+        // Set the content variable to the correct language
+        this.content = lang === 'en' ? en.productPages : fr.productPages;
 
-        if (lang == 'en') {
-            document.getElementById('inAppPurchaseTitle').innerText = en.productPages.inAppPurchaseTitle
-            document.getElementById('inAppPurchaseText').innerText = en.productPages.inAppPurchaseText
-        } else {
-            document.getElementById('inAppPurchaseTitle').innerText = fr.productPages.inAppPurchaseTitle
-            document.getElementById('inAppPurchaseText').innerText = fr.productPages.inAppPurchaseText
+        // Prefix for links
+        if (location.href.includes("/fr/")) {
+            this.langPrefix = "/fr/";
+        } else if (location.href.includes("/en/")) {
+            this.langPrefix = "/en/";
         }
     },
 }

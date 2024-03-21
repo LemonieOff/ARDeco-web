@@ -9,7 +9,7 @@
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>
                 <div class="name">Evan Blachier</div>
-                <div id="role-evan" class="role"></div>
+                <div id="role-evan" class="role">{{ content.role }}</div>
             </div>
             <div class="timeline-content">
                 <div class="year-2020">2020</div>
@@ -31,7 +31,7 @@
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
                     <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
-                    <div id="internshipRole1-evan" class="internship-role"></div>
+                    <div id="internshipRole1-evan" class="internship-role">{{ content.internshipRole1 }}</div>
                 </div>
                 <div class="year-2023">2023</div>
             </div>
@@ -46,28 +46,37 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "ProfileEvan",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
-        let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
+        let lang = this.urlLang;
+
+        // If lang selector is not passed in url, get the user's one or set it to french
+        if (lang !== 'en' && lang !== 'fr') {
+            const localStorageLang = localStorage.getItem('lang');
+            if (localStorageLang) {
+                lang = localStorageLang;
+            } else {
+                lang = 'fr';
+            }
         }
 
-        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
-            location.href = location.href.replace("/fr/", "/en/")
-        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
-            location.href = location.href.replace("/en/", "/fr/")
-        }
+        // Set the content variable to the correct language
+        this.content = lang === 'en' ? en.profilePages.evan : fr.profilePages.evan;
 
-        if (lang == 'en') {
-            document.getElementById('role-evan').innerText = en.profilePages.evan.role
-            document.getElementById('internshipRole1-evan').innerText = en.profilePages.evan.internshipRole1
-        } else {
-            document.getElementById('role-evan').innerText = fr.profilePages.evan.role
-            document.getElementById('internshipRole1-evan').innerText = fr.profilePages.evan.internshipRole1
+        // Prefix for links
+        if (location.href.includes("/fr/")) {
+            this.langPrefix = "/fr/";
+        } else if (location.href.includes("/en/")) {
+            this.langPrefix = "/en/";
         }
-    },
+    }
 }
 </script>
 

@@ -1,7 +1,9 @@
 <template>
-    <div class="question-content background-card" id="how-to-use-ardeco">
-        <div id="howToUseArdecoTitle" class="title underline">{{ content.howToUseArdecoTitle }}</div>
-        <div id="howToUseArdecoText" class="sub-title gray-text-color">{{ content.howToUseArdecoText }}</div>
+    <div class="question-content background-card">
+        <div class="title underline">{{content.title}}</div>
+        <div class="sub-title gray-text-color">{{content.objective}}</div>
+        <div class="sub-title gray-text-color">{{content.engagement}}</div>
+        <div class="sub-title gray-text-color">{{content.readCarefully}}</div>
     </div>
 </template>
 
@@ -10,7 +12,7 @@ import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
 export default {
-    name: "HowToUseArdeco",
+    name: "",
     props: {
         urlLang: String | null
     },
@@ -34,7 +36,7 @@ export default {
         }
 
         // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.productPages : fr.productPages;
+        this.content = lang === 'en' ? en.privacyPolicy.introduction : fr.privacyPolicy.introduction;
 
         // Prefix for links
         if (location.href.includes("/fr/")) {
@@ -42,7 +44,7 @@ export default {
         } else if (location.href.includes("/en/")) {
             this.langPrefix = "/en/";
         }
-    },
+    }
 }
 </script>
 

@@ -57,9 +57,12 @@
   },
   "footer": {
     "stayTuned": "Restez à l'écoute",
-    "contactUs": "Nos contacter",
+    "contactUs": "Nous contacter",
     "newsletter": "Rejoignez notre newsletter",
-    "subscribe": "S'abonner"
+    "subscribe": "S'abonner",
+    "rules": "Règles légales",
+    "privacyPolicy": "Politique de confidentialité",
+    "cgu": "Conditions Générales d'Utilisation"
   },
   "home": {
     "welcomeTitle": "Bienvenue sur ARDeco",
@@ -71,7 +74,29 @@
     },
     "augmentedRealityTitle": "Réalité Augmentée",
     "augmentedRealityText": "Nous avons choisi la Réalité Augmentée pour ce projet car elle offre une expérience immersive et interactive, vous permettant de visualiser et d'expérimenter différents éléments de design en temps réel, directement dans votre propre espace. ARDeco élimine les conjectures et la nécessité de coûteuses et chronophages refontes en vous offrant un aperçu fidèle de votre espace de rêve. Découvrez des possibilités infinies et libérez votre créativité avec ARDeco - le futur du design intérieur est là.",
-    "keyPoints": "Points Clés"
+    "keyPoints": "Points Clés",
+    "keyPointsBlocks": [
+      {
+        "title": "Recommandations de conception alimentées par l'IA",
+        "description": "Nos algorithmes intelligents analysent votre espace et proposent des suggestions de conception personnalisées basées sur vos préférences et vos besoins uniques."
+      },
+      {
+        "title": "Visualisation en temps réel",
+        "description": "Voyez comment différents meubles, couleurs et accessoires apparaissent dans votre espace instantanément, ce qui facilite la comparaison et le choix des éléments de conception parfaits."
+      },
+      {
+        "title": "Interface facile à utiliser",
+        "description": "Avec une conception conviviale et des commandes intuitives, ARDeco vous permet de transformer votre espace en quelques tapes seulement."
+      },
+      {
+        "title": "Partagez vos conceptions",
+        "description": "Collaborez avec des amis, de la famille ou des professionnels en partageant vos conceptions, en obtenant des commentaires et en peaufinant votre espace ensemble."
+      },
+      {
+        "title": "Inspiration infinie",
+        "description": "Explorez une vaste bibliothèque de styles, de tendances et d'idées de conception pour vous aider à créer un espace qui reflète vraiment votre personnalité."
+      }
+    ]
   },
   "login": {
     "welcome": "Bienvenue utilisateur N°",
@@ -85,7 +110,8 @@
     "firstName": "Nom : ",
     "lastName": "Prénom : ",
     "city": "Ville : ",
-    "phone": "Téléhone : "
+    "phone": "Téléhone : ",
+    "loading": "Chargement en cours..."
   },
   "profile": {
     "yourFavoriteThemes": "Mes thèmes favoris",
@@ -122,5 +148,74 @@
       "resetCompagnyApiKey": "Réinitialiser mon clé API"
     }
   },
-  "languageChangerText": "Traduire en EN"
+  "languageChangerText": "Traduire en EN",
+  "privacyPolicy": {
+    "introduction": {
+      "title": "Introduction",
+      "objective": "La présente politique de confidentialité a pour objectif de vous informer sur la manière dont ARDeco collecte, utilise et protège vos données personnelles.",
+      "engagement": "Nous nous engageons à respecter votre vie privée et à protéger vos données personnelles.",
+      "readCarefully": "Nous vous invitons à lire attentivement cette politique de confidentialité pour comprendre nos pratiques concernant vos données personnelles et la manière dont nous les traitons."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "cookies": "Nous utilisons des cookies dans l'unique but d'identifier les utilisateurs et de permettre l'accès aux services autorisés.",
+      "collection": "Ces cookies sont automatiquement collectés par notre serveur web et stockés dans le navigateur de l'utilisateur dès sa connexion ou son enregistrement, jusqu'à sa déconnexion.",
+      "usage": "Nous ne stockons aucune donnée personnelle autre que l'identifiant unique interne dans les cookies.",
+      "consent": "En utilisant nos services, les utilisateurs consentent à l'utilisation de ces cookies.",
+      "share": "Nous ne partageons pas ces cookies avec des tiers et leur utilisation demeure interne."
+    },
+    "identification": {
+      "title": "Données d'identification",
+      "collection": "Nous recueillons et traitons certaines données privées dans le cadre de nos activités pour identifier et authentifier chaque utilisateur.",
+      "dataTypes": "Les données d'identification comprennent, mais sans s'y limiter, les noms, les adresses, les adresses e-mail, les numéros de téléphone, les informations démographiques et toute autre information fournie volontairement par les utilisateurs dans le cadre de nos services.",
+      "usage": "Ces données sont collectées dans le but de fournir et de personnaliser nos services, de communiquer avec les utilisateurs, ainsi que de répondre à leurs demandes."
+    },
+    "bank": {
+      "title": "Données bancaires",
+      "collection": "Nous collectons et traitons les informations bancaires nécessaires pour traiter les paiements et les transactions effectuées sur notre plateforme.",
+      "dataTypes": "Ces données peuvent inclure les numéros de carte de crédit/débit, les coordonnées bancaires et toute autre information associée aux transactions financières (comme l'historique des commandes).",
+      "usage": "Nous prenons des mesures de sécurité appropriées pour protéger ces données sensibles et assurer leur confidentialité."
+    },
+    "social": {
+      "title": "Données à caractère social",
+      "collection": "Nous collectons et traitons certaines données à caractère social dans le cadre de nos services pour permettre aux utilisateurs de partager des informations et d'interagir entre eux.",
+      "dataTypes": "Ces données peuvent inclure les noms d'utilisateur, les photos de profil, les pièces sauvegardées, les publications, les commentaires, les likes, les partages et toute autre information partagée volontairement par les utilisateurs.",
+      "usage": "Ces données sont collectées dans le but de faciliter les interactions sociales entre les utilisateurs et de personnaliser leur expérience."
+    },
+    "private": {
+      "title": "Données privées",
+      "collection": "Nous collectons et traitons certaines données privées dans le cadre de nos services pour permettre le bon fonctionnement de nos algorithmes.",
+      "dataTypes": "Ces données peuvent inclure toute information pertinente obtenue lors de l'analyse des images soumises par les utilisateurs pendant et à la suite d'un scan. Cela peut concerner les mesures obtenues à la suite de la soumission de l'image, l'inventaire des éléments présents dans l'image ainsi que toute autre information utile au fonctionnement de l'algorithme.",
+      "usage": "Ces données sont uniquement utilisées de manière éphémère pour le bon fonctionnement de l'algorithme de suggestion et de placement des meubles."
+    },
+    "statistics": {
+      "title": "Données statistiques",
+      "collection": "Nous collectons et traitons des données statistiques dans le cadre de nos services pour générer des rapports et des analyses sur l'utilisation de nos services.",
+      "usage": "Ces données sont utilisées afin d'analyser les tendances, de calibrer de l'algorithme de recommandation et de placement, de partager des préférences utilisateurs (en moyenne et de façon anonyme) aux entreprises partenaires et de générer des statistiques d'utilisation générale pour améliorer nos services."
+    },
+    "internal": {
+      "title": "Données internes",
+      "collection": "Nous collectons et traitons des données internes, servant uniquement à des fins d'optimisation de l'expérience des utilisateurs sur nos services.",
+      "dataTypeCart": "Ces données incluent les données du panier de l'utilisateur, afin de faciliter ses achats au sein de l'application, ces données ne génèrent pas de statistiques et sont supprimables ou modifiables par l'utilisateur à tout moment.",
+      "dataTypeFavorites": "Ces données incluent les données des favoris de l'utilisateur, afin de faciliter la sauvegarde de ses meubles ou pièces préférés au sein de l'application, ces données sont supprimables ou modifiables par l'utilisateur à tout moment.",
+      "dataTypeTickets": "Ces données incluent les tickets d'assistance de l'utilisateur, qui ne sont pas supprimés afin d'en conserver l'historique, toutefois leur suppression définitive est possible sur demande écrite ou automatiquement à la fermeture du compte.",
+      "usage": "Ces données sont collectées dans le but d'optimiser l'expérience des utilisateurs et de personnaliser nos services. Elles sont stockées en interne et ne sont ni partagées ni traitées extérieurement ou à des fins légales."
+    },
+    "device": {
+      "title": "Données de périphériques",
+      "collection": "Nous collectons et traitons les données des appareils utilisés afin d'assurer le bon démarrage et fonctionnement de l'application et de permettre au système de s'adapter et de faire usage des technologies des périphériques disponibles.",
+      "dataTypes": "Ces données peuvent inclure le modèle, le constructeur, la version du système d'exploitation, la version du kernel, les fonctionnalités spécifiques disponibles à chaque périphérique, les rapports automatiques de plantage de l'application, les rapports automatiques de démarrage de l'application, les caractéristiques des périphériques comme les processeurs et ses données associées, les chips et les cartes graphiques et leurs données associées, la RAM et ses données associées, le stockage interne et ses données associées, le stockage externe et ses données associées, les statistiques des ressources prises par l'application et la version de l'application utilisée.",
+      "usage": "Ces données sont collectées dans le but d'assurer le bon fonctionnement de l'application et de personnaliser nos services. Elles sont stockées en interne et ne sont ni partagées ni traitées extérieurement ou à des fins légales."
+    },
+    "conclusion": {
+      "title": "Conclusion",
+      "usage": "L'intégralité des données collectées sont utilisées uniquement dans le cadre de nos services et conformément aux lois applicables en matière de protection des données.",
+      "share": "Nous ne partagerons pas ces données avec des tiers non autorisés, sauf si cela est nécessaire pour fournir nos services, pour se conformer à une obligation légale, ou avec le consentement explicite de l'utilisateur.",
+      "userRights": "Les utilisateurs ont le droit de demander l'accès, la rectification, la suppression ou la limitation du traitement de leurs données personnelles, ainsi que de s'opposer à leur traitement et de demander la portabilité de leurs données.",
+      "keep": "Nous conservons ces données aussi longtemps que nécessaire pour fournir nos services, pour atteindre les objectifs décrits dans cette politique, sauf si une période de conservation plus longue est requise ou autorisée par la loi, ou jusqu'à ce que l'utilisateur demande leur suppression.",
+      "acceptance": "En utilisant nos services, les utilisateurs consentent à la collecte, au traitement et à l'utilisation de leurs données privées et données bancaires conformément à cette politique de confidentialité.",
+      "questions": "Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter par email ou via notre support.",
+      "update": "Nous nous réservons le droit de mettre à jour cette politique de confidentialité à tout moment."
+    }
+  }
 }

@@ -2,21 +2,44 @@
 import {isLogged, loggedIn, disconnect} from "public/js/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
+import {onMounted, ref} from "vue";
+
+const route = useRoute();
+let lang = ref(route.params.lang);
+let content = ref({});
+const langPrefix = ref("/");
 
 onMounted(async () => {
+    console.log(lang);
+    // If lang selector is not passed in url, get the user's one or set it to french
+    if (lang.value !== 'en' && lang.value !== 'fr') {
+        const localStorageLang = localStorage.getItem('lang');
+        if (localStorageLang) {
+            lang.value = localStorageLang;
+        } else {
+            lang.value = 'fr';
+        }
+    }
+    console.log(lang);
+
+    // Set the content variable to the correct language
+    content.value = lang.value === 'en' ? en.login : fr.login;
+    console.log(lang.value === 'en');
+    console.log(content.value);
+
+    // Prefix for links
+    if (location.href.includes("/fr/")) {
+        langPrefix.value = "/fr/";
+    } else if (location.href.includes("/en/")) {
+        langPrefix.value = "/en/";
+    }
+
     const userID = await isLogged();
-    let lang = localStorage.getItem('lang')
     if (userID) {
         if (loggedIn) {
             document.getElementById("login-register-wrapper").style.display = "none";
             document.getElementById("user-form").style.display = "default";
-            if (lang == 'en') {
-                document.getElementById("user-welcome").innerHTML = en.login.welcome + userID + "!";
-                document.getElementById("logout").innerHTML = en.login.logout;
-            } else {
-                document.getElementById("user-welcome").innerHTML = fr.login.welcome + userID + "!";
-                document.getElementById("logout").innerHTML = fr.login.logout;
-            }
+            document.getElementById("user-welcome-id").innerHTML = userID;
         } else {
             document.getElementById("login-register-wrapper").style.display = "default";
             document.getElementById("user-form").style.display = "none";
@@ -24,31 +47,6 @@ onMounted(async () => {
     } else {
         document.getElementById("login-register-wrapper").style.display = "default";
         document.getElementById("user-form").style.display = "none";
-        if (lang == "en") {
-            document.getElementById("login").innerHTML = en.login.login;
-            document.getElementById("register").innerHTML = en.login.register;
-            document.getElementById("email").innerHTML = en.login.email;
-            document.getElementById("password").innerHTML = en.login.password;
-            document.getElementById("email2").innerHTML = en.login.email;
-            document.getElementById("password2").innerHTML = en.login.password;
-            document.getElementById("passwordConfirm").innerHTML = en.login.passwordConfirm;
-            document.getElementById("firstName").innerHTML = en.login.firstName;
-            document.getElementById("lastName").innerHTML = en.login.lastName;
-            document.getElementById("city").innerHTML = en.login.city;
-            document.getElementById("phone").innerHTML = en.login.phone;
-        } else {
-            document.getElementById("login").innerHTML = fr.login.login;
-            document.getElementById("register").innerHTML = fr.login.register;
-            document.getElementById("email").innerHTML = fr.login.email;
-            document.getElementById("password").innerHTML = fr.login.password;
-            document.getElementById("email2").innerHTML = fr.login.email;
-            document.getElementById("password2").innerHTML = fr.login.password;
-            document.getElementById("passwordConfirm").innerHTML = fr.login.passwordConfirm;
-            document.getElementById("firstName").innerHTML = fr.login.firstName;
-            document.getElementById("lastName").innerHTML = fr.login.lastName;
-            document.getElementById("city").innerHTML = fr.login.city;
-            document.getElementById("phone").innerHTML = fr.login.phone;
-        }
     }
     document.getElementById("forms-loading").style.display = "none";
     document.getElementById("forms-wrapper").style.display = "block";
@@ -180,7 +178,7 @@ const logout = async () => {
         credentials: 'include',
     });
     await disconnect();
-    localStorage.setItem('lang', null)
+    localStorage.removeItem('lang');
     const result = await response.text();
     console.log(result);
     location.reload();
@@ -188,21 +186,21 @@ const logout = async () => {
 </script>
 
 <template>
-    <Navbar/>
+    <Navbar :urlLang=lang></Navbar>
     <div id="forms-container">
         <div id="forms-loading" class="form">
-            Chargement en cours...
+            {{ content.loading }}
         </div>
         <div id="forms-wrapper" style="display: none">
             <div id="login-register-wrapper" class="login-register-wrapper">
                 <div id="login-form" class="form">
                     <div id="email_section_login">
-                        <label id="email" for="email"></label>
+                        <label id="email" for="email">{{ content.email }}</label>
                         <input type="text" id="email_login" name="email" placeholder="Email">
                         <ul id="email_errors_login" class="login-error"></ul>
                     </div>
                     <div id="password_section_login">
-                        <label id="password" for="password"></label>
+                        <label id="password" for="password">{{ content.password }}</label>
                         <input type="password" id="password_login" name="password" placeholder="Password">
                         <ul id="password_errors_login" class="login-error"></ul>
                     </div>
@@ -210,41 +208,41 @@ const logout = async () => {
                         <ul id="general_errors_login" class="login-error"></ul>
                         <ul id="general_success_login" class="login-success"></ul>
                     </div>
-                    <button id="login" @click="login">Login</button>
+                    <button id="login" @click="login">{{ content.login }}</button>
                 </div>
                 <div id="register-form" class="form">
                     <div id="email_section_register">
-                        <label id="email2" for="email"></label>
+                        <label id="email2" for="email">{{ content.email }}</label>
                         <input type="text" id="email_register" name="email" placeholder="Email">
                         <ul id="email_errors_register" class="login-error"></ul>
                     </div>
                     <div id="password_section_register">
-                        <label id="password2" for="password"></label>
+                        <label id="password2" for="password">{{ content.password }}</label>
                         <input type="password" id="password_register" name="password" placeholder="Password">
                         <ul id="password_errors_register" class="login-error"></ul>
                     </div>
                     <div id="password_confirm_section_register">
-                        <label id="passwordConfirm" for="password_confirm_register"></label>
+                        <label id="passwordConfirm" for="password_confirm_register">{{ content.passwordConfirm }}</label>
                         <input type="password" id="password_confirm_register" name="password_confirm" placeholder="Password">
                         <ul id="password_confirm_errors_register" class="login-error"></ul>
                     </div>
                     <div id="first_name_section_register">
-                        <label id="firstName" for="first_name_register"></label>
-                        <input type="text" id="first_name_register" name="first_name" placeholder="Hugo">
+                        <label id="firstName" for="first_name_register">{{ content.firstName }}</label>
+                        <input type="text" id="first_name_register" name="first_name" placeholder="John">
                         <ul id="first_name_errors_register" class="login-error"></ul>
                     </div>
                     <div id="last_name_section_register">
-                        <label id="lastName" for="last_name_register"></label>
-                        <input type="text" id="last_name_register" name="last_name" placeholder="BECART">
+                        <label id="lastName" for="last_name_register">{{ content.lastName }}</label>
+                        <input type="text" id="last_name_register" name="last_name" placeholder="DOE">
                         <ul id="last_name_errors_register" class="login-error"></ul>
                     </div>
                     <div id="city_section_register">
-                        <label id="city" for="city_register"></label>
+                        <label id="city" for="city_register">{{ content.city }}</label>
                         <input type="text" id="city_register" name="city" placeholder="Berlin">
                         <ul id="city_errors_register" class="login-error"></ul>
                     </div>
                     <div id="phone_section_register">
-                        <label id="phone" for="phone_register"></label>
+                        <label id="phone" for="phone_register">{{ content.phone }}</label>
                         <input type="tel" id="phone_register" name="phone" placeholder="+33601020304">
                         <ul id="phone_errors_register" class="login-error"></ul>
                     </div>
@@ -252,15 +250,16 @@ const logout = async () => {
                         <ul id="general_errors_register" class="login-error"></ul>
                         <ul id="general_success_register" class="login-success"></ul>
                     </div>
-                    <button id="register" @click="register"></button>
+                    <button id="register" @click="register">{{ content.register }}</button>
                 </div>
             </div>
             <div id="user-form" class="form">
-                <div id="user-welcome"></div>
-                <button id="logout" @click="logout"></button>
+                <div id="user-welcome">{{ content.welcome }}<span id="user-welcome-id"></span>!</div>
+                <button id="logout" @click="logout">{{ content.logout }}</button>
             </div>
         </div>
     </div>
+    <Footer :urlLang=lang></Footer>
 </template>
 
 <style scoped lang="scss">

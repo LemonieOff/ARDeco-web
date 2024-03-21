@@ -1,11 +1,11 @@
 <template>
     <div class="navbar">
-        <a id="home" class="navbar-option" href="/">Home</a>
-        <a id="team" class="navbar-option" href="/team">Team</a>
-        <a id="product" class="navbar-option" href="/product">Our product</a>
-        <a id="profile" class="navbar-option" href="/profile">Profile</a>
-        <a id="settings" class="navbar-option" href="/settings">Settings</a>
-        <button id="dark-mode-button" style="color: #F2EBDF;" @click="toggleDarkMode">Dark mode</button>
+        <a id="home" class="navbar-option" :href="`${langPrefix}`">{{content.home}}</a>
+        <a id="team" class="navbar-option" :href="`${langPrefix}team`">{{content.team}}</a>
+        <a id="product" class="navbar-option" :href="`${langPrefix}product`">{{content.product}}</a>
+        <a id="profile" class="navbar-option" :href="`${langPrefix}profile`">{{content.profile}}</a>
+        <a id="profile" class="navbar-option" :href="`${langPrefix}settings`">{{content.settings}}</a>
+        <button id="dark-mode-button" style="color: #F2EBDF;" @click="toggleDarkMode">{{content.darkmode}}</button>
     </div>
 </template>
 
@@ -16,49 +16,36 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "Navbar",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
-        // If no user is connected, deletes the 'lang' item
-        if (localStorage.getItem('userID') == null) {
-            localStorage.setItem('lang', null)
+        let lang = this.urlLang;
+
+        // If lang selector is not passed in url, get the user's one or set it to french
+        if (lang !== 'en' && lang !== 'fr') {
+            if (localStorage.getItem('lang')) {
+                lang = localStorage.getItem('lang');
+            } else {
+                lang = 'fr';
+            }
         }
 
-        // Change the language of the website
-        let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
+        // Set the content variable to the correct language
+        this.content = lang === 'en' ? en.navBar : fr.navBar;
+
+        // Prefix for links
+        if (location.href.includes("/fr/")) {
+            this.langPrefix = "/fr/";
+        } else if (location.href.includes("/en/")) {
+            this.langPrefix = "/en/";
         }
-        console.log("localStorage.getItem('lang') : ", localStorage.getItem('lang'))
-        console.log("lang = ", lang)
-        if (lang == 'en') {
-            document.getElementById('home').innerText = en.navBar.home
-            document.getElementById('team').innerText = en.navBar.team
-            document.getElementById('product').innerText = en.navBar.product
-            document.getElementById('profile').innerText = en.navBar.profile
-            document.getElementById('settings').innerText = en.navBar.settings
-            document.getElementById('dark-mode-button').innerText = en.navBar.darkmode
-        } else {
-            document.getElementById('home').innerText = fr.navBar.home
-            document.getElementById('team').innerText = fr.navBar.team
-            document.getElementById('product').innerText = fr.navBar.product
-            document.getElementById('profile').innerText = fr.navBar.profile
-            document.getElementById('settings').innerText = fr.navBar.settings
-            document.getElementById('dark-mode-button').innerText = fr.navBar.darkmode
-        }
-        
-        // Change the url links between /fr and /en depending on the language
-        if (lang == 'en') {
-            document.getElementById('home').setAttribute("href", "/en/")
-            document.getElementById('team').setAttribute("href", "/en/team")
-            document.getElementById('product').setAttribute("href", "/en/product")
-            document.getElementById('profile').setAttribute("href", "/en/profile")
-        } else {
-            document.getElementById('home').setAttribute("href", "/fr/")
-            document.getElementById('team').setAttribute("href", "/fr/team")
-            document.getElementById('product').setAttribute("href", "/fr/product")
-            document.getElementById('profile').setAttribute("href", "/fr/profile")
-        }
+
         this.checkDarkMode();
     },
     methods: {
