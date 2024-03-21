@@ -82,6 +82,9 @@ import {isLogged, loggedIn} from "public/js/checkLogin";
 
 onMounted(async () => {
     const userID = await isLogged();
+    if (!loggedIn) {
+        location.href = "/fr/login";
+    }
     let lang = localStorage.getItem('lang')
 
     // get profile data
@@ -129,10 +132,6 @@ onMounted(async () => {
     document.getElementById("city_edit").placeholder = result_profile.city;
     document.getElementById("yourFavoriteFurnitures").innerHTML = fr.profile.yourFavoriteFurnitures;
     document.getElementById("yourFavoriteGalleries").innerHTML = fr.profile.yourFavoriteGalleries;
-
-    if (!loggedIn) {
-        location.href = "/login";
-    }
 });
 
 const confirmEdit = async () => {
