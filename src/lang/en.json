@@ -17,42 +17,42 @@
       "presentationTextPart2": "During those 5 years, we are asked to to find internships or part time jobs to learn everything we need to know about life in the professional world. Since all of us are 3rd years, we can comfortably say that we all spent at least half a year in a company already, which turns out to be very beneficial to the development of our ARDeco project."
     },
     "evan": {
-      "role":"AR Developer",
-      "internshipRole1":"Junior Frontend Developer"
+      "role": "AR Developer",
+      "internshipRole1": "Junior Frontend Developer"
     },
     "hugo": {
-      "role":"Project Leader",
-      "internshipRole1":"Backend Developer",
-      "internshipRole2":"Video Game Developer"
+      "role": "Project Leader",
+      "internshipRole1": "Backend Developer",
+      "internshipRole2": "Video Game Developer"
     },
     "louis": {
-      "role":"AR Developer",
-      "internshipRole1":"Junior Software Developer",
-      "internshipRole2":"Web Developer",
-      "internshipRole3":"Video Game Developer"
+      "role": "AR Developer",
+      "internshipRole1": "Junior Software Developer",
+      "internshipRole2": "Web Developer",
+      "internshipRole3": "Video Game Developer"
     },
     "valentin": {
-      "role":"Design and Partners",
-      "internshipRole1":"Tech and Web Support",
-      "internshipRole2":"Frontend Developer",
-      "internshipRole3":"Junior Frontend Developer"
+      "role": "Design and Partners",
+      "internshipRole1": "Tech and Web Support",
+      "internshipRole2": "Frontend Developer",
+      "internshipRole3": "Junior Frontend Developer"
     }
   },
   "productPages": {
     "projectDetailsTitle": "Discover the details of our project",
     "findYourAnswersSubtitle": "Find the answers to your questions  in our FAQ !",
-    "furnitureChoiceTitle":"How are my furniture chosen ?",
-    "furnitureChoiceText":"The application offers layout and decoration for a completely empty room, such as helping to rearrange and redecorate an already furnished and furnished room. At the end, the application offers to view the result in 3D in the application, but also (and above all) in augmented reality directly in the room! At this stage, he can even move the furniture displayed, select others, delete or add them manually and change their color and style. To generate the result in 3D or augmented reality, we decided to use 3D models.",
-    "whatIsArdecoTitle":"What is ARDeco ?",
-    "whatIsArdecoText":"ARDeco is a mobile application for scanning the room using the phone. Our AI then generates an interior layout and decoration based on the budget and style defined by the user. He will visualize the result in augmented reality and will be able to buy the furniture (automatically arranged) from the partners directly from the application.",
-    "howToUseArdecoTitle":"How to use ARDeco ?",
-    "howToUseArdecoText":"The user can first enter a budget range and/or a maximum budget not to be exceeded. He can also select different styles that he would like in his room (for example zen, industrial, classic, forest, etc...). He will then simply have to use his phone camera, and perform a scan of the room by following the instructions indicated on the screen and checking the veracity of the information calculated and transcribed. It is possible that the application asks the user to enter one or more distances manually to perform more precise calculations.",
-    "modelsOriginsTitle":"Where do the models come from ?",
-    "modelsOriginsText":"These 3D models are provided to us directly by the partner brands whose catalog is present in the application. If the partners do not have 3D models, we will offer them conversion solutions in order to be compatible with our service. In the worst case, we can adapt to them and offer support for additional formats according to the needs of our partners.",
-    "whyUseArdecoTitle":"Why should I use ARDeco ?",
-    "whyUseArdecoText":"The project therefore saves time when furnishing your room. Thanks to the budget and style selection, the scanning of the room to capture the dimensions of the walls and furniture (if present in the room) and the AI previously described which retrieves furniture corresponding to the criteria and dimensions then pose, saving user time and agent. Another improvement that the project brings to the user is that he is sure of the final rendering of his room and will not be disappointed, since he can visualize in augmented reality in his room the final arrangement, and even carry out tests to be sure.",
-    "inAppPurchaseTitle":"Can I buy furniture from the app ?",
-    "inAppPurchaseText":"Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user."
+    "furnitureChoiceTitle": "How are my furniture chosen ?",
+    "furnitureChoiceText": "The application offers layout and decoration for a completely empty room, such as helping to rearrange and redecorate an already furnished and furnished room. At the end, the application offers to view the result in 3D in the application, but also (and above all) in augmented reality directly in the room! At this stage, he can even move the furniture displayed, select others, delete or add them manually and change their color and style. To generate the result in 3D or augmented reality, we decided to use 3D models.",
+    "whatIsArdecoTitle": "What is ARDeco ?",
+    "whatIsArdecoText": "ARDeco is a mobile application for scanning the room using the phone. Our AI then generates an interior layout and decoration based on the budget and style defined by the user. He will visualize the result in augmented reality and will be able to buy the furniture (automatically arranged) from the partners directly from the application.",
+    "howToUseArdecoTitle": "How to use ARDeco ?",
+    "howToUseArdecoText": "The user can first enter a budget range and/or a maximum budget not to be exceeded. He can also select different styles that he would like in his room (for example zen, industrial, classic, forest, etc...). He will then simply have to use his phone camera, and perform a scan of the room by following the instructions indicated on the screen and checking the veracity of the information calculated and transcribed. It is possible that the application asks the user to enter one or more distances manually to perform more precise calculations.",
+    "modelsOriginsTitle": "Where do the models come from ?",
+    "modelsOriginsText": "These 3D models are provided to us directly by the partner brands whose catalog is present in the application. If the partners do not have 3D models, we will offer them conversion solutions in order to be compatible with our service. In the worst case, we can adapt to them and offer support for additional formats according to the needs of our partners.",
+    "whyUseArdecoTitle": "Why should I use ARDeco ?",
+    "whyUseArdecoText": "The project therefore saves time when furnishing your room. Thanks to the budget and style selection, the scanning of the room to capture the dimensions of the walls and furniture (if present in the room) and the AI previously described which retrieves furniture corresponding to the criteria and dimensions then pose, saving user time and agent. Another improvement that the project brings to the user is that he is sure of the final rendering of his room and will not be disappointed, since he can visualize in augmented reality in his room the final arrangement, and even carry out tests to be sure.",
+    "inAppPurchaseTitle": "Can I buy furniture from the app ?",
+    "inAppPurchaseText": "Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user."
   },
   "footer": {
     "stayTuned": "Stay tuned",
@@ -214,6 +214,101 @@
       "acceptance": "By using our services, users consent to the collection, processing and use of their private and banking data in accordance with this privacy policy.",
       "questions": "If you have any questions regarding this privacy policy, please contact us by email or through our support.",
       "update": "We reserve the right to update this privacy policy at any time."
+    }
+  },
+  "cgu": {
+    "object": {
+      "title": "Article 1 - Objet",
+      "text": "Les présentes Conditions Générales d'Utilisation ont pour objet de définir les modalités et conditions d'utilisation du Service proposé par ARDeco à ses utilisateurs."
+    },
+    "definitions": {
+      "title": "Article 2 - Définitions",
+      "userTitle": "Utilisateur",
+      "userText": "Tout utilisateur, qu'il soit professionnel ou particulier, se connectant au Service.",
+      "serviceTitle": "Service",
+      "serviceText": "L'ensemble des services proposés par ARDeco à ses utilisateurs.",
+      "userContentTitle": "Contenu de l'utilisateur",
+      "userContentText": "Ensemble des éléments transmis par l'Utilisateur au sein du Service.",
+      "userAccountTitle": "Compte utilisateur",
+      "userAccountText": "Informations nécessaires à l'identification d'un utilisateur sur le Service.",
+      "editorTitle": "Éditeur",
+      "editorText": "La personne ou l'entité, morale ou physique, responsable de l'édition et du contenu du Service."
+    },
+    "accessAndUse": {
+      "title": "Article 3 - Accès et utilisation du Service",
+      "access": "L'accès au Service est réservé à tout utilisateur disposant d'une connexion internet. Tous les frais nécessaires à l'accès au Service (matériel informatique, logiciels, connexion internet, etc.) sont à la charge de l'Utilisateur.",
+      "account": "L'utilisateur ayant accès au Service doit disposer d'un Compte utilisateur. Ce compte est personnel et ne peut être partagé. En cas de non-respect des CGU, le Service se réserve le droit de suspendre ou de supprimer le Compte de l'Utilisateur sans préavis, ni indemnité.",
+      "content": "Le Service permet à l'Utilisateur de publier du contenu. Dans ce cas, l'Utilisateur reste propriétaire de tout contenu qu'il publie. L'Utilisateur cède toutefois à l'Éditeur le droit de publier ce contenu sur le Service.",
+      "responsibility": "L'Utilisateur est responsable de tout contenu qu'il publie. L'Utilisateur s'engage à ne publier que du contenu pour lequel il dispose des droits nécessaires.",
+      "moderation": "Le Service se réserve le droit de modérer ou de supprimer tout contenu publié par l'Utilisateur à tout moment et sans préavis, ni justification.",
+      "data": "L'Utilisateur est informé et accepte que la mise en œuvre du Service nécessite que ses données personnelles soient transmises à des tiers.",
+      "availability": "Le Service s'efforce de fournir le Service 24 heures sur 24, 7 jours sur 7. En cas d'interruption, le Service s'efforcera de communiquer préalablement aux Utilisateurs les dates et heures de l'intervention.",
+      "responsibility2": "L'Éditeur ne peut être tenu responsable de tout dommage direct ou indirect causé au matériel de l'Utilisateur lors de l'accès au Service.",
+      "cookies": "Le Service peut utiliser des cookies. Dans ce cas, le Service informe l'Utilisateur de la possibilité de désactiver les cookies depuis les paramètres de son navigateur.",
+      "proprietary": "Le Service et son contenu (textes, images, sons, vidéos, etc.) sont la propriété exclusive de l'Éditeur.",
+      "license": "L'Utilisateur dispose d'une licence d'utilisation du Service, non exclusive et non transférable.",
+      "responsibility3": "L'Utilisateur s'engage à ne pas reproduire, copier, modifier, vendre, revendre, décompiler, désassembler, distribuer, concéder ou exploiter tout ou partie du Service sans l'autorisation expresse de l'Éditeur.",
+      "sanctions": "En cas de non-respect des CGU, l'Éditeur se réserve le droit de suspendre ou de supprimer le Compte de l'Utilisateur sans préavis, ni indemnité."
+    },
+    "intellectualProperty": {
+      "title": "Article 4 - Propriété intellectuelle",
+      "content": "Les marques, logos, signes et tout autre contenu du Service sont protégés par le Code de la propriété intellectuelle et par le droit d'auteur.",
+      "license": "L'Utilisateur sollicite l'autorisation préalable de l'Éditeur pour toute reproduction, publication, copie des différents contenus.",
+      "sanctions": "Toute utilisation non autorisée des contenus du Service engagera la responsabilité civile et pénale de l'Utilisateur sur le fondement de la contrefaçon."
+    },
+    "personalData": {
+      "title": "Article 5 - Données personnelles",
+      "data": "Les données personnelles collectées par le Service sont nécessaires à la bonne exécution du Service.",
+      "usage": "Ces données peuvent être utilisées par le Service pour permettre la navigation de l'Utilisateur sur le Service, pour améliorer la qualité du Service, pour envoyer des informations commerciales et pour personnaliser les services proposés à l'Utilisateur.",
+      "duration": "Les données personnelles sont conservées pour la durée nécessaire à l'accomplissement des finalités pour lesquelles elles ont été collectées.",
+      "policy": "L'Utilisateur peut consulter la politique de confidentialité du Service pour en savoir davantage sur la collecte et le traitement de ses données personnelles.",
+      "opposition": "L'Utilisateur dispose du droit de s'opposer à la collecte de ses données personnelles. L'exercice de ce droit peut cependant empêcher l'accès au Service.",
+      "deletion": "L'Utilisateur dispose du droit de demander la suppression de ses données personnelles. L'exercice de ce droit peut cependant empêcher l'accès au Service.",
+      "responsibility": "L'Éditeur s'engage à ne pas communiquer les données personnelles de l'Utilisateur à des tiers sans son consentement.",
+      "security": "Les données personnelles de l'Utilisateur peuvent être conservées par le Service pour des raisons de sécurité."
+    },
+    "responsibility": {
+      "title": "Article 6 - Responsabilité",
+      "security": "L'Éditeur s'engage à assurer la sécurité et la confidentialité des données transmises par l'Utilisateur.",
+      "limitation": "Toutefois, sa responsabilité ne peut être engagée en cas de force majeure ou du fait imprévisible et insurmontable d'un tiers.",
+      "content": "L'Éditeur n'est pas responsable des contenus publiés par l'Utilisateur. L'Utilisateur s'engage à ne publier que du contenu pour lequel il dispose des droits nécessaires.",
+      "sanctions": "L'Éditeur se réserve le droit de supprimer tout contenu publié par l'Utilisateur qui contreviendrait à la législation en vigueur en France.",
+      "responsibility": "L'Éditeur ne peut être tenu responsable des dommages directs et indirects causés au matériel de l'Utilisateur lors de l'accès au Service, y compris les dommages causés par des virus ou des logiciels malveillants.",
+      "userResponsibility": "L'Utilisateur est seul responsable des dommages causés à des tiers du fait de l'utilisation du Service."
+    },
+    "cguEdit": {
+      "title": "Article 7 - Modification des CGU",
+      "modification": "L'Éditeur se réserve le droit de modifier les CGU à tout moment et sans préavis.",
+      "acceptance": "L'Utilisateur est invité à consulter régulièrement les CGU pour prendre connaissance des éventuelles modifications.",
+      "application": "L'utilisation du Service par l'Utilisateur vaut acceptation des CGU en vigueur.",
+      "opposition": "L'Utilisateur qui n'accepte pas les CGU en vigueur doit se désinscrire du Service.",
+      "previous": "Toute condition générale antérieure à la modification sera alors caduque.",
+      "opposition2": "Toute modification des CGU s'applique à l'Utilisateur dès son entrée en vigueur."
+    },
+    "durationAndCancellation": {
+      "title": "Article 8 - Durée et résiliation",
+      "duration": "Les présentes CGU s'appliquent pour une durée indéterminée.",
+      "cancellation": "L'Utilisateur peut résilier son Compte à tout moment, sans préavis, sans frais et sans motif en adressant une demande de résiliation à l'Éditeur.",
+      "suppression": "La résiliation du Compte entraîne la suppression immédiate de toutes les données personnelles de l'Utilisateur.",
+      "responsibility": "L'Éditeur ne peut être tenu responsable de la perte de données de l'Utilisateur suite à la résiliation de son Compte.",
+      "application": "La résiliation du Compte entraîne la suppression immédiate de l'accès au Service.",
+      "responsibility2": "L'Éditeur se réserve le droit de résilier le Compte de tout Utilisateur qui contreviendrait aux CGU."
+    },
+    "litige": {
+      "title": "Article 9 - Litiges",
+      "applicable": "Les présentes CGU sont régies par le droit français.",
+      "conciliation": "En cas de litige non résolu à l'amiable entre l'Utilisateur et l'Éditeur, les tribunaux français sont compétents pour régler le litige.",
+      "responsibility": "Pour toute question relative à l'application des CGU, l'Utilisateur peut contacter l'Éditeur via l'outil de support client."
+    },
+    "generalDisposition": {
+      "title": "Article 10 - Dispositions générales",
+      "nullity": "Si l'une des clauses des CGU est déclarée nulle par une décision de justice, les autres clauses restent en vigueur.",
+      "nonRenunciation": "Le fait pour l'Éditeur de ne pas se prévaloir d'une clause des CGU n'implique pas sa renonciation à se prévaloir de cette clause ultérieurement."
+    },
+    "contact": {
+      "title": "Article 11 - Contact",
+      "contact": "Pour toute question relative aux CGU, l'Utilisateur peut contacter l'Éditeur via l'outil de support client.",
+      "email": "L'Éditeur peut être contacté par email à l'adresse suivante : contact@ardeco.app"
     }
   }
 }
