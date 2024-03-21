@@ -4,6 +4,7 @@
         <a id="team" class="navbar-option" :href="`${langPrefix}team`">{{content.team}}</a>
         <a id="product" class="navbar-option" :href="`${langPrefix}product`">{{content.product}}</a>
         <a id="profile" class="navbar-option" :href="`${langPrefix}profile`">{{content.profile}}</a>
+        <a id="profile" class="navbar-option" :href="`${langPrefix}settings`">{{content.settings}}</a>
         <button id="dark-mode-button" style="color: #F2EBDF;" @click="toggleDarkMode">{{content.darkmode}}</button>
     </div>
 </template>

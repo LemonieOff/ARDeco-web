@@ -82,7 +82,10 @@ import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/js/checkLogin";
 
 onMounted(async () => {
-    const userID = await isLogged();
+    const userID = await isLogged()
+    if (!loggedIn) {
+        location.href = "/login";
+    }
     let lang = localStorage.getItem('lang')
 
     // get profile data
@@ -109,54 +112,51 @@ onMounted(async () => {
     document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
 
     if (lang == 'en') {
-            document.getElementById("firstName").innerHTML = en.profile.informations.firstName + result_profile.firstname;
-            document.getElementById("lastName").innerHTML = en.profile.informations.lastName + result_profile.lastname;
-            document.getElementById("email").innerHTML = en.profile.informations.email + result_profile.email;
-            document.getElementById("phone").innerHTML = en.profile.informations.phone + result_profile.phone;
-            document.getElementById("city").innerHTML = en.profile.informations.city + result_profile.city;
-            document.getElementById("savedItems").innerHTML = en.profile.informations.savedItems + result_gallery.length;
-            document.getElementById("commandsOrdered").innerHTML = en.profile.informations.commandsOrdered + "0";
-            document.getElementById("cancelEditButton").innerHTML = en.profile.buttons.cancel;
-            document.getElementById("startEditButton").innerHTML = en.profile.buttons.update;
-            document.getElementById("editProfile").innerHTML = en.profile.buttons.confirm;
-            document.getElementById("firstName2").innerHTML = en.profile.informations.firstName;
-            document.getElementById("first_name_edit").placeholder = result_profile.firstname;
-            document.getElementById("lastName2").innerHTML = en.profile.informations.lastName;
-            document.getElementById("last_name_edit").placeholder = result_profile.lastname;
-            document.getElementById("email2").innerHTML = en.profile.informations.email;
-            document.getElementById("email_edit").placeholder = result_profile.email;
-            document.getElementById("phone2").innerHTML = en.profile.informations.phone;
-            document.getElementById("phone_edit").placeholder = result_profile.phone;
-            document.getElementById("city2").innerHTML = en.profile.informations.city;
-            document.getElementById("city_edit").placeholder = result_profile.city;
-            document.getElementById("yourFavoriteFurnitures").innerHTML = en.profile.yourFavoriteFurnitures;
-            document.getElementById("yourFavoriteGalleries").innerHTML = en.profile.yourFavoriteGalleries;
-        } else {
-            document.getElementById("firstName").innerHTML = fr.profile.informations.firstName + result_profile.firstname;
-            document.getElementById("lastName").innerHTML = fr.profile.informations.lastName + result_profile.lastname;
-            document.getElementById("email").innerHTML = fr.profile.informations.email + result_profile.email;
-            document.getElementById("phone").innerHTML = fr.profile.informations.phone + result_profile.phone;
-            document.getElementById("city").innerHTML = fr.profile.informations.city + result_profile.city;
-            document.getElementById("savedItems").innerHTML = fr.profile.informations.savedItems + result_gallery.length;
-            document.getElementById("commandsOrdered").innerHTML = fr.profile.informations.commandsOrdered + "0";
-            document.getElementById("cancelEditButton").innerHTML = fr.profile.buttons.cancel;
-            document.getElementById("startEditButton").innerHTML = fr.profile.buttons.update;
-            document.getElementById("editProfile").innerHTML = fr.profile.buttons.confirm;
-            document.getElementById("firstName2").innerHTML = fr.profile.informations.firstName;
-            document.getElementById("first_name_edit").placeholder = result_profile.firstname;
-            document.getElementById("lastName2").innerHTML = fr.profile.informations.lastName;
-            document.getElementById("last_name_edit").placeholder = result_profile.lastname;
-            document.getElementById("email2").innerHTML = fr.profile.informations.email;
-            document.getElementById("email_edit").placeholder = result_profile.email;
-            document.getElementById("phone2").innerHTML = fr.profile.informations.phone;
-            document.getElementById("phone_edit").placeholder = result_profile.phone;
-            document.getElementById("city2").innerHTML = fr.profile.informations.city;
-            document.getElementById("city_edit").placeholder = result_profile.city;
-            document.getElementById("yourFavoriteFurnitures").innerHTML = fr.profile.yourFavoriteFurnitures;
-            document.getElementById("yourFavoriteGalleries").innerHTML = fr.profile.yourFavoriteGalleries;
-        }
-    if (!loggedIn) {
-        location.href = "/login";
+        document.getElementById("firstName").innerHTML = en.profile.informations.firstName + result_profile.firstname;
+        document.getElementById("lastName").innerHTML = en.profile.informations.lastName + result_profile.lastname;
+        document.getElementById("email").innerHTML = en.profile.informations.email + result_profile.email;
+        document.getElementById("phone").innerHTML = en.profile.informations.phone + result_profile.phone;
+        document.getElementById("city").innerHTML = en.profile.informations.city + result_profile.city;
+        document.getElementById("savedItems").innerHTML = en.profile.informations.savedItems + result_gallery.length;
+        document.getElementById("commandsOrdered").innerHTML = en.profile.informations.commandsOrdered + "0";
+        document.getElementById("cancelEditButton").innerHTML = en.profile.buttons.cancel;
+        document.getElementById("startEditButton").innerHTML = en.profile.buttons.update;
+        document.getElementById("editProfile").innerHTML = en.profile.buttons.confirm;
+        document.getElementById("firstName2").innerHTML = en.profile.informations.firstName;
+        document.getElementById("first_name_edit").placeholder = result_profile.firstname;
+        document.getElementById("lastName2").innerHTML = en.profile.informations.lastName;
+        document.getElementById("last_name_edit").placeholder = result_profile.lastname;
+        document.getElementById("email2").innerHTML = en.profile.informations.email;
+        document.getElementById("email_edit").placeholder = result_profile.email;
+        document.getElementById("phone2").innerHTML = en.profile.informations.phone;
+        document.getElementById("phone_edit").placeholder = result_profile.phone;
+        document.getElementById("city2").innerHTML = en.profile.informations.city;
+        document.getElementById("city_edit").placeholder = result_profile.city;
+        document.getElementById("yourFavoriteFurnitures").innerHTML = en.profile.yourFavoriteFurnitures;
+        document.getElementById("yourFavoriteGalleries").innerHTML = en.profile.yourFavoriteGalleries;
+    } else {
+        document.getElementById("firstName").innerHTML = fr.profile.informations.firstName + result_profile.firstname;
+        document.getElementById("lastName").innerHTML = fr.profile.informations.lastName + result_profile.lastname;
+        document.getElementById("email").innerHTML = fr.profile.informations.email + result_profile.email;
+        document.getElementById("phone").innerHTML = fr.profile.informations.phone + result_profile.phone;
+        document.getElementById("city").innerHTML = fr.profile.informations.city + result_profile.city;
+        document.getElementById("savedItems").innerHTML = fr.profile.informations.savedItems + result_gallery.length;
+        document.getElementById("commandsOrdered").innerHTML = fr.profile.informations.commandsOrdered + "0";
+        document.getElementById("cancelEditButton").innerHTML = fr.profile.buttons.cancel;
+        document.getElementById("startEditButton").innerHTML = fr.profile.buttons.update;
+        document.getElementById("editProfile").innerHTML = fr.profile.buttons.confirm;
+        document.getElementById("firstName2").innerHTML = fr.profile.informations.firstName;
+        document.getElementById("first_name_edit").placeholder = result_profile.firstname;
+        document.getElementById("lastName2").innerHTML = fr.profile.informations.lastName;
+        document.getElementById("last_name_edit").placeholder = result_profile.lastname;
+        document.getElementById("email2").innerHTML = fr.profile.informations.email;
+        document.getElementById("email_edit").placeholder = result_profile.email;
+        document.getElementById("phone2").innerHTML = fr.profile.informations.phone;
+        document.getElementById("phone_edit").placeholder = result_profile.phone;
+        document.getElementById("city2").innerHTML = fr.profile.informations.city;
+        document.getElementById("city_edit").placeholder = result_profile.city;
+        document.getElementById("yourFavoriteFurnitures").innerHTML = fr.profile.yourFavoriteFurnitures;
+        document.getElementById("yourFavoriteGalleries").innerHTML = fr.profile.yourFavoriteGalleries;
     }
 });
 

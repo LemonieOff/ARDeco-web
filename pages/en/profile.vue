@@ -82,7 +82,9 @@ import {isLogged, loggedIn} from "public/js/checkLogin";
 
 onMounted(async () => {
     const userID = await isLogged();
-    let lang = localStorage.getItem('lang')
+    if (!loggedIn) {
+        location.href = "/en/login";
+    }
 
     // get profile data
     const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
@@ -129,10 +131,6 @@ onMounted(async () => {
     document.getElementById("city_edit").placeholder = result_profile.city;
     document.getElementById("yourFavoriteFurnitures").innerHTML = en.profile.yourFavoriteFurnitures;
     document.getElementById("yourFavoriteGalleries").innerHTML = en.profile.yourFavoriteGalleries;
-
-    if (!loggedIn) {
-        location.href = "/login";
-    }
 });
 
 const confirmEdit = async () => {
