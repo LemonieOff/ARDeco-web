@@ -1,44 +1,47 @@
 <template>
     <div class="page-presentation-content top-right-yellow-fade-background">
         <div class="line-jump"></div>
-        <div id="title" class="title"></div>
+        <div id="title" class="title">{{ content.title }}</div>
         <div class="sub-content">
             <div class="team-content">
-                <div id="picturesTitle" class="title"></div>
-                <div id="picturesSubtitle" class="sub-title"></div>
+                <div id="picturesTitle" class="title">{{ content.picturesTitle }}</div>
+                <div id="picturesSubtitle" class="sub-title">{{ content.picturesSubtitle }}</div>
                 <div class="profile-pictures-content">
                     <div class="profile-pictures">
                         <a class="shaking-effect" href="#hugo-profile">
                             <img src="../../assets/images/profile-pictures/Hugo.png">
+                        </a>
+                        <a href="#valentin-profile">
+                            <img src="../../assets/images/profile-pictures/Valentin.png">
                         </a>
                     </div>
                     <div class="profile-pictures">
                         <a class="shaking-effect" href="#louis-profile">
                             <img src="../../assets/images/profile-pictures/Louis.png">
                         </a>
-                        <a class="shaking-effect" href="#mathias-profile">
-                            <img class="bottom-picture" src="../../assets/images/profile-pictures/Mathias.png">
+                        <a href="#unknown-profile">
+                            <img src="../../assets/images/profile-pictures/Unknown.png">
                         </a>
                     </div>
                     <div class="profile-pictures">
                         <a href="#evan-profile">
                             <img src="../../assets/images/profile-pictures/Evan.png">
                         </a>
-                        <a href="#valentin-profile">
-                            <img class="bottom-picture" src="../../assets/images/profile-pictures/Valentin.png">
+                        <a href="#unknown-profile">
+                            <img src="../../assets/images/profile-pictures/Unknown.png">
                         </a>
                     </div>
                 </div>
             </div>
             <div class="school-content">
-                <div id="presentationTitle" class="title"></div>
-                <div id="presentationSubtitle" class="sub-title"></div>
+                <div id="presentationTitle" class="title">{{ content.presentationTitle }}</div>
+                <div id="presentationSubtitle" class="sub-title">{{ content.presentationSubtitle }}</div>
                 <div class="epitech-details">
                     <a href="https://www.epitech.eu/en/">
                         <img src="../../assets/images/profile-pictures/Epitech.png">
                     </a>
-                    <div id="presentationTextPart1" class="text"></div>
-                    <div id="presentationTextPart2" class="text"></div>
+                    <div id="presentationTextPart1" class="text">{{ content.presentationTextPart1 }}</div>
+                    <div id="presentationTextPart2" class="text">{{ content.presentationTextPart2 }}</div>
                 </div>
             </div>
         </div>
@@ -52,38 +55,37 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "PagePresentation",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
-        let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
+        let lang = this.urlLang;
+
+        // If lang selector is not passed in url, get the user's one or set it to french
+        if (lang !== 'en' && lang !== 'fr') {
+            const localStorageLang = localStorage.getItem('lang');
+            if (localStorageLang) {
+                lang = localStorageLang;
+            } else {
+                lang = 'fr';
+            }
         }
 
-        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
-            location.href = location.href.replace("/fr/", "/en/")
-        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
-            location.href = location.href.replace("/en/", "/fr/")
-        }
+        // Set the content variable to the correct language
+        this.content = lang === 'en' ? en.profilePages.presentationPage : fr.profilePages.presentationPage;
 
-        if (lang == 'en') {
-            document.getElementById('title').innerText = en.profilePages.presentationPage.title
-            document.getElementById('picturesTitle').innerText = en.profilePages.presentationPage.picturesTitle
-            document.getElementById('picturesSubtitle').innerText = en.profilePages.presentationPage.picturesSubtitle
-            document.getElementById('presentationTitle').innerText = en.profilePages.presentationPage.presentationTitle
-            document.getElementById('presentationSubtitle').innerText = en.profilePages.presentationPage.presentationSubtitle
-            document.getElementById('presentationTextPart1').innerText = en.profilePages.presentationPage.presentationTextPart1
-            document.getElementById('presentationTextPart2').innerText = en.profilePages.presentationPage.presentationTextPart2
-        } else {
-            document.getElementById('title').innerText = fr.profilePages.presentationPage.title
-            document.getElementById('picturesTitle').innerText = fr.profilePages.presentationPage.picturesTitle
-            document.getElementById('picturesSubtitle').innerText = fr.profilePages.presentationPage.picturesSubtitle
-            document.getElementById('presentationTitle').innerText = fr.profilePages.presentationPage.presentationTitle
-            document.getElementById('presentationSubtitle').innerText = fr.profilePages.presentationPage.presentationSubtitle
-            document.getElementById('presentationTextPart1').innerText = fr.profilePages.presentationPage.presentationTextPart1
-            document.getElementById('presentationTextPart2').innerText = fr.profilePages.presentationPage.presentationTextPart2
+        // Prefix for links
+        if (location.href.includes("/fr/")) {
+            this.langPrefix = "/fr/";
+        } else if (location.href.includes("/en/")) {
+            this.langPrefix = "/en/";
         }
-    },
+    }
 }
 </script>
 
