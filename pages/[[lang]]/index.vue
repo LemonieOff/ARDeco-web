@@ -1,6 +1,7 @@
 <template>
     <Navbar :urlLang=lang></Navbar>
     <Index :urlLang=lang></Index>
+    <Footer :urlLang=lang></Footer>
 </template>
 
 <script setup lang="js">

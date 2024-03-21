@@ -109,7 +109,8 @@
     "firstName": "Nom : ",
     "lastName": "Prénom : ",
     "city": "Ville : ",
-    "phone": "Téléhone : "
+    "phone": "Téléhone : ",
+    "loading": "Chargement en cours..."
   },
   "profile": {
     "yourFavoriteThemes": "Mes thèmes favoris",

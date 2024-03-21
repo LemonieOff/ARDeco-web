@@ -1,29 +1,29 @@
 <template>
     <div class="faq-page-content">
-        <div id="projectDetailsTitle" class="main-title">Discover the details of our project</div>
+        <div id="projectDetailsTitle" class="main-title">{{ content.projectDetailsTitle }}</div>
         <div class="sub-content">
             <div class="faq-into-question background-card">
-                <div id="findYourAnswersSubtitle" class="sub-title gray-text-color">Find the answers to your questions  in our FAQ !</div>
+                <div id="findYourAnswersSubtitle" class="sub-title gray-text-color">{{ content.findYourAnswersSubtitle }}</div>
             </div>
             <div class="questions-list">
-                <a id="q-whatIsArdecoTitle" class="text gray-text-color background-card question-card" href="#what-is-ardeco"> What is ARDeco ?
+                <a id="q-whatIsArdecoTitle" class="text gray-text-color background-card question-card" href="#what-is-ardeco"> {{ content.whatIsArdecoTitle }}
                     <img class="question-icon" src="../../assets/images/questions-icons/what-is-ardeco.png">
                 </a>
-                <a id="q-howToUseArdecoTitle" class="text gray-text-color background-card question-card" href="#how-to-use-ardeco"> How to use ARDeco ?
+                <a id="q-howToUseArdecoTitle" class="text gray-text-color background-card question-card" href="#how-to-use-ardeco"> {{ content.howToUseArdecoTitle }}
                     <img class="question-icon" src="../../assets/images/questions-icons/how-to-use-ardeco.png">
                 </a>
-                <a id="q-furnitureChoiceTitle" class="text gray-text-color background-card question-card" href="#how-are-furnitures-chosen"> How are my furniture chosen ?
+                <a id="q-furnitureChoiceTitle" class="text gray-text-color background-card question-card" href="#how-are-furnitures-chosen"> {{ content.furnitureChoiceTitle }}
                     <img class="question-icon" src="../../assets/images/questions-icons/furniture.png">
                 </a>
             </div>
             <div class="questions-list">
-                <a id="q-modelsOriginsTitle" class="text gray-text-color background-card question-card" href="#where-are-models-from"> Where do the models come from ?
+                <a id="q-modelsOriginsTitle" class="text gray-text-color background-card question-card" href="#where-are-models-from"> {{ content.modelsOriginsTitle }}
                     <img class="question-icon" src="../../assets/images/questions-icons/models.png">
                 </a>
-                <a id="q-whyUseArdecoTitle" class="text gray-text-color background-card question-card" href="#why-choose-ardeco"> Why should I use ARDeco ?
+                <a id="q-whyUseArdecoTitle" class="text gray-text-color background-card question-card" href="#why-choose-ardeco"> {{ content.whyUseArdecoTitle }}
                     <img class="question-icon" src="../../assets/images/questions-icons/why-choose-ardeco.png">
                 </a>
-                <a id="q-inAppPurchaseTitle" class="text gray-text-color background-card question-card" href="#in-app-purchases"> Can I buy furniture from the app ?
+                <a id="q-inAppPurchaseTitle" class="text gray-text-color background-card question-card" href="#in-app-purchases"> {{ content.inAppPurchaseTitle }}
                     <img class="question-icon" src="../../assets/images/questions-icons/in-app-purchases.png">
                 </a>
             </div>
@@ -38,40 +38,37 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "QuestionsList",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
-        let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
+        let lang = this.urlLang;
+
+        // If lang selector is not passed in url, get the user's one or set it to french
+        if (lang !== 'en' && lang !== 'fr') {
+            const localStorageLang = localStorage.getItem('lang');
+            if (localStorageLang) {
+                lang = localStorageLang;
+            } else {
+                lang = 'fr';
+            }
         }
 
-        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
-            location.href = location.href.replace("/fr/", "/en/")
-        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
-            location.href = location.href.replace("/en/", "/fr/")
-        }
+        // Set the content variable to the correct language
+        this.content = lang === 'en' ? en.productPages : fr.productPages;
 
-        if (lang == 'en') {
-            document.getElementById('projectDetailsTitle').innerText = en.productPages.projectDetailsTitle
-            document.getElementById('findYourAnswersSubtitle').innerText = en.productPages.findYourAnswersSubtitle
-            document.getElementById('q-furnitureChoiceTitle').innerText = en.productPages.furnitureChoiceTitle
-            document.getElementById('q-whatIsArdecoTitle').innerText = en.productPages.whatIsArdecoTitle
-            document.getElementById('q-howToUseArdecoTitle').innerText = en.productPages.howToUseArdecoTitle
-            document.getElementById('q-modelsOriginsTitle').innerText = en.productPages.modelsOriginsTitle
-            document.getElementById('q-whyUseArdecoTitle').innerText = en.productPages.whyUseArdecoTitle
-            document.getElementById('q-inAppPurchaseTitle').innerText = en.productPages.inAppPurchaseTitle
-        } else {
-            document.getElementById('projectDetailsTitle').innerText = fr.productPages.projectDetailsTitle
-            document.getElementById('findYourAnswersSubtitle').innerText = fr.productPages.findYourAnswersSubtitle
-            document.getElementById('q-furnitureChoiceTitle').innerText = fr.productPages.furnitureChoiceTitle
-            document.getElementById('q-whatIsArdecoTitle').innerText = fr.productPages.whatIsArdecoTitle
-            document.getElementById('q-howToUseArdecoTitle').innerText = fr.productPages.howToUseArdecoTitle
-            document.getElementById('q-modelsOriginsTitle').innerText = fr.productPages.modelsOriginsTitle
-            document.getElementById('q-whyUseArdecoTitle').innerText = fr.productPages.whyUseArdecoTitle
-            document.getElementById('q-inAppPurchaseTitle').innerText = fr.productPages.inAppPurchaseTitle
+        // Prefix for links
+        if (location.href.includes("/fr/")) {
+            this.langPrefix = "/fr/";
+        } else if (location.href.includes("/en/")) {
+            this.langPrefix = "/en/";
         }
-    },
+    }
 }
 </script>
 

@@ -21,6 +21,7 @@
     <div class="space-between-questions"></div>
     <Conclusion :urlLang=lang></Conclusion>
     <div class="space-between-questions"></div>
+    <Footer :urlLang=lang></Footer>
 </template>
 
 <script setup lang="ts">

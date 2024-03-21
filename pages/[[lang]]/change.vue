@@ -1,7 +1,8 @@
 <!-- EmailInput.vue -->
 <template>
-  <Navbar :urlLang=lang></Navbar>
-  <Change :urlLang=lang></Change>
+    <Navbar :urlLang=lang></Navbar>
+    <Change :urlLang=lang></Change>
+    <Footer :urlLang=lang></Footer>
 </template>
 
 <script setup lang="ts">

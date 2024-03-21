@@ -108,7 +108,8 @@
     "firstName": "First name : ",
     "lastName": "Last name : ",
     "city": "City : ",
-    "phone": "Phone : "
+    "phone": "Phone : ",
+    "loading": "Loading..."
   },
   "profile": {
     "yourFavoriteThemes": "My favorites themes",
@@ -215,5 +216,4 @@
       "update": "We reserve the right to update this privacy policy at any time."
     }
   }
-
 }
