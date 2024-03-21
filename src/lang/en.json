@@ -219,97 +219,97 @@
   },
   "cgu": {
     "object": {
-      "title": "Article 1 - Objet",
-      "text": "Les présentes Conditions Générales d'Utilisation ont pour objet de définir les modalités et conditions d'utilisation du Service proposé par ARDeco à ses utilisateurs."
+      "title": "Article 1 - Purpose",
+      "text": "The purpose of these General Conditions of Use is to define the terms and conditions of use of the Service offered by ARDeco to its users."
     },
     "definitions": {
-      "title": "Article 2 - Définitions",
-      "userTitle": "Utilisateur",
-      "userText": "Tout utilisateur, qu'il soit professionnel ou particulier, se connectant au Service.",
+      "title": "Article 2 - Definitions",
+      "userTitle": "User",
+      "userText": "Any user, whether professional or individual, connecting to the Service.",
       "serviceTitle": "Service",
-      "serviceText": "L'ensemble des services proposés par ARDeco à ses utilisateurs.",
-      "userContentTitle": "Contenu de l'utilisateur",
-      "userContentText": "Ensemble des éléments transmis par l'Utilisateur au sein du Service.",
-      "userAccountTitle": "Compte utilisateur",
-      "userAccountText": "Informations nécessaires à l'identification d'un utilisateur sur le Service.",
-      "editorTitle": "Éditeur",
-      "editorText": "La personne ou l'entité, morale ou physique, responsable de l'édition et du contenu du Service."
+      "serviceText": "All the services offered by ARDeco to its users.",
+      "userContentTitle": "User Content",
+      "userContentText": "All elements transmitted by the User within the Service.",
+      "userAccountTitle": "User Account",
+      "userAccountText": "Information necessary to identify a user on the Service.",
+      "editorTitle": "Editor",
+      "editorText": "The person or entity, legal or physical, responsible for the editing and content of the Service."
     },
     "accessAndUse": {
-      "title": "Article 3 - Accès et utilisation du Service",
-      "access": "L'accès au Service est réservé à tout utilisateur disposant d'une connexion internet. Tous les frais nécessaires à l'accès au Service (matériel informatique, logiciels, connexion internet, etc.) sont à la charge de l'Utilisateur.",
-      "account": "L'utilisateur ayant accès au Service doit disposer d'un Compte utilisateur. Ce compte est personnel et ne peut être partagé. En cas de non-respect des CGU, le Service se réserve le droit de suspendre ou de supprimer le Compte de l'Utilisateur sans préavis, ni indemnité.",
-      "content": "Le Service permet à l'Utilisateur de publier du contenu. Dans ce cas, l'Utilisateur reste propriétaire de tout contenu qu'il publie. L'Utilisateur cède toutefois à l'Éditeur le droit de publier ce contenu sur le Service.",
-      "responsibility": "L'Utilisateur est responsable de tout contenu qu'il publie. L'Utilisateur s'engage à ne publier que du contenu pour lequel il dispose des droits nécessaires.",
-      "moderation": "Le Service se réserve le droit de modérer ou de supprimer tout contenu publié par l'Utilisateur à tout moment et sans préavis, ni justification.",
-      "data": "L'Utilisateur est informé et accepte que la mise en œuvre du Service nécessite que ses données personnelles soient transmises à des tiers.",
-      "availability": "Le Service s'efforce de fournir le Service 24 heures sur 24, 7 jours sur 7. En cas d'interruption, le Service s'efforcera de communiquer préalablement aux Utilisateurs les dates et heures de l'intervention.",
-      "responsibility2": "L'Éditeur ne peut être tenu responsable de tout dommage direct ou indirect causé au matériel de l'Utilisateur lors de l'accès au Service.",
-      "cookies": "Le Service peut utiliser des cookies. Dans ce cas, le Service informe l'Utilisateur de la possibilité de désactiver les cookies depuis les paramètres de son navigateur.",
-      "proprietary": "Le Service et son contenu (textes, images, sons, vidéos, etc.) sont la propriété exclusive de l'Éditeur.",
-      "license": "L'Utilisateur dispose d'une licence d'utilisation du Service, non exclusive et non transférable.",
-      "responsibility3": "L'Utilisateur s'engage à ne pas reproduire, copier, modifier, vendre, revendre, décompiler, désassembler, distribuer, concéder ou exploiter tout ou partie du Service sans l'autorisation expresse de l'Éditeur.",
-      "sanctions": "En cas de non-respect des CGU, l'Éditeur se réserve le droit de suspendre ou de supprimer le Compte de l'Utilisateur sans préavis, ni indemnité."
+      "title": "Article 3 - Access and use of the Service",
+      "access": "Access to the Service is reserved for any user with an internet connection. All costs necessary for access to the Service (computer hardware, software, internet connection, etc.) are the responsibility of the 'User.",
+      "account": "The user having access to the Service must have a User Account. This account is personal and cannot be shared. In the event of non-compliance with the T&Cs, the Service reserves the right to suspend or delete the User's Account without notice or compensation.",
+      "content": "The Service allows the User to publish content. In this case, the User remains the owner of any content that he publishes. The User, however, transfers to the Publisher the right to publish this content on the service.",
+      "responsibility": "The User is responsible for any content he publishes. The User undertakes to only publish content for which he has the necessary rights.",
+      "moderation": "The Service reserves the right to moderate or delete any content published by the User at any time and without notice or justification.",
+      "data": "The User is informed and accepts that the implementation of the Service requires that his personal data be transmitted to third parties.",
+      "availability": "The Service strives to provide the Service 24 hours a day, 7 days a week. In the event of an interruption, the Service will endeavor to communicate to Users in advance the dates and times of the intervention." ,
+      "responsibility2": "The Publisher cannot be held responsible for any direct or indirect damage caused to the User's equipment when accessing the Service.",
+      "cookies": "The Service may use cookies. In this case, the Service informs the User of the possibility of deactivating cookies from their browser settings.",
+      "proprietary": "The Service and its content (texts, images, sounds, videos, etc.) are the exclusive property of the Publisher.",
+      "license": "The User has a non-exclusive and non-transferable license to use the Service.",
+      "responsibility3": "The User undertakes not to reproduce, copy, modify, sell, resell, decompile, disassemble, distribute, license or exploit all or part of the Service without the express authorization of the Publisher.",
+      "sanctions": "In the event of non-compliance with the T&Cs, the Publisher reserves the right to suspend or delete the User's Account without notice or compensation."
     },
     "intellectualProperty": {
-      "title": "Article 4 - Propriété intellectuelle",
-      "content": "Les marques, logos, signes et tout autre contenu du Service sont protégés par le Code de la propriété intellectuelle et par le droit d'auteur.",
-      "license": "L'Utilisateur sollicite l'autorisation préalable de l'Éditeur pour toute reproduction, publication, copie des différents contenus.",
-      "sanctions": "Toute utilisation non autorisée des contenus du Service engagera la responsabilité civile et pénale de l'Utilisateur sur le fondement de la contrefaçon."
+      "title": "Article 4 - Intellectual property",
+      "content": "The brands, logos, signs and any other content of the Service are protected by the Intellectual Property Code and by copyright.",
+      "license": "The User requests prior authorization from the Publisher for any reproduction, publication, copy of the various contents.",
+      "sanctions": "Any unauthorized use of the contents of the Service will incur the civil and criminal liability of the User on the basis of the infringement."
     },
     "personalData": {
-      "title": "Article 5 - Données personnelles",
-      "data": "Les données personnelles collectées par le Service sont nécessaires à la bonne exécution du Service.",
-      "usage": "Ces données peuvent être utilisées par le Service pour permettre la navigation de l'Utilisateur sur le Service, pour améliorer la qualité du Service, pour envoyer des informations commerciales et pour personnaliser les services proposés à l'Utilisateur.",
-      "duration": "Les données personnelles sont conservées pour la durée nécessaire à l'accomplissement des finalités pour lesquelles elles ont été collectées.",
-      "policy": "L'Utilisateur peut consulter la politique de confidentialité du Service pour en savoir davantage sur la collecte et le traitement de ses données personnelles.",
-      "opposition": "L'Utilisateur dispose du droit de s'opposer à la collecte de ses données personnelles. L'exercice de ce droit peut cependant empêcher l'accès au Service.",
-      "deletion": "L'Utilisateur dispose du droit de demander la suppression de ses données personnelles. L'exercice de ce droit peut cependant empêcher l'accès au Service.",
-      "responsibility": "L'Éditeur s'engage à ne pas communiquer les données personnelles de l'Utilisateur à des tiers sans son consentement.",
-      "security": "Les données personnelles de l'Utilisateur peuvent être conservées par le Service pour des raisons de sécurité."
+      "title": "Article 5 - Personal data",
+      "data": "The personal data collected by the Service are necessary for the proper execution of the Service.",
+      "use": "These data may be used by the Service to enable the User's navigation on the Service, to improve the quality of the Service, to send commercial information and to personalize the services offered to the User.",
+      "duration": "Personal data is kept for the period necessary to fulfill the purposes for which it was collected.",
+      "policy": "The User can consult the Service's privacy policy to find out more about the collection and processing of their personal data.",
+      "opposition": "The User has the right to object to the collection of their personal data. The exercise of this right may, however, prevent access to the Service.",
+      "deletion": "The User has the right to request the deletion of his personal data. The exercise of this right may, however, prevent access to the Service.",
+      "responsibility": "The Publisher undertakes not to communicate the User's personal data to third parties without their consent.",
+      "security": "The User's personal data may be retained by the Service for security reasons."
     },
     "responsibility": {
-      "title": "Article 6 - Responsabilité",
-      "security": "L'Éditeur s'engage à assurer la sécurité et la confidentialité des données transmises par l'Utilisateur.",
-      "limitation": "Toutefois, sa responsabilité ne peut être engagée en cas de force majeure ou du fait imprévisible et insurmontable d'un tiers.",
-      "content": "L'Éditeur n'est pas responsable des contenus publiés par l'Utilisateur. L'Utilisateur s'engage à ne publier que du contenu pour lequel il dispose des droits nécessaires.",
-      "sanctions": "L'Éditeur se réserve le droit de supprimer tout contenu publié par l'Utilisateur qui contreviendrait à la législation en vigueur en France.",
-      "responsibility": "L'Éditeur ne peut être tenu responsable des dommages directs et indirects causés au matériel de l'Utilisateur lors de l'accès au Service, y compris les dommages causés par des virus ou des logiciels malveillants.",
-      "userResponsibility": "L'Utilisateur est seul responsable des dommages causés à des tiers du fait de l'utilisation du Service."
+      "title": "Article 6 - Liability",
+      "security": "The Publisher undertakes to ensure the security and confidentiality of data transmitted by the User.",
+      "limitation": "However, liability cannot be incurred in the event of force majeure or the unforeseeable and insurmountable act of a third party.",
+      "content": "The Publisher is not responsible for the content published by the User. The User undertakes to only publish content for which he has the necessary rights.",
+      "sanctions": "The Publisher reserves the right to delete any content published by the User which contravenes the legislation in force in France.",
+      "responsibility": "The Publisher cannot be held responsible for direct or indirect damage caused to the User's equipment when accessing the Service, including damage caused by viruses or malware.",
+      "userResponsibility": "The User is solely responsible for damage caused to third parties as a result of the use of the Service."
     },
     "cguEdit": {
-      "title": "Article 7 - Modification des CGU",
-      "modification": "L'Éditeur se réserve le droit de modifier les CGU à tout moment et sans préavis.",
-      "acceptance": "L'Utilisateur est invité à consulter régulièrement les CGU pour prendre connaissance des éventuelles modifications.",
-      "application": "L'utilisation du Service par l'Utilisateur vaut acceptation des CGU en vigueur.",
-      "opposition": "L'Utilisateur qui n'accepte pas les CGU en vigueur doit se désinscrire du Service.",
-      "previous": "Toute condition générale antérieure à la modification sera alors caduque.",
-      "opposition2": "Toute modification des CGU s'applique à l'Utilisateur dès son entrée en vigueur."
+      "title": "Article 7 - Modification of the T&Cs",
+      "modification": "The Publisher reserves the right to modify the T&Cs at any time and without notice.",
+      "acceptance": "The User is invited to regularly consult the T&Cs to be aware of any modifications.",
+      "application": "Use of the Service by the User constitutes acceptance of the T&Cs in force.",
+      "opposition": "The User who does not accept the T&Cs in force must unsubscribe from the Service.",
+      "previous": "Any general conditions prior to the modification will then be null and void.",
+      "opposition2": "Any modification of the T&Cs applies to the User upon its entry into force."
     },
     "durationAndCancellation": {
-      "title": "Article 8 - Durée et résiliation",
-      "duration": "Les présentes CGU s'appliquent pour une durée indéterminée.",
-      "cancellation": "L'Utilisateur peut résilier son Compte à tout moment, sans préavis, sans frais et sans motif en adressant une demande de résiliation à l'Éditeur.",
-      "suppression": "La résiliation du Compte entraîne la suppression immédiate de toutes les données personnelles de l'Utilisateur.",
-      "responsibility": "L'Éditeur ne peut être tenu responsable de la perte de données de l'Utilisateur suite à la résiliation de son Compte.",
-      "application": "La résiliation du Compte entraîne la suppression immédiate de l'accès au Service.",
-      "responsibility2": "L'Éditeur se réserve le droit de résilier le Compte de tout Utilisateur qui contreviendrait aux CGU."
+      "title": "Article 8 - Duration and termination",
+      "duration": "These T&Cs apply for an indefinite period.",
+      "cancellation": "The User may terminate their Account at any time, without notice, without charge and without reason by sending a termination request to the Publisher.",
+      "deletion": "Termination of the Account results in the immediate deletion of all personal data of the User.",
+      "responsibility": "The Publisher cannot be held responsible for the loss of User data following the termination of their Account.",
+      "application": "Termination of the Account results in immediate removal of access to the Service.",
+      "responsibility2": "The Publisher reserves the right to terminate the Account of any User who contravenes the T&Cs."
     },
     "litige": {
-      "title": "Article 9 - Litiges",
-      "applicable": "Les présentes CGU sont régies par le droit français.",
-      "conciliation": "En cas de litige non résolu à l'amiable entre l'Utilisateur et l'Éditeur, les tribunaux français sont compétents pour régler le litige.",
-      "responsibility": "Pour toute question relative à l'application des CGU, l'Utilisateur peut contacter l'Éditeur via l'outil de support client."
+      "title": "Article 9 - Disputes",
+      "applicable": "These T&Cs are governed by French law.",
+      "conciliation": "In the event of a dispute not resolved amicably between the User and the Publisher, the French courts have jurisdiction to settle the dispute.",
+      "responsibility": "For any questions relating to the application of the T&Cs, the User can contact the Publisher via the customer support tool."
     },
     "generalDisposition": {
-      "title": "Article 10 - Dispositions générales",
-      "nullity": "Si l'une des clauses des CGU est déclarée nulle par une décision de justice, les autres clauses restent en vigueur.",
-      "nonRenunciation": "Le fait pour l'Éditeur de ne pas se prévaloir d'une clause des CGU n'implique pas sa renonciation à se prévaloir de cette clause ultérieurement."
+      "title": "Article 10 - General provisions",
+      "nullity": "If one of the clauses of the T&Cs is declared null by a court decision, the other clauses remain in force.",
+      "nonRenunciation": "The fact that the Publisher does not take advantage of a clause of the General Terms and Conditions does not imply its waiver of the right to take advantage of this clause at a later date."
     },
     "contact": {
       "title": "Article 11 - Contact",
-      "contact": "Pour toute question relative aux CGU, l'Utilisateur peut contacter l'Éditeur via l'outil de support client.",
-      "email": "L'Éditeur peut être contacté par email à l'adresse suivante : contact@ardeco.app"
+      "contact": "For any questions relating to the T&Cs, the User can contact the Publisher via the customer support tool.",
+      "email": "The Publisher can be contacted by email at the following address: contact@ardeco.app"
     }
   }
 }
