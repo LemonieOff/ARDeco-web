@@ -19,7 +19,7 @@
                         <a href="#evan-profile">
                             <img src="../../assets/images/profile-pictures/Evan.png">
                         </a>
-                        <a href="#unknown-profile">
+                        <a>
                             <img src="../../assets/images/profile-pictures/Unknown.png">
                         </a>
                     </div>
@@ -27,7 +27,7 @@
                         <a class="shaking-effect" href="#louis-profile">
                             <img src="../../assets/images/profile-pictures/Louis.png">
                         </a>
-                        <a href="#unknown-profile">
+                        <a>
                             <img src="../../assets/images/profile-pictures/Unknown.png">
                         </a>
                     </div>
