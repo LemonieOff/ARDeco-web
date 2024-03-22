@@ -136,7 +136,7 @@ onMounted(async () => {
 
 const confirmEdit = async () => {
     document.getElementsByClassName("profile-wrapper")[0].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'none'
+    document.getElementById("editElementsDiv").style.display = 'none'
     const email_field = document.getElementById("email_edit").value;
     const first_name_field = document.getElementById("first_name_edit").value;
     const last_name_field = document.getElementById("last_name_edit").value;
@@ -166,12 +166,12 @@ const confirmEdit = async () => {
 
 const startEdit = async () => {
     document.getElementsByClassName("profile-wrapper")[0].style.display = 'none';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block'
+    document.getElementById("editElementsDiv").style.display = 'block'
 }
 
 const cancelEdit = async () => {
     document.getElementsByClassName("profile-wrapper")[0].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'none'
+    document.getElementById("editElementsDiv").style.display = 'none'
 }
 </script>
 

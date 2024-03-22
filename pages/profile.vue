@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div class="profile-wrapper" style="display: none;">
+        <div id="editElementsDiv" class="profile-wrapper" style="display: none;">
             <div class="profile-elements-wrapper">
                 <div class="element">
                     <label id="firstName2" for="first_name_edit"></label>
@@ -162,7 +162,7 @@ onMounted(async () => {
 
 const confirmEdit = async () => {
     document.getElementsByClassName("profile-wrapper")[0].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'none'
+    document.getElementById("editElementsDiv").style.display = 'none'
     const email_field = document.getElementById("email_edit").value;
     const first_name_field = document.getElementById("first_name_edit").value;
     const last_name_field = document.getElementById("last_name_edit").value;
@@ -191,13 +191,14 @@ const confirmEdit = async () => {
 }
 
 const startEdit = async () => {
+    console.log('HERE');
     document.getElementsByClassName("profile-wrapper")[0].style.display = 'none';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block'
+    document.getElementById("editElementsDiv").style.display = 'block';
 }
 
 const cancelEdit = async () => {
     document.getElementsByClassName("profile-wrapper")[0].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'none'
+    document.getElementById("editElementsDiv").style.display = 'none';
 }
 </script>
 
