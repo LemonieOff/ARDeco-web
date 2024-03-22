@@ -125,9 +125,11 @@
       "phone": "Téléphone : ",
       "city": "Ville : ",
       "savedItems": "Élements sauvegardés dans la gallerie : ",
-      "commandsOrdered": "Nombre de commandes : ",
-      "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)"
+      "commandsOrdered": "Nombre de commande(s) : ",
+      "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)",
+      "role": "Rôle : "
     },
+    "loading": "Chargement en cours...",
     "buttons": {
       "cancel": "Annuler",
       "update": "Modifier",
@@ -312,5 +314,17 @@
       "contact": "Pour toute question relative aux CGU, l'Utilisateur peut contacter l'Éditeur via l'outil de support client.",
       "email": "L'Éditeur peut être contacté par email à l'adresse suivante : contact@ardeco.app"
     }
+  },
+  "orderHistory": {
+    "title": "Historique des commandes",
+    "loading": "Chargement en cours...",
+    "noOrders": "Aucune commande trouvée.",
+    "order": "Commande",
+    "date": "Date",
+    "total": "Montant total",
+    "id": "ID",
+    "furniture": "Meubles",
+    "actions": "Actions",
+    "download": "Télécharger la facture"
   }
 }

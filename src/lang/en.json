@@ -124,9 +124,11 @@
       "phone": "Phone : ",
       "city": "City : ",
       "savedItems": "Saved items in gallery : ",
-      "commandsOrdered": "Commands ordered : ",
-      "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)"
+      "commandsOrdered": "Ordered command(s) : ",
+      "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)",
+      "role": "Role : "
     },
+    "loading": "Loading...",
     "buttons": {
       "cancel": "Cancel",
       "update": "Update settings",
@@ -311,5 +313,17 @@
       "contact": "For any questions relating to the T&Cs, the User can contact the Publisher via the customer support tool.",
       "email": "The Publisher can be contacted by email at the following address: contact@ardeco.app"
     }
+  },
+  "orderHistory": {
+    "title": "Order history",
+    "loading": "Loading...",
+    "noOrders": "No orders found",
+    "order": "Order",
+    "date": "Date",
+    "total": "Total amount",
+    "id": "ID",
+    "furniture": "Furniture",
+    "actions": "Actions",
+    "download": "Download invoice"
   }
 }
