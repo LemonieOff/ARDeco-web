@@ -125,9 +125,11 @@
       "phone": "Téléphone : ",
       "city": "Ville : ",
       "savedItems": "Élements sauvegardés dans la gallerie : ",
-      "commandsOrdered": "Nombre de commandes : ",
-      "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)"
+      "commandsOrdered": "Nombre de commande(s) : ",
+      "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)",
+      "role": "Rôle : "
     },
+    "loading": "Chargement en cours...",
     "buttons": {
       "cancel": "Annuler",
       "update": "Modifier",

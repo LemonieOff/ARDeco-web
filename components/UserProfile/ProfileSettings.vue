@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="content">
-            <FavoriteThemes :urlLang=this.urlLang />
+            <FavoriteThemes :urlLang=urlLang />
             <img class="profile-picture" src="../../assets/images/profile-settings/default-profile-picture.png">
-            <!-- <ProfileDetails :urlLang=this.urlLang /> -->
-            <RecentPurchases :urlLang=this.urlLang />
+            <!-- <ProfileDetails :urlLang=urlLang /> -->
+            <RecentPurchases :urlLang=urlLang />
         </div>
     </div>
 </template>
@@ -16,7 +16,7 @@ import RecentPurchases from "~/components/UserProfile/RecentPurchases.vue"
 export default {
     name: "ProfileSettings",
     props: {
-        urlLang: String
+        urlLang: String | null
     },
     components: {
         FavoriteThemes,
@@ -27,5 +27,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~/styles/ProfileSettings.scss";
+@import "/styles/ProfileSettings.scss";
 </style>
