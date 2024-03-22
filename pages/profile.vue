@@ -63,7 +63,7 @@
         <div class="profile-wrapper-lower-buttons" style="margin: 2%; margin-left: 35%; width: 30%; background-color: none;">
             <div class="profile-elements-wrapper">
                 <div class="element">
-                    <a id="yourFavoriteFurnitures" href="/favFourniture" class="button"></a>
+                    <a id="yourFavoriteFurnitures" href="/favFurniture" class="button"></a>
                 </div>
                 <div class="element2">
                     <a id="yourFavoriteGalleries" href="/favGallery" class="button"></a>
