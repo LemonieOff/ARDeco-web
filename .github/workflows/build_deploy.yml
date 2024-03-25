@@ -31,7 +31,7 @@ jobs:
           uploads: |
             .output/ => /opt/ardeco/web/
           ignore: |
-            .output/node_modules
+            .output/server/node_modules
 
       - name: Log timestamp
         uses: appleboy/ssh-action@master
