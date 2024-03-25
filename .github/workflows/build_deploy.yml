@@ -22,12 +22,24 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy directory
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: Deploy file
+        uses: Dylan700/sftp-upload-action@latest
         with:
           server: ${{ vars.SERVER_HOST }}
           username: ${{ vars.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          local_path: '.output/*'
-          remote_path: '/opt/ardeco/web'
-          sftp_only: true
+          uploads: |
+            .output/* => /opt/ardeco/web
+          ignore: |
+            .output/node_modules
+
+      - name: Log timestamp
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ vars.SERVER_HOST }}
+          username: ${{ vars.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            cd /opt/ardeco/support
+            touch timestamp
+
