@@ -4,7 +4,8 @@
         <a id="team" class="navbar-option" :href="`${langPrefix}team`">{{content.team}}</a>
         <a id="product" class="navbar-option" :href="`${langPrefix}product`">{{content.product}}</a>
         <a id="profile" class="navbar-option" :href="`${langPrefix}profile`">{{content.profile}}</a>
-        <a id="profile" class="navbar-option" :href="`${langPrefix}settings`">{{content.settings}}</a>
+        <a id="settings" class="navbar-option" :href="`${langPrefix}settings`">{{content.settings}}</a>
+        <a id="login" class="navbar-option" :href="`${langPrefix}login`"></a>
         <button id="dark-mode-button" style="color: #F2EBDF;" @click="toggleDarkMode">{{content.darkmode}}</button>
     </div>
 </template>
@@ -26,6 +27,7 @@ export default {
     },
     mounted() {
         let lang = this.urlLang;
+        const userID = localStorage.getItem('userID');
 
         // If lang selector is not passed in url, get the user's one or set it to french
         if (lang !== 'en' && lang !== 'fr') {
@@ -44,6 +46,12 @@ export default {
             this.langPrefix = "/fr/";
         } else if (location.href.includes("/en/")) {
             this.langPrefix = "/en/";
+        }
+
+        if (userID != null) {
+            document.getElementById("login").innerText = this.content.disconnect;
+        } else {
+            document.getElementById("login").innerText = this.content.login;
         }
 
         this.checkDarkMode();

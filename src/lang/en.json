@@ -5,7 +5,9 @@
     "product": "Our product",
     "profile": "Profile",
     "settings": "Settings",
-    "darkmode": "Toggle dark mode"
+    "darkmode": "Toggle dark mode",
+    "login": "Login",
+    "disconnect": "Disconnect"
   },
   "profilePages": {
     "presentationPage": {

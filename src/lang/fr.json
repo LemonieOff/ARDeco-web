@@ -5,7 +5,9 @@
     "product": "Notre produit",
     "profile": "Profil",
     "settings": "Paramètres",
-    "darkmode": "Activer le mode sombre"
+    "darkmode": "Activer le mode sombre",
+    "login": "Se connecter",
+    "disconnect": "Se déconnecter"
   },
   "profilePages": {
     "presentationPage": {
