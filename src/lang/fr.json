@@ -1,13 +1,14 @@
 {
   "navBar": {
     "home": "Accueil",
-    "team": "Équipe",
+    "team": "Notre équipe",
     "product": "Notre produit",
-    "profile": "Profil",
+    "profile": "Mon profil",
     "settings": "Paramètres",
-    "darkmode": "Activer le mode sombre",
-    "login": "Se connecter",
-    "disconnect": "Se déconnecter"
+    "darkmode": "Mode sombre",
+    "lightmode": "Mode clair",
+    "login": "Connexion",
+    "disconnect": "Déconnexion"
   },
   "profilePages": {
     "presentationPage": {

@@ -1,11 +1,12 @@
 {
   "navBar": {
     "home": "Home",
-    "team": "Team",
+    "team": "Our team",
     "product": "Our product",
-    "profile": "Profile",
+    "profile": "My profile",
     "settings": "Settings",
-    "darkmode": "Toggle dark mode",
+    "darkmode": "Dark mode",
+    "lightmode": "Light mode",
     "login": "Login",
     "disconnect": "Disconnect"
   },
