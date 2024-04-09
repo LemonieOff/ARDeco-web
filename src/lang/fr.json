@@ -137,20 +137,34 @@
       "cancel": "Annuler",
       "update": "Modifier",
       "confirm": "Confirmer"
-    },
-    "settings": {
-      "firstAndLastName": "Nom de famille et Prénom",
-      "getUserSettings": "Voir mes paramètres",
-      "setUserSettings": "Mettre mes paramètres à jour",
-      "addFurnitureToCatalog": "Ajouter un meuble au catalog",
-      "getUserGallery": "Voir ma gallerie",
-      "changeGalleryVisibility": "Changer la visibilité d'un item",
-      "getCompagnyCatalog": "Voir mon catalog d'entreprise",
-      "getCompagnyArchive": "Voir mon archive d'entreprise",
-      "emptyCompagnyArchive": "Vider mon archive d'entreprise",
-      "archiveItem": "Archiver cet élement",
-      "restoreItemFromArchive": "Restaurer cet élement de l'archive",
-      "resetCompagnyApiKey": "Réinitialiser mon clé API"
+    }
+  },
+  "settings": {
+    "firstAndLastName": "Nom de famille et Prénom",
+    "getUserSettings": "Voir mes paramètres",
+    "setUserSettings": "Mettre mes paramètres à jour",
+    "addFurnitureToCatalog": "Ajouter un meuble au catalog",
+    "getUserGallery": "Voir ma gallerie",
+    "changeGalleryVisibility": "Changer la visibilité d'un item",
+    "getCompagnyCatalog": "Voir mon catalog d'entreprise",
+    "getCompagnyArchive": "Voir mon archive d'entreprise",
+    "emptyCompagnyArchive": "Vider mon archive d'entreprise",
+    "archiveItem": "Archiver cet élement",
+    "restoreItemFromArchive": "Restaurer cet élement de l'archive",
+    "resetCompagnyApiKey": "Réinitialiser mon clé API",
+    "currentUserSettingsTitle" : "Vos paramètres actuels",
+    "language" : "Langue",
+    "title" : "Paramètres",
+    "placeholders": {
+      "furnitureName" : "Nom du meuble",
+      "furniturePrice" : "Prix du meuble",
+      "furnitureStyles" : "Styles du meuble",
+      "furnitureRooms" : "Pièces liées au meuble",
+      "furnitureHeight" : "Hauteur du meuble (en cm)",
+      "furnitureWidth" : "Largeur du meuble (en cm)",
+      "furnitureDepths" : "Profondeur du meuble (en cm)",
+      "furnitureColors" : "Couleur(s) du meuble",
+      "itemInputID" : "ID de l'item"
     }
   },
   "languageChangerText": "Traduire en EN",
