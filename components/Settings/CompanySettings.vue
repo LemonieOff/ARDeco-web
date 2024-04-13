@@ -3,30 +3,31 @@
     <div class="title">{{content.title}}</div>
     <div class="parameters">
         <hr>
+        <div class="left-side-parameters">
+            <button id="getCompagnyCatalog" class="buttonSettings" style="margin-top: 17.5%;" @click="getCatalog">{{content.getCompagnyCatalog}}</button>
+            <button id="getCompagnyArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="getArchive">{{content.getCompagnyArchive}}</button>
+            <button id="emptyCompagnyArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="deleteArchive">{{content.emptyCompagnyArchive}}</button>
+            <button id="resetCompagnyApiKey" class="buttonSettings" style="margin-top: 2.5%;" @click="getApiToken">{{content.resetCompagnyApiKey}}</button>
+            <div style="margin-top: 12%;">
+                <input class="buttonSettings" style="width: 45%;" id="itemInputID" :placeholder="`${placeholders.itemInputID}`">
+                <button id="visibilityButton" style="background-color: green; width: 15%;" @click="changeVisibility">Visible</button>
+            </div>
+            <button id="changeGalleryVisibility" class="buttonSettings" style="margin-top: 2.5%;" @click="setItemVisibility">{{content.changeGalleryVisibility}}</button>
+            <button id="archiveItem" class="buttonSettings" style="margin-top: 2.5%;" @click="archiveItem">{{content.archiveItem}}</button>
+            <button id="restoreItemFromArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="restoreItem">{{content.restoreItemFromArchive}}</button>
+        </div>
         <div class="center-side-parameters">
-            <div class="currentUserSettings">
-                <div class="currentUserSettingsTitle" id="currentUserSettings">{{content.currentUserSettingsTitle}}</div>
-                <div class="optionOnOff">
-                    <span>{{content.language}} : </span>
-                    <span id="currentLang">OFF</span>
-                </div>
-                <div class="optionOnOff">
-                    <span>Notifications : </span>
-                    <span id="currentNotifications">OFF</span>
-                </div>
+            <div class="addFurnitureDiv">
+                <button id="addFurnitureToCatalog" class="buttonSettings" style="margin-top: 17.5%;" @click="addFurniture">{{content.addFurnitureToCatalog}}</button>
+                <input class="buttonSettings" id="furnitureName" :placeholder="`${placeholders.furnitureName}`">
+                <input class="buttonSettings" id="furniturePrice" :placeholder="`${placeholders.furniturePrice}`">
+                <input class="buttonSettings" id="furnitureStyles" :placeholder="`${placeholders.furnitureStyles}`">
+                <input class="buttonSettings" id="furnitureRooms" :placeholder="`${placeholders.furnitureRooms}`">
+                <input class="buttonSettings" id="furnitureHeight" :placeholder="`${placeholders.furnitureHeight}`">
+                <input class="buttonSettings" id="furnitureWidth" :placeholder="`${placeholders.furnitureWidth}`">
+                <input class="buttonSettings" id="furnitureDepth" :placeholder="`${placeholders.furnitureDepth}`">
+                <input class="buttonSettings" id="furnitureColors" :placeholder="`${placeholders.furnitureColors}`">
             </div>
-            <div class="updateUserSettings">
-                <button id="setUserSettings" class="buttonSettings" @click="setSettings">{{content.setUserSettings}}</button>
-                <div class="settingsSetter">
-                    <span id="languageSetter">{{content.language}} : </span>
-                    <button class="optionSetter" id="languageSetterButton" @click="changeLanguageButton">FR</button>
-                </div>
-                <div class="settingsSetter">
-                    <span id="notificationsSetter">Notifications : </span>
-                    <button class="optionSetter" id="notificationsSetterButton" @click="changeNotificationsButton">ON</button>
-                </div>
-            </div>
-            <button id="getUserGallery" class="buttonSettings" style="margin-top: 10%;" @click="getGallery">{{content.getUserGallery}}</button>
         </div>
         <div class="right-side-parameters">
             <div id="reponseText" class="buttonSettingsResponse"></div>
@@ -38,7 +39,7 @@
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 export default {
-    name: "OverallSettings",
+    name: "CompanySettings",
     props: {
         urlLang: String | null
     },
@@ -60,8 +61,8 @@ export default {
             }
         }
 
-        this.content = lang === 'en' ? en.settings.users : fr.settings.users;
-        this.placeholders = lang === 'en' ? en.settings.users.placeholders : fr.settings.users.placeholders;
+        this.content = lang === 'en' ? en.settings.companies : fr.settings.companies;
+        this.placeholders = lang === 'en' ? en.settings.companies.placeholders : fr.settings.companies.placeholders;
 
         this.getSettings();
     },
@@ -461,18 +462,17 @@ export default {
 
 .parameters {
     display: inline-flex;
-    min-height: 100%;
-    width: 50%;
-    margin-left: 25%;
+    min-height: 80vh;
 }
 
-.center-side-parameters {
-    width: 50%;
+.left-side-parameters {
+    width: 33.3%;
     text-align: center;
 }
 
-.right-side-parameters {
-    width: 50%;
+.center-side-parameters {
+    width: 33.3%;
+    text-align: center;
 }
 
 .currentUserSettings {
@@ -528,6 +528,10 @@ export default {
     margin-top: 10%;
 }
 
+.right-side-parameters {
+    width: 33.3%;
+}
+
 button {
     background-color: #F4F4F4;
     outline-style: solid;
@@ -544,9 +548,10 @@ button {
 
 .buttonSettingsResponse {
     background-color: #F4F4F4;
+    margin-top: 5%;
     margin-left: 20%;
     width: 60%;
-    height: 100%;
+    min-height: 75%;
     align-self: center;
     border-radius: 20px;
 }
