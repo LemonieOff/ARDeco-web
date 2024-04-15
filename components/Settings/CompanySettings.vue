@@ -340,7 +340,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/styles/ProfileSettings.scss";
-changeVisibility
 .navbar-top-space {
     height: 10vh;
 }

@@ -160,8 +160,6 @@ export default {
                     document.getElementById('currentNotifications').innerHTML = "OFF";
                 }
                 localStorage.setItem('dark_mode', result.data.dark_mode);
-                console.log('result.data.dark_mode : ', result.data.dark_mode);
-                localStorage.setItem('lang', result.data.language);
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
