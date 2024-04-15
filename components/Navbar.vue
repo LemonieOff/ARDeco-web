@@ -14,6 +14,9 @@
                     <li id="settingsMenuOption">
                         <img src="~/../../assets/images/icons/settings.png" /><a :href="`${langPrefix}settings`">{{content.settings}}</a>
                     </li>
+                    <li id="companyMenuOption">
+                        <img src="~/../../assets/images/icons/company.png" /><a :href="`${langPrefix}company`">{{content.company}}</a>
+                    </li>
                     <li id="disconnectMenuOption">
                         <img src="~/../../assets/images/icons/logout.png" /><a :href="`${langPrefix}login`">{{content.disconnect}}</a>
                     </li>
@@ -49,15 +52,20 @@ export default {
         let lang = this.urlLang;
         const userID = localStorage.getItem('userID');
         const dark_mode = localStorage.getItem('dark_mode');
+        const role = localStorage.getItem('role');
 
         if (userID == null) {
             document.getElementById("profileMenuOption").style.display = "none";
             document.getElementById("settingsMenuOption").style.display = "none";
+            document.getElementById("companyMenuOption").style.display = "none";
             document.getElementById("disconnectMenuOption").style.display = "none";
             document.getElementById("profileImage").style.display = "none";
         } else {
             document.getElementById("loginMenuOption").style.display = "none";
             document.getElementById("defaultImage").style.display = "none";
+            if (role == "client") {
+                document.getElementById("companyMenuOption").style.display = "none";
+            }
         }
 
         if (dark_mode == 'true') {
