@@ -38,6 +38,8 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
+import {isLogged, loggedIn} from "public/js/checkLogin";
+
 export default {
     name: "CompanySettings",
     props: {
@@ -63,23 +65,13 @@ export default {
 
         this.content = lang === 'en' ? en.settings.companies : fr.settings.companies;
         this.placeholders = lang === 'en' ? en.settings.companies.placeholders : fr.settings.companies.placeholders;
-
-        this.getSettings();
     },
     methods: {
-        async checkUserConnected () {
-            const userID = localStorage.getItem('userID');
-            if (userID == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
-                return -1;
-            };
-            return userID;
-        },
         async deleteArchive() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
@@ -98,9 +90,10 @@ export default {
             }
         },
         async archiveItem() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
             const itemInputID = document.getElementById('itemInputID').value;
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`);
@@ -121,9 +114,10 @@ export default {
             }
         },
         async restoreItem() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
             const itemInputID = document.getElementById('itemInputID').value;
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
@@ -143,9 +137,10 @@ export default {
             }
         },
         async getArchive() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'GET',
@@ -175,9 +170,10 @@ export default {
             }
         },
         async changeLanguageButton() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
             console.log("document.getElementById('languageSetterButton').innerHTML = ", document.getElementById('languageSetterButton').innerHTML)
             if (document.getElementById('languageSetterButton').innerHTML == "FR") {
                 document.getElementById('languageSetterButton').innerHTML = "EN";
@@ -187,58 +183,11 @@ export default {
                 document.getElementById('languageSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
             }
         },
-        async changeNotificationsButton() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
-            console.log("document.getElementById('notificationsSetterButton').innerHTML = ", document.getElementById('notificationsSetterButton').innerHTML)
-            if (document.getElementById('notificationsSetterButton').innerHTML == "ON") {
-                document.getElementById('notificationsSetterButton').innerHTML = "OFF";
-                document.getElementById('notificationsSetterButton').style.backgroundColor = "red";
-            } else {
-                document.getElementById('notificationsSetterButton').innerHTML = "ON";
-                document.getElementById('notificationsSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
-            }
-        },
-        async setSettings() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
-            let lang = 'fr';
-            let notifs = true;
-            if (document.querySelector('#languageSetterButton').innerHTML == "EN") {
-                lang = 'en';
-            }
-            if (document.querySelector('#notificationsSetterButton').innerHTML == "OFF") {
-                notifs = false;
-            }
-            console.log(lang, notifs, true, userID, 'https://api.ardeco.app/settings');
-            const response = await fetch('https://api.ardeco.app/settings', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    "language": lang,
-                    "notifications_enabled": notifs,
-                }),
-                credentials: 'include',
-            });
-
-            const result = await response.json();
-            console.log(result);
-            if (result.code == 200) {
-                document.getElementById('reponseText').innerHTML = result.description;
-                localStorage.setItem('lang', lang);
-            } else {
-                document.getElementById('reponseText').innerHTML = result.description;
-            }
-            location.reload()
-        },
         async addFurniture() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const furnitureName = document.querySelector('#furnitureName').value;
             const furniturePrice = document.querySelector('#furniturePrice').value;
@@ -288,69 +237,11 @@ export default {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
         },
-        async getSettings() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
-            const response = await fetch('https://api.ardeco.app/settings', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-            });
-
-            const result = await response.json();
-            console.log(result);
-            if (result.code == 200) {
-                if (result.data.language == "fr") {
-                    document.getElementById('currentLang').innerHTML = "FR";
-                } else {
-                    document.getElementById('currentLang').innerHTML = "EN";
-                }
-                if (result.data.notifications_enabled == true) {
-                    document.getElementById('currentNotifications').innerHTML = "ON";
-                } else {
-                    document.getElementById('currentNotifications').innerHTML = "OFF";
-                }
-                localStorage.setItem('dark_mode', result.data.dark_mode);
-                console.log('result.data.dark_mode : ', result.data.dark_mode);
-                localStorage.setItem('lang', result.data.language);
-            } else {
-                document.getElementById('reponseText').innerHTML = result.description;
-            }
-        },
-        async getGallery() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
-            const response = await fetch('https://api.ardeco.app/gallery/user/' + `${userID}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-            });
-
-            const result = await response.json();
-            console.log(result);
-            document.getElementById('reponseText').innerHTML = '';
-            if (result.code == 200 && result.data.length == 0) {
-                document.getElementById('reponseText').innerHTML = 'Gallery empty';
-            } else {
-                for (let i = 0; i < result.data.length; i++) {
-                    document.getElementById('reponseText').innerHTML += 
-                        '<p>' + (i + 1) + '. ' + `${result.data[i].name}` +
-                        ' - ' + `${result.data[i].room_type}` + 
-                        ' - ' + `${result.data[i].description}` +
-                        ' - ' + `${result.data[i].id}` + '</p>';
-                }
-            }
-        },
         async getCatalog() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
             const response = await fetch('https://api.ardeco.app/catalog', {
                 method: 'GET',
                 headers: {
@@ -377,14 +268,11 @@ export default {
         },
 
         async setItemVisibility() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
-            if (localStorage.getItem('userID') == null) {
-                console.log('No user found, redirecting to login');
-                window.location.href = 'http://localhost:3000/login';
-                return;
-            } else if (document.getElementById('itemInputID').value == "") {
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+            if (document.getElementById('itemInputID').value == "") {
                 document.getElementById('reponseText').innerHTML = "Please precise the id of the item you want to change.";
                 return;
             }
@@ -415,9 +303,10 @@ export default {
             }
         },
         async changeVisibility() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
             let content = document.getElementById('visibilityButton').innerHTML;
             if (content == 'Visible') {
                 document.getElementById('visibilityButton').innerHTML = 'Invisible';
@@ -428,9 +317,10 @@ export default {
             }
         },
         async getApiToken() {
-            const userID = await this.checkUserConnected();
-            if (userID == -1)
-                return;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
             const response = await fetch('https://api.ardeco.app/company/requestToken', {
                 method: 'GET',
                 headers: {
@@ -450,7 +340,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~/styles/ProfileSettings.scss";
-
+changeVisibility
 .navbar-top-space {
     height: 10vh;
 }
