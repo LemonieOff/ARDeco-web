@@ -53,6 +53,7 @@ export default {
         }
     },
     mounted() {
+        this.checkIfLogged();
         let lang = this.urlLang
 
         if (lang !== 'en' && lang !== 'fr') {
@@ -67,6 +68,12 @@ export default {
         this.placeholders = lang === 'en' ? en.settings.companies.placeholders : fr.settings.companies.placeholders;
     },
     methods: {
+        async checkIfLogged() {
+            await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+        },
         async deleteArchive() {
             const userID = await isLogged();
             if (!loggedIn) {

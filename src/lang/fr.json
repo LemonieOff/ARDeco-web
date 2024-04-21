@@ -173,6 +173,15 @@
       }
     }
   },
+  "tickets": {
+    "title": "Support",
+    "somethingWrong": "Quelque chose ne va pas ?",
+    "askUs": "Demandez nous !",
+    "writeYourProblemHere": "Écrivez votre problème ici",
+    "pendingTickets": "Demandes en attente",
+    "createTicket": "Créer une demande",
+    "updateTicket": "Mettre à jour ma demande"
+  },
   "languageChangerText": "Traduire en EN",
   "privacyPolicy": {
     "introduction": {

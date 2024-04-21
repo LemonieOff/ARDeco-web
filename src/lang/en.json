@@ -172,6 +172,15 @@
       }
     }
   },
+  "tickets": {
+    "title": "Support",
+    "somethingWrong": "Something's wrong ?",
+    "askUs": "Ask us !",
+    "writeYourProblemHere": "Write your problem here",
+    "pendingTickets": "Awaiting issues",
+    "createTicket": "Create an issue",
+    "updateTicket": "Update my issue"
+  },
   "languageChangerText": "Translate to FR",
   "privacyPolicy": {
     "introduction": {
