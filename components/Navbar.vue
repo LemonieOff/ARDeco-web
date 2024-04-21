@@ -21,7 +21,7 @@
                         <img src="~/../../assets/images/icons/support.png" /><a :href="`${langPrefix}tickets`">{{content.tickets}}</a>
                     </li>
                     <li id="disconnectMenuOption">
-                        <img src="~/../../assets/images/icons/logout.png" /><a :href="`${langPrefix}login`">{{content.disconnect}}</a>
+                        <img src="~/../../assets/images/icons/logout.png" /><a @click="logout">{{content.disconnect}}</a>
                     </li>
                     <li id="loginMenuOption">
                         <img src="~/../../assets/images/icons/logout.png" /><a :href="`${langPrefix}login`">{{content.login}}</a>
@@ -39,6 +39,7 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
+import { disconnect } from "public/js/checkLogin";
 
 export default {
     name: "Navbar",
@@ -222,6 +223,16 @@ export default {
                 });
             }
         },
+        async logout() {
+            const response = await fetch('https://api.ardeco.app/logout', {
+                method: 'GET',
+                credentials: 'include',
+            });
+            await disconnect();
+            localStorage.removeItem('lang');
+            const result = await response.text();
+            console.log(result);
+        }
     },
 };
 </script>
@@ -232,6 +243,10 @@ export default {
 .dark-body {
     background-color: darkslategray;
     color: white;
+}
+
+#disconnectMenuOption {
+    cursor: pointer;
 }
 
 </style>
