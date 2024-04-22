@@ -1,4 +1,19 @@
 {
+  "errors": {
+    "fields": {
+      "empty": "Ce champ ne peut pas être vide.",
+      "notFullyCompleted": "Veuillez remplir tous les champs.",
+      "passwordsDoNotMatch": "Les mots de passe ne correspondent pas."
+    },
+    "user": {
+      "notConnected": "Vous n'êtes pas connecté.",
+      "notFound": "Utilisateur non trouvé.",
+      "alreadyClosed": "Ce compte a déjà été supprimé.",
+      "emailDoesNotMatch": "L'email ne correspond pas à celui de votre compte.",
+      "passwordsDoNotMatch": "Les mots de passe ne correspondent pas.",
+      "wrongPassword": "Mot de passe incorrect."
+    }
+  },
   "navBar": {
     "home": "Accueil",
     "team": "Notre équipe",
@@ -105,18 +120,26 @@
   },
   "login": {
     "welcome": "Bienvenue utilisateur N°",
-    "getSettings": "Mes paramètres actuels",
+    "loginTitle": "Connexion",
+    "registerTitle": "Inscription",
     "logout": "Se déconnecter",
     "login": "Se connecter",
     "register": "Créer un compte",
     "email": "Email : ",
     "password": "Mot de passe : ",
     "passwordConfirm": "Confirmer le mot de passe : ",
-    "firstName": "Nom : ",
-    "lastName": "Prénom : ",
+    "firstName": "Prénom : ",
+    "lastName": "Nom : ",
     "city": "Ville : ",
-    "phone": "Téléhone : ",
-    "loading": "Chargement en cours..."
+    "phone": "Téléphone : ",
+    "loading": "Chargement en cours...",
+    "optional": "Facultatif",
+    "optionalFields": "Champs facultatifs",
+    "mandatory": "Obligatoire",
+    "mandatoryFields": "Champs obligatoires",
+    "consent": "En vous inscrivant, vous acceptez que vos données soient collectées et traitées conformément à notre Politique de Confidentialité",
+    "hasRead": "J'ai lu et j'accepte les Conditions Générales d'Utilisation",
+    "consentNotGiven": "Vous devez accepter les Conditions Générales d'Utilisation et la Politique de Confidentialité pour continuer."
   },
   "profile": {
     "yourFavoriteThemes": "Mes thèmes favoris",
@@ -124,8 +147,8 @@
     "yourFavoriteFurnitures": "Mes meubles favoris",
     "yourFavoriteGalleries": "Mes galleries favorites",
     "informations": {
-      "firstName": "Nom de famille : ",
-      "lastName": "Prénom : ",
+      "firstName": "Prénom : ",
+      "lastName": "Nom de famille : ",
       "email": "Adresse email : ",
       "phone": "Téléphone : ",
       "city": "Ville : ",
@@ -138,18 +161,36 @@
     "buttons": {
       "cancel": "Annuler",
       "update": "Modifier",
-      "confirm": "Confirmer"
+      "confirm": "Confirmer",
+      "delete": "Supprimer le compte"
+    }
+  },
+  "deleteAccount": {
+    "title": "Suppression du compte",
+    "text": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible et toutes vos données seront perdues.",
+    "email": "Email : ",
+    "password": "Mot de passe : ",
+    "passwordConfirm": "Confirmer le mot de passe : ",
+    "loading": "Chargement en cours...",
+    "placeholders": {
+      "email": "Votre email ici",
+      "password": "Votre mot de passe ici",
+      "passwordConfirm": "Confirmer votre mot de passe ici"
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "delete": "Supprimer"
     }
   },
   "settings": {
     "users": {
-      "firstAndLastName": "Nom de famille et Prénom",
+      "firstAndLastName": "Prénom et nom de famille",
       "getUserSettings": "Voir mes paramètres",
       "setUserSettings": "Mettre mes paramètres à jour",
-      "getUserGallery": "Voir ma gallerie",
-      "currentUserSettingsTitle" : "Vos paramètres actuels",
-      "language" : "Langue",
-      "title" : "Paramètres"
+      "getUserGallery": "Voir ma galerie",
+      "currentUserSettingsTitle": "Vos paramètres actuels",
+      "language": "Langue",
+      "title": "Paramètres"
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter un meuble au catalog",
@@ -160,17 +201,17 @@
       "archiveItem": "Archiver cet élement",
       "restoreItemFromArchive": "Restaurer cet élement de l'archive",
       "resetCompagnyApiKey": "Réinitialiser mon clé API",
-      "title" : "Paramètres d'entreprise",
+      "title": "Paramètres d'entreprise",
       "placeholders": {
-        "furnitureName" : "Nom du meuble",
-        "furniturePrice" : "Prix du meuble",
-        "furnitureStyles" : "Styles du meuble",
-        "furnitureRooms" : "Pièces liées au meuble",
-        "furnitureHeight" : "Hauteur du meuble (en cm)",
-        "furnitureWidth" : "Largeur du meuble (en cm)",
-        "furnitureDepths" : "Profondeur du meuble (en cm)",
-        "furnitureColors" : "Couleur(s) du meuble",
-        "itemInputID" : "ID de l'item"
+        "furnitureName": "Nom du meuble",
+        "furniturePrice": "Prix du meuble",
+        "furnitureStyles": "Styles du meuble",
+        "furnitureRooms": "Pièces liées au meuble",
+        "furnitureHeight": "Hauteur du meuble (en cm)",
+        "furnitureWidth": "Largeur du meuble (en cm)",
+        "furnitureDepths": "Profondeur du meuble (en cm)",
+        "furnitureColors": "Couleur(s) du meuble",
+        "itemInputID": "ID de l'item"
       }
     }
   },

@@ -1,4 +1,19 @@
 {
+  "errors": {
+    "fields": {
+      "empty": "This field cannot be empty.",
+      "notFullyCompleted": "You must fill all the fields.",
+      "passwordsDoNotMatch": "Passwords do not match."
+    },
+    "user": {
+      "notConnected": "You are not connected.",
+      "notFound": "User not found.",
+      "alreadyClosed": "User already deleted.",
+      "emailDoesNotMatch": "Email does not match.",
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "wrongPassword": "Wrong password."
+    }
+  },
   "navBar": {
     "home": "Home",
     "team": "Our team",
@@ -105,6 +120,8 @@
   },
   "login": {
     "welcome": "Welcome user N°",
+    "loginTitle": "Login",
+    "registerTitle": "Register",
     "logout": "Logout",
     "login": "Login",
     "register": "Register",
@@ -115,7 +132,14 @@
     "lastName": "Last name : ",
     "city": "City : ",
     "phone": "Phone : ",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "optional": "Optional",
+    "optionalFields": "Optional fields",
+    "mandatory": "Mandatory",
+    "mandatoryFields": "Mandatory fields",
+    "consent": "I consent to the processing of my personal data as described in our Privacy Policy",
+    "hasRead": "I have read and accept the Terms of Use",
+    "consentNotGiven": "You must consent to the Terms of Use and Privacy Policy to continue."
   },
   "profile": {
     "yourFavoriteThemes": "My favorites themes",
@@ -137,7 +161,25 @@
     "buttons": {
       "cancel": "Cancel",
       "update": "Update settings",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "delete": "Delete account"
+    }
+  },
+  "deleteAccount": {
+    "title": "Delete account",
+    "text": "Are you sure you want to delete your account ? This action is irreversible and will delete all your data.",
+    "email": "Email : ",
+    "password": "Password : ",
+    "passwordConfirm": "Confirm password : ",
+    "loading": "Loading...",
+    "placeholders": {
+      "email": "Your email here",
+      "password": "Your password here",
+      "passwordConfirm": "Confirm your password here"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "delete": "Delete"
     }
   },
   "settings": {

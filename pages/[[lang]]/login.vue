@@ -1,4 +1,4 @@
-<script setup>
+<script setup xmlns="http://www.w3.org/1999/html">
 import {isLogged, loggedIn, disconnect} from "public/js/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
@@ -45,7 +45,7 @@ onMounted(async () => {
         document.getElementById("user-form").style.display = "none";
     }
     document.getElementById("forms-loading").style.display = "none";
-    document.getElementById("forms-wrapper").style.display = "block";
+    document.getElementById("forms-wrapper").style.display = "flex";
 });
 
 const displayHTMLErrors = (result, response, type) => {
@@ -82,13 +82,15 @@ const displayHTMLErrors = (result, response, type) => {
         console.log("fail");
         if (Array.isArray(result.message)) {
             result.message.forEach(error => {
-                const li = document.createElement("li");
-                li.innerHTML = error;
-
                 const split = error.split(" ");
+                const field = split[0];
+                split.shift();
 
-                if (Object.keys(errors).includes(split[0])) {
-                    errors[split[0]].appendChild(li);
+                const li = document.createElement("li");
+                li.innerHTML = split.join(" ");
+
+                if (Object.keys(errors).includes(field)) {
+                    errors[field].appendChild(li);
                 } else {
                     errors.general.appendChild(li);
                 }
@@ -145,6 +147,13 @@ const register = async () => {
     const city_field = document.getElementById("city_register").value;
     const phone_field = document.getElementById("phone_register").value;
 
+    if (!document.getElementById("checkPolicy").checked || !document.getElementById("checkTOS").checked) {
+        const li = document.createElement("li");
+        li.innerHTML = content.value["consentNotGiven"];
+        document.getElementById("general_errors_register").replaceChildren(li);
+        return;
+    }
+
     const response = await fetch('https://api.ardeco.app/register', {
         method: 'POST',
         headers: {
@@ -190,6 +199,7 @@ const logout = async () => {
         <div id="forms-wrapper" style="display: none">
             <div id="login-register-wrapper" class="login-register-wrapper">
                 <div id="login-form" class="form">
+                    <span class="typeTitle">{{ content.loginTitle }}</span>
                     <div id="email_section_login">
                         <label id="email" for="email">{{ content.email }}</label>
                         <input type="text" id="email_login" name="email" placeholder="Email">
@@ -207,40 +217,51 @@ const logout = async () => {
                     <button id="login" @click="login">{{ content.login }}</button>
                 </div>
                 <div id="register-form" class="form">
-                    <div id="email_section_register">
-                        <label id="email2" for="email">{{ content.email }}</label>
-                        <input type="text" id="email_register" name="email" placeholder="Email">
-                        <ul id="email_errors_register" class="login-error"></ul>
+                    <span class="typeTitle">{{ content.registerTitle }}</span>
+                    <div class="mandatory_fields">
+                        <span class="gdpr_indication">{{ content.mandatoryFields }}</span>
+                        <div id="email_section_register">
+                            <label id="email2" for="email">{{ content.email }}</label>
+                            <input type="text" id="email_register" name="email" placeholder="Email">
+                            <ul id="email_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="password_section_register">
+                            <label id="password2" for="password">{{ content.password }}</label>
+                            <input type="password" id="password_register" name="password" placeholder="Password">
+                            <ul id="password_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="password_confirm_section_register">
+                            <label id="passwordConfirm" for="password_confirm_register">{{ content.passwordConfirm }}</label>
+                            <input type="password" id="password_confirm_register" name="password_confirm" placeholder="Password">
+                            <ul id="password_confirm_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="first_name_section_register">
+                            <label id="firstName" for="first_name_register">{{ content.firstName }}</label>
+                            <input type="text" id="first_name_register" name="first_name" placeholder="John">
+                            <ul id="first_name_errors_register" class="login-error"></ul>
+                        </div>
                     </div>
-                    <div id="password_section_register">
-                        <label id="password2" for="password">{{ content.password }}</label>
-                        <input type="password" id="password_register" name="password" placeholder="Password">
-                        <ul id="password_errors_register" class="login-error"></ul>
+                    <div class="optional_fields">
+                        <span class="gdpr_indication">{{ content.optionalFields }}</span>
+                        <div id="last_name_section_register">
+                            <label id="lastName" for="last_name_register">{{ content.lastName }}</label>
+                            <input type="text" id="last_name_register" name="last_name" placeholder="DOE">
+                            <ul id="last_name_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="city_section_register">
+                            <label id="city" for="city_register">{{ content.city }}</label>
+                            <input type="text" id="city_register" name="city" placeholder="Berlin">
+                            <ul id="city_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="phone_section_register">
+                            <label id="phone" for="phone_register">{{ content.phone }}</label>
+                            <input type="tel" id="phone_register" name="phone" placeholder="+33601020304">
+                            <ul id="phone_errors_register" class="login-error"></ul>
+                        </div>
                     </div>
-                    <div id="password_confirm_section_register">
-                        <label id="passwordConfirm" for="password_confirm_register">{{ content.passwordConfirm }}</label>
-                        <input type="password" id="password_confirm_register" name="password_confirm" placeholder="Password">
-                        <ul id="password_confirm_errors_register" class="login-error"></ul>
-                    </div>
-                    <div id="first_name_section_register">
-                        <label id="firstName" for="first_name_register">{{ content.firstName }}</label>
-                        <input type="text" id="first_name_register" name="first_name" placeholder="John">
-                        <ul id="first_name_errors_register" class="login-error"></ul>
-                    </div>
-                    <div id="last_name_section_register">
-                        <label id="lastName" for="last_name_register">{{ content.lastName }}</label>
-                        <input type="text" id="last_name_register" name="last_name" placeholder="DOE">
-                        <ul id="last_name_errors_register" class="login-error"></ul>
-                    </div>
-                    <div id="city_section_register">
-                        <label id="city" for="city_register">{{ content.city }}</label>
-                        <input type="text" id="city_register" name="city" placeholder="Berlin">
-                        <ul id="city_errors_register" class="login-error"></ul>
-                    </div>
-                    <div id="phone_section_register">
-                        <label id="phone" for="phone_register">{{ content.phone }}</label>
-                        <input type="tel" id="phone_register" name="phone" placeholder="+33601020304">
-                        <ul id="phone_errors_register" class="login-error"></ul>
+                    <div class="gdpr_consent">
+                        <div><input type="checkbox" id="checkPolicy"/><label for="checkPolicy">{{ content.consent }}</label></div>
+                        <div><input type="checkbox" id="checkTOS"/><label for="checkTOS">{{ content.hasRead }}</label></div>
                     </div>
                     <div id="general_section_register">
                         <ul id="general_errors_register" class="login-error"></ul>
@@ -259,6 +280,10 @@ const logout = async () => {
 </template>
 
 <style scoped lang="scss">
+#forms-container {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+}
 
 button {
     outline-style: solid;
@@ -269,23 +294,87 @@ button {
     outline-style: solid;
     outline-width: thin;
 }
+
+.gdpr_indication {
+    text-decoration: underline;
+}
+
 .form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    border-radius: 15px;
+    padding: 25px;
+    background-color: #f4f4f4;
+    width: 30%;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3px;
+        margin: 5px 0;
+    }
+
+    .typeTitle {
+        font-size: 1.5em;
+        font-weight: bold;
+        text-align: center;
+        margin-top: -15px;
+        margin-bottom: 5px;
+    }
+
+    .gdpr_consent {
+        div {
+            display: block;
+            /*padding: 3px;
+            margin: 5px 0;*/
+
+            label {
+                margin-left: 5px;
+            }
+        }
+        margin-top: -3%;
+        margin-bottom: -5%;
+    }
+}
+
+#user-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 10% 0;
+    border: none;
+    width: fit-content;
+    align-self: center;
+
+    div {
+        display: block;
+    }
+}
+
+#forms-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.mandatory_fields {
+    background-color: #e0e0e0;
+    border-radius: 15px;
+}
+
+.optional_fields {
+    background-color: #e0e0e0;
+    border-radius: 15px;
 }
 
 .login-register-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-
-    .form {
-        padding: 0 25px;
-    }
+    justify-content: space-evenly;
 }
 
 .login-error {
