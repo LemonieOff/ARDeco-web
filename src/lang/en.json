@@ -120,6 +120,8 @@
   },
   "login": {
     "welcome": "Welcome user N°",
+    "loginTitle": "Login",
+    "registerTitle": "Register",
     "logout": "Logout",
     "login": "Login",
     "register": "Register",
@@ -130,7 +132,14 @@
     "lastName": "Last name : ",
     "city": "City : ",
     "phone": "Phone : ",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "optional": "Optional",
+    "optionalFields": "Optional fields",
+    "mandatory": "Mandatory",
+    "mandatoryFields": "Mandatory fields",
+    "consent": "I consent to the processing of my personal data as described in our Privacy Policy",
+    "hasRead": "I have read and accept the Terms of Use",
+    "consentNotGiven": "You must consent to the Terms of Use and Privacy Policy to continue."
   },
   "profile": {
     "yourFavoriteThemes": "My favorites themes",

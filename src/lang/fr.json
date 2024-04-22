@@ -120,7 +120,8 @@
   },
   "login": {
     "welcome": "Bienvenue utilisateur N°",
-    "getSettings": "Mes paramètres actuels",
+    "loginTitle": "Connexion",
+    "registerTitle": "Inscription",
     "logout": "Se déconnecter",
     "login": "Se connecter",
     "register": "Créer un compte",
@@ -130,8 +131,15 @@
     "firstName": "Prénom : ",
     "lastName": "Nom : ",
     "city": "Ville : ",
-    "phone": "Téléhone : ",
-    "loading": "Chargement en cours..."
+    "phone": "Téléphone : ",
+    "loading": "Chargement en cours...",
+    "optional": "Facultatif",
+    "optionalFields": "Champs facultatifs",
+    "mandatory": "Obligatoire",
+    "mandatoryFields": "Champs obligatoires",
+    "consent": "En vous inscrivant, vous acceptez que vos données soient collectées et traitées conformément à notre Politique de Confidentialité",
+    "hasRead": "J'ai lu et j'accepte les Conditions Générales d'Utilisation",
+    "consentNotGiven": "Vous devez accepter les Conditions Générales d'Utilisation et la Politique de Confidentialité pour continuer."
   },
   "profile": {
     "yourFavoriteThemes": "Mes thèmes favoris",
