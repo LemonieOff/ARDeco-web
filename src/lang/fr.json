@@ -112,8 +112,8 @@
     "email": "Email : ",
     "password": "Mot de passe : ",
     "passwordConfirm": "Confirmer le mot de passe : ",
-    "firstName": "Nom : ",
-    "lastName": "Prénom : ",
+    "firstName": "Prénom : ",
+    "lastName": "Nom : ",
     "city": "Ville : ",
     "phone": "Téléhone : ",
     "loading": "Chargement en cours..."
@@ -124,8 +124,8 @@
     "yourFavoriteFurnitures": "Mes meubles favoris",
     "yourFavoriteGalleries": "Mes galleries favorites",
     "informations": {
-      "firstName": "Nom de famille : ",
-      "lastName": "Prénom : ",
+      "firstName": "Prénom : ",
+      "lastName": "Nom de famille : ",
       "email": "Adresse email : ",
       "phone": "Téléphone : ",
       "city": "Ville : ",
@@ -138,15 +138,16 @@
     "buttons": {
       "cancel": "Annuler",
       "update": "Modifier",
-      "confirm": "Confirmer"
+      "confirm": "Confirmer",
+      "delete": "Supprimer le compte"
     }
   },
   "settings": {
     "users": {
-      "firstAndLastName": "Nom de famille et Prénom",
+      "firstAndLastName": "Prénom et nom de famille",
       "getUserSettings": "Voir mes paramètres",
       "setUserSettings": "Mettre mes paramètres à jour",
-      "getUserGallery": "Voir ma gallerie",
+      "getUserGallery": "Voir ma galerie",
       "currentUserSettingsTitle" : "Vos paramètres actuels",
       "language" : "Langue",
       "title" : "Paramètres"

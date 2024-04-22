@@ -24,6 +24,7 @@
             </div>
             <div class="profile-edit-buttons-wrapper">
                 <button id="startEditButton" class="editProfileButton" @click="startEdit">{{ buttons.update }}</button>
+                <a id="deleteAccountButton" class="deleteAccountButton" :href="`${langPrefix}deleteAccount`">{{ buttons.delete }}</a>
             </div>
         </div>
 
@@ -243,6 +244,18 @@ const cancelEdit = async () => {
 .editProfileButton {
     width: 10%;
     border-radius: 5px;
+}
+
+.deleteAccountButton {
+    width: 20%;
+    margin-left: 5%;
+    border-radius: 5px;
+    background-color: #9e1d1d;
+    color: white;
+}
+
+#deleteAccountButton {
+    text-align: center;
 }
 
 #startEditButton {

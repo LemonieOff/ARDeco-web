@@ -137,7 +137,8 @@
     "buttons": {
       "cancel": "Cancel",
       "update": "Update settings",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "delete": "Delete account"
     }
   },
   "settings": {
