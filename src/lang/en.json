@@ -5,6 +5,8 @@
     "product": "Our product",
     "profile": "My profile",
     "settings": "Settings",
+    "company": "Company",
+    "tickets": "Support",
     "darkmode": "Dark mode",
     "lightmode": "Light mode",
     "login": "Login",
@@ -139,32 +141,46 @@
     }
   },
   "settings": {
-    "firstAndLastName": "First and last name",
-    "getUserSettings": "Get user settings",
-    "setUserSettings": "Set user settings",
-    "addFurnitureToCatalog": "Add a furniture to the catalog",
-    "getUserGallery": "Get user gallery",
-    "changeGalleryVisibility": "Change gallery item visibility",
-    "getCompagnyCatalog": "Get compagny catalog",
-    "getCompagnyArchive": "Get compagny archive",
-    "emptyCompagnyArchive": "Empty compagny archive",
-    "archiveItem": "Archive item",
-    "restoreItemFromArchive": "Restore item from archive",
-    "resetCompagnyApiKey": "Reset company API key",
-    "currentUserSettingsTitle" : "Your current settings",
-    "language" : "Language",
-    "title" : "Settings",
-    "placeholders": {
-      "furnitureName" : "Furniture name",
-      "furniturePrice" : "Furniture price",
-      "furnitureStyles" : "Furniture styles",
-      "furnitureRooms" : "Furniture rooms",
-      "furnitureHeight" : "Furniture height",
-      "furnitureWidth" : "Furniture width",
-      "furnitureDepths" : "Furniture depths",
-      "furnitureColors" : "Furniture colors",
-      "itemInputID" : "Item ID"
+    "users": {
+      "firstAndLastName": "First and last name",
+      "getUserSettings": "Get user settings",
+      "setUserSettings": "Set user settings",
+      "getUserGallery": "Get user gallery",
+      "currentUserSettingsTitle" : "Your current settings",
+      "language" : "Language",
+      "title" : "Settings"
+    },
+    "companies": {
+      "addFurnitureToCatalog": "Add a furniture to the catalog",
+      "changeGalleryVisibility": "Change gallery item visibility",
+      "getCompagnyCatalog": "Get compagny catalog",
+      "getCompagnyArchive": "Get compagny archive",
+      "emptyCompagnyArchive": "Empty compagny archive",
+      "archiveItem": "Archive item",
+      "restoreItemFromArchive": "Restore item from archive",
+      "resetCompagnyApiKey": "Reset company API key",
+      "title" : "Company settings",
+      "placeholders": {
+        "furnitureName" : "Furniture name",
+        "furniturePrice" : "Furniture price",
+        "furnitureStyles" : "Furniture styles",
+        "furnitureRooms" : "Furniture rooms",
+        "furnitureHeight" : "Furniture height",
+        "furnitureWidth" : "Furniture width",
+        "furnitureDepths" : "Furniture depths",
+        "furnitureColors" : "Furniture colors",
+        "itemInputID" : "Item ID"
+      }
     }
+  },
+  "tickets": {
+    "title": "Support",
+    "somethingWrong": "Something's wrong ?",
+    "askUs": "Ask us !",
+    "writeYourProblemHere": "Write your problem here",
+    "pendingTickets": "Awaiting issues",
+    "createTicket": "Create an issue",
+    "updateTicket": "Update my issue"
   },
   "languageChangerText": "Translate to FR",
   "privacyPolicy": {

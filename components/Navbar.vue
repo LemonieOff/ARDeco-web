@@ -14,8 +14,14 @@
                     <li id="settingsMenuOption">
                         <img src="~/../../assets/images/icons/settings.png" /><a :href="`${langPrefix}settings`">{{content.settings}}</a>
                     </li>
+                    <li id="companyMenuOption">
+                        <img src="~/../../assets/images/icons/company.png" /><a :href="`${langPrefix}company`">{{content.company}}</a>
+                    </li>
+                    <li id="ticketsMenuOption">
+                        <img src="~/../../assets/images/icons/support.png" /><a :href="`${langPrefix}tickets`">{{content.tickets}}</a>
+                    </li>
                     <li id="disconnectMenuOption">
-                        <img src="~/../../assets/images/icons/logout.png" /><a :href="`${langPrefix}login`">{{content.disconnect}}</a>
+                        <img src="~/../../assets/images/icons/logout.png" /><a @click="logout">{{content.disconnect}}</a>
                     </li>
                     <li id="loginMenuOption">
                         <img src="~/../../assets/images/icons/logout.png" /><a :href="`${langPrefix}login`">{{content.login}}</a>
@@ -33,6 +39,7 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
+import { disconnect } from "public/js/checkLogin";
 
 export default {
     name: "Navbar",
@@ -49,15 +56,21 @@ export default {
         let lang = this.urlLang;
         const userID = localStorage.getItem('userID');
         const dark_mode = localStorage.getItem('dark_mode');
+        const role = localStorage.getItem('role');
 
         if (userID == null) {
             document.getElementById("profileMenuOption").style.display = "none";
             document.getElementById("settingsMenuOption").style.display = "none";
+            document.getElementById("companyMenuOption").style.display = "none";
+            document.getElementById("ticketsMenuOption").style.display = "none";
             document.getElementById("disconnectMenuOption").style.display = "none";
             document.getElementById("profileImage").style.display = "none";
         } else {
             document.getElementById("loginMenuOption").style.display = "none";
             document.getElementById("defaultImage").style.display = "none";
+            if (role == "client") {
+                document.getElementById("companyMenuOption").style.display = "none";
+            }
         }
 
         if (dark_mode == 'true') {
@@ -210,6 +223,16 @@ export default {
                 });
             }
         },
+        async logout() {
+            const response = await fetch('https://api.ardeco.app/logout', {
+                method: 'GET',
+                credentials: 'include',
+            });
+            await disconnect();
+            localStorage.removeItem('lang');
+            const result = await response.text();
+            console.log(result);
+        }
     },
 };
 </script>
@@ -220,6 +243,10 @@ export default {
 .dark-body {
     background-color: darkslategray;
     color: white;
+}
+
+#disconnectMenuOption {
+    cursor: pointer;
 }
 
 </style>
