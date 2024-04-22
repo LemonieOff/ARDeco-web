@@ -1,27 +1,27 @@
 <template>
     <div class="navbar-top-space"></div>
-    <div class="title">Your settings</div>
+    <div class="title">{{content.title}}</div>
     <div class="parameters">
         <hr>
         <div class="left-side-parameters">
-            <button id="getUserGallery" class="buttonSettings" style="margin-top: 17.5%;" @click="getGallery">Get user gallery</button>
-            <button id="getCompagnyCatalog" class="buttonSettings" style="margin-top: 2.5%;" @click="getCatalog">Get compagny catalog</button>
-            <button id="getCompagnyArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="getArchive">Get compagny archive</button>
-            <button id="emptyCompagnyArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="deleteArchive">Empty compagny archive</button>
-            <button id="resetCompagnyApiKey" class="buttonSettings" style="margin-top: 2.5%;" @click="getApiToken">Reset company API key</button>
+            <button id="getUserGallery" class="buttonSettings" style="margin-top: 17.5%;" @click="getGallery">{{content.getUserGallery}}</button>
+            <button id="getCompagnyCatalog" class="buttonSettings" style="margin-top: 2.5%;" @click="getCatalog">{{content.getCompagnyCatalog}}</button>
+            <button id="getCompagnyArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="getArchive">{{content.getCompagnyArchive}}</button>
+            <button id="emptyCompagnyArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="deleteArchive">{{content.emptyCompagnyArchive}}</button>
+            <button id="resetCompagnyApiKey" class="buttonSettings" style="margin-top: 2.5%;" @click="getApiToken">{{content.resetCompagnyApiKey}}</button>
             <div style="margin-top: 12%;">
-                <input class="buttonSettings" style="width: 45%;" id="itemInputID" placeholder="Item ID">
+                <input class="buttonSettings" style="width: 45%;" id="itemInputID" :placeholder="`${placeholders.itemInputID}`">
                 <button id="visibilityButton" style="background-color: green; width: 15%;" @click="changeVisibility">Visible</button>
             </div>
-            <button id="changeGalleryVisibility" class="buttonSettings" style="margin-top: 2.5%;" @click="setItemVisibility">Change gallery item visibility</button>
-            <button id="archiveItem" class="buttonSettings" style="margin-top: 2.5%;" @click="archiveItem">Archive item</button>
-            <button id="restoreItemFromArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="restoreItem">Restore item from archive</button>
+            <button id="changeGalleryVisibility" class="buttonSettings" style="margin-top: 2.5%;" @click="setItemVisibility">{{content.changeGalleryVisibility}}</button>
+            <button id="archiveItem" class="buttonSettings" style="margin-top: 2.5%;" @click="archiveItem">{{content.archiveItem}}</button>
+            <button id="restoreItemFromArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="restoreItem">{{content.restoreItemFromArchive}}</button>
         </div>
         <div class="center-side-parameters">
             <div class="currentUserSettings">
-                <div class="currentUserSettingsTitle" id="currentUserSettings">Your current settings</div>
+                <div class="currentUserSettingsTitle" id="currentUserSettings">{{content.currentUserSettingsTitle}}</div>
                 <div class="optionOnOff">
-                    <span>Language : </span>
+                    <span>{{content.language}} : </span>
                     <span id="currentLang">OFF</span>
                 </div>
                 <div class="optionOnOff">
@@ -30,9 +30,9 @@
                 </div>
             </div>
             <div class="updateUserSettings">
-                <button id="setUserSettings" class="buttonSettings" @click="setSettings">Change user settings</button>
+                <button id="setUserSettings" class="buttonSettings" @click="setSettings">{{content.setUserSettings}}</button>
                 <div class="settingsSetter">
-                    <span id="languageSetter">Language : </span>
+                    <span id="languageSetter">{{content.language}} : </span>
                     <button class="optionSetter" id="languageSetterButton" @click="changeLanguageButton">FR</button>
                 </div>
                 <div class="settingsSetter">
@@ -41,15 +41,15 @@
                 </div>
             </div>
             <div class="addFurnitureDiv">
-                <button id="addFurnitureToCatalog" class="buttonSettings" @click="addFurniture">Add a furniture to the catalog</button>
-                <input class="buttonSettings" id="furnitureName" placeholder="Furniture name">
-                <input class="buttonSettings" id="furniturePrice" placeholder="Furniture price">
-                <input class="buttonSettings" id="furnitureStyles" placeholder="Furniture styles">
-                <input class="buttonSettings" id="furnitureRooms" placeholder="Furniture rooms">
-                <input class="buttonSettings" id="furnitureHeight" placeholder="Furniture height">
-                <input class="buttonSettings" id="furnitureWidth" placeholder="Furniture width">
-                <input class="buttonSettings" id="furnitureDepth" placeholder="Furniture depth">
-                <input class="buttonSettings" id="furnitureColors" placeholder="Furniture colors">
+                <button id="addFurnitureToCatalog" class="buttonSettings" @click="addFurniture">{{content.addFurnitureToCatalog}}</button>
+                <input class="buttonSettings" id="furnitureName" :placeholder="`${placeholders.furnitureName}`">
+                <input class="buttonSettings" id="furniturePrice" :placeholder="`${placeholders.furniturePrice}`">
+                <input class="buttonSettings" id="furnitureStyles" :placeholder="`${placeholders.furnitureStyles}`">
+                <input class="buttonSettings" id="furnitureRooms" :placeholder="`${placeholders.furnitureRooms}`">
+                <input class="buttonSettings" id="furnitureHeight" :placeholder="`${placeholders.furnitureHeight}`">
+                <input class="buttonSettings" id="furnitureWidth" :placeholder="`${placeholders.furnitureWidth}`">
+                <input class="buttonSettings" id="furnitureDepth" :placeholder="`${placeholders.furnitureDepth}`">
+                <input class="buttonSettings" id="furnitureColors" :placeholder="`${placeholders.furnitureColors}`">
             </div>
         </div>
         <div class="right-side-parameters">
@@ -64,43 +64,29 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "OverallSettings",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            placeholders: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
         let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
+
+        if (lang !== 'en' && lang !== 'fr') {
+            if (localStorage.getItem('lang')) {
+                lang = localStorage.getItem('lang');
+            } else {
+                lang = 'fr';
+            }
         }
 
-        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
-            location.href = location.href.replace("/fr/", "/en/")
-        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
-            location.href = location.href.replace("/en/", "/fr/")
-        }
+        this.content = lang === 'en' ? en.settings : fr.settings;
+        this.placeholders = lang === 'en' ? en.settings.placeholders : fr.settings.placeholders;
 
-        if (lang == 'en') {
-            document.getElementById('setUserSettings').innerText = en.profile.settings.setUserSettings
-            document.getElementById('addFurnitureToCatalog').innerText = en.profile.settings.addFurnitureToCatalog
-            document.getElementById('getUserGallery').innerText = en.profile.settings.getUserGallery
-            document.getElementById('changeGalleryVisibility').innerText = en.profile.settings.changeGalleryVisibility
-            document.getElementById('getCompagnyCatalog').innerText = en.profile.settings.getCompagnyCatalog
-            document.getElementById('getCompagnyArchive').innerText = en.profile.settings.getCompagnyArchive
-            document.getElementById('emptyCompagnyArchive').innerText = en.profile.settings.emptyCompagnyArchive
-            document.getElementById('archiveItem').innerText = en.profile.settings.archiveItem
-            document.getElementById('restoreItemFromArchive').innerText = en.profile.settings.restoreItemFromArchive
-            document.getElementById('resetCompagnyApiKey').innerText = en.profile.settings.resetCompagnyApiKey
-        } else {
-            document.getElementById('setUserSettings').innerText = fr.profile.settings.setUserSettings
-            document.getElementById('addFurnitureToCatalog').innerText = fr.profile.settings.addFurnitureToCatalog
-            document.getElementById('getUserGallery').innerText = fr.profile.settings.getUserGallery
-            document.getElementById('changeGalleryVisibility').innerText = fr.profile.settings.changeGalleryVisibility
-            document.getElementById('getCompagnyCatalog').innerText = fr.profile.settings.getCompagnyCatalog
-            document.getElementById('getCompagnyArchive').innerText = fr.profile.settings.getCompagnyArchive
-            document.getElementById('emptyCompagnyArchive').innerText = fr.profile.settings.emptyCompagnyArchive
-            document.getElementById('archiveItem').innerText = fr.profile.settings.archiveItem
-            document.getElementById('restoreItemFromArchive').innerText = fr.profile.settings.restoreItemFromArchive
-            document.getElementById('resetCompagnyApiKey').innerText = fr.profile.settings.resetCompagnyApiKey
-        }
         this.getSettings();
     },
     methods: {
