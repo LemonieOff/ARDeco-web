@@ -8,11 +8,10 @@
 }
 
 /* Links inside the navbar */
-.navbar a {
+.navbar .navbarLink {
     display: inline-block;
     color: #F2EBDF;
     padding: 14px 16px;
-    margin-left: 2.5%;
     margin-right: 2.5%;
     text-decoration: none;
 }
@@ -24,7 +23,7 @@
     right: 5%;
 }
 
-.navbar a:hover {
+.navbar .navbarLink:hover {
     background: #F2EBDF;
     color: black;
 }
@@ -129,7 +128,7 @@ button {
         text-align: left;
     }
 
-    .navbar a {
+    .navbar .navbarLink {
         margin-left: 0%;
         margin-right: 0%;
         padding: 6px;
