@@ -237,7 +237,7 @@ export default {
         }
     },
 };
-</script>40%
+</script>
 
 <style scoped>
 @import '~/styles/Navbar.scss';

@@ -1,7 +1,7 @@
 .navbar {
     text-align: center;
     background-color: #333;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 500;
@@ -37,19 +37,19 @@ button {
 }
 
 #home {
-    position: absolute;
+    position: fixed;
     left: 35%;
 }
 
 #dark-mode-button {
-    position: absolute;
-    top: 25%;
+    position: fixed;
+    top: 1.5%;
     right: 32.5%;
 }
 
 #light-mode-button {
-    position: absolute;
-    top: 25%;
+    position: fixed;
+    top: 1.5%;
     right: 32.5%;
 }
 
@@ -70,7 +70,7 @@ button {
 }
 
 .action .profile img {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -79,7 +79,7 @@ button {
 }
 
 .action .menu {
-    position: absolute;
+    position: fixed;
     top: 120px;
     right: -10px;
     padding: 10px 20px;
@@ -100,7 +100,7 @@ button {
 
 .action .menu::before {
     content: "";
-    position: absolute;
+    position: fixed;
     top: -5px;
     right: 28px;
     width: 20px;
@@ -159,7 +159,7 @@ button {
     }
 
     .navbarLink {
-        position: absolute;
+        position: fixed;
     }
 
     #team {
@@ -171,18 +171,18 @@ button {
     }
 
     #home {
-        position: absolute;
+        position: fixed;
         left: 5%;
     }
 
     #dark-mode-button {
-        position: absolute;
+        position: fixed;
         top: 0%;
         left: 70%;
     }
 
     #light-mode-button {
-        position: absolute;
+        position: fixed;
         top: 25%;
         left: 32.5%;
     }
