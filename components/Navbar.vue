@@ -237,27 +237,10 @@ export default {
         }
     },
 };
-</script>
+</script>40%
 
 <style scoped>
 @import '~/styles/Navbar.scss';
-
-#home {
-    position: absolute;
-    left: 35%;
-}
-
-#dark-mode-button {
-    position: absolute;
-    top: 25%;
-    right: 32.5%;
-}
-
-#light-mode-button {
-    position: absolute;
-    top: 25%;
-    right: 32.5%;
-}
 
 .dark-body {
     background-color: darkslategray;

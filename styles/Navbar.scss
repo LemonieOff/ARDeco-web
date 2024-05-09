@@ -1,7 +1,7 @@
 .navbar {
     text-align: center;
     background-color: #333;
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100%;
     z-index: 500;
@@ -34,6 +34,23 @@
 
 button {
     color: #F2EBDF;
+}
+
+#home {
+    position: absolute;
+    left: 35%;
+}
+
+#dark-mode-button {
+    position: absolute;
+    top: 25%;
+    right: 32.5%;
+}
+
+#light-mode-button {
+    position: absolute;
+    top: 25%;
+    right: 32.5%;
 }
 
 .action {
@@ -126,6 +143,7 @@ button {
 @media screen and (max-width: 768px) {
     .navbar {
         text-align: left;
+        height: 6%;
     }
 
     .navbar .navbarLink {
@@ -138,6 +156,35 @@ button {
 
     .navbar-option {
         font-size: 12px;
+    }
+
+    .navbarLink {
+        position: absolute;
+    }
+
+    #team {
+        left: 15%;
+    }
+
+    #product {
+        left: 40%;
+    }
+
+    #home {
+        position: absolute;
+        left: 5%;
+    }
+
+    #dark-mode-button {
+        position: absolute;
+        top: 0%;
+        left: 70%;
+    }
+
+    #light-mode-button {
+        position: absolute;
+        top: 25%;
+        left: 32.5%;
     }
 
     .action {
