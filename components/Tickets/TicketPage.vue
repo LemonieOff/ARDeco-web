@@ -7,12 +7,18 @@
         <div class="subTitle">{{ content.askUs }}</div>
     </div>
     <div class="pageContent">
-        <div class="pendingTickets">
+        <div id="pendingTickets" class="pendingTickets">
             <div class="alignCenter">{{ content.pendingTickets }}</div>
+            <div class="alignCenter pendingTicket">
+                <div class="ticketStatus">STATUS</div>
+                <div class="ticketTitle">TITRE</div>
+            </div>
         </div>
         <div class="manageTicket">
-            <input type="text" class="textContent" :placeholder="content.writeYourProblemHere">
-            <button class="alignCenter ticketManagementButton">{{ content.createTicket }}</button>
+            <input id="title" type="text" class="titleOrDescripion" :placeholder="content.writeYourTitleHere">
+            <input id="description" type="text" class="titleOrDescripion" :placeholder="content.shortDescriptionOfYourProblem">
+            <input id="message" type="text" class="textContent" :placeholder="content.writeYourProblemHere">
+            <button class="alignCenter ticketManagementButton" @click="createTicket">{{ content.createTicket }}</button>
             <!-- <button class="alignCenter">{{ content.updateTicket }}</button> -->
         </div>
     </div>
@@ -48,6 +54,7 @@ export default {
         }
 
         this.content = lang === 'en' ? en.tickets : fr.tickets;
+        this.getUserTickets();
     },
     methods: {
         async checkIfLogged() {
@@ -55,12 +62,112 @@ export default {
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
+        },
+        async createTicket() {
+            await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+            const message = document.getElementById("message").value;
+            const response = await fetch('https://api.ardeco.app/ticket/create?mode=id', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "title": title,
+                    "description": description,
+                    "message": message
+                }),
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+
+            document.getElementById("title").value = "";
+            document.getElementById("description").value = "";
+            document.getElementById("message").value = "";
+        },
+        async getUserTickets() {
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+
+            const response = await fetch('https://api.ardeco.app/ticket/user/' + `${userID}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log("result", result);
+
+            if (result.code == 200) {
+                const ticketsContainer = document.getElementById('pendingTickets');
+                result.data.forEach(ticket => {
+                    const ticketDiv = document.createElement('div');
+                    // ticketDiv.classList.add('alignCenter', 'pendingTicket');
+                    ticketDiv.style = "padding-top: 2.5%; display: inline-flex; background-color: #F2EBDF; border-radius: 5px; border: 1px solid black; height: 10%; width: 90%; margin-left: 5%; margin-top: 2.5%;";
+
+                    const statusDiv = document.createElement('div');
+                    statusDiv.classList.add('ticketStatus');
+                    statusDiv.style = "max-width: 20%; border: 1px solid red;";
+
+                    statusDiv.textContent = ticket.status;
+                    if (ticket.status == "pending")
+                        ticketDiv.style.backgroundColor = "#fe9496";
+                    else if (ticket.status == "closed")
+                        ticketDiv.style.backgroundColor = "#1bcfc4";
+                    else if (ticket.status == "deleted")
+                        ticketDiv.style.backgroundColor = "#9e58ff";
+                    else
+                        console.log("ERROR : ", ticket.status)
+
+                    const titleDiv = document.createElement('div');
+                    titleDiv.classList.add('ticketTitle');
+                    titleDiv.style = "max-width: 75%; border: 1px solid green; margin-left: 5%;";
+                    titleDiv.textContent = ticket.title;
+
+                    ticketDiv.appendChild(statusDiv);
+                    ticketDiv.appendChild(titleDiv);
+                    ticketsContainer.appendChild(ticketDiv);
+                });
+            }
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+
+.pendingTicket {
+    display: inline-flex;
+    background-color: #F2EBDF;
+    border-radius: 5px;
+    border: 1px solid black;
+    height: 10%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 2.5%;
+    padding-top: 2.5%;
+}
+
+.ticketStatus {
+    max-width: 20%;
+    border: 1px solid red;
+}
+
+.ticketTitle {
+    max-width: 80%;
+    margin-left: 5%;
+    border: 1px solid green;
+}
 
 ::placeholder {
     text-align: center;
@@ -99,7 +206,7 @@ export default {
     padding: 1%;
     border: 1px solid;
     border-radius: 10px;
-    width: 30%;
+    max-width: 30%;
     height: 100%;
     margin-left: 7.5%;
 }
@@ -117,7 +224,18 @@ export default {
     background-color: #FFFFFF;
     margin: 2.5%;
     width: 95%;
-    height: 80%;
+    height: 55%;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.titleOrDescripion {
+    background-color: #FFFFFF;
+    margin: 2.5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    width: 95%;
+    height: 10%;
     border-radius: 5px;
     border: 1px solid;
 }

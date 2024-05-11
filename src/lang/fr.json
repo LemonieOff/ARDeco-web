@@ -152,9 +152,9 @@
       "title" : "Paramètres"
     },
     "companies": {
-      "addFurnitureToCatalog": "Ajouter un meuble au catalog",
+      "addFurnitureToCatalog": "Ajouter un meuble au catalogue",
       "changeGalleryVisibility": "Changer la visibilité d'un item",
-      "getCompagnyCatalog": "Voir mon catalog d'entreprise",
+      "getCompagnyCatalog": "Voir mon catalogue d'entreprise",
       "getCompagnyArchive": "Voir mon archive d'entreprise",
       "emptyCompagnyArchive": "Vider mon archive d'entreprise",
       "archiveItem": "Archiver cet élement",
@@ -168,7 +168,7 @@
         "furnitureRooms" : "Pièces liées au meuble",
         "furnitureHeight" : "Hauteur du meuble (en cm)",
         "furnitureWidth" : "Largeur du meuble (en cm)",
-        "furnitureDepths" : "Profondeur du meuble (en cm)",
+        "furnitureDepth" : "Profondeur du meuble (en cm)",
         "furnitureColors" : "Couleur(s) du meuble",
         "itemInputID" : "ID de l'item"
       }
@@ -178,7 +178,9 @@
     "title": "Support",
     "somethingWrong": "Quelque chose ne va pas ?",
     "askUs": "Demandez nous !",
-    "writeYourProblemHere": "Écrivez votre problème ici",
+    "writeYourTitleHere": "Écrivez le titre de votre problème ici",
+    "shortDescriptionOfYourProblem": "Décrivez votre problème en quelques mots",
+    "writeYourProblemHere": "Détaillez clairement votre problème ici",
     "pendingTickets": "Demandes en attente",
     "createTicket": "Créer une demande",
     "updateTicket": "Mettre à jour ma demande"

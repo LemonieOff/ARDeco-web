@@ -167,7 +167,7 @@
         "furnitureRooms" : "Furniture rooms",
         "furnitureHeight" : "Furniture height",
         "furnitureWidth" : "Furniture width",
-        "furnitureDepths" : "Furniture depths",
+        "furnitureDepth" : "Furniture depths",
         "furnitureColors" : "Furniture colors",
         "itemInputID" : "Item ID"
       }
@@ -177,7 +177,9 @@
     "title": "Support",
     "somethingWrong": "Something's wrong ?",
     "askUs": "Ask us !",
-    "writeYourProblemHere": "Write your problem here",
+    "writeYourTitleHere": "Write the title of your ticket here",
+    "shortDescriptionOfYourProblem": "Write a short description of your problem",
+    "writeYourProblemHere": "Message us your problem in detail here",
     "pendingTickets": "Awaiting issues",
     "createTicket": "Create an issue",
     "updateTicket": "Update my issue"
