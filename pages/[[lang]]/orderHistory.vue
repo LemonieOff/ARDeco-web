@@ -1,6 +1,6 @@
 <template>
     <Navbar :urlLang=lang></Navbar>
-    <div class="title" style="margin-top: 10%">{{ content.title }}</div>
+    <div class="title">{{ content.title }}</div>
     <div id="order_history_loading">{{ content.loading }}</div>
     <div id="order_history_error">{{ errorMessage }}</div>
     <div class="form" id="order_history_table" style="display: none">
@@ -40,6 +40,7 @@ let orderHistory = ref([]);
 let errorMessage = ref("");
 let successMessage = ref("");
 const langPrefix = ref("/");
+const user_id = ref(0);
 
 onMounted(async () => {
     // If lang selector is not passed in url, get the user's one or set it to french
@@ -73,10 +74,11 @@ async function checkLogin() {
     if (!userID) {
         location.href = langPrefix.value + "login";
     }
+    user_id.value = Number(userID);
 }
 
 async function getOrderHistory() {
-    const response = await fetch('https://api.ardeco.app/order_history/user/2?mode=details', {
+    const response = await fetch(`https://api.ardeco.app/order_history/user/${user_id.value}?mode=details`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -183,12 +185,6 @@ async function downloadInvoice(id) {
 
 .grid-row {
     display: flex;
-}
-
-.grid-item {
-    flex: 1;
-    padding: 10px;
-    border-right: 1px solid #000;
 }
 
 .grid-item:last-child {
