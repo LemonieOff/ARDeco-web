@@ -2,7 +2,6 @@
   <div class="overflow-x-hidden">
     <ClientOnly/>
     <NuxtPage class="z-1"/>
-    <Footer/>
     <LanguageChanger/>
   </div>
 </template>

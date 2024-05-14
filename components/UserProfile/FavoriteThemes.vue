@@ -1,6 +1,6 @@
 <template>
     <div class="favorite-themes">
-        <div id="yourFavoriteThemes" class="sub-title"> Your favorites themes </div>
+        <div id="yourFavoriteThemes" class="sub-title">{{ content.yourFavoriteThemes }}</div>
         <div class="empty-text-content"></div>
     </div>
 </template>
@@ -12,24 +12,34 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "FavoriteThemes",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
-        let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
+        let lang = this.urlLang;
+
+        // If lang selector is not passed in url, get the user's one or set it to french
+        if (lang !== 'en' && lang !== 'fr') {
+            if (localStorage.getItem('lang')) {
+                lang = localStorage.getItem('lang');
+            } else {
+                lang = 'fr';
+            }
         }
 
-        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
-            location.href = location.href.replace("/fr/", "/en/")
-        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
-            location.href = location.href.replace("/en/", "/fr/")
-        }
+        // Set the content variable to the correct language
+        this.content = lang === 'en' ? en.profile : fr.profile;
 
-        if (lang == 'en') {
-            document.getElementById('yourFavoriteThemes').innerText = en.profile.yourFavoriteThemes
-        } else {
-            document.getElementById('yourFavoriteThemes').innerText = fr.profile.yourFavoriteThemes
+        // Prefix for links
+        if (location.href.includes("/fr/")) {
+            this.langPrefix = "/fr/";
+        } else if (location.href.includes("/en/")) {
+            this.langPrefix = "/en/";
         }
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="question-content background-card" id="how-are-furnitures-chosen">
-        <div id="furnitureChoiceTitle" class="title underline"></div>
-        <div id="furnitureChoiceText" class="sub-title gray-text-color"></div>
+        <div id="furnitureChoiceTitle" class="title underline">{{ content.furnitureChoiceTitle }}</div>
+        <div id="furnitureChoiceText" class="sub-title gray-text-color">{{ content.furnitureChoiceText }}</div>
     </div>
 </template>
 
@@ -12,26 +12,35 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "HowAreMyFurnitureChosen",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
-        let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
+        let lang = this.urlLang;
+
+        // If lang selector is not passed in url, get the user's one or set it to french
+        if (lang !== 'en' && lang !== 'fr') {
+            const localStorageLang = localStorage.getItem('lang');
+            if (localStorageLang) {
+                lang = localStorageLang;
+            } else {
+                lang = 'fr';
+            }
         }
 
-        if (location.href.includes("/fr/") && localStorage.getItem('lang') == "en") {
-            location.href = location.href.replace("/fr/", "/en/")
-        } else if (location.href.includes("/en/") && localStorage.getItem('lang') == "fr") {
-            location.href = location.href.replace("/en/", "/fr/")
-        }
+        // Set the content variable to the correct language
+        this.content = lang === 'en' ? en.productPages : fr.productPages;
 
-        if (lang == 'en') {
-            document.getElementById('furnitureChoiceTitle').innerText = en.productPages.furnitureChoiceTitle
-            document.getElementById('furnitureChoiceText').innerText = en.productPages.furnitureChoiceText
-        } else {
-            document.getElementById('furnitureChoiceTitle').innerText = fr.productPages.furnitureChoiceTitle
-            document.getElementById('furnitureChoiceText').innerText = fr.productPages.furnitureChoiceText
+        // Prefix for links
+        if (location.href.includes("/fr/")) {
+            this.langPrefix = "/fr/";
+        } else if (location.href.includes("/en/")) {
+            this.langPrefix = "/en/";
         }
     },
 }

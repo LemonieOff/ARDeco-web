@@ -1,66 +1,153 @@
 <template>
     <div class="navbar">
-        <a id="home" class="navbar-option" href="/">Home</a>
-        <a id="team" class="navbar-option" href="/team">Team</a>
-        <a id="product" class="navbar-option" href="/product">Our product</a>
-        <a id="profile" class="navbar-option" href="/profile">Profile</a>
-        <button id="dark-mode-button" style="color: #F2EBDF;" @click="toggleDarkMode">Dark mode</button>
+        <a id="home" class="navbar-option" :href="`${langPrefix}`">{{content.home}}</a>
+        <a id="team" class="navbar-option" :href="`${langPrefix}team`">{{content.team}}</a>
+        <a id="product" class="navbar-option" :href="`${langPrefix}product`">{{content.product}}</a>
+        <button id="dark-mode-button" @click="toggleDarkMode">{{content.darkmode}}</button>
+        <button id="light-mode-button" @click="toggleDarkMode">{{content.lightmode}}</button>
+        <div class="action">
+            <div class="menu">
+                <ul>
+                    <li id="profileMenuOption">
+                        <img src="~/.././assets/images/icons/user.png" /><a :href="`${langPrefix}profile`">{{content.profile}}</a>
+                    </li>
+                    <li id="settingsMenuOption">
+                        <img src="~/../../assets/images/icons/settings.png" /><a :href="`${langPrefix}settings`">{{content.settings}}</a>
+                    </li>
+                    <li id="companyMenuOption">
+                        <img src="~/../../assets/images/icons/company.png" /><a :href="`${langPrefix}company`">{{content.company}}</a>
+                    </li>
+                    <li id="ticketsMenuOption">
+                        <img src="~/../../assets/images/icons/support.png" /><a :href="`${langPrefix}tickets`">{{content.tickets}}</a>
+                    </li>
+                    <li id="disconnectMenuOption">
+                        <img src="~/../../assets/images/icons/logout.png" /><a @click="logout">{{content.disconnect}}</a>
+                    </li>
+                    <li id="loginMenuOption">
+                        <img src="~/../../assets/images/icons/logout.png" /><a :href="`${langPrefix}login`">{{content.login}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="user" @click="menuToggle">
+                <img id="profileImage" class="navbar-icon" src="~/../../assets/images/profile-pictures/Valentin.png"/>
+                <img id="defaultImage" class="navbar-icon" src="~/../../assets/images/profile-pictures/Unknown.png"/>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
+import { disconnect } from "public/js/checkLogin";
 
 export default {
     name: "Navbar",
     props: {
-        urlLang: String
+        urlLang: String | null
+    },
+    data() {
+        return {
+            content: {},
+            langPrefix: "/"
+        }
     },
     mounted() {
-        // If no user is connected, deletes the 'lang' item
-        if (localStorage.getItem('userID') == null) {
-            localStorage.setItem('lang', null)
+        let lang = this.urlLang;
+        const userID = localStorage.getItem('userID');
+        const dark_mode = localStorage.getItem('dark_mode');
+        const role = localStorage.getItem('role');
+
+        if (userID == null) {
+            document.getElementById("profileMenuOption").style.display = "none";
+            document.getElementById("settingsMenuOption").style.display = "none";
+            document.getElementById("companyMenuOption").style.display = "none";
+            document.getElementById("ticketsMenuOption").style.display = "none";
+            document.getElementById("disconnectMenuOption").style.display = "none";
+            document.getElementById("profileImage").style.display = "none";
+        } else {
+            document.getElementById("loginMenuOption").style.display = "none";
+            document.getElementById("defaultImage").style.display = "none";
+            if (role == "client") {
+                document.getElementById("companyMenuOption").style.display = "none";
+            }
         }
 
-        // Change the language of the website
-        let lang = this.urlLang
-        if (lang == null) {
-            lang = localStorage.getItem('lang')
-        }
-        console.log("localStorage.getItem('lang') : ", localStorage.getItem('lang'))
-        console.log("lang = ", lang)
-        if (lang == 'en') {
-            document.getElementById('home').innerText = en.navBar.home
-            document.getElementById('team').innerText = en.navBar.team
-            document.getElementById('product').innerText = en.navBar.product
-            document.getElementById('profile').innerText = en.navBar.profile
-            document.getElementById('dark-mode-button').innerText = en.navBar.darkmode
+        if (dark_mode == 'true') {
+            document.getElementById("dark-mode-button").style.display = "none";
         } else {
-            document.getElementById('home').innerText = fr.navBar.home
-            document.getElementById('team').innerText = fr.navBar.team
-            document.getElementById('product').innerText = fr.navBar.product
-            document.getElementById('profile').innerText = fr.navBar.profile
-            document.getElementById('dark-mode-button').innerText = fr.navBar.darkmode
+            document.getElementById("light-mode-button").style.display = "none";
         }
-        
-        // Change the url links between /fr and /en depending on the language
-        if (lang == 'en') {
-            document.getElementById('home').setAttribute("href", "/en/")
-            document.getElementById('team').setAttribute("href", "/en/team")
-            document.getElementById('product').setAttribute("href", "/en/product")
-            document.getElementById('profile').setAttribute("href", "/en/profile")
-        } else {
-            document.getElementById('home').setAttribute("href", "/fr/")
-            document.getElementById('team').setAttribute("href", "/fr/team")
-            document.getElementById('product').setAttribute("href", "/fr/product")
-            document.getElementById('profile').setAttribute("href", "/fr/profile")
+
+        // If lang selector is not passed in url, get the user's one or set it to french
+        if (lang !== 'en' && lang !== 'fr') {
+            if (localStorage.getItem('lang')) {
+                lang = localStorage.getItem('lang');
+            } else {
+                lang = 'fr';
+            }
         }
+
+        // Set the content variable to the correct language
+        this.content = lang === 'en' ? en.navBar : fr.navBar;
+
+        // Prefix for links
+        if (location.href.includes("/fr/")) {
+            this.langPrefix = "/fr/";
+        } else if (location.href.includes("/en/")) {
+            this.langPrefix = "/en/";
+        }
+
+        this.checkDarkMode();
     },
     methods: {
-        toggleDarkMode() {
+        async menuToggle() {
+            const toggleMenu = document.querySelector(".menu");
+            toggleMenu.classList.toggle("active");
+        },
+        async checkDarkMode() {
+            const dark_mode = localStorage.getItem('dark_mode');
+
+            const backgoundFade = document.getElementsByClassName("top-right-yellow-fade-background")
+            const background1 = document.getElementsByClassName("bottom-right-yellow-fade-background")
+            const background2 = document.getElementsByClassName("top-right-yellow-fade-background")
+            const background3 = document.getElementsByClassName("bottom-left-yellow-fade-background")
+            const backgroundCards = document.getElementsByClassName("background-card");
+
+            const body = document.body
+            if (dark_mode == 'true') {
+                body.style = "background-color: #474E68; color: #BB86FC";
+
+                if (document.URL.includes("team")) {
+                    backgoundFade[0].style = "background: #474E68"
+                    background1[0].style = "background: #474E68"
+                    background1[1].style = "background: #474E68"
+                    background2[1].style = "background: #474E68"
+                    background3[0].style = "background: #474E68"
+                } else if (document.URL.includes("product")) {
+                    for (let i = 0; i < backgroundCards.length; i++) {
+                        backgroundCards[i].style = "background: #001A7A; color: #BB86FC"
+                    }
+                }
+            } else {
+                body.style = ""
+
+                if (document.URL.includes("team")) {
+                    backgoundFade[0].style = ""
+                    background1[0].style = ""
+                    background1[1].style = ""
+                    background2[1].style = ""
+                    background3[0].style = ""
+                } else if (document.URL.includes("product")) {
+                    for (let i = 0; i < backgroundCards.length; i++) {
+                        backgroundCards[i].style = ""
+                    }
+                }
+            }
+        },
+        async toggleDarkMode() {
+            const dark_mode = localStorage.getItem('dark_mode');
             console.log("button activated, on url:", document.URL.includes("product"))
-            const isDarkModeActive = document.body.style.getPropertyValue("background-color")
             const backgoundFade = document.getElementsByClassName("top-right-yellow-fade-background")
             const background1 = document.getElementsByClassName("bottom-right-yellow-fade-background")
             const background2 = document.getElementsByClassName("top-right-yellow-fade-background")
@@ -70,8 +157,11 @@ export default {
             const backgroundCards = document.getElementsByClassName("background-card");
 
             const body = document.body
-            if (isDarkModeActive == "") {
-                body.style = "background-color: rgba(0, 4, 65, 0.91); color: white";
+            if (dark_mode == 'false') {
+                localStorage.setItem('dark_mode', 'true');
+                document.getElementById("dark-mode-button").style.display = "none";
+                document.getElementById("light-mode-button").style.display = "inline-block";
+                body.style = "background-color: #474E68; color: #BB86FC";
 
                 if (document.URL.includes("team")) {
                     backgoundFade[0].style = "background: linear-gradient(312deg, rgba(0, 4, 65, 0.91) 64.31%, rgba(3, 0, 182, 0.692) 100%)"
@@ -85,11 +175,25 @@ export default {
                     }
                 } else if (document.URL.includes("product")) {
                     for (let i = 0; i < backgroundCards.length; i++) {
-                        backgroundCards[i].style = "background: #001A7A; color: white"
+                        backgroundCards[i].style = "background: #001A7A; color: #BB86FC"
                     }
                 }
+
+                await fetch('https://api.ardeco.app/settings', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "dark_mode": true,
+                    }),
+                    credentials: 'include',
+                });
             } else {
                 body.style = ""
+                localStorage.setItem('dark_mode', 'false');
+                document.getElementById("dark-mode-button").style.display = "inline-block";
+                document.getElementById("light-mode-button").style.display = "none";
 
                 if (document.URL.includes("team")) {
                     backgoundFade[0].style = "background: linear-gradient(312deg, rgba(242, 235, 223, 0.91) 64.31%, rgba(255, 199, 0, 0.65) 100%)"
@@ -106,8 +210,29 @@ export default {
                         backgroundCards[i].style = ""
                     }
                 }
+
+                await fetch('https://api.ardeco.app/settings', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "dark_mode": false,
+                    }),
+                    credentials: 'include',
+                });
             }
         },
+        async logout() {
+            const response = await fetch('https://api.ardeco.app/logout', {
+                method: 'GET',
+                credentials: 'include',
+            });
+            await disconnect();
+            localStorage.removeItem('lang');
+            const result = await response.text();
+            console.log(result);
+        }
     },
 };
 </script>
@@ -118,6 +243,10 @@ export default {
 .dark-body {
     background-color: darkslategray;
     color: white;
+}
+
+#disconnectMenuOption {
+    cursor: pointer;
 }
 
 </style>

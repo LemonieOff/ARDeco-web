@@ -1,10 +1,31 @@
 {
+  "errors": {
+    "fields": {
+      "empty": "This field cannot be empty.",
+      "notFullyCompleted": "You must fill all the fields.",
+      "passwordsDoNotMatch": "Passwords do not match."
+    },
+    "user": {
+      "notConnected": "You are not connected.",
+      "notFound": "User not found.",
+      "alreadyClosed": "User already deleted.",
+      "emailDoesNotMatch": "Email does not match.",
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "wrongPassword": "Wrong password."
+    }
+  },
   "navBar": {
     "home": "Home",
-    "team": "Team",
+    "team": "Our team",
     "product": "Our product",
-    "profile": "Profile",
-    "darkmode": "Toggle dark mode"
+    "profile": "My profile",
+    "settings": "Settings",
+    "company": "Company",
+    "tickets": "Support",
+    "darkmode": "Dark mode",
+    "lightmode": "Light mode",
+    "login": "Login",
+    "disconnect": "Disconnect"
   },
   "profilePages": {
     "presentationPage": {
@@ -17,48 +38,51 @@
       "presentationTextPart2": "During those 5 years, we are asked to to find internships or part time jobs to learn everything we need to know about life in the professional world. Since all of us are 3rd years, we can comfortably say that we all spent at least half a year in a company already, which turns out to be very beneficial to the development of our ARDeco project."
     },
     "evan": {
-      "role":"AR Developer",
-      "internshipRole1":"Junior Frontend Developer"
+      "role": "AR Developer",
+      "internshipRole1": "Junior Frontend Developer"
     },
     "hugo": {
-      "role":"Project Leader",
-      "internshipRole1":"Backend Developer",
-      "internshipRole2":"Video Game Developer"
+      "role": "Project Leader",
+      "internshipRole1": "Backend Developer",
+      "internshipRole2": "Video Game Developer"
     },
     "louis": {
-      "role":"AR Developer",
-      "internshipRole1":"Junior Software Developer",
-      "internshipRole2":"Web Developer",
-      "internshipRole3":"Video Game Developer"
+      "role": "AR Developer",
+      "internshipRole1": "Junior Software Developer",
+      "internshipRole2": "Web Developer",
+      "internshipRole3": "Video Game Developer"
     },
     "valentin": {
-      "role":"Design and Partners",
-      "internshipRole1":"Tech and Web Support",
-      "internshipRole2":"Frontend Developer",
-      "internshipRole3":"Junior Frontend Developer"
+      "role": "Design and Partners",
+      "internshipRole1": "Tech and Web Support",
+      "internshipRole2": "Frontend Developer",
+      "internshipRole3": "Junior Frontend Developer"
     }
   },
   "productPages": {
     "projectDetailsTitle": "Discover the details of our project",
     "findYourAnswersSubtitle": "Find the answers to your questions  in our FAQ !",
-    "furnitureChoiceTitle":"How are my furniture chosen ?",
-    "furnitureChoiceText":"The application offers layout and decoration for a completely empty room, such as helping to rearrange and redecorate an already furnished and furnished room. At the end, the application offers to view the result in 3D in the application, but also (and above all) in augmented reality directly in the room! At this stage, he can even move the furniture displayed, select others, delete or add them manually and change their color and style. To generate the result in 3D or augmented reality, we decided to use 3D models.",
-    "whatIsArdecoTitle":"What is ARDeco ?",
-    "whatIsArdecoText":"ARDeco is a mobile application for scanning the room using the phone. Our AI then generates an interior layout and decoration based on the budget and style defined by the user. He will visualize the result in augmented reality and will be able to buy the furniture (automatically arranged) from the partners directly from the application.",
-    "howToUseArdecoTitle":"How to use ARDeco ?",
-    "howToUseArdecoText":"The user can first enter a budget range and/or a maximum budget not to be exceeded. He can also select different styles that he would like in his room (for example zen, industrial, classic, forest, etc...). He will then simply have to use his phone camera, and perform a scan of the room by following the instructions indicated on the screen and checking the veracity of the information calculated and transcribed. It is possible that the application asks the user to enter one or more distances manually to perform more precise calculations.",
-    "modelsOriginsTitle":"Where do the models come from ?",
-    "modelsOriginsText":"These 3D models are provided to us directly by the partner brands whose catalog is present in the application. If the partners do not have 3D models, we will offer them conversion solutions in order to be compatible with our service. In the worst case, we can adapt to them and offer support for additional formats according to the needs of our partners.",
-    "whyUseArdecoTitle":"Why should I use ARDeco ?",
-    "whyUseArdecoText":"The project therefore saves time when furnishing your room. Thanks to the budget and style selection, the scanning of the room to capture the dimensions of the walls and furniture (if present in the room) and the AI previously described which retrieves furniture corresponding to the criteria and dimensions then pose, saving user time and agent. Another improvement that the project brings to the user is that he is sure of the final rendering of his room and will not be disappointed, since he can visualize in augmented reality in his room the final arrangement, and even carry out tests to be sure.",
-    "inAppPurchaseTitle":"Can I buy furniture from the app ?",
-    "inAppPurchaseText":"Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user."
+    "furnitureChoiceTitle": "How are my furniture chosen ?",
+    "furnitureChoiceText": "The application offers layout and decoration for a completely empty room, such as helping to rearrange and redecorate an already furnished and furnished room. At the end, the application offers to view the result in 3D in the application, but also (and above all) in augmented reality directly in the room! At this stage, he can even move the furniture displayed, select others, delete or add them manually and change their color and style. To generate the result in 3D or augmented reality, we decided to use 3D models.",
+    "whatIsArdecoTitle": "What is ARDeco ?",
+    "whatIsArdecoText": "ARDeco is a mobile application for scanning the room using the phone. Our AI then generates an interior layout and decoration based on the budget and style defined by the user. He will visualize the result in augmented reality and will be able to buy the furniture (automatically arranged) from the partners directly from the application.",
+    "howToUseArdecoTitle": "How to use ARDeco ?",
+    "howToUseArdecoText": "The user can first enter a budget range and/or a maximum budget not to be exceeded. He can also select different styles that he would like in his room (for example zen, industrial, classic, forest, etc...). He will then simply have to use his phone camera, and perform a scan of the room by following the instructions indicated on the screen and checking the veracity of the information calculated and transcribed. It is possible that the application asks the user to enter one or more distances manually to perform more precise calculations.",
+    "modelsOriginsTitle": "Where do the models come from ?",
+    "modelsOriginsText": "These 3D models are provided to us directly by the partner brands whose catalog is present in the application. If the partners do not have 3D models, we will offer them conversion solutions in order to be compatible with our service. In the worst case, we can adapt to them and offer support for additional formats according to the needs of our partners.",
+    "whyUseArdecoTitle": "Why should I use ARDeco ?",
+    "whyUseArdecoText": "The project therefore saves time when furnishing your room. Thanks to the budget and style selection, the scanning of the room to capture the dimensions of the walls and furniture (if present in the room) and the AI previously described which retrieves furniture corresponding to the criteria and dimensions then pose, saving user time and agent. Another improvement that the project brings to the user is that he is sure of the final rendering of his room and will not be disappointed, since he can visualize in augmented reality in his room the final arrangement, and even carry out tests to be sure.",
+    "inAppPurchaseTitle": "Can I buy furniture from the app ?",
+    "inAppPurchaseText": "Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user."
   },
   "footer": {
     "stayTuned": "Stay tuned",
     "contactUs": "Contact us",
     "newsletter": "Join our newsletter",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "rules": "Legal rules",
+    "privacyPolicy": "Privacy Policy",
+    "cgu": "Terms of use"
   },
   "home": {
     "welcomeTitle": "Welcome to ARDeco",
@@ -70,10 +94,34 @@
     },
     "augmentedRealityTitle": "Augmented Reality",
     "augmentedRealityText": "We chose Augmented Reality for this project because it offers an immersive, interactive experience, allowing you to visualize and experiment with various design elements in real-time, right in your own space. ARDeco eliminates the guesswork and the need for costly, time-consuming redesigns by giving you a true-to-life preview of your dream space. Discover endless possibilities and unleash your creativity with ARDeco – the future of interior design is here.",
-    "keyPoints": "Key Points"
+    "keyPoints": "Key Points",
+    "keyPointsBlocks": [
+      {
+        "title": "AI-Powered Design Recommendations",
+        "description": "Our intelligent algorithms analyze your space and offer personalized design suggestions based on your unique preferences and requirements."
+      },
+      {
+        "title": "Real-Time Visualization",
+        "description": "See how different furniture, colors, and accessories look in your space instantly, making it easy to compare and choose the perfect design elements."
+      },
+      {
+        "title": "Easy-to-Use Interface",
+        "description": "With a user-friendly design and intuitive controls, ARDeco lets you transform your space in just a few taps."
+      },
+      {
+        "title": "Share Your Designs",
+        "description": "Collaborate with friends, family, or professionals by sharing your designs, getting feedback, and fine-tuning your space together."
+      },
+      {
+        "title": "Endless Inspiration",
+        "description": "Explore a vast library of styles, trends, and design ideas to help you create a space that truly reflects your personality."
+      }
+    ]
   },
   "login": {
     "welcome": "Welcome user N°",
+    "loginTitle": "Login",
+    "registerTitle": "Register",
     "logout": "Logout",
     "login": "Login",
     "register": "Register",
@@ -83,11 +131,21 @@
     "firstName": "First name : ",
     "lastName": "Last name : ",
     "city": "City : ",
-    "phone": "Phone : "
+    "phone": "Phone : ",
+    "loading": "Loading...",
+    "optional": "Optional",
+    "optionalFields": "Optional fields",
+    "mandatory": "Mandatory",
+    "mandatoryFields": "Mandatory fields",
+    "consent": "I consent to the processing of my personal data as described in our Privacy Policy",
+    "hasRead": "I have read and accept the Terms of Use",
+    "consentNotGiven": "You must consent to the Terms of Use and Privacy Policy to continue."
   },
   "profile": {
-    "yourFavoriteThemes": "Your favorites themes",
-    "yourRecentPurchaces": "Your recent purchases",
+    "yourFavoriteThemes": "My favorites themes",
+    "yourRecentPurchaces": "My recent purchases",
+    "yourFavoriteFurnitures": "My favorites furnitures",
+    "yourFavoriteGalleries": "My favorites galleries",
     "informations": {
       "firstName": "First name : ",
       "lastName": "Last name : ",
@@ -95,23 +153,252 @@
       "phone": "Phone : ",
       "city": "City : ",
       "savedItems": "Saved items in gallery : ",
-      "commandsOrdered": "Commands ordered : ",
-      "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)"
+      "commandsOrdered": "Ordered command(s) : ",
+      "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)",
+      "role": "Role : "
     },
-    "settings": {
+    "loading": "Loading...",
+    "buttons": {
+      "cancel": "Cancel",
+      "update": "Update settings",
+      "confirm": "Confirm",
+      "delete": "Delete account"
+    }
+  },
+  "deleteAccount": {
+    "title": "Delete account",
+    "text": "Are you sure you want to delete your account ? This action is irreversible and will delete all your data.",
+    "email": "Email : ",
+    "password": "Password : ",
+    "passwordConfirm": "Confirm password : ",
+    "loading": "Loading...",
+    "placeholders": {
+      "email": "Your email here",
+      "password": "Your password here",
+      "passwordConfirm": "Confirm your password here"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "delete": "Delete"
+    }
+  },
+  "settings": {
+    "users": {
       "firstAndLastName": "First and last name",
       "getUserSettings": "Get user settings",
       "setUserSettings": "Set user settings",
-      "addFurnitureToCatalog": "Add a furniture to the catalog",
       "getUserGallery": "Get user gallery",
+      "currentUserSettingsTitle" : "Your current settings",
+      "language" : "Language",
+      "title" : "Settings"
+    },
+    "companies": {
+      "addFurnitureToCatalog": "Add a furniture to the catalog",
       "changeGalleryVisibility": "Change gallery item visibility",
       "getCompagnyCatalog": "Get compagny catalog",
       "getCompagnyArchive": "Get compagny archive",
       "emptyCompagnyArchive": "Empty compagny archive",
       "archiveItem": "Archive item",
       "restoreItemFromArchive": "Restore item from archive",
-      "resetCompagnyApiKey": "Reset company API key"
+      "resetCompagnyApiKey": "Reset company API key",
+      "title" : "Company settings",
+      "placeholders": {
+        "furnitureName" : "Furniture name",
+        "furniturePrice" : "Furniture price",
+        "furnitureStyles" : "Furniture styles",
+        "furnitureRooms" : "Furniture rooms",
+        "furnitureHeight" : "Furniture height",
+        "furnitureWidth" : "Furniture width",
+        "furnitureDepths" : "Furniture depths",
+        "furnitureColors" : "Furniture colors",
+        "itemInputID" : "Item ID"
+      }
     }
   },
-  "languageChangerText": "Translate to FR"
+  "tickets": {
+    "title": "Support",
+    "somethingWrong": "Something's wrong ?",
+    "askUs": "Ask us !",
+    "writeYourProblemHere": "Write your problem here",
+    "pendingTickets": "Awaiting issues",
+    "createTicket": "Create an issue",
+    "updateTicket": "Update my issue"
+  },
+  "languageChangerText": "Translate to FR",
+  "privacyPolicy": {
+    "introduction": {
+      "title": "Introduction",
+      "objective": "The purpose of this privacy policy is to inform you about the way in which ARDeco collects, uses and protects your personal data.",
+      "engagement": "We are committed to respecting your privacy and protecting your personal data.",
+      "readCarefully": "We invite you to read this privacy policy carefully to understand our practices regarding your personal data and how we treat it."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "cookies": "We use cookies for the sole purpose of identifying users and providing access to authorized services.",
+      "collection": "These cookies are automatically collected by our web server and stored in the user's browser from the moment they log in or register until they log out.",
+      "usage": "We do not store any personal data other than the internal unique identifier in cookies.",
+      "consent": "By using our services, users consent to the use of these cookies.",
+      "share": "We do not share these cookies with third parties and their use remains internal."
+    },
+    "identification": {
+      "title": "Identification data",
+      "collection": "We collect and process certain private data in the course of our activities to identify and authenticate each user.",
+      "dataTypes": "Identifying Data includes, but is not limited to, names, addresses, email addresses, phone numbers, demographic information, and any other information voluntarily provided by Users in connection with our Services.",
+      "usage": "This data is collected for the purpose of providing and personalizing our services, communicating with users, as well as responding to their requests."
+    },
+    "bank": {
+      "title": "Bank data",
+      "collection": "We collect and process banking information necessary to process payments and transactions made on our platform.",
+      "dataTypes": "This data may include credit/debit card numbers, banking details and any other information associated with financial transactions (such as order history).",
+      "usage": "We take appropriate security measures to protect this sensitive data and ensure its confidentiality."
+    },
+    "social": {
+      "title": "Social data",
+      "collection": "We collect and process certain social data as part of our services to enable users to share information and interact with each other.",
+      "dataTypes": "This data may include usernames, profile photos, saved rooms, posts, comments, likes, shares and any other information voluntarily shared by users.",
+      "usage": "This data is collected with the aim of facilitating social interactions between users and personalizing their experience."
+    },
+    "private": {
+      "title": "Private data",
+      "collection": "We collect and process certain private data as part of our services to enable our algorithms to function properly.",
+      "dataTypes": "This data may include any relevant information obtained when analyzing images submitted by users during and following a scan. This may concern the measurements obtained following submission of the image, the inventory of elements present in the image as well as any other information useful to the operation of the algorithm.",
+      "usage": "This data is only used ephemerally for the proper functioning of the furniture suggestion and placement algorithm."
+    },
+    "statistics": {
+      "title": "Statistic data",
+      "collection": "We collect and process statistical data as part of our services to generate reports and analyzes on the use of our services.",
+      "usage": "This data is used to analyze trends, calibrate the recommendation and placement algorithm, share user preferences (on average and anonymously) with partner companies and generate general usage statistics to improve our services."
+    },
+    "internal": {
+      "title": "Internal data",
+      "collection": "We collect and process internal data, used solely for the purposes of optimizing the user experience on our services.",
+      "dataTypeCart": "This data includes the user's basket data, in order to facilitate purchases within the application, this data does not generate statistics and can be deleted or modified by the user at any time.",
+      "dataTypeFavorites": "This data includes the user's favorite data, in order to facilitate the saving of their favorite furniture or rooms within the application, this data can be deleted or modified by the user at any time.",
+      "dataTypeTickets": "This data includes the user's support tickets, which are not deleted in order to preserve the history, however their permanent deletion is possible upon written request or automatically upon closure of the account.",
+      "usage": "This data is collected in order to optimize user experience and personalize our services. It is stored internally and is not shared or processed externally or for legal purposes."
+    },
+    "device": {
+      "title": "Device data",
+      "collection": "We collect and process data from the devices used to ensure the correct startup and operation of the application and to allow the system to adapt and make use of available device technologies.",
+      "dataTypes": "This data may include model, manufacturer, operating system version, kernel version, specific features available to each device, automatic application crash reports, automatic application startup reports , characteristics of peripherals such as processors and its associated data, chips and graphics cards and their associated data, RAM and its associated data, internal storage and its associated data, external storage and its associated data, statistics of resources taken by the application and the version of the application used.",
+      "usage": "This data is collected in order to ensure the proper functioning of the application and to personalize our services. It is stored internally and is not shared or processed externally or for legal purposes."
+    },
+    "conclusion": {
+      "title": "Conclusion",
+      "usage": "All data collected is used solely within the framework of our services and in accordance with applicable data protection laws.",
+      "share": "We will not share this data with unauthorized third parties unless necessary to provide our services, to comply with a legal obligation, or with the explicit consent of the user.",
+      "userRights": "Users have the right to request access, rectification, deletion or limitation of the processing of their personal data, as well as to object to their processing and request portability of their data.",
+      "keep": "We retain this data for as long as necessary to provide our services, to achieve the purposes described in this policy, unless a longer retention period is required or permitted by law, or until the user requests its deletion .",
+      "acceptance": "By using our services, users consent to the collection, processing and use of their private and banking data in accordance with this privacy policy.",
+      "questions": "If you have any questions regarding this privacy policy, please contact us by email or through our support.",
+      "update": "We reserve the right to update this privacy policy at any time."
+    }
+  },
+  "cgu": {
+    "object": {
+      "title": "Article 1 - Purpose",
+      "text": "The purpose of these General Conditions of Use is to define the terms and conditions of use of the Service offered by ARDeco to its users."
+    },
+    "definitions": {
+      "title": "Article 2 - Definitions",
+      "userTitle": "User",
+      "userText": "Any user, whether professional or individual, connecting to the Service.",
+      "serviceTitle": "Service",
+      "serviceText": "All the services offered by ARDeco to its users.",
+      "userContentTitle": "User Content",
+      "userContentText": "All elements transmitted by the User within the Service.",
+      "userAccountTitle": "User Account",
+      "userAccountText": "Information necessary to identify a user on the Service.",
+      "editorTitle": "Editor",
+      "editorText": "The person or entity, legal or physical, responsible for the editing and content of the Service."
+    },
+    "accessAndUse": {
+      "title": "Article 3 - Access and use of the Service",
+      "access": "Access to the Service is reserved for any user with an internet connection. All costs necessary for access to the Service (computer hardware, software, internet connection, etc.) are the responsibility of the 'User.",
+      "account": "The user having access to the Service must have a User Account. This account is personal and cannot be shared. In the event of non-compliance with the T&Cs, the Service reserves the right to suspend or delete the User's Account without notice or compensation.",
+      "content": "The Service allows the User to publish content. In this case, the User remains the owner of any content that he publishes. The User, however, transfers to the Publisher the right to publish this content on the service.",
+      "responsibility": "The User is responsible for any content he publishes. The User undertakes to only publish content for which he has the necessary rights.",
+      "moderation": "The Service reserves the right to moderate or delete any content published by the User at any time and without notice or justification.",
+      "data": "The User is informed and accepts that the implementation of the Service requires that his personal data be transmitted to third parties.",
+      "availability": "The Service strives to provide the Service 24 hours a day, 7 days a week. In the event of an interruption, the Service will endeavor to communicate to Users in advance the dates and times of the intervention." ,
+      "responsibility2": "The Publisher cannot be held responsible for any direct or indirect damage caused to the User's equipment when accessing the Service.",
+      "cookies": "The Service may use cookies. In this case, the Service informs the User of the possibility of deactivating cookies from their browser settings.",
+      "proprietary": "The Service and its content (texts, images, sounds, videos, etc.) are the exclusive property of the Publisher.",
+      "license": "The User has a non-exclusive and non-transferable license to use the Service.",
+      "responsibility3": "The User undertakes not to reproduce, copy, modify, sell, resell, decompile, disassemble, distribute, license or exploit all or part of the Service without the express authorization of the Publisher.",
+      "sanctions": "In the event of non-compliance with the T&Cs, the Publisher reserves the right to suspend or delete the User's Account without notice or compensation."
+    },
+    "intellectualProperty": {
+      "title": "Article 4 - Intellectual property",
+      "content": "The brands, logos, signs and any other content of the Service are protected by the Intellectual Property Code and by copyright.",
+      "license": "The User requests prior authorization from the Publisher for any reproduction, publication, copy of the various contents.",
+      "sanctions": "Any unauthorized use of the contents of the Service will incur the civil and criminal liability of the User on the basis of the infringement."
+    },
+    "personalData": {
+      "title": "Article 5 - Personal data",
+      "data": "The personal data collected by the Service are necessary for the proper execution of the Service.",
+      "use": "These data may be used by the Service to enable the User's navigation on the Service, to improve the quality of the Service, to send commercial information and to personalize the services offered to the User.",
+      "duration": "Personal data is kept for the period necessary to fulfill the purposes for which it was collected.",
+      "policy": "The User can consult the Service's privacy policy to find out more about the collection and processing of their personal data.",
+      "opposition": "The User has the right to object to the collection of their personal data. The exercise of this right may, however, prevent access to the Service.",
+      "deletion": "The User has the right to request the deletion of his personal data. The exercise of this right may, however, prevent access to the Service.",
+      "responsibility": "The Publisher undertakes not to communicate the User's personal data to third parties without their consent.",
+      "security": "The User's personal data may be retained by the Service for security reasons."
+    },
+    "responsibility": {
+      "title": "Article 6 - Liability",
+      "security": "The Publisher undertakes to ensure the security and confidentiality of data transmitted by the User.",
+      "limitation": "However, liability cannot be incurred in the event of force majeure or the unforeseeable and insurmountable act of a third party.",
+      "content": "The Publisher is not responsible for the content published by the User. The User undertakes to only publish content for which he has the necessary rights.",
+      "sanctions": "The Publisher reserves the right to delete any content published by the User which contravenes the legislation in force in France.",
+      "responsibility": "The Publisher cannot be held responsible for direct or indirect damage caused to the User's equipment when accessing the Service, including damage caused by viruses or malware.",
+      "userResponsibility": "The User is solely responsible for damage caused to third parties as a result of the use of the Service."
+    },
+    "cguEdit": {
+      "title": "Article 7 - Modification of the T&Cs",
+      "modification": "The Publisher reserves the right to modify the T&Cs at any time and without notice.",
+      "acceptance": "The User is invited to regularly consult the T&Cs to be aware of any modifications.",
+      "application": "Use of the Service by the User constitutes acceptance of the T&Cs in force.",
+      "opposition": "The User who does not accept the T&Cs in force must unsubscribe from the Service.",
+      "previous": "Any general conditions prior to the modification will then be null and void.",
+      "opposition2": "Any modification of the T&Cs applies to the User upon its entry into force."
+    },
+    "durationAndCancellation": {
+      "title": "Article 8 - Duration and termination",
+      "duration": "These T&Cs apply for an indefinite period.",
+      "cancellation": "The User may terminate their Account at any time, without notice, without charge and without reason by sending a termination request to the Publisher.",
+      "deletion": "Termination of the Account results in the immediate deletion of all personal data of the User.",
+      "responsibility": "The Publisher cannot be held responsible for the loss of User data following the termination of their Account.",
+      "application": "Termination of the Account results in immediate removal of access to the Service.",
+      "responsibility2": "The Publisher reserves the right to terminate the Account of any User who contravenes the T&Cs."
+    },
+    "litige": {
+      "title": "Article 9 - Disputes",
+      "applicable": "These T&Cs are governed by French law.",
+      "conciliation": "In the event of a dispute not resolved amicably between the User and the Publisher, the French courts have jurisdiction to settle the dispute.",
+      "responsibility": "For any questions relating to the application of the T&Cs, the User can contact the Publisher via the customer support tool."
+    },
+    "generalDisposition": {
+      "title": "Article 10 - General provisions",
+      "nullity": "If one of the clauses of the T&Cs is declared null by a court decision, the other clauses remain in force.",
+      "nonRenunciation": "The fact that the Publisher does not take advantage of a clause of the General Terms and Conditions does not imply its waiver of the right to take advantage of this clause at a later date."
+    },
+    "contact": {
+      "title": "Article 11 - Contact",
+      "contact": "For any questions relating to the T&Cs, the User can contact the Publisher via the customer support tool.",
+      "email": "The Publisher can be contacted by email at the following address: contact@ardeco.app"
+    }
+  },
+  "orderHistory": {
+    "title": "Order history",
+    "loading": "Loading...",
+    "noOrders": "No orders found",
+    "order": "Order",
+    "date": "Date",
+    "total": "Total amount",
+    "id": "ID",
+    "furniture": "Furniture",
+    "actions": "Actions",
+    "download": "Download invoice"
+  }
 }

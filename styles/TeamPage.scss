@@ -84,6 +84,14 @@
     width: 50%;
     height: 70%;
     // border: 3px solid blue;
+
+    .timeline-active, .timeline-inactive {
+        flex: 1 1 0px;
+    }
+
+    .internship-logo {
+        //max-width: 2px;
+    }
 }
 
 .timeline-inactive {
