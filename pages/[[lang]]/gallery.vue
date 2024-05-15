@@ -1,29 +1,33 @@
 <template>
     <Navbar :urlLang=lang></Navbar>
     <div class="title">{{ content.title }}</div>
-    <div id="fav_furniture_loading">{{ content.loading }}</div>
-    <div>
-        <div class="form">
-            <div class="grid">
-                <div class="grid-header">
-                    <div class="grid-item cell-id">{{ content.id }}</div>
-                    <div class="grid-item cell-name">{{ content.name }}</div>
-                    <div class="grid-item cell-desc">{{ content.description }}</div>
-                    <div class="grid-item cell-author">{{ content.author }}</div>
-                    <div class="grid-item cell-room">{{ content.roomType }}</div>
-                    <div class="grid-item cell-furniture">{{ content.furnitureTable }}</div>
-                    <div class="grid-item cell-actions">{{ content.actionSingOrPlu }}</div>
+    <div class="form">
+        <div class="grid">
+            <div class="grid-header">
+                <div class="grid-item">{{ content.id }}</div>
+                <div class="grid-item">{{ content.name }}</div>
+                <div class="grid-item">{{ content.roomType }}</div>
+                <div class="grid-item">{{ content.author }}</div>
+                <div class="grid-item">{{ content.actionSingOrPlu}}</div>
+            </div>
+            <div v-for="(item) in GalleryData" class="grid-row">
+                <div class="grid-item" v-if="item.visibility === true">{{ item.id }}</div>
+                <div class="grid-item" v-if="item.visibility === true">{{ item.name }}</div>
+                <div class="grid-item" v-if="item.visibility === true">{{ item.room_type }}</div>
+                <div class="grid-item" v-if="item.visibility === true">{{ item.user.first_name }} {{
+                        item.user.last_name
+                    }}
                 </div>
-                <div v-for="(item) in GalleryData" class="grid-row">
-                    <div class="grid-item cell-id">{{ item.gallery.id }}</div>
-                    <div class="grid-item cell-name">{{ item.gallery.name }}</div>
-                    <div class="grid-item cell-desc">{{ item.gallery.description }}</div>
-                    <div class="grid-item cell-author">{{ item.user.first_name }} {{ item.user.last_name }}</div>
-                    <div class="grid-item cell-room">{{ item.gallery.type }}</div>
-                    <div class="grid-item cell-furniture">{{ item.gallery.furniture }}</div>
-                    <div class="grid-item cell-actions">
-                        <button class="custom-button" @click="deleteGallery(item.gallery.id)">{{ content.delete }}</button><br />
-                        <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">{{ content.blockUser }}</button>
+                <div class="grid-item">
+                    <!-- <router-link :to="{ name: 'VoirDetails', params: { id: 1 }}">Voir Détails</router-link> -->
+                    <button class="custom-button" @click="openSidebar(item.id)" v-if="item.visibility === true">
+                        {{ content.details }}
+                    </button><br />
+                    <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">
+                        {{ content.blockUser }}
+                    </button>
+                    <div class="sidebar" :id="`sidebar-${item.id}`" style="left: -250px">
+                        Sidebar Content
                     </div>
                 </div>
             </div>
@@ -40,10 +44,10 @@ import fr from "~/src/lang/fr.json";
 
 const route = useRoute();
 let lang = ref(route.params.lang);
-let content = ref({});
-let GalleryData = ref([]);
-let errorMessage = ref("");
-let successMessage = ref("");
+const content = ref({});
+const GalleryData = ref([]);
+const errorMessage = ref("");
+const successMessage = ref("");
 const langPrefix = ref("/");
 const userID = ref(0);
 
@@ -58,16 +62,14 @@ onMounted(async () => {
         }
     }
 
-    console.log(lang.value);
-
     // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.favorite.gallery : fr.favorite.gallery;
+    content.value = lang.value === 'en' ? en.gallery : fr.gallery;
 
     // Prefix for links
     langPrefix.value = lang.value === 'en' ? '/en/' : '/fr/';
 
     await checkLogin();
-    await getFavGallery();
+    await getGallery();
 });
 
 async function checkLogin() {
@@ -78,14 +80,9 @@ async function checkLogin() {
     userID.value = Number(userID_tmp);
 }
 
-async function getFavGallery() {
+async function getGallery() {
     try {
-        const userID = localStorage.getItem('userID');
-        if (!userID) {
-            throw new Error('No user found, redirecting to login');
-        }
-
-        const response = await fetch('https://api.ardeco.app/favorite/gallery', {
+        const response = await fetch('https://api.ardeco.app/gallery?user_details', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -97,7 +94,6 @@ async function getFavGallery() {
             throw new Error('Failed to fetch data');
         }
 
-        document.getElementById("fav_furniture_loading").style.display = "none";
         const result = await response.json();
         GalleryData.value = result.data;
     } catch (error) {
@@ -106,24 +102,23 @@ async function getFavGallery() {
     }
 }
 
-async function deleteGallery(id) {
-    try {
-        const response = await fetch(`https://api.ardeco.app/favorite/Gallery/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-        });
-        if (response.ok) {
-            successMessage.value = 'Gallery deleted successfully';
-            GalleryData.value = GalleryData.value.filter(item => item.gallery.id !== id);
-        } else {
-            throw new Error('Failed to delete Gallery');
+async function redirectDetails(id) {
+    window.location.href = '/voirDetails/' + id;
+}
+
+async function openSidebar(id) {
+    /*const all_sidebars = document.getElementsByClassName('.sidebar');
+    all_sidebars.forEach(sidebar => {
+        if (sidebar.style.left === "0") {
+            sidebar.style.left = "-250px";
         }
-    } catch (error) {
-        console.error(error);
-        errorMessage.value = 'An error occurred while deleting the gallery.';
+      });*/
+
+    const sidebar = document.getElementById(`sidebar-${id}`);
+    if (sidebar.style.left === "-250px") {
+        sidebar.style.left = "0";
+    } else {
+        sidebar.style.left = "-250px";
     }
 }
 
@@ -152,6 +147,10 @@ async function blockUser(userID) {
 </script>
 
 <style scoped lang="scss">
+.container {
+    padding: 20px;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -169,12 +168,23 @@ async function blockUser(userID) {
 }
 
 .custom-button {
-    padding: 5px 20px;
+    padding: 10px 25px;
     background-color: #F2EBDF;
-    color: rgb(62 64 63);
-    border: 2px solid rgb(62 64 63);
+    color: rgb(62, 64, 63);
+    border: 2px solid rgb(62, 64, 63);
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.custom-button:hover {
+    background-color: #e0d8c6;
+    color: rgb(35, 37, 36);
+    border-color: rgb(35, 37, 36);
+}
+
+.custom-button:active {
+    transform: translateY(2px);
 }
 
 .grid {
@@ -188,10 +198,17 @@ async function blockUser(userID) {
     min-width: 1400px;
     display: flex;
     font-weight: bold;
+
 }
 
 .grid-row {
     display: flex;
+}
+
+.grid-item {
+    flex: 1;
+    padding: 10px;
+    border-right: 1px solid #000;
 }
 
 .grid-item:last-child {
@@ -204,9 +221,9 @@ async function blockUser(userID) {
 
 .grid-item {
     flex: 1;
-    padding: 12px; /* Adjust padding */
-    border-right: 1px solid #ddd; /* Lighter border */
-    border-bottom: 1px solid #ddd; /* Add bottom border */
+    padding: 12px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
     align-content: center;
 }
 
@@ -217,12 +234,19 @@ async function blockUser(userID) {
     margin-top: 5%;
 }
 
-#fav_furniture_loading {
-    text-align: center;
-    margin-top: 5%;
+.container {
+    padding-top: 90px;
 }
 
-.cell-id {
-    flex-grow: 0.2;
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Caché par défaut */
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    transition: left 0.3s ease;
 }
 </style>

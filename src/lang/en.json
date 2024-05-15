@@ -400,5 +400,54 @@
     "furniture": "Furniture",
     "actions": "Actions",
     "download": "Download invoice"
+  },
+  "favorite": {
+    "furniture": {
+
+    },
+    "gallery": {
+      "title": "Favorite galleries (designs)",
+      "loading": "Loading...",
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "date": "Date",
+      "author": "Author",
+      "furnitureTable": "Furniture",
+      "roomType": "Room type",
+      "item": "Item",
+      "noItems": "No items found.",
+      "action": "Action",
+      "actions": "Actions",
+      "actionSingOrPlu": "Action(s)",
+      "delete": "Delete",
+      "deleteAll": "Delete all",
+      "blockUser": "Block user"
+    }
+  },
+  "gallery": {
+    "title": "Gallery",
+    "loading": "Loading...",
+    "noGalleries": "No gallery found.",
+    "gallery": "Gallery",
+    "id": "ID",
+    "name": "Name",
+    "description": "Description",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "date": "Date",
+    "author": "Author",
+    "furnitureTable": "Furniture",
+    "roomType": "Room type",
+    "item": "Item",
+    "noItems": "No item found.",
+    "action": "Action",
+    "actions": "Actions",
+    "actionSingOrPlu": "Action(s)",
+    "details": "Details",
+    "delete": "Delete",
+    "blockUser": "Block user"
   }
 }

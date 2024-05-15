@@ -1,6 +1,6 @@
 <template>
-    <Navbar :urlLang=this.lang></Navbar>
-    <div class="title" style="margin-top: 10%">{{ content.title }}</div>
+    <Navbar :urlLang=lang></Navbar>
+    <div class="title">{{ content.title }}</div>
     <div id="order_history_loading">{{ content.loading }}</div>
     <div id="order_history_error">{{ errorMessage }}</div>
     <div class="form" id="order_history_table" style="display: none">
@@ -26,128 +26,118 @@
     <div id="order_history_noOrder" style="display: none;">{{ content.noOrders }}</div>
 </template>
 
-<script>
-import {isLogged} from "public/js/checkLogin";
-import fr from "/src/lang/fr.json";
-import en from "/src/lang/en.json";
+<script setup>
 import Navbar from "~/components/Navbar.vue";
+import {isLogged} from "public/js/checkLogin";
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+import {onMounted, ref} from "vue";
 
-export default {
-    name: "FavFurniture",
-    components: {
-        Navbar
-    },
-    setup() {
-        const route = useRoute();
-        return { route };
-    },
-    data() {
-        return {
-            orderHistory: [],
-            errorMessage: '',
-            successMessage: '',
-            content: {},
-            langPrefix: "/",
-            lang: this.route.params.lang
-        };
-    },
-    mounted() {
-        // If lang selector is not passed in url, get the user's one or set it to french
-        if (this.lang !== 'en' && this.lang !== 'fr') {
-            const localStorageLang = localStorage.getItem('lang');
-            if (localStorageLang) {
-                this.lang = localStorageLang;
-            } else {
-                this.lang = 'fr';
-            }
+const route = useRoute();
+let lang = ref(route.params.lang);
+let content = ref({});
+let orderHistory = ref([]);
+let errorMessage = ref("");
+let successMessage = ref("");
+const langPrefix = ref("/");
+const user_id = ref(0);
+
+onMounted(async () => {
+    // If lang selector is not passed in url, get the user's one or set it to french
+    if (lang.value !== 'en' && lang.value !== 'fr') {
+        const localStorageLang = localStorage.getItem('lang');
+        if (localStorageLang) {
+            lang.value = localStorageLang;
+        } else {
+            lang.value = 'fr';
         }
+    }
 
-        console.log(this.lang);
+    console.log(lang.value);
 
-        // Set the content variable to the correct language
-        this.content = this.lang === 'en' ? en.orderHistory : fr.orderHistory;
+    // Set the content variable to the correct language
+    content.value = lang.value === 'en' ? en.orderHistory : fr.orderHistory;
 
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
-        }
+    // Prefix for links
+    if (location.href.includes("/fr/")) {
+        langPrefix.value = "/fr/";
+    } else if (location.href.includes("/en/")) {
+        langPrefix.value = "/en/";
+    }
 
-        this.checkLogin();
-        this.getOrderHistory();
-    },
-    methods: {
-        async checkLogin() {
-            const userID = await isLogged();
-            if (!userID) {
-                location.href = this.langPrefix + "login";
-            }
+    await checkLogin();
+    await getOrderHistory();
+});
+
+async function checkLogin() {
+    const userID = await isLogged();
+    if (!userID) {
+        location.href = langPrefix.value + "login";
+    }
+    user_id.value = Number(userID);
+}
+
+async function getOrderHistory() {
+    const response = await fetch(`https://api.ardeco.app/order_history/user/${user_id.value}?mode=details`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
         },
+        credentials: 'include',
+    });
 
-        async getOrderHistory() {
-            const response = await fetch('https://api.ardeco.app/order_history/user/2?mode=details', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-            });
+    if (!response.ok) {
+        console.error("Error on fetching order history");
+        errorMessage.value = "Error on fetching order history";
+        return;
+    }
 
-            if (!response.ok) {
-                console.error("Error on fetching order history");
-                this.errorMessage = "Error on fetching order history";
-                return;
-            }
+    const result = await response.json();
 
-            const result = await response.json();
+    document.getElementById("order_history_loading").style.display = "none";
+    if (result.code !== 200) {
+        console.error(result);
+        errorMessage.value = result.description;
+        document.getElementById("order_history_error").style.display = "block";
+    } else {
+        orderHistory.value = result.data;
+        console.log(orderHistory.value);
+        if (orderHistory.value.length > 0) {
+            document.getElementById("order_history_table").style.display = "flex";
+        } else {
+            document.getElementById("order_history_noOrder").style.display = "block";
 
-            document.getElementById("order_history_loading").style.display = "none";
-            if (result.code !== 200) {
-                console.error(result);
-                this.errorMessage = result.description;
-                document.getElementById("order_history_error").style.display = "block";
-            } else {
-                this.orderHistory = result.data;
-                console.log(this.orderHistory);
-                if (this.orderHistory.length > 0) {
-                    document.getElementById("order_history_table").style.display = "flex";
-                } else {
-                    document.getElementById("order_history_noOrder").style.display = "block";
-
-                }
-            }
-        },
-
-        async downloadInvoice(id) {
-            this.errorMessage = '';
-
-            const response = await fetch(`https://api.ardeco.app/order_history/invoice/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/pdf',
-                },
-                credentials: 'include',
-            });
-
-            if (!response.ok) {
-                console.error("Error on fetching invoice");
-                this.errorMessage = "Error on fetching invoice N°" + id;
-                return;
-            }
-
-            const result = await response.blob();
-
-            if (response.status !== 200) {
-                console.error(result);
-                alert(result.description);
-            } else {
-                //const file = new Blob([result], {type: 'application/pdf'});
-                response.headers
-                const file = URL.createObjectURL(result);
-                window.open(file, '_blank');
-            }
         }
+    }
+}
+
+async function downloadInvoice(id) {
+    errorMessage.value = '';
+
+    const response = await fetch(`https://api.ardeco.app/order_history/invoice/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/pdf',
+        },
+        credentials: 'include',
+    });
+
+    if (!response.ok) {
+        console.error("Error on fetching invoice");
+        errorMessage.value = "Error on fetching invoice N°" + id;
+        return;
+    }
+
+    const result = await response.blob();
+
+    if (response.status !== 200) {
+        console.error(result);
+        alert(result.description);
+    } else {
+        //const file = new Blob([result], {type: 'application/pdf'});
+        response.headers
+        const file = URL.createObjectURL(result);
+        window.open(file, '_blank');
     }
 }
 </script>
@@ -195,12 +185,6 @@ export default {
 
 .grid-row {
     display: flex;
-}
-
-.grid-item {
-    flex: 1;
-    padding: 10px;
-    border-right: 1px solid #000;
 }
 
 .grid-item:last-child {

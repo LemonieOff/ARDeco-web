@@ -400,5 +400,54 @@
     "furniture": "Meubles",
     "actions": "Actions",
     "download": "Télécharger la facture"
+  },
+  "favorite": {
+    "furniture": {
+
+    },
+    "gallery": {
+      "title": "Galeries (aménagements) favorites",
+      "loading": "Chargement en cours...",
+      "id": "ID",
+      "name": "Nom",
+      "description": "Description",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "date": "Date",
+      "author": "Auteur",
+      "furnitureTable": "Meubles",
+      "roomType": "Type de pièce",
+      "item": "Élément",
+      "noItems": "Aucun élément trouvé.",
+      "action": "Action",
+      "actions": "Actions",
+      "actionSingOrPlu": "Action(s)",
+      "delete": "Supprimer",
+      "deleteAll": "Supprimer tout",
+      "blockUser": "Bloquer l'utilisateur"
+    }
+  },
+  "gallery": {
+    "title": "Galerie",
+    "loading": "Chargement en cours...",
+    "noGalleries": "Aucune galerie trouvée.",
+    "gallery": "Galerie",
+    "id": "ID",
+    "name": "Nom",
+    "description": "Description",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "date": "Date",
+    "author": "Auteur",
+    "furnitureTable": "Meubles",
+    "roomType": "Type de pièce",
+    "item": "Élément",
+    "noItems": "Aucun élément trouvé.",
+    "action": "Action",
+    "actions": "Actions",
+    "actionSingOrPlu": "Action(s)",
+    "details": "Détails",
+    "delete": "Supprimer",
+    "blockUser": "Bloquer l'utilisateur"
   }
 }
