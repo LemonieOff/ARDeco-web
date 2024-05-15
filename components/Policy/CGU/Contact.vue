@@ -1,7 +1,8 @@
 <template>
-    <div class="recent-purchases">
-        <div id="yourRecentPurchaces" class="sub-title">{{ content.yourRecentPurchaces }}</div>
-        <div class="empty-text-content"></div>
+    <div class="question-content background-card">
+        <div class="title underline">{{ content.title }}</div>
+        <div class="sub-title gray-text-color">{{ content.contact }}</div>
+        <div class="sub-title gray-text-color">{{ content.email }}</div>
     </div>
 </template>
 
@@ -10,7 +11,7 @@ import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
 export default {
-    name: "RecentPurchases",
+    name: "",
     props: {
         urlLang: String | null
     },
@@ -25,15 +26,16 @@ export default {
 
         // If lang selector is not passed in url, get the user's one or set it to french
         if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
+            const localStorageLang = localStorage.getItem('lang');
+            if (localStorageLang) {
+                lang = localStorageLang;
             } else {
                 lang = 'fr';
             }
         }
 
         // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.profile : fr.profile;
+        this.content = lang === 'en' ? en.cgu.contact : fr.cgu.contact;
 
         // Prefix for links
         if (location.href.includes("/fr/")) {
@@ -46,5 +48,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~/styles/ProfileSettings.scss";
+@import '~/styles/FAQPage.scss';
 </style>

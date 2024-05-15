@@ -10,6 +10,7 @@ export default {
     name: "LanguageChanger",
     mounted() {
         let lang = localStorage.getItem('lang')
+        console.log("lang is : ", lang);
         if (lang == 'en') {
             document.getElementById('languageChanger').innerText = en.languageChangerText
         } else {
@@ -18,6 +19,7 @@ export default {
     },
     methods: {
         changeLanguage() {
+            console.log("getItem : ", localStorage.getItem('lang'));
             let lang = localStorage.getItem('lang')
             if (lang == "fr") {
                 localStorage.setItem('lang', "en")
@@ -26,6 +28,7 @@ export default {
                 localStorage.setItem('lang', "fr")
                 location.href = location.href.replace("/fr/", "/en/")
             }
+            console.log("lang was : ", lang, " and is now : ", localStorage.getItem('lang'));
         }
     },
 };

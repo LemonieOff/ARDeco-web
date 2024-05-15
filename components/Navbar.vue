@@ -3,15 +3,43 @@
         <a id="home" class="navbar-option" :href="`${langPrefix}`">{{content.home}}</a>
         <a id="team" class="navbar-option" :href="`${langPrefix}team`">{{content.team}}</a>
         <a id="product" class="navbar-option" :href="`${langPrefix}product`">{{content.product}}</a>
-        <a id="profile" class="navbar-option" :href="`${langPrefix}profile`">{{content.profile}}</a>
-        <a id="profile" class="navbar-option" :href="`${langPrefix}settings`">{{content.settings}}</a>
-        <button id="dark-mode-button" style="color: #F2EBDF;" @click="toggleDarkMode">{{content.darkmode}}</button>
+        <button id="dark-mode-button" @click="toggleDarkMode">{{content.darkmode}}</button>
+        <button id="light-mode-button" @click="toggleDarkMode">{{content.lightmode}}</button>
+        <div class="action">
+            <div class="menu">
+                <ul>
+                    <li id="profileMenuOption">
+                        <img src="~/.././assets/images/icons/user.png" /><a :href="`${langPrefix}profile`">{{content.profile}}</a>
+                    </li>
+                    <li id="settingsMenuOption">
+                        <img src="~/../../assets/images/icons/settings.png" /><a :href="`${langPrefix}settings`">{{content.settings}}</a>
+                    </li>
+                    <li id="companyMenuOption">
+                        <img src="~/../../assets/images/icons/company.png" /><a :href="`${langPrefix}company`">{{content.company}}</a>
+                    </li>
+                    <li id="ticketsMenuOption">
+                        <img src="~/../../assets/images/icons/support.png" /><a :href="`${langPrefix}tickets`">{{content.tickets}}</a>
+                    </li>
+                    <li id="disconnectMenuOption">
+                        <img src="~/../../assets/images/icons/logout.png" /><a @click="logout">{{content.disconnect}}</a>
+                    </li>
+                    <li id="loginMenuOption">
+                        <img src="~/../../assets/images/icons/logout.png" /><a :href="`${langPrefix}login`">{{content.login}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="user" @click="menuToggle">
+                <img id="profileImage" class="navbar-icon" src="~/../../assets/images/profile-pictures/Valentin.png"/>
+                <img id="defaultImage" class="navbar-icon" src="~/../../assets/images/profile-pictures/Unknown.png"/>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
+import { disconnect } from "public/js/checkLogin";
 
 export default {
     name: "Navbar",
@@ -26,6 +54,30 @@ export default {
     },
     mounted() {
         let lang = this.urlLang;
+        const userID = localStorage.getItem('userID');
+        const dark_mode = localStorage.getItem('dark_mode');
+        const role = localStorage.getItem('role');
+
+        if (userID == null) {
+            document.getElementById("profileMenuOption").style.display = "none";
+            document.getElementById("settingsMenuOption").style.display = "none";
+            document.getElementById("companyMenuOption").style.display = "none";
+            document.getElementById("ticketsMenuOption").style.display = "none";
+            document.getElementById("disconnectMenuOption").style.display = "none";
+            document.getElementById("profileImage").style.display = "none";
+        } else {
+            document.getElementById("loginMenuOption").style.display = "none";
+            document.getElementById("defaultImage").style.display = "none";
+            if (role == "client") {
+                document.getElementById("companyMenuOption").style.display = "none";
+            }
+        }
+
+        if (dark_mode == 'true') {
+            document.getElementById("dark-mode-button").style.display = "none";
+        } else {
+            document.getElementById("light-mode-button").style.display = "none";
+        }
 
         // If lang selector is not passed in url, get the user's one or set it to french
         if (lang !== 'en' && lang !== 'fr') {
@@ -49,6 +101,10 @@ export default {
         this.checkDarkMode();
     },
     methods: {
+        async menuToggle() {
+            const toggleMenu = document.querySelector(".menu");
+            toggleMenu.classList.toggle("active");
+        },
         async checkDarkMode() {
             const dark_mode = localStorage.getItem('dark_mode');
 
@@ -103,6 +159,8 @@ export default {
             const body = document.body
             if (dark_mode == 'false') {
                 localStorage.setItem('dark_mode', 'true');
+                document.getElementById("dark-mode-button").style.display = "none";
+                document.getElementById("light-mode-button").style.display = "inline-block";
                 body.style = "background-color: #474E68; color: #BB86FC";
 
                 if (document.URL.includes("team")) {
@@ -134,6 +192,8 @@ export default {
             } else {
                 body.style = ""
                 localStorage.setItem('dark_mode', 'false');
+                document.getElementById("dark-mode-button").style.display = "inline-block";
+                document.getElementById("light-mode-button").style.display = "none";
 
                 if (document.URL.includes("team")) {
                     backgoundFade[0].style = "background: linear-gradient(312deg, rgba(242, 235, 223, 0.91) 64.31%, rgba(255, 199, 0, 0.65) 100%)"
@@ -163,6 +223,16 @@ export default {
                 });
             }
         },
+        async logout() {
+            const response = await fetch('https://api.ardeco.app/logout', {
+                method: 'GET',
+                credentials: 'include',
+            });
+            await disconnect();
+            localStorage.removeItem('lang');
+            const result = await response.text();
+            console.log(result);
+        }
     },
 };
 </script>
@@ -173,6 +243,10 @@ export default {
 .dark-body {
     background-color: darkslategray;
     color: white;
+}
+
+#disconnectMenuOption {
+    cursor: pointer;
 }
 
 </style>
