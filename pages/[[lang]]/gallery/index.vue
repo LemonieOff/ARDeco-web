@@ -19,10 +19,10 @@
                     }}
                 </div>
                 <div class="grid-item">
-                    <!-- <router-link :to="{ name: 'VoirDetails', params: { id: 1 }}">Voir Détails</router-link> -->
-                    <button class="custom-button" @click="openSidebar(item.id)" v-if="item.visibility === true">
+                    <a :href="`${langPrefix}gallery/${item.id}`" class="custom-button" v-if="item.visibility === true">{{ content.details }}</a>
+                    <!--<button class="custom-button" @click="openSidebar(item.id)" v-if="item.visibility === true">
                         {{ content.details }}
-                    </button><br />
+                    </button>--><br/>
                     <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">
                         {{ content.blockUser }}
                     </button>
