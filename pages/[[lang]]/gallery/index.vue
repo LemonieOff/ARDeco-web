@@ -168,6 +168,7 @@ async function blockUser(userID) {
 }
 
 .custom-button {
+    display: inline-block;
     padding: 10px 25px;
     background-color: #F2EBDF;
     color: rgb(62, 64, 63);
