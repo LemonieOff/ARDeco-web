@@ -1,33 +1,36 @@
 <template>
-    <Navbar/>
-    <div class="container">
-        <div class="title">Details</div>
-            <div class="form">
-                <div class="grid">
-                    <div class="grid-header">
-                    <div class="grid-item">ID</div>
-                    <div class="grid-item">Nom</div>
-                    <div class="grid-item">Description</div>
-                    <div class="grid-item">Auteur</div>
-                    <div class="grid-item">Type</div>
-                    <div class="grid-item">Meubles</div>
-                </div>
-                <div class="grid-row">
-                        <div class="grid-item">{{ GalleryData.id }}</div>
-                        <div class="grid-item">{{ GalleryData.name }}</div> 
-                        <div class="grid-item">{{ GalleryData.description }}</div>
-                        <div class="grid-item"  v-if="GalleryData.user_id" >{{ UserData.data.lastname }} {{ UserData.data.firstname }}</div>
-                        <div class="grid-item">{{ GalleryData.room_type }}</div>
-                        <div class="grid-item">{{ GalleryData.furniture }}</div>
-                </div>
-            </div>
+  <Navbar/>
+  <div class="container">
+    <div class="title">Détails de la Galerie</div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-item">
+          <strong>ID:</strong> {{ GalleryData.id }}
         </div>
+        <div class="card-item">
+          <strong>Nom:</strong> {{ GalleryData.name }}
+        </div> 
+        <div class="card-item">
+          <strong>Description:</strong> {{ GalleryData.description }}
+        </div>
+        <div class="card-item" v-if="GalleryData.user_id" >
+          <strong>Auteur:</strong> {{ UserData.data.lastname }} {{ UserData.data.firstname }}
+        </div>
+        <div class="card-item">
+          <strong>Pièces:</strong> {{ GalleryData.room_type }}
+        </div>
+        <div class="card-item">
+          <strong>Meubles:</strong> {{ GalleryData.furniture }}
+        </div>
+      </div>
     </div>
-  </template>
+    <br>
+    <button class="custom-button" @click="goToGallery">Retour à la Galerie</button>
+  </div>
+</template>
   
 <script>
   import {isLogged} from "public/js/checkLogin";
-// check next3 , page gallery/3 pour les details 
   export default {
     name: "Gallery",
     data() {
@@ -40,7 +43,8 @@
     },
     created() {
       this.checkLogin();
-      this.getGallery(5);
+      const id = this.$route.params.id;
+      this.getGallery(id);
     },
     methods: {
       async checkLogin() {
@@ -104,6 +108,9 @@
                 sidebar.style.left = "-250px";
             }
         },
+        goToGallery() {
+        this.$router.push('/gallery');
+      },
     }
   }
 </script>
@@ -127,22 +134,6 @@
 
 .edit-success {
   color: green;
-}
-
-.custom-button {
-  padding: 10px 25px;
-  background-color: #F2EBDF;
-  color: rgb(62, 64, 63);
-  border: 2px solid rgb(62, 64, 63);
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-.custom-button:hover {
-  background-color: #e0d8c6;
-  color: rgb(35, 37, 36);
-  border-color: rgb(35, 37, 36);
 }
 
 .custom-button:active {
@@ -208,4 +199,36 @@
   padding: 20px;
   transition: left 0.3s ease;
 }
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom right, #f3f3f3, #e0e0e0);
+    color: #333; /* Couleur du texte */
+  }
+
+  .card-content {
+    padding: 20px;
+  }
+
+  .card-item {
+    margin-bottom: 15px;
+  }
+
+  .custom-button {
+    background-color: rgb(191, 178, 170);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .custom-button:hover {
+    background-color: #5d5249; /* Couleur de survol */
+  }
+
 </style>

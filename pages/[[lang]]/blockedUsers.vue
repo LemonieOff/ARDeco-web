@@ -3,7 +3,7 @@
     <Navbar/>
     <div class="blocked-users">
       <div class="title">Utilisateurs bloqués</div>
-      <div v-if="UserData.length > 0">
+      <div class="user-grid" v-if="UserData.length > 0">
         <div class="blocked-user" v-for="userData in UserData" :key="userData.data.userId">
           <div class="user-cube">
             <div class="user-details">
@@ -117,8 +117,15 @@
     margin-bottom: 20px;
   }
   
+  .user-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .blocked-user {
     margin-bottom: 20px;
+    margin-right: 20px; /* Espacement entre les utilisateurs bloqués */
   }
   
   .user-cube {
