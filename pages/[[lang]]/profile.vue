@@ -61,13 +61,21 @@
             </div>
         </div>
 
-        <div class="profile-wrapper-lower-buttons" style="margin: 2%; margin-left: 35%; width: 30%; background-color: none; display: none">
+        <div class="profile-wrapper-lower-buttons" style="margin: 2% 2% 2% 35%;width: 30%; display: none">
             <div class="profile-elements-wrapper">
                 <div class="element">
                     <a id="yourFavoriteFurnitures" :href="`${langPrefix}favFurniture`" class="button">{{ content.yourFavoriteFurnitures }}</a>
                 </div>
                 <div class="element2">
                     <a id="yourFavoriteGalleries" :href="`${langPrefix}favGallery`" class="button">{{ content.yourFavoriteGalleries }}</a>
+                </div>
+            </div>
+            <div class="profile-elements-wrapper">
+                <div class="element">
+                    <a id="galleryAccess" :href="`${langPrefix}gallery`" class="button">{{ content.gallery }}</a>
+                </div>
+                <div class="element2">
+                    <a id="blockedUsersAccess" :href="`${langPrefix}blockedUsers`" class="button">{{ content.blockedUsers }}</a>
                 </div>
             </div>
         </div>
