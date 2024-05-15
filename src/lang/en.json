@@ -146,6 +146,8 @@
     "yourRecentPurchaces": "My recent purchases",
     "yourFavoriteFurnitures": "My favorites furnitures",
     "yourFavoriteGalleries": "My favorites galleries",
+    "gallery": "Public gallery",
+    "blockedUsers": "Blocked users",
     "informations": {
       "firstName": "First name : ",
       "lastName": "Last name : ",

@@ -145,14 +145,16 @@
     "yourFavoriteThemes": "Mes thèmes favoris",
     "yourRecentPurchaces": "Mes récents achats",
     "yourFavoriteFurnitures": "Mes meubles favoris",
-    "yourFavoriteGalleries": "Mes galleries favorites",
+    "yourFavoriteGalleries": "Mes galeries favorites",
+    "gallery": "Galerie public",
+    "blockedUsers": "Utilisateurs bloqués",
     "informations": {
       "firstName": "Prénom : ",
       "lastName": "Nom de famille : ",
       "email": "Adresse email : ",
       "phone": "Téléphone : ",
       "city": "Ville : ",
-      "savedItems": "Élements sauvegardés dans la gallerie : ",
+      "savedItems": "Élements sauvegardés dans la galerie : ",
       "commandsOrdered": "Nombre de commande(s) : ",
       "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)",
       "role": "Rôle : "

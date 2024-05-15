@@ -9,7 +9,7 @@
             <div class="user-details">
               <p class="user-name">{{ 'Nom : '+ userData.data.lastname }}</p>
               <p class="user-name">{{ 'Prenom : '+ userData.data.firstname }}</p>
-              <p class="user-name">{{ 'User_ID : '+ userData.data.userId }}</p>
+              <p class="user-name">{{ 'ID : '+ userData.data.userId }}</p>
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@
             console.error(error.message);
             this.errorMessage = error.message;
         }
-        for(let x = 0; this.BlockedData[x] != undefined; x++) {
+        for(let x = 0; this.BlockedData[x] !== undefined; x++) {
             await this.getUserFullName(this.BlockedData[x]);
         }
     },
@@ -141,4 +141,3 @@
     color: #888;
   }
   </style>
-  
