@@ -101,7 +101,15 @@
         "title": "Endless Inspiration",
         "description": "Explore a vast library of styles, trends, and design ideas to help you create a space that truly reflects your personality."
       }
-    ]
+    ],
+    "timeline": {
+      "title": "Our project's steps",
+      "testAndLearn": "Experimenting with technologies to find the most compatible ones with the project and the desired objectives.",
+      "managementAndProcess": "Stage aiming to work on our internal organization as a team for the rest of the project.",
+      "fastForward": "The goal of this sprint is to make significant progress to achieve an Alpha version.",
+      "betaAndGrowthHacking": "Having a testable Beta that can be launched in real conditions with real users.",
+      "consolidation": "Have a final, fully functional application, usable by interested users."
+    }
   },
   "login": {
     "welcome": "Welcome user N°",

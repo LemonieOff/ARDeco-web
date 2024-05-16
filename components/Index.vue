@@ -58,37 +58,37 @@
             </li>
         </ul>
     </div>
-    <div class="timelineTitle">Our project's steps</div>
+    <div class="timelineTitle">{{ timeline.title }}</div>
     <div class="timeline">
         <div class="outer">
             <div class="card">
                 <div class="info">
                     <h3 class="title">TEST & LEARN</h3>
-                    <p>Expérimenter des technologies pour trouver les plus compatibles avec le projet et les objectifs recherchés.</p>
+                    <p>{{ timeline.testAndLearn }}</p>
                 </div>
             </div>
             <div class="card">
                 <div class="info">
                     <h3 class="title">MANAGEMENT & PROCESS</h3>
-                    <p>Étape ayant comme objectif de travailler notre organisation interne en tant qu'équipe pour le reste du projet.</p>
+                    <p>{{ timeline.managementAndProcess }}</p>
                 </div>
             </div>
             <div class="card">
                 <div class="info">
                     <h3 class="title">FAST FORWARD</h3>
-                    <p>Le but de ce sprint est d’avoir une avancée significative afin que d'atteindre une version Alpha.</p>
+                    <p>{{ timeline.fastForward }}</p>
                 </div>
             </div>
             <div class="card">
                 <div class="info">
                     <h3 class="title">BETA & GROWTH HACKING</h3>
-                    <p>Avoir une Bêta testable pouvant être  lancée en conditions réelles avec de vrais utilisateurs.</p>
+                    <p>{{ timeline.betaAndGrowthHacking }}</p>
                 </div>
             </div>
             <div class="card">
                 <div class="info">
                     <h3 class="title">CONSOLIDATION</h3>
-                    <p>?</p>
+                    <p>{{ timeline.consolidation }}</p>
                 </div>
             </div>
         </div>
@@ -110,6 +110,7 @@ export default {
     data() {
         return {
             content: {},
+            timeline: {},
             transition: {},
             langPrefix: "/",
             backgroundUrl: backgroundUrl,
@@ -132,7 +133,7 @@ export default {
         // Set the content variable to the correct language
         this.content = lang === 'en' ? en.home : fr.home;
         this.transition = this.content.transitionEffect;
-
+        this.timeline = this.content.timeline;
         this.features = this.content.keyPointsBlocks;
 
         // Prefix for links
