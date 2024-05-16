@@ -301,4 +301,52 @@ span.outline-text {
         transform: translateX(-100%);
     }
 }
+
+@media only screen and (max-width: 500px) {
+    #welcomeTitle {
+        font-size: 72px;
+    }
+
+    #productPresentation {
+        font-size: 16px;
+    }
+
+    #augmentedRealityText {
+        font-size: 16px;
+    }
+
+    .timelineTitle {
+        margin-top: 100%;
+    }
+
+    .timeline {
+        width: 80%;
+        margin-left: 10%;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    #welcomeTitle {
+        font-size: 96px;
+    }
+
+    #productPresentation {
+        font-size: 18px;
+    }
+
+    #augmentedRealityText {
+        font-size: 18px;
+    }
+
+    .timelineTitle {
+        margin-top: 5%;
+    }
+
+    .timeline {
+        width: 60%;
+        margin-left: 20%;
+    }
+}
+
 </style>
