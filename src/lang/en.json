@@ -239,6 +239,7 @@
     "youCantReplyToAClosedTicket": "You can't reply to a closed ticket",
     "send": "SEND",
     "close": "CLOSE",
+    "back": "BACK",
     "pending": "Pending",
     "closed": "Closed",
     "deleted": "Deleted"

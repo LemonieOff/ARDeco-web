@@ -236,9 +236,10 @@
     "createTicket": "Créer une demande",
     "updateTicket": "Mettre à jour ma demande",
     "typeYourTextHere": "Écrivez votre message ici",
-    "youCantReplyToAClosedTicket": "Vous ne opuvez pas répondre à un ticket fermé",
+    "youCantReplyToAClosedTicket": "Vous ne pouvez pas répondre à un ticket fermé",
     "send": "ENVOYER",
     "close": "FERMER",
+    "back": "RETOUR",
     "pending": "En attente",
     "closed": "Fermé",
     "deleted": "Supprimé"

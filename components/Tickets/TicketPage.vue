@@ -33,8 +33,11 @@
             </div>
             <input ref="responseInput" v-if="currentTicketStatus === 'pending'" type="text" class="newMessageInuput" :placeholder="content.typeYourTextHere">
             <input ref="responseInput" v-if="currentTicketStatus === 'closed'" class="newMessageInuput" :placeholder="content.youCantReplyToAClosedTicket">
-            <button class="buttonFontClass sendMessage" v-if="currentTicketStatus === 'pending'" @click="sendNewMessage"> {{ content.send }}</button>
-            <button class="buttonFontClass closeMessage" @click="closeConversation"> {{ content.close }}</button>
+            <span class="ticketButtons">
+                <button class="buttonFontClass sendMessage" v-if="currentTicketStatus === 'pending'" @click="sendNewMessage"> {{ content.send }}</button>
+                <button class="buttonFontClass closeMessage" v-if="currentTicketStatus === 'pending'" @click="closeTicket"> {{ content.close }}</button>
+                <button class="buttonFontClass goBack" @click="closeConversation"> {{ content.back }}</button>
+            </span>
         </div>
     </div>
 </template>
@@ -185,7 +188,28 @@ name: "TicketPage",
             this.$refs.responseInput.value = "";
             await this.receiveTicketDetails(this.currentTicketID);
         },
-        closeConversation() {
+        async closeTicket() {
+            await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+
+            const response = await fetch('https://api.ardeco.app/ticket/close/' + `${this.currentTicketID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log("result", result);
+
+            this.$refs.responseInput.value = "";
+            await this.receiveTicketDetails(this.currentTicketID);
+            await this.getUserTickets();
+        },
+        async closeConversation() {
             this.$refs.responseInput.value = null;
             this.$refs.ticketManage.style.display = "none";
             this.$refs.ticketCreator.style.display = "block";
@@ -327,7 +351,7 @@ name: "TicketPage",
 
 .newMessageInuput {
     margin-top: 1%;
-    min-width: 80%;
+    min-width: 78%;
     min-height: 18%;
     border: 1px solid black;
     border-radius: 5px;
@@ -335,6 +359,9 @@ name: "TicketPage",
 
 .buttonFontClass {
     font-size: 10px;
+}
+
+.ticketButtons {
 }
 
 .sendMessage {
@@ -365,6 +392,22 @@ name: "TicketPage",
 
 .closeMessage:hover {
     color: #fe9496;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.goBack {
+    margin-left: 1%;
+    background-color: #505050;
+    color: #FFFFFF;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 4px;
+}
+
+.goBack:hover {
+    color: #505050;
     background-color: #FFFFFF;
     cursor: pointer;
 }
