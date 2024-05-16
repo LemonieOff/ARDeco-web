@@ -182,7 +182,14 @@
     "writeYourProblemHere": "Message us your problem in detail here",
     "pendingTickets": "Awaiting issues",
     "createTicket": "Create an issue",
-    "updateTicket": "Update my issue"
+    "updateTicket": "Update my issue",
+    "typeYourTextHere": "Type yout message here",
+    "youCantReplyToAClosedTicket": "You can't reply to a closed ticket",
+    "send": "SEND",
+    "close": "CLOSE",
+    "pending": "Pending",
+    "closed": "Closed",
+    "deleted": "Deleted"
   },
   "languageChangerText": "Translate to FR",
   "privacyPolicy": {

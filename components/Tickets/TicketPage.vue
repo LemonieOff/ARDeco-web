@@ -7,38 +7,56 @@
         <div class="subTitle">{{ content.askUs }}</div>
     </div>
     <div class="pageContent">
-        <div id="pendingTickets" class="pendingTickets">
+        <div class="pendingTickets">
             <div class="alignCenter">{{ content.pendingTickets }}</div>
-            <div class="alignCenter pendingTicket">
-                <div class="ticketStatus">STATUS</div>
-                <div class="ticketTitle">TITRE</div>
+            <div class="alignCenter pendingTicket" v-for="ticket in tickets" :key="ticket.id" :class="getTicketStatusClass(ticket.status)" @click="receiveTicketDetails(ticket.id)">
+                <div class="ticketStatus">{{ content[ticket.status] }}</div>
+                <div class="ticketTitle">{{ ticket.title }}</div>
             </div>
         </div>
-        <div class="manageTicket">
-            <input id="title" type="text" class="titleOrDescripion" :placeholder="content.writeYourTitleHere">
-            <input id="description" type="text" class="titleOrDescripion" :placeholder="content.shortDescriptionOfYourProblem">
-            <input id="message" type="text" class="textContent" :placeholder="content.writeYourProblemHere">
+        <div ref="ticketCreator" class="manageTicket">
+            <input ref="titleInput" type="text" class="titleOrDescripion" :placeholder="content.writeYourTitleHere">
+            <input ref="descriptionInput" type="text" class="titleOrDescripion" :placeholder="content.shortDescriptionOfYourProblem">
+            <input ref="messageInput" type="text" class="textContent" :placeholder="content.writeYourProblemHere">
             <button class="alignCenter ticketManagementButton" @click="createTicket">{{ content.createTicket }}</button>
-            <!-- <button class="alignCenter">{{ content.updateTicket }}</button> -->
+        </div>
+        <div ref="ticketManage" class="manageTicket" style="display: none;">
+            <div class="messageHistory">
+                <div class="message" v-for="message in messages" :key="message.timestamp" :class="{ 'fromUser': message.sender !== 'Support', 'fromSupport': message.sender === 'Support' }">
+                    {{ message.content }}
+                    <div class="messageDetails">
+                        <span> {{ message.sender }}</span>
+                        <span> - </span>
+                        <span> {{ formatDate(message.timestamp) }}</span>
+                    </div>
+                </div>
+            </div>
+            <input ref="responseInput" v-if="currentTicketStatus === 'pending'" type="text" class="newMessageInuput" :placeholder="content.typeYourTextHere">
+            <input ref="responseInput" v-if="currentTicketStatus === 'closed'" class="newMessageInuput" :placeholder="content.youCantReplyToAClosedTicket">
+            <button class="buttonFontClass sendMessage" v-if="currentTicketStatus === 'pending'" @click="sendNewMessage"> {{ content.send }}</button>
+            <button class="buttonFontClass closeMessage" @click="closeConversation"> {{ content.close }}</button>
         </div>
     </div>
 </template>
-
+  
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import { isLogged, loggedIn } from "public/js/checkLogin";
 
 export default {
-    name: "TicketPage",
+name: "TicketPage",
     props: {
         urlLang: String | null
     },
     data() {
         return {
             content: {},
-            placeholders: {},
-            langPrefix: "/"
+            tickets: [],
+            messages: [],
+            langPrefix: "/",
+            currentTicketID: null,
+            currentTicketStatus: null
         }
     },
     mounted() {
@@ -68,9 +86,9 @@ export default {
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            const title = document.getElementById("title").value;
-            const description = document.getElementById("description").value;
-            const message = document.getElementById("message").value;
+            const title = this.$refs.titleInput.value;
+            const description = this.$refs.descriptionInput.value;
+            const message = this.$refs.messageInput.value;
             const response = await fetch('https://api.ardeco.app/ticket/create?mode=id', {
                 method: 'POST',
                 headers: {
@@ -87,9 +105,40 @@ export default {
             const result = await response.json();
             console.log(result);
 
-            document.getElementById("title").value = "";
-            document.getElementById("description").value = "";
-            document.getElementById("message").value = "";
+            this.$refs.titleInput.value = "";
+            this.$refs.descriptionInput.value = "";
+            this.$refs.messageInput.value = "";
+
+            this.getUserTickets();
+        },
+        async receiveTicketDetails(ticketID) {
+            await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+
+            const response = await fetch('https://api.ardeco.app/ticket/' + `${ticketID}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            this.$refs.ticketManage.style.display = "block";
+            this.$refs.ticketCreator.style.display = "none";
+
+            const result = await response.json();
+            console.log("result", result);
+
+            if (result.code == 200) {
+                this.messages = JSON.parse(result.data.messages);
+                this.currentTicketStatus = result.data.status;
+                console.log("messages", this.messages);
+                console.log("status", this.currentTicketStatus);
+            }
+            
+            this.currentTicketID = ticketID;
         },
         async getUserTickets() {
             const userID = await isLogged();
@@ -109,36 +158,50 @@ export default {
             console.log("result", result);
 
             if (result.code == 200) {
-                const ticketsContainer = document.getElementById('pendingTickets');
-                result.data.forEach(ticket => {
-                    const ticketDiv = document.createElement('div');
-                    // ticketDiv.classList.add('alignCenter', 'pendingTicket');
-                    ticketDiv.style = "padding-top: 2.5%; display: inline-flex; background-color: #F2EBDF; border-radius: 5px; border: 1px solid black; height: 10%; width: 90%; margin-left: 5%; margin-top: 2.5%;";
-
-                    const statusDiv = document.createElement('div');
-                    statusDiv.classList.add('ticketStatus');
-                    statusDiv.style = "max-width: 20%; border: 1px solid red;";
-
-                    statusDiv.textContent = ticket.status;
-                    if (ticket.status == "pending")
-                        ticketDiv.style.backgroundColor = "#fe9496";
-                    else if (ticket.status == "closed")
-                        ticketDiv.style.backgroundColor = "#1bcfc4";
-                    else if (ticket.status == "deleted")
-                        ticketDiv.style.backgroundColor = "#9e58ff";
-                    else
-                        console.log("ERROR : ", ticket.status)
-
-                    const titleDiv = document.createElement('div');
-                    titleDiv.classList.add('ticketTitle');
-                    titleDiv.style = "max-width: 75%; border: 1px solid green; margin-left: 5%;";
-                    titleDiv.textContent = ticket.title;
-
-                    ticketDiv.appendChild(statusDiv);
-                    ticketDiv.appendChild(titleDiv);
-                    ticketsContainer.appendChild(ticketDiv);
-                });
+                this.tickets = result.data;
             }
+        },
+        async sendNewMessage() {
+            await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+
+            const message = this.$refs.responseInput.value;
+            const response = await fetch('https://api.ardeco.app/ticket/write/' + `${this.currentTicketID}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "message": message
+                }),
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log("result", result);
+
+            this.$refs.responseInput.value = "";
+            await this.receiveTicketDetails(this.currentTicketID);
+        },
+        closeConversation() {
+            this.$refs.responseInput.value = null;
+            this.$refs.ticketManage.style.display = "none";
+            this.$refs.ticketCreator.style.display = "block";
+            this.messages = [];
+            this.currentTicketStatus = null;
+        },
+        getTicketStatusClass(status) {
+            if (status === "pending") return "pending";
+            else if (status === "closed") return "closed";
+            else if (status === "deleted") return "deleted";
+            else return "";
+        },
+        formatDate(timestamp) {
+            const newTimestamp = timestamp.replace(/,/g, '');
+            const date = new Date(parseInt(newTimestamp) * 1000);
+            return date.toLocaleString();
         }
     }
 }
@@ -147,26 +210,60 @@ export default {
 <style lang="scss" scoped>
 
 .pendingTicket {
+    cursor: pointer;
     display: inline-flex;
-    background-color: #F2EBDF;
     border-radius: 5px;
     border: 1px solid black;
     height: 10%;
     width: 90%;
     margin-left: 5%;
     margin-top: 2.5%;
-    padding-top: 2.5%;
 }
 
 .ticketStatus {
-    max-width: 20%;
-    border: 1px solid red;
+    margin-left: 5%;
+    align-self: center;
+    width: 30%;
+    padding: 1%;
 }
 
 .ticketTitle {
-    max-width: 80%;
+    align-self: center;
+    max-width: 60%;
     margin-left: 5%;
-    border: 1px solid green;
+}
+
+.pending {
+    background-color: #f5f5f5;
+    color: #fe9496;
+    font-weight: bold;
+}
+
+.pending:hover {
+    background-color: #fe9496;
+    color: #FFFFFF;
+}
+
+.closed {
+    background-color: #f5f5f5;
+    color: #1bcfc4;
+    font-weight: bold;
+}
+
+.closed:hover {
+    background-color: #1bcfc4;
+    color: #f5f5f5;
+}
+
+.deleted {
+    background-color: #f5f5f5;
+    color: #9e58ff;
+    font-weight: bold;
+}
+
+.deleted {
+    background-color: #9e58ff;
+    color: #f5f5f5;
 }
 
 ::placeholder {
@@ -202,6 +299,7 @@ export default {
 }
 
 .pendingTickets {
+    overflow-y: auto;
     background-color: #F5F5F5;
     padding: 1%;
     border: 1px solid;
@@ -218,6 +316,83 @@ export default {
     border-radius: 10px;
     margin-left: 5%;
     width: 50%;
+}
+
+.messageHistory {
+    height: 80%;
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+.newMessageInuput {
+    margin-top: 1%;
+    min-width: 80%;
+    min-height: 18%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.buttonFontClass {
+    font-size: 10px;
+}
+
+.sendMessage {
+    margin-left: 1%;
+    background-color: #1bcfc4;
+    color: #FFFFFF;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 4px;
+}
+
+.sendMessage:hover {
+    color: #1bcfc4;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.closeMessage {
+    margin-left: 1%;
+    background-color: #fe9496;
+    color: #FFFFFF;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 4px;
+}
+
+.closeMessage:hover {
+    color: #fe9496;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.message {
+    font-size: 16px;
+    border: 1px solid black;
+    padding: 2%;
+    padding-bottom: 1%;
+    padding-top: 1.5%;
+    margin: 1%;
+    max-width: 60%;
+    min-height: 4%;
+    border-radius: 5px;
+}
+
+.messageDetails {
+    font-size: 10px;
+}
+
+.fromUser {
+    background-color: #1bcfc4;
+}
+
+.fromSupport {
+    background-color: #e1e9f5;
+    text-align: end;
+    margin-left: 40%;
 }
 
 .textContent {
@@ -248,5 +423,4 @@ export default {
     margin-left: 30%;
     width: 40%;
 }
-
 </style>

@@ -183,7 +183,14 @@
     "writeYourProblemHere": "Détaillez clairement votre problème ici",
     "pendingTickets": "Demandes en attente",
     "createTicket": "Créer une demande",
-    "updateTicket": "Mettre à jour ma demande"
+    "updateTicket": "Mettre à jour ma demande",
+    "typeYourTextHere": "Écrivez votre message ici",
+    "youCantReplyToAClosedTicket": "Vous ne opuvez pas répondre à un ticket fermé",
+    "send": "ENVOYER",
+    "close": "FERMER",
+    "pending": "En attente",
+    "closed": "Fermé",
+    "deleted": "Supprimé"
   },
   "languageChangerText": "Traduire en EN",
   "privacyPolicy": {
