@@ -1,5 +1,5 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
+    <Navbar :urlLang=lang :profile=profile></Navbar>
     <ProfileSettings :urlLang=lang id="profileSettings" style="display: none"></ProfileSettings>
     <div id="profile-container">
         <div id="profile-loading" style="top: 10%;" class="form">
@@ -88,7 +88,7 @@ import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
 import {isLogged, loggedIn} from "public/js/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, provide} from "vue";
 
 const route = useRoute();
 let lang = ref(route.params.lang);
@@ -97,6 +97,8 @@ let info = ref({});
 let buttons = ref({});
 let settings = ref({});
 const langPrefix = ref("/");
+const profile = ref({});
+provide('profile', profile);
 
 onMounted(async () => {
     const userID = await isLogged();
@@ -138,6 +140,7 @@ onMounted(async () => {
     });
     const data_profile = await response_profile.json();
     const result_profile = data_profile.data;
+    profile.value = result_profile;
 
     // get gallery number data
     const response_gallery = await fetch(`https://api.ardeco.app/gallery/user/${userID}`, {
