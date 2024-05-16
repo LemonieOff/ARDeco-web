@@ -106,7 +106,6 @@ onMounted(async () => {
         location.href = langPrefix.value + "login";
     }
 
-    console.log(lang.value);
     // If lang selector is not passed in url, get the user's one or set it to french
     if (lang.value !== 'en' && lang.value !== 'fr') {
         const localStorageLang = localStorage.getItem('lang');
@@ -116,15 +115,12 @@ onMounted(async () => {
             lang.value = 'fr';
         }
     }
-    console.log(lang);
 
     // Set the content variable to the correct language
     content.value = lang.value === 'en' ? en.profile : fr.profile;
     info.value = lang.value === 'en' ? en.profile.informations : fr.profile.informations;
     buttons.value = lang.value === 'en' ? en.profile.buttons : fr.profile.buttons;
     settings.value = lang.value === 'en' ? en.profile.settings : fr.profile.settings;
-    console.log(lang.value === 'en');
-    console.log(content.value);
 
     // Prefix for links
     if (location.href.includes("/fr/")) {

@@ -34,7 +34,6 @@ export default {
         profile() {
             console.log("test");
             if (this.profile) {
-                 console.log(this.profile);
                 this.imageSrc = `https://api.ardeco.app/profile_pictures/${this.profile.profile_picture_id}.png`;
             }
         }
