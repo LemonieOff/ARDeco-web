@@ -64,31 +64,43 @@
             <div class="card">
                 <div class="info">
                     <h3 class="title">TEST & LEARN</h3>
+                    <h3 class="title">{{ timelineDates.june2023 }}</h3>
                     <p>{{ timeline.testAndLearn }}</p>
                 </div>
             </div>
             <div class="card">
                 <div class="info">
                     <h3 class="title">MANAGEMENT & PROCESS</h3>
+                    <h3 class="title">{{ timelineDates.october2023 }}</h3>
                     <p>{{ timeline.managementAndProcess }}</p>
                 </div>
             </div>
             <div class="card">
                 <div class="info">
                     <h3 class="title">FAST FORWARD</h3>
+                    <h3 class="title">{{ timelineDates.january2024 }}</h3>
                     <p>{{ timeline.fastForward }}</p>
                 </div>
             </div>
             <div class="card">
                 <div class="info">
                     <h3 class="title">BETA & GROWTH HACKING</h3>
+                    <h3 class="title">{{ timelineDates.may2024 }}</h3>
                     <p>{{ timeline.betaAndGrowthHacking }}</p>
                 </div>
             </div>
             <div class="card">
                 <div class="info">
                     <h3 class="title">CONSOLIDATION</h3>
+                    <h3 class="title">{{ timelineDates.september2024 }}</h3>
                     <p>{{ timeline.consolidation }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="info">
+                    <h3 class="title">LAUNCH AND METRIC</h3>
+                    <h3 class="title">{{ timelineDates.december2024 }}</h3>
+                    <p>{{ timeline.launchAndMetric }}</p>
                 </div>
             </div>
         </div>
@@ -111,6 +123,7 @@ export default {
         return {
             content: {},
             timeline: {},
+            timelineDates: {},
             transition: {},
             langPrefix: "/",
             backgroundUrl: backgroundUrl,
@@ -134,6 +147,7 @@ export default {
         this.content = lang === 'en' ? en.home : fr.home;
         this.transition = this.content.transitionEffect;
         this.timeline = this.content.timeline;
+        this.timelineDates = this.content.timeline.dates;
         this.features = this.content.keyPointsBlocks;
 
         // Prefix for links
