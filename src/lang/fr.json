@@ -181,7 +181,12 @@
       "cancel": "Annuler",
       "update": "Modifier",
       "confirm": "Confirmer",
-      "delete": "Supprimer le compte"
+      "delete": "Supprimer le compte",
+      "reset": "Réinitialiser"
+    },
+    "picture": {
+      "infoText": "Si aucune image n'est sélectionnée, l'image sera réinitialisée et utilisera celle par défaut.",
+      "confirmText": "Les changements prennent effet uniquement à partir de la confirmation."
     }
   },
   "deleteAccount": {
@@ -396,7 +401,7 @@
       "title": "Article 8 - Durée et résiliation",
       "duration": "Les présentes CGU s'appliquent pour une durée indéterminée.",
       "cancellation": "L'Utilisateur peut résilier son Compte à tout moment, sans préavis, sans frais et sans motif en adressant une demande de résiliation à l'Éditeur.",
-      "suppression": "La résiliation du Compte entraîne la suppression immédiate de toutes les données personnelles de l'Utilisateur.",
+      "deletion": "La résiliation du Compte entraîne la suppression immédiate de toutes les données personnelles de l'Utilisateur.",
       "responsibility": "L'Éditeur ne peut être tenu responsable de la perte de données de l'Utilisateur suite à la résiliation de son Compte.",
       "application": "La résiliation du Compte entraîne la suppression immédiate de l'accès au Service.",
       "responsibility2": "L'Éditeur se réserve le droit de résilier le Compte de tout Utilisateur qui contreviendrait aux CGU."
