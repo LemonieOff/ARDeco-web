@@ -135,7 +135,7 @@ name: "TicketPage",
             console.log("result", result);
 
             if (result.code == 200) {
-                this.messages = JSON.parse(result.data.messages);
+                this.messages = result.data.messages;
                 this.currentTicketStatus = result.data.status;
                 console.log("messages", this.messages);
                 console.log("status", this.currentTicketStatus);
