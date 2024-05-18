@@ -32,7 +32,7 @@
                 </div>
             </div>
             <input ref="responseInput" v-if="currentTicketStatus === 'pending'" type="text" class="newMessageInuput" :placeholder="content.typeYourTextHere">
-            <input ref="responseInput" v-if="currentTicketStatus === 'closed'" class="newMessageInuput" :placeholder="content.youCantReplyToAClosedTicket">
+            <input ref="responseInput" disabled style="cursor: not-allowed" v-if="currentTicketStatus === 'closed'" class="newMessageInuput" :placeholder="content.youCantReplyToAClosedTicket">
             <span class="ticketButtons">
                 <button class="buttonFontClass sendMessage" v-if="currentTicketStatus === 'pending'" @click="sendNewMessage"> {{ content.send }}</button>
                 <button class="buttonFontClass closeMessage" v-if="currentTicketStatus === 'pending'" @click="closeTicket"> {{ content.close }}</button>
@@ -41,7 +41,7 @@
         </div>
     </div>
 </template>
-  
+
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
