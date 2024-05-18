@@ -172,7 +172,12 @@
       "cancel": "Cancel",
       "update": "Update settings",
       "confirm": "Confirm",
-      "delete": "Delete account"
+      "delete": "Delete account",
+      "reset": "Reset"
+    },
+    "picture": {
+      "infoText": "If no image is selected, the image will be reset to the default one.",
+      "confirmText": "Changes take effect only upon confirmation."
     }
   },
   "deleteAccount": {

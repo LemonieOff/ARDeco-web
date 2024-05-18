@@ -1,5 +1,5 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
+    <Navbar :urlLang=lang :profile=profile></Navbar>
     <ProfileSettings :urlLang=lang id="profileSettings" style="display: none"></ProfileSettings>
     <div id="profile-container">
         <div id="profile-loading" style="top: 10%;" class="form">
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div class="profile-wrapper-lower-buttons" style="margin: 2% 2% 2% 35%;width: 30%; display: none">
+        <div class="profile-wrapper-lower-buttons">
             <div class="profile-elements-wrapper">
                 <div class="element">
                     <a id="yourFavoriteFurnitures" :href="`${langPrefix}favFurniture`" class="button">{{ content.yourFavoriteFurnitures }}</a>
@@ -88,7 +88,7 @@ import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
 import {isLogged, loggedIn} from "public/js/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, provide} from "vue";
 
 const route = useRoute();
 let lang = ref(route.params.lang);
@@ -97,6 +97,8 @@ let info = ref({});
 let buttons = ref({});
 let settings = ref({});
 const langPrefix = ref("/");
+const profile = ref({});
+provide('profile', profile);
 
 onMounted(async () => {
     const userID = await isLogged();
@@ -104,7 +106,6 @@ onMounted(async () => {
         location.href = langPrefix.value + "login";
     }
 
-    console.log(lang.value);
     // If lang selector is not passed in url, get the user's one or set it to french
     if (lang.value !== 'en' && lang.value !== 'fr') {
         const localStorageLang = localStorage.getItem('lang');
@@ -114,15 +115,12 @@ onMounted(async () => {
             lang.value = 'fr';
         }
     }
-    console.log(lang);
 
     // Set the content variable to the correct language
     content.value = lang.value === 'en' ? en.profile : fr.profile;
     info.value = lang.value === 'en' ? en.profile.informations : fr.profile.informations;
     buttons.value = lang.value === 'en' ? en.profile.buttons : fr.profile.buttons;
     settings.value = lang.value === 'en' ? en.profile.settings : fr.profile.settings;
-    console.log(lang.value === 'en');
-    console.log(content.value);
 
     // Prefix for links
     if (location.href.includes("/fr/")) {
@@ -138,6 +136,7 @@ onMounted(async () => {
     });
     const data_profile = await response_profile.json();
     const result_profile = data_profile.data;
+    profile.value = result_profile;
 
     // get gallery number data
     const response_gallery = await fetch(`https://api.ardeco.app/gallery/user/${userID}`, {
@@ -221,20 +220,28 @@ const cancelEdit = async () => {
 </script>
 
 <style scoped lang="scss">
+#profile-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 5%;
+}
 
 .profile-wrapper {
-    margin-left: 20%;
-    margin-top: 5%;
+    //margin-left: 20%;
+    //margin-top: 5%;
     background-color: #F4F4F4;
     border-radius: 20px;
-    width: 60%;
+    width: 90%;
     height: 20%;
 }
 
 .profile-wrapper-lower-buttons {
     margin: 2%;
-    margin-left: 35%;
-    width: 30%;
+    //margin-left: 35%;
+    width: 90%;
     height: 20%;
 }
 

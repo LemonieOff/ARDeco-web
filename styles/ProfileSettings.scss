@@ -10,10 +10,11 @@
 
 .content {
     display: flex;
-    width: 80%;
+    justify-content: space-evenly;
+    //width: 80%;
     height: 60%;
     margin-top: 10%;
-    margin-left: 10%;
+    //margin-left: 10%;
 }
 
 .favorite-themes {
@@ -31,9 +32,13 @@
 .profile-picture {
     margin-top: 5%;
     height: auto;
-    width: 20%;
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 15%;
+    /*    margin-left: 10%;
+        margin-right: 10%;*/
+}
+
+.profile-picture:hover {
+    cursor: pointer;
 }
 
 .first-and-last-names {
@@ -70,32 +75,30 @@
         left: 30%;
         width: 40%;
     }
-    
+
     .content {
-        width: 95%;
-        margin-top: 25%;
-        margin-left: 2.5%;
+        //width: 95%;
+        //margin-top: 25%;
+        //margin-left: 2.5%;
     }
-    
+
     .favorite-themes {
         width: 35%;
     }
-    
+
     .profile-details {
         width: 30%;
     }
-    
+
     .recent-purchases {
         width: 35%;
     }
-    
+
     .profile-picture {
-        margin-top: 50%;
-        width: 100%;
-    
-        margin-left: 0%;
+        //margin-top: 15%;
+        //width: 100%;
     }
-    
+
     .first-and-last-names {
         width: 100%;
 
@@ -103,7 +106,7 @@
         margin-left: 0%;
         font-size: 24px;
     }
-    
+
     .sub-title {
         font-size: 20px;
     }
@@ -115,32 +118,30 @@
         left: 30%;
         width: 40%;
     }
-    
+
     .content {
-        width: 95%;
-        margin-top: 20vh;
-        margin-left: 2.5%;
+        //width: 95%;
+        //margin-top: 20vh;
+        //margin-left: 2.5%;
     }
-    
+
     .favorite-themes {
         width: 35%;
     }
-    
+
     .profile-details {
         width: 30%;
     }
-    
+
     .recent-purchases {
         width: 35%;
     }
-    
+
     .profile-picture {
-        margin-top: 40%;
-        width: 100%;
-    
-        margin-left: 0%;
+        //margin-top: 10%;
+        //width: 100%;
     }
-    
+
     .first-and-last-names {
         width: 100%;
 
@@ -148,7 +149,7 @@
         margin-left: 0%;
         font-size: 14px;
     }
-    
+
     .sub-title {
         font-size: 14px;
     }
