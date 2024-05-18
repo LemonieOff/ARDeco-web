@@ -8,11 +8,10 @@
 }
 
 /* Links inside the navbar */
-.navbar a {
+.navbar .navbarLink {
     display: inline-block;
     color: #F2EBDF;
     padding: 14px 16px;
-    margin-left: 2.5%;
     margin-right: 2.5%;
     text-decoration: none;
 }
@@ -24,7 +23,7 @@
     right: 5%;
 }
 
-.navbar a:hover {
+.navbar .navbarLink:hover {
     background: #F2EBDF;
     color: black;
 }
@@ -35,6 +34,23 @@
 
 button {
     color: #F2EBDF;
+}
+
+#home {
+    position: fixed;
+    left: 35%;
+}
+
+#dark-mode-button {
+    position: fixed;
+    top: 1.5%;
+    right: 32.5%;
+}
+
+#light-mode-button {
+    position: fixed;
+    top: 1.5%;
+    right: 32.5%;
 }
 
 .action {
@@ -54,7 +70,7 @@ button {
 }
 
 .action .profile img {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -63,7 +79,7 @@ button {
 }
 
 .action .menu {
-    position: absolute;
+    position: fixed;
     top: 120px;
     right: -10px;
     padding: 10px 20px;
@@ -84,7 +100,7 @@ button {
 
 .action .menu::before {
     content: "";
-    position: absolute;
+    position: fixed;
     top: -5px;
     right: 28px;
     width: 20px;
@@ -127,9 +143,10 @@ button {
 @media screen and (max-width: 768px) {
     .navbar {
         text-align: left;
+        height: 6%;
     }
 
-    .navbar a {
+    .navbar .navbarLink {
         margin-left: 0%;
         margin-right: 0%;
         padding: 6px;
@@ -139,6 +156,35 @@ button {
 
     .navbar-option {
         font-size: 12px;
+    }
+
+    .navbarLink {
+        position: fixed;
+    }
+
+    #team {
+        left: 15%;
+    }
+
+    #product {
+        left: 40%;
+    }
+
+    #home {
+        position: fixed;
+        left: 5%;
+    }
+
+    #dark-mode-button {
+        position: fixed;
+        top: 0%;
+        left: 70%;
+    }
+
+    #light-mode-button {
+        position: fixed;
+        top: 25%;
+        left: 32.5%;
     }
 
     .action {

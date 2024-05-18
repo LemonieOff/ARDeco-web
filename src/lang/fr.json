@@ -116,7 +116,15 @@
         "title": "Inspiration infinie",
         "description": "Explorez une vaste bibliothèque de styles, de tendances et d'idées de conception pour vous aider à créer un espace qui reflète vraiment votre personnalité."
       }
-    ]
+    ],
+    "timeline": {
+      "title" : "Les étapes de notre projet",
+      "testAndLearn": "Expérimenter des technologies pour trouver les plus compatibles avec le projet et les objectifs recherchés.",
+      "managementAndProcess": "Étape ayant comme objectif de travailler notre organisation interne en tant qu'équipe pour le reste du projet.",
+      "fastForward": "Le but de ce sprint est d’avoir une avancée significative afin que d'atteindre une version Alpha.",
+      "betaAndGrowthHacking": "Avoir une Bêta testable pouvant être lancée en conditions réelles avec de vrais utilisateurs.",
+      "consolidation": "Avoir une application finale et pleinenement fonctionnelle, utilisable par des utilisateurs interessés."
+    }
   },
   "login": {
     "welcome": "Bienvenue utilisateur N°",
@@ -200,9 +208,9 @@
       "title": "Paramètres"
     },
     "companies": {
-      "addFurnitureToCatalog": "Ajouter un meuble au catalog",
+      "addFurnitureToCatalog": "Ajouter un meuble au catalogue",
       "changeGalleryVisibility": "Changer la visibilité d'un item",
-      "getCompagnyCatalog": "Voir mon catalog d'entreprise",
+      "getCompagnyCatalog": "Voir mon catalogue d'entreprise",
       "getCompagnyArchive": "Voir mon archive d'entreprise",
       "emptyCompagnyArchive": "Vider mon archive d'entreprise",
       "archiveItem": "Archiver cet élement",
@@ -226,10 +234,20 @@
     "title": "Support",
     "somethingWrong": "Quelque chose ne va pas ?",
     "askUs": "Demandez nous !",
-    "writeYourProblemHere": "Écrivez votre problème ici",
+    "writeYourTitleHere": "Écrivez le titre de votre problème ici",
+    "shortDescriptionOfYourProblem": "Décrivez votre problème en quelques mots",
+    "writeYourProblemHere": "Détaillez clairement votre problème ici",
     "pendingTickets": "Demandes en attente",
     "createTicket": "Créer une demande",
-    "updateTicket": "Mettre à jour ma demande"
+    "updateTicket": "Mettre à jour ma demande",
+    "typeYourTextHere": "Écrivez votre message ici",
+    "youCantReplyToAClosedTicket": "Vous ne pouvez pas répondre à un ticket fermé",
+    "send": "ENVOYER",
+    "close": "FERMER",
+    "back": "RETOUR",
+    "pending": "En attente",
+    "closed": "Fermé",
+    "deleted": "Supprimé"
   },
   "languageChangerText": "Traduire en EN",
   "privacyPolicy": {
