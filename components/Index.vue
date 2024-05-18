@@ -91,6 +91,12 @@
                     <p>{{ timeline.consolidation }}</p>
                 </div>
             </div>
+            <div class="card">
+                <div class="info">
+                    <h3 class="title">LAUNCH AND METRIC</h3>
+                    <p>{{ timeline.launchAndMetric }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
