@@ -164,7 +164,12 @@
       "cancel": "Annuler",
       "update": "Modifier",
       "confirm": "Confirmer",
-      "delete": "Supprimer le compte"
+      "delete": "Supprimer le compte",
+      "reset": "Réinitialiser"
+    },
+    "picture": {
+      "infoText": "Si aucune image n'est sélectionnée, l'image sera réinitialisée et utilisera celle par défaut.",
+      "confirmText": "Les changements prennent effet uniquement à partir de la confirmation."
     }
   },
   "deleteAccount": {

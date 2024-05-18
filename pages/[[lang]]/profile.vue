@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div class="profile-wrapper-lower-buttons" style="margin: 2% 2% 2% 35%;width: 30%; display: none">
+        <div class="profile-wrapper-lower-buttons">
             <div class="profile-elements-wrapper">
                 <div class="element">
                     <a id="yourFavoriteFurnitures" :href="`${langPrefix}favFurniture`" class="button">{{ content.yourFavoriteFurnitures }}</a>
@@ -220,20 +220,28 @@ const cancelEdit = async () => {
 </script>
 
 <style scoped lang="scss">
+#profile-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 5%;
+}
 
 .profile-wrapper {
-    margin-left: 20%;
-    margin-top: 5%;
+    //margin-left: 20%;
+    //margin-top: 5%;
     background-color: #F4F4F4;
     border-radius: 20px;
-    width: 60%;
+    width: 90%;
     height: 20%;
 }
 
 .profile-wrapper-lower-buttons {
     margin: 2%;
-    margin-left: 35%;
-    width: 30%;
+    //margin-left: 35%;
+    width: 90%;
     height: 20%;
 }
 
