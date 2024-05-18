@@ -455,4 +455,8 @@ button {
     border-radius: 20px;
 }
 
+#responseText {
+    overflow-y: auto;
+}
+
 </style>
