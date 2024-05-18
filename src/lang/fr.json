@@ -124,7 +124,15 @@
       "fastForward": "Le but de ce sprint est d’avoir une avancée significative afin que d'atteindre une version Alpha.",
       "betaAndGrowthHacking": "Avoir une Bêta testable pouvant être lancée en conditions réelles avec de vrais utilisateurs.",
       "consolidation": "Avoir une application finale et pleinenement fonctionnelle, utilisable par des utilisateurs interessés.",
-      "launchAndMetric": "Rendre une version finale de l'application, publique et utilisable par tous."
+      "launchAndMetric": "Rendre une version finale de l'application, publique et utilisable par tous.",
+      "dates": {
+        "june2023": "Juin 2023",
+        "october2023": "Octobre 2023",
+        "january2024": "Janvier 2024",
+        "may2024": "Mai 2024",
+        "september2024": "Septembre 2024",
+        "december2024": "Décembre 2024"
+      }
     }
   },
   "login": {
