@@ -3,7 +3,7 @@
         <div class="title underline">{{ content.title }}</div>
         <div class="sub-title gray-text-color">{{ content.duration }}</div>
         <div class="sub-title gray-text-color">{{ content.cancellation }}</div>
-        <div class="sub-title gray-text-color">{{ content.suppression }}</div>
+        <div class="sub-title gray-text-color">{{ content.deletion }}</div>
         <div class="sub-title gray-text-color">{{ content.responsibility }}</div>
         <div class="sub-title gray-text-color">{{ content.application }}</div>
         <div class="sub-title gray-text-color">{{ content.responsibility2 }}</div>
