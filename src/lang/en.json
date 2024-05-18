@@ -116,7 +116,15 @@
         "title": "Endless Inspiration",
         "description": "Explore a vast library of styles, trends, and design ideas to help you create a space that truly reflects your personality."
       }
-    ]
+    ],
+    "timeline": {
+      "title": "Our project's steps",
+      "testAndLearn": "Experimenting with technologies to find the most compatible ones with the project and the desired objectives.",
+      "managementAndProcess": "Stage aiming to work on our internal organization as a team for the rest of the project.",
+      "fastForward": "The goal of this sprint is to make significant progress to achieve an Alpha version.",
+      "betaAndGrowthHacking": "Having a testable Beta that can be launched in real conditions with real users.",
+      "consolidation": "Have a final, fully functional application, usable by interested users."
+    }
   },
   "login": {
     "welcome": "Welcome user N°",
@@ -211,7 +219,7 @@
         "furnitureRooms" : "Furniture rooms",
         "furnitureHeight" : "Furniture height",
         "furnitureWidth" : "Furniture width",
-        "furnitureDepths" : "Furniture depths",
+        "furnitureDepth" : "Furniture depths",
         "furnitureColors" : "Furniture colors",
         "itemInputID" : "Item ID"
       }
@@ -221,10 +229,20 @@
     "title": "Support",
     "somethingWrong": "Something's wrong ?",
     "askUs": "Ask us !",
-    "writeYourProblemHere": "Write your problem here",
+    "writeYourTitleHere": "Write the title of your ticket here",
+    "shortDescriptionOfYourProblem": "Write a short description of your problem",
+    "writeYourProblemHere": "Message us your problem in detail here",
     "pendingTickets": "Awaiting issues",
     "createTicket": "Create an issue",
-    "updateTicket": "Update my issue"
+    "updateTicket": "Update my issue",
+    "typeYourTextHere": "Type yout message here",
+    "youCantReplyToAClosedTicket": "You can't reply to a closed ticket",
+    "send": "SEND",
+    "close": "CLOSE",
+    "back": "BACK",
+    "pending": "Pending",
+    "closed": "Closed",
+    "deleted": "Deleted"
   },
   "languageChangerText": "Translate to FR",
   "privacyPolicy": {

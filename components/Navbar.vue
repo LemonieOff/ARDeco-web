@@ -1,8 +1,10 @@
 <template>
     <div class="navbar">
-        <a id="home" class="navbar-option" :href="`${langPrefix}`">{{content.home}}</a>
-        <a id="team" class="navbar-option" :href="`${langPrefix}team`">{{content.team}}</a>
-        <a id="product" class="navbar-option" :href="`${langPrefix}product`">{{content.product}}</a>
+        <a id="home" :href="`${langPrefix}`">
+            <img class="navbar-icon" src="~/../../assets/images/logo.png">
+        </a>
+        <a id="team" class="navbar-option navbarLink" :href="`${langPrefix}team`">{{content.team}}</a>
+        <a id="product" class="navbar-option navbarLink" :href="`${langPrefix}product`">{{content.product}}</a>
         <button id="dark-mode-button" @click="toggleDarkMode">{{content.darkmode}}</button>
         <button id="light-mode-button" @click="toggleDarkMode">{{content.lightmode}}</button>
         <div class="action">

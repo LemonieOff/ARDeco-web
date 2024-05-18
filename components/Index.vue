@@ -58,6 +58,41 @@
             </li>
         </ul>
     </div>
+    <div class="timelineTitle">{{ timeline.title }}</div>
+    <div class="timeline">
+        <div class="outer">
+            <div class="card">
+                <div class="info">
+                    <h3 class="title">TEST & LEARN</h3>
+                    <p>{{ timeline.testAndLearn }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="info">
+                    <h3 class="title">MANAGEMENT & PROCESS</h3>
+                    <p>{{ timeline.managementAndProcess }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="info">
+                    <h3 class="title">FAST FORWARD</h3>
+                    <p>{{ timeline.fastForward }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="info">
+                    <h3 class="title">BETA & GROWTH HACKING</h3>
+                    <p>{{ timeline.betaAndGrowthHacking }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="info">
+                    <h3 class="title">CONSOLIDATION</h3>
+                    <p>{{ timeline.consolidation }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -65,7 +100,7 @@ import backgroundUrl from "assets/images/homeHero.jpg";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
-import {ref} from "vue";
+import { ref } from "vue";
 
 export default {
     name: "Index",
@@ -75,6 +110,7 @@ export default {
     data() {
         return {
             content: {},
+            timeline: {},
             transition: {},
             langPrefix: "/",
             backgroundUrl: backgroundUrl,
@@ -97,7 +133,7 @@ export default {
         // Set the content variable to the correct language
         this.content = lang === 'en' ? en.home : fr.home;
         this.transition = this.content.transitionEffect;
-
+        this.timeline = this.content.timeline;
         this.features = this.content.keyPointsBlocks;
 
         // Prefix for links
@@ -111,6 +147,132 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.timelineTitle {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -5%;
+}
+
+/* Timeline Container */
+.timeline {
+    background: var(--primary-color);
+    margin-left: 40%;
+    margin-bottom: 5%;
+    width: 20%;
+}
+
+/* Card container */
+.card {
+    position: relative;
+    max-width: 400px;
+}
+
+/* setting padding based on even or odd */
+.card:nth-child(odd) {
+    padding: 30px 0 30px 30px;
+}
+
+.card:nth-child(even) {
+    padding: 30px 30px 30px 0;
+}
+
+/* Global ::before */
+.card::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    border: solid orangered;
+}
+
+/* Setting the border of top, bottom, left */
+.card:nth-child(odd)::before {
+    left: 0px;
+    top: -4.5px;
+    bottom: -4.5px;
+    border-width: 5px 0 5px 5px;
+    border-radius: 50px 0 0 50px;
+}
+
+/* Setting the top and bottom to "-5px" because earlier it was out of a pixel in mobile devices */
+@media only screen and (max-width: 400px) {
+    .card:nth-child(odd)::before {
+        top: -5px;
+        bottom: -5px;
+    }
+}
+
+/* Setting the border of top, bottom, right */
+.card:nth-child(even)::before {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-width: 5px 5px 5px 0;
+    border-radius: 0 50px 50px 0;
+}
+
+/* Removing the border if it is the first card */
+.card:first-child::before {
+    border-top: 0;
+    border-top-left-radius: 0;
+}
+
+/* Removing the border if it is the last card  and it's odd */
+.card:last-child:nth-child(odd)::before {
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Removing the border if it is the last card  and it's even */
+.card:last-child:nth-child(even)::before {
+    border-bottom: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* Information about the timeline */
+.info {
+    display: flex;
+    flex-direction: column;
+    background: #333;
+    color: gray;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Title of the card */
+.title {
+    color: orangered;
+    position: relative;
+}
+
+/* Timeline dot  */
+.title::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 999px;
+    border: 3px solid orangered;
+}
+
+/* text right if the card is even  */
+.card:nth-child(even) > .info > .title {
+    text-align: right;
+}
+
+/* setting dot to the left if the card is odd */
+.card:nth-child(odd) > .info > .title::before {
+    left: -45px;
+}
+
+/* setting dot to the right if the card is odd */
+.card:nth-child(even) > .info > .title::before {
+    right: -45px;
+}
+
+
 .auto-scroll-text {
     & > div {
         animation: scrollText 16s infinite linear;
@@ -139,4 +301,52 @@ span.outline-text {
         transform: translateX(-100%);
     }
 }
+
+@media only screen and (max-width: 500px) {
+    #welcomeTitle {
+        font-size: 72px;
+    }
+
+    #productPresentation {
+        font-size: 16px;
+    }
+
+    #augmentedRealityText {
+        font-size: 16px;
+    }
+
+    .timelineTitle {
+        margin-top: 100%;
+    }
+
+    .timeline {
+        width: 80%;
+        margin-left: 10%;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    #welcomeTitle {
+        font-size: 96px;
+    }
+
+    #productPresentation {
+        font-size: 18px;
+    }
+
+    #augmentedRealityText {
+        font-size: 18px;
+    }
+
+    .timelineTitle {
+        margin-top: 5%;
+    }
+
+    .timeline {
+        width: 60%;
+        margin-left: 20%;
+    }
+}
+
 </style>
