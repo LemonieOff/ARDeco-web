@@ -119,6 +119,7 @@ export default {
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
+            document.getElementById('itemInputID').value = "";
         },
         async restoreItem() {
             const userID = await isLogged();
@@ -142,6 +143,7 @@ export default {
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
+            document.getElementById('itemInputID').value = "";
         },
         async getArchive() {
             const userID = await isLogged();
@@ -308,6 +310,7 @@ export default {
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
+            document.getElementById('itemInputID').value = "";
         },
         async changeVisibility() {
             const userID = await isLogged();
@@ -450,6 +453,10 @@ button {
     min-height: 75%;
     align-self: center;
     border-radius: 20px;
+}
+
+#responseText {
+    overflow-y: auto;
 }
 
 </style>

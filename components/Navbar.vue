@@ -226,14 +226,13 @@ export default {
             }
         },
         async logout() {
-            const response = await fetch('https://api.ardeco.app/logout', {
+            await fetch('https://api.ardeco.app/logout', {
                 method: 'GET',
                 credentials: 'include',
             });
             await disconnect();
             localStorage.removeItem('lang');
-            const result = await response.text();
-            console.log(result);
+            location.href = this.langPrefix + "home";
         }
     },
 };

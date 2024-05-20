@@ -1,3 +1,92 @@
+<template>
+    <Navbar :urlLang=lang></Navbar>
+    <div id="forms-container">
+        <div id="forms-loading" class="form">
+            {{ content.loading }}
+        </div>
+        <div id="forms-wrapper" style="display: none">
+            <div id="login-register-wrapper" class="login-register-wrapper">
+                <div id="login-form" class="form">
+                    <span class="typeTitle">{{ content.loginTitle }}</span>
+                    <div id="email_section_login">
+                        <label id="email" for="email">{{ content.email }}</label>
+                        <input type="text" id="email_login" name="email" placeholder="Email">
+                        <ul id="email_errors_login" class="login-error"></ul>
+                    </div>
+                    <div id="password_section_login">
+                        <label id="password" for="password">{{ content.password }}</label>
+                        <input type="password" id="password_login" name="password" placeholder="Password">
+                        <ul id="password_errors_login" class="login-error"></ul>
+                    </div>
+                    <div id="general_section_login">
+                        <ul id="general_errors_login" class="login-error"></ul>
+                        <ul id="general_success_login" class="login-success"></ul>
+                    </div>
+                    <button id="login" @click="login">{{ content.login }}</button>
+                </div>
+                <div id="register-form" class="form">
+                    <span class="typeTitle">{{ content.registerTitle }}</span>
+                    <div class="mandatory_fields">
+                        <span class="gdpr_indication">{{ content.mandatoryFields }}</span>
+                        <div id="email_section_register">
+                            <label id="email2" for="email">{{ content.email }}</label>
+                            <input type="text" id="email_register" name="email" placeholder="Email">
+                            <ul id="email_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="password_section_register">
+                            <label id="password2" for="password">{{ content.password }}</label>
+                            <input type="password" id="password_register" name="password" placeholder="Password">
+                            <ul id="password_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="password_confirm_section_register">
+                            <label id="passwordConfirm" for="password_confirm_register">{{ content.passwordConfirm }}</label>
+                            <input type="password" id="password_confirm_register" name="password_confirm" placeholder="Password">
+                            <ul id="password_confirm_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="first_name_section_register">
+                            <label id="firstName" for="first_name_register">{{ content.firstName }}</label>
+                            <input type="text" id="first_name_register" name="first_name" placeholder="John">
+                            <ul id="first_name_errors_register" class="login-error"></ul>
+                        </div>
+                    </div>
+                    <div class="optional_fields">
+                        <span class="gdpr_indication">{{ content.optionalFields }}</span>
+                        <div id="last_name_section_register">
+                            <label id="lastName" for="last_name_register">{{ content.lastName }}</label>
+                            <input type="text" id="last_name_register" name="last_name" placeholder="DOE">
+                            <ul id="last_name_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="city_section_register">
+                            <label id="city" for="city_register">{{ content.city }}</label>
+                            <input type="text" id="city_register" name="city" placeholder="Berlin">
+                            <ul id="city_errors_register" class="login-error"></ul>
+                        </div>
+                        <div id="phone_section_register">
+                            <label id="phone" for="phone_register">{{ content.phone }}</label>
+                            <input type="tel" id="phone_register" name="phone" placeholder="+33601020304">
+                            <ul id="phone_errors_register" class="login-error"></ul>
+                        </div>
+                    </div>
+                    <div class="gdpr_consent">
+                        <div><input type="checkbox" id="checkPolicy"/><label for="checkPolicy">{{ content.consent }}</label></div>
+                        <div><input type="checkbox" id="checkTOS"/><label for="checkTOS">{{ content.hasRead }}</label></div>
+                    </div>
+                    <div id="general_section_register">
+                        <ul id="general_errors_register" class="login-error"></ul>
+                        <ul id="general_success_register" class="login-success"></ul>
+                    </div>
+                    <button id="register" @click="register">{{ content.register }}</button>
+                </div>
+            </div>
+            <div id="user-form" class="form">
+                <div id="user-welcome">{{ content.welcome }}<span id="user-welcome-id"></span>!</div>
+                <button id="logout" @click="logout">{{ content.logout }}</button>
+            </div>
+        </div>
+    </div>
+    <Footer :urlLang=lang></Footer>
+</template>
+
 <script setup xmlns="http://www.w3.org/1999/html">
 import {isLogged, loggedIn, disconnect} from "public/js/checkLogin";
 import en from "~/src/lang/en.json";
@@ -77,7 +166,7 @@ const displayHTMLErrors = (result, response, type) => {
             localStorage.setItem("userID", result.data["id"]);
         }
         localStorage.setItem("role", result.data["role"]);
-        location.reload();
+        location.href = langPrefix.value + "profile";
     } else {
         console.log("fail");
         if (Array.isArray(result.message)) {
@@ -186,98 +275,9 @@ const logout = async () => {
     localStorage.removeItem('lang');
     const result = await response.text();
     console.log(result);
-    location.reload();
+    location.href = langPrefix.value + "home";
 }
 </script>
-
-<template>
-    <Navbar :urlLang=lang></Navbar>
-    <div id="forms-container">
-        <div id="forms-loading" class="form">
-            {{ content.loading }}
-        </div>
-        <div id="forms-wrapper" style="display: none">
-            <div id="login-register-wrapper" class="login-register-wrapper">
-                <div id="login-form" class="form">
-                    <span class="typeTitle">{{ content.loginTitle }}</span>
-                    <div id="email_section_login">
-                        <label id="email" for="email">{{ content.email }}</label>
-                        <input type="text" id="email_login" name="email" placeholder="Email">
-                        <ul id="email_errors_login" class="login-error"></ul>
-                    </div>
-                    <div id="password_section_login">
-                        <label id="password" for="password">{{ content.password }}</label>
-                        <input type="password" id="password_login" name="password" placeholder="Password">
-                        <ul id="password_errors_login" class="login-error"></ul>
-                    </div>
-                    <div id="general_section_login">
-                        <ul id="general_errors_login" class="login-error"></ul>
-                        <ul id="general_success_login" class="login-success"></ul>
-                    </div>
-                    <button id="login" @click="login">{{ content.login }}</button>
-                </div>
-                <div id="register-form" class="form">
-                    <span class="typeTitle">{{ content.registerTitle }}</span>
-                    <div class="mandatory_fields">
-                        <span class="gdpr_indication">{{ content.mandatoryFields }}</span>
-                        <div id="email_section_register">
-                            <label id="email2" for="email">{{ content.email }}</label>
-                            <input type="text" id="email_register" name="email" placeholder="Email">
-                            <ul id="email_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="password_section_register">
-                            <label id="password2" for="password">{{ content.password }}</label>
-                            <input type="password" id="password_register" name="password" placeholder="Password">
-                            <ul id="password_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="password_confirm_section_register">
-                            <label id="passwordConfirm" for="password_confirm_register">{{ content.passwordConfirm }}</label>
-                            <input type="password" id="password_confirm_register" name="password_confirm" placeholder="Password">
-                            <ul id="password_confirm_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="first_name_section_register">
-                            <label id="firstName" for="first_name_register">{{ content.firstName }}</label>
-                            <input type="text" id="first_name_register" name="first_name" placeholder="John">
-                            <ul id="first_name_errors_register" class="login-error"></ul>
-                        </div>
-                    </div>
-                    <div class="optional_fields">
-                        <span class="gdpr_indication">{{ content.optionalFields }}</span>
-                        <div id="last_name_section_register">
-                            <label id="lastName" for="last_name_register">{{ content.lastName }}</label>
-                            <input type="text" id="last_name_register" name="last_name" placeholder="DOE">
-                            <ul id="last_name_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="city_section_register">
-                            <label id="city" for="city_register">{{ content.city }}</label>
-                            <input type="text" id="city_register" name="city" placeholder="Berlin">
-                            <ul id="city_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="phone_section_register">
-                            <label id="phone" for="phone_register">{{ content.phone }}</label>
-                            <input type="tel" id="phone_register" name="phone" placeholder="+33601020304">
-                            <ul id="phone_errors_register" class="login-error"></ul>
-                        </div>
-                    </div>
-                    <div class="gdpr_consent">
-                        <div><input type="checkbox" id="checkPolicy"/><label for="checkPolicy">{{ content.consent }}</label></div>
-                        <div><input type="checkbox" id="checkTOS"/><label for="checkTOS">{{ content.hasRead }}</label></div>
-                    </div>
-                    <div id="general_section_register">
-                        <ul id="general_errors_register" class="login-error"></ul>
-                        <ul id="general_success_register" class="login-success"></ul>
-                    </div>
-                    <button id="register" @click="register">{{ content.register }}</button>
-                </div>
-            </div>
-            <div id="user-form" class="form">
-                <div id="user-welcome">{{ content.welcome }}<span id="user-welcome-id"></span>!</div>
-                <button id="logout" @click="logout">{{ content.logout }}</button>
-            </div>
-        </div>
-    </div>
-    <Footer :urlLang=lang></Footer>
-</template>
 
 <style scoped lang="scss">
 #forms-container {

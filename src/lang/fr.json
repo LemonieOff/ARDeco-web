@@ -233,7 +233,7 @@
         "furnitureRooms": "Pièces liées au meuble",
         "furnitureHeight": "Hauteur du meuble (en cm)",
         "furnitureWidth": "Largeur du meuble (en cm)",
-        "furnitureDepths": "Profondeur du meuble (en cm)",
+        "furnitureDepth": "Profondeur du meuble (en cm)",
         "furnitureColors": "Couleur(s) du meuble",
         "itemInputID": "ID de l'item"
       }
