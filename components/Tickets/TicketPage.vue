@@ -32,9 +32,7 @@
                 </div>
             </div>
             <textarea ref="responseInput" v-if="currentTicketStatus === 'pending'" class="newMessageInput" :placeholder="content.typeYourTextHere"></textarea>
-            <textarea ref="responseInput" v-if="currentTicketStatus === 'closed'" class="newMessageInput" :placeholder="content.youCantReplyToAClosedTicket" disabled></textarea>
-            <input ref="responseInput" v-if="currentTicketStatus === 'pending'" type="text" class="newMessageInuput" :placeholder="content.typeYourTextHere">
-            <input ref="responseInput" disabled style="cursor: not-allowed" v-if="currentTicketStatus === 'closed'" class="newMessageInuput" :placeholder="content.youCantReplyToAClosedTicket">
+            <textarea ref="responseInput" v-if="currentTicketStatus === 'closed'" class="newMessageInput" :placeholder="content.youCantReplyToAClosedTicket" disabled style="cursor: not-allowed;"></textarea>
             <span class="ticketButtons">
                 <button class="buttonFontClass sendMessage" v-if="currentTicketStatus === 'pending'" @click="sendNewMessage"> {{ content.send }}</button>
                 <button class="buttonFontClass closeMessage" v-if="currentTicketStatus === 'pending'" @click="closeTicket"> {{ content.close }}</button>
@@ -142,7 +140,7 @@ name: "TicketPage",
                 console.log("messages", this.messages);
                 console.log("status", this.currentTicketStatus);
             }
-            
+
             this.currentTicketID = ticketID;
         },
         async getUserTickets() {
@@ -345,10 +343,11 @@ name: "TicketPage",
 }
 
 .messageHistory {
-    height: 80%;
+    height: 70%;
     border: 1px solid black;
     border-radius: 5px;
     overflow-y: auto;
+    margin-bottom: 4%;
 }
 
 .newMessageInuput {
@@ -364,6 +363,7 @@ name: "TicketPage",
 }
 
 .ticketButtons {
+    display: flex;
 }
 
 .sendMessage {
@@ -466,8 +466,7 @@ name: "TicketPage",
     word-break: break-all;
     white-space: pre-wrap;
     background-color: #FFFFFF;
-    margin: 2.5%;
-    margin-top: 0%;
+    margin: 0 2.5% 1%;
     width: 95%;
     border-radius: 5px;
     border: 1px solid;
