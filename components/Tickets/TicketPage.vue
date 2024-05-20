@@ -15,9 +15,9 @@
             </div>
         </div>
         <div ref="ticketCreator" class="manageTicket">
-            <input ref="titleInput" type="text" class="titleOrDescripion" :placeholder="content.writeYourTitleHere">
-            <input ref="descriptionInput" type="text" class="titleOrDescripion" :placeholder="content.shortDescriptionOfYourProblem">
-            <input ref="messageInput" type="text" class="textContent" :placeholder="content.writeYourProblemHere">
+            <input ref="titleInput" type="text" class="titleOrDescription" :placeholder="content.writeYourTitleHere">
+            <textarea ref="descriptionInput" class="titleOrDescription" :placeholder="content.shortDescriptionOfYourProblem"></textarea>
+            <textarea ref="messageInput" class="textContent" :placeholder="content.writeYourProblemHere"></textarea>
             <button class="alignCenter ticketManagementButton" @click="createTicket">{{ content.createTicket }}</button>
         </div>
         <div ref="ticketManage" class="manageTicket" style="display: none;">
@@ -31,6 +31,8 @@
                     </div>
                 </div>
             </div>
+            <textarea ref="responseInput" v-if="currentTicketStatus === 'pending'" class="newMessageInput" :placeholder="content.typeYourTextHere"></textarea>
+            <textarea ref="responseInput" v-if="currentTicketStatus === 'closed'" class="newMessageInput" :placeholder="content.youCantReplyToAClosedTicket" disabled></textarea>
             <input ref="responseInput" v-if="currentTicketStatus === 'pending'" type="text" class="newMessageInuput" :placeholder="content.typeYourTextHere">
             <input ref="responseInput" disabled style="cursor: not-allowed" v-if="currentTicketStatus === 'closed'" class="newMessageInuput" :placeholder="content.youCantReplyToAClosedTicket">
             <span class="ticketButtons">
@@ -438,26 +440,6 @@ name: "TicketPage",
     margin-left: 40%;
 }
 
-.textContent {
-    background-color: #FFFFFF;
-    margin: 2.5%;
-    width: 95%;
-    height: 55%;
-    border-radius: 5px;
-    border: 1px solid;
-}
-
-.titleOrDescripion {
-    background-color: #FFFFFF;
-    margin: 2.5%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    width: 95%;
-    height: 10%;
-    border-radius: 5px;
-    border: 1px solid;
-}
-
 .ticketManagementButton {
     background-color: #F2EBDF;
     border: 1px solid;
@@ -466,4 +448,42 @@ name: "TicketPage",
     margin-left: 30%;
     width: 40%;
 }
+
+#messageInput {
+    text-align: start;
+}
+
+::placeholder {
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.titleOrDescription,
+.textContent,
+.newMessageInput {
+    overflow-wrap: break-word;
+    word-break: break-all;
+    white-space: pre-wrap;
+    background-color: #FFFFFF;
+    margin: 2.5%;
+    margin-top: 0%;
+    width: 95%;
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 1%;
+}
+
+.titleOrDescription {
+    height: 10%;
+}
+
+.textContent {
+    height: 55%;
+}
+
+.newMessageInput {
+    min-height: 18%;
+}
+
 </style>
