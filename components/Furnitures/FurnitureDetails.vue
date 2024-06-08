@@ -7,20 +7,20 @@
             <div class="furnitureDetails solidBorders roundedBorders">
                 <div class="furnitureRooms"> {{ catalogElement.rooms }}</div>
                 <div class="furnitureStyles"> {{ catalogElement.styles }}</div>
-                <div class="furnitureDimentions"> Dimensions (cm): {{ catalogElement.width }} / {{ catalogElement.height }} / {{ catalogElement.depth }}</div>
+                <div class="furnitureDimentions">{{ content.dimensions }} {{ catalogElement.width }} / {{ catalogElement.height }} / {{ catalogElement.depth }}</div>
                 <div class="furniturePrice">{{ catalogElement.price }}€</div>
-                <button class="addToCart solidBorders primaryButton"> Ajouter au panier </button>
+                <button class="addToCart solidBorders primaryButton"> {{ content.addToCart }} </button>
             </div>
             <div class="furnitureActions">
-                <button class="addFavoriteButton solidBorders roundedBorders secondaryButton"> Ajouter aux favoris </button>
-                <div class="availableOrNot solidBorders roundedBorders statusElement"> Disponible </div>
+                <button class="addFavoriteButton solidBorders roundedBorders secondaryButton"> {{ content.addToFavorites }} </button>
+                <div class="availableOrNot solidBorders roundedBorders statusElement"> {{ content.available }} </div>
             </div>
         </div>
     </div>
     <div class="adminActions">
-        <button class="solidBorders roundedBorders primaryButton adminButton" @click="goToCatalog"> Retour </button>
-        <button class="solidBorders roundedBorders secondaryButton adminButton"> Archiver </button>
-        <button class="solidBorders roundedBorders secondaryButton adminButton"> Masquer </button>
+        <button class="solidBorders roundedBorders primaryButton adminButton goBack" @click="goToCatalog"> {{ content.goBack }} </button>
+        <button class="solidBorders roundedBorders secondaryButton adminButton"> {{ content.archive }} </button>
+        <button class="solidBorders roundedBorders secondaryButton adminButton"> {{ content.hide }} </button>
     </div>
 </template>
 
@@ -56,7 +56,7 @@ export default {
         this.getCatalog();
         console.log(this.$route.params.id);
 
-        // this.content = lang === 'en' ? en.furnitures.users : fr.furnitures.users;
+        this.content = lang === 'en' ? en.catalog : fr.catalog;
     },
     methods: {
         async getCatalog() {
@@ -133,14 +133,12 @@ export default {
     margin: auto;
     text-align: center;
     font-size: 200%;
-    border: 1px solid green;
 }
 
 .furnitureElements {
     margin-top: 1%;
     margin-left: 20%;
     display: flex;
-    border: 1px solid black;
     width: 60%;
     padding: 1%;
 }
@@ -153,7 +151,6 @@ export default {
 .sideActions {
     margin-left: 15%;
     display: block;
-    border: 1px solid purple;
     width: 30%;
     height: 30vw;
 }
@@ -194,13 +191,12 @@ export default {
 
 .furnitureActions {
     margin-top: 15%;
-    border: 1px solid blue;
     height: 30%;
 }
 
 .addFavoriteButton {
     margin-left: 10%;
-    height: 5vh;
+    height: 30%;
     width: 80%;
 }
 
@@ -211,14 +207,16 @@ export default {
     margin-left: 10%;
     height: 30%;
     width: 80%;
-    // background-color: #E84545;
 }
 
 .adminActions {
     margin-left: 21%;
-    border: 1px solid orange;
     width: 30vw;
     height: 5vh;
+}
+
+.goBack {
+    margin-left: 0;
 }
 
 </style>
