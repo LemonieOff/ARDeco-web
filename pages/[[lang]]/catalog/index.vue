@@ -18,7 +18,7 @@
                 <div class="grid-item" v-if="item.active === true">{{ item.rooms }}</div>
                 <div class="grid-item" v-if="item.active === true">{{ item.styles }}</div>
                 <div class="grid-item">
-                    <a :href="`${langPrefix}gallery/${item.id}`" class="custom-button" v-if="item.active === true">{{ content.details }}</a>
+                    <a :href="`${langPrefix}catalog/${item.id}`" class="custom-button" v-if="item.active === true">{{ content.details }}</a>
                 </div>
             </div>
         </div>
@@ -90,50 +90,6 @@ async function getCatalog() {
     } catch (error) {
         console.error(error.message);
         errorMessage.value = error.message;
-    }
-}
-
-
-async function redirectDetails(id) {
-    window.location.href = '/voirDetails/' + id;
-}
-
-async function openSidebar(id) {
-    /*const all_sidebars = document.getElementsByClassName('.sidebar');
-    all_sidebars.forEach(sidebar => {
-        if (sidebar.style.left === "0") {
-            sidebar.style.left = "-250px";
-        }
-      });*/
-
-    const sidebar = document.getElementById(`sidebar-${id}`);
-    if (sidebar.style.left === "-250px") {
-        sidebar.style.left = "0";
-    } else {
-        sidebar.style.left = "-250px";
-    }
-}
-
-async function blockUser(userID) {
-    try {
-        const response = await fetch(`https://api.ardeco.app/block/${userID}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-        });
-        const json = await response.json();
-        alert(json.description);
-        if (response.ok) {
-            successMessage.value = 'User blocked successfully';
-            // CatalogData.value = CatalogData.value.filter(item => item.user.id !== userID);
-        } else {
-            throw new Error('Failed to block user');
-        }
-    } catch (error) {
-        console.error(error);
-        errorMessage.value = 'An error occurred while blocking the user.';
     }
 }
 </script>

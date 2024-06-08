@@ -2,24 +2,25 @@
     <div class="navbar-top-space"></div>
     <div class="title"> {{ catalogElement.name }}</div>
     <div class="furnitureElements">
-        <img src="~/.././assets/images/furnitures/furnitureDefault.png" class="furniturePicture">
+        <img src="~/.././assets/images/furnitures/furnitureDefault.png" class="furniturePicture solidBorders roundedBorders">
         <div class="sideActions">
-            <div class="furnitureDetails">
+            <div class="furnitureDetails solidBorders roundedBorders">
                 <div class="furnitureRooms"> {{ catalogElement.rooms }}</div>
                 <div class="furnitureStyles"> {{ catalogElement.styles }}</div>
-                <div class="furnitureDimentions">{{ catalogElement.width }} cm / {{ catalogElement.height }} cm / {{ catalogElement.depth }} cm</div>
+                <div class="furnitureDimentions"> Dimensions (cm): {{ catalogElement.width }} / {{ catalogElement.height }} / {{ catalogElement.depth }}</div>
                 <div class="furniturePrice">{{ catalogElement.price }}€</div>
-                <button class="addToCart"> Ajouter au panier </button>
+                <button class="addToCart solidBorders primaryButton"> Ajouter au panier </button>
             </div>
             <div class="furnitureActions">
-                <button class="addFavoriteButton"> Ajouter aux favoris </button>
-                <div class="availableOrNot"> Disponible </div>
+                <button class="addFavoriteButton solidBorders roundedBorders secondaryButton"> Ajouter aux favoris </button>
+                <div class="availableOrNot solidBorders roundedBorders statusElement"> Disponible </div>
             </div>
         </div>
     </div>
     <div class="adminActions">
-        <button class="archiveFurnitureButton"> Archiver </button>
-        <button class="hideFurnitureButton"> Masquer </button>
+        <button class="solidBorders roundedBorders primaryButton adminButton" @click="goToCatalog"> Retour </button>
+        <button class="solidBorders roundedBorders secondaryButton adminButton"> Archiver </button>
+        <button class="solidBorders roundedBorders secondaryButton adminButton"> Masquer </button>
     </div>
 </template>
 
@@ -53,6 +54,7 @@ export default {
             }
         }
         this.getCatalog();
+        console.log(this.$route.params.id);
 
         // this.content = lang === 'en' ? en.furnitures.users : fr.furnitures.users;
     },
@@ -72,18 +74,56 @@ export default {
                 }
 
                 const result = await response.json();
-                this.catalogElement = result.data[0];
+
+                for (let item of result.data) {
+                    if (item.id == this.$route.params.id) {
+                        this.catalogElement = item;
+                        break;
+                    }
+                }
+
                 console.log(this.catalogElement);
             } catch (error) {
                 console.error(error.message);
                 errorMessage.value = error.message;
             }
-        }
+        },
+        async goToCatalog() {
+            this.$router.push('/catalog');
+        },
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '~/styles/variables/ColorVariables.scss';
+
+.solidBorders {
+    border: 3px solid $primary-black;
+}
+
+.roundedBorders {
+    border-radius: 10px;
+}
+
+.primaryButton {
+    background-color: $primary-black;
+    color: $primary-white;
+}
+
+.secondaryButton {
+    background-color: $primary-light-blue;
+}
+
+.statusElement {
+    background-color: $primary-green;
+}
+
+.adminButton {
+    margin-left: 10%;
+    width: 20%;
+    height: 100%;
+}
 
 .navbar-top-space {
     height: 10vh;
@@ -106,10 +146,8 @@ export default {
 }
 
 .furniturePicture {
-    border: 3px solid #333333;
     width: 30vw;
     height: 30vw;
-    border-radius: 10px;
 }
 
 .sideActions {
@@ -122,9 +160,7 @@ export default {
 
 .furnitureDetails {
     padding: 10%;
-    background-color: #E9E9E9;
-    border: 3px solid #333333;
-    border-radius: 10px;
+    background-color: $secondary-white;
     height: 60%;
 
 }
@@ -152,8 +188,6 @@ export default {
 .addToCart {
     margin-top: 5%;
     text-align: center;
-    border: 3px solid #333333;
-    background-color: #769FCD;
     width: 100%;
     height: 5vh;
 }
@@ -168,9 +202,6 @@ export default {
     margin-left: 10%;
     height: 5vh;
     width: 80%;
-    border: 3px solid #333333;
-    border-radius: 10px;
-    background-color: #769FCD;
 }
 
 .availableOrNot {
@@ -180,9 +211,6 @@ export default {
     margin-left: 10%;
     height: 30%;
     width: 80%;
-    border: 3px solid #333333;
-    border-radius: 10px;
-    background-color: #609966;
     // background-color: #E84545;
 }
 
@@ -191,24 +219,6 @@ export default {
     border: 1px solid orange;
     width: 30vw;
     height: 5vh;
-
-}
-
-.archiveFurnitureButton {
-    border: 3px solid #333333;
-    border-radius: 10px;
-    background-color: #769FCD;
-    width: 45%;
-    height: 100%;
-}
-
-.hideFurnitureButton {
-    margin-left: 10%;
-    border: 3px solid #333333;
-    border-radius: 10px;
-    background-color: #769FCD;
-    width: 45%;
-    height: 100%;
 }
 
 </style>
