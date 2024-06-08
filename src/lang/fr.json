@@ -483,5 +483,30 @@
     "details": "Détails",
     "delete": "Supprimer",
     "blockUser": "Bloquer l'utilisateur"
+  },
+  "catalog": {
+    "title": "Catalogue",
+    "loading": "Chargement en cours...",
+    "noGalleries": "Aucune galerie trouvée.",
+    "gallery": "Galerie",
+    "id": "ID",
+    "name": "Nom et entreprise",
+    "company": "Entreprise",
+    "styles": "Styles",
+    "description": "Description",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "date": "Date",
+    "author": "Auteur",
+    "furnitureTable": "Meubles",
+    "roomType": "Type de pièce",
+    "item": "Élément",
+    "noItems": "Aucun élément trouvé.",
+    "action": "Action",
+    "actions": "Actions",
+    "actionSingOrPlu": "Action(s)",
+    "details": "Détails",
+    "delete": "Supprimer",
+    "blockUser": "Bloquer l'utilisateur"
   }
 }

@@ -483,5 +483,30 @@
     "details": "Details",
     "delete": "Delete",
     "blockUser": "Block user"
+  },
+  "catalog": {
+    "title": "Catalog",
+    "loading": "Loading...",
+    "noGalleries": "No gallery found.",
+    "gallery": "Gallery",
+    "id": "ID",
+    "name": "Name and company",
+    "company": "Company",
+    "styles": "Styles",
+    "description": "Description",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "date": "Date",
+    "author": "Author",
+    "furnitureTable": "Furniture",
+    "roomType": "Room type",
+    "item": "Item",
+    "noItems": "No item found.",
+    "action": "Action",
+    "actions": "Actions",
+    "actionSingOrPlu": "Action(s)",
+    "details": "Details",
+    "delete": "Delete",
+    "blockUser": "Block user"
   }
 }
