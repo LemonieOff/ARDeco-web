@@ -25,7 +25,10 @@
       </div>
     </div>
     <br>
-    <button class="custom-button" @click="goToGallery">Retour à la Galerie</button>
+    <button class="custom-button" @click="goToGallery">Retour</button>
+    <button class="custom-button" id="startReportButton" style="margin-left: 2.5%" @click="startReport">Signaler</button>
+    <input type="text" id="reportDescription" placeholder="Décriver le problème ici (optionnel)" hidden>
+    <button id="confirmReport" class="custom-button" style="margin-left: 2.5%" @click="reportGallery" hidden>Confirmer</button>
   </div>
 </template>
   
@@ -94,22 +97,65 @@
             console.error("Error fetching user information:", error);
             return "Unknown user";
         }
-    },
+      },
 
       async redirectDetails(id) {
         window.location.href = '/voirDetails/' + id;
       },
 
-        async openSidebar(id) {
-            var sidebar = document.getElementById("sidebar");
-            if (sidebar.style.left === "-250px") {
-                sidebar.style.left = "0";
-            } else {
-                sidebar.style.left = "-250px";
-            }
-        },
-        goToGallery() {
+      async openSidebar(id) {
+        var sidebar = document.getElementById("sidebar");
+        if (sidebar.style.left === "-250px") {
+            sidebar.style.left = "0";
+        } else {
+            sidebar.style.left = "-250px";
+        }
+      },
+
+      goToGallery() {
         this.$router.push('/gallery');
+      },
+
+      async startReport() {
+        let active = false;
+        if (document.getElementById('reportDescription').hidden == false) {
+          active = true;
+        }
+
+        if (active) {
+          document.getElementById('reportDescription').hidden = true;
+          document.getElementById('confirmReport').hidden = true;
+          document.getElementById('startReportButton').textContent = "Signaler";
+        } else {
+          document.getElementById('reportDescription').hidden = false;
+          document.getElementById('confirmReport').hidden = false;
+          document.getElementById('startReportButton').textContent = "Annuler";
+        }
+      },
+
+      async reportGallery() {
+        const text = document.querySelector('#reportDescription').value;
+        try {
+          const response = await fetch(`https://api.ardeco.app/gallery_report/${this.GalleryData.id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify([{
+              "report_text": text
+            }]),
+            credentials: 'include',
+          });
+          if (!response.ok) {
+            throw new Error("Failed to report gallery");
+          } else {
+            this.startReport();
+            document.getElementById('reportDescription').textContent = "";
+          }
+        } catch (error) {
+            console.error("Error fetching user information:", error);
+            return "Unknown user";
+        }
       },
     }
   }
@@ -201,34 +247,52 @@
 }
 
 .card {
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(to bottom right, #f3f3f3, #e0e0e0);
-    color: #333; /* Couleur du texte */
-  }
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom right, #f3f3f3, #e0e0e0);
+  color: #333; /* Couleur du texte */
+}
 
-  .card-content {
-    padding: 20px;
-  }
+.card-content {
+  padding: 20px;
+}
 
-  .card-item {
-    margin-bottom: 15px;
-  }
+.card-item {
+  margin-bottom: 15px;
+}
 
-  .custom-button {
-    background-color: rgb(191, 178, 170);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+.custom-button {
+  background-color: rgb(191, 178, 170);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .custom-button:hover {
-    background-color: #5d5249; /* Couleur de survol */
-  }
+.custom-button:hover {
+  background-color: #5d5249; /* Couleur de survol */
+}
+
+#reportDescription {
+  margin-left: 2.5%;
+  width: 60%;
+  height: 5vh;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#confirmReport {
+  background-color: red;
+}
+
+#confirmReport:hover {
+  background-color: #F4F4F4;
+  border: 1px solid red;
+  color: red;
+}
 
 </style>
