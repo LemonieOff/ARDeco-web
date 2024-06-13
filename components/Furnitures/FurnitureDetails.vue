@@ -19,8 +19,10 @@
     </div>
     <div class="adminActions">
         <button class="solidBorders roundedBorders primaryButton adminButton goBack" @click="goToCatalog"> {{ content.goBack }} </button>
-        <button class="solidBorders roundedBorders secondaryButton adminButton"> {{ content.archive }} </button>
         <button class="solidBorders roundedBorders secondaryButton adminButton"> {{ content.hide }} </button>
+        <button id="archiveButton" class="solidBorders roundedBorders secondaryButton adminButton" @click="archiveElement"> {{ content.archive }} </button>
+        <button id="restoreButton" class="solidBorders roundedBorders secondaryButton adminButton" @click="restoreElement" hidden> {{ content.restore }} </button>
+        <button id="deleteButton" class="solidBorders roundedBorders secondaryButton adminButton deleteButton" @click="deleteElement" hidden> {{ content.delete }} </button>
     </div>
 </template>
 
@@ -38,7 +40,8 @@ export default {
         return {
             content: {},
             langPrefix: "/",
-            catalogElement: {}
+            catalogElement: {},
+            elementIsNotArchived: false
         }
     },
     mounted() {
@@ -53,9 +56,8 @@ export default {
                 lang = 'fr';
             }
         }
+    
         this.getCatalog();
-        console.log(this.$route.params.id);
-
         this.content = lang === 'en' ? en.catalog : fr.catalog;
     },
     methods: {
@@ -74,12 +76,16 @@ export default {
                 }
 
                 const result = await response.json();
-
                 for (let item of result.data) {
                     if (item.id == this.$route.params.id) {
-                        this.catalogElement = item;
+                        this.catalogElement = item
+                        this.elementIsNotArchived = true;
                         break;
                     }
+                }
+
+                if (this.elementIsNotArchived == false) {
+                    this.lookIntoArchive();
                 }
 
                 console.log(this.catalogElement);
@@ -88,9 +94,119 @@ export default {
                 errorMessage.value = error.message;
             }
         },
+
         async goToCatalog() {
             this.$router.push('/catalog');
         },
+
+        async lookIntoArchive() {
+            let elementFound = false;
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            for (let item of result.data) {
+                if (item.id == this.$route.params.id) {
+                    this.catalogElement = item;
+                    elementFound = true;
+                    break;
+                }
+            }
+            if (!elementFound) {
+                console.error("No element with this ID has been found in the catalog or the archive.");
+            } else {
+                this.showDeleteOption();
+            }
+        },
+
+        async showDeleteOption() {
+            if (this.elementIsNotArchived == false) {
+                document.getElementById('deleteButton').hidden = false;
+                document.getElementById('archiveButton').hidden = true;
+                document.getElementById('restoreButton').hidden = false;
+            }
+        },
+
+        async switchButtonDeleteVisibility() {
+            if (this.elementIsNotArchived == false) {
+                document.getElementById('deleteButton').hidden = true;
+                document.getElementById('archiveButton').hidden = false;
+                document.getElementById('restoreButton').hidden = true;
+                this.elementIsNotArchived = true;
+            } else {
+                document.getElementById('deleteButton').hidden = false;
+                document.getElementById('archiveButton').hidden = true;
+                document.getElementById('restoreButton').hidden = false;
+                this.elementIsNotArchived = false;
+            }
+        },
+
+        async archiveElement() {
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${this.catalogElement.object_id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);          
+            this.switchButtonDeleteVisibility();
+        },
+
+        async restoreElement() {
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${this.catalogElement.object_id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            this.switchButtonDeleteVisibility();
+        },
+
+        async deleteElement() {
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '/' + `${this.catalogElement.object_id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            this.goToCatalog();
+        }
     }
 }
 </script>
@@ -109,18 +225,38 @@ export default {
 .primaryButton {
     background-color: $primary-black;
     color: $primary-white;
+    transition: 0.25s;
+}
+
+.primaryButton:hover {
+    background-color: $primary-white;
+    color: $primary-black;
 }
 
 .secondaryButton {
     background-color: $primary-light-blue;
+    transition: 0.25s;
+}
+
+.secondaryButton:hover {
+    background-color: $primary-white;
+    color: $secondary-blue;
+    border-color: $secondary-blue;
 }
 
 .statusElement {
     background-color: $primary-green;
+    transition: 0.25s;
+}
+
+.statusElement:hover {
+    background-color: $primary-white;
+    color: $primary-green;
+    border-color: $primary-green;
 }
 
 .adminButton {
-    margin-left: 10%;
+    margin-left: 5%;
     width: 20%;
     height: 100%;
 }
@@ -216,7 +352,18 @@ export default {
 }
 
 .goBack {
-    margin-left: 0;
+    margin-left: 2.5%;
+}
+
+.deleteButton {
+    background-color: $primary-red;
+    transition: 0.25s;
+}
+
+.deleteButton:hover {
+    color: $primary-red;
+    background-color: $primary-white;
+    border-color: $primary-red;
 }
 
 </style>
