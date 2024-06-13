@@ -31,7 +31,7 @@
                 </ul>
             </div>
             <div id="user" @click="menuToggle">
-                <img id="profileImage" class="navbar-icon" src="~/../../assets/images/profile-pictures/Valentin.png"/>
+                <img id="profileImage" class="navbar-icon" v-bind:src="imageSrc" alt="P"/>
                 <img id="defaultImage" class="navbar-icon" src="~/../../assets/images/profile-pictures/Unknown.png"/>
             </div>
         </div>
@@ -50,6 +50,7 @@ export default {
     },
     data() {
         return {
+            imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
             content: {},
             langPrefix: "/"
         }
@@ -59,6 +60,10 @@ export default {
         const userID = localStorage.getItem('userID');
         const dark_mode = localStorage.getItem('dark_mode');
         const role = localStorage.getItem('role');
+        const profile_picture_id = localStorage.getItem('profile_picture_id');
+        if (profile_picture_id) {
+            this.imageSrc = `https://api.ardeco.app/profile_pictures/${profile_picture_id}.png`;
+        }
 
         if (userID == null) {
             document.getElementById("profileMenuOption").style.display = "none";
@@ -250,4 +255,11 @@ export default {
     cursor: pointer;
 }
 
+#profileImage {
+    border-radius: 50%;
+}
+
+#defaultImage {
+    border-radius: 50%;
+}
 </style>
