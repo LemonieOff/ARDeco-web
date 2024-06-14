@@ -14,6 +14,7 @@
             </div>
             <button id="changeGalleryVisibility" class="buttonSettings" style="margin-top: 2.5%;" @click="setItemVisibility">{{content.changeGalleryVisibility}}</button>
             <button id="archiveItem" class="buttonSettings" style="margin-top: 2.5%;" @click="archiveItem">{{content.archiveItem}}</button>
+            <button id="archiveItem" class="buttonSettings" style="margin-top: 2.5%;" @click="deleteSingleItem">{{content.deleteItem}}</button>
             <button id="restoreItemFromArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="restoreItem">{{content.restoreItemFromArchive}}</button>
         </div>
         <div class="center-side-parameters">
@@ -96,6 +97,32 @@ export default {
                 document.getElementById('reponseText').innerHTML = result.description;
             }
         },
+
+        async deleteSingleItem() {
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+            const itemInputID = document.getElementById('itemInputID').value;
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code == 200) {
+                document.getElementById('reponseText').innerHTML = result.description;
+            } else {
+                document.getElementById('reponseText').innerHTML = result.description;
+            }
+            document.getElementById('itemInputID').value = "";
+        },
+
         async archiveItem() {
             const userID = await isLogged();
             if (!loggedIn) {

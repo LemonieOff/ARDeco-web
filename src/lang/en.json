@@ -223,6 +223,7 @@
       "getCompagnyArchive": "Get compagny archive",
       "emptyCompagnyArchive": "Empty compagny archive",
       "archiveItem": "Archive item",
+      "deleteItem": "Delete single item",
       "restoreItemFromArchive": "Restore item from archive",
       "resetCompagnyApiKey": "Reset company API key",
       "title" : "Company settings",

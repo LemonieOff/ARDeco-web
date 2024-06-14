@@ -223,6 +223,7 @@
       "getCompagnyArchive": "Voir mon archive d'entreprise",
       "emptyCompagnyArchive": "Vider mon archive d'entreprise",
       "archiveItem": "Archiver cet élement",
+      "deleteItem": "Supprimer un élement",
       "restoreItemFromArchive": "Restaurer cet élement de l'archive",
       "resetCompagnyApiKey": "Réinitialiser mon clé API",
       "title": "Paramètres d'entreprise",
