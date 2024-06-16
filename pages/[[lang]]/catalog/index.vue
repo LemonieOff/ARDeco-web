@@ -7,28 +7,18 @@
                 <div class="grid-item">{{ content.id }}</div>
                 <div class="grid-item">{{ content.name }}</div>
                 <div class="grid-item">{{ content.roomType }}</div>
-                <div class="grid-item">{{ content.author }}</div>
+                <div class="grid-item">{{ content.styles }}</div>
                 <div class="grid-item">{{ content.actionSingOrPlu}}</div>
             </div>
-            <div v-for="(item) in GalleryData" class="grid-row">
-                <div class="grid-item" v-if="item.visibility === true">{{ item.id }}</div>
-                <div class="grid-item" v-if="item.visibility === true">{{ item.name }}</div>
-                <div class="grid-item" v-if="item.visibility === true">{{ item.room_type }}</div>
-                <div class="grid-item" v-if="item.visibility === true">{{ item.user.first_name }} {{
-                        item.user.last_name
-                    }}
-                </div>
+            <div v-for="(item) in CatalogData" class="grid-row">
+                <div class="grid-item" v-if="item.active === true">{{ item.id }}</div>
+                <div class="grid-item" v-if="item.active === true">{{ item.name }}, {{
+                        item.company_name
+                }}</div>
+                <div class="grid-item" v-if="item.active === true">{{ item.rooms }}</div>
+                <div class="grid-item" v-if="item.active === true">{{ item.styles }}</div>
                 <div class="grid-item">
-                    <a :href="`${langPrefix}gallery/${item.id}`" class="custom-button" v-if="item.visibility === true">{{ content.details }}</a>
-                    <!--<button class="custom-button" @click="openSidebar(item.id)" v-if="item.visibility === true">
-                        {{ content.details }}
-                    </button>--><br/>
-                    <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">
-                        {{ content.blockUser }}
-                    </button>
-                    <div class="sidebar" :id="`sidebar-${item.id}`" style="left: -250px">
-                        Sidebar Content
-                    </div>
+                    <a :href="`${langPrefix}catalog/${item.id}`" class="custom-button" v-if="item.active === true">{{ content.details }}</a>
                 </div>
             </div>
         </div>
@@ -45,7 +35,7 @@ import fr from "~/src/lang/fr.json";
 const route = useRoute();
 let lang = ref(route.params.lang);
 const content = ref({});
-const GalleryData = ref([]);
+const CatalogData = ref([]);
 const errorMessage = ref("");
 const successMessage = ref("");
 const langPrefix = ref("/");
@@ -63,14 +53,14 @@ onMounted(async () => {
     }
 
     // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.gallery : fr.gallery;
+    content.value = lang.value === 'en' ? en.catalog : fr.catalog;
 
     // Prefix for links
     langPrefix.value = lang.value === 'en' ? '/en/' : '/fr/';
 
     await checkLogin();
-    await getGallery();
-    console.log(GalleryData.value);
+    await getCatalog();
+    console.log(CatalogData.value);
 });
 
 async function checkLogin() {
@@ -81,9 +71,9 @@ async function checkLogin() {
     userID.value = Number(userID_tmp);
 }
 
-async function getGallery() {
+async function getCatalog() {
     try {
-        const response = await fetch('https://api.ardeco.app/gallery?user_details', {
+        const response = await fetch('https://api.ardeco.app/catalog', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -96,53 +86,10 @@ async function getGallery() {
         }
 
         const result = await response.json();
-        GalleryData.value = result.data;
+        CatalogData.value = result.data;
     } catch (error) {
         console.error(error.message);
         errorMessage.value = error.message;
-    }
-}
-
-async function redirectDetails(id) {
-    window.location.href = '/voirDetails/' + id;
-}
-
-async function openSidebar(id) {
-    /*const all_sidebars = document.getElementsByClassName('.sidebar');
-    all_sidebars.forEach(sidebar => {
-        if (sidebar.style.left === "0") {
-            sidebar.style.left = "-250px";
-        }
-      });*/
-
-    const sidebar = document.getElementById(`sidebar-${id}`);
-    if (sidebar.style.left === "-250px") {
-        sidebar.style.left = "0";
-    } else {
-        sidebar.style.left = "-250px";
-    }
-}
-
-async function blockUser(userID) {
-    try {
-        const response = await fetch(`https://api.ardeco.app/block/${userID}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-        });
-        const json = await response.json();
-        alert(json.description);
-        if (response.ok) {
-            successMessage.value = 'User blocked successfully';
-            // GalleryData.value = GalleryData.value.filter(item => item.user.id !== userID);
-        } else {
-            throw new Error('Failed to block user');
-        }
-    } catch (error) {
-        console.error(error);
-        errorMessage.value = 'An error occurred while blocking the user.';
     }
 }
 </script>
