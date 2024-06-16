@@ -137,6 +137,7 @@ export default {
                 if (value <= 0 || value > 4) {
                     await this.resetProfilePictureRequest();
                 } else {
+                    localStorage.setItem('profile_picture_id', value);
                     await this.changeProfilePictureRequest(value);
                 }
             } else {
