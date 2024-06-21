@@ -56,14 +56,11 @@ export default {
         }
     },
     mounted() {
+        this.getUSerPicture();
         let lang = this.urlLang;
         const userID = localStorage.getItem('userID');
         const dark_mode = localStorage.getItem('dark_mode');
         const role = localStorage.getItem('role');
-        const profile_picture_id = localStorage.getItem('profile_picture_id');
-        if (profile_picture_id) {
-            this.imageSrc = `https://api.ardeco.app/profile_pictures/${profile_picture_id}.png`;
-        }
 
         if (userID == null) {
             document.getElementById("profileMenuOption").style.display = "none";
@@ -238,6 +235,17 @@ export default {
             await disconnect();
             localStorage.removeItem('lang');
             location.href = this.langPrefix + "home";
+        },
+        async getUSerPicture() {
+            const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+            });
+            const result = await response.json();
+            this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data}.png`
         }
     },
 };
