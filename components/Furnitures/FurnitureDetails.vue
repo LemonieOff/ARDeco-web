@@ -14,15 +14,17 @@
             <div class="furnitureActions">
                 <button class="addFavoriteButton solidBorders roundedBorders secondaryButton"> {{ content.addToFavorites }} </button>
                 <div class="availableOrNot solidBorders roundedBorders statusElement"> {{ content.available }} </div>
+                <div id="errorText" class="textReportJustification errorHandler" hidden></div>
+                <div id="successText" class="textReportJustification successHandler"></div>
             </div>
         </div>
     </div>
     <div class="adminActions">
         <button class="solidBorders roundedBorders primaryButton adminButton goBack" @click="goToCatalog"> {{ content.goBack }} </button>
-        <button class="solidBorders roundedBorders secondaryButton adminButton"> {{ content.hide }} </button>
-        <button id="archiveButton" class="solidBorders roundedBorders secondaryButton adminButton" @click="archiveElement"> {{ content.archive }} </button>
-        <button id="restoreButton" class="solidBorders roundedBorders secondaryButton adminButton" @click="restoreElement" hidden> {{ content.restore }} </button>
-        <button id="deleteButton" class="solidBorders roundedBorders secondaryButton adminButton deleteButton" @click="deleteElement" hidden> {{ content.delete }} </button>
+        <button class="solidBorders roundedBorders secondaryButton adminButton companyAction companyAction adminAction"> {{ content.hide }} </button> <!-- Est plutôt une "adminAction", mais pour l'instant je le met en "companyAction" -->
+        <button id="archiveButton" class="solidBorders roundedBorders secondaryButton adminButton companyAction" @click="archiveElement"> {{ content.archive }} </button>
+        <button id="restoreButton" class="solidBorders roundedBorders secondaryButton adminButton companyAction" @click="restoreElement" hidden> {{ content.restore }} </button>
+        <button id="deleteButton" class="solidBorders roundedBorders secondaryButton adminButton deleteButton companyAction" @click="deleteElement" hidden> {{ content.delete }} </button>
     </div>
 </template>
 
@@ -41,7 +43,8 @@ export default {
             content: {},
             langPrefix: "/",
             catalogElement: {},
-            elementIsNotArchived: false
+            elementIsNotArchived: false,
+            profileID: null
         }
     },
     mounted() {
@@ -57,12 +60,39 @@ export default {
             }
         }
     
-        this.getCatalog();
+        this.getCatalogAndCompanyName();
         this.content = lang === 'en' ? en.catalog : fr.catalog;
     },
     methods: {
-        async getCatalog() {
+        async getCatalogAndCompanyName() {
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = langPrefix.value + "login";
+            }
+
             try {
+                // Data du profil
+                const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+
+                if (!response_profile.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+
+                const data_profile = await response_profile.json();
+                if (data_profile.data.role = "company") {
+                    this.profileID = data_profile.data.id
+                }
+                console.log(data_profile)
+            } catch (error) {
+                console.error(error.message);
+                errorMessage.value = error.message;
+            }
+
+            try {
+                // Data du catalog
                 const response = await fetch('https://api.ardeco.app/catalog', {
                     method: 'GET',
                     headers: {
@@ -88,7 +118,15 @@ export default {
                     this.lookIntoArchive();
                 }
 
-                console.log(this.catalogElement);
+                const companyActions = document.getElementsByClassName('companyAction');
+
+                console.log('this.profileID', this.profileID)
+                console.log('this.catalogElement.company', this.catalogElement.company)
+                if (this.profileID != this.catalogElement.company) {
+                    for (const action of companyActions) {
+                        action.hidden = true;
+                    }
+                }
             } catch (error) {
                 console.error(error.message);
                 errorMessage.value = error.message;
@@ -122,9 +160,18 @@ export default {
                     break;
                 }
             }
+
+            const errorDiv = document.getElementById('errorText');
+            const successDiv = document.getElementById('successText');
             if (!elementFound) {
                 console.error("No element with this ID has been found in the catalog or the archive.");
+                successDiv.hidden = true;
+                errorDiv.hidden = false;
+                errorDiv.innerText = "No element with this ID has been found in the catalog or the archive.";
             } else {
+                successDiv.hidden = false;
+                errorDiv.hidden = true;
+                successDiv.innerText = "Element found.";
                 this.showDeleteOption();
             }
         },
@@ -166,8 +213,20 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);          
-            this.switchButtonDeleteVisibility();
+            console.log(result);
+
+            const errorDiv = document.getElementById('errorText');
+            const successDiv = document.getElementById('successText');
+            if (!response.ok) {
+                successDiv.hidden = true;
+                errorDiv.hidden = false;
+                errorDiv.innerText = result.description;
+            } else {
+                successDiv.hidden = false;
+                errorDiv.hidden = true;
+                successDiv.innerText = result.description;
+                this.switchButtonDeleteVisibility();
+            }
         },
 
         async restoreElement() {
@@ -186,7 +245,19 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            this.switchButtonDeleteVisibility();
+
+            const errorDiv = document.getElementById('errorText');
+            const successDiv = document.getElementById('successText');
+            if (!response.ok) {
+                successDiv.hidden = true;
+                errorDiv.hidden = false;
+                errorDiv.innerText = result.description;
+            } else {
+                successDiv.hidden = false;
+                errorDiv.hidden = true;
+                successDiv.innerText = result.description;
+                this.switchButtonDeleteVisibility();
+            }
         },
 
         async deleteElement() {
@@ -205,7 +276,19 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            this.goToCatalog();
+
+            const errorDiv = document.getElementById('errorText');
+            const successDiv = document.getElementById('successText');
+            if (!response.ok) {
+                successDiv.hidden = true;
+                errorDiv.hidden = false;
+                errorDiv.innerText = result.description;
+            } else {
+                successDiv.hidden = false;
+                errorDiv.hidden = true;
+                successDiv.innerText = result.description;
+                this.goToCatalog();
+            }
         }
     }
 }
@@ -265,6 +348,27 @@ export default {
     height: 10vh;
 }
 
+.textReportJustification {
+    margin-top: 20%;
+    text-align: justify;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.errorHandler {
+    font-style: normal;
+    font-weight: bold;
+    color: $primary-red;
+    text-align: center;
+}
+
+.successHandler {
+    font-style: normal;
+    font-weight: bold;
+    color: $primary-green;
+    text-align: center;
+}
+
 .title {
     margin: auto;
     text-align: center;
@@ -294,7 +398,7 @@ export default {
 .furnitureDetails {
     padding: 10%;
     background-color: $secondary-white;
-    height: 60%;
+    height: 35vh;
 
 }
 
@@ -364,6 +468,112 @@ export default {
     color: $primary-red;
     background-color: $primary-white;
     border-color: $primary-red;
+}
+
+@media screen and (max-width: 768px) {
+
+    .solidBorders {
+        border: 1px solid $primary-black;
+    }
+
+    .roundedBorders {
+        border-radius: 5px;
+    }
+
+    .adminButton {
+        font-size: 12px;
+        margin-left: 5%;
+        width: 100px;
+        padding: 5px;
+    }
+
+    .textReportJustification {
+        margin-left: 0%;
+        margin-top: 5%;
+        text-align: center;
+        font-size: 12px;
+        font-style: italic;
+    }
+
+    .title {
+        margin: auto;
+        text-align: center;
+        font-size: 200%;
+    }
+
+    .furnitureElements {
+        margin-top: 1%;
+        margin-left: 5%;
+        width: 90%;
+        height: 100%;
+        padding: 1%;
+    }
+
+    .furniturePicture {
+        width: 60%;
+        height: 100%;
+    }
+
+    .sideActions {
+        margin-left: 5%;
+        width: 100%;
+        height: 100%;
+    }
+
+    .furnitureDetails {
+        padding: 10%;
+        height: 200px;
+    }
+
+    .furnitureRooms {
+        font-size: 16px;
+    }
+
+    .furnitureStyles {
+        font-size: 14px;
+        margin-top: 5%;
+    }
+
+    .furnitureDimentions {
+        font-size: 10px;
+    }
+
+    .furniturePrice {
+        font-size: 16px;
+    }
+
+    .addToCart {
+        font-size: 12px;
+        height: auto;
+    }
+
+    .furnitureActions {
+        margin-top: 15%;
+        height: 30%;
+    }
+
+    .addFavoriteButton {
+        font-size: 10px;
+        padding: 2%;
+    }
+
+    .availableOrNot {
+        font-size: 12px;
+        padding-top: 0;
+    }
+
+    .adminActions {
+        display: flex;
+        margin-left: 5%;
+        width: 90%;
+        height: auto;
+        margin-top: 5px;
+    }
+
+    .goBack {
+        margin-left: 0;
+    }
+
 }
 
 </style>
