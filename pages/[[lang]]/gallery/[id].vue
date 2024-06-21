@@ -1,228 +1,212 @@
 <template>
   <Navbar/>
   <div class="container">
-    <div class="title">Détails de la Galerie</div>
+    <div class="title">{{ content.galleryDetailsTitle }}</div>
     <div class="card">
       <div class="card-content">
         <div class="card-item">
-          <strong>ID:</strong> {{ GalleryData.id }}
+          <strong>{{ content.id }}:</strong> {{ GalleryData.id }}
         </div>
         <div class="card-item">
-          <strong>Nom:</strong> {{ GalleryData.name }}
+          <strong>{{ content.name }}:</strong> {{ GalleryData.name }}
         </div> 
         <div class="card-item">
-          <strong>Description:</strong> {{ GalleryData.description }}
+          <strong>{{ content.description }}:</strong> {{ GalleryData.description }}
         </div>
         <div class="card-item" v-if="GalleryData.user_id" >
-          <strong>Auteur:</strong> {{ UserData.data.lastname }} {{ UserData.data.firstname }}
+          <strong>{{ content.author }}:</strong> {{ UserData.data.lastname }} {{ UserData.data.firstname }}
         </div>
         <div class="card-item">
-          <strong>Pièces:</strong> {{ GalleryData.room_type }}
+          <strong>{{ content.rooms }}:</strong> {{ GalleryData.room_type }}
         </div>
         <div class="card-item">
-          <strong>Meubles:</strong> {{ GalleryData.furniture }}
+          <strong>{{ content.furnitureTable }}:</strong> {{ GalleryData.furniture }}
         </div>
       </div>
     </div>
     <br>
-    <button class="custom-button" @click="goToGallery">Retour</button>
-    <button class="custom-button" id="startReportButton" style="margin-left: 2.5%" @click="startReport">Signaler</button>
-    <input type="text" id="reportDescription" placeholder="Décriver le problème ici (optionnel)" hidden>
-    <button id="confirmReport" class="custom-button" style="margin-left: 2.5%" @click="reportGallery" hidden>Confirmer</button>
+    <button class="custom-button" @click="goToGallery"> {{ content.goBack }} </button>
+    <button class="custom-button" id="startReportButton" style="margin-left: 2.5%" @click="startReport"> {{ content.report }} </button>
+    <input type="text" id="reportDescription" placeholder="Décrivez le problème ici (optionnel)" hidden>
+    <button id="confirmReport" class="custom-button" style="margin-left: 2.5%" @click="reportGallery" hidden> {{ content.confirm }} </button>
+    <div id="textEncouragement" class="textReportJustification" hidden> {{ content.textReportEncouragement }} </div>
+    <div id="errorText" class="textReportJustification errorHandler" hidden></div>
+    <div id="successText" class="textReportJustification successHandler"></div>
   </div>
 </template>
   
 <script>
-  import {isLogged} from "public/js/checkLogin";
-  export default {
-    name: "Gallery",
-    data() {
-      return {
-        GalleryData: [],
-        UserData:[],
-        errorMessage: '',
-        successMessage: ''
-      };
-    },
-    created() {
-      this.checkLogin();
-      const id = this.$route.params.id;
-      this.getGallery(id);
-    },
-    methods: {
-      async checkLogin() {
-        const userID = await isLogged();
-        if (!userID) {
-          location.href = "/login";
-        }
-      },
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
+import {isLogged} from "public/js/checkLogin";
 
-      async getGallery(id) {
-        try {
-          const userID = localStorage.getItem('userID');
-          if (!userID) {
-            throw new Error('No user found, redirecting to login');
-          }
-          
-          const response = await fetch(`https://api.ardeco.app/gallery/${id}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-          });
-  
-          if (!response.ok) {
-            throw new Error('Failed to fetch data');
-          }
-  
-          const result = await response.json();
-          this.GalleryData = result.data;
-        } catch (error) {
-          console.error(error.message);
-          this.errorMessage = error.message;
-        }
-        this.getUserFullName(this.GalleryData.user_id);
-      },
-
-      async getUserFullName(userId) {
-        try {
-            const response = await fetch(`https://api.ardeco.app/user/${userId}`);
-            if (!response.ok) {
-            throw new Error("Failed to fetch user information");
-            }
-            const userData = await response.json();
-           this.UserData = userData;
-        } catch (error) {
-            console.error("Error fetching user information:", error);
-            return "Unknown user";
-        }
-      },
-
-      async redirectDetails(id) {
-        window.location.href = '/voirDetails/' + id;
-      },
-
-      async openSidebar(id) {
-        var sidebar = document.getElementById("sidebar");
-        if (sidebar.style.left === "-250px") {
-            sidebar.style.left = "0";
-        } else {
-            sidebar.style.left = "-250px";
-        }
-      },
-
-      goToGallery() {
-        this.$router.push('/gallery');
-      },
-
-      async startReport() {
-        let active = false;
-        if (document.getElementById('reportDescription').hidden == false) {
-          active = true;
-        }
-
-        if (active) {
-          document.getElementById('reportDescription').hidden = true;
-          document.getElementById('confirmReport').hidden = true;
-          document.getElementById('startReportButton').textContent = "Signaler";
-        } else {
-          document.getElementById('reportDescription').hidden = false;
-          document.getElementById('confirmReport').hidden = false;
-          document.getElementById('startReportButton').textContent = "Annuler";
-        }
-      },
-
-      async reportGallery() {
-        const text = document.querySelector('#reportDescription').value;
-        try {
-          const response = await fetch(`https://api.ardeco.app/gallery_report/${this.GalleryData.id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify([{
-              "report_text": text
-            }]),
-            credentials: 'include',
-          });
-          if (!response.ok) {
-            throw new Error("Failed to report gallery");
-          } else {
-            this.startReport();
-            document.getElementById('reportDescription').textContent = "";
-          }
-        } catch (error) {
-            console.error("Error fetching user information:", error);
-            return "Unknown user";
-        }
-      },
+export default {
+  name: "Gallery",
+  data() {
+    return {
+      GalleryData: [],
+      UserData:[],
+      errorMessage: '',
+      successMessage: '',
+      content: {}
+    };
+  },
+  mounted() {
+    let lang = this.urlLang;
+    if (lang !== 'en' && lang !== 'fr') {
+      if (localStorage.getItem('lang')) {
+        lang = localStorage.getItem('lang');
+      } else {
+        lang = 'fr';
+      }
     }
+    this.content = lang === 'en' ? en.gallery : fr.gallery;
+  },
+  created() {
+    this.checkLogin();
+    const id = this.$route.params.id;
+    this.getGallery(id);
+  },
+  methods: {
+    async checkLogin() {
+      const userID = await isLogged();
+      if (!userID) {
+        location.href = "/login";
+      }
+    },
+
+    async getGallery(id) {
+      try {
+        const userID = localStorage.getItem('userID');
+        if (!userID) {
+          throw new Error('No user found, redirecting to login');
+        }
+        
+        const response = await fetch(`https://api.ardeco.app/gallery/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const result = await response.json();
+        this.GalleryData = result.data;
+      } catch (error) {
+        console.error(error.message);
+        this.errorMessage = error.message;
+      }
+      this.getUserFullName(this.GalleryData.user_id);
+    },
+
+    async getUserFullName(userId) {
+      try {
+          const response = await fetch(`https://api.ardeco.app/user/${userId}`);
+          if (!response.ok) {
+          throw new Error("Failed to fetch user information");
+          }
+          const userData = await response.json();
+          this.UserData = userData;
+      } catch (error) {
+          console.error("Error fetching user information:", error);
+          return "Unknown user";
+      }
+    },
+
+    async goToGallery() {
+      this.$router.push('/gallery');
+    },
+
+    async startReport() {
+      let active = false;
+      if (document.getElementById('reportDescription').hidden == false) {
+        active = true;
+      }
+
+      if (active) {
+        document.getElementById('reportDescription').hidden = true;
+        document.getElementById('confirmReport').hidden = true;
+        document.getElementById('textEncouragement').hidden = true;
+        document.getElementById('startReportButton').textContent = "Signaler";
+        document.getElementById('errorText').hidden = true;
+      } else {
+        document.getElementById('reportDescription').hidden = false;
+        document.getElementById('confirmReport').hidden = false;
+        document.getElementById('textEncouragement').hidden = false;
+        document.getElementById('startReportButton').textContent = "Annuler";
+        document.getElementById('successText').hidden = true;
+      }
+    },
+
+    async reportGallery() {
+      const text = document.querySelector('#reportDescription').value;
+      const errorDiv = document.getElementById('errorText');
+      const successDiv = document.getElementById('successText');
+      try {
+        const response = await fetch(`https://api.ardeco.app/gallery_report/${this.GalleryData.id}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify([{
+            "report_text": text
+          }]),
+          credentials: 'include',
+        });
+        const result = await response.json();
+        console.log(result)
+        if (!response.ok) {
+          successDiv.hidden = true;
+          errorDiv.hidden = false;
+          errorDiv.innerText = result.description;
+          throw new Error("Failed to report gallery");
+        } else {
+          this.startReport();
+          document.getElementById('reportDescription').textContent = "";
+          successDiv.hidden = false;
+          errorDiv.hidden = true;
+          successDiv.innerText = result.description;
+        }
+      } catch (error) {
+        successDiv.hidden = true;
+        errorDiv.hidden = false;
+        errorDiv.innerText = result.description;
+        console.error("Error fetching user information:", error);
+        return "Unknown user";
+      }
+    },
   }
+}
 </script>
 
 <style scoped lang="scss">
-  .container {
-    padding: 20px;
-  }
+@import '~/styles/variables/ColorVariables.scss';
 
-  .form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 10% 0;
+.textReportJustification {
+  margin-top: 1%;
+  margin-left: 17.5%;
+  width: 59%;
+  text-align: justify;
+  font-size: 12px;
+  font-style: italic;
 }
 
-.edit-error {
-  color: red;
-}
-
-.edit-success {
-  color: green;
-}
-
-.custom-button:active {
-  transform: translateY(2px);
-}
-
-.grid {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #000;
-  border-radius: 5px;
-}
-
-.grid-header {
-  min-width: 1400px;
-  display: flex;
+.errorHandler {
+  font-style: normal;
   font-weight: bold;
-
+  color: $primary-red;
+  text-align: center;
 }
 
-.grid-row {
-  display: flex;
-}
-
-.grid-item {
-  flex: 1;
-  padding: 10px;
-  border-right: 1px solid #000;
-}
-
-.grid-item:last-child {
-  border-right: none;
-}
-
-.grid-row:hover {
-  background-color: rgb(191,178,170);
-}
-
-.grid-item {
-  flex: 1;
-  padding: 12px;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+.successHandler {
+  font-style: normal;
+  font-weight: bold;
+  color: $primary-green;
+  text-align: center;
 }
 
 .title {
@@ -230,20 +214,9 @@
   font-size: 25px;
   font-weight: bold;
 }
-.container{
-    padding-top: 90px;
-}
 
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -250px; /* Caché par défaut */
-  width: 250px;
-  height: 100%;
-  background-color: #333;
-  color: #fff;
-  padding: 20px;
-  transition: left 0.3s ease;
+.container {
+  padding-top: 90px;
 }
 
 .card {
@@ -251,7 +224,7 @@
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background: linear-gradient(to bottom right, #f3f3f3, #e0e0e0);
-  color: #333; /* Couleur du texte */
+  color: #333;
 }
 
 .card-content {
@@ -286,13 +259,13 @@
 }
 
 #confirmReport {
-  background-color: red;
+  background-color: $primary-red;
 }
 
 #confirmReport:hover {
   background-color: #F4F4F4;
-  border: 1px solid red;
-  color: red;
+  border: 1px solid $primary-red;
+  color: $primary-red;
 }
 
 </style>

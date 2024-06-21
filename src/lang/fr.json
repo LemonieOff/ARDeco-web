@@ -464,6 +464,7 @@
   },
   "gallery": {
     "title": "Galerie",
+    "galleryDetailsTitle": "Détails de la Galerie",
     "loading": "Chargement en cours...",
     "noGalleries": "Aucune galerie trouvée.",
     "gallery": "Galerie",
@@ -474,6 +475,7 @@
     "lastName": "Nom",
     "date": "Date",
     "author": "Auteur",
+    "rooms": "Pièces",
     "furnitureTable": "Meubles",
     "roomType": "Type de pièce",
     "item": "Élément",
@@ -483,7 +485,11 @@
     "actionSingOrPlu": "Action(s)",
     "details": "Détails",
     "delete": "Supprimer",
-    "blockUser": "Bloquer l'utilisateur"
+    "goBack": "Retour",
+    "report": "Signaler",
+    "confirm": "Confirmer",
+    "blockUser": "Bloquer l'utilisateur",
+    "textReportEncouragement": "Bien que l'indication d'une raison de signalement soit optionnelle, elle est vivement recommandée. En fournissant des détails sur le problème rencontré, vous nous aidez à mieux comprendre la situation et à traiter votre signalement le plus rapidement possible. Nous apprécions votre coopération et votre aide pour améliorer notre site web."
   },
   "catalog": {
     "title": "Catalogue",

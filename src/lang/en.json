@@ -464,6 +464,7 @@
   },
   "gallery": {
     "title": "Gallery",
+    "galleryDetailsTitle": "Gallery details",
     "loading": "Loading...",
     "noGalleries": "No gallery found.",
     "gallery": "Gallery",
@@ -474,6 +475,7 @@
     "lastName": "Last name",
     "date": "Date",
     "author": "Author",
+    "rooms": "Rooms",
     "furnitureTable": "Furniture",
     "roomType": "Room type",
     "item": "Item",
@@ -483,7 +485,11 @@
     "actionSingOrPlu": "Action(s)",
     "details": "Details",
     "delete": "Delete",
-    "blockUser": "Block user"
+    "goBack": "Return",
+    "report": "Report",
+    "confirm": "Confirm",
+    "blockUser": "Block user",
+    "textReportEncouragement": "Although providing a reason for the report is optional, it is highly recommended. By giving us details about the issue, you help us better understand the situation and address your report as quickly as possible. We appreciate your cooperation and assistance in improving our website."
   },
   "catalog": {
     "title": "Catalog",
