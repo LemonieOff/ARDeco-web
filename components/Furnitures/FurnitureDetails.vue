@@ -43,7 +43,8 @@ export default {
             content: {},
             langPrefix: "/",
             catalogElement: {},
-            elementIsNotArchived: false
+            elementIsNotArchived: false,
+            profileID: null
         }
     },
     mounted() {
@@ -68,7 +69,6 @@ export default {
             if (!loggedIn) {
                 location.href = langPrefix.value + "login";
             }
-            let profileCompanyName = "";
 
             try {
                 // Data du profil
@@ -83,7 +83,7 @@ export default {
 
                 const data_profile = await response_profile.json();
                 if (data_profile.data.role = "company") {
-                    profileCompanyName = `${data_profile.data.firstname}-${data_profile.data.lastname}`;
+                    this.profileID = data_profile.data.id
                 }
                 console.log(data_profile)
             } catch (error) {
@@ -113,14 +113,16 @@ export default {
                         break;
                     }
                 }
-                console.log(this.catalogElement)
 
                 if (this.elementIsNotArchived == false) {
                     this.lookIntoArchive();
                 }
 
                 const companyActions = document.getElementsByClassName('companyAction');
-                if (profileCompanyName != this.catalogElement.company_name) {
+
+                console.log('this.profileID', this.profileID)
+                console.log('this.catalogElement.company', this.catalogElement.company)
+                if (this.profileID != this.catalogElement.company) {
                     for (const action of companyActions) {
                         action.hidden = true;
                     }
