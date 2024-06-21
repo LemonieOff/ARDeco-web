@@ -41,6 +41,7 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
+import {isLogged, loggedIn} from "public/js/checkLogin";
 import { disconnect } from "public/js/checkLogin";
 
 export default {
@@ -51,11 +52,13 @@ export default {
     data() {
         return {
             imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
+            profileData: {},
             content: {},
             langPrefix: "/"
         }
     },
     mounted() {
+        this.getProfileData();
         this.getUSerPicture();
         let lang = this.urlLang;
         const userID = localStorage.getItem('userID');
@@ -246,6 +249,21 @@ export default {
             });
             const result = await response.json();
             this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data}.png`
+        },
+        async getProfileData() {
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = langPrefix.value + "login";
+            }
+
+            // get profile data
+            const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
+                method: 'GET',
+                credentials: 'include',
+            });
+            const data_profile = await response_profile.json();
+            this.profileData.value = data_profile.data;
+            console.log(this.profileData.value)
         }
     },
 };

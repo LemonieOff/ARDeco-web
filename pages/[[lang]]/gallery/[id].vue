@@ -186,29 +186,6 @@ export default {
 <style scoped lang="scss">
 @import '~/styles/variables/ColorVariables.scss';
 
-.textReportJustification {
-  margin-top: 1%;
-  margin-left: 17.5%;
-  width: 59%;
-  text-align: justify;
-  font-size: 12px;
-  font-style: italic;
-}
-
-.errorHandler {
-  font-style: normal;
-  font-weight: bold;
-  color: $primary-red;
-  text-align: center;
-}
-
-.successHandler {
-  font-style: normal;
-  font-weight: bold;
-  color: $primary-green;
-  text-align: center;
-}
-
 .title {
   text-align : center;
   font-size: 25px;
