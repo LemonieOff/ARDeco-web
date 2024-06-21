@@ -1,6 +1,6 @@
 <template>
     <Navbar :urlLang=lang></Navbar>
-    <div class="title">{{ content.title }}</div>
+    <div class="title">{{ content.archiveTitle }}</div>
     <div class="form">
         <div class="grid">
             <div class="grid-header">

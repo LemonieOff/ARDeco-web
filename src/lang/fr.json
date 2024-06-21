@@ -492,6 +492,7 @@
     "textReportEncouragement": "Bien que l'indication d'une raison de signalement soit optionnelle, elle est vivement recommandée. En fournissant des détails sur le problème rencontré, vous nous aidez à mieux comprendre la situation et à traiter votre signalement le plus rapidement possible. Nous apprécions votre coopération et votre aide pour améliorer notre site web."
   },
   "catalog": {
+    "archiveTitle": "Archive",
     "title": "Catalogue",
     "loading": "Chargement en cours...",
     "noGalleries": "Aucune galerie trouvée.",
