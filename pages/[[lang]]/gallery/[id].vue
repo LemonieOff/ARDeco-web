@@ -33,12 +33,14 @@
     <div id="errorText" class="textReportJustification errorHandler" hidden></div>
     <div id="successText" class="textReportJustification successHandler"></div>
   </div>
+  <CommentSection :galleryId=GalleryData.id />
 </template>
   
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {isLogged} from "public/js/checkLogin";
+import CommentSection from "~/components/CommentSection.vue";
 
 export default {
   name: "Gallery",
@@ -193,6 +195,8 @@ export default {
 }
 
 .container {
+  width: 80%;
+  margin-left: 10%;
   padding-top: 90px;
 }
 
