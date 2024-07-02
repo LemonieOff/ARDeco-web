@@ -9,9 +9,10 @@
     <div id="oldCommentSection" class="commentSection">
         <div class="comment" v-for="singleComment in comments.slice().reverse()" :key="singleComment.id">
             <div class="topCommentSection">
-                <img class="icon" v-bind:src="defaultUserPicture" alt="P"/>
+                <img class="icon" v-bind:src="defaultUserPicture" v-if="singleComment.user_id != userId" alt="P"/>
+                <img class="icon" v-bind:src="imageSrc" v-if="singleComment.user_id == userId" alt="P"/>
                 <div class="userInfoSection">
-                    <div id="commentUserName">Utilisateur {{ singleComment.user_id }} </div>
+                    <div id="commentUserName">{{ content.user }} {{ singleComment.user_id }} </div>
                     <div id="commentDate">{{ singleComment.creation_date }}</div>
                 </div>
                 <img id="deleteButton" class="icon" src="~/../../assets/images/icons/trash.png" v-if="singleComment.user_id == userId" @click="deleteComment(singleComment.id)"/>
@@ -60,7 +61,7 @@ export default {
 
         this.getComments()
         this.getUserPicture()
-        // this.content = lang === 'en' ? en.comments : fr.comments;
+        this.content = lang === 'en' ? en.comments : fr.comments;
     },
     methods: {
         async getUserPicture() {
