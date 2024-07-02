@@ -1,6 +1,6 @@
 <template>
     <div id="newCommentSection" class="commentSection">
-        <img id="profileImage" class="icon" v-bind:src="imageSrc" alt="P"/>
+        <img class="icon" v-bind:src="imageSrc" alt="P"/>
         <input id="commentInput" type="text" placeholder="Écrivez un commentaire">
         <img id="sendComment" class="icon" src="~/../../assets/images/icons/send.png" @click="postComment">
         <div id="Error" class="requestReport" hidden></div>
@@ -9,11 +9,12 @@
     <div id="oldCommentSection" class="commentSection">
         <div class="comment" v-for="singleComment in comments.slice().reverse()" :key="singleComment.id">
             <div class="topCommentSection">
-                <img id="profileImage" class="icon" v-bind:src="defaultUserPicture" alt="P"/>
+                <img class="icon" v-bind:src="defaultUserPicture" alt="P"/>
                 <div class="userInfoSection">
                     <div id="commentUserName">Utilisateur {{ singleComment.user_id }} </div>
                     <div id="commentDate">{{ singleComment.creation_date }}</div>
                 </div>
+                <img id="deleteButton" class="icon" src="~/../../assets/images/icons/trash.png" v-if="singleComment.user_id == userId" @click="deleteComment(singleComment.id)"/>
             </div>
             <div class="bottomCommentSection">{{ singleComment.comment }}</div>
         </div>
@@ -37,25 +38,28 @@ export default {
             content: {},
             langPrefix: "/",
             comments: [],
+            userId: null,
             // usersThatCommended: [],
             defaultUserPicture: "https://api.ardeco.app/profile_pictures/0.png"
         }
     },
     mounted() {
         const body = document.body
-        body.style.backgroundColor = "#F4F4F4";
+        body.style.backgroundColor = "#F4F4F4"
         let lang = this.urlLang
 
         if (lang !== 'en' && lang !== 'fr') {
             if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
+                lang = localStorage.getItem('lang')
             } else {
-                lang = 'fr';
+                lang = 'fr'
             }
         }
 
-        this.getComments();
-        this.getUserPicture();
+        this.userId = localStorage.getItem('userID')
+
+        this.getComments()
+        this.getUserPicture()
         // this.content = lang === 'en' ? en.comments : fr.comments;
     },
     methods: {
@@ -111,38 +115,37 @@ export default {
             const result = await response.json();
 
             if (result.code != 201) {
-                this.showError(result.description)
+                this.showError(result.message)
             } else {
                 this.showSuccess(result.description)
                 this.getComments()
             }
             console.log("POST :", result);
         },
-        // async deleteComment() {
-        //     await isLogged();
-        //     if (!loggedIn) {
-        //         location.href = this.langPrefix + "login";
-        //     }
+        async deleteComment(commentId) {
+            await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
 
-        //     const text = document.getElementById('commentInput').textContent;
-        //     const commentId = 0;
-        //     const response = await fetch('https://api.ardeco.app/gallery/' + `${this.galleryId}` + '/comments' + `${commentId}`, {
-        //         method: 'DELETE',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         credentials: 'include',
-        //     });
+            const response = await fetch('https://api.ardeco.app/gallery/' + `${this.galleryId}` + '/comments/' + `${commentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
 
-        // if (!response.ok) {
-        //     this.showError(response.description)
-        // } else {
-        //     this.showSuccess(response.description)
-        // }
+            const result = await response.json();
 
-        //     const result = await response.json();
-        //     console.log(result);furnitureName
-        // },
+            if (result.code != 200) {
+                this.showError(result.message)
+            } else {
+                this.showSuccess(result.description)
+                this.getComments()
+            }
+            console.log("DELETE :", result);
+        },
         async showError(errorExplanation) {
             const error = document.getElementById('Error');
             const success = document.getElementById('Success');
@@ -187,8 +190,8 @@ export default {
 }
 
 .commentSection {
-    width: 55%;
-    margin-left: 25%;
+    width: 55vw;
+    margin-left: 25vw;
 }
 
 #commentInput {
@@ -237,6 +240,7 @@ export default {
 }
 
 .topCommentSection {
+    width: 40vw;
     display: flex;
 }
 
@@ -258,11 +262,20 @@ export default {
 .bottomCommentSection {
     background-color: $secondary-white;
     width: 80%;
-    margin-left: 12%;
+    margin-left: 70px;
     padding: 10px;
     border-radius: 5px;
     font-size: 14px;
     border: 2px outset $primary-black;
+}
+
+#deleteButton {
+    border-radius: 0;
+    max-height: 35px;
+    margin-left: 25vw;
+    margin-top: 4%;
+    border: none;
+    cursor: pointer;
 }
 
 </style>
