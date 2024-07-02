@@ -278,4 +278,48 @@ export default {
     cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+    .commentSection {
+        margin-left: 5%;
+        width: 90%;
+    }
+
+    #oldCommentSection {
+        margin-top: 2.5%;
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .topCommentSection {
+        width: 100%;
+    }
+
+    .userInfoSection {
+        margin-top: 25px;
+        height: auto;
+    }
+
+    #commentUserName {
+        font-size: 9px;
+    }
+
+    #commentDate {
+        font-size: 11px;
+        color: gray;
+    }
+
+    #deleteButton {
+        margin-top: 20px;
+        margin-left: 25%;
+    }
+
+    .bottomCommentSection {
+        width: 90%;
+        margin-left: 5%;
+        height: auto;
+        font-size: 12px;
+    }
+
+}
+
 </style>
