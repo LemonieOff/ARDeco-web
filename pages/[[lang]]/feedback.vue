@@ -1,14 +1,14 @@
 <template>
     <div>
         <Navbar/>
-        <div class="title"> Donnez nous votre avis ! </div>
+        <div class="title"> {{ content.title }} </div>
         <div class="formCard">
-            <div class="motivationalText textToHighlight"> Ça ne vous prend que deux minutes ! </div>
+            <div class="motivationalText textToHighlight"> {{ content.textEncouragement }} </div>
             <div class="chooseFeedbackType">
                 <svg class="fontAwsomeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM169.8 165.3c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/>
                 </svg>
-                <span class="question textToHighlight"> De quoi voulez-vous nous parler ? </span>
+                <span class="question textToHighlight"> {{ content.typesChoiceTitle }} </span>
             </div>
             <div class="typesCards">
                 <button v-for="(card, index) in cards" :key="index" :id="`card${index}`" class="typeCard" @click="changeSelection(index)" :class="{ active: index === selectedCard }" >
@@ -19,17 +19,19 @@
                 <svg class="fontAwsomeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"/>
                 </svg>
-                <span class="question textToHighlight"> Dites-nous tout ! </span>
+                <span class="question textToHighlight"> {{ content.inputTitle }} </span>
             </div>
-            <textarea id="textInput" class="userInput" placeholder="Je pense que..."></textarea>
-            <div class="sendFormButton"> Envoyer </div>
+            <textarea id="textInput" class="userInput" :placeholder="`${content.inputPlaceholder}`"></textarea>
+            <div class="sendFormButton"> {{ content.send }} </div>
         </div>
     </div>
 </template>
 
 <script>
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
 import Navbar from "~/components/Navbar.vue";
-import { isLogged } from "public/js/checkLogin";
+import { isLogged, loggedIn } from "public/js/checkLogin";
 
 export default {
     name: "Feedback",
@@ -43,10 +45,33 @@ export default {
                 { name: 'Suggestion' },
                 { name: 'Bug' }
             ],
-            selectedCard: 0
+            selectedCard: 0,
+            content: {},
+            langPrefix: "/"
         };
     },
+    mounted() {
+        this.checkIfLogged();
+        let lang = this.urlLang
+
+        if (lang !== 'en' && lang !== 'fr') {
+            if (localStorage.getItem('lang')) {
+                lang = localStorage.getItem('lang');
+            } else {
+                lang = 'fr';
+            }
+        }
+
+        this.content = lang === 'en' ? en.feedback : fr.feedback;
+    },
     methods: {
+        async checkIfLogged() {
+            await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+        },
+
         changeSelection(index) {
             this.selectedCard = index;
         },

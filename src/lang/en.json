@@ -517,5 +517,18 @@
     "restore": "Unarchive",
     "hide": "Hide",
     "show": "Stop hidding"
+  },
+  "feedback": {
+    "title": "Give us your opinion !",
+    "textEncouragement": "It only takes two minutes !",
+    "typesChoiceTitle": "What do you want to talk about ?",
+    "types": {
+      "feedback": "Feedback",
+      "suggestion": "Suggestion",
+      "bug": "Bug"
+    },
+    "inputTitle": "Tell us everything !",
+    "inputPlaceholder": "I think that...",
+    "send": "Send"
   }
 }
