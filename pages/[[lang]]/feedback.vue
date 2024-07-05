@@ -264,4 +264,60 @@ export default {
     cursor: pointer;
 }
 
+
+@media screen and (max-width: 768px) {
+
+    .title {
+        margin-top: 75px;
+    }
+
+    .formCard {
+        height: 400px;
+        width: 80%;
+        margin-top: 25px;
+        margin-left: 10%;
+    }
+
+    .motivationalText {
+        font-size: 16px;
+    }
+
+    .chooseFeedbackType {
+        font-size: 14px;
+    }
+
+    .typesCards {
+        display: flex;
+        margin-left: 7.5%;
+        margin-top: 3%;
+    }
+
+    .typeCard {
+        font-size: 12px;
+        padding: 3px;
+    }
+
+    .fontAwsomeIcon {
+        margin-top: 1px;
+    }
+
+    .userInputTitle {
+        font-size: 14px;
+    }
+
+    .userInput {
+        font-size: 14px;
+    }
+
+    .sendFormButton {
+        font-size: 14px;
+        width: 30%;
+        margin-left: 35%;
+        padding: 2%;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+}
+
 </style>

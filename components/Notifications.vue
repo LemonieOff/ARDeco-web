@@ -76,5 +76,16 @@
 }
 
 
+@media screen and (max-width: 768px) {
+
+    .notificationBubble {
+        font-size: 14px;
+
+        top: 45px;
+        left: -300px;
+    }
+}
+
+
 </style>
   
