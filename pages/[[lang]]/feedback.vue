@@ -22,8 +22,9 @@
                 <span class="question textToHighlight"> {{ content.inputTitle }} </span>
             </div>
             <textarea id="textInput" class="userInput" :placeholder="`${content.inputPlaceholder}`"></textarea>
-            <div class="sendFormButton"> {{ content.send }} </div>
+            <div class="sendFormButton" @click="sendForm"> {{ content.send }} </div>
         </div>
+        <Notifications ref="notifications"/>
     </div>
 </template>
 
@@ -31,12 +32,14 @@
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import Navbar from "~/components/Navbar.vue";
+import Notifications from "~/components/Notifications.vue";
 import { isLogged, loggedIn } from "public/js/checkLogin";
 
 export default {
     name: "Feedback",
     components: {
         Navbar,
+        Notifications
     },
     data() {
         return {
@@ -47,7 +50,8 @@ export default {
             ],
             selectedCard: 0,
             content: {},
-            langPrefix: "/"
+            langPrefix: "/",
+            message: ''
         };
     },
     mounted() {
@@ -77,20 +81,75 @@ export default {
         },
 
         async sendForm() {
-            await isLogged();
+            const inputText = document.getElementById('textInput');
+            const userId = await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            const response = await fetch('https://api.ardeco.app/catalog', {
+
+            let feedbackType = null;
+            const dateToCreateId = new Date('July 5, 2024 00:00:00 GMT+00:00');
+            const date = new Date();
+            const uniqueId = dateToCreateId.getTime();
+            const todaysDate = date.toDateString();
+            const feedbackContent = inputText.value;
+
+            if (feedbackContent == "") {
+                this.$refs.notifications.showError("Erreur : Veuillez ajouter un texte.")
+                return;
+            }
+
+            console.log('selectedCard : ', this.selectedCard)
+
+            switch (this.selectedCard) {
+                case 0:
+                    feedbackType = "feedback";
+                    break;
+                case 1:
+                    feedbackType = "suggestion";
+                    break;
+                case 2:
+                    feedbackType = "bug";
+                    break;
+                default:
+                    feedbackType = "feedback";
+            }
+
+            console.log("id : ", uniqueId)
+            console.log("user_id : ", userId)
+            console.log("feedback : ", feedbackContent)
+            console.log("type : ", feedbackType)
+            console.log("date : ", todaysDate)
+            console.log("processed : ", false)
+            console.log("process_date : ", null)
+
+            const response = await fetch('https://api.ardeco.app/feedbacks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify({
+                    "id": uniqueId,
+                    "user_id": userId,
+                    "feedback": feedbackContent,
+                    "type": feedbackType,
+                    "date": todaysDate,
+                    "processed": false,
+                    "process_date": null
+                }),
                 credentials: 'include',
             });
 
             const result = await response.json();
             console.log(result);
+
+            if (result.code != 201) {
+                this.$refs.notifications.showError(result.description)
+            } else {
+                this.$refs.notifications.showSuccess(result.description)
+                inputText.value = "";
+            }
+
         },
     }
 };
