@@ -25,7 +25,8 @@
     "darkmode": "Dark mode",
     "lightmode": "Light mode",
     "login": "Login",
-    "disconnect": "Disconnect"
+    "disconnect": "Disconnect",
+    "feedback": "Feedback"
   },
   "profilePages": {
     "presentationPage": {

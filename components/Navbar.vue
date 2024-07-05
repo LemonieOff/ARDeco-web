@@ -22,6 +22,9 @@
                     <li id="ticketsMenuOption">
                         <img src="~/../../assets/images/icons/support.png" /><a :href="`${langPrefix}tickets`">{{content.tickets}}</a>
                     </li>
+                    <li id="feedbackMenuOption">
+                        <img src="~/../../assets/images/icons/feedback.png" /><a :href="`${langPrefix}feedback`">{{content.feedback}}</a>
+                    </li>
                     <li id="disconnectMenuOption">
                         <img src="~/../../assets/images/icons/logout.png" /><a @click="logout">{{content.disconnect}}</a>
                     </li>
@@ -68,6 +71,7 @@ export default {
         if (userID == null) {
             document.getElementById("profileMenuOption").style.display = "none";
             document.getElementById("settingsMenuOption").style.display = "none";
+            document.getElementById("feedbackMenuOption").style.display = "none";
             document.getElementById("companyMenuOption").style.display = "none";
             document.getElementById("ticketsMenuOption").style.display = "none";
             document.getElementById("disconnectMenuOption").style.display = "none";

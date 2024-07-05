@@ -25,7 +25,8 @@
     "darkmode": "Mode sombre",
     "lightmode": "Mode clair",
     "login": "Connexion",
-    "disconnect": "Déconnexion"
+    "disconnect": "Déconnexion",
+    "feedback": "Vos retours"
   },
   "profilePages": {
     "presentationPage": {
