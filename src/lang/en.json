@@ -531,5 +531,8 @@
     "inputTitle": "Tell us everything !",
     "inputPlaceholder": "I think that...",
     "send": "Send"
+  },
+  "comments": {
+    "user": "User"
   }
 }

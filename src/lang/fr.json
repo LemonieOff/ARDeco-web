@@ -531,5 +531,8 @@
     "inputTitle": "Dites-nous tout !",
     "inputPlaceholder": "Je pense que...",
     "send": "Envoyer"
+  },
+  "comments": {
+    "user": "Utilisateur"
   }
 }
