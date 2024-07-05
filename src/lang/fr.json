@@ -25,7 +25,8 @@
     "darkmode": "Mode sombre",
     "lightmode": "Mode clair",
     "login": "Connexion",
-    "disconnect": "Déconnexion"
+    "disconnect": "Déconnexion",
+    "feedback": "Vos retours"
   },
   "profilePages": {
     "presentationPage": {
@@ -517,6 +518,19 @@
     "restore": "Désarchiver",
     "hide": "Masquer",
     "show": "Démasquer"
+  },
+  "feedback": {
+    "title": "Donnez nous votre avis !",
+    "textEncouragement": "Ça ne vous prend que deux minutes !",
+    "typesChoiceTitle": "De quoi voulez-vous nous parler ?",
+    "types": {
+      "feedback": "Feedback",
+      "suggestion": "Suggestion",
+      "bug": "Bug"
+    },
+    "inputTitle": "Dites-nous tout !",
+    "inputPlaceholder": "Je pense que...",
+    "send": "Envoyer"
   },
   "comments": {
     "user": "Utilisateur"
