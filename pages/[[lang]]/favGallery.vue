@@ -14,16 +14,21 @@
                     <div class="grid-item cell-furniture">{{ content.furnitureTable }}</div>
                     <div class="grid-item cell-actions">{{ content.actionSingOrPlu }}</div>
                 </div>
-                <div v-for="(item) in GalleryData" class="grid-row">
-                    <div class="grid-item cell-id">{{ item.gallery.id }}</div>
-                    <div class="grid-item cell-name">{{ item.gallery.name }}</div>
-                    <div class="grid-item cell-desc">{{ item.gallery.description }}</div>
-                    <div class="grid-item cell-author">{{ item.user.first_name }} {{ item.user.last_name }}</div>
-                    <div class="grid-item cell-room">{{ item.gallery.type }}</div>
-                    <div class="grid-item cell-furniture">{{ item.gallery.furniture }}</div>
-                    <div class="grid-item cell-actions">
-                        <button class="custom-button" @click="deleteGallery(item.gallery.id)">{{ content.delete }}</button><br />
-                        <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">{{ content.blockUser }}</button>
+                <div v-for="(item) in GalleryData">
+                    <div v-if="!item.error" class="grid-row">
+                        <div class="grid-item cell-id">{{ item.id }}</div>
+                        <div class="grid-item cell-name">{{ item.name }}</div>
+                        <div class="grid-item cell-desc">{{ item.description }}</div>
+                        <div class="grid-item cell-author">{{ item.user.first_name }} {{ item.user.last_name }}</div>
+                        <div class="grid-item cell-room">{{ item.room_type }}</div>
+                        <div class="grid-item cell-furniture">{{ item.furniture }}</div>
+                        <div class="grid-item cell-actions">
+                            <button class="custom-button" @click="deleteGallery(item.id)">{{ content.delete }}</button><br />
+                            <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">{{ content.blockUser }}</button>
+                        </div>
+                    </div>
+                    <div v-else class="grid-item cell-error">
+                        {{ content.noItems }}
                     </div>
                 </div>
             </div>
@@ -37,6 +42,7 @@ import {isLogged} from "public/js/checkLogin";
 import {onMounted, ref} from "vue";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
+import {FetchError} from "~/src/errors/fetch_error";
 
 const route = useRoute();
 let lang = ref(route.params.lang);
@@ -94,15 +100,27 @@ async function getFavGallery() {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch data');
+            throw new FetchError(response);
         }
 
         document.getElementById("fav_furniture_loading").style.display = "none";
         const result = await response.json();
         GalleryData.value = result.data;
     } catch (error) {
-        console.error(error.message);
-        errorMessage.value = error.message;
+        if (error instanceof FetchError) {
+            const status = error.response.status;
+            if (status === 404) {
+                document.getElementById("fav_furniture_loading").style.display = "none";
+                GalleryData.value = [
+                    {
+                        error: true
+                    }
+                ];
+            }
+        } else {
+            console.error(error.message);
+            errorMessage.value = error.message;
+        }
     }
 }
 
@@ -117,7 +135,14 @@ async function deleteGallery(id) {
         });
         if (response.ok) {
             successMessage.value = 'Gallery deleted successfully';
-            GalleryData.value = GalleryData.value.filter(item => item.gallery.id !== id);
+            GalleryData.value = GalleryData.value.filter(item => item.id !== id);
+            if (GalleryData.value.length === 0) {
+                GalleryData.value = [
+                    {
+                        error: true
+                    }
+                ]
+            }
         } else {
             throw new Error('Failed to delete Gallery');
         }
@@ -224,5 +249,9 @@ async function blockUser(userID) {
 
 .cell-id {
     flex-grow: 0.2;
+}
+
+.cell-error {
+    text-align: center;
 }
 </style>

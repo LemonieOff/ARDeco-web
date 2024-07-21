@@ -1,9 +1,9 @@
 <template>
-  <div class="overflow-x-hidden">
-    <ClientOnly/>
-    <NuxtPage class="z-1"/>
-    <LanguageChanger/>
-  </div>
+    <div class="overflow-x-hidden">
+        <ClientOnly/>
+        <NuxtPage class="z-1"/>
+        <LanguageChanger/>
+    </div>
 </template>
 <script>
 import Header from "./components/Header";
@@ -12,6 +12,6 @@ import Footer from "~/components/Footer.vue";
 import LanguageChanger from "~/components/LanguageChanger.vue";
 
 export default {
-  components: { Header, Navbar, Footer, LanguageChanger }
+    components: {Header, Navbar, Footer, LanguageChanger}
 }
 </script>
