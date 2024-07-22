@@ -119,7 +119,7 @@
       }
     ],
     "timeline": {
-      "title" : "Les étapes de notre projet",
+      "title": "Les étapes de notre projet",
       "testAndLearn": "Expérimenter des technologies pour trouver les plus compatibles avec le projet et les objectifs recherchés.",
       "managementAndProcess": "Étape ayant comme objectif de travailler notre organisation interne en tant qu'équipe pour le reste du projet.",
       "fastForward": "Le but de ce sprint est d’avoir une avancée significative afin que d'atteindre une version Alpha.",
