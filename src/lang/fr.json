@@ -493,6 +493,23 @@
     "textReportEncouragement": "Bien que l'indication d'une raison de signalement soit optionnelle, elle est vivement recommandée. En fournissant des détails sur le problème rencontré, vous nous aidez à mieux comprendre la situation et à traiter votre signalement le plus rapidement possible. Nous apprécions votre coopération et votre aide pour améliorer notre site web."
   },
   "catalog": {
+    "list": {
+      "name": "Nom",
+      "price": "Prix (€)",
+      "rooms": "Pièce(s)",
+      "styles": "Style(s)",
+      "colors": "Couleur(s)",
+      "width": "Largeur (cm)",
+      "height": "Longeur (cm)",
+      "depth": "Hauteur (cm)",
+      "actions": "Actions",
+      "catalog": "Catalogue",
+      "archive": "Archive"
+    },
+    "buttons": {
+      "emptyCompagnyArchive": "Vider mon archive d'entreprise",
+      "resetCompagnyApiKey": "Réinitialiser mon clé API"
+    },
     "archiveTitle": "Archive",
     "title": "Catalogue",
     "loading": "Chargement en cours...",

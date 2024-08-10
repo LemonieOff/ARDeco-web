@@ -1,11 +1,11 @@
 <template>
     <Navbar :urlLang=lang></Navbar>
-    <UserCatalogAndArchive :urlLang=lang></UserCatalogAndArchive>
+    <CompanySettings :urlLang=lang></CompanySettings>
 </template>
 
 <script setup lang="ts">
 import Navbar from "~/components/Navbar.vue";
-import UserCatalogAndArchive from "~/components/Settings/UserCatalogAndArchive.vue";
+import CompanySettings from "~/components/Settings/CompanySettings.vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
