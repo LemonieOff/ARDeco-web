@@ -1,4 +1,8 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.welcomeTitle }}</Title>
+        <Meta name="description" content="Une application innovante qui révolutionne votre expérience de design et d'aménagement intérieur en utilisant la Réalité Augmentée (AR) et l'Intelligence Artificielle (IA) depuis votre smartphone." />
+    </Head>
     <div id="hero" class="flex h-screen w-full font-black bg-port-brown text-9xl bg-no-repeat bg-cover"
          :style="{backgroundImage: `url(${backgroundUrl})`}">
         <h1 id="welcomeTitle"

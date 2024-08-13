@@ -1,7 +1,7 @@
 <template>
     <div class="navbar">
         <a id="home" :href="`${langPrefix}`">
-            <img class="navbar-icon" src="~/../../assets/images/logo.png">
+            <img class="navbar-icon" src="~/../../assets/images/logo.png" alt="Home">
         </a>
         <a id="team" class="navbar-option navbarLink" :href="`${langPrefix}team`">{{content.team}}</a>
         <a id="product" class="navbar-option navbarLink" :href="`${langPrefix}product`">{{content.product}}</a>
@@ -26,7 +26,7 @@
                         <img src="~/../../assets/images/icons/feedback.png" /><a :href="`${langPrefix}feedback`">{{content.feedback}}</a>
                     </li>
                     <li id="disconnectMenuOption">
-                        <img src="~/../../assets/images/icons/logout.png" /><a @click="logout">{{content.disconnect}}</a>
+                        <img src="~/../../assets/images/icons/logout.png" /><a @click="logout" href="#">{{content.disconnect}}</a>
                     </li>
                     <li id="loginMenuOption">
                         <img src="~/../../assets/images/icons/logout.png" /><a :href="`${langPrefix}login`">{{content.login}}</a>
