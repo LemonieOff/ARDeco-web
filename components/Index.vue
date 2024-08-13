@@ -3,12 +3,15 @@
         <Title>ARDeco - {{ content.welcomeTitle }}</Title>
         <Meta name="description" content="Une application innovante qui révolutionne votre expérience de design et d'aménagement intérieur en utilisant la Réalité Augmentée (AR) et l'Intelligence Artificielle (IA) depuis votre smartphone." />
     </Head>
+    <!-- Welcome title -->
     <div id="hero" class="flex h-dvh w-full bg-port-brown bg-no-repeat bg-cover"
          :style="{backgroundImage: `url(${backgroundUrl})`}">
         <h1 id="welcomeTitle"
             class="font-black mt-72 md:mt-16 p-2 justify-center text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-center mx-auto bg-port-brown md:bg-transparent rounded-lg text-ARgrey h-fit w-fit md:w-1/2">
             {{content.welcomeTitle}}</h1>
     </div>
+
+    <!-- Product presentation -->
     <div class="bg-[#F2EBDF] flex flex-col 2xl:flex-row items-center mt-9 mb-9">
         <div class="font-display font-medium 2xl:w-1/3 ml-9 mr-9 text-2xl 2xl:text-4xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mb-9">
             <h2 class="underline mb-2 text-center">ARDeco</h2>
@@ -18,25 +21,25 @@
         </div>
         <img class="2xl:ml-24 w-1/2 h-2/3 my-auto rounded-xl" src="~assets/images/intro.gif" alt="ARDeco concept demo"/>
     </div>
-    <div class="bg-[#F2EBDF] flex flex-col">
+
+    <!-- Team link -->
+    <div class="bg-[#F2EBDF]">
         <div class="text-center h-full items-center">
-            <div class="flex w-full overflow-hidden mt-24 z-0 flex-col pt-8 md:pt-0">
-                <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap',
-        'transition duration-1000 pointer-events-none select-none">
-                    <div v-for="j in 10" :key="j"
-                         class="font-black leading-none text-3 mr-4 text-[3rem] md:text-[5rem] text-port-brown">
+            <div class="flex w-full overflow-hidden py-5 z-0 flex-col">
+                <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
+                    <div v-for="j in 5" :key="j"
+                         class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] text-port-brown">
                         <span id="discover" class="mr-4">{{transition.discover}}</span><span id="team" class="outline-text">{{transition.team}}</span>
                     </div>
                 </div>
 
-                <div class="mx-auto">
-                    <a id="clickHere" class="p-5 rounded-full flex h-fit text-port-brown font-extrabold text-3xl md:text-5xl bg-ARgrey ease-in-out
-      duration-700 hover:text-ARgrey hover:bg-port-brown  hover:border-2 hover:border-ARgrey hover:p-8" href="/team">{{transition.clickHere}}</a>
+                <div class="mx-auto mt-2 md:mt-4 mb-1 md:mb-3">
+                    <a id="clickHere" class="p-2 md:p-5 rounded-full flex h-fit text-port-brown font-extrabold text-2xl md:text-5xl bg-ARgrey ease-in-out duration-700 border-2 border-transparent hover:text-ARgrey hover:bg-port-brown hover:border-ARgrey" href="/team">{{transition.clickHere}}</a>
                 </div>
-                <div class=" auto-scroll-text flex items-center justify-start w-full whitespace-nowrap',
-        'transition duration-1000 pointer-events-none select-none ">
-                    <div v-for="j in 10" :key="j"
-                         class="font-black leading-none mr-4 text-3  text-[3rem] md:text-[5rem] text-port-brown animation-reverse">
+
+                <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
+                    <div v-for="j in 5" :key="j"
+                         class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] text-port-brown animation-reverse">
                         <span id="discover2" class="mr-4">{{transition.discover}}</span><span id="team2" class="outline-text">{{transition.team}}</span>
                     </div>
                 </div>
