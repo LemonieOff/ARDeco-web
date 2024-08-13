@@ -120,20 +120,38 @@
     ],
     "timeline": {
       "title": "Our project's steps",
-      "testAndLearn": "Experimenting with technologies to find the most compatible ones with the project and the desired objectives.",
-      "managementAndProcess": "Stage aiming to work on our internal organization as a team for the rest of the project.",
-      "fastForward": "The goal of this sprint is to make significant progress to achieve an Alpha version.",
-      "betaAndGrowthHacking": "Having a testable Beta that can be launched in real conditions with real users.",
-      "consolidation": "Have a final, fully functional application, usable by interested users.",
-      "launchAndMetric": "Finish the final version of the project, public and usable for everyone.",
-      "dates": {
-        "june2023": "June 2023",
-        "october2023": "October 2023",
-        "january2024": "January 2024",
-        "may2024": "May 2024",
-        "september2024": "September 2024",
-        "december2024": "December 2024"
-      }
+      "steps": [
+        {
+          "title": "TEST & LEARN",
+          "description": "Experimenting with technologies to find the most compatible ones with the project and the desired objectives.",
+          "date": "June 2023"
+        },
+        {
+          "title": "MANAGEMENT & PROCESS",
+          "description": "Stage aiming to work on our internal organization as a team for the rest of the project.",
+          "date": "October 2023"
+        },
+        {
+          "title": "FAST FORWARD",
+          "description": "Make significant progress to achieve an Alpha version.",
+          "date": "January 2024"
+        },
+        {
+          "title": "BETA & GROWTH HACKING",
+          "description": "Having a testable Beta that can be launched in real conditions with real users.",
+          "date": "May 2024"
+        },
+        {
+          "title": "CONSOLIDATION",
+          "description": "Have a final, fully functional application, usable by interested users.",
+          "date": "September 2024"
+        },
+        {
+          "title": "LAUNCH & METRIC",
+          "description": "Finish the final version of the project, public and usable for everyone.",
+          "date": "December 2024"
+        }
+      ]
     }
   },
   "login": {
