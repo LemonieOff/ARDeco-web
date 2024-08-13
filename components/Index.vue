@@ -59,11 +59,11 @@
     </div>
 
     <!-- Features -->
-    <div class="flex flex-col items-center justify-center bg-gradient-to-b h-screen w-screen from-port-brown to-[#F2EBDF]">
+    <div class="flex flex-col items-center justify-center bg-gradient-to-b from-port-brown to-[#F2EBDF]">
         <span id="keyPoints" class="text-9xl font-bold mb-12 w-full text-center outline-text">{{content.keyPoints}}</span>
-        <ul class="flex flex-wrap justify-center">
+        <ul class="flex flex-col lg:flex-row flex-wrap justify-center content-center">
             <li v-for="(feature, index) in features" :key="index"
-                class="m-3 flex flex-col justify-between bg-port-brown border border-ARgrey text-ARgrey p-4 rounded-md shadow-md w-1/3 font-sans hover:bg-ARgrey hover:text-port-brown">
+                class="m-3 flex flex-col justify-between bg-port-brown border border-ARgrey text-ARgrey p-4 rounded-md shadow-md w-5/6 lg:w-2/5 font-sans hover:bg-ARgrey hover:text-port-brown">
                 <h3 class="text-xl font-semibold mb-2">{{ feature.title }}</h3>
                 <p class="">{{ feature.description }}</p>
             </li>
