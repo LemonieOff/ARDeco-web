@@ -12,14 +12,14 @@
     </div>
 
     <!-- Product presentation -->
-    <div class="bg-[#F2EBDF] flex flex-col 2xl:flex-row items-center mt-9 mb-9">
-        <div class="font-display font-medium 2xl:w-1/3 ml-9 mr-9 text-2xl 2xl:text-4xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mb-9">
+    <div class="bg-[#F2EBDF] flex flex-col xl:flex-row items-center my-9">
+        <div class="font-display font-medium mx-9 text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-xl:mb-9">
             <h2 class="underline mb-2 text-center">ARDeco</h2>
             <p id="productPresentation" class="">
                 {{content.productPresentation}}
             </p>
         </div>
-        <img class="2xl:ml-24 w-1/2 h-2/3 my-auto rounded-xl" src="~assets/images/intro.gif" alt="ARDeco concept demo"/>
+        <img class="2xl:ml-24 xl:mr-9 my-auto rounded-xl" src="~assets/images/intro.gif" alt="ARDeco concept demo"/>
     </div>
 
     <!-- Team link -->
