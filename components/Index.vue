@@ -46,6 +46,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Augmented reality -->
     <div class="h-screen bg-gradient-to-t from-port-brown to-[#F2EBDF] flex">
         <img class="ml-32 w-1/2 h-2/3 my-auto rounded-xl" src="~assets/images/ar_illu.png" alt="this slowpoke moves"/>
         <div class="font-display font-medium w-1/3 ml-9 text-4xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4">
@@ -55,6 +57,8 @@
             </p>
         </div>
     </div>
+
+    <!-- Features -->
     <div class="flex flex-col items-center justify-center bg-gradient-to-b h-screen w-screen from-port-brown to-[#F2EBDF]">
         <span id="keyPoints" class="text-9xl font-bold mb-12 w-full text-center outline-text">{{content.keyPoints}}</span>
         <ul class="flex flex-wrap justify-center">
@@ -65,6 +69,8 @@
             </li>
         </ul>
     </div>
+
+    <!-- Timeline -->
     <div class="timelineTitle">{{ timeline.title }}</div>
     <div class="timeline">
         <div class="outer">
@@ -168,7 +174,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.auto-scroll-text {
+    & > div {
+        animation: scrollText 16s infinite linear;
 
+        &.animation-reverse {
+            animation-direction: reverse;
+        }
+
+        span.outline-text {
+            -webkit-text-stroke: 1px theme('colors.ARgrey');
+            color: transparent;
+        }
+    }
+}
+
+span.outline-text {
+    -webkit-text-stroke: 1px theme('colors.ARgrey');
+    color: transparent;
+}
+
+@keyframes scrollText {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
 </style>
 
 <!--<style lang="scss" scoped>
@@ -295,36 +328,6 @@ export default {
 /* setting dot to the right if the card is odd */
 .card:nth-child(even) > .info > .title::before {
     right: -45px;
-}
-
-
-.auto-scroll-text {
-    & > div {
-        animation: scrollText 16s infinite linear;
-
-        &.animation-reverse {
-            animation-direction: reverse;
-        }
-
-        span.outline-text {
-            -webkit-text-stroke: 1px theme('colors.ARgrey');
-            color: transparent;
-        }
-    }
-}
-
-span.outline-text {
-    -webkit-text-stroke: 1px theme('colors.ARgrey');
-    color: transparent;
-}
-
-@keyframes scrollText {
-    from {
-        transform: translateX(0%);
-    }
-    to {
-        transform: translateX(-100%);
-    }
 }
 
 @media only screen and (max-width: 500px) {
