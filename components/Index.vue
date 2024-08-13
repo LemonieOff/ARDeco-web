@@ -3,10 +3,10 @@
         <Title>ARDeco - {{ content.welcomeTitle }}</Title>
         <Meta name="description" content="Une application innovante qui révolutionne votre expérience de design et d'aménagement intérieur en utilisant la Réalité Augmentée (AR) et l'Intelligence Artificielle (IA) depuis votre smartphone." />
     </Head>
-    <div id="hero" class="flex h-screen w-full font-black bg-port-brown text-9xl bg-no-repeat bg-cover"
+    <div id="hero" class="flex h-dvh w-full bg-port-brown bg-no-repeat bg-cover"
          :style="{backgroundImage: `url(${backgroundUrl})`}">
         <h1 id="welcomeTitle"
-            class="font-black md:mt-16 justify-center text-7xl md:text-9xl mt-72 text-center mx-auto bg-port-brown md:bg-transparent h-fit text-ARgrey w-fit md:w-1/2">
+            class="font-black mt-72 md:mt-16 p-2 justify-center text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-center mx-auto bg-port-brown md:bg-transparent rounded-lg text-ARgrey h-fit w-fit md:w-1/2">
             {{content.welcomeTitle}}</h1>
     </div>
     <div class="h-screen bg-[#F2EBDF] flex">
