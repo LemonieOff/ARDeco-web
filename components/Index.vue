@@ -9,14 +9,14 @@
             class="font-black mt-72 md:mt-16 p-2 justify-center text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-center mx-auto bg-port-brown md:bg-transparent rounded-lg text-ARgrey h-fit w-fit md:w-1/2">
             {{content.welcomeTitle}}</h1>
     </div>
-    <div class="h-screen bg-[#F2EBDF] flex">
-        <div class="font-display font-medium w-1/3 ml-9 text-4xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4">
-            <h2 class="underline mb-5">ARDECO</h2>
-            <p id="productPresentation">
+    <div class="bg-[#F2EBDF] flex flex-col 2xl:flex-row items-center mt-9 mb-9">
+        <div class="font-display font-medium 2xl:w-1/3 ml-9 mr-9 text-2xl 2xl:text-4xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mb-9">
+            <h2 class="underline mb-2 text-center">ARDeco</h2>
+            <p id="productPresentation" class="">
                 {{content.productPresentation}}
             </p>
         </div>
-        <img class="ml-32 w-1/2 h-2/3 my-auto rounded-xl" src="~assets/images/intro.gif" alt="this slowpoke moves"/>
+        <img class="2xl:ml-24 w-1/2 h-2/3 my-auto rounded-xl" src="~assets/images/intro.gif" alt="ARDeco concept demo"/>
     </div>
     <div class="bg-[#F2EBDF] flex flex-col">
         <div class="text-center h-full items-center">
@@ -166,6 +166,10 @@ export default {
 
 <style lang="scss" scoped>
 
+</style>
+
+<!--<style lang="scss" scoped>
+
 .timelineTitle {
     font-size: 24px;
     font-weight: bold;
@@ -175,7 +179,7 @@ export default {
 
 /* Timeline Container */
 .timeline {
-    background: var(--primary-color);
+    background: var(&#45;&#45;primary-color);
     margin-left: 40%;
     margin-bottom: 5%;
     width: 20%;
@@ -367,4 +371,4 @@ span.outline-text {
     }
 }
 
-</style>
+</style>-->
