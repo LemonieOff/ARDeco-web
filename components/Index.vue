@@ -13,7 +13,7 @@
 
     <!-- Product presentation -->
     <div class="bg-[#F2EBDF] flex flex-col xl:flex-row items-center my-9">
-        <div class="font-display font-medium mx-9 text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-xl:mb-9">
+        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-xl:mb-9">
             <h2 class="underline mb-2 text-center">ARDeco</h2>
             <p id="productPresentation" class="">
                 {{content.productPresentation}}
@@ -50,7 +50,7 @@
     <!-- Augmented reality -->
     <div class="bg-gradient-to-t from-port-brown to-[#F2EBDF] flex flex-col-reverse xl:flex-row items-center py-9">
         <img class="2xl:ml-24 xl:w-1/3 w-1/2 my-auto rounded-xl" src="~assets/images/ar_illu.png" alt="ARDeco conceptual mobile in-use illustration"/>
-        <div class="font-display font-medium mx-9 text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
+        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
             <h2 id="augmentedRealityTitle" class="underline mb-2 text-center">{{content.augmentedRealityTitle}}</h2>
             <p id="augmentedRealityText">
                 {{content.augmentedRealityText}}
@@ -60,7 +60,7 @@
 
     <!-- Features -->
     <div class="flex flex-col items-center justify-center bg-gradient-to-b from-port-brown to-[#F2EBDF]">
-        <span id="keyPoints" class="text-9xl font-bold mb-12 w-full text-center outline-text">{{content.keyPoints}}</span>
+        <span id="keyPoints" class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-12 w-full text-center outline-text">{{content.keyPoints}}</span>
         <ul class="flex flex-col lg:flex-row flex-wrap justify-center content-center">
             <li v-for="(feature, index) in features" :key="index"
                 class="m-3 flex flex-col justify-between bg-port-brown border border-ARgrey text-ARgrey p-4 rounded-md shadow-md w-5/6 lg:w-2/5 font-sans hover:bg-ARgrey hover:text-port-brown">
