@@ -3,6 +3,7 @@
         <Title>ARDeco - {{ content.welcomeTitle }}</Title>
         <Meta name="description" content="Une application innovante qui révolutionne votre expérience de design et d'aménagement intérieur en utilisant la Réalité Augmentée (AR) et l'Intelligence Artificielle (IA) depuis votre smartphone." />
     </Head>
+    <Html :lang="lang"/>
     <!-- Welcome title -->
     <div id="hero" class="flex h-dvh w-full bg-port-brown bg-no-repeat bg-cover"
          :style="{backgroundImage: `url(${backgroundUrl})`}">
@@ -105,24 +106,23 @@ export default {
             transition: {},
             langPrefix: "/",
             backgroundUrl: backgroundUrl,
-            features: ref([])
+            features: ref([]),
+            lang: this.urlLang
         }
     },
     mounted() {
-        let lang = this.urlLang;
-
         // If lang selector is not passed in url, get the user's one or set it to french
-        if (lang !== 'en' && lang !== 'fr') {
+        if (this.lang !== 'en' && this.lang !== 'fr') {
             const localStorageLang = localStorage.getItem('lang');
             if (localStorageLang) {
-                lang = localStorageLang;
+                this.lang = localStorageLang;
             } else {
-                lang = 'fr';
+                this.lang = 'fr';
             }
         }
 
         // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.home : fr.home;
+        this.content = this.lang === 'en' ? en.home : fr.home;
         this.transition = this.content.transitionEffect;
         this.timeline = this.content.timeline;
         this.features = this.content.keyPointsBlocks;
