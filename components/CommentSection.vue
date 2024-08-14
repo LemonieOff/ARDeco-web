@@ -1,21 +1,21 @@
 <template>
     <div id="newCommentSection" class="commentSection">
-        <img class="icon" v-bind:src="imageSrc" alt="P"/>
+        <NuxtImg width="50" height="50" class="icon" v-bind:src="imageSrc" alt="Own profile picture"/>
         <input id="commentInput" type="text" placeholder="Écrivez un commentaire">
-        <img id="sendComment" class="icon" src="~/../../assets/images/icons/send.png" @click="postComment">
+        <NuxtImg id="sendComment" class="icon" src="images/icons/send.webp" @click="postComment"/>
         <div id="Error" class="requestReport" hidden></div>
         <div id="Success" class="requestReport" hidden></div>
     </div>
     <div id="oldCommentSection" class="commentSection">
         <div class="comment" v-for="singleComment in comments.slice().reverse()" :key="singleComment.id">
             <div class="topCommentSection">
-                <img class="icon" v-bind:src="defaultUserPicture" v-if="singleComment.user_id != userId" alt="P"/>
-                <img class="icon" v-bind:src="imageSrc" v-if="singleComment.user_id == userId" alt="P"/>
+                <NuxtImg width="50" height="50" class="icon" v-bind:src="defaultUserPicture" v-if="Number(singleComment.user_id) !== Number(userId)" alt="User profile picture"/>
+                <NuxtImg width="50" height="50" class="icon" v-bind:src="imageSrc" v-if="Number(singleComment.user_id) === Number(userId)" alt="Own profile picture"/>
                 <div class="userInfoSection">
                     <div id="commentUserName">{{ content.user }} {{ singleComment.user_id }} </div>
                     <div id="commentDate">{{ singleComment.creation_date }}</div>
                 </div>
-                <img id="deleteButton" class="icon" src="~/../../assets/images/icons/trash.png" v-if="singleComment.user_id == userId" @click="deleteComment(singleComment.id)"/>
+                <NuxtImg id="deleteButton" class="icon" src="images/icons/trash.webp" alt="Delete" v-if="Number(singleComment.user_id) === Number(userId)" @click="deleteComment(singleComment.id)"/>
             </div>
             <div class="bottomCommentSection">{{ singleComment.comment }}</div>
         </div>
@@ -115,11 +115,11 @@ export default {
 
             const result = await response.json();
 
-            if (result.code != 201) {
-                this.showError(result.message)
+            if (result.code !== 201) {
+                await this.showError(result.message)
             } else {
-                this.showSuccess(result.description)
-                this.getComments()
+                await this.showSuccess(result.description)
+                await this.getComments()
             }
             console.log("POST :", result);
         },
@@ -139,11 +139,11 @@ export default {
 
             const result = await response.json();
 
-            if (result.code != 200) {
-                this.showError(result.message)
+            if (result.code !== 200) {
+                await this.showError(result.message)
             } else {
-                this.showSuccess(result.description)
-                this.getComments()
+                await this.showSuccess(result.description)
+                await this.getComments()
             }
             console.log("DELETE :", result);
         },
