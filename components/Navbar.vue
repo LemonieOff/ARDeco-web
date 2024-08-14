@@ -1,7 +1,7 @@
 <template>
     <div class="navbar">
-        <a id="home" :href="`${langPrefix}`">
-            <img class="navbar-icon" src="~/../../assets/images/logo.png" alt="Home">
+        <a id="home" class="navbar-option" :href="`${langPrefix}`">
+            <NuxtImg height="50" width="50" class="navbar-icon" src="images/logo.webp" alt="Home"/>
         </a>
         <a id="team" class="navbar-option navbarLink" :href="`${langPrefix}team`">{{content.team}}</a>
         <a id="product" class="navbar-option navbarLink" :href="`${langPrefix}product`">{{content.product}}</a>
@@ -11,31 +11,31 @@
             <div class="menu">
                 <ul>
                     <li id="profileMenuOption">
-                        <img src="~/.././assets/images/icons/user.png" /><a :href="`${langPrefix}profile`">{{content.profile}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/user.webp" alt="Profile" loading="lazy"/><a :href="`${langPrefix}profile`">{{content.profile}}</a>
                     </li>
                     <li id="settingsMenuOption">
-                        <img src="~/../../assets/images/icons/settings.png" /><a :href="`${langPrefix}settings`">{{content.settings}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/settings.webp" alt="Settings" loading="lazy"/><a :href="`${langPrefix}settings`">{{content.settings}}</a>
                     </li>
                     <li id="companyMenuOption">
-                        <img src="~/../../assets/images/icons/company.png" /><a :href="`${langPrefix}company`">{{content.company}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/company.webp" alt="Company" loading="lazy"/><a :href="`${langPrefix}company`">{{content.company}}</a>
                     </li>
                     <li id="ticketsMenuOption">
-                        <img src="~/../../assets/images/icons/support.png" /><a :href="`${langPrefix}tickets`">{{content.tickets}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/support.webp" alt="Support" loading="lazy"/><a :href="`${langPrefix}tickets`">{{content.tickets}}</a>
                     </li>
                     <li id="feedbackMenuOption">
-                        <img src="~/../../assets/images/icons/feedback.png" /><a :href="`${langPrefix}feedback`">{{content.feedback}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/feedback.webp" alt="Feedback" loading="lazy"/><a :href="`${langPrefix}feedback`">{{content.feedback}}</a>
                     </li>
                     <li id="disconnectMenuOption">
-                        <img src="~/../../assets/images/icons/logout.png" /><a @click="logout" href="#">{{content.disconnect}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Logout" loading="lazy"/><a @click="logout" href="#">{{content.disconnect}}</a>
                     </li>
                     <li id="loginMenuOption">
-                        <img src="~/../../assets/images/icons/logout.png" /><a :href="`${langPrefix}login`">{{content.login}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Login" loading="lazy"/><a :href="`${langPrefix}login`">{{content.login}}</a>
                     </li>
                 </ul>
             </div>
             <div id="user" @click="menuToggle">
-                <img id="profileImage" class="navbar-icon" v-bind:src="imageSrc" alt="P"/>
-                <img id="defaultImage" class="navbar-icon" src="~/../../assets/images/profile-pictures/Unknown.png"/>
+                <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon" v-bind:src="imageSrc" alt="Own profile picture"/>
+                <NuxtImg width="50px" height="50px" id="defaultImage" class="navbar-icon" src="images/profile-pictures/Unknown.webp"/>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@ export default {
         } else {
             document.getElementById("loginMenuOption").style.display = "none";
             document.getElementById("defaultImage").style.display = "none";
-            if (role == "client") {
+            if (role === "client") {
                 document.getElementById("companyMenuOption").style.display = "none";
             }
         }

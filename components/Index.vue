@@ -5,8 +5,7 @@
     </Head>
     <Html :lang="lang"/>
     <!-- Welcome title -->
-    <div id="hero" class="flex h-dvh w-full bg-port-brown bg-no-repeat bg-cover"
-         :style="{backgroundImage: `url(${backgroundUrl})`}">
+    <div id="hero" class="flex h-dvh w-full bg-port-brown bg-no-repeat bg-cover" :style="{backgroundImage: `url(${backgroundUrl})`}">
         <h1 id="welcomeTitle"
             class="font-black mt-72 md:mt-16 p-2 justify-center text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-center mx-auto bg-port-brown md:bg-transparent rounded-lg text-ARgrey h-fit w-fit md:w-1/2">
             {{content.welcomeTitle}}</h1>
@@ -20,7 +19,7 @@
                 {{content.productPresentation}}
             </p>
         </div>
-        <img class="2xl:ml-24 xl:mr-9 my-auto rounded-xl" src="~assets/images/intro.gif" alt="ARDeco concept demo"/>
+        <video class="2xl:ml-24 xl:mr-9 my-auto rounded-xl" src="~assets/images/intro.webm" type="video/webm" autoplay loop muted></video>
     </div>
 
     <!-- Team link -->
@@ -50,7 +49,7 @@
 
     <!-- Augmented reality -->
     <div class="bg-gradient-to-t from-port-brown to-[#F2EBDF] flex flex-col-reverse xl:flex-row items-center py-9">
-        <img class="2xl:ml-24 xl:w-1/3 w-1/2 my-auto rounded-xl" src="~assets/images/ar_illu.png" alt="ARDeco conceptual mobile in-use illustration"/>
+        <NuxtImg width="612" loading="lazy" class="2xl:ml-24 xl:w-1/3 w-1/2 my-auto rounded-xl" src="images/ar_illu.webp" alt="ARDeco conceptual mobile in-use illustration"/>
         <div class="font-display font-medium mx-9 text-xl md:text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
             <h2 id="augmentedRealityTitle" class="underline mb-2 text-center">{{content.augmentedRealityTitle}}</h2>
             <p id="augmentedRealityText">

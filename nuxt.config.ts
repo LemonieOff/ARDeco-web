@@ -8,6 +8,11 @@ export default defineNuxtConfig({
         plugins: {
             tailwindcss: {},
             autoprefixer: {},
+            cssnano: {}
         },
     },
+    image: {
+        format: ['webp', 'png', 'jpg', 'gif'],
+        domains: ['localhost', 'ardeco.app'],
+    }
 })

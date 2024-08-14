@@ -9,26 +9,23 @@
                 <div class="profile-pictures-content">
                     <div class="profile-pictures">
                         <a class="shaking-effect" href="#hugo-profile">
-                            <img src="../../assets/images/profile-pictures/Hugo.png">
+                            <img src="../../assets/images/profile-pictures/Hugo.png" alt="Hugo Becart">
                         </a>
                         <a href="#valentin-profile">
-                            <img src="../../assets/images/profile-pictures/Valentin.png">
+                            <img src="../../assets/images/profile-pictures/Valentin.png" alt="Valentin Astic">
                         </a>
                     </div>
                     <div class="profile-pictures">
                         <a href="#evan-profile">
-                            <img src="../../assets/images/profile-pictures/Evan.png">
-                        </a>
-                        <a>
-                            <img src="../../assets/images/profile-pictures/Unknown.png">
+                            <img src="../../assets/images/profile-pictures/Evan.png" alt="Evan Blachier">
                         </a>
                     </div>
                     <div class="profile-pictures">
                         <a class="shaking-effect" href="#louis-profile">
-                            <img src="../../assets/images/profile-pictures/Louis.png">
+                            <img src="../../assets/images/profile-pictures/Louis.png" alt="Louis Villedieu">
                         </a>
                         <a>
-                            <img src="../../assets/images/profile-pictures/Unknown.png">
+                            <NuxtImg src="images/profile-pictures/Unknown.webp" alt="Hugo Delille"/>
                         </a>
                     </div>
                 </div>
