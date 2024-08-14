@@ -208,6 +208,13 @@
       "confirmText": "Changes take effect only upon confirmation."
     }
   },
+  "blockedUsers": {
+    "title": "Blocked users",
+    "lastname": "Last name : ",
+    "firstname": "First name : ",
+    "id": "ID : ",
+    "unblock": "Unblock"
+  },
   "deleteAccount": {
     "title": "Delete account",
     "text": "Are you sure you want to delete your account ? This action is irreversible and will delete all your data.",

@@ -208,6 +208,13 @@
       "confirmText": "Les changements prennent effet uniquement à partir de la confirmation."
     }
   },
+  "blockedUsers": {
+    "title": "Utilisateurs bloqués",
+    "lastname": "Nom : ",
+    "firstname": "Prénom : ",
+    "id": "ID : ",
+    "unblock": "Débloquer"
+  },
   "deleteAccount": {
     "title": "Suppression du compte",
     "text": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible et toutes vos données seront perdues.",
