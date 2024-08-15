@@ -280,6 +280,7 @@
   },
   "languageChangerText": "Translate to FR",
   "privacyPolicy": {
+    "title": "Privacy policy",
     "introduction": {
       "title": "Introduction",
       "objective": "The purpose of this privacy policy is to inform you about the way in which ARDeco collects, uses and protects your personal data.",
@@ -349,6 +350,7 @@
     }
   },
   "cgu": {
+    "title": "Terms of use",
     "object": {
       "title": "Article 1 - Purpose",
       "text": "The purpose of these General Conditions of Use is to define the terms and conditions of use of the Service offered by ARDeco to its users."

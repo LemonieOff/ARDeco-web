@@ -280,6 +280,7 @@
   },
   "languageChangerText": "Traduire en EN",
   "privacyPolicy": {
+    "title": "Politique de confidentialité",
     "introduction": {
       "title": "Introduction",
       "objective": "La présente politique de confidentialité a pour objectif de vous informer sur la manière dont ARDeco collecte, utilise et protège vos données personnelles.",
@@ -349,6 +350,7 @@
     }
   },
   "cgu": {
+    "title": "Conditions Générales d'Utilisation",
     "object": {
       "title": "Article 1 - Objet",
       "text": "Les présentes Conditions Générales d'Utilisation ont pour objet de définir les modalités et conditions d'utilisation du Service proposé par ARDeco à ses utilisateurs."
