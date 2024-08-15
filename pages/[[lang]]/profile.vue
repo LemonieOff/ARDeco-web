@@ -1,6 +1,6 @@
 <template>
-    <Navbar :urlLang=lang :profile=profile></Navbar>
-    <ProfileSettings :urlLang=lang id="profileSettings" style="display: none"></ProfileSettings>
+    <Navbar/>
+    <ProfileSettings id="profileSettings" style="display: none"></ProfileSettings>
     <div id="profile-container">
         <div id="profile-loading" style="top: 10%;" class="form">
             {{ content.loading }}
@@ -83,37 +83,30 @@
 </template>
 
 <script setup>
-import Navbar from "~/components/Navbar.vue";
-import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
 import {isLogged, loggedIn} from "public/js/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {onMounted, ref, provide} from "vue";
+import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
 
-const route = useRoute();
-let lang = ref(route.params.lang);
+let lang = ref("");
 let content = ref({});
 let info = ref({});
 let buttons = ref({});
 let settings = ref({});
-const langPrefix = ref("/");
+const langPrefix = ref("");
 const profile = ref({});
 provide('profile', profile);
 
+const nuxtApp = useNuxtApp();
+
 onMounted(async () => {
+    langPrefix.value = nuxtApp.$langPrefix;
+    lang.value = nuxtApp.$lang;
+
     const userID = await isLogged();
     if (!loggedIn) {
         location.href = langPrefix.value + "login";
-    }
-
-    // If lang selector is not passed in url, get the user's one or set it to french
-    if (lang.value !== 'en' && lang.value !== 'fr') {
-        const localStorageLang = localStorage.getItem('lang');
-        if (localStorageLang) {
-            lang.value = localStorageLang;
-        } else {
-            lang.value = 'fr';
-        }
     }
 
     // Set the content variable to the correct language
@@ -121,13 +114,6 @@ onMounted(async () => {
     info.value = lang.value === 'en' ? en.profile.informations : fr.profile.informations;
     buttons.value = lang.value === 'en' ? en.profile.buttons : fr.profile.buttons;
     settings.value = lang.value === 'en' ? en.profile.settings : fr.profile.settings;
-
-    // Prefix for links
-    if (location.href.includes("/fr/")) {
-        langPrefix.value = "/fr/";
-    } else if (location.href.includes("/en/")) {
-        langPrefix.value = "/en/";
-    }
 
     // get profile data
     const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
