@@ -34,8 +34,8 @@
                 </ul>
             </div>
             <div id="user" @click="menuToggle">
-                <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon" v-bind:src="imageSrc" alt="Own profile picture"/>
-                <NuxtImg width="50px" height="50px" id="defaultImage" class="navbar-icon" src="images/profile-pictures/Unknown.webp"/>
+                <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon hidden" v-bind:src="imageSrc" alt="Own profile picture"/>
+                <NuxtImg width="50px" height="50px" id="defaultImage" class="navbar-icon" src="images/profile-pictures/Unknown.webp" alt="Default profile picture"/>
             </div>
         </div>
     </div>
@@ -49,21 +49,24 @@ import { disconnect } from "public/js/checkLogin";
 
 export default {
     name: "Navbar",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
             imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
             profileData: {},
             content: {},
-            langPrefix: "/"
+            urlLang: "",
+            langPrefix: "",
         }
     },
     mounted() {
+        this.urlLang = this.$urlLang;
+        this.langPrefix = this.$langPrefix;
+
+        // Set the content variable to the correct language
+        this.content = this.$lang === 'en' ? en.navBar : fr.navBar;
+
         this.getProfileData();
         this.getUSerPicture();
-        let lang = this.urlLang;
         const userID = localStorage.getItem('userID');
         const dark_mode = localStorage.getItem('dark_mode');
         const role = localStorage.getItem('role');
@@ -75,38 +78,19 @@ export default {
             document.getElementById("companyMenuOption").style.display = "none";
             document.getElementById("ticketsMenuOption").style.display = "none";
             document.getElementById("disconnectMenuOption").style.display = "none";
-            document.getElementById("profileImage").style.display = "none";
         } else {
             document.getElementById("loginMenuOption").style.display = "none";
             document.getElementById("defaultImage").style.display = "none";
+            document.getElementById("profileImage").style.display = "block";
             if (role === "client") {
                 document.getElementById("companyMenuOption").style.display = "none";
             }
         }
 
-        if (dark_mode == 'true') {
+        if (dark_mode === 'true') {
             document.getElementById("dark-mode-button").style.display = "none";
         } else {
             document.getElementById("light-mode-button").style.display = "none";
-        }
-
-        // If lang selector is not passed in url, get the user's one or set it to french
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.navBar : fr.navBar;
-
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
         }
 
         this.checkDarkMode();
@@ -126,7 +110,7 @@ export default {
             const backgroundCards = document.getElementsByClassName("background-card");
 
             const body = document.body
-            if (dark_mode == 'true') {
+            if (dark_mode === 'true') {
                 body.style = "background-color: #474E68; color: #BB86FC";
 
                 if (document.URL.includes("team")) {
@@ -168,7 +152,7 @@ export default {
             const backgroundCards = document.getElementsByClassName("background-card");
 
             const body = document.body
-            if (dark_mode == 'false') {
+            if (dark_mode === 'false') {
                 localStorage.setItem('dark_mode', 'true');
                 document.getElementById("dark-mode-button").style.display = "none";
                 document.getElementById("light-mode-button").style.display = "inline-block";
@@ -241,7 +225,7 @@ export default {
             });
             await disconnect();
             localStorage.removeItem('lang');
-            location.href = this.langPrefix + "home";
+            location.href = this.langPrefix;
         },
         async getUSerPicture() {
             const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
@@ -257,7 +241,7 @@ export default {
         async getProfileData() {
             const userID = await isLogged();
             if (!loggedIn) {
-                location.href = langPrefix.value + "login";
+                // location.href = this.langPrefix.value + "login";
             }
 
             // get profile data
