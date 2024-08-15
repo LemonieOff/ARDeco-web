@@ -44,7 +44,7 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import {isLogged, loggedIn} from "public/js/checkLogin";
+import {isLogged, loggedIn, userID} from "public/js/checkLogin";
 import { disconnect } from "public/js/checkLogin";
 
 export default {
@@ -65,13 +65,15 @@ export default {
         // Set the content variable to the correct language
         this.content = this.$lang === 'en' ? en.navBar : fr.navBar;
 
+        isLogged();
+
         this.getProfileData();
         this.getUSerPicture();
         const userID = localStorage.getItem('userID');
         const dark_mode = localStorage.getItem('dark_mode');
         const role = localStorage.getItem('role');
 
-        if (userID == null) {
+        if (userID === null) {
             document.getElementById("profileMenuOption").style.display = "none";
             document.getElementById("settingsMenuOption").style.display = "none";
             document.getElementById("feedbackMenuOption").style.display = "none";
@@ -228,6 +230,10 @@ export default {
             location.href = this.langPrefix;
         },
         async getUSerPicture() {
+            if (!loggedIn) {
+                return;
+            }
+
             const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
                 method: 'GET',
                 headers: {
@@ -239,9 +245,8 @@ export default {
             this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data}.png`
         },
         async getProfileData() {
-            const userID = await isLogged();
             if (!loggedIn) {
-                // location.href = this.langPrefix.value + "login";
+                return;
             }
 
             // get profile data
