@@ -26,37 +26,16 @@ import fr from "~/src/lang/fr.json";
 
 export default {
     name: "Footer",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
             content: {},
-            langPrefix: "/"
+            langPrefix: ""
         }
     },
     mounted() {
-        let lang = this.urlLang;
+        this.langPrefix = this.$langPrefix;
 
-        // If lang selector is not passed in url, get the user's one or set it to french
-        if (lang !== 'en' && lang !== 'fr') {
-            const localStorageLang = localStorage.getItem('lang');
-            if (localStorageLang) {
-                lang = localStorageLang;
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.footer : fr.footer;
-
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
-        }
+        this.content = this.$lang === 'en' ? en.footer : fr.footer;
     },
 }
 </script>
