@@ -1,21 +1,21 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
-    <QuestionsList :urlLang=lang></QuestionsList>
-    <WhatIsArdeco :urlLang=lang></WhatIsArdeco>
+    <Navbar/>
+    <QuestionsList/>
+    <WhatIsArdeco/>
     <div class="space-between-questions"></div>
-    <HowToUseArdeco :urlLang=lang></HowToUseArdeco>
+    <HowToUseArdeco/>
     <div class="space-between-questions"></div>
-    <HowAreMyFurnitureChosen :urlLang=lang></HowAreMyFurnitureChosen>
+    <HowAreMyFurnitureChosen/>
     <div class="space-between-questions"></div>
-    <WhereDoModelsComeFrom :urlLang=lang></WhereDoModelsComeFrom>
+    <WhereDoModelsComeFrom/>
     <div class="space-between-questions"></div>
-    <WhyShouldIUseArdeco :urlLang=lang></WhyShouldIUseArdeco>
+    <WhyShouldIUseArdeco/>
     <div class="space-between-questions"></div>
-    <InAppPurchaces :urlLang=lang></InAppPurchaces>
+    <InAppPurchaces/>
     <div class="space-between-questions"></div>
-    <Footer :urlLang=lang></Footer>
+    <Footer/>
 </template>
-  
+
 <script setup lang="ts">
 import Navbar from "~/components/Navbar.vue";
 import QuestionsList from "~/components/FAQ/QuestionsList.vue";
@@ -25,10 +25,6 @@ import WhereDoModelsComeFrom from "~/components/FAQ/WhereDoModelsComeFrom.vue"
 import WhyShouldIUseArdeco from "~/components/FAQ/WhyShouldIUseArdeco.vue"
 import InAppPurchaces from "~/components/FAQ/InAppPurchaces.vue"
 import HowToUseArdeco from "~/components/FAQ/HowToUseArdeco.vue"
-
-const route = useRoute();
-
-let lang = route.params.lang;
 </script>
 
 <style lang="scss" scoped>
