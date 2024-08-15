@@ -551,6 +551,7 @@
     "send": "Send"
   },
   "comments": {
-    "user": "User"
+    "user": "User",
+    "writePlaceholder": "Write a comment"
   }
 }

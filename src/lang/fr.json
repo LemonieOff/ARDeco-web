@@ -551,6 +551,7 @@
     "send": "Envoyer"
   },
   "comments": {
-    "user": "Utilisateur"
+    "user": "Utilisateur",
+    "writePlaceholder": "Écrivez un commentaire"
   }
 }
