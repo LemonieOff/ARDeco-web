@@ -14,5 +14,8 @@ export default defineNuxtConfig({
     image: {
         format: ['webp', 'png', 'jpg', 'gif'],
         domains: ['localhost', 'ardeco.app'],
+        ipx: {
+            maxAge: 60 * 60 * 24 * 365,
+        }
     }
 })
