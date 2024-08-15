@@ -9,9 +9,7 @@ import fr from "~/src/lang/fr.json";
 export default {
     name: "LanguageChanger",
     mounted() {
-        let lang = localStorage.getItem('lang')
-        console.log("lang is : ", lang);
-        if (lang == 'en') {
+        if (this.$lang === 'en') {
             document.getElementById('languageChanger').innerText = en.languageChangerText
         } else {
             document.getElementById('languageChanger').innerText = fr.languageChangerText
@@ -19,16 +17,21 @@ export default {
     },
     methods: {
         changeLanguage() {
-            console.log("getItem : ", localStorage.getItem('lang'));
-            let lang = localStorage.getItem('lang')
-            if (lang == "fr") {
-                localStorage.setItem('lang', "en")
-                location.href = location.href.replace("/en/", "/fr/")
+            if (this.$langPrefix !== "/") {
+                if (this.$lang === "fr") {
+                    location.href = location.href.replace(/\/fr\/?/, "/en/")
+                } else if (this.$lang === "en") {
+                    location.href = location.href.replace(/\/en\/?/, "/fr/")
+                }
             } else {
-                localStorage.setItem('lang', "fr")
-                location.href = location.href.replace("/fr/", "/en/")
+                if (this.$lang === "fr") {
+                    localStorage.setItem('lang', "en");
+                    location.reload();
+                } else {
+                    localStorage.setItem('lang', "fr");
+                    location.reload();
+                }
             }
-            console.log("lang was : ", lang, " and is now : ", localStorage.getItem('lang'));
         }
     },
 };
