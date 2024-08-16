@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar">
+    <div class="navbar h-14">
         <a id="home" class="navbar-option" :href="`${langPrefix}`">
             <NuxtImg height="50" width="50" class="navbar-icon" src="images/logo.webp" alt="Home"/>
         </a>
