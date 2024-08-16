@@ -36,7 +36,7 @@ const components = shallowRef([CguObject, Definitions, AccessAndUse, Intellectua
 
 onMounted(() => {
     content.value = lang.value === "en" ? en.cgu : fr.cgu;
-})
+});
 </script>
 
 <style lang="scss" scoped>
