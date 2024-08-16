@@ -46,9 +46,9 @@
             </div>
             <div id="user" @click="menuToggle">
                 <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon hidden rounded-[50%]"
-                         v-bind:src="imageSrc" alt="Own profile picture"/>
+                         v-bind:src="imageSrc" loading="lazy" alt="Own profile picture"/>
                 <NuxtImg width="50px" height="50px" id="defaultImage" class="navbar-icon rounded-[50%]"
-                         src="images/profile-pictures/Unknown.webp" alt="Default profile picture"/>
+                         src="images/profile-pictures/Unknown.webp" loading="lazy" alt="Default profile picture"/>
             </div>
         </div>
     </div>
