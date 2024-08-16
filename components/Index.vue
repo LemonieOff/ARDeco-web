@@ -49,7 +49,7 @@
 
     <!-- Augmented reality -->
     <div class="bg-gradient-to-t from-port-brown to-[#F2EBDF] flex flex-col-reverse xl:flex-row items-center py-9">
-        <NuxtImg width="612" loading="lazy" class="2xl:ml-24 xl:w-1/3 w-1/2 my-auto rounded-xl" src="images/ar_illu.webp" alt="ARDeco conceptual mobile in-use illustration"/>
+        <NuxtImg width="612" height="503" loading="lazy" class="2xl:ml-24 xl:w-1/3 w-1/2 my-auto rounded-xl" src="images/ar_illu.webp" alt="ARDeco conceptual mobile in-use illustration"/>
         <div class="font-display font-medium mx-9 text-xl md:text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
             <h2 id="augmentedRealityTitle" class="underline mb-2 text-center">{{content.augmentedRealityTitle}}</h2>
             <p id="augmentedRealityText">
