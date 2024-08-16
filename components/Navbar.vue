@@ -1,115 +1,113 @@
 <template>
-    <div class="navbar">
+    <div class="navbar h-14">
         <a id="home" class="navbar-option" :href="`${langPrefix}`">
             <NuxtImg height="50" width="50" class="navbar-icon" src="images/logo.webp" alt="Home"/>
         </a>
-        <a id="team" class="navbar-option navbarLink" :href="`${langPrefix}team`">{{content.team}}</a>
-        <a id="product" class="navbar-option navbarLink" :href="`${langPrefix}product`">{{content.product}}</a>
-        <button id="dark-mode-button" @click="toggleDarkMode">{{content.darkmode}}</button>
-        <button id="light-mode-button" @click="toggleDarkMode">{{content.lightmode}}</button>
+        <a id="team" class="navbar-option navbarLink" :href="`${langPrefix}team`">{{ content.team }}</a>
+        <a id="product" class="navbar-option navbarLink" :href="`${langPrefix}product`">{{ content.product }}</a>
+        <button id="dark-mode-button" @click="toggleDarkMode">{{ content.darkmode }}</button>
+        <button id="light-mode-button" @click="toggleDarkMode">{{ content.lightmode }}</button>
         <div class="action">
             <div class="menu">
                 <ul>
                     <li id="profileMenuOption">
-                        <NuxtImg width="20px" height="20px" src="images/icons/user.webp" alt="Profile" loading="lazy"/><a :href="`${langPrefix}profile`">{{content.profile}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/user.webp" alt="Profile" loading="lazy"/>
+                        <a :href="`${langPrefix}profile`">{{ content.profile }}</a>
                     </li>
                     <li id="settingsMenuOption">
-                        <NuxtImg width="20px" height="20px" src="images/icons/settings.webp" alt="Settings" loading="lazy"/><a :href="`${langPrefix}settings`">{{content.settings}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/settings.webp" alt="Settings"
+                                 loading="lazy"/>
+                        <a :href="`${langPrefix}settings`">{{ content.settings }}</a>
                     </li>
                     <li id="companyMenuOption">
-                        <NuxtImg width="20px" height="20px" src="images/icons/company.webp" alt="Company" loading="lazy"/><a :href="`${langPrefix}company`">{{content.company}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/company.webp" alt="Company"
+                                 loading="lazy"/>
+                        <a :href="`${langPrefix}company`">{{ content.company }}</a>
                     </li>
                     <li id="ticketsMenuOption">
-                        <NuxtImg width="20px" height="20px" src="images/icons/support.webp" alt="Support" loading="lazy"/><a :href="`${langPrefix}tickets`">{{content.tickets}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/support.webp" alt="Support"
+                                 loading="lazy"/>
+                        <a :href="`${langPrefix}tickets`">{{ content.tickets }}</a>
                     </li>
                     <li id="feedbackMenuOption">
-                        <NuxtImg width="20px" height="20px" src="images/icons/feedback.webp" alt="Feedback" loading="lazy"/><a :href="`${langPrefix}feedback`">{{content.feedback}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/feedback.webp" alt="Feedback"
+                                 loading="lazy"/>
+                        <a :href="`${langPrefix}feedback`">{{ content.feedback }}</a>
                     </li>
                     <li id="disconnectMenuOption">
-                        <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Logout" loading="lazy"/><a @click="logout" href="#">{{content.disconnect}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Logout" loading="lazy"/>
+                        <a @click="logout" href="#">{{ content.disconnect }}</a>
                     </li>
                     <li id="loginMenuOption">
-                        <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Login" loading="lazy"/><a :href="`${langPrefix}login`">{{content.login}}</a>
+                        <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Login" loading="lazy"/>
+                        <a :href="`${langPrefix}login`">{{ content.login }}</a>
                     </li>
                 </ul>
             </div>
             <div id="user" @click="menuToggle">
-                <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon" v-bind:src="imageSrc" alt="Own profile picture"/>
-                <NuxtImg width="50px" height="50px" id="defaultImage" class="navbar-icon" src="images/profile-pictures/Unknown.webp"/>
+                <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon hidden rounded-[50%]"
+                         v-bind:src="imageSrc" loading="lazy" alt="Own profile picture"/>
+                <NuxtImg width="50px" height="50px" id="defaultImage" class="navbar-icon rounded-[50%]"
+                         src="images/profile-pictures/Unknown.webp" loading="lazy" alt="Default profile picture"/>
             </div>
         </div>
     </div>
+    <!-- Add a block with the navbar height, so it doesn't overlap on other content -->
+    <div id="navbar-size" class="h-14"></div>
 </template>
 
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import {isLogged, loggedIn} from "public/js/checkLogin";
-import { disconnect } from "public/js/checkLogin";
+import {disconnect, isLogged, loggedIn, userID} from "public/js/checkLogin";
 
 export default {
     name: "Navbar",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
             imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
-            profileData: {},
             content: {},
-            langPrefix: "/"
+            urlLang: "",
+            langPrefix: "",
         }
     },
-    mounted() {
-        this.getProfileData();
-        this.getUSerPicture();
-        let lang = this.urlLang;
-        const userID = localStorage.getItem('userID');
+    async mounted() {
+        this.urlLang = this.$urlLang;
+        this.langPrefix = this.$langPrefix;
+
+        // Set the content variable to the correct language
+        this.content = this.$lang === 'en' ? en.navBar : fr.navBar;
+
+        await isLogged();
+
+        await this.getUSerPicture();
+
         const dark_mode = localStorage.getItem('dark_mode');
         const role = localStorage.getItem('role');
 
-        if (userID == null) {
+        if (userID === null) {
             document.getElementById("profileMenuOption").style.display = "none";
             document.getElementById("settingsMenuOption").style.display = "none";
             document.getElementById("feedbackMenuOption").style.display = "none";
             document.getElementById("companyMenuOption").style.display = "none";
             document.getElementById("ticketsMenuOption").style.display = "none";
             document.getElementById("disconnectMenuOption").style.display = "none";
-            document.getElementById("profileImage").style.display = "none";
         } else {
             document.getElementById("loginMenuOption").style.display = "none";
             document.getElementById("defaultImage").style.display = "none";
+            document.getElementById("profileImage").style.display = "block";
             if (role === "client") {
                 document.getElementById("companyMenuOption").style.display = "none";
             }
         }
 
-        if (dark_mode == 'true') {
+        if (dark_mode === 'true') {
             document.getElementById("dark-mode-button").style.display = "none";
         } else {
             document.getElementById("light-mode-button").style.display = "none";
         }
 
-        // If lang selector is not passed in url, get the user's one or set it to french
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.navBar : fr.navBar;
-
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
-        }
-
-        this.checkDarkMode();
+        await this.checkDarkMode();
     },
     methods: {
         async menuToggle() {
@@ -126,7 +124,7 @@ export default {
             const backgroundCards = document.getElementsByClassName("background-card");
 
             const body = document.body
-            if (dark_mode == 'true') {
+            if (dark_mode === 'true') {
                 body.style = "background-color: #474E68; color: #BB86FC";
 
                 if (document.URL.includes("team")) {
@@ -168,7 +166,7 @@ export default {
             const backgroundCards = document.getElementsByClassName("background-card");
 
             const body = document.body
-            if (dark_mode == 'false') {
+            if (dark_mode === 'false') {
                 localStorage.setItem('dark_mode', 'true');
                 document.getElementById("dark-mode-button").style.display = "none";
                 document.getElementById("light-mode-button").style.display = "inline-block";
@@ -240,10 +238,13 @@ export default {
                 credentials: 'include',
             });
             await disconnect();
-            localStorage.removeItem('lang');
-            location.href = this.langPrefix + "home";
+            location.href = this.langPrefix;
         },
         async getUSerPicture() {
+            if (!loggedIn) {
+                return;
+            }
+
             const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
                 method: 'GET',
                 headers: {
@@ -253,21 +254,6 @@ export default {
             });
             const result = await response.json();
             this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data}.png`
-        },
-        async getProfileData() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = langPrefix.value + "login";
-            }
-
-            // get profile data
-            const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
-                method: 'GET',
-                credentials: 'include',
-            });
-            const data_profile = await response_profile.json();
-            this.profileData.value = data_profile.data;
-            console.log(this.profileData.value)
         }
     },
 };
@@ -276,20 +262,7 @@ export default {
 <style scoped>
 @import '~/styles/Navbar.scss';
 
-.dark-body {
-    background-color: darkslategray;
-    color: white;
-}
-
 #disconnectMenuOption {
     cursor: pointer;
-}
-
-#profileImage {
-    border-radius: 50%;
-}
-
-#defaultImage {
-    border-radius: 50%;
 }
 </style>

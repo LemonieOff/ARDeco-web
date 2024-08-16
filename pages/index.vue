@@ -1,17 +1,9 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
-    <Index :urlLang=lang></Index>
-    <Footer :urlLang=lang></Footer>
+    <Navbar/>
+    <Index/>
+    <Footer/>
 </template>
 
-<script setup lang="js">
+<script setup lang="ts">
 import Index from "~/components/Index.vue";
-
-const route = useRoute();
-
-let lang = route.params.lang;
 </script>
-
-<style lang="scss" scoped>
-
-</style>

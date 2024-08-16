@@ -1,7 +1,7 @@
 <template>
     <div id="newCommentSection" class="commentSection">
         <NuxtImg width="50" height="50" class="icon" v-bind:src="imageSrc" alt="Own profile picture"/>
-        <input id="commentInput" type="text" placeholder="Écrivez un commentaire">
+        <input id="commentInput" type="text" :placeholder="`${content['writePlaceholder']}`">
         <NuxtImg id="sendComment" class="icon" src="images/icons/send.webp" @click="postComment"/>
         <div id="Error" class="requestReport" hidden></div>
         <div id="Success" class="requestReport" hidden></div>
@@ -30,14 +30,13 @@ import {isLogged, loggedIn} from "public/js/checkLogin";
 export default {
     name: "CommentSection",
     props: {
-        urlLang: String | null,
         galleryId: Number | null
     },
     data() {
         return {
             imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
             content: {},
-            langPrefix: "/",
+            langPrefix: "",
             comments: [],
             userId: null,
             // usersThatCommended: [],
@@ -45,23 +44,20 @@ export default {
         }
     },
     mounted() {
+        this.langPrefix = this.$langPrefix;
+
+        this.content = this.$lang === 'en' ? en.comments : fr.comments;
+
         const body = document.body
         body.style.backgroundColor = "#F4F4F4"
-        let lang = this.urlLang
-
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang')
-            } else {
-                lang = 'fr'
-            }
-        }
 
         this.userId = localStorage.getItem('userID')
-
-        this.getComments()
-        this.getUserPicture()
-        this.content = lang === 'en' ? en.comments : fr.comments;
+    },
+    watch: {
+        galleryId() {
+            this.getComments()
+            this.getUserPicture()
+        }
     },
     methods: {
         async getUserPicture() {

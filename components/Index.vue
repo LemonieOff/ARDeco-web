@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="mx-auto mt-2 md:mt-4 mb-1 md:mb-3">
-                    <a id="clickHere" class="p-2 md:p-5 rounded-full flex h-fit text-port-brown font-extrabold text-2xl md:text-5xl bg-ARgrey ease-in-out duration-700 border-2 border-transparent hover:text-ARgrey hover:bg-port-brown hover:border-ARgrey" href="/team">{{transition.clickHere}}</a>
+                    <a id="clickHere" class="p-2 md:p-5 rounded-full flex h-fit text-port-brown font-extrabold text-2xl md:text-5xl bg-ARgrey ease-in-out duration-700 border-2 border-transparent hover:text-ARgrey hover:bg-port-brown hover:border-ARgrey" :href="`${langPrefix}team`">{{transition.clickHere}}</a>
                 </div>
 
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
@@ -49,7 +49,7 @@
 
     <!-- Augmented reality -->
     <div class="bg-gradient-to-t from-port-brown to-[#F2EBDF] flex flex-col-reverse xl:flex-row items-center py-9">
-        <NuxtImg width="612" loading="lazy" class="2xl:ml-24 xl:w-1/3 w-1/2 my-auto rounded-xl" src="images/ar_illu.webp" alt="ARDeco conceptual mobile in-use illustration"/>
+        <NuxtImg width="612" height="503" loading="lazy" class="2xl:ml-24 xl:w-1/3 w-1/2 my-auto rounded-xl" src="images/ar_illu.webp" alt="ARDeco conceptual mobile in-use illustration"/>
         <div class="font-display font-medium mx-9 text-xl md:text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
             <h2 id="augmentedRealityTitle" class="underline mb-2 text-center">{{content.augmentedRealityTitle}}</h2>
             <p id="augmentedRealityText">
@@ -62,7 +62,7 @@
     <div class="flex flex-col items-center justify-center bg-gradient-to-b from-port-brown to-[#F2EBDF]">
         <span id="keyPoints" class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-12 w-full text-center outline-text">{{content.keyPoints}}</span>
         <ul class="flex flex-col lg:flex-row flex-wrap justify-center content-center">
-            <li v-for="(feature, index) in features" :key="index"
+            <li v-for="(feature, index) in content.keyPointsBlocks" :key="index"
                 class="m-3 flex flex-col justify-between bg-port-brown border border-ARgrey text-ARgrey p-4 rounded-md shadow-md w-5/6 lg:w-2/5 font-sans hover:bg-ARgrey hover:text-port-brown">
                 <h3 class="text-xl font-semibold mb-2">{{ feature.title }}</h3>
                 <p class="">{{ feature.description }}</p>
@@ -90,13 +90,8 @@ import backgroundUrl from "assets/images/homeHero.jpg";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
-import { ref } from "vue";
-
 export default {
     name: "Index",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
             content: {},
@@ -104,34 +99,19 @@ export default {
             timelineDates: {},
             transition: {},
             langPrefix: "/",
-            backgroundUrl: backgroundUrl,
-            features: ref([]),
-            lang: this.urlLang
+            lang: "",
+            backgroundUrl: backgroundUrl
         }
     },
     mounted() {
-        // If lang selector is not passed in url, get the user's one or set it to french
-        if (this.lang !== 'en' && this.lang !== 'fr') {
-            const localStorageLang = localStorage.getItem('lang');
-            if (localStorageLang) {
-                this.lang = localStorageLang;
-            } else {
-                this.lang = 'fr';
-            }
-        }
+        this.urlLang = this.$urlLang;
+        this.langPrefix = this.$langPrefix;
+        this.lang = this.$lang;
 
         // Set the content variable to the correct language
-        this.content = this.lang === 'en' ? en.home : fr.home;
+        this.content = this.$lang === 'en' ? en.home : fr.home;
         this.transition = this.content.transitionEffect;
         this.timeline = this.content.timeline;
-        this.features = this.content.keyPointsBlocks;
-
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
-        }
     }
 }
 </script>
