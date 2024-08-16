@@ -12,38 +12,14 @@ import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
 export default {
-    name: "",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
-            content: {},
-            langPrefix: ""
+            content: {}
         }
     },
     mounted() {
-        let lang = this.urlLang;
-        console.log(lang);
-
-        // If lang selector is not passed in url, get the user's one or set it to french
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-
         // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.privacyPolicy.device : fr.privacyPolicy.device;
-
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
-        }
+        this.content = this.$lang === 'en' ? en.privacyPolicy.device : fr.privacyPolicy.device;
     }
 }
 </script>

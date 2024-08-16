@@ -12,10 +12,6 @@ import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
 export default {
-    name: "",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
             content: {},
@@ -36,14 +32,7 @@ export default {
         }
 
         // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.privacyPolicy.introduction : fr.privacyPolicy.introduction;
-
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
-        }
+        this.content = this.$lang === 'en' ? en.privacyPolicy.introduction : fr.privacyPolicy.introduction;
     }
 }
 </script>
