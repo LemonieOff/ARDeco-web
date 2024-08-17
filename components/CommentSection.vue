@@ -159,7 +159,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~/styles/variables/ColorVariables.scss';
+@import '@/styles/variables/ColorVariables.scss';
 
 .icon {
     margin: 10px;
@@ -198,8 +198,7 @@ export default {
 }
 
 #sendComment {
-    margin: auto;
-    margin-left: 2.5%;
+    margin: auto auto auto 2.5%;
     padding: 5px;
     max-height: 50px;
     border-radius: 10px;

@@ -9,20 +9,23 @@
     <div class="pageContent">
         <div class="pendingTickets">
             <div class="alignCenter">{{ content.pendingTickets }}</div>
-            <div class="alignCenter pendingTicket" v-for="ticket in tickets" :key="ticket.id" :class="getTicketStatusClass(ticket.status)" @click="receiveTicketDetails(ticket.id)">
+            <div class="alignCenter pendingTicket" v-for="ticket in tickets" :key="ticket.id"
+                 :class="getTicketStatusClass(ticket.status)" @click="receiveTicketDetails(ticket.id)">
                 <div class="ticketStatus">{{ content[ticket.status] }}</div>
                 <div class="ticketTitle">{{ ticket.title }}</div>
             </div>
         </div>
         <div ref="ticketCreator" class="manageTicket">
             <input ref="titleInput" type="text" class="titleOrDescription" :placeholder="content.writeYourTitleHere">
-            <textarea ref="descriptionInput" class="titleOrDescription" :placeholder="content.shortDescriptionOfYourProblem"></textarea>
+            <textarea ref="descriptionInput" class="titleOrDescription"
+                      :placeholder="content.shortDescriptionOfYourProblem"></textarea>
             <textarea ref="messageInput" class="textContent" :placeholder="content.writeYourProblemHere"></textarea>
             <button class="alignCenter ticketManagementButton" @click="createTicket">{{ content.createTicket }}</button>
         </div>
         <div ref="ticketManage" class="manageTicket" style="display: none;">
             <div class="messageHistory">
-                <div class="message" v-for="message in messages" :key="message.timestamp" :class="{ 'fromUser': message.sender !== 'Support', 'fromSupport': message.sender === 'Support' }">
+                <div class="message" v-for="message in messages" :key="message.timestamp"
+                     :class="{ 'fromUser': message.sender !== 'Support', 'fromSupport': message.sender === 'Support' }">
                     {{ message.content }}
                     <div class="messageDetails">
                         <span> {{ message.sender }}</span>
@@ -31,11 +34,16 @@
                     </div>
                 </div>
             </div>
-            <textarea ref="responseInput" v-if="currentTicketStatus === 'pending'" class="newMessageInput" :placeholder="content.typeYourTextHere"></textarea>
-            <textarea ref="responseInput" v-if="currentTicketStatus === 'closed'" class="newMessageInput" :placeholder="content.youCantReplyToAClosedTicket" disabled style="cursor: not-allowed;"></textarea>
+            <textarea ref="responseInput" v-if="currentTicketStatus === 'pending'" class="newMessageInput"
+                      :placeholder="content.typeYourTextHere"></textarea>
+            <textarea ref="responseInput" v-if="currentTicketStatus === 'closed'" class="newMessageInput"
+                      :placeholder="content.youCantReplyToAClosedTicket" disabled
+                      style="cursor: not-allowed;"></textarea>
             <span class="ticketButtons">
-                <button class="buttonFontClass sendMessage" v-if="currentTicketStatus === 'pending'" @click="sendNewMessage"> {{ content.send }}</button>
-                <button class="buttonFontClass closeMessage" v-if="currentTicketStatus === 'pending'" @click="closeTicket"> {{ content.close }}</button>
+                <button class="buttonFontClass sendMessage" v-if="currentTicketStatus === 'pending'"
+                        @click="sendNewMessage"> {{ content.send }}</button>
+                <button class="buttonFontClass closeMessage" v-if="currentTicketStatus === 'pending'"
+                        @click="closeTicket"> {{ content.close }}</button>
                 <button class="buttonFontClass goBack" @click="closeConversation"> {{ content.back }}</button>
             </span>
         </div>
@@ -45,37 +53,26 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import { isLogged, loggedIn } from "public/js/checkLogin";
+import {isLogged, loggedIn} from "public/js/checkLogin";
 
 export default {
-name: "TicketPage",
+    name: "TicketPage",
     props: {
         urlLang: String | null
     },
     data() {
         return {
-            content: {},
+            content: this.$lang === 'en' ? en.tickets : fr.tickets,
             tickets: [],
             messages: [],
-            langPrefix: "/",
+            langPrefix: this.$langPrefix,
             currentTicketID: null,
             currentTicketStatus: null
         }
     },
-    mounted() {
-        this.checkIfLogged();
-        let lang = this.urlLang
-
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        this.content = lang === 'en' ? en.tickets : fr.tickets;
-        this.getUserTickets();
+    async mounted() {
+        await this.checkIfLogged();
+        await this.getUserTickets();
     },
     methods: {
         async checkIfLogged() {
@@ -112,7 +109,7 @@ name: "TicketPage",
             this.$refs.descriptionInput.value = "";
             this.$refs.messageInput.value = "";
 
-            this.getUserTickets();
+            await this.getUserTickets();
         },
         async receiveTicketDetails(ticketID) {
             await isLogged();
@@ -134,7 +131,7 @@ name: "TicketPage",
             const result = await response.json();
             console.log("result", result);
 
-            if (result.code == 200) {
+            if (result.code === 200) {
                 this.messages = result.data.messages;
                 this.currentTicketStatus = result.data.status;
                 console.log("messages", this.messages);
@@ -160,7 +157,7 @@ name: "TicketPage",
             const result = await response.json();
             console.log("result", result);
 
-            if (result.code == 200) {
+            if (result.code === 200) {
                 this.tickets = result.data;
             }
         },
@@ -318,7 +315,7 @@ name: "TicketPage",
 
 .pageContent {
     display: inline-flex;
-    width:100dvw;
+    width: 100dvw;
     height: 55dvh;
 }
 
@@ -350,7 +347,7 @@ name: "TicketPage",
     margin-bottom: 4%;
 }
 
-.newMessageInuput {
+.newMessageInput {
     margin-top: 1%;
     min-width: 78%;
     min-height: 18%;
@@ -417,9 +414,7 @@ name: "TicketPage",
 .message {
     font-size: 16px;
     border: 1px solid black;
-    padding: 2%;
-    padding-bottom: 1%;
-    padding-top: 1.5%;
+    padding: 1.5% 2% 1%;
     margin: 1%;
     max-width: 60%;
     min-height: 4%;
