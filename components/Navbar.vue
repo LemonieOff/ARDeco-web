@@ -1,44 +1,48 @@
 <template>
     <div class="navbar h-14">
-        <a id="home" class="navbar-option" :href="`${langPrefix}`">
+        <NuxtLink id="home" class="navbar-option" :to="{ name: 'lang', params: { lang: null } }">
             <NuxtImg height="50" width="50" class="navbar-icon" src="images/logo.webp" alt="Home"/>
-        </a>
-        <a id="team" class="navbar-option navbarLink" :href="`${langPrefix}team`">{{ content.team }}</a>
-        <a id="product" class="navbar-option navbarLink" :href="`${langPrefix}product`">{{ content.product }}</a>
+        </NuxtLink>
+        <NuxtLink id="team" class="navbar-option navbarLink" :to="{ name: 'lang-team', params: { lang: rawLangPrefix } }">
+            {{ content.team }}
+        </NuxtLink>
+        <NuxtLink id="product" class="navbar-option navbarLink" :to="{ name: 'lang-product', params: { lang: rawLangPrefix } }">
+            {{ content.product }}
+        </NuxtLink>
         <button id="dark-mode-button" @click="toggleDarkMode">{{ content.darkmode }}</button>
         <button id="light-mode-button" @click="toggleDarkMode">{{ content.lightmode }}</button>
         <div class="action">
             <div class="menu">
                 <ul>
-                    <li id="profileMenuOption">
+                    <li id="profileMenuOption" class="cursor-pointer">
                         <NuxtImg width="20px" height="20px" src="images/icons/user.webp" alt="Profile" loading="lazy"/>
                         <a :href="`${langPrefix}profile`">{{ content.profile }}</a>
                     </li>
-                    <li id="settingsMenuOption">
+                    <li id="settingsMenuOption" class="cursor-pointer">
                         <NuxtImg width="20px" height="20px" src="images/icons/settings.webp" alt="Settings"
                                  loading="lazy"/>
                         <a :href="`${langPrefix}settings`">{{ content.settings }}</a>
                     </li>
-                    <li id="companyMenuOption">
+                    <li id="companyMenuOption" class="cursor-pointer">
                         <NuxtImg width="20px" height="20px" src="images/icons/company.webp" alt="Company"
                                  loading="lazy"/>
                         <a :href="`${langPrefix}company`">{{ content.company }}</a>
                     </li>
-                    <li id="ticketsMenuOption">
+                    <li id="ticketsMenuOption" class="cursor-pointer">
                         <NuxtImg width="20px" height="20px" src="images/icons/support.webp" alt="Support"
                                  loading="lazy"/>
                         <a :href="`${langPrefix}tickets`">{{ content.tickets }}</a>
                     </li>
-                    <li id="feedbackMenuOption">
+                    <li id="feedbackMenuOption" class="cursor-pointer">
                         <NuxtImg width="20px" height="20px" src="images/icons/feedback.webp" alt="Feedback"
                                  loading="lazy"/>
                         <a :href="`${langPrefix}feedback`">{{ content.feedback }}</a>
                     </li>
-                    <li id="disconnectMenuOption">
+                    <li id="disconnectMenuOption" class="cursor-pointer">
                         <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Logout" loading="lazy"/>
                         <a @click="logout" href="#">{{ content.disconnect }}</a>
                     </li>
-                    <li id="loginMenuOption">
+                    <li id="loginMenuOption" class="cursor-pointer">
                         <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Login" loading="lazy"/>
                         <a :href="`${langPrefix}login`">{{ content.login }}</a>
                     </li>
@@ -66,18 +70,13 @@ export default {
     data() {
         return {
             imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
-            content: {},
-            urlLang: "",
-            langPrefix: "",
+            content: this.$lang === 'en' ? en.navBar : fr.navBar,
+            urlLang: this.$urlLang,
+            langPrefix: this.$langPrefix,
+            rawLangPrefix: this.$rawLangPrefix
         }
     },
     async mounted() {
-        this.urlLang = this.$urlLang;
-        this.langPrefix = this.$langPrefix;
-
-        // Set the content variable to the correct language
-        this.content = this.$lang === 'en' ? en.navBar : fr.navBar;
-
         await isLogged();
 
         await this.getUSerPicture();
@@ -114,6 +113,7 @@ export default {
             const toggleMenu = document.querySelector(".menu");
             toggleMenu.classList.toggle("active");
         },
+        // TODO : URGENT - CORRIGER LE DARK MODE !!!
         async checkDarkMode() {
             const dark_mode = localStorage.getItem('dark_mode');
 
@@ -125,28 +125,28 @@ export default {
 
             const body = document.body
             if (dark_mode === 'true') {
-                body.style = "background-color: #474E68; color: #BB86FC";
+                // body.style = "background-color: #474E68; color: #BB86FC";
 
                 if (document.URL.includes("team")) {
-                    backgoundFade[0].style = "background: #474E68"
-                    background1[0].style = "background: #474E68"
-                    background1[1].style = "background: #474E68"
-                    background2[1].style = "background: #474E68"
-                    background3[0].style = "background: #474E68"
+                    // backgoundFade[0].style = "background: #474E68"
+                    // background1[0].style = "background: #474E68"
+                    // background1[1].style = "background: #474E68"
+                    // background2[1].style = "background: #474E68"
+                    // background3[0].style = "background: #474E68"
                 } else if (document.URL.includes("product")) {
                     for (let i = 0; i < backgroundCards.length; i++) {
-                        backgroundCards[i].style = "background: #001A7A; color: #BB86FC"
+                        // backgroundCards[i].style = "background: #001A7A; color: #BB86FC"
                     }
                 }
             } else {
                 body.style = ""
 
                 if (document.URL.includes("team")) {
-                    backgoundFade[0].style = ""
-                    background1[0].style = ""
-                    background1[1].style = ""
-                    background2[1].style = ""
-                    background3[0].style = ""
+                    // backgoundFade[0].style = ""
+                    // background1[0].style = ""
+                    // background1[1].style = ""
+                    // background2[1].style = ""
+                    // background3[0].style = ""
                 } else if (document.URL.includes("product")) {
                     for (let i = 0; i < backgroundCards.length; i++) {
                         backgroundCards[i].style = ""
@@ -260,9 +260,5 @@ export default {
 </script>
 
 <style scoped>
-@import '~/styles/Navbar.scss';
-
-#disconnectMenuOption {
-    cursor: pointer;
-}
+@import '@/styles/Navbar.scss';
 </style>
