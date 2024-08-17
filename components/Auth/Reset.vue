@@ -44,12 +44,11 @@ export default {
 </script>
 
 <style scoped>
-@import "~/styles/ProfileSettings.scss";
+@import "@/styles/ProfileSettings.scss";
 
 form {
     z-index: 999; /* Valeur à ajuster selon votre mise en page */
-    position: flex;
-    padding-top: 120;
+    padding-top: 120px;
     width: 100%;
     margin-top: 20%;
 }
