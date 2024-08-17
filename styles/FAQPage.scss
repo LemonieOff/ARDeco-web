@@ -1,11 +1,21 @@
 @import 'variables/ColorVariables.scss';
 
 @keyframes tilt-shaking {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(2.5deg); }
-    50% { transform: rotate(0eg); }
-    75% { transform: rotate(-2.5deg); }
-    100% { transform: rotate(0deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(2.5deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-2.5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 .faq-page-content {
@@ -44,8 +54,7 @@
 .question-icon {
     height: auto;
     width: 40%;
-    padding: 30%;
-    padding-top: 10%;
+    padding: 10% 30% 30%;
 }
 
 .questions-list {
@@ -97,7 +106,7 @@
 
 .text {
     font-size: 0.94vw;
-}   
+}
 
 .gray-text-color {
     color: #6C6C6C;
@@ -118,8 +127,8 @@ img {
     transition: .3s ease-in-out;
 }
 
-img:hover{
-	transform: scale(1.25);
+img:hover {
+    transform: scale(1.25);
 }
 
 @media screen and (max-width: 1181px) {
@@ -144,12 +153,11 @@ img:hover{
     .question-icon {
         height: auto;
         width: 40%;
-        padding: 30%;
-        padding-top: 10%;
+        padding: 10% 30% 30%;
     }
 
     .questions-list {
-        margin-left: 0px;
+        margin-left: 0;
         margin-top: 5%;
         height: 30%;
         width: 100%;
@@ -226,32 +234,7 @@ img:hover{
     .question-icon {
         height: auto;
         width: 40%;
-        padding: 30%;
-        padding-top: 10%;
-    }
-
-    .questions-list {
-        margin-left: 0px;
-        margin-top: 5%;
-        height: 30%;
-        width: 100%;
-    }
-
-    .questions-list-element-right {
-        margin-right: 10%;
-        text-align: right;
-        height: 15%;
-    }
-
-    .questions-list-element-left {
-        margin-left: 10%;
-        text-align: left;
-        height: 15%;
-    }
-
-    .question-content {
-        width: 80%;
-        margin-left: 10%;
+        padding: 10% 30% 30%;
     }
 
     .main-title {

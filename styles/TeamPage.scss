@@ -40,8 +40,7 @@
 .profile-picture {
     // border: 3px solid green;
     display: block;
-    margin: auto;
-    margin-top: -5%;
+    margin: -5% auto auto;
     height: 75%;
     width: auto;
 }
@@ -67,13 +66,13 @@
 .name {
     margin-top: -17.5%;
     font-size: 1.25vw;
-    font-weight : bold;
+    font-weight: bold;
 }
 
 .role {
     margin-top: -10%;
     color: #6C6C6C;
-    font-weight : bold;
+    font-weight: bold;
     font-size: 1.25vw;
 }
 
@@ -86,7 +85,7 @@
     // border: 3px solid blue;
 
     .timeline-active, .timeline-inactive {
-        flex: 1 1 0px;
+        flex: 1 1 0;
     }
 
     .internship-logo {
@@ -127,23 +126,23 @@
 }
 
 .end-year-bubble-active {
-    margin-top: -0.25vw; 
+    margin-top: -0.25vw;
     margin-left: 99%;
-	width: 0;
-	height: 0;
-	border-top: 0.5vw solid transparent;
-	border-left: 1vw solid $timeline-active;
-	border-bottom: 0.5vw solid transparent;
+    width: 0;
+    height: 0;
+    border-top: 0.5vw solid transparent;
+    border-left: 1vw solid $timeline-active;
+    border-bottom: 0.5vw solid transparent;
 }
 
 .end-year-bubble-inactive {
-    margin-top: -0.25vw; 
+    margin-top: -0.25vw;
     margin-left: 99%;
-	width: 0;
-	height: 0;
-	border-top: 0.5vw solid transparent;
-	border-left: 1vw solid $timeline-inactive;
-	border-bottom: 0.5vw solid transparent;
+    width: 0;
+    height: 0;
+    border-top: 0.5vw solid transparent;
+    border-left: 1vw solid $timeline-inactive;
+    border-bottom: 0.5vw solid transparent;
 }
 
 .year-2020 {
@@ -198,54 +197,54 @@ img {
     transition: .3s ease-in-out;
 }
 
-img:hover{
-	transform: scale(1.25);
+img:hover {
+    transform: scale(1.25);
 }
 
 @media screen and (max-width: 1181px) {
     .profile-page-content {
         height: 40vh;
     }
-    
+
     .sub-content {
         height: 40vh;
         width: 90%;
         margin-left: 10%;
     }
-    
+
     .personal-content {
-        margin-top: 0%;
-        margin-left: 0%;
+        margin-top: 0;
+        margin-left: 0;
         width: 25%;
         height: 70%;
     }
-    
+
     .name {
         font-size: 16px;
     }
-    
+
     .role {
         font-size: 16px;
     }
-    
+
     .year-2020 {
         font-size: 24px;
     }
-    
+
     .year-2023 {
         font-size: 24px;
     }
-    
+
     .internship-logo {
         margin-left: 5px;
         margin-top: 10px;
         width: 100px;
     }
-    
+
     .internship-role {
         font-size: 10px;
     }
-    
+
     .epitech-logo-timeline {
         display: none;
     }
@@ -255,24 +254,24 @@ img:hover{
     .profile-page-content {
         height: 40vh;
     }
-    
+
     .sub-content {
         height: 40vh;
         width: 90%;
         margin-left: 10%;
     }
-    
+
     .personal-content {
-        margin-top: 0%;
-        margin-left: 0%;
+        margin-top: 0;
+        margin-left: 0;
         width: 40%;
         height: 70%;
     }
-    
+
     .name {
         font-size: 11px;
     }
-    
+
     .role {
         font-size: 11px;
     }
@@ -281,25 +280,25 @@ img:hover{
         margin-left: 5%;
         margin-top: -2.5%;
     }
-    
+
     .year-2020 {
         font-size: 14px;
     }
-    
+
     .year-2023 {
         font-size: 14px;
     }
-    
+
     .internship-logo {
         margin-left: 5px;
         margin-top: 10px;
         width: 80px;
     }
-    
+
     .internship-role {
         font-size: 8px;
     }
-    
+
     .epitech-logo-timeline {
         display: none;
     }
