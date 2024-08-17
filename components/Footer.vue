@@ -28,15 +28,10 @@ export default {
     name: "Footer",
     data() {
         return {
-            content: {},
-            langPrefix: ""
+            content: this.$lang === 'en' ? en.footer : fr.footer,
+            langPrefix: this.$langPrefix
         }
-    },
-    mounted() {
-        this.langPrefix = this.$langPrefix;
-
-        this.content = this.$lang === 'en' ? en.footer : fr.footer;
-    },
+    }
 }
 </script>
 

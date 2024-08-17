@@ -1,7 +1,7 @@
 <template>
     <Navbar/>
     <div class="container">
-        <div class="title">{{ content.galleryDetailsTitle }}</div>
+        <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.galleryDetailsTitle }}</div>
         <div class="card">
             <div class="card-content">
                 <div class="card-item">
@@ -53,20 +53,15 @@ export default {
             UserData: [],
             errorMessage: '',
             successMessage: '',
-            content: {},
-            urlLang: "",
-            langPrefix: "",
+            content: this.$lang === 'en' ? en.gallery : fr.gallery,
+            urlLang: this.$urlLang,
+            langPrefix: this.$langPrefix,
         };
     },
-    mounted() {
-        this.urlLang = this.$urlLang;
-        this.langPrefix = this.$langPrefix;
-
-        this.content = this.$lang === 'en' ? en.gallery : fr.gallery;
-
-        this.checkLogin();
+    async mounted() {
+        await this.checkLogin();
         const id = this.$route.params.id;
-        this.getGallery(id);
+        await this.getGallery(id);
     },
     methods: {
         async checkLogin() {
@@ -112,8 +107,7 @@ export default {
                 if (!response.ok) {
                     throw new Error("Failed to fetch user information");
                 }
-                const userData = await response.json();
-                this.UserData = userData;
+                this.UserData = await response.json();
             } catch (error) {
                 console.error("Error fetching user information:", error);
                 return "Unknown user";
@@ -126,7 +120,7 @@ export default {
 
         async startReport() {
             let active = false;
-            if (document.getElementById('reportDescription').hidden == false) {
+            if (document.getElementById('reportDescription').hidden === false) {
                 active = true;
             }
 
@@ -187,7 +181,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~/styles/variables/ColorVariables.scss';
+@import '@/styles/variables/ColorVariables.scss';
 
 .title {
     text-align: center;
@@ -198,7 +192,6 @@ export default {
 .container {
     width: 80%;
     margin-left: 10%;
-    padding-top: 90px;
 }
 
 .card {

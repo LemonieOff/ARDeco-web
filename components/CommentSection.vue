@@ -35,8 +35,8 @@ export default {
     data() {
         return {
             imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
-            content: {},
-            langPrefix: "",
+            content: this.$lang === 'en' ? en.comments : fr.comments,
+            langPrefix: this.$langPrefix,
             comments: [],
             userId: null,
             // usersThatCommended: [],
@@ -44,13 +44,6 @@ export default {
         }
     },
     mounted() {
-        this.langPrefix = this.$langPrefix;
-
-        this.content = this.$lang === 'en' ? en.comments : fr.comments;
-
-        const body = document.body
-        body.style.backgroundColor = "#F4F4F4"
-
         this.userId = localStorage.getItem('userID')
     },
     watch: {
@@ -166,7 +159,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~/styles/variables/ColorVariables.scss';
+@import '@/styles/variables/ColorVariables.scss';
 
 .icon {
     margin: 10px;
@@ -205,8 +198,7 @@ export default {
 }
 
 #sendComment {
-    margin: auto;
-    margin-left: 2.5%;
+    margin: auto auto auto 2.5%;
     padding: 5px;
     max-height: 50px;
     border-radius: 10px;

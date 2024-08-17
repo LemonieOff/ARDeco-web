@@ -29,18 +29,18 @@
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
                     <div v-for="j in 5" :key="j"
                          class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] text-port-brown">
-                        <span id="discover" class="mr-4">{{transition.discover}}</span><span id="team" class="outline-text">{{transition.team}}</span>
+                        <span id="discover" class="mr-4">{{ content.transitionEffect.discover }}</span><span id="team" class="outline-text">{{ content.transitionEffect.team }}</span>
                     </div>
                 </div>
 
                 <div class="mx-auto mt-2 md:mt-4 mb-1 md:mb-3">
-                    <a id="clickHere" class="p-2 md:p-5 rounded-full flex h-fit text-port-brown font-extrabold text-2xl md:text-5xl bg-ARgrey ease-in-out duration-700 border-2 border-transparent hover:text-ARgrey hover:bg-port-brown hover:border-ARgrey" :href="`${langPrefix}team`">{{transition.clickHere}}</a>
+                    <a id="clickHere" class="p-2 md:p-5 rounded-full flex h-fit text-port-brown font-extrabold text-2xl md:text-5xl bg-ARgrey ease-in-out duration-700 border-2 border-transparent hover:text-ARgrey hover:bg-port-brown hover:border-ARgrey" :href="`${langPrefix}team`">{{ content.transitionEffect.clickHere }}</a>
                 </div>
 
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
                     <div v-for="j in 5" :key="j"
                          class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] text-port-brown animation-reverse">
-                        <span id="discover2" class="mr-4">{{transition.discover}}</span><span id="team2" class="outline-text">{{transition.team}}</span>
+                        <span id="discover2" class="mr-4">{{ content.transitionEffect.discover}}</span><span id="team2" class="outline-text">{{ content.transitionEffect.team}}</span>
                     </div>
                 </div>
             </div>
@@ -71,10 +71,10 @@
     </div>
 
     <!-- Timeline -->
-    <div id="timelineTitle" class="font-bold text-center text-2xl mt-9 mb-5">{{ timeline.title }}</div>
+    <div id="timelineTitle" class="font-bold text-center text-2xl mt-9 mb-5">{{ content.timeline.title }}</div>
     <div id="timeline">
         <div class="flex flex-col items-center">
-            <div class="card w-4/5 xl:w-3/5 2xl:w-2/5 relative py-[30px] odd:pl-[30px] even:pr-[30px]" v-for="(object, index) in timeline.steps" :key="index">
+            <div class="card w-4/5 xl:w-3/5 2xl:w-2/5 relative py-[30px] odd:pl-[30px] even:pr-[30px]" v-for="(object, index) in content.timeline.steps" :key="index">
                 <div class="info flex flex-col p-2.5 rounded-xl bg-[#333]">
                     <h3 class="title text-[#ffaf91] relative">{{ object.title }}</h3>
                     <h3 class="title text-[#ffaf91] relative">{{ object.date }}</h3>
@@ -94,24 +94,11 @@ export default {
     name: "Index",
     data() {
         return {
-            content: {},
-            timeline: {},
-            timelineDates: {},
-            transition: {},
-            langPrefix: "/",
-            lang: "",
+            content: this.$lang === 'en' ? en.home : fr.home,
+            langPrefix: this.$langPrefix,
+            lang: this.$lang,
             backgroundUrl: backgroundUrl
         }
-    },
-    mounted() {
-        this.urlLang = this.$urlLang;
-        this.langPrefix = this.$langPrefix;
-        this.lang = this.$lang;
-
-        // Set the content variable to the correct language
-        this.content = this.$lang === 'en' ? en.home : fr.home;
-        this.transition = this.content.transitionEffect;
-        this.timeline = this.content.timeline;
     }
 }
 </script>

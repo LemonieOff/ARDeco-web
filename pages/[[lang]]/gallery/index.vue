@@ -1,6 +1,6 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
-    <div class="title">{{ content.title }}</div>
+    <Navbar/>
+    <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
     <div class="form">
         <div class="grid">
             <div class="grid-header">
@@ -36,38 +36,20 @@
 </template>
 
 <script setup>
-import Navbar from "~/components/Navbar.vue";
 import {isLogged} from "public/js/checkLogin";
-import {onMounted, ref} from "vue";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
-const route = useRoute();
-let lang = ref(route.params.lang);
-const content = ref({});
+const nuxtApp = useNuxtApp();
+
+const content = ref(nuxtApp.$lang === 'en' ? en.gallery : fr.gallery);
 const GalleryData = ref([]);
 const errorMessage = ref("");
 const successMessage = ref("");
-const langPrefix = ref("/");
+const langPrefix = ref(nuxtApp.$langPrefix);
 const userID = ref(0);
 
 onMounted(async () => {
-    // If lang selector is not passed in url, get the user's one or set it to french
-    if (lang.value !== 'en' && lang.value !== 'fr') {
-        const localStorageLang = localStorage.getItem('lang');
-        if (localStorageLang) {
-            lang.value = localStorageLang;
-        } else {
-            lang.value = 'fr';
-        }
-    }
-
-    // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.gallery : fr.gallery;
-
-    // Prefix for links
-    langPrefix.value = lang.value === 'en' ? '/en/' : '/fr/';
-
     await checkLogin();
     await getGallery();
     console.log(GalleryData.value);

@@ -15,19 +15,14 @@ import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
 export default {
-    name: "",
     data() {
         return {
-            content: {}
+            content: this.$lang === 'en' ? en.cgu.durationAndCancellation : fr.cgu.durationAndCancellation
         }
-    },
-    mounted() {
-        // Set the content variable to the correct language
-        this.content = this.$lang === 'en' ? en.cgu.durationAndCancellation : fr.cgu.durationAndCancellation;
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/FAQPage.scss';
+@import '@/styles/FAQPage.scss';
 </style>

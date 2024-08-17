@@ -1,13 +1,13 @@
 <template>
     <div class="question-content background-card">
-        <div class="title underline">{{content.title}}</div>
-        <div class="sub-title gray-text-color">{{content.usage}}</div>
-        <div class="sub-title gray-text-color">{{content.share}}</div>
-        <div class="sub-title gray-text-color">{{content.userRights}}</div>
-        <div class="sub-title gray-text-color">{{content.keep}}</div>
-        <div class="sub-title gray-text-color">{{content.acceptance}}</div>
-        <div class="sub-title gray-text-color">{{content.questions}}</div>
-        <div class="sub-title gray-text-color">{{content.update}}</div>
+        <div class="title underline">{{ content.title }}</div>
+        <div class="sub-title gray-text-color">{{ content.usage }}</div>
+        <div class="sub-title gray-text-color">{{ content.share }}</div>
+        <div class="sub-title gray-text-color">{{ content.userRights }}</div>
+        <div class="sub-title gray-text-color">{{ content.keep }}</div>
+        <div class="sub-title gray-text-color">{{ content.acceptance }}</div>
+        <div class="sub-title gray-text-color">{{ content.questions }}</div>
+        <div class="sub-title gray-text-color">{{ content.update }}</div>
     </div>
 </template>
 
@@ -16,42 +16,14 @@ import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
 export default {
-    name: "",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
-            content: {},
-            langPrefix: ""
-        }
-    },
-    mounted() {
-        let lang = this.urlLang;
-        console.log(lang);
-
-        // If lang selector is not passed in url, get the user's one or set it to french
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.privacyPolicy.conclusion : fr.privacyPolicy.conclusion;
-
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
+            content: this.$lang === 'en' ? en.privacyPolicy.conclusion : fr.privacyPolicy.conclusion
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/FAQPage.scss';
+@import '@/styles/FAQPage.scss';
 </style>
