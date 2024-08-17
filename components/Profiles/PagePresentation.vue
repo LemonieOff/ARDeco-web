@@ -1,7 +1,6 @@
 <template>
     <div class="page-presentation-content top-right-yellow-fade-background">
-        <div class="line-jump"></div>
-        <div id="title" class="title">{{ content.title }}</div>
+        <div id="title" class="text-center font-bold py-8 text-xl md:text-4xl">{{ content.title }}</div>
         <div class="sub-content">
             <div class="team-content">
                 <div id="picturesTitle" class="title">{{ content.picturesTitle }}</div>
@@ -9,20 +8,20 @@
                 <div class="profile-pictures-content">
                     <div class="profile-pictures">
                         <a class="shaking-effect" href="#hugo-profile">
-                            <img src="../../assets/images/profile-pictures/Hugo.png" alt="Hugo Becart">
+                            <img src="@/assets/images/profile-pictures/Hugo.png" alt="Hugo Becart">
                         </a>
                         <a href="#valentin-profile">
-                            <img src="../../assets/images/profile-pictures/Valentin.png" alt="Valentin Astic">
+                            <img src="@/assets/images/profile-pictures/Valentin.png" alt="Valentin Astic">
                         </a>
                     </div>
                     <div class="profile-pictures">
                         <a href="#evan-profile">
-                            <img src="../../assets/images/profile-pictures/Evan.png" alt="Evan Blachier">
+                            <img src="@/assets/images/profile-pictures/Evan.png" alt="Evan Blachier">
                         </a>
                     </div>
                     <div class="profile-pictures">
                         <a class="shaking-effect" href="#louis-profile">
-                            <img src="../../assets/images/profile-pictures/Louis.png" alt="Louis Villedieu">
+                            <img src="@/assets/images/profile-pictures/Louis.png" alt="Louis Villedieu">
                         </a>
                         <a>
                             <NuxtImg src="images/profile-pictures/Unknown.webp" alt="Hugo Delille"/>
@@ -34,9 +33,9 @@
                 <div id="presentationTitle" class="title">{{ content.presentationTitle }}</div>
                 <div id="presentationSubtitle" class="sub-title">{{ content.presentationSubtitle }}</div>
                 <div class="epitech-details">
-                    <a href="https://www.epitech.eu/en/">
-                        <img src="../../assets/images/profile-pictures/Epitech.png">
-                    </a>
+                    <NuxtLink :href="epitechSrc" target="_blank">
+                        <img src="@/assets/images/profile-pictures/Epitech.png" alt="Epitech">
+                    </NuxtLink>
                     <div id="presentationTextPart1" class="text">{{ content.presentationTextPart1 }}</div>
                     <div id="presentationTextPart2" class="text">{{ content.presentationTextPart2 }}</div>
                 </div>
@@ -46,46 +45,25 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
+import en from "@/src/lang/en.json";
+import fr from "@/src/lang/fr.json";
 
 export default {
     name: "PagePresentation",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
-            content: {},
-            langPrefix: "/"
+            content: fr.profilePages.presentationPage,
+            epitechSrc: "https://www.epitech.eu"
         }
     },
     mounted() {
-        let lang = this.urlLang;
-
-        // If lang selector is not passed in url, get the user's one or set it to french
-        if (lang !== 'en' && lang !== 'fr') {
-            const localStorageLang = localStorage.getItem('lang');
-            if (localStorageLang) {
-                lang = localStorageLang;
-            } else {
-                lang = 'fr';
-            }
-        }
-
         // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.profilePages.presentationPage : fr.profilePages.presentationPage;
-
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
-        }
+        this.content = this.$lang === 'en' ? en.profilePages.presentationPage : fr.profilePages.presentationPage;
+        this.epitechSrc = this.$lang === 'fr' ? this.epitechSrc : "https://international.epitech.eu"
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../../styles/PagePresentation.scss";
+@import "@/styles/PagePresentation.scss";
 </style>
