@@ -13,16 +13,12 @@ import fr from "~/src/lang/fr.json";
 export default {
     data() {
         return {
-            content: {}
+            content: this.$lang === 'en' ? en.privacyPolicy.statistics : fr.privacyPolicy.statistics
         }
-    },
-    mounted() {
-        // Set the content variable to the correct language
-        this.content = this.$lang === 'en' ? en.privacyPolicy.statistics : fr.privacyPolicy.statistics;
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/FAQPage.scss';
+@import '@/styles/FAQPage.scss';
 </style>

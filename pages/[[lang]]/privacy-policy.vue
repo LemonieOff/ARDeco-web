@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from "~/components/Navbar.vue";
 import Introduction from "~/components/Policy/PrivacyPolicy/Introduction.vue";
 import Cookies from "~/components/Policy/PrivacyPolicy/Cookies.vue";
 import Identification from "~/components/Policy/PrivacyPolicy/Identification.vue";
@@ -23,21 +22,16 @@ import Device from "~/components/Policy/PrivacyPolicy/Device.vue";
 import Conclusion from "~/components/Policy/PrivacyPolicy/Conclusion.vue";
 import fr from "~/src/lang/fr.json"
 import en from "~/src/lang/en.json"
-import Footer from "~/components/Footer.vue";
 
 const nuxtApp = useNuxtApp();
 
 const lang = ref(nuxtApp.$lang);
 
-let content = ref({});
+const content = ref(lang.value === "en" ? en.privacyPolicy : fr.privacyPolicy);
 
 const components = shallowRef([Introduction, Cookies, Identification, Bank, Social, Private, Statistics, Internal, Device, Conclusion]);
-
-onMounted(() => {
-    content.value = lang.value === "en" ? en.privacyPolicy : fr.privacyPolicy;
-});
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/FAQPage.scss';
+@import '@/styles/FAQPage.scss';
 </style>

@@ -289,9 +289,9 @@
     },
     "cookies": {
       "title": "Cookies",
-      "cookies": "We use cookies for the sole purpose of identifying users and providing access to authorized services.",
+      "cookies": "We use cookies for the sole purpose of identifying users, enabling access to authorized services and providing them in the language selected by the user.",
       "collection": "These cookies are automatically collected by our web server and stored in the user's browser from the moment they log in or register until they log out.",
-      "usage": "We do not store any personal data other than the internal unique identifier in cookies.",
+      "usage": "We do not store any personal data other than the internal unique identifier in cookies. Other cookies do not allow user identification, and are only used to provide personalized services.",
       "consent": "By using our services, users consent to the use of these cookies.",
       "share": "We do not share these cookies with third parties and their use remains internal."
     },

@@ -1,4 +1,5 @@
 <template>
+    <Html :lang="lang"></Html>
     <Navbar/>
     <QuestionsList/>
     <WhatIsArdeco/>
@@ -25,8 +26,12 @@ import WhereDoModelsComeFrom from "~/components/FAQ/WhereDoModelsComeFrom.vue"
 import WhyShouldIUseArdeco from "~/components/FAQ/WhyShouldIUseArdeco.vue"
 import InAppPurchaces from "~/components/FAQ/InAppPurchaces.vue"
 import HowToUseArdeco from "~/components/FAQ/HowToUseArdeco.vue"
+
+const nuxtApp = useNuxtApp();
+
+const lang = ref(nuxtApp.$lang);
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/FAQPage.scss';
+@import '@/styles/FAQPage.scss';
 </style>

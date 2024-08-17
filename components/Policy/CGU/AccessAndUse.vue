@@ -24,16 +24,12 @@ import fr from "~/src/lang/fr.json";
 export default {
     data() {
         return {
-            content: {}
+            content: this.$lang === 'en' ? en.cgu.accessAndUse : fr.cgu.accessAndUse
         }
-    },
-    mounted() {
-        // Set the content variable to the correct language
-        this.content = this.$lang === 'en' ? en.cgu.accessAndUse : fr.cgu.accessAndUse;
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/FAQPage.scss';
+@import '@/styles/FAQPage.scss';
 </style>

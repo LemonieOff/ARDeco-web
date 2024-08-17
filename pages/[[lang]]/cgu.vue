@@ -1,16 +1,15 @@
 <template>
     <Html :lang="lang"></Html>
     <Navbar/>
-        <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
-        <div v-for="component in components">
-            <Component :is="component"/>
-            <div class="space-between-questions"></div>
-        </div>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
+    <div v-for="component in components">
+        <Component :is="component"/>
+        <div class="space-between-questions"></div>
+    </div>
     <Footer/>
 </template>
 
 <script setup lang="ts">
-import Navbar from "~/components/Navbar.vue";
 import CguObject from "~/components/Policy/CGU/CguObject.vue";
 import Definitions from "~/components/Policy/CGU/Definitions.vue";
 import AccessAndUse from "~/components/Policy/CGU/AccessAndUse.vue";
@@ -22,7 +21,6 @@ import DurationAndCancellation from "~/components/Policy/CGU/DurationAndCancella
 import Litige from "~/components/Policy/CGU/Litige.vue";
 import GeneralDisposition from "~/components/Policy/CGU/GeneralDisposition.vue";
 import Contact from "~/components/Policy/CGU/Contact.vue";
-import Footer from "~/components/Footer.vue";
 import fr from "~/src/lang/fr.json"
 import en from "~/src/lang/en.json"
 
@@ -30,15 +28,11 @@ const nuxtApp = useNuxtApp();
 
 const lang = ref(nuxtApp.$lang);
 
-let content = ref({});
+let content = ref(lang.value === "en" ? en.cgu : fr.cgu);
 
 const components = shallowRef([CguObject, Definitions, AccessAndUse, IntellectualProperty, PersonalData, Responsibility, CguEdit, DurationAndCancellation, Litige, GeneralDisposition, Contact]);
-
-onMounted(() => {
-    content.value = lang.value === "en" ? en.cgu : fr.cgu;
-});
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/FAQPage.scss';
+@import '@/styles/FAQPage.scss';
 </style>

@@ -13,16 +13,12 @@ export default {
     name: "InAppPurchaces",
     data() {
         return {
-            content: {}
+            content: this.$lang === 'en' ? en.productPages : fr.productPages
         }
-    },
-    mounted() {
-        // Set the content variable to the correct language
-        this.content = this.$lang === 'en' ? en.productPages : fr.productPages;
-    },
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/FAQPage.scss';
+@import '@/styles/FAQPage.scss';
 </style>
