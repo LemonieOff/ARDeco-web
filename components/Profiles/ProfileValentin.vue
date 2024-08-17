@@ -51,14 +51,9 @@ export default {
     name: "ProfileValentin",
     data() {
         return {
-            content: fr.profilePages.valentin,
-            epitechSrc: "https://www.epitech.eu"
+            content: this.$lang === 'en' ? en.profilePages.valentin : fr.profilePages.valentin,
+            epitechSrc: this.$lang === 'fr' ? "https://www.epitech.eu" : "https://international.epitech.eu"
         }
-    },
-    mounted() {
-        // Set the content variable to the correct language
-        this.content = this.$lang === 'en' ? en.profilePages.valentin : fr.profilePages.valentin;
-        this.epitechSrc = this.$lang === 'fr' ? this.epitechSrc : "https://international.epitech.eu";
     }
 }
 </script>

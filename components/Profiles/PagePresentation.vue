@@ -52,14 +52,9 @@ export default {
     name: "PagePresentation",
     data() {
         return {
-            content: fr.profilePages.presentationPage,
-            epitechSrc: "https://www.epitech.eu"
+            content: this.$lang === 'en' ? en.profilePages.presentationPage : fr.profilePages.presentationPage,
+            epitechSrc: this.$lang === 'fr' ? "https://www.epitech.eu" : "https://international.epitech.eu"
         }
-    },
-    mounted() {
-        // Set the content variable to the correct language
-        this.content = this.$lang === 'en' ? en.profilePages.presentationPage : fr.profilePages.presentationPage;
-        this.epitechSrc = this.$lang === 'fr' ? this.epitechSrc : "https://international.epitech.eu"
     }
 }
 </script>
