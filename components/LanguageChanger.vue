@@ -1,5 +1,5 @@
 <template>
-    <button id="languageChanger" @click="changeLanguage"></button>
+    <button id="languageChanger" @click="changeLanguage">{{ content }}</button>
 </template>
 
 <script>
@@ -8,29 +8,22 @@ import fr from "~/src/lang/fr.json";
 
 export default {
     name: "LanguageChanger",
-    mounted() {
-        if (this.$lang === 'en') {
-            document.getElementById('languageChanger').innerText = en.languageChangerText
-        } else {
-            document.getElementById('languageChanger').innerText = fr.languageChangerText
+    data() {
+        return {
+            content: this.$lang === "en" ? en.languageChangerText : fr.languageChangerText
         }
     },
     methods: {
         changeLanguage() {
             if (this.$langPrefix !== "/") {
                 if (this.$lang === "fr") {
-                    location.href = location.href.replace(/\/fr\/?/, "/en/")
+                    location.href = location.href.replace(/\/fr\/?/, "/en/");
                 } else if (this.$lang === "en") {
-                    location.href = location.href.replace(/\/en\/?/, "/fr/")
+                    location.href = location.href.replace(/\/en\/?/, "/fr/");
                 }
             } else {
-                if (this.$lang === "fr") {
-                    localStorage.setItem('lang', "en");
-                    location.reload();
-                } else {
-                    localStorage.setItem('lang', "fr");
-                    location.reload();
-                }
+                this.$changeLang("toggle");
+                location.reload();
             }
         }
     },
@@ -38,7 +31,7 @@ export default {
 </script>
 
 <style scoped>
-@import '~/styles/Navbar.scss';
+@import '@/styles/Navbar.scss';
 
 #languageChanger {
     position: fixed;
