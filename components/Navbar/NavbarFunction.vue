@@ -1,7 +1,7 @@
 <template>
     <button :id="id" @click="finalFun"
-            class="navbar-option text-AR-Beige h-full content-center px-4 hover:text-black hover:bg-AR-Beige"
-            :class="[mobileHidden ? 'hidden sm:inline-block' : 'inline-block']">
+            class="navbar-option text-AR-Beige content-center hover:text-black hover:bg-AR-Beige"
+            :class="[!mobileDisplay ? 'h-full px-4' : 'w-full py-4 last:rounded-br-2xl', mobileHidden ? 'hidden sm:inline-block' : (mobileOnly ? 'inline-block sm:hidden' : '')]">
         <slot></slot>
     </button>
 </template>
@@ -16,6 +16,7 @@ const props = defineProps({
         type: String,
         required: true
     },
+    mobileDisplay: Boolean,
     mobileHidden: {
         type: Boolean,
         required: false,
