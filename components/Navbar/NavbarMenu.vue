@@ -1,6 +1,7 @@
 <template>
     <div class="text-sm">
-        <div id="navbarMenu" class="invisible opacity-0 fixed top-32 bg-white py-2.5 px-5 rounded-2xl w-52 duration-500">
+        <div id="navbarMenu"
+             class="invisible opacity-0 fixed top-32 -right-2.5 bg-white py-2.5 px-5 rounded-2xl w-52 duration-500">
             <ul>
                 <NavbarMenuLink v-if="userID" id="profileMenuOption" page-name="lang-profile" :page-lang="langPrefix"
                                 image-src="images/icons/user.webp" :alt="content.profile">
@@ -28,7 +29,7 @@
                 </NavbarMenuLink>
 
                 <NavbarMenuFunction v-if="userID" id="logoutMenuOption" :fun="logout"
-                                image-src="images/icons/logout.webp" :alt="content.disconnect">
+                                    image-src="images/icons/logout.webp" :alt="content.disconnect">
                     {{ content.disconnect }}
                 </NavbarMenuFunction>
 
@@ -39,9 +40,10 @@
             </ul>
         </div>
         <div id="user" @click="menuToggle">
-            <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon hidden rounded-[50%]"
+            <NuxtImg v-if="imageSrc !== ''" width="50px" height="50px" id="profileImage"
+                     class="navbar-icon rounded-[50%]"
                      v-bind:src="imageSrc" loading="lazy" alt="Own profile picture"/>
-            <NuxtImg width="50px" height="50px" id="defaultImage" class="navbar-icon rounded-[50%]"
+            <NuxtImg v-else width="50px" height="50px" id="defaultImage" class="navbar-icon rounded-[50%]"
                      src="images/profile-pictures/Unknown.webp" loading="lazy" alt="Default profile picture"/>
         </div>
     </div>
@@ -54,7 +56,7 @@ const nuxtApp = useNuxtApp();
 
 const langPrefix = nuxtApp.$rawLangPrefix;
 const content = nuxtApp.$content.navBar;
-const imageSrc = ref("https://api.ardeco.app/profile_pictures/0.png");
+const imageSrc = ref("");
 const userId = ref<number | undefined | null>(null);
 const role = ref<string | null>("");
 
@@ -98,8 +100,7 @@ async function menuToggle() {
 </script>
 
 <style scoped lang="scss">
-#navbarMenu{
-    right: -10px;
+#navbarMenu {
     box-shadow: -5px 5px 10px 0px rgba(0, 0, 0, .1);
 }
 
