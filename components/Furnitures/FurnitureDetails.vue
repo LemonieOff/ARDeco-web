@@ -295,7 +295,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/variables/ColorVariables.scss';
+@import '@/styles/variables/ColorVariables.scss';
 
 .solidBorders {
     border: 3px solid $primary-black;

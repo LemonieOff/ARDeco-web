@@ -376,7 +376,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~/styles/ProfileSettings.scss";
+@import "@/styles/ProfileSettings.scss";
 .navbar-top-space {
     height: 10vh;
 }

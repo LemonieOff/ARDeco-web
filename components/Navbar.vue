@@ -1,104 +1,33 @@
 <template>
-    <div class="navbar h-14">
-        <NuxtLink id="home" class="navbar-option" :to="{ name: 'lang', params: { lang: null } }">
-            <NuxtImg height="50" width="50" class="navbar-icon" src="images/logo.webp" alt="Home"/>
-        </NuxtLink>
-        <NuxtLink id="team" class="navbar-option navbarLink" :to="{ name: 'lang-team', params: { lang: rawLangPrefix } }">
+    <div class="text-center h-14 bg-[#333] fixed w-full z-[500] flex justify-around items-center">
+        <NavbarLink id="home" page-name="lang" :page-lang="rawLangPrefix" class="hover:bg-transparent">
+            <NuxtImg height="50" width="50" class="max-h-12" src="images/logo.webp" alt="Home"/>
+        </NavbarLink>
+        <NavbarLink id="team" page-name="lang-team" :page-lang="rawLangPrefix">
             {{ content.team }}
-        </NuxtLink>
-        <NuxtLink id="product" class="navbar-option navbarLink" :to="{ name: 'lang-product', params: { lang: rawLangPrefix } }">
+        </NavbarLink>
+        <NavbarLink id="product" page-name="lang-product" :page-lang=rawLangPrefix>
             {{ content.product }}
-        </NuxtLink>
-        <button id="dark-mode-button" @click="toggleDarkMode">{{ content.darkmode }}</button>
-        <button id="light-mode-button" @click="toggleDarkMode">{{ content.lightmode }}</button>
-        <div class="action">
-            <div class="menu">
-                <ul>
-                    <li id="profileMenuOption" class="cursor-pointer">
-                        <NuxtImg width="20px" height="20px" src="images/icons/user.webp" alt="Profile" loading="lazy"/>
-                        <a :href="`${langPrefix}profile`">{{ content.profile }}</a>
-                    </li>
-                    <li id="settingsMenuOption" class="cursor-pointer">
-                        <NuxtImg width="20px" height="20px" src="images/icons/settings.webp" alt="Settings"
-                                 loading="lazy"/>
-                        <a :href="`${langPrefix}settings`">{{ content.settings }}</a>
-                    </li>
-                    <li id="companyMenuOption" class="cursor-pointer">
-                        <NuxtImg width="20px" height="20px" src="images/icons/company.webp" alt="Company"
-                                 loading="lazy"/>
-                        <a :href="`${langPrefix}company`">{{ content.company }}</a>
-                    </li>
-                    <li id="ticketsMenuOption" class="cursor-pointer">
-                        <NuxtImg width="20px" height="20px" src="images/icons/support.webp" alt="Support"
-                                 loading="lazy"/>
-                        <a :href="`${langPrefix}tickets`">{{ content.tickets }}</a>
-                    </li>
-                    <li id="feedbackMenuOption" class="cursor-pointer">
-                        <NuxtImg width="20px" height="20px" src="images/icons/feedback.webp" alt="Feedback"
-                                 loading="lazy"/>
-                        <a :href="`${langPrefix}feedback`">{{ content.feedback }}</a>
-                    </li>
-                    <li id="disconnectMenuOption" class="cursor-pointer">
-                        <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Logout" loading="lazy"/>
-                        <a @click="logout" href="#">{{ content.disconnect }}</a>
-                    </li>
-                    <li id="loginMenuOption" class="cursor-pointer">
-                        <NuxtImg width="20px" height="20px" src="images/icons/logout.webp" alt="Login" loading="lazy"/>
-                        <a :href="`${langPrefix}login`">{{ content.login }}</a>
-                    </li>
-                </ul>
-            </div>
-            <div id="user" @click="menuToggle">
-                <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon hidden rounded-[50%]"
-                         v-bind:src="imageSrc" loading="lazy" alt="Own profile picture"/>
-                <NuxtImg width="50px" height="50px" id="defaultImage" class="navbar-icon rounded-[50%]"
-                         src="images/profile-pictures/Unknown.webp" loading="lazy" alt="Default profile picture"/>
-            </div>
-        </div>
+        </NavbarLink>
+        <button id="dark-mode-button" class="navbarLink text-AR-Beige" @click="">{{ content.darkmode }}</button>
+        <button id="light-mode-button" class="text-AR-Beige" @click="">{{ content.lightmode }}</button>
+        <NavbarMenu/>
     </div>
     <!-- Add a block with the navbar height, so it doesn't overlap on other content -->
     <div id="navbar-size" class="h-14"></div>
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-import {disconnect, isLogged, loggedIn, userID} from "public/js/checkLogin";
-
 export default {
     name: "Navbar",
     data() {
         return {
-            imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
-            content: this.$lang === 'en' ? en.navBar : fr.navBar,
-            urlLang: this.$urlLang,
-            langPrefix: this.$langPrefix,
+            content: this.$content.navBar,
             rawLangPrefix: this.$rawLangPrefix
         }
     },
     async mounted() {
-        await isLogged();
-
-        await this.getUSerPicture();
-
         const dark_mode = localStorage.getItem('dark_mode');
-        const role = localStorage.getItem('role');
-
-        if (userID === null) {
-            document.getElementById("profileMenuOption").style.display = "none";
-            document.getElementById("settingsMenuOption").style.display = "none";
-            document.getElementById("feedbackMenuOption").style.display = "none";
-            document.getElementById("companyMenuOption").style.display = "none";
-            document.getElementById("ticketsMenuOption").style.display = "none";
-            document.getElementById("disconnectMenuOption").style.display = "none";
-        } else {
-            document.getElementById("loginMenuOption").style.display = "none";
-            document.getElementById("defaultImage").style.display = "none";
-            document.getElementById("profileImage").style.display = "block";
-            if (role === "client") {
-                document.getElementById("companyMenuOption").style.display = "none";
-            }
-        }
 
         if (dark_mode === 'true') {
             document.getElementById("dark-mode-button").style.display = "none";
@@ -106,15 +35,14 @@ export default {
             document.getElementById("light-mode-button").style.display = "none";
         }
 
-        await this.checkDarkMode();
+        // await this.checkDarkMode();
     },
     methods: {
-        async menuToggle() {
-            const toggleMenu = document.querySelector(".menu");
-            toggleMenu.classList.toggle("active");
-        },
-        // TODO : URGENT - CORRIGER LE DARK MODE !!!
-        async checkDarkMode() {
+        /*
+            TODO : URGENT - CORRIGER LE DARK MODE !!! --- EN COURS (https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually)
+                   Plugin + cookie + App.vue html tag pour y ajouter manuellement l'attribut du dark mode
+        */
+        /*async checkDarkMode() {
             const dark_mode = localStorage.getItem('dark_mode');
 
             const backgoundFade = document.getElementsByClassName("top-right-yellow-fade-background")
@@ -231,34 +159,7 @@ export default {
                     credentials: 'include',
                 });
             }
-        },
-        async logout() {
-            await fetch('https://api.ardeco.app/logout', {
-                method: 'GET',
-                credentials: 'include',
-            });
-            await disconnect();
-            location.href = this.langPrefix;
-        },
-        async getUSerPicture() {
-            if (!loggedIn) {
-                return;
-            }
-
-            const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-            });
-            const result = await response.json();
-            this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data}.png`
-        }
+        },*/
     },
 };
 </script>
-
-<style scoped>
-@import '@/styles/Navbar.scss';
-</style>

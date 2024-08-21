@@ -156,7 +156,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~/styles/variables/ColorVariables.scss';
+@import '@/styles/variables/ColorVariables.scss';
 
 .title {
     margin-top: 100px;
