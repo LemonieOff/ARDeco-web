@@ -33,7 +33,7 @@ import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import Navbar from "~/components/Navbar.vue";
 import Notifications from "~/components/Notifications.vue";
-import { isLogged, loggedIn } from "public/js/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 
 export default {
     name: "Feedback",

@@ -16,7 +16,8 @@ module.exports = {
       colors: {
         'light-black': '#010D00',
         'port-brown': '#BFB2AA',
-        'ARgrey': '#3E403F'
+        'AR-Grey': '#3E403F',
+        'AR-Beige': '#F2EBDF',
       }
     },
   },

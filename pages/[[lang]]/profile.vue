@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-import {isLogged, loggedIn} from "public/js/checkLogin";
+import {isLogged, loggedIn} from "public/ts/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {onMounted, ref, provide} from "vue";

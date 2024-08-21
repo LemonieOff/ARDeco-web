@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import {isLogged} from "public/js/checkLogin";
+import {isLogged} from "public/ts/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
@@ -83,10 +83,6 @@ async function getGallery() {
         console.error(error.message);
         errorMessage.value = error.message;
     }
-}
-
-async function redirectDetails(id) {
-    window.location.href = '/voirDetails/' + id;
 }
 
 async function openSidebar(id) {

@@ -7,13 +7,13 @@
     <!-- Welcome title -->
     <div id="hero" class="flex h-dvh w-full bg-port-brown bg-no-repeat bg-cover" :style="{backgroundImage: `url(${backgroundUrl})`}">
         <h1 id="welcomeTitle"
-            class="font-black mt-72 md:mt-16 p-2 justify-center text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-center mx-auto bg-port-brown md:bg-transparent rounded-lg text-ARgrey h-fit w-fit md:w-1/2">
+            class="font-black mt-72 md:mt-16 p-2 justify-center text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-center mx-auto bg-port-brown md:bg-transparent rounded-lg text-AR-Grey h-fit w-fit md:w-1/2">
             {{content.welcomeTitle}}</h1>
     </div>
 
     <!-- Product presentation -->
-    <div class="bg-[#F2EBDF] flex flex-col xl:flex-row items-center my-9">
-        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-xl:mb-9">
+    <div class="bg-AR-Beige flex flex-col xl:flex-row items-center my-9">
+        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-AR-Grey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-xl:mb-9">
             <h2 class="underline mb-2 text-center">ARDeco</h2>
             <p id="productPresentation" class="">
                 {{content.productPresentation}}
@@ -23,7 +23,7 @@
     </div>
 
     <!-- Team link -->
-    <div class="bg-[#F2EBDF]">
+    <div class="bg-AR-Beige">
         <div class="text-center h-full items-center">
             <div class="flex w-full overflow-hidden py-5 z-0 flex-col">
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="mx-auto mt-2 md:mt-4 mb-1 md:mb-3">
-                    <a id="clickHere" class="p-2 md:p-5 rounded-full flex h-fit text-port-brown font-extrabold text-2xl md:text-5xl bg-ARgrey ease-in-out duration-700 border-2 border-transparent hover:text-ARgrey hover:bg-port-brown hover:border-ARgrey" :href="`${langPrefix}team`">{{ content.transitionEffect.clickHere }}</a>
+                    <a id="clickHere" class="p-2 md:p-5 rounded-full flex h-fit text-port-brown font-extrabold text-2xl md:text-5xl bg-AR-Grey ease-in-out duration-700 border-2 border-transparent hover:text-AR-Grey hover:bg-port-brown hover:border-AR-Grey" :href="`${langPrefix}team`">{{ content.transitionEffect.clickHere }}</a>
                 </div>
 
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
@@ -48,9 +48,9 @@
     </div>
 
     <!-- Augmented reality -->
-    <div class="bg-gradient-to-t from-port-brown to-[#F2EBDF] flex flex-col-reverse xl:flex-row items-center py-9">
+    <div class="bg-gradient-to-t from-port-brown to-AR-Beige flex flex-col-reverse xl:flex-row items-center py-9">
         <NuxtImg width="612" height="503" loading="lazy" class="2xl:ml-24 xl:w-1/3 w-1/2 my-auto rounded-xl" src="images/ar_illu.webp" alt="ARDeco conceptual mobile in-use illustration"/>
-        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-ARgrey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
+        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-AR-Grey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
             <h2 id="augmentedRealityTitle" class="underline mb-2 text-center">{{content.augmentedRealityTitle}}</h2>
             <p id="augmentedRealityText">
                 {{content.augmentedRealityText}}
@@ -59,11 +59,11 @@
     </div>
 
     <!-- Features -->
-    <div class="flex flex-col items-center justify-center bg-gradient-to-b from-port-brown to-[#F2EBDF]">
+    <div class="flex flex-col items-center justify-center bg-gradient-to-b from-port-brown to-AR-Beige">
         <span id="keyPoints" class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-12 w-full text-center outline-text">{{content.keyPoints}}</span>
         <ul class="flex flex-col lg:flex-row flex-wrap justify-center content-center">
             <li v-for="(feature, index) in content.keyPointsBlocks" :key="index"
-                class="m-3 flex flex-col justify-between bg-port-brown border border-ARgrey text-ARgrey p-4 rounded-md shadow-md w-5/6 lg:w-2/5 font-sans hover:bg-ARgrey hover:text-port-brown">
+                class="m-3 flex flex-col justify-between bg-port-brown border border-AR-Grey text-AR-Grey p-4 rounded-md shadow-md w-5/6 lg:w-2/5 font-sans hover:bg-AR-Grey hover:text-port-brown">
                 <h3 class="text-xl font-semibold mb-2">{{ feature.title }}</h3>
                 <p class="">{{ feature.description }}</p>
             </li>
@@ -87,14 +87,12 @@
 
 <script>
 import backgroundUrl from "assets/images/homeHero.jpg";
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 
 export default {
     name: "Index",
     data() {
         return {
-            content: this.$lang === 'en' ? en.home : fr.home,
+            content: this.$content.home,
             langPrefix: this.$langPrefix,
             lang: this.$lang,
             backgroundUrl: backgroundUrl
@@ -113,14 +111,14 @@ export default {
         }
 
         span.outline-text {
-            -webkit-text-stroke: 1px theme('colors.ARgrey');
+            -webkit-text-stroke: 1px theme('colors.AR-Grey');
             color: transparent;
         }
     }
 }
 
 span.outline-text {
-    -webkit-text-stroke: 1px theme('colors.ARgrey');
+    -webkit-text-stroke: 1px theme('colors.AR-Grey');
     color: transparent;
 }
 
