@@ -32,4 +32,8 @@
         background-clip: content-box;
         @apply bg-port-brown;
     }
+
+    .outline-text {
+        -webkit-text-stroke: 1px theme('colors.AR-Grey');
+    }
 }

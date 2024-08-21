@@ -29,7 +29,7 @@
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
                     <div v-for="j in 5" :key="j"
                          class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] text-port-brown">
-                        <span id="discover" class="mr-4">{{ content.transitionEffect.discover }}</span><span id="team" class="outline-text">{{ content.transitionEffect.team }}</span>
+                        <span id="discover" class="mr-4">{{ content.transitionEffect.discover }}</span><span id="team" class="text-transparent outline-text" style="-webkit-text-stroke: 1px theme('colors.AR-Grey');">{{ content.transitionEffect.team }}</span>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
                     <div v-for="j in 5" :key="j"
                          class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] text-port-brown animation-reverse">
-                        <span id="discover2" class="mr-4">{{ content.transitionEffect.discover}}</span><span id="team2" class="outline-text">{{ content.transitionEffect.team}}</span>
+                        <span id="discover2" class="mr-4">{{ content.transitionEffect.discover}}</span><span id="team2" class="text-transparent outline-text">{{ content.transitionEffect.team}}</span>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
 
     <!-- Features -->
     <div class="flex flex-col items-center justify-center bg-gradient-to-b from-port-brown to-AR-Beige">
-        <span id="keyPoints" class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-12 w-full text-center outline-text">{{content.keyPoints}}</span>
+        <span id="keyPoints" class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-12 w-full text-center text-transparent outline-text">{{content.keyPoints}}</span>
         <ul class="flex flex-col lg:flex-row flex-wrap justify-center content-center">
             <li v-for="(feature, index) in content.keyPointsBlocks" :key="index"
                 class="m-3 flex flex-col justify-between bg-port-brown border border-AR-Grey text-AR-Grey p-4 rounded-md shadow-md w-5/6 lg:w-2/5 font-sans hover:bg-AR-Grey hover:text-port-brown">
@@ -109,17 +109,7 @@ export default {
         &.animation-reverse {
             animation-direction: reverse;
         }
-
-        span.outline-text {
-            -webkit-text-stroke: 1px theme('colors.AR-Grey');
-            color: transparent;
-        }
     }
-}
-
-span.outline-text {
-    -webkit-text-stroke: 1px theme('colors.AR-Grey');
-    color: transparent;
 }
 
 @keyframes scrollText {
