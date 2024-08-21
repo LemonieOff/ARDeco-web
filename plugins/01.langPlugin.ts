@@ -2,7 +2,10 @@ import fr from "@/src/lang/fr.json";
 import en from "@/src/lang/en.json";
 
 export default defineNuxtPlugin(() => {
-    const langCookie = useCookie<string>('lang');
+    const langCookie = useCookie<string>('lang', {
+        sameSite: "lax",
+        secure: true,
+    });
 
     if (!langCookie.value) langCookie.value = "fr";
 

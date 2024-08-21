@@ -1,4 +1,5 @@
 <template>
+    <Html :class="{ dark: darkMode }"></Html>
     <Head>
         <Title>ARDeco</Title>
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -12,6 +13,8 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
+const nuxtApp = useNuxtApp();
 
+const darkMode: boolean = nuxtApp.$darkMode;
 </script>
