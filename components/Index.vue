@@ -28,8 +28,8 @@
             <div class="flex w-full overflow-hidden py-5 z-0 flex-col">
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
                     <div v-for="j in 5" :key="j"
-                         class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] text-port-brown">
-                        <span id="discover" class="mr-4">{{ content.transitionEffect.discover }}</span><span id="team" class="text-transparent outline-text" style="-webkit-text-stroke: 1px theme('colors.AR-Grey');">{{ content.transitionEffect.team }}</span>
+                         class="font-black leading-none mr-4 text-[2rem] md:text-[5rem]">
+                        <span id="discover" class="mr-4 text-AR-Grey">{{ content.transitionEffect.discover }}</span><span id="team" class="text-transparent outline-text" style="-webkit-text-stroke: 1px theme('colors.AR-Grey');">{{ content.transitionEffect.team }}</span>
                     </div>
                 </div>
 
@@ -39,8 +39,8 @@
 
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
                     <div v-for="j in 5" :key="j"
-                         class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] text-port-brown animation-reverse">
-                        <span id="discover2" class="mr-4">{{ content.transitionEffect.discover}}</span><span id="team2" class="text-transparent outline-text">{{ content.transitionEffect.team}}</span>
+                         class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] animation-reverse">
+                        <span id="discover2" class="mr-4 text-AR-Grey">{{ content.transitionEffect.discover}}</span><span id="team2" class="text-transparent outline-text">{{ content.transitionEffect.team}}</span>
                     </div>
                 </div>
             </div>
@@ -153,15 +153,10 @@ export default {
     border-top-left-radius: 0;
 }
 
-/* Removing the border if it is the last card  and it's odd */
-.card:last-child:nth-child(odd)::before {
+/* Removing the border if it is the last card */
+.card:last-child::before {
     border-bottom: 0;
     border-bottom-left-radius: 0;
-}
-
-/* Removing the border if it is the last card  and it's even */
-.card:last-child:nth-child(even)::before {
-    border-bottom: 0;
     border-bottom-right-radius: 0;
 }
 

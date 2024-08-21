@@ -26,7 +26,8 @@
     "lightmode": "Light mode",
     "login": "Login",
     "disconnect": "Disconnect",
-    "feedback": "Feedback"
+    "feedback": "Feedback",
+    "toggleMobileNavbar": "Open/close the navigation bar"
   },
   "profilePages": {
     "presentationPage": {
