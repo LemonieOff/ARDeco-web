@@ -25,7 +25,7 @@ export default {
     name: "Footer",
     data() {
         return {
-            content: this.$content.navBar,
+            content: this.$content.footer,
             langPrefix: this.$langPrefix
         }
     }
