@@ -26,7 +26,8 @@
     "lightmode": "Mode clair",
     "login": "Connexion",
     "disconnect": "Déconnexion",
-    "feedback": "Vos retours"
+    "feedback": "Vos retours",
+    "toggleMobileNavbar": "Ouvrir/fermer la barre de navigation"
   },
   "profilePages": {
     "presentationPage": {

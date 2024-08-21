@@ -1,4 +1,3 @@
-/*@import url("https://use.typekit.net/bpw8gft.css");*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,7 +9,7 @@
 
     body {
         font-family: 'Roboto', sans-serif;
-        background-color: #F2EBDF;
+        @apply bg-AR-Beige;
     }
 
     button {
@@ -31,5 +30,9 @@
         border: 4px solid transparent;
         background-clip: content-box;
         @apply bg-port-brown;
+    }
+
+    .outline-text {
+        -webkit-text-stroke: 1px theme('colors.AR-Grey');
     }
 }

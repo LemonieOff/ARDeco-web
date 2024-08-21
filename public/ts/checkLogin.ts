@@ -1,13 +1,15 @@
-let loggedIn = false;
-let userID = null;
+let loggedIn: boolean = false;
+let userID: number | null = null;
 
 const isLogged = async () => {
     const userID_LS = localStorage.getItem("userID");
 
-    // Set localUserID to undefined type if it is "undefined" string
+    // Set localUserID to an undefined type if it is "undefined" string
     const localUserID = userID_LS === "undefined" ? undefined : userID_LS;
 
-    if (localUserID) {
+    const localUserIDNumber = Number(localUserID);
+
+    if (localUserID && !isNaN(localUserIDNumber)) {
         const response = await fetch('https://api.ardeco.app/checkjwt/' + localUserID, {
             method: 'GET',
             headers: {
@@ -19,14 +21,14 @@ const isLogged = async () => {
         loggedIn = result["status"] === "OK";
         if (loggedIn) {
             console.log("Logged in");
-            userID = localUserID;
+            userID = localUserIDNumber;
 
             const role_LS = localStorage.getItem("role");
 
-            // Set localUserID to undefined type if it is "undefined" string
+            // Set localUserID to an undefined type if it is "undefined" string
             const role = role_LS === "undefined" ? undefined : role_LS;
 
-            // If role is not stored locally, retrieve it from the server
+            // If the role is not stored locally, retrieve it from the server
             if (!role) {
                 console.log("No stored role, retrieving it");
                 const response = await fetch('https://api.ardeco.app/user/' + localUserID, {
@@ -54,7 +56,7 @@ const isLogged = async () => {
         loggedIn = false;
         userID = null;
     }
-    return localUserID;
+    return userID;
 }
 
 const disconnect = async () => {

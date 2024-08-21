@@ -31,7 +31,7 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import { isLogged, loggedIn } from "public/js/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 
 export default {
     name: "FurnitureDetails",
@@ -295,7 +295,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/variables/ColorVariables.scss';
+@import '@/styles/variables/ColorVariables.scss';
 
 .solidBorders {
     border: 3px solid $primary-black;

@@ -1,5 +1,11 @@
+import fr from "@/src/lang/fr.json";
+import en from "@/src/lang/en.json";
+
 export default defineNuxtPlugin(() => {
-    const langCookie = useCookie<string>('lang');
+    const langCookie = useCookie<string>('lang', {
+        sameSite: "lax",
+        secure: true,
+    });
 
     if (!langCookie.value) langCookie.value = "fr";
 
@@ -61,15 +67,19 @@ export default defineNuxtPlugin(() => {
         rawLangPrefix = "en";
     }
 
+    const content = lang === "en" ? en : fr;
+
     const result = {
         urlLang: urlLang,
         langPrefix: langPrefix,
         rawLangPrefix: rawLangPrefix,
         lang: lang,
         langCookieValue: langCookie.value,
-        changeLang: changeLang
+        changeLang: changeLang,
+        content: content
     };
-    console.debug("Lang plugin result :", result);
+
+    if (import.meta.client) console.debug("Lang plugin result :", result);
 
     return {
         provide: result,

@@ -27,7 +27,7 @@
 
 <script setup>
 import Navbar from "~/components/Navbar.vue";
-import {isLogged} from "public/js/checkLogin";
+import {isLogged} from "public/ts/checkLogin";
 import {onMounted, ref} from "vue";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";

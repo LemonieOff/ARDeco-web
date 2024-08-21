@@ -88,7 +88,7 @@
 </template>
 
 <script setup xmlns="http://www.w3.org/1999/html">
-import {isLogged, loggedIn, disconnect} from "public/js/checkLogin";
+import {isLogged, loggedIn, disconnect} from "public/ts/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {onMounted, ref} from "vue";
