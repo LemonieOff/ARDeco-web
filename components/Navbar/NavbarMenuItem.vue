@@ -1,5 +1,5 @@
 <template>
-    <li :id="id" class="list-none py-3.5 px-0 border-t first:border-0 border-t-black/5 flex">
+    <li :id="id" class="list-none py-3 px-0 border-t first:border-0 border-t-black/5 flex">
         <slot></slot>
     </li>
 </template>
