@@ -1,7 +1,4 @@
-import fr from "@/src/lang/fr.json";
-import en from "@/src/lang/en.json";
-
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(async () => {
     const langCookie = useCookie<string>('lang', {
         sameSite: "lax",
         secure: true,
@@ -67,7 +64,7 @@ export default defineNuxtPlugin(() => {
         rawLangPrefix = "en";
     }
 
-    const content = lang === "en" ? en : fr;
+    const content = lang === "en" ? await import('@/src/lang/en.json') : await import('@/src/lang/fr.json');
 
     const result = {
         urlLang: urlLang,

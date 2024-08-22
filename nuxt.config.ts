@@ -8,6 +8,10 @@ export default defineNuxtConfig({
             collections: []
         }
     },
+    nitro: {
+        compressPublicAssets: true,
+        minify: true
+    },
     css: ['@/assets/css/main.css'],
     postcss: {
         plugins: {
