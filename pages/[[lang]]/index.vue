@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import Index from "@/components/Index.vue";
+import Index from "@/components/Index.server.vue";
 </script>

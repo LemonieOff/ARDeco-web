@@ -1,4 +1,4 @@
-<template xmlns="http://www.w3.org/1999/html">
+<template>
     <div class="flex bg-port-brown flex-row border-AR-Grey border-t-4 pb-8">
         <div class="w-1/3 flex flex-col justify-around mx-auto ml-14">
             <h1 id="stayTuned" class="font-display font-black text-AR-Grey text-3xl mt-4 mb-5">
@@ -31,7 +31,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

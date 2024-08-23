@@ -20,6 +20,16 @@ export default defineNuxtConfig({
             cssnano: {}
         },
     },
+    experimental: {
+        componentIslands: {
+            selectiveClient: true
+        },
+        defaults: {
+            nuxtLink: {
+                prefetch: false
+            }
+        },
+    },
     image: {
         format: ['webp', 'png', 'jpg', 'gif'],
         domains: ['localhost', 'ardeco.app'],
