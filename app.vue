@@ -6,7 +6,7 @@
     <div class="overflow-x-hidden">
         <Navbar/>
         <NuxtPage/>
-        <Footer/>
+        <Footer :content="content.footer" :lang-prefix="langPrefix"/>
         <LanguageChanger/>
     </div>
 </template>
@@ -16,4 +16,6 @@ const nuxtApp = useNuxtApp();
 
 const darkMode: boolean = nuxtApp.$darkMode;
 const lang = nuxtApp.$lang;
+const content = nuxtApp.$content;
+const langPrefix = nuxtApp.$langPrefix;
 </script>

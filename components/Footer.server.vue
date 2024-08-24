@@ -32,7 +32,17 @@
 </template>
 
 <script setup lang="ts">
-const nuxtApp = useNuxtApp();
-const content = ref(nuxtApp.$content.footer);
-const langPrefix = ref(nuxtApp.$langPrefix);
+const props = defineProps({
+    content: {
+        type: Object,
+        required: true
+    },
+    langPrefix: {
+        type: String,
+        required: true
+    }
+});
+
+const content = ref(props.content);
+const langPrefix = ref(props.langPrefix);
 </script>
