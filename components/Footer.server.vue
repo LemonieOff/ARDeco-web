@@ -1,33 +1,38 @@
 <template>
-    <div class="flex bg-port-brown flex-row border-AR-Grey border-t-4 pb-8">
-        <div class="w-1/3 flex flex-col justify-around mx-auto ml-14">
-            <h1 id="stayTuned" class="font-display font-black text-AR-Grey text-3xl mt-4 mb-5">
-                {{ content.stayTuned }}</h1>
-            <a class="font-display text-AR-Grey text-xl font-bold decoration-0 mb-2 hover:text-white"
-               href="https://instagram.com/ardeco_officiel" target="_blank">@ardeco_officiel</a>
-            <a class="font-display text-AR-Grey text-xl font-bold decoration-0 mb-2 hover:text-white"
-               href="https://linkedin.com/company/ardeco-nice" target="_blank">ARdeco</a>
-            <a class="font-display text-AR-Grey text-xl font-bold decoration-0 mb-0 hover:text-white"
-               href="mailto:ardeco.officiel@gmail.com" target="_blank">ardeco.officiel@gmail.com</a>
+    <div class="bg-port-brown border-AR-Grey border-t-4 text-AR-Grey font-bold flex flex-col sm:flex-row py-2.5">
+        <div id="footer-socials" class="w-full">
+            <div class="flex flex-col lg:flex-row justify-around items-center">
+                <a href="https://instagram.com/ardeco_officiel" target="_blank" class="w-fit flex items-center hover:text-white">
+                    <Icon name="uil:instagram" class="mr-1"/>
+                    @ardeco_officiel
+                </a>
+                <a href="https://linkedin.com/company/ardeco-nice" target="_blank" class="w-fit flex items-center hover:text-white">
+                    <Icon name="uil:linkedin" class="mr-1"/>
+                    ARDeco
+                </a>
+                <a href="mailto:contact@ardeco.app" target="_blank" class="w-fit flex items-center hover:text-white">
+                    <Icon name="uil:envelope" class="mr-1"/>
+                    contact@ardeco.app
+                </a>
+            </div>
         </div>
-        <div class="w-1/3 flex flex-col justify-around ml-14">
-            <h1 id="rules" class="font-display font-black text-AR-Grey text-3xl mt-1">{{ content.rules }}</h1>
-            <a id="privacyPolicy" class="font-display text-AR-Grey text-xl font-bold decoration-0 hover:text-white"
-               :href="`${langPrefix}privacy-policy`">{{ content.privacyPolicy }}</a>
-            <a id="cgu" class="font-display text-AR-Grey text-xl font-bold decoration-0 hover:text-white"
-               :href="`${langPrefix}cgu`">{{ content.cgu }}</a>
+        <div id="footer-policy" class="w-full my-auto">
+            <div class="flex flex-col lg:flex-row justify-around items-center">
+                <a :href="`${langPrefix}privacy-policy`" target="_blank" class="w-fit flex items-center hover:text-white">
+                    <Icon name="uil:padlock" class="mr-1"/>
+                    {{ content.privacyPolicy }}
+                </a>
+                <a :href="`${langPrefix}cgu`" target="_blank" class="w-fit flex items-center hover:text-white">
+                    <Icon name="uil:file-check-alt" class="mr-1"/>
+                    {{ content.cgu }}
+                </a>
+            </div>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    name: "Footer",
-    data() {
-        return {
-            content: this.$content.footer,
-            langPrefix: this.$langPrefix
-        }
-    }
-}
+<script setup lang="ts">
+const nuxtApp = useNuxtApp();
+const content = ref(nuxtApp.$content.footer);
+const langPrefix = ref(nuxtApp.$langPrefix);
 </script>
