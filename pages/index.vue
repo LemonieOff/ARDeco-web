@@ -1,7 +1,5 @@
 <template>
-    <Navbar/>
     <Index/>
-    <Footer/>
 </template>
 
 <script setup lang="ts">

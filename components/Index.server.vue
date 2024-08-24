@@ -4,7 +4,6 @@
         <Meta name="description"
               content="Une application innovante qui révolutionne votre expérience de design et d'aménagement intérieur en utilisant la Réalité Augmentée (AR) et l'Intelligence Artificielle (IA) depuis votre smartphone."/>
     </Head>
-    <Html :lang="lang"/>
     <!-- Welcome title -->
     <div id="hero" class="flex h-dvh w-full bg-port-brown bg-no-repeat bg-cover"
          :style="{backgroundImage: `url(${backgroundUrl})`}">

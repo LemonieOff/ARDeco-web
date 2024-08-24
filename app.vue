@@ -1,11 +1,12 @@
 <template>
-    <Html :class="{ dark: darkMode }"></Html>
+    <Html :class="{ dark: darkMode }" :lang="lang"/>
     <Head>
         <Title>ARDeco</Title>
     </Head>
     <div class="overflow-x-hidden">
-        <ClientOnly/>
+        <Navbar/>
         <NuxtPage/>
+        <Footer/>
         <LanguageChanger/>
     </div>
 </template>
@@ -14,4 +15,5 @@
 const nuxtApp = useNuxtApp();
 
 const darkMode: boolean = nuxtApp.$darkMode;
+const lang = nuxtApp.$lang;
 </script>
