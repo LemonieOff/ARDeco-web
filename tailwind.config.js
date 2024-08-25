@@ -18,6 +18,8 @@ module.exports = {
         'port-brown': '#BFB2AA',
         'AR-Grey': '#3E403F',
         'AR-Beige': '#F2EBDF',
+        'AR-Light-Grey': '#6C6C6C',
+        'AR-Dark-Grey': '#292929'
       }
     },
   },

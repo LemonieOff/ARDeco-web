@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-port-brown border-AR-Grey border-t-4 text-AR-Grey font-bold flex flex-col sm:flex-row py-2.5">
+    <div class="bg-port-brown dark:bg-[#544840] border-AR-Grey border-t-4 text-AR-Grey dark:text-[#DECDC3] font-bold flex flex-col sm:flex-row py-2.5">
         <div id="footer-socials" class="w-full">
             <div class="flex flex-col lg:flex-row justify-around items-center">
                 <a href="https://instagram.com/ardeco_officiel" target="_blank" class="w-fit flex items-center hover:text-white">
@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
     content: {
         type: Object,
         required: true
@@ -42,7 +42,4 @@ const props = defineProps({
         required: true
     }
 });
-
-const content = ref(props.content);
-const langPrefix = ref(props.langPrefix);
 </script>
