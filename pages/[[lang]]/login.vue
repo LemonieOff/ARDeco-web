@@ -1,5 +1,5 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
+    <Navbar/>
     <div id="forms-container">
         <div id="forms-loading" class="form">
             {{ content.loading }}
@@ -84,41 +84,17 @@
             </div>
         </div>
     </div>
-    <Footer :urlLang=lang></Footer>
+    <Footer/>
 </template>
 
-<script setup xmlns="http://www.w3.org/1999/html">
+<script setup lang="ts">
 import {isLogged, loggedIn, disconnect} from "public/ts/checkLogin";
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-import {onMounted, ref} from "vue";
 
-const route = useRoute();
-let lang = ref(route.params.lang);
-let content = ref({});
-const langPrefix = ref("/");
+const nuxtApp = useNuxtApp();
+let content = ref(nuxtApp.$content.login);
+const langPrefix = ref(nuxtApp.$langPrefix);
 
 onMounted(async () => {
-    // If lang selector is not passed in url, get the user's one or set it to french
-    if (lang.value !== 'en' && lang.value !== 'fr') {
-        const localStorageLang = localStorage.getItem('lang');
-        if (localStorageLang) {
-            lang.value = localStorageLang;
-        } else {
-            lang.value = 'fr';
-        }
-    }
-
-    // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.login : fr.login;
-
-    // Prefix for links
-    if (location.href.includes("/fr/")) {
-        langPrefix.value = "/fr/";
-    } else if (location.href.includes("/en/")) {
-        langPrefix.value = "/en/";
-    }
-
     const userID = await isLogged();
     if (userID) {
         if (loggedIn) {

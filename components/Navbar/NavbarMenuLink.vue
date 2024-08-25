@@ -8,8 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import NavbarMenuItem from "~/components/Navbar/NavbarMenuItem.vue";
-
 defineProps({
     pageName: String,
     pageLang: String,

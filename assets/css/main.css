@@ -9,7 +9,7 @@
 
     body {
         font-family: 'Roboto', sans-serif;
-        @apply bg-AR-Beige;
+        @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown;
     }
 
     button {
@@ -34,5 +34,9 @@
 
     .outline-text {
         -webkit-text-stroke: 1px theme('colors.AR-Grey');
+    }
+
+    .dark .outline-text {
+        -webkit-text-stroke: 1px theme('colors.port-brown');
     }
 }

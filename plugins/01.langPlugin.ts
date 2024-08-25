@@ -1,8 +1,5 @@
-import fr from "@/src/lang/fr.json";
-import en from "@/src/lang/en.json";
-
-export default defineNuxtPlugin(() => {
-    const langCookie = useCookie<string>('lang', {
+export default defineNuxtPlugin(async () => {
+    const langCookie = useCookie<"fr" | "en">('lang', {
         sameSite: "lax",
         secure: true,
     });
@@ -51,9 +48,11 @@ export default defineNuxtPlugin(() => {
     let urlLang = route.params.lang; // Raw lang passed in parameters (can be a wrong value)
 
     // If lang selector is not passed in url, get the user's one or set it to French if inexistant (default language)
-    let lang = urlLang; // Language to use for translation (always good value)
-    if (lang !== 'en' && lang !== 'fr') {
+    let lang: "fr" | "en"; // Language to use for translation (always good value)
+    if (urlLang !== 'en' && urlLang !== 'fr') {
         lang = langCookie.value;
+    } else {
+        lang = urlLang;
     }
 
     // Set prefix for links based on urlLang
@@ -67,7 +66,7 @@ export default defineNuxtPlugin(() => {
         rawLangPrefix = "en";
     }
 
-    const content = lang === "en" ? en : fr;
+    const content = lang === "en" ? await import('@/src/lang/en.json') : await import('@/src/lang/fr.json');
 
     const result = {
         urlLang: urlLang,
