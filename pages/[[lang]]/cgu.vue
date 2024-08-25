@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-center text-black dark:text-port-brown font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
     <CguObject :content="content.object"/>
     <Definitions :content="content.definitions"/>
     <AccessAndUse :content="content.accessAndUse" />

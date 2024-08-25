@@ -13,8 +13,8 @@
     </div>
 
     <!-- Product presentation -->
-    <div class="bg-AR-Beige flex flex-col xl:flex-row items-center my-9">
-        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-AR-Grey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-xl:mb-9">
+    <div class="flex flex-col xl:flex-row items-center my-9">
+        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-AR-Grey dark:text-AR-Beige my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-xl:mb-9">
             <h2 class="underline mb-2 text-center">ARDeco</h2>
             <p id="productPresentation" class="">
                 {{ content.productPresentation }}
@@ -25,17 +25,16 @@
     </div>
 
     <!-- Team link -->
-    <div class="bg-AR-Beige">
+    <div>
         <div class="text-center h-full items-center">
             <div class="flex w-full overflow-hidden py-5 z-0 flex-col">
                 <div class="flex auto-scroll-text items-center justify-start w-full whitespace-nowrap transition duration-1000 pointer-events-none select-none">
                     <div v-for="j in 5" :key="j"
                          class="font-black leading-none mr-4 text-[2rem] md:text-[5rem]">
-                        <span id="discover" class="mr-4 text-AR-Grey">{{
+                        <span id="discover" class="mr-4 text-AR-Grey dark:text-port-brown">{{
                                 content.transitionEffect.discover
                             }}</span><span
-                            id="team" class="text-transparent outline-text"
-                            style="-webkit-text-stroke: 1px theme('colors.AR-Grey');">{{
+                            id="team" class="text-transparent outline-text">{{
                             content.transitionEffect.team
                         }}</span>
                     </div>
@@ -51,7 +50,7 @@
                     <div v-for="j in 5" :key="j"
                          class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] animation-reverse">
                             <span id="discover2"
-                                  class="mr-4 text-AR-Grey">{{ content.transitionEffect.discover }}</span><span
+                                  class="mr-4 text-AR-Grey dark:text-port-brown">{{ content.transitionEffect.discover }}</span><span
                             id="team2"
                             class="text-transparent outline-text">{{ content.transitionEffect.team }}</span>
                     </div>
@@ -61,10 +60,10 @@
     </div>
 
     <!-- Augmented reality -->
-    <div class="bg-gradient-to-t from-port-brown to-AR-Beige flex flex-col-reverse xl:flex-row items-center py-9">
+    <div class="bg-gradient-to-t from-port-brown to-AR-Beige dark:from-AR-Grey dark:to-AR-Dark-Grey flex flex-col-reverse xl:flex-row items-center py-9">
         <NuxtImg width="612" height="503" loading="lazy" class="2xl:ml-24 xl:w-1/3 w-1/2 my-auto rounded-xl"
                  src="images/ar_illu.webp" alt="ARDeco conceptual mobile in-use illustration"/>
-        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-AR-Grey my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
+        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-AR-Grey dark:text-AR-Beige my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
             <h2 id="augmentedRealityTitle" class="underline mb-2 text-center">
                 {{ content.augmentedRealityTitle }}</h2>
             <p id="augmentedRealityText">
@@ -74,7 +73,7 @@
     </div>
 
     <!-- Features -->
-    <div class="flex flex-col items-center justify-center bg-gradient-to-b from-port-brown to-AR-Beige">
+    <div class="flex flex-col items-center justify-center bg-gradient-to-b from-port-brown to-AR-Beige dark:to-AR-Dark-Grey dark:from-AR-Grey">
             <span id="keyPoints"
                   class="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-12 w-full text-center text-transparent outline-text">
                 {{ content.keyPoints }}</span>
