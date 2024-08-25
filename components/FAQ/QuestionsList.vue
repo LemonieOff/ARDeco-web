@@ -17,7 +17,7 @@
                     <img class="question-icon" src="../../assets/images/questions-icons/how-to-use-ardeco.png" alt="How to use">
                 </a>
                 <a id="q-furnitureChoiceTitle" class="text gray-text-color background-card question-card"
-                   href="#how-are-furnitures-chosen"> {{ content.furnitureChoiceTitle }}
+                   href="#how-are-furniture-chosen"> {{ content.furnitureChoiceTitle }}
                     <img class="question-icon" src="../../assets/images/questions-icons/furniture.png" alt="Furniture">
                 </a>
             </div>
