@@ -8,20 +8,20 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxt/icon": "^1.4.10",
     "@nuxt/image": "^1.7.0",
+    "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.12.1",
-    "@playwright/test": "^1.39.0",
-    "@types/node": "^20.8.10",
-    "@types/three": "^0.150.0",
-    "autoprefixer": "^10.4.13",
-    "nuxt": "^3.12.4",
-    "postcss": "^8.4.21",
-    "sass": "^1.58.3",
-    "tailwindcss": "^3.2.7"
+    "@playwright/test": "^1.46.1",
+    "@types/node": "^22.5.0",
+    "autoprefixer": "^10.4.20",
+    "nuxt": "^3.13.0",
+    "postcss": "^8.4.41",
+    "sass": "^1.77.8",
+    "tailwindcss": "^3.4.10"
   },
   "dependencies": {
-    "axios": "^1.7.4",
-    "three": "^0.151.2",
-    "vue": "^3.2.47"
+    "axios": "^1.7.5",
+    "vue": "^3.4.38"
   }
 }

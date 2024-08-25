@@ -26,7 +26,8 @@
     "lightmode": "Light mode",
     "login": "Login",
     "disconnect": "Disconnect",
-    "feedback": "Feedback"
+    "feedback": "Feedback",
+    "toggleMobileNavbar": "Open/close the navigation bar"
   },
   "profilePages": {
     "presentationPage": {
@@ -287,6 +288,7 @@
   },
   "languageChangerText": "Translate to FR",
   "privacyPolicy": {
+    "title": "Privacy policy",
     "introduction": {
       "title": "Introduction",
       "objective": "The purpose of this privacy policy is to inform you about the way in which ARDeco collects, uses and protects your personal data.",
@@ -295,9 +297,9 @@
     },
     "cookies": {
       "title": "Cookies",
-      "cookies": "We use cookies for the sole purpose of identifying users and providing access to authorized services.",
+      "cookies": "We use cookies for the sole purpose of identifying users, enabling access to authorized services and providing them in the language selected by the user.",
       "collection": "These cookies are automatically collected by our web server and stored in the user's browser from the moment they log in or register until they log out.",
-      "usage": "We do not store any personal data other than the internal unique identifier in cookies.",
+      "usage": "We do not store any personal data other than the internal unique identifier in cookies. Other cookies do not allow user identification, and are only used to provide personalized services.",
       "consent": "By using our services, users consent to the use of these cookies.",
       "share": "We do not share these cookies with third parties and their use remains internal."
     },
@@ -356,6 +358,7 @@
     }
   },
   "cgu": {
+    "title": "Terms of use",
     "object": {
       "title": "Article 1 - Purpose",
       "text": "The purpose of these General Conditions of Use is to define the terms and conditions of use of the Service offered by ARDeco to its users."
@@ -398,7 +401,7 @@
     "personalData": {
       "title": "Article 5 - Personal data",
       "data": "The personal data collected by the Service are necessary for the proper execution of the Service.",
-      "use": "These data may be used by the Service to enable the User's navigation on the Service, to improve the quality of the Service, to send commercial information and to personalize the services offered to the User.",
+      "usage": "These data may be used by the Service to enable the User's navigation on the Service, to improve the quality of the Service, to send commercial information and to personalize the services offered to the User.",
       "duration": "Personal data is kept for the period necessary to fulfill the purposes for which it was collected.",
       "policy": "The User can consult the Service's privacy policy to find out more about the collection and processing of their personal data.",
       "opposition": "The User has the right to object to the collection of their personal data. The exercise of this right may, however, prevent access to the Service.",
@@ -558,6 +561,7 @@
     "send": "Send"
   },
   "comments": {
-    "user": "User"
+    "user": "User",
+    "writePlaceholder": "Write a comment"
   }
 }

@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import {isLogged} from "public/js/checkLogin";
+import {isLogged} from "public/ts/checkLogin";
 
 export default {
     name: "FavFourniture",

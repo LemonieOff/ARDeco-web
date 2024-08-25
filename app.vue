@@ -1,18 +1,21 @@
 <template>
+    <Html :class="{ dark: darkMode }" :lang="lang"/>
     <Head>
         <Title>ARDeco</Title>
     </Head>
     <div class="overflow-x-hidden">
-        <ClientOnly/>
-        <NuxtPage class="z-1"/>
+        <Navbar/>
+        <NuxtPage/>
+        <Footer :content="content.footer" :lang-prefix="langPrefix"/>
         <LanguageChanger/>
     </div>
 </template>
 
-<script>
-import LanguageChanger from "~/components/LanguageChanger.vue";
+<script setup lang="ts">
+const nuxtApp = useNuxtApp();
 
-export default {
-    components: {LanguageChanger}
-}
+const darkMode: boolean = nuxtApp.$darkMode;
+const lang = nuxtApp.$lang;
+const content = nuxtApp.$content;
+const langPrefix = nuxtApp.$langPrefix;
 </script>

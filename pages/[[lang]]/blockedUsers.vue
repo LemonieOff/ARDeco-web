@@ -25,12 +25,10 @@
     </div>
 </template>
 
-<script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-import {isLogged} from "public/js/checkLogin";
-
-export default {
+  <script>
+  import { isLogged } from "public/ts/checkLogin";
+  
+  export default {
     name: "Blocked",
     props: {
         urlLang: String | null

@@ -2,9 +2,9 @@
     <div class="profile-page-content top-left-yellow-fade-background" id="valentin-profile">
         <div class="sub-content">
             <div class="personal-content card">
-                <img class="hobby" src="../../assets/images/profile-hobbies/football.png">
-                <a href="https://www.linkedin.com/in/valentin-astic-85a514205/">
-                    <img class="profile-picture" src="../../assets/images/profile-pictures/VALENTIN_.png">
+                <img class="hobby" src="@/assets/images/profile-hobbies/football.png" alt="Football">
+                <a href="https://www.linkedin.com/in/valentin-astic-85a514205/" target="_blank">
+                    <img class="profile-picture" src="@/assets/images/profile-pictures/VALENTIN_.png" alt="Valentin Astic">
                 </a>
                 <div class="black-separation-bar"></div>
                 <div class="orange-separation-bar"></div>
@@ -19,22 +19,22 @@
                 <div class="timeline-inactive"></div>
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
-                    <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
+                    <img class="internship-logo" src="@/assets/images/compagny-logos/BetaoLogo.png" alt="Betao">
                     <div id="internshipRole1-valentin" class="internship-role">{{ content.internshipRole1 }}</div>
                 </div>
                 <div class="timeline-inactive">
-                    <a href="https://www.epitech.eu/en/">
-                        <img class="epitech-logo-timeline" src="../../assets/images/profile-pictures/Epitech.png">
-                    </a>
+                    <NuxtLink :href="epitechSrc" target="_blank">
+                        <img class="epitech-logo-timeline" src="@/assets/images/profile-pictures/Epitech.png" alt="Epitech">
+                    </NuxtLink>
                 </div>
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
-                    <img class="internship-logo" src="../../assets/images/compagny-logos/MathaLogo.png">
+                    <img class="internship-logo" src="@/assets/images/compagny-logos/MathaLogo.png" alt="Matha">
                     <div id="internshipRole2-valentin" class="internship-role">{{ content.internshipRole2 }}</div>
                 </div>
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
-                    <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png">
+                    <img class="internship-logo" src="@/assets/images/compagny-logos/BetaoLogo.png" alt="Betao">
                     <div id="internshipRole3-valentin" class="internship-role">{{ content.internshipRole3 }}</div>
                 </div>
                 <div class="year-2023">2023</div>
@@ -49,41 +49,15 @@ import fr from "~/src/lang/fr.json";
 
 export default {
     name: "ProfileValentin",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
-            content: {},
-            langPrefix: "/"
-        }
-    },
-    mounted() {
-        let lang = this.urlLang;
-
-        // If lang selector is not passed in url, get the user's one or set it to french
-        if (lang !== 'en' && lang !== 'fr') {
-            const localStorageLang = localStorage.getItem('lang');
-            if (localStorageLang) {
-                lang = localStorageLang;
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        // Set the content variable to the correct language
-        this.content = lang === 'en' ? en.profilePages.valentin : fr.profilePages.valentin;
-
-        // Prefix for links
-        if (location.href.includes("/fr/")) {
-            this.langPrefix = "/fr/";
-        } else if (location.href.includes("/en/")) {
-            this.langPrefix = "/en/";
+            content: this.$lang === 'en' ? en.profilePages.valentin : fr.profilePages.valentin,
+            epitechSrc: this.$lang === 'fr' ? "https://www.epitech.eu" : "https://international.epitech.eu"
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/styles/TeamPage.scss';
+@import '@/styles/TeamPage.scss';
 </style>
