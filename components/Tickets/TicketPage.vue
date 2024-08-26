@@ -1,5 +1,4 @@
 <template>
-    <div class="navbar-top-space"></div>
     <div class="titleElements alignCenter">
         <div class="title">{{ content.title }}</div>
         <br>
