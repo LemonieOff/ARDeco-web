@@ -5,7 +5,9 @@
     </Head>
     <div class="overflow-x-hidden min-h-screen flex flex-col">
         <Navbar/>
-        <NuxtPage/>
+        <div>
+            <NuxtPage/>
+        </div>
         <Footer :content="content.footer" :lang-prefix="langPrefix"/>
         <LanguageChanger/>
     </div>
