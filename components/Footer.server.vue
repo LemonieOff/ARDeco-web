@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-port-brown dark:bg-[#544840] border-AR-Grey border-t-4 text-AR-Grey dark:text-[#DECDC3] font-bold flex flex-col sm:flex-row py-2.5">
+    <div class="bg-port-brown dark:bg-[#544840] border-AR-Grey border-t-4 text-AR-Grey dark:text-[#DECDC3] font-bold flex flex-col sm:flex-row py-2.5 mt-auto">
         <div id="footer-socials" class="w-full">
             <div class="flex flex-col lg:flex-row justify-around items-center">
                 <a href="https://instagram.com/ardeco_officiel" target="_blank" class="w-fit flex items-center hover:text-white">

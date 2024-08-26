@@ -3,7 +3,7 @@
     <Head>
         <Title>ARDeco</Title>
     </Head>
-    <div class="overflow-x-hidden">
+    <div class="overflow-x-hidden min-h-screen flex flex-col">
         <Navbar/>
         <NuxtPage/>
         <Footer :content="content.footer" :lang-prefix="langPrefix"/>

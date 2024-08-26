@@ -11,7 +11,7 @@
 
     <!-- App and store -->
     <div class="bg-gradient-to-t from-port-brown to-AR-Beige dark:from-AR-Grey dark:to-AR-Dark-Grey flex flex-col xl:flex-row items-center py-9">
-        <NuxtImg width="128" height="128" loading="lazy" class="min-w-32 max-w-32 lg:min-w-64 lg:max-w-64 my-auto rounded-xl dark:bg-port-brown"
+        <NuxtImg width="128" height="128" loading="lazy" class="min-w-32 max-w-32 lg:min-w-64 lg:max-w-64 xl:ml-9 my-auto rounded-xl dark:bg-port-brown"
                  src="images/ardeco.webp" alt="ARDeco logo"/>
         <div class="font-display font-medium mx-9 text-xl md:text-2xl text-AR-Grey dark:text-AR-Beige my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
             <h2 id="appTitle" class="underline mb-2 text-center">
