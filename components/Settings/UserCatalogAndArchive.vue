@@ -8,8 +8,9 @@
     </div>
     <div class="pageContent">
         <div class="buttonsArea">
+            <button class="buttonSettings" @click="goToFurnitureCreation" style="margin-top: 0%">{{ buttons.createNewFurniture }}</button>
             <button class="buttonSettings" @click="deleteArchive">{{buttons.emptyCompagnyArchive}}</button>
-            <button class="buttonSettings" style="margin-top:10%" @click="getApiToken">{{buttons.resetCompagnyApiKey}}</button>
+            <button class="buttonSettings" @click="getApiToken">{{buttons.resetCompagnyApiKey}}</button>
         </div>
         <div class="listArea">
             <div class="catalog">
@@ -294,6 +295,10 @@ export default {
                 this.$refs.notifications.showError(result.description)
             }
             localStorage.setItem('COMPANY_API_TOKEN', result.data);
+        },
+
+        async goToFurnitureCreation() {
+            window.location.href = this.langPrefix + "furniture-creation";
         }
     }
 }
@@ -362,7 +367,8 @@ export default {
 
 .buttonSettings {
     width: 70%;
-    margin-left: 15%;
+    margin-left: 5%;
+    margin-top: 10%;
     height: 7.5%;
     background-color: $primary-white;
     border: 2px solid $primary-black;
@@ -378,7 +384,6 @@ export default {
 
 .listArea {
     text-align: center;
-    margin-left: 5vw;
     width: 65.5vw;
     max-height: 100%;
     overflow: auto;

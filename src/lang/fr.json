@@ -508,7 +508,8 @@
     },
     "buttons": {
       "emptyCompagnyArchive": "Vider mon archive d'entreprise",
-      "resetCompagnyApiKey": "Réinitialiser mon clé API"
+      "resetCompagnyApiKey": "Réinitialiser mon clé API",
+      "createNewFurniture": "Créer un nouveau meuble"
     },
     "archiveTitle": "Archive",
     "title": "Catalogue",

@@ -508,7 +508,8 @@
     },
     "buttons": {
       "emptyCompagnyArchive": "Empty compagny archive",
-      "resetCompagnyApiKey": "Reset company API key"
+      "resetCompagnyApiKey": "Reset company API key",
+      "createNewFurniture": "Create a new furniture"
     },
     "archiveTitle": "Archive",
     "title": "Catalog",
