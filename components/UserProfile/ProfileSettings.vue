@@ -1,12 +1,10 @@
 <template>
     <div>
         <div class="content">
-            <FavoriteThemes/>
             <div @click="showModal" class="image-container profile-picture">
                 <img v-bind:src="imageSrc" alt="Profile picture">
                 <span class="edit-icon">&#9998;</span>
             </div>
-            <RecentPurchases/>
         </div>
         <div id="profile_picture_modal">
             <div id="profile_picture_div">
