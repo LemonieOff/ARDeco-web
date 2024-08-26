@@ -5,15 +5,33 @@
               content="Une application innovante qui révolutionne votre expérience de design et d'aménagement intérieur en utilisant la Réalité Augmentée (AR) et l'Intelligence Artificielle (IA) depuis votre smartphone."/>
     </Head>
     <!-- Welcome title -->
-    <div id="hero" class="flex h-dvh w-full bg-port-brown bg-no-repeat bg-cover"
-         :style="{backgroundImage: `url(${backgroundUrl})`}">
-        <h1 id="welcomeTitle"
-            class="font-black mt-72 md:mt-16 p-2 justify-center text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-center mx-auto bg-port-brown md:bg-transparent rounded-lg text-AR-Grey h-fit w-fit md:w-1/2">
-            {{ content.welcomeTitle }}</h1>
+    <h1 id="welcomeTitle" class="font-black mt-9 p-2 justify-center text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl text-center mx-auto text-AR-Grey dark:text-AR-Beige h-fit w-fit">
+        {{ content.welcomeTitle }}
+    </h1>
+
+    <!-- App and store -->
+    <div class="bg-gradient-to-t from-port-brown to-AR-Beige dark:from-AR-Grey dark:to-AR-Dark-Grey flex flex-col xl:flex-row items-center py-9">
+        <NuxtImg width="128" height="128" loading="lazy" class="min-w-32 max-w-32 lg:min-w-64 lg:max-w-64 my-auto rounded-xl dark:bg-port-brown"
+                 src="images/ardeco.webp" alt="ARDeco logo"/>
+        <div class="font-display font-medium mx-9 text-xl md:text-2xl text-AR-Grey dark:text-AR-Beige my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-2xl:mt-9">
+            <h2 id="appTitle" class="underline mb-2 text-center">
+                {{ content.appTitle }}</h2>
+            <p id="appText">
+                {{ content.appTextIntro }}
+                <a v-if="lang === 'fr'" href="https://play.google.com/store/apps/details?id=app.ARDeco.ARDeco" target="_blank" class="block w-fit mx-auto">
+                    <NuxtImg src="images/google-play-badge_fr.webp" class="max-h-20"></NuxtImg>
+                </a>
+                <a v-else href="https://play.google.com/store/apps/details?id=app.ARDeco.ARDeco&hl=en" target="_blank" class="block w-fit mx-auto">
+                    <NuxtImg src="images/google-play-badge_en.webp" class="max-h-20"></NuxtImg>
+                </a>
+                {{ content.appTextFeedback }}
+                <span class="block italic text-sm text-center pt-2.5">{{ content.appTextLegalAttributionGoogle }}</span>
+            </p>
+        </div>
     </div>
 
     <!-- Product presentation -->
-    <div class="flex flex-col xl:flex-row items-center my-9">
+    <div class="flex flex-col xl:flex-row items-center py-9 bg-gradient-to-b to-AR-Beige from-port-brown dark:to-AR-Dark-Grey dark:from-AR-Grey">
         <div class="font-display font-medium mx-9 text-xl md:text-2xl text-AR-Grey dark:text-AR-Beige my-auto bg-port-brown bg-opacity-20 rounded-3xl p-4 max-xl:mb-9">
             <h2 class="underline mb-2 text-center">ARDeco</h2>
             <p id="productPresentation" class="">
@@ -50,7 +68,8 @@
                     <div v-for="j in 5" :key="j"
                          class="font-black leading-none mr-4 text-[2rem] md:text-[5rem] animation-reverse">
                             <span id="discover2"
-                                  class="mr-4 text-AR-Grey dark:text-port-brown">{{ content.transitionEffect.discover }}</span><span
+                                  class="mr-4 text-AR-Grey dark:text-port-brown">
+                                {{ content.transitionEffect.discover }}</span><span
                             id="team2"
                             class="text-transparent outline-text">{{ content.transitionEffect.team }}</span>
                     </div>
@@ -103,16 +122,13 @@
 </template>
 
 <script>
-import backgroundUrl from "assets/images/homeHero.jpg";
-
 export default {
     name: "Index",
     data() {
         return {
             content: this.$content.home,
             langPrefix: this.$langPrefix,
-            lang: this.$lang,
-            backgroundUrl: backgroundUrl
+            lang: this.$lang
         }
     }
 }

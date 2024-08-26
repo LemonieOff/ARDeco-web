@@ -18,11 +18,11 @@
         </div>
         <div id="footer-policy" class="w-full my-auto">
             <div class="flex flex-col lg:flex-row justify-around items-center">
-                <a :href="`${langPrefix}privacy-policy`" target="_blank" class="w-fit flex items-center hover:text-white">
+                <a :href="`${langPrefix}privacy-policy`" class="w-fit flex items-center hover:text-white">
                     <Icon name="uil:padlock" class="mr-1"/>
                     {{ content.privacyPolicy }}
                 </a>
-                <a :href="`${langPrefix}cgu`" target="_blank" class="w-fit flex items-center hover:text-white">
+                <a :href="`${langPrefix}cgu`" class="w-fit flex items-center hover:text-white">
                     <Icon name="uil:file-check-alt" class="mr-1"/>
                     {{ content.cgu }}
                 </a>
