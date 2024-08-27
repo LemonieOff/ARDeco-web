@@ -19,10 +19,10 @@
             <p id="appText">
                 {{ content.appTextIntro }}
                 <a v-if="lang === 'fr'" href="https://play.google.com/store/apps/details?id=app.ARDeco.ARDeco" target="_blank" class="block w-fit mx-auto">
-                    <NuxtImg src="images/google-play-badge_fr.webp" class="max-h-20"></NuxtImg>
+                    <NuxtImg src="images/google-play-badge_fr.webp" class="max-h-20" alt="Télécharger sur Google Play"></NuxtImg>
                 </a>
                 <a v-else href="https://play.google.com/store/apps/details?id=app.ARDeco.ARDeco&hl=en" target="_blank" class="block w-fit mx-auto">
-                    <NuxtImg src="images/google-play-badge_en.webp" class="max-h-20"></NuxtImg>
+                    <NuxtImg src="images/google-play-badge_en.webp" class="max-h-20" alt="Download on Google Play"></NuxtImg>
                 </a>
                 {{ content.appTextFeedback }}
                 <span class="block italic text-sm text-center pt-2.5">{{ content.appTextLegalAttributionGoogle }}</span>
