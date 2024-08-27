@@ -1,6 +1,6 @@
 <template>
     <div class="titleElements alignCenter">
-        <div class="title">{{ content.title }}</div>
+        <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
         <br>
         <div class="subTitle">{{ content.somethingWrong }}</div>
         <div class="subTitle">{{ content.askUs }}</div>
@@ -56,9 +56,6 @@ import {isLogged, loggedIn} from "public/ts/checkLogin";
 
 export default {
     name: "TicketPage",
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
             content: this.$lang === 'en' ? en.tickets : fr.tickets,

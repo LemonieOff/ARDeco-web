@@ -1,8 +1,7 @@
 <template>
     <div>
-        <Navbar/>
         <div class="blocked-users">
-            <div class="title">Check email address</div>
+            <div class="text-center font-bold text-xl md:text-4xl my-8">Check email address</div>
             <div id="loading">
                 Loading...
             </div>
@@ -101,13 +100,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.title {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 20px;
 }
 
 .form {

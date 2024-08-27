@@ -1,6 +1,5 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
-    <div class="title">{{ content.title }}</div>
+    <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
     <div id="fav_furniture_loading">{{ content.loading }}</div>
     <div>
         <div class="form">
@@ -233,13 +232,6 @@ async function blockUser(userID) {
     border-right: 1px solid #ddd; /* Lighter border */
     border-bottom: 1px solid #ddd; /* Add bottom border */
     align-content: center;
-}
-
-.title {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 5%;
 }
 
 #fav_furniture_loading {

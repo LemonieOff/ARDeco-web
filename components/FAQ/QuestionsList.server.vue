@@ -50,7 +50,3 @@ const nuxtApp = useNuxtApp();
 
 const content = ref(nuxtApp.$content.productPages);
 </script>
-
-<style lang="scss" scoped>
-@import '@/styles/FAQPage.scss';
-</style>

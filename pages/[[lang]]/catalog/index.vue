@@ -1,6 +1,5 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
-    <div class="title">{{ content.title }}</div>
+    <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
     <div class="form">
         <div class="grid">
             <div class="grid-header">
@@ -26,7 +25,6 @@
 </template>
 
 <script setup>
-import Navbar from "~/components/Navbar.vue";
 import {isLogged} from "public/ts/checkLogin";
 import {onMounted, ref} from "vue";
 import en from "~/src/lang/en.json";
@@ -174,13 +172,6 @@ async function getCatalog() {
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     align-content: center;
-}
-
-.title {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 5%;
 }
 
 .container {

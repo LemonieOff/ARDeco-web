@@ -1,5 +1,4 @@
 <template>
-    <Navbar/>
     <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
     <div class="form">
         <div class="grid">

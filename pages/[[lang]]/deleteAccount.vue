@@ -1,7 +1,6 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
     <div id="profile-container">
-        <h1 class="title">{{ content.title }}</h1>
+        <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
         <p class="warning-text">{{ content.text }}</p>
         <div class="profile-wrapper">
             <div class="profile-elements-wrapper">
