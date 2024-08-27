@@ -1,5 +1,4 @@
 <template>
-    <Navbar/>
     <ProfileSettings id="profileSettings" style="display: none"></ProfileSettings>
     <div id="profile-container">
         <div id="profile-loading" style="top: 10%;" class="form">

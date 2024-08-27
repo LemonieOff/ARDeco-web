@@ -1,7 +1,7 @@
 <!-- EmailInput.vue -->
 <template>
     <div>
-        <h1>Remplir l'adresse e-mail pour réinitialiser le mot de passe</h1>
+        <h1 class="text-center font-bold text-xl md:text-4xl my-8">Remplir l'adresse e-mail pour réinitialiser le mot de passe</h1>
         <form @submit.prevent="submitEmail">
             <label for="email">Adresse e-mail :</label>
             <input type="email" id="email" v-model="email" required>

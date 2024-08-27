@@ -30,7 +30,3 @@ const nuxtApp = useNuxtApp();
 
 let content = ref(nuxtApp.$content.cgu);
 </script>
-
-<style lang="scss" scoped>
-@import '@/styles/FAQPage.scss';
-</style>
