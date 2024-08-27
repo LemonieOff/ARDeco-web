@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import QuestionsList from "@/components/FAQ/QuestionsList.vue";
+import QuestionsList from "@/components/FAQ/QuestionsList.server.vue";
 import WhatIsArdeco from "@/components/FAQ/WhatIsArdeco.server.vue"
 import HowAreMyFurnitureChosen from "@/components/FAQ/HowAreMyFurnitureChosen.server.vue"
 import WhereDoModelsComeFrom from "@/components/FAQ/WhereDoModelsComeFrom.server.vue"
