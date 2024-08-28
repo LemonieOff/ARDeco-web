@@ -1,11 +1,11 @@
 <template>
     <Navbar :urlLang=lang></Navbar>
-    <CompanySettings :urlLang=lang></CompanySettings>
+    <CreateNewFurniture :urlLang=lang></CreateNewFurniture>
 </template>
 
 <script setup lang="ts">
 import Navbar from "~/components/Navbar.vue";
-import CompanySettings from "~/components/Settings/CompanySettings.vue";
+import CreateNewFurniture from "~/components/Settings/CreateNewFurniture.vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();

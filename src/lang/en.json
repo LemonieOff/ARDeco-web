@@ -218,7 +218,7 @@
       "title" : "Settings"
     },
     "companies": {
-      "addFurnitureToCatalog": "Add a furniture to the catalog",
+      "addFurnitureToCatalog": "Add the furniture to the catalog",
       "changeGalleryVisibility": "Change gallery item visibility",
       "getCompagnyCatalog": "Get compagny catalog",
       "getCompagnyArchive": "Get compagny archive",
