@@ -1,10 +1,8 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
     <FurnitureDetails :urlLand="lang"></FurnitureDetails>
 </template>
 
 <script setup lang="ts">
-import Navbar from "@/components/Navbar.vue";
 import FurnitureDetails from "@/components/Furnitures/FurnitureDetails.vue";
 import { useRoute } from "vue-router";
 

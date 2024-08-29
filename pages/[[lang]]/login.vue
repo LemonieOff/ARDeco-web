@@ -1,5 +1,4 @@
 <template>
-    <Navbar/>
     <div id="forms-container">
         <div id="forms-loading" class="form">
             {{ content.loading }}
@@ -84,7 +83,6 @@
             </div>
         </div>
     </div>
-    <Footer/>
 </template>
 
 <script setup lang="ts">

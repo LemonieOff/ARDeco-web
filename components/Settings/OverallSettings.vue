@@ -1,6 +1,5 @@
 <template>
-    <div class="navbar-top-space"></div>
-    <div class="title">{{content.title}}</div>
+    <div class="text-center font-bold text-xl md:text-4xl my-8">{{content.title}}</div>
     <div class="parameters">
         <hr>
         <div class="center-side-parameters">

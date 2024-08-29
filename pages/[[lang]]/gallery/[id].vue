@@ -1,5 +1,4 @@
 <template>
-    <Navbar/>
     <div class="container">
         <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.galleryDetailsTitle }}</div>
         <div class="card">

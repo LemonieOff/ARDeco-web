@@ -88,6 +88,10 @@
   },
   "home": {
     "welcomeTitle": "Bienvenue sur ARDeco",
+    "appTitle": "Téléchargez l'appli sur Google Play !",
+    "appTextIntro": "Utilisez dès maintenant l'application mobile ARDeco. Disponible en accès anticipé public sur Google Play :",
+    "appTextFeedback": "Nous comptons sur vos retours pour améliorer notre service. Vous pouvez nous les faire parvenir directement depuis l'app, le site, par email ou via un formulaire qui vous sera communiqué prochainement.",
+    "appTextLegalAttributionGoogle": "Google Play et le logo Google Play sont des marques de Google LLC.",
     "productPresentation": "Une application innovante qui révolutionne votre expérience de design intérieur en utilisant la Réalité Augmentée (AR) et l'Intelligence Artificielle (IA). Numérisez facilement votre pièce avec votre téléphone, et nos algorithmes IA intelligents analyseront l'espace pour créer des décorations personnalisées, visuellement époustouflantes, adaptées à vos préférences. Explorez de nouvelles possibilités de design et donnez vie à votre espace de rêve avec ARDeco.",
     "transitionEffect": {
       "team": "Équipe",

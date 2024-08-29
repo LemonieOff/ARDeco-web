@@ -1,8 +1,7 @@
 <template>
     <div>
-        <Navbar/>
         <div class="blocked-users">
-            <div class="title">{{ content.title }}</div>
+            <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
             <div class="user-grid" v-if="UserData.length > 0">
                 <div class="blocked-user" v-for="userData in UserData" :key="userData.data.userId">
                     <div class="user-cube">
