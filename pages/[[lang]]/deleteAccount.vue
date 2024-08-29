@@ -1,7 +1,6 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
     <div id="profile-container">
-        <h1 class="title">{{ content.title }}</h1>
+        <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
         <p class="warning-text">{{ content.text }}</p>
         <div class="profile-wrapper">
             <div class="profile-elements-wrapper">
@@ -28,7 +27,7 @@
 
 <script setup>
 import Navbar from "~/components/Navbar.vue";
-import {isLogged, loggedIn} from "public/js/checkLogin";
+import {isLogged, loggedIn} from "public/ts/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {onMounted, ref} from "vue";

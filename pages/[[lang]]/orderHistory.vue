@@ -1,6 +1,5 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
-    <div class="title">{{ content.title }}</div>
+    <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
     <div id="order_history_loading">{{ content.loading }}</div>
     <div id="order_history_error">{{ errorMessage }}</div>
     <div class="form" id="order_history_table" style="display: none">
@@ -27,8 +26,7 @@
 </template>
 
 <script setup>
-import Navbar from "~/components/Navbar.vue";
-import {isLogged} from "public/js/checkLogin";
+import {isLogged} from "public/ts/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {onMounted, ref} from "vue";
@@ -200,13 +198,6 @@ async function downloadInvoice(id) {
     padding: 12px; /* Adjust padding */
     border-right: 1px solid #ddd; /* Lighter border */
     border-bottom: 1px solid #ddd; /* Add bottom border */
-}
-
-.title {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 10%;
 }
 
 #order_history_loading {

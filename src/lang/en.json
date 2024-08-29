@@ -26,7 +26,8 @@
     "lightmode": "Light mode",
     "login": "Login",
     "disconnect": "Disconnect",
-    "feedback": "Feedback"
+    "feedback": "Feedback",
+    "toggleMobileNavbar": "Open/close the navigation bar"
   },
   "profilePages": {
     "presentationPage": {
@@ -87,6 +88,10 @@
   },
   "home": {
     "welcomeTitle": "Welcome to ARDeco",
+    "appTitle": "Download the app on Google Play!",
+    "appTextIntro": "Use the ARDeco mobile app now. Available in public early access on Google Play:",
+    "appTextFeedback": "We count on your feedback to improve our service. You can send it to us directly from the app, this website, by email or via a form that will be communicated to you soon.",
+    "appTextLegalAttributionGoogle": "Google Play and the Google Play logo are trademarks of Google LLC.",
     "productPresentation": "Is innovative application that revolutionizes your interior design experience using Augmented Reality (AR) and Artificial Intelligence (AI). Effortlessly scan your room with your phone, and our intelligent AI algorithms will analyze the space to create personalized, visually stunning decorations tailored to your preferences. Explore new design possibilities and bring your dream space to life with ARDeco.",
     "transitionEffect": {
       "team": "Team",
@@ -120,20 +125,38 @@
     ],
     "timeline": {
       "title": "Our project's steps",
-      "testAndLearn": "Experimenting with technologies to find the most compatible ones with the project and the desired objectives.",
-      "managementAndProcess": "Stage aiming to work on our internal organization as a team for the rest of the project.",
-      "fastForward": "The goal of this sprint is to make significant progress to achieve an Alpha version.",
-      "betaAndGrowthHacking": "Having a testable Beta that can be launched in real conditions with real users.",
-      "consolidation": "Have a final, fully functional application, usable by interested users.",
-      "launchAndMetric": "Finish the final version of the project, public and usable for everyone.",
-      "dates": {
-        "june2023": "June 2023",
-        "october2023": "October 2023",
-        "january2024": "January 2024",
-        "may2024": "May 2024",
-        "september2024": "September 2024",
-        "december2024": "December 2024"
-      }
+      "steps": [
+        {
+          "title": "TEST & LEARN",
+          "description": "Experimenting with technologies to find the most compatible ones with the project and the desired objectives.",
+          "date": "June 2023"
+        },
+        {
+          "title": "MANAGEMENT & PROCESS",
+          "description": "Stage aiming to work on our internal organization as a team for the rest of the project.",
+          "date": "October 2023"
+        },
+        {
+          "title": "FAST FORWARD",
+          "description": "Make significant progress to achieve an Alpha version.",
+          "date": "January 2024"
+        },
+        {
+          "title": "BETA & GROWTH HACKING",
+          "description": "Having a testable Beta that can be launched in real conditions with real users.",
+          "date": "May 2024"
+        },
+        {
+          "title": "CONSOLIDATION",
+          "description": "Have a final, fully functional application, usable by interested users.",
+          "date": "September 2024"
+        },
+        {
+          "title": "LAUNCH & METRIC",
+          "description": "Finish the final version of the project, public and usable for everyone.",
+          "date": "December 2024"
+        }
+      ]
     }
   },
   "login": {
@@ -189,6 +212,17 @@
       "infoText": "If no image is selected, the image will be reset to the default one.",
       "confirmText": "Changes take effect only upon confirmation."
     }
+  },
+  "blockedUsers": {
+    "title": "Blocked users",
+    "lastname": "Last name : ",
+    "firstname": "First name : ",
+    "id": "ID : ",
+    "unblock": "Unblock",
+    "loading": "Loading...",
+    "fetchError": "Server error while fetching the data",
+    "fetchUserError": "Server error while fetching a blocked user data",
+    "noBlockedUsers": "No blocked users"
   },
   "deleteAccount": {
     "title": "Delete account",
@@ -262,6 +296,7 @@
   },
   "languageChangerText": "Translate to FR",
   "privacyPolicy": {
+    "title": "Privacy policy",
     "introduction": {
       "title": "Introduction",
       "objective": "The purpose of this privacy policy is to inform you about the way in which ARDeco collects, uses and protects your personal data.",
@@ -270,9 +305,9 @@
     },
     "cookies": {
       "title": "Cookies",
-      "cookies": "We use cookies for the sole purpose of identifying users and providing access to authorized services.",
+      "cookies": "We use cookies for the sole purpose of identifying users, enabling access to authorized services and providing them in the language selected by the user.",
       "collection": "These cookies are automatically collected by our web server and stored in the user's browser from the moment they log in or register until they log out.",
-      "usage": "We do not store any personal data other than the internal unique identifier in cookies.",
+      "usage": "We do not store any personal data other than the internal unique identifier in cookies. Other cookies do not allow user identification, and are only used to provide personalized services.",
       "consent": "By using our services, users consent to the use of these cookies.",
       "share": "We do not share these cookies with third parties and their use remains internal."
     },
@@ -331,6 +366,7 @@
     }
   },
   "cgu": {
+    "title": "Terms of use",
     "object": {
       "title": "Article 1 - Purpose",
       "text": "The purpose of these General Conditions of Use is to define the terms and conditions of use of the Service offered by ARDeco to its users."
@@ -373,7 +409,7 @@
     "personalData": {
       "title": "Article 5 - Personal data",
       "data": "The personal data collected by the Service are necessary for the proper execution of the Service.",
-      "use": "These data may be used by the Service to enable the User's navigation on the Service, to improve the quality of the Service, to send commercial information and to personalize the services offered to the User.",
+      "usage": "These data may be used by the Service to enable the User's navigation on the Service, to improve the quality of the Service, to send commercial information and to personalize the services offered to the User.",
       "duration": "Personal data is kept for the period necessary to fulfill the purposes for which it was collected.",
       "policy": "The User can consult the Service's privacy policy to find out more about the collection and processing of their personal data.",
       "opposition": "The User has the right to object to the collection of their personal data. The exercise of this right may, however, prevent access to the Service.",
@@ -551,6 +587,7 @@
     "send": "Send"
   },
   "comments": {
-    "user": "User"
+    "user": "User",
+    "writePlaceholder": "Write a comment"
   }
 }

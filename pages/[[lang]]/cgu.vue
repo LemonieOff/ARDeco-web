@@ -1,52 +1,32 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
-    <div class="space-between-questions"></div>
-    <CguObject :urlLang=lang></CguObject>
-    <div class="space-between-questions"></div>
-    <Definitions :urlLang=lang></Definitions>
-    <div class="space-between-questions"></div>
-    <AccessAndUse :urlLang=lang></AccessAndUse>
-    <div class="space-between-questions"></div>
-    <IntellectualProperty :urlLang=lang></IntellectualProperty>
-    <div class="space-between-questions"></div>
-    <PersonalData :urlLang=lang></PersonalData>
-    <div class="space-between-questions"></div>
-    <Responsibility :urlLang=lang></Responsibility>
-    <div class="space-between-questions"></div>
-    <CguEdit :urlLang=lang></CguEdit>
-    <div class="space-between-questions"></div>
-    <DurationAndCancellation :urlLang=lang></DurationAndCancellation>
-    <div class="space-between-questions"></div>
-    <Litige :urlLang=lang></Litige>
-    <div class="space-between-questions"></div>
-    <GeneralDisposition :urlLang=lang></GeneralDisposition>
-    <div class="space-between-questions"></div>
-    <Contact :urlLang=lang></Contact>
-    <div class="space-between-questions"></div>
-    <Footer :urlLang=lang></Footer>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
+    <CguObject :content="content.object"/>
+    <Definitions :content="content.definitions"/>
+    <AccessAndUse :content="content.accessAndUse" />
+    <IntellectualProperty :content="content.intellectualProperty"/>
+    <PersonalData :content="content.personalData"/>
+    <Responsibility :content="content.responsibility"/>
+    <CguEdit :content="content.cguEdit"/>
+    <DurationAndCancellation :content="content.durationAndCancellation"/>
+    <Litige :content="content.litige"/>
+    <GeneralDisposition :content="content.generalDisposition"/>
+    <Contact :content="content.contact"/>
 </template>
 
 <script setup lang="ts">
-import Navbar from "~/components/Navbar.vue";
-import CguObject from "~/components/Policy/CGU/CguObject.vue";
-import Definitions from "~/components/Policy/CGU/Definitions.vue";
-import AccessAndUse from "~/components/Policy/CGU/AccessAndUse.vue";
-import IntellectualProperty from "~/components/Policy/CGU/IntellectualProperty.vue";
-import PersonalData from "~/components/Policy/CGU/PersonalData.vue";
-import Responsibility from "~/components/Policy/CGU/Responsibility.vue";
-import CguEdit from "~/components/Policy/CGU/CguEdit.vue";
-import DurationAndCancellation from "~/components/Policy/CGU/DurationAndCancellation.vue";
-import Litige from "~/components/Policy/CGU/Litige.vue";
-import GeneralDisposition from "~/components/Policy/CGU/GeneralDisposition.vue";
-import Contact from "~/components/Policy/CGU/Contact.vue";
-import Footer from "~/components/Footer.vue";
-import {useRoute} from "vue-router";
+import CguObject from "@/components/Policy/CGU/CguObject.server.vue";
+import Definitions from "@/components/Policy/CGU/Definitions.server.vue";
+import AccessAndUse from "@/components/Policy/CGU/AccessAndUse.server.vue";
+import IntellectualProperty from "@/components/Policy/CGU/IntellectualProperty.server.vue";
+import PersonalData from "@/components/Policy/CGU/PersonalData.server.vue";
+import Responsibility from "@/components/Policy/CGU/Responsibility.server.vue";
+import CguEdit from "@/components/Policy/CGU/CguEdit.server.vue";
+import DurationAndCancellation from "@/components/Policy/CGU/DurationAndCancellation.server.vue";
+import Litige from "@/components/Policy/CGU/Litige.server.vue";
+import GeneralDisposition from "@/components/Policy/CGU/GeneralDisposition.server.vue";
+import Contact from "@/components/Policy/CGU/Contact.server.vue";
 
-const route = useRoute();
+const nuxtApp = useNuxtApp();
 
-const lang = route.params.lang;
+let content = ref(nuxtApp.$content.cgu);
 </script>
-
-<style lang="scss" scoped>
-@import '~/styles/FAQPage.scss';
-</style>

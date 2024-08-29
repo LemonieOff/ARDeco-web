@@ -1,17 +1,23 @@
 <template>
-    <div class="overflow-x-hidden">
-        <ClientOnly/>
-        <NuxtPage class="z-1"/>
+    <Html :class="{ dark: darkMode }" :lang="lang"/>
+    <Head>
+        <Title>ARDeco</Title>
+    </Head>
+    <div class="overflow-x-hidden min-h-screen flex flex-col">
+        <Navbar/>
+        <div>
+            <NuxtPage/>
+        </div>
+        <Footer :content="content.footer" :lang-prefix="langPrefix"/>
         <LanguageChanger/>
     </div>
 </template>
-<script>
-import Header from "./components/Header";
-import Navbar from "~/components/Navbar.vue";
-import Footer from "~/components/Footer.vue";
-import LanguageChanger from "~/components/LanguageChanger.vue";
 
-export default {
-    components: {Header, Navbar, Footer, LanguageChanger}
-}
+<script setup lang="ts">
+const nuxtApp = useNuxtApp();
+
+const darkMode: boolean = nuxtApp.$darkMode;
+const lang = nuxtApp.$lang;
+const content = nuxtApp.$content;
+const langPrefix = nuxtApp.$langPrefix;
 </script>

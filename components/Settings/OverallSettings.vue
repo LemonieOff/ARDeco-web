@@ -1,6 +1,5 @@
 <template>
-    <div class="navbar-top-space"></div>
-    <div class="title">{{content.title}}</div>
+    <div class="text-center font-bold text-xl md:text-4xl my-8">{{content.title}}</div>
     <div class="parameters">
         <hr>
         <div class="center-side-parameters">
@@ -37,7 +36,7 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import {isLogged, loggedIn} from "public/js/checkLogin";
+import {isLogged, loggedIn} from "public/ts/checkLogin";
 
 export default {
     name: "OverallSettings",
@@ -197,7 +196,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~/styles/ProfileSettings.scss";
+@import "@/styles/ProfileSettings.scss";
 
 .navbar-top-space {
     height: 10vh;

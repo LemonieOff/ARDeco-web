@@ -26,7 +26,8 @@
     "lightmode": "Mode clair",
     "login": "Connexion",
     "disconnect": "Déconnexion",
-    "feedback": "Vos retours"
+    "feedback": "Vos retours",
+    "toggleMobileNavbar": "Ouvrir/fermer la barre de navigation"
   },
   "profilePages": {
     "presentationPage": {
@@ -87,6 +88,10 @@
   },
   "home": {
     "welcomeTitle": "Bienvenue sur ARDeco",
+    "appTitle": "Téléchargez l'appli sur Google Play !",
+    "appTextIntro": "Utilisez dès maintenant l'application mobile ARDeco. Disponible en accès anticipé public sur Google Play :",
+    "appTextFeedback": "Nous comptons sur vos retours pour améliorer notre service. Vous pouvez nous les faire parvenir directement depuis l'app, le site, par email ou via un formulaire qui vous sera communiqué prochainement.",
+    "appTextLegalAttributionGoogle": "Google Play et le logo Google Play sont des marques de Google LLC.",
     "productPresentation": "Une application innovante qui révolutionne votre expérience de design intérieur en utilisant la Réalité Augmentée (AR) et l'Intelligence Artificielle (IA). Numérisez facilement votre pièce avec votre téléphone, et nos algorithmes IA intelligents analyseront l'espace pour créer des décorations personnalisées, visuellement époustouflantes, adaptées à vos préférences. Explorez de nouvelles possibilités de design et donnez vie à votre espace de rêve avec ARDeco.",
     "transitionEffect": {
       "team": "Équipe",
@@ -120,20 +125,38 @@
     ],
     "timeline": {
       "title": "Les étapes de notre projet",
-      "testAndLearn": "Expérimenter des technologies pour trouver les plus compatibles avec le projet et les objectifs recherchés.",
-      "managementAndProcess": "Étape ayant comme objectif de travailler notre organisation interne en tant qu'équipe pour le reste du projet.",
-      "fastForward": "Le but de ce sprint est d’avoir une avancée significative afin que d'atteindre une version Alpha.",
-      "betaAndGrowthHacking": "Avoir une Bêta testable pouvant être lancée en conditions réelles avec de vrais utilisateurs.",
-      "consolidation": "Avoir une application finale et pleinenement fonctionnelle, utilisable par des utilisateurs interessés.",
-      "launchAndMetric": "Rendre une version finale de l'application, publique et utilisable par tous.",
-      "dates": {
-        "june2023": "Juin 2023",
-        "october2023": "Octobre 2023",
-        "january2024": "Janvier 2024",
-        "may2024": "Mai 2024",
-        "september2024": "Septembre 2024",
-        "december2024": "Décembre 2024"
-      }
+      "steps": [
+        {
+          "title": "TEST & LEARN",
+          "description": "Expérimenter des technologies pour trouver les plus compatibles avec le projet et les objectifs recherchés.",
+          "date": "Juin 2023"
+        },
+        {
+          "title": "MANAGEMENT & PROCESS",
+          "description": "Étape ayant comme objectif de travailler notre organisation interne en tant qu'équipe pour le reste du projet.",
+          "date": "Octobre 2023"
+        },
+        {
+          "title": "FAST FORWARD",
+          "description": "Avoir une avancée significative du projet afin d'atteindre une version Alpha.",
+          "date": "Janvier 2024"
+        },
+        {
+          "title": "BETA & GROWTH HACKING",
+          "description": "Avoir une Bêta testable pouvant être lancée en conditions réelles avec de vrais utilisateurs.",
+          "date": "Mai 2024"
+        },
+        {
+          "title": "CONSOLIDATION",
+          "description": "Avoir une application finale et pleinement fonctionnelle, utilisable par des utilisateurs intéressés.",
+          "date": "Septembre 2024"
+        },
+        {
+          "title": "LAUNCH & METRIC",
+          "description": "Rendre une version finale de l'application, publique et utilisable par tous.",
+          "date": "Décembre 2024"
+        }
+      ]
     }
   },
   "login": {
@@ -189,6 +212,17 @@
       "infoText": "Si aucune image n'est sélectionnée, l'image sera réinitialisée et utilisera celle par défaut.",
       "confirmText": "Les changements prennent effet uniquement à partir de la confirmation."
     }
+  },
+  "blockedUsers": {
+    "title": "Utilisateurs bloqués",
+    "lastname": "Nom : ",
+    "firstname": "Prénom : ",
+    "id": "ID : ",
+    "unblock": "Débloquer",
+    "loading": "Chargement...",
+    "fetchError": "Erreur du serveur lors de la récupération des données",
+    "fetchUserError": "Erreur du serveur lors de la récupération des données d'un utilisateur bloqué",
+    "noBlockedUsers": "Aucun utilisateur bloqué"
   },
   "deleteAccount": {
     "title": "Suppression du compte",
@@ -262,6 +296,7 @@
   },
   "languageChangerText": "Traduire en EN",
   "privacyPolicy": {
+    "title": "Politique de confidentialité",
     "introduction": {
       "title": "Introduction",
       "objective": "La présente politique de confidentialité a pour objectif de vous informer sur la manière dont ARDeco collecte, utilise et protège vos données personnelles.",
@@ -270,9 +305,9 @@
     },
     "cookies": {
       "title": "Cookies",
-      "cookies": "Nous utilisons des cookies dans l'unique but d'identifier les utilisateurs et de permettre l'accès aux services autorisés.",
+      "cookies": "Nous utilisons des cookies dans l'unique but d'identifier les utilisateurs, de permettre l'accès aux services autorisés et de les fournir dans la langue sélectionnée par l'utilisateur.",
       "collection": "Ces cookies sont automatiquement collectés par notre serveur web et stockés dans le navigateur de l'utilisateur dès sa connexion ou son enregistrement, jusqu'à sa déconnexion.",
-      "usage": "Nous ne stockons aucune donnée personnelle autre que l'identifiant unique interne dans les cookies.",
+      "usage": "Nous ne stockons aucune donnée personnelle autre que l'identifiant unique interne dans les cookies. Les autres cookies ne permettent pas l'identification de l'utilisateur, et ne servent qu'à fournir des services personnalisés.",
       "consent": "En utilisant nos services, les utilisateurs consentent à l'utilisation de ces cookies.",
       "share": "Nous ne partageons pas ces cookies avec des tiers et leur utilisation demeure interne."
     },
@@ -331,6 +366,7 @@
     }
   },
   "cgu": {
+    "title": "Conditions Générales d'Utilisation",
     "object": {
       "title": "Article 1 - Objet",
       "text": "Les présentes Conditions Générales d'Utilisation ont pour objet de définir les modalités et conditions d'utilisation du Service proposé par ARDeco à ses utilisateurs."
@@ -551,6 +587,7 @@
     "send": "Envoyer"
   },
   "comments": {
-    "user": "Utilisateur"
+    "user": "Utilisateur",
+    "writePlaceholder": "Écrivez un commentaire"
   }
 }

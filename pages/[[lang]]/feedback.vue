@@ -1,7 +1,6 @@
 <template>
     <div>
-        <Navbar/>
-        <div class="title"> {{ content.title }} </div>
+        <div class="text-center font-bold text-xl md:text-4xl my-8"> {{ content.title }} </div>
         <div class="formCard">
             <div class="motivationalText textToHighlight"> {{ content.textEncouragement }} </div>
             <div class="chooseFeedbackType">
@@ -31,14 +30,12 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import Navbar from "~/components/Navbar.vue";
 import Notifications from "~/components/Notifications.vue";
-import { isLogged, loggedIn } from "public/js/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 
 export default {
     name: "Feedback",
     components: {
-        Navbar,
         Notifications
     },
     data() {
@@ -156,7 +153,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~/styles/variables/ColorVariables.scss';
+@import '@/styles/variables/ColorVariables.scss';
 
 .title {
     margin-top: 100px;

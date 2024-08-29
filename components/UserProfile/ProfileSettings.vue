@@ -1,12 +1,10 @@
 <template>
     <div>
         <div class="content">
-            <FavoriteThemes :urlLang=urlLang></FavoriteThemes>
             <div @click="showModal" class="image-container profile-picture">
                 <img v-bind:src="imageSrc" alt="Profile picture">
                 <span class="edit-icon">&#9998;</span>
             </div>
-            <RecentPurchases :urlLang=urlLang></RecentPurchases>
         </div>
         <div id="profile_picture_modal">
             <div id="profile_picture_div">
@@ -62,9 +60,6 @@ export default {
             picture: {},
             buttons: {}
         }
-    },
-    props: {
-        urlLang: String | null
     },
     inject: ['profile'],
     components: {
