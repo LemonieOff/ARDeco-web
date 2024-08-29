@@ -1,6 +1,5 @@
 <template>
-    <div class="navbar-top-space"></div>
-    <div class="title">{{content.title}}</div>
+    <div class="text-center font-bold text-xl md:text-4xl my-8">{{content.title}}</div>
     <div class="parameters">
         <hr>
         <div class="left-side-parameters">
@@ -9,7 +8,7 @@
             <button id="emptyCompagnyArchive" class="buttonSettings" style="margin-top: 2.5%;" @click="deleteArchive">{{content.emptyCompagnyArchive}}</button>
             <button id="resetCompagnyApiKey" class="buttonSettings" style="margin-top: 2.5%;" @click="getApiToken">{{content.resetCompagnyApiKey}}</button>
             <div style="margin-top: 12%;">
-                <input class="buttonSettings" style="width: 45%;" id="itemInputID" :placeholder="`${placeholders.itemInputID}`">
+                <input class="buttonSettings" style="width: 45%;" id="itemInputID" :placeholder="`${content.placeholders.itemInputID}`">
                 <button id="visibilityButton" style="background-color: green; width: 15%;" @click="changeVisibility">Visible</button>
             </div>
             <button id="changeGalleryVisibility" class="buttonSettings" style="margin-top: 2.5%;" @click="setItemVisibility">{{content.changeGalleryVisibility}}</button>
@@ -20,14 +19,14 @@
         <div class="center-side-parameters">
             <div class="addFurnitureDiv">
                 <button id="addFurnitureToCatalog" class="buttonSettings" style="margin-top: 17.5%;" @click="addFurniture">{{content.addFurnitureToCatalog}}</button>
-                <input class="buttonSettings" id="furnitureName" :placeholder="`${placeholders.furnitureName}`">
-                <input class="buttonSettings" id="furniturePrice" :placeholder="`${placeholders.furniturePrice}`">
-                <input class="buttonSettings" id="furnitureStyles" :placeholder="`${placeholders.furnitureStyles}`">
-                <input class="buttonSettings" id="furnitureRooms" :placeholder="`${placeholders.furnitureRooms}`">
-                <input class="buttonSettings" id="furnitureHeight" :placeholder="`${placeholders.furnitureHeight}`">
-                <input class="buttonSettings" id="furnitureWidth" :placeholder="`${placeholders.furnitureWidth}`">
-                <input class="buttonSettings" id="furnitureDepth" :placeholder="`${placeholders.furnitureDepth}`">
-                <input class="buttonSettings" id="furnitureColors" :placeholder="`${placeholders.furnitureColors}`">
+                <input class="buttonSettings" id="furnitureName" :placeholder="`${content.placeholders.furnitureName}`">
+                <input class="buttonSettings" id="furniturePrice" :placeholder="`${content.placeholders.furniturePrice}`">
+                <input class="buttonSettings" id="furnitureStyles" :placeholder="`${content.placeholders.furnitureStyles}`">
+                <input class="buttonSettings" id="furnitureRooms" :placeholder="`${content.placeholders.furnitureRooms}`">
+                <input class="buttonSettings" id="furnitureHeight" :placeholder="`${content.placeholders.furnitureHeight}`">
+                <input class="buttonSettings" id="furnitureWidth" :placeholder="`${content.placeholders.furnitureWidth}`">
+                <input class="buttonSettings" id="furnitureDepth" :placeholder="`${content.placeholders.furnitureDepth}`">
+                <input class="buttonSettings" id="furnitureColors" :placeholder="`${content.placeholders.furnitureColors}`">
             </div>
         </div>
         <div class="right-side-parameters">
@@ -37,8 +36,6 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
 
 export default {
@@ -48,25 +45,12 @@ export default {
     },
     data() {
         return {
-            content: {},
-            placeholders: {},
+            content: this.$content.settings.companies,
             langPrefix: "/"
         }
     },
     mounted() {
         this.checkIfLogged();
-        let lang = this.urlLang
-
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        this.content = lang === 'en' ? en.settings.companies : fr.settings.companies;
-        this.placeholders = lang === 'en' ? en.settings.companies.placeholders : fr.settings.companies.placeholders;
     },
     methods: {
         async checkIfLogged() {
@@ -293,9 +277,9 @@ export default {
                 document.getElementById('reponseText').innerHTML = 'Catalog empty';
             } else {
                 for (let i = 0; i < result.data.length; i++) {
-                    document.getElementById('reponseText').innerHTML += 
+                    document.getElementById('reponseText').innerHTML +=
                         '<p>' + (i + 1) + '. ' + `${result.data[i].name}` +
-                        ' - ' + `${result.data[i].styles}` + 
+                        ' - ' + `${result.data[i].styles}` +
                         ' - ' + `${result.data[i].price}` +
                         '€ - ' + `${result.data[i].id}` +
                         ' - ' + `${result.data[i].object_id}` + '</p>';

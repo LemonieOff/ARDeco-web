@@ -1,0 +1,339 @@
+<template>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.myCompany }}</h1>
+    <div class="listSelection flex justify-center mx-auto gap-10 sm:w-1/3">
+        <button v-for="(card, index) in cards" :key="index" :id="`card${index}`" class="showListButton" @click="selectedCard = index" :class="{ active: index === selectedCard }" >
+            {{ card.name }}
+        </button>
+    </div>
+    <div class="pageContent">
+        <div class="buttonsArea">
+            <button class="buttonSettings" @click="goToFurnitureCreation" style="margin-top: 0">{{ content.buttons.createNewFurniture }}</button>
+            <button class="buttonSettings" @click="deleteArchive">{{content.buttons.emptyCompagnyArchive}}</button>
+            <button class="buttonSettings" @click="getApiToken">{{content.buttons.resetCompagnyApiKey}}</button>
+        </div>
+        <div class="listArea">
+            <div class="catalog" v-if="selectedCard === 0">
+                <div class="grid-header">
+                    <div class="grid-item">{{ content.list.name }}</div>
+                    <div class="grid-item">{{ content.list.colors }}</div>
+                    <div class="grid-item">{{ content.list.rooms }}</div>
+                    <div class="grid-item">{{ content.list.styles }}</div>
+                    <div class="grid-item">{{ content.list.price }}</div>
+                    <div class="grid-item no-right-border">{{ content.list.actions }}</div>
+                </div>
+                <div v-for="(item) in this.catalogList" class="flex">
+                    <div class="grid-item font-bold" v-if="item.company === this.userID">{{ item.name }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">{{ item.colors }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">{{ item.rooms }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">{{ item.styles }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
+                    <div class="grid-item no-right-border" v-if="item.company === this.userID">
+                        <button class="actionButton redBackground" @click="archiveItem(item.object_id)"> Archive </button>
+                    </div>
+                </div>
+            </div>
+            <div class="archive" v-else>
+                <div class="grid-header">
+                    <div class="grid-item">{{ content.list.name }}</div>
+                    <div class="grid-item">{{ content.list.colors }}</div>
+                    <div class="grid-item">{{ content.list.rooms }}</div>
+                    <div class="grid-item">{{ content.list.styles }}</div>
+                    <div class="grid-item">{{ content.list.price }}</div>
+                    <div class="grid-item no-right-border">{{ content.list.actions }}</div>
+                </div>
+                <div v-for="(item) in this.archiveList" class="flex">
+                    <div class="grid-item font-bold" v-if="item.company === this.userID">{{ item.name }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">{{ item.colors }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">{{ item.rooms }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">{{ item.styles }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
+                    <div class="grid-item no-right-border" v-if="item.company === this.userID">
+                        <button class="actionButton greenBackground" @click="restoreItem(item.object_id)"> Restorer </button>
+                        <button class="actionButton redBackground" @click="deleteArchive(item.object_id)"> Supprimer </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <Notifications ref="notifications"/>
+</template>
+
+<script>
+import {isLogged, loggedIn} from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
+
+export default {
+    name: "UserCatalogAndArchive",
+    components: {
+        Notifications,
+    },
+    data() {
+        return {
+            cards: [
+                { name: this.$content.catalog.title },
+                { name: this.$content.catalog.archiveTitle }
+            ],
+            content: this.$content.catalog,
+            userID: 0,
+            selectedCard: 0,
+            catalogList: [],
+            archiveList: [],
+        }
+    },
+    mounted() {
+        this.checkIfLogged();
+    },
+    methods: {
+        async checkIfLogged() {
+            const userID_TMP = await isLogged();
+            if (!loggedIn) {
+                location.href = this.$langPrefix + "login";
+            }
+            this.userID = Number(userID_TMP);
+
+            await this.getArchive();
+            await this.getCatalog();
+        },
+
+        async getCatalog() {
+            const response = await fetch('https://api.ardeco.app/catalog', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200 && result.data.length === 0) {
+                this.catalogList = result.data;
+                this.$refs.notifications.showSuccess("Votre catalogue est vide")
+            } else {
+                this.catalogList = result.data;
+            }
+        },
+
+        async getArchive() {
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/' + `${this.userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200 && result.data.length === 0) {
+                this.archiveList = result.data;
+                this.$refs.notifications.showSuccess("Votre archive est vide")
+            } else if (result.code === 200) {
+                this.archiveList = result.data;
+            }
+        },
+
+        async archiveItem(itemInputID) {
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${this.userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200) {
+                this.$refs.notifications.showSuccess(result.description)
+            } else {
+                this.$refs.notifications.showError(result.description)
+            }
+            await this.getArchive();
+            await this.getCatalog();
+        },
+
+        async deleteArchive(itemInputID) {
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/' + `${this.userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200) {
+                this.$refs.notifications.showSuccess(result.description)
+            } else {
+                this.$refs.notifications.showError(result.description)
+            }
+            await this.getArchive();
+            await this.getCatalog();
+        },
+
+        async restoreItem(itemInputID) {
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${this.userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200) {
+                this.$refs.notifications.showSuccess(result.description)
+            } else {
+                this.$refs.notifications.showError(result.description)
+            }
+            await this.getArchive();
+            await this.getCatalog();
+        },
+
+        async getApiToken() {
+            const response = await fetch('https://api.ardeco.app/company/requestToken', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200) {
+                this.$refs.notifications.showSuccess(result.description)
+            } else {
+                this.$refs.notifications.showError(result.description)
+            }
+            localStorage.setItem('COMPANY_API_TOKEN', result.data);
+        },
+
+        async goToFurnitureCreation() {
+            window.location.href = this.$langPrefix + "furniture-creation";
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+@import "@/styles/ProfileSettings.scss";
+@import '@/styles/variables/ColorVariables.scss';
+
+.listSelection {
+    margin-top: 5vh;
+    margin-bottom: 2.5vh;
+    height: 5vh;
+}
+
+.showListButton {
+    border: 1px outset $primary-black;
+    border-radius: 5px;
+    min-width: 35%;
+    height: 100%;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.showListButton:hover {
+    background-color: $primary-black;
+    color: $absolute-white;
+}
+
+.placementRight {
+    margin-left: 30%;
+}
+
+.showListButton.active {
+    background-color: $primary-black;
+    color: $absolute-white;
+}
+
+.pageContent {
+    display: flex;
+    margin-top: 7.5vh;
+    margin-left: 5vw;
+    width: 90vw;
+    height: 60vh;
+}
+
+.buttonsArea {
+    border-radius: 5px;
+    width: 20vw;
+}
+
+.buttonSettings {
+    width: 70%;
+    margin-left: 5%;
+    margin-top: 10%;
+    min-height: 7.5%;
+    background-color: $primary-white;
+    border: 2px solid $primary-black;
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.buttonSettings:hover {
+    background-color: $primary-black;
+    color: $primary-white;
+}
+
+.listArea {
+    text-align: center;
+    width: 65.5vw;
+    max-height: 100%;
+    overflow: auto;
+}
+
+.catalog, .archive {
+    text-align: center;
+    border: 2px solid $primary-black;
+    border-radius: 5px;
+    width: 65vw;
+    max-height: 100%;
+    background-color: $secondary-white;
+}
+
+.grid-header {
+    display: flex;
+    font-weight: bold;
+    background-color: $primary-black;
+    color: $primary-white;
+}
+
+.grid-item {
+    flex: 1;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-right: 1px solid $primary-gray;
+    border-bottom: 1px solid $primary-gray;
+}
+
+.no-right-border {
+    border-right: none;
+}
+
+.actionButton {
+    color: $secondary-white;
+    padding: 5px;
+    border: 1px solid $primary-black;
+    border-radius: 5px;
+}
+
+.redBackground {
+    background-color: $primary-red;
+}
+
+.greenBackground {
+    background-color: green;
+    margin-right: 5%;
+}
+</style>
