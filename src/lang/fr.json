@@ -213,6 +213,17 @@
       "confirmText": "Les changements prennent effet uniquement à partir de la confirmation."
     }
   },
+  "blockedUsers": {
+    "title": "Utilisateurs bloqués",
+    "lastname": "Nom : ",
+    "firstname": "Prénom : ",
+    "id": "ID : ",
+    "unblock": "Débloquer",
+    "loading": "Chargement...",
+    "fetchError": "Erreur du serveur lors de la récupération des données",
+    "fetchUserError": "Erreur du serveur lors de la récupération des données d'un utilisateur bloqué",
+    "noBlockedUsers": "Aucun utilisateur bloqué"
+  },
   "deleteAccount": {
     "title": "Suppression du compte",
     "text": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible et toutes vos données seront perdues.",

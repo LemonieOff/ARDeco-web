@@ -19,7 +19,10 @@ module.exports = {
         'AR-Grey': '#3E403F',
         'AR-Beige': '#F2EBDF',
         'AR-Light-Grey': '#6C6C6C',
-        'AR-Dark-Grey': '#292929'
+        'AR-Extra-Light-Grey': '#888',
+        'AR-Floral-White': '#FFFAF0',
+        'AR-Dark-Grey': '#292929',
+        'AR-Green': '#4ca444'
       }
     },
   },
