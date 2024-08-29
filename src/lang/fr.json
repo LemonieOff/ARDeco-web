@@ -529,6 +529,7 @@
     "textReportEncouragement": "Bien que l'indication d'une raison de signalement soit optionnelle, elle est vivement recommandée. En fournissant des détails sur le problème rencontré, vous nous aidez à mieux comprendre la situation et à traiter votre signalement le plus rapidement possible. Nous apprécions votre coopération et votre aide pour améliorer notre site web."
   },
   "catalog": {
+    "myCompany": "Mon entreprise",
     "list": {
       "name": "Nom",
       "price": "Prix (€)",
@@ -544,7 +545,7 @@
     },
     "buttons": {
       "emptyCompagnyArchive": "Vider mon archive d'entreprise",
-      "resetCompagnyApiKey": "Réinitialiser mon clé API",
+      "resetCompagnyApiKey": "Réinitialiser la clé API",
       "createNewFurniture": "Créer un nouveau meuble"
     },
     "archiveTitle": "Archive",

@@ -1,16 +1,7 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
-    <CreateNewFurniture :urlLang=lang></CreateNewFurniture>
+    <CreateNewFurniture/>
 </template>
 
 <script setup lang="ts">
-import Navbar from "~/components/Navbar.vue";
-import CreateNewFurniture from "~/components/Settings/CreateNewFurniture.vue";
-import { useRoute } from "vue-router";
-
-const route = useRoute();
-
-const lang = route.params.lang;
+import CreateNewFurniture from "@/components/Settings/CreateNewFurniture.vue";
 </script>
-
-<style lang="scss" scoped></style>

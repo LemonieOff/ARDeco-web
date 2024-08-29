@@ -1,16 +1,7 @@
 <template>
-    <Navbar :urlLang=lang></Navbar>
-    <UserCatalogAndArchive :urlLang=lang></UserCatalogAndArchive>
+    <UserCatalogAndArchive/>
 </template>
 
 <script setup lang="ts">
-import Navbar from "~/components/Navbar.vue";
-import UserCatalogAndArchive from "~/components/Settings/UserCatalogAndArchive.vue";
-import { useRoute } from "vue-router";
-
-const route = useRoute();
-
-const lang = route.params.lang;
+import UserCatalogAndArchive from "@/components/Settings/UserCatalogAndArchive.vue";
 </script>
-
-<style lang="scss" scoped></style>

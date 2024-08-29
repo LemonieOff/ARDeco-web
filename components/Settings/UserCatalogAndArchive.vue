@@ -1,29 +1,28 @@
 <template>
-    <div class="navbar-top-space"></div>
-    <div class="title"> Mon entreprise </div>
-    <div class="listSelection">
-        <button v-for="(card, index) in cards" :key="index" :id="`card${index}`" class="showListButton" @click="changeSelection(index)" :class="{ active: index === selectedCard }" >
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.myCompany }}</h1>
+    <div class="listSelection flex justify-center mx-auto gap-10 sm:w-1/3">
+        <button v-for="(card, index) in cards" :key="index" :id="`card${index}`" class="showListButton" @click="selectedCard = index" :class="{ active: index === selectedCard }" >
             {{ card.name }}
         </button>
     </div>
     <div class="pageContent">
         <div class="buttonsArea">
-            <button class="buttonSettings" @click="goToFurnitureCreation" style="margin-top: 0%">{{ buttons.createNewFurniture }}</button>
-            <button class="buttonSettings" @click="deleteArchive">{{buttons.emptyCompagnyArchive}}</button>
-            <button class="buttonSettings" @click="getApiToken">{{buttons.resetCompagnyApiKey}}</button>
+            <button class="buttonSettings" @click="goToFurnitureCreation" style="margin-top: 0">{{ content.buttons.createNewFurniture }}</button>
+            <button class="buttonSettings" @click="deleteArchive">{{content.buttons.emptyCompagnyArchive}}</button>
+            <button class="buttonSettings" @click="getApiToken">{{content.buttons.resetCompagnyApiKey}}</button>
         </div>
         <div class="listArea">
-            <div class="catalog">
+            <div class="catalog" v-if="selectedCard === 0">
                 <div class="grid-header">
-                    <div class="grid-item">{{ content.name }}</div>
-                    <div class="grid-item">{{ content.colors }}</div>
-                    <div class="grid-item">{{ content.rooms }}</div>
-                    <div class="grid-item">{{ content.styles }}</div>
-                    <div class="grid-item">{{ content.price }}</div>
-                    <div class="grid-item no-right-border">{{ content.actions }}</div>
+                    <div class="grid-item">{{ content.list.name }}</div>
+                    <div class="grid-item">{{ content.list.colors }}</div>
+                    <div class="grid-item">{{ content.list.rooms }}</div>
+                    <div class="grid-item">{{ content.list.styles }}</div>
+                    <div class="grid-item">{{ content.list.price }}</div>
+                    <div class="grid-item no-right-border">{{ content.list.actions }}</div>
                 </div>
-                <div v-for="(item) in this.catalogList" class="row">
-                    <div class="grid-item bold" v-if="item.company === this.userID">{{ item.name }}</div>
+                <div v-for="(item) in this.catalogList" class="flex">
+                    <div class="grid-item font-bold" v-if="item.company === this.userID">{{ item.name }}</div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.colors }}</div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.rooms }}</div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.styles }}</div>
@@ -33,17 +32,17 @@
                     </div>
                 </div>
             </div>
-            <div class="archive" hidden>
+            <div class="archive" v-else>
                 <div class="grid-header">
-                    <div class="grid-item">{{ content.name }}</div>
-                    <div class="grid-item">{{ content.colors }}</div>
-                    <div class="grid-item">{{ content.rooms }}</div>
-                    <div class="grid-item">{{ content.styles }}</div>
-                    <div class="grid-item">{{ content.price }}</div>
-                    <div class="grid-item no-right-border">{{ content.actions }}</div>
+                    <div class="grid-item">{{ content.list.name }}</div>
+                    <div class="grid-item">{{ content.list.colors }}</div>
+                    <div class="grid-item">{{ content.list.rooms }}</div>
+                    <div class="grid-item">{{ content.list.styles }}</div>
+                    <div class="grid-item">{{ content.list.price }}</div>
+                    <div class="grid-item no-right-border">{{ content.list.actions }}</div>
                 </div>
-                <div v-for="(item) in this.archiveList" class="row">
-                    <div class="grid-item bold" v-if="item.company === this.userID">{{ item.name }}</div>
+                <div v-for="(item) in this.archiveList" class="flex">
+                    <div class="grid-item font-bold" v-if="item.company === this.userID">{{ item.name }}</div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.colors }}</div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.rooms }}</div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.styles }}</div>
@@ -60,80 +59,43 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-import {isLogged, loggedIn} from "public/js/checkLogin";
-import Notifications from "~/components/Notifications.vue";
+import {isLogged, loggedIn} from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "UserCatalogAndArchive",
     components: {
         Notifications,
     },
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
             cards: [
-                { name: 'Catalogue' },
-                { name: 'Archive' }
+                { name: this.$content.catalog.title },
+                { name: this.$content.catalog.archiveTitle }
             ],
-            content: {},
-            buttons: {},
+            content: this.$content.catalog,
             userID: 0,
             selectedCard: 0,
             catalogList: [],
             archiveList: [],
-            langPrefix: "/"
         }
     },
     mounted() {
-        const body = document.body
-        body.style.backgroundColor = "#F4F4F4"
         this.checkIfLogged();
-        let lang = this.urlLang
-
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        this.content = lang === 'en' ? en.catalog.list : fr.catalog.list;
-        this.buttons = lang === 'en' ? en.catalog.buttons : fr.catalog.buttons;
-
-        this.getArchive();
-        this.getCatalog();
     },
     methods: {
         async checkIfLogged() {
             const userID_TMP = await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = this.$langPrefix + "login";
             }
             this.userID = Number(userID_TMP);
-        },
 
-        changeSelection(index) {
-            this.selectedCard = index;
-
-            if (index == 1) {
-                document.getElementsByClassName("catalog")[0].hidden = true;
-                document.getElementsByClassName("archive")[0].hidden = false;
-            } else {
-                document.getElementsByClassName("catalog")[0].hidden = false;
-                document.getElementsByClassName("archive")[0].hidden = true;
-            }
+            await this.getArchive();
+            await this.getCatalog();
         },
 
         async getCatalog() {
-            await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
             const response = await fetch('https://api.ardeco.app/catalog', {
                 method: 'GET',
                 headers: {
@@ -144,7 +106,7 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            if (result.code == 200 && result.data.length == 0) {
+            if (result.code === 200 && result.data.length === 0) {
                 this.catalogList = result.data;
                 this.$refs.notifications.showSuccess("Votre catalogue est vide")
             } else {
@@ -153,12 +115,8 @@ export default {
         },
 
         async getArchive() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch('https://api.ardeco.app/archive/' + `${this.userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -168,21 +126,17 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            if (result.code == 200 && result.data.length == 0) {
+            if (result.code === 200 && result.data.length === 0) {
                 this.archiveList = result.data;
                 this.$refs.notifications.showSuccess("Votre archive est vide")
-            } else if (result.code == 200) {
+            } else if (result.code === 200) {
                 this.archiveList = result.data;
             }
         },
 
         async archiveItem(itemInputID) {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${this.userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -192,22 +146,18 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            if (result.code == 200) {
+            if (result.code === 200) {
                 this.$refs.notifications.showSuccess(result.description)
             } else {
                 this.$refs.notifications.showError(result.description)
             }
-            this.getArchive();
-            this.getCatalog();
+            await this.getArchive();
+            await this.getCatalog();
         },
 
         async deleteArchive(itemInputID) {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch('https://api.ardeco.app/archive/' + `${this.userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -217,22 +167,18 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            if (result.code == 200) {
+            if (result.code === 200) {
                 this.$refs.notifications.showSuccess(result.description)
             } else {
                 this.$refs.notifications.showError(result.description)
             }
-            this.getArchive();
-            this.getCatalog();
+            await this.getArchive();
+            await this.getCatalog();
         },
 
         async restoreItem(itemInputID) {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${this.userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -242,43 +188,16 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            if (result.code == 200) {
+            if (result.code === 200) {
                 this.$refs.notifications.showSuccess(result.description)
             } else {
                 this.$refs.notifications.showError(result.description)
             }
-            this.getArchive();
-            this.getCatalog();
-        },
-
-        async deleteArchive() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-            });
-
-            const result = await response.json();
-            console.log(result);
-            if (result.code == 200) {
-                this.$refs.notifications.showSuccess(result.description)
-            } else {
-                this.$refs.notifications.showError(result.description)
-            }
+            await this.getArchive();
+            await this.getCatalog();
         },
 
         async getApiToken() {
-            await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
             const response = await fetch('https://api.ardeco.app/company/requestToken', {
                 method: 'GET',
                 headers: {
@@ -289,7 +208,7 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            if (result.code == 200) {
+            if (result.code === 200) {
                 this.$refs.notifications.showSuccess(result.description)
             } else {
                 this.$refs.notifications.showError(result.description)
@@ -298,34 +217,20 @@ export default {
         },
 
         async goToFurnitureCreation() {
-            window.location.href = this.langPrefix + "furniture-creation";
+            window.location.href = this.$langPrefix + "furniture-creation";
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "~/styles/ProfileSettings.scss";
-@import '~/styles/variables/ColorVariables.scss';
-
-
-.navbar-top-space {
-    height: 10vh;
-}
-
-.title {
-    width: 20%;
-    margin-left: 7.5%;
-    text-align: center;
-    font-size: xx-large;
-}
+@import "@/styles/ProfileSettings.scss";
+@import '@/styles/variables/ColorVariables.scss';
 
 .listSelection {
     margin-top: 5vh;
     margin-bottom: 2.5vh;
     height: 5vh;
-    width: 25vw;
-    margin-left: 37.5vw;
 }
 
 .showListButton {
@@ -335,7 +240,6 @@ export default {
     height: 100%;
     text-align: center;
     transition: 0.3s;
-    margin-right: 15%;
 }
 
 .showListButton:hover {
@@ -369,7 +273,7 @@ export default {
     width: 70%;
     margin-left: 5%;
     margin-top: 10%;
-    height: 7.5%;
+    min-height: 7.5%;
     background-color: $primary-white;
     border: 2px solid $primary-black;
     border-radius: 5px;
@@ -389,7 +293,7 @@ export default {
     overflow: auto;
 }
 
-.catalog {
+.catalog, .archive {
     text-align: center;
     border: 2px solid $primary-black;
     border-radius: 5px;
@@ -397,26 +301,12 @@ export default {
     max-height: 100%;
     background-color: $secondary-white;
 }
-
-.archive {
-    text-align: center;
-    border: 2px solid $primary-black;
-    border-radius: 5px;
-    width: 65vw;
-    max-height: 100%;
-    background-color: $secondary-white;
-}
-
 
 .grid-header {
     display: flex;
     font-weight: bold;
     background-color: $primary-black;
     color: $primary-white;
-}
-
-.row {
-    display: flex;
 }
 
 .grid-item {
@@ -429,10 +319,6 @@ export default {
 
 .no-right-border {
     border-right: none;
-}
-
-.bold {
-    font-weight: bold;
 }
 
 .actionButton {
@@ -450,5 +336,4 @@ export default {
     background-color: green;
     margin-right: 5%;
 }
-
 </style>

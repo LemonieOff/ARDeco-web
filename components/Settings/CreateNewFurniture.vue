@@ -1,13 +1,12 @@
 <template>
-    <div class="navbar-top-space"></div>
-    <div class="title">{{content.title}}</div>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{content.title}}</h1>
     <div class="mainContent">
         <div class="furniturePictureArea">
-            <img id="furnitureImg" src="~/../../assets/images/furnitures/defaultFurnitureCreationImage.png">
+            <img id="furnitureImg" src="@/assets/images/furnitures/defaultFurnitureCreationImage.png">
         </div>
         <div class="furnitureDetails">
             <div class="furnitureSpecificDetails">
-                <div class="specificDetailTitle" id="furnitureStyles">{{placeholders.furnitureStyles}}</div>
+                <div class="specificDetailTitle" id="furnitureStyles">{{content.placeholders.furnitureStyles}}</div>
                 <div class="options">
                     <div v-for="(style, key) in styles" :key="key" class="option">
                         <label :for="`style_${key}`" @click="toggleSelection(style)" :class="{ 'selected': style.selected }">
@@ -15,7 +14,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="specificDetailTitle" id="furnitureRooms">{{placeholders.furnitureRooms}}</div>
+                <div class="specificDetailTitle" id="furnitureRooms">{{content.placeholders.furnitureRooms}}</div>
                 <div class="options">
                     <div v-for="(room, key) in rooms" :key="key" class="option">
                         <label :for="`room_${key}`" @click="toggleSelection(room)" :class="{ 'selected': room.selected }">
@@ -23,26 +22,26 @@
                         </label>
                     </div>
                 </div>
-                <div class="specificDetailTitle" id="furnitureColors">{{placeholders.furnitureColors}}</div>
+                <div class="specificDetailTitle" id="furnitureColors">{{content.placeholders.furnitureColors}}</div>
                 <div class="options">
                     <div v-for="(_color, key) in colors" :key="key" class="colorOption">
                         <label :for="`color_${key}`"
                         @click="toggleSelection(_color)"
                         :class="{ 'selected': _color.selected }"
                         :style="{ 'background-color': _color.hex,
-                            'border-color': _color.selected ? black : _color.hex,
-                            'color': _color.selected ? _color.hex : black }">
+                            'border-color': _color.selected ? 'black' : _color.hex,
+                            'color': _color.selected ? _color.hex : 'black' }">
                             {{ _color.name }}
                         </label>
                     </div>
                 </div>
             </div>
             <div class="furnitureBasicDetails">
-                <input class="basicButton" id="furnitureName" :placeholder="`${placeholders.furnitureName}`">
-                <input class="basicButton" id="furniturePrice" :placeholder="`${placeholders.furniturePrice}`">
-                <input class="basicButton" id="furnitureHeight" :placeholder="`${placeholders.furnitureHeight}`">
-                <input class="basicButton" id="furnitureWidth" :placeholder="`${placeholders.furnitureWidth}`">
-                <input class="basicButton" id="furnitureDepth" :placeholder="`${placeholders.furnitureDepth}`">
+                <input class="basicButton" id="furnitureName" :placeholder="`${content.placeholders.furnitureName}`">
+                <input class="basicButton" id="furniturePrice" :placeholder="`${content.placeholders.furniturePrice}`">
+                <input class="basicButton" id="furnitureHeight" :placeholder="`${content.placeholders.furnitureHeight}`">
+                <input class="basicButton" id="furnitureWidth" :placeholder="`${content.placeholders.furnitureWidth}`">
+                <input class="basicButton" id="furnitureDepth" :placeholder="`${content.placeholders.furnitureDepth}`">
                 <button id="addFurnitureToCatalog" class="basicButton bottomButton" @click="addFurniture">{{content.addFurnitureToCatalog}}</button>
             </div>
         </div>
@@ -51,23 +50,17 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-import {isLogged, loggedIn} from "public/js/checkLogin";
-import { color } from "three/examples/jsm/nodes/Nodes.js";
-import Notifications from "~/components/Notifications.vue";
+import {isLogged, loggedIn} from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "CreateNewFurniture",
     components: {
         Notifications
     },
-    props: {
-        urlLang: String | null
-    },
     data() {
         return {
-            content: {},
+            content: this.$content.settings.companies,
             placeholders: {},
             langPrefix: "/",
             styles: {
@@ -104,20 +97,6 @@ export default {
     },
     mounted() {
         this.checkIfLogged();
-        const body = document.body
-        body.style.backgroundColor = "#F4F4F4"
-        let lang = this.urlLang
-
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        this.content = lang === 'en' ? en.settings.companies : fr.settings.companies;
-        this.placeholders = lang === 'en' ? en.settings.companies.placeholders : fr.settings.companies.placeholders;
     },
     methods: {
         toggleSelection(item) {
@@ -131,20 +110,6 @@ export default {
             }
         },
 
-        async changeLanguageButton() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
-            console.log("document.getElementById('languageSetterButton').innerHTML = ", document.getElementById('languageSetterButton').innerHTML)
-            if (document.getElementById('languageSetterButton').innerHTML == "FR") {
-                document.getElementById('languageSetterButton').innerHTML = "EN";
-                document.getElementById('languageSetterButton').style.backgroundColor = "red";
-            } else {
-                document.getElementById('languageSetterButton').innerHTML = "FR";
-                document.getElementById('languageSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
-            }
-        },
         async addFurniture() {
             const userID = await isLogged();
             if (!loggedIn) {
@@ -212,7 +177,7 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            if (result.code == 201) {
+            if (result.code === 201) {
                 document.querySelector('#furnitureName').value = "";
                 document.querySelector('#furniturePrice').value = "";
                 document.querySelector('#furnitureHeight').value = "";
@@ -228,16 +193,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~/styles/ProfileSettings.scss";
-@import '~/styles/variables/ColorVariables.scss';
+@import "@/styles/ProfileSettings.scss";
+@import '@/styles/variables/ColorVariables.scss';
 
 .navbar-top-space {
     height: 10vh;
-}
-
-.title {
-    font-weight: bold;
-    margin-bottom: 4%;
 }
 
 .mainContent {
@@ -278,7 +238,6 @@ export default {
 
 .basicButton {
     text-align: center;
-    margin-left: 7.5%;
     border: 1px solid $primary-black;
     border-radius: 5px;
     height: 10%;
@@ -288,7 +247,7 @@ export default {
 }
 
 .bottomButton {
-    margin-bottom: 0%;
+    margin-bottom: 0;
 }
 
 .specificDetailTitle {
@@ -317,8 +276,7 @@ export default {
     border: 1px solid $primary-black;
     border-radius: 5px;
     padding: 5px;
-    margin: 5px;
-    margin-bottom: 10px;
+    margin: 5px 5px 10px;
     align-items: center;
     transition: 0.3s;
 }
@@ -338,8 +296,7 @@ export default {
     display: inline-block;
     border: 4px solid;
     border-radius: 5px;
-    margin: 5px;
-    margin-bottom: 10px;
+    margin: 5px 5px 10px;
     align-items: center;
     transition: 0.3s;
 }
@@ -366,8 +323,8 @@ export default {
         display: inline;
         margin-left: 10%;
         border: none;
-        border-radius: 0px;
-        padding: 0%;
+        border-radius: 0;
+        padding: 0;
         width: 80%;
     }
 
@@ -383,10 +340,10 @@ export default {
     }
 
     .specificDetailTitle {
-        border-radius: 0px;
+        border-radius: 0;
         height: 10%;
         width: 100%;
-        margin-left: 0%;
+        margin-left: 0;
         font-weight: bold;
         font-size: 18px;
         margin-bottom: 10%;
