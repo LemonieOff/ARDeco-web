@@ -218,7 +218,11 @@
     "lastname": "Last name : ",
     "firstname": "First name : ",
     "id": "ID : ",
-    "unblock": "Unblock"
+    "unblock": "Unblock",
+    "loading": "Loading...",
+    "fetchError": "Server error while fetching the data",
+    "fetchUserError": "Server error while fetching a blocked user data",
+    "noBlockedUsers": "No blocked users"
   },
   "deleteAccount": {
     "title": "Delete account",

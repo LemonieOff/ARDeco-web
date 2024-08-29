@@ -1,215 +1,132 @@
 <template>
     <div>
-        <div class="blocked-users">
-            <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
-            <div class="user-grid" v-if="UserData.length > 0">
-                <div class="blocked-user" v-for="userData in UserData" :key="userData.data.userId">
-                    <div class="user-cube">
-                        <div class="user-details">
-                            <p class="user-title">{{ content.lastname }} <span class="user-value">{{ userData.data.lastname }}</span></p>
-                            <p class="user-title">{{ content.firstname }} <span class="user-value">{{ userData.data.firstname }}</span></p>
-                            <p class="user-title">{{ content.id }} <span class="user-value">{{ userData.data.userId }}</span></p>
-                            <button class="unblockButton" @click="unblockUser(userData.data.userId)">{{
-                                    content.unblock
-                                }}
-                            </button>
-                        </div>
-                    </div>
+        <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
+        <div class="flex flex-wrap justify-center gap-5 dark:text-AR-Beige"
+             v-if="userData.length > 0 && errorMessage === ''">
+            <div v-for="userData in userData" :key="userData.userId"
+                 class="rounded-lg bg-AR-Floral-White dark:bg-AR-Grey"
+                 style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+                <div class="flex flex-col p-5 min-w-52 max-w-52 min-h-44 max-h-44">
+                    <p class="font-bold">
+                        {{ content.firstname }} <span class="font-normal">{{ userData.firstname }}</span>
+                    </p>
+                    <p class="font-bold">
+                        {{ content.lastname }} <span class="font-normal">{{ userData.lastname }}</span>
+                    </p>
+                    <p class="font-bold">
+                        {{ content.id }} <span class="font-normal">{{ userData.userId }}</span>
+                    </p>
+                    <button class="block bg-AR-Green text-white border-none rounded text-center mt-2.5 py-2.5 px-5"
+                            @click="unblockUser(userData.userId)">
+                        {{ content.unblock }}
+                    </button>
                 </div>
             </div>
-            <div v-else>
-                <p class="no-blocked-users">Aucun utilisateur bloqué</p>
-            </div>
         </div>
+        <p v-else class="text-center italic mt-5 text-AR-Grey dark:text-AR-Beige">
+            {{ errorMessage === '' ? content.loading : errorMessage }}
+        </p>
     </div>
 </template>
 
-  <script>
-  import { isLogged } from "public/ts/checkLogin";
-  
-  export default {
-    name: "Blocked",
-    props: {
-        urlLang: String | null
-    },
-    data() {
-        return {
-            BlockedData: [],
-            UserData: [],
-            errorMessage: "",
-            successMessage: "",
-            content: {},
-            langPrefix: "fr"
-        };
-    },
-    mounted() {
-        let lang = this.urlLang
+<script setup lang="ts">
+import {isLogged} from 'public/ts/checkLogin';
 
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
+interface User {
+    firstname: string;
+    lastname: string;
+    userId: number;
+}
 
-        this.content = lang === 'en' ? en.blockedUsers : fr.blockedUsers;
+const nuxtApp = useNuxtApp();
 
-        this.checkLogin();
-        this.getBlocked();
-    },
-    methods: {
-        async checkLogin() {
-            const userID = await isLogged();
-            if (!userID) {
-                location.href = "/login";
-            }
-        },
+const userData = ref<User[]>([]);
+const errorMessage = ref("");
+const notificationMessage = ref("");
+const content = ref(nuxtApp.$content.blockedUsers);
 
-        async getBlocked() {
-            try {
-                const userID = localStorage.getItem("userID");
-                if (!userID) {
-                    throw new Error("No user found, redirecting to login");
-                }
+onMounted(async () => {
+    await checkLogin();
+    await getBlocked();
+});
 
-                const response = await fetch("https://api.ardeco.app/blocked_users", {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    credentials: "include"
-                });
-
-                if (!response.ok) {
-                    throw new Error("Failed to fetch data");
-                }
-
-                const result = await response.json();
-                this.BlockedData = result.data;
-            } catch (error) {
-                console.error(error.message);
-                this.errorMessage = error.message;
-            }
-            for (let x = 0; this.BlockedData[x] !== undefined; x++) {
-                await this.getUserFullName(this.BlockedData[x]);
-            }
-        },
-
-        async getUserFullName(userId) {
-            try {
-                const response = await fetch(`https://api.ardeco.app/user/${userId}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    credentials: "include"
-                });
-                if (!response.ok) {
-                    throw new Error("Failed to fetch user information");
-                }
-                const userData = await response.json();
-                userData.data.userId = userId; // Ajout de l'ID d'utilisateur
-                this.UserData.push(userData);
-            } catch (error) {
-                console.error("Error fetching user information:", error);
-                return "Unknown user";
-            }
-        },
-
-        async unblockUser(userId) {
-            try {
-                const response = await fetch(`https://api.ardeco.app/unblock/${userId}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    credentials: "include"
-                });
-
-                if (!response.ok) {
-                    throw new Error("Failed to unblock user");
-                }
-
-                this.UserData = this.UserData.filter(user => user.data.userId !== userId);
-                this.successMessage = `User ${userId} unblocked successfully`;
-            } catch (error) {
-                console.error(error.message);
-                this.errorMessage = error.message;
-            }
-        }
+async function checkLogin() {
+    const userID = await isLogged();
+    if (!userID) {
+        location.href = '/login';
     }
-};
+}
 
+async function getBlocked() {
+    const userID = localStorage.getItem('userID');
+    if (!userID) {
+        console.error('No user found, redirecting to login');
+        errorMessage.value = 'No user found, redirecting to login';
+        return;
+    }
+
+    const response = await fetch('https://api.ardeco.app/blocked_users', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+    });
+
+    if (!response.ok) {
+        console.error(content.value.fetchError, response);
+        errorMessage.value = content.value.fetchError;
+        return;
+    }
+
+    const result = await response.json();
+    console.log(result);
+
+    if (result.data.length === 0) {
+        errorMessage.value = content.value.noBlockedUsers;
+        return;
+    }
+
+    for (let x = 0; result.data[x] !== undefined; x++) {
+        await getUserFullName(result.data[x]);
+    }
+}
+
+async function getUserFullName(userId: number) {
+    const response = await fetch(`https://api.ardeco.app/user/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+    });
+    if (!response.ok) {
+        console.error(content.value.fetchError, response);
+        errorMessage.value = content.value.fetchError;
+        return;
+    }
+    const userDataResponse = await response.json();
+    userDataResponse.data.userId = userId;
+    userData.value.push(userDataResponse.data);
+}
+
+async function unblockUser(userId: number) {
+    const response = await fetch(`https://api.ardeco.app/unblock/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+    });
+
+    if (!response.ok) {
+        console.error('Failed to unblock user ' + userId, response);
+        notificationMessage.value = 'Failed to unblock user ' + userId;
+        return;
+    }
+
+    userData.value = userData.value.filter(user => user.userId !== userId);
+    notificationMessage.value = `User ${userId} unblocked successfully`;
+    if (userData.value.length === 0) errorMessage.value = content.value.noBlockedUsers;
+}
 </script>
-
-<style scoped>
-.blocked-users {
-    padding-top: 56px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.title {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.user-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.blocked-user {
-    margin-bottom: 20px;
-    margin-right: 20px; /* Espacement entre les utilisateurs bloqués */
-}
-
-.user-cube {
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color: floralwhite;
-}
-
-.user-details {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    word-wrap: break-word;
-    min-width: 200px;
-    max-width: 200px;
-    min-height: 170px;
-    max-height: 170px;
-}
-
-.user-title {
-    font-weight: bold;
-
-    span.user-value {
-        font-weight: normal;
-    }
-}
-
-.no-blocked-users {
-    text-align: center;
-    margin-top: 20px;
-    font-style: italic;
-    color: #888;
-}
-
-.unblockButton {
-    display: block;
-    background-color: #4ca444;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0 0 0;
-    border-radius: 5px;
-    cursor: pointer;
-    align-self: center;
-}
-</style>

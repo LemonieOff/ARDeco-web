@@ -218,7 +218,11 @@
     "lastname": "Nom : ",
     "firstname": "Prénom : ",
     "id": "ID : ",
-    "unblock": "Débloquer"
+    "unblock": "Débloquer",
+    "loading": "Chargement...",
+    "fetchError": "Erreur du serveur lors de la récupération des données",
+    "fetchUserError": "Erreur du serveur lors de la récupération des données d'un utilisateur bloqué",
+    "noBlockedUsers": "Aucun utilisateur bloqué"
   },
   "deleteAccount": {
     "title": "Suppression du compte",
