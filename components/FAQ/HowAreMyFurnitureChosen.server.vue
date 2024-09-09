@@ -1,5 +1,5 @@
 <template>
-    <PolicyCard :title="content.furnitureChoiceTitle" id="how-are-furniture-chosen">
+    <PolicyCard :title="content.furnitureChoiceTitle" id="how-are-furniture-chosen" class="scroll-mt-14">
         <div>{{ content.furnitureChoiceText }}</div>
     </PolicyCard>
 </template>

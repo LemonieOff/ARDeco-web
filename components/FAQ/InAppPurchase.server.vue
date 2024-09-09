@@ -1,5 +1,5 @@
 <template>
-    <PolicyCard :title="content.inAppPurchaseTitle" id="in-app-purchases">
+    <PolicyCard :title="content.inAppPurchaseTitle" id="in-app-purchases" class="scroll-mt-14">
         <div id="inAppPurchaseText">{{ content.inAppPurchaseText }}</div>
     </PolicyCard>
 </template>

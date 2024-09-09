@@ -1,5 +1,5 @@
 <template>
-    <PolicyCard :title="content.modelsOriginsTitle" id="where-are-models-from">
+    <PolicyCard :title="content.modelsOriginsTitle" id="where-are-models-from" class="scroll-mt-14">
         <div id="modelsOriginsText">{{ content.modelsOriginsText }}</div>
     </PolicyCard>
 </template>
