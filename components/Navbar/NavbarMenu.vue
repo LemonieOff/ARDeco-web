@@ -3,62 +3,59 @@
         <div id="navbarMenu"
              class="invisible opacity-0 fixed top-32 -right-2.5 bg-white py-2.5 px-5 rounded-2xl w-52 duration-500">
             <ul>
-                <NavbarMenuLink v-if="userID" id="profileMenuOption" page-name="lang-profile" :page-lang="langPrefix"
+                <NavbarMenuLink v-if="userId" id="profileMenuOption" page-name="lang-profile" :page-lang="langPrefix"
                                 image-src="images/icons/user.webp" :alt="content.profile">
                     {{ content.profile }}
                 </NavbarMenuLink>
 
-                <NavbarMenuLink v-if="userID" id="settingsMenuOption" page-name="lang-settings" :page-lang="langPrefix"
+                <NavbarMenuLink v-if="userId" id="settingsMenuOption" page-name="lang-settings" :page-lang="langPrefix"
                                 image-src="images/icons/settings.webp" :alt="content.settings">
                     {{ content.settings }}
                 </NavbarMenuLink>
 
-                <NavbarMenuLink v-if="userID && role === 'company'" id="companyMenuOption" page-name="lang-company"
+                <NavbarMenuLink v-if="userId && role === 'company'" id="companyMenuOption" page-name="lang-company"
                                 :page-lang="langPrefix" image-src="images/icons/company.webp" :alt="content.company">
                     {{ content.company }}
                 </NavbarMenuLink>
 
-                <NavbarMenuLink v-if="userID" id="ticketsMenuOption" page-name="lang-tickets" :page-lang="langPrefix"
+                <NavbarMenuLink v-if="userId" id="ticketsMenuOption" page-name="lang-tickets" :page-lang="langPrefix"
                                 image-src="images/icons/support.webp" :alt="content.tickets">
                     {{ content.tickets }}
                 </NavbarMenuLink>
 
-                <NavbarMenuLink v-if="userID" id="feedbackMenuOption" page-name="lang-feedback" :page-lang="langPrefix"
+                <NavbarMenuLink v-if="userId" id="feedbackMenuOption" page-name="lang-feedback" :page-lang="langPrefix"
                                 image-src="images/icons/feedback.webp" :alt="content.feedback">
                     {{ content.feedback }}
                 </NavbarMenuLink>
 
-                <NavbarMenuFunction v-if="userID" id="logoutMenuOption" :fun="logout"
+                <NavbarMenuFunction v-if="userId" id="logoutMenuOption" :fun="logout"
                                     image-src="images/icons/logout.webp" :alt="content.disconnect">
                     {{ content.disconnect }}
                 </NavbarMenuFunction>
 
-                <NavbarMenuLink v-if="!userID" id="loginMenuOption" page-name="lang-login" :page-lang="langPrefix"
+                <NavbarMenuLink v-if="!userId" id="loginMenuOption" page-name="lang-login" :page-lang="langPrefix"
                                 image-src="images/icons/logout.webp" :alt="content.login">
                     {{ content.login }}
                 </NavbarMenuLink>
             </ul>
         </div>
         <div id="user" @click="menuToggle">
-            <NuxtImg v-if="imageSrc !== ''" width="50px" height="50px" id="profileImage"
-                     class="navbar-icon rounded-[50%]"
-                     v-bind:src="imageSrc" loading="lazy" alt="Own profile picture"/>
-            <NuxtImg v-else width="50px" height="50px" id="defaultImage" class="navbar-icon rounded-[50%]"
-                     src="images/profile-pictures/Unknown.webp" loading="lazy" alt="Default profile picture"/>
+            <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon rounded-[50%]"
+                     v-bind:src="imageSrc" alt="Profile picture"/>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import {disconnect, isLogged, loggedIn, userID} from "public/ts/checkLogin";
+import {disconnect, isLogged, loggedIn} from "public/ts/checkLogin";
 
 const nuxtApp = useNuxtApp();
 
 const langPrefix = nuxtApp.$rawLangPrefix;
 const content = nuxtApp.$content.navBar;
-const imageSrc = ref("");
 const userId = ref<number | undefined | null>(null);
 const role = ref<string | null>("");
+const imageSrc = ref(nuxtApp.$profilePicture.url);
 
 onMounted(async () => {
     userId.value = await isLogged();
@@ -73,12 +70,15 @@ async function logout() {
         method: 'GET',
         credentials: 'include',
     });
+    imageSrc.value = nuxtApp.$changeProfilePicture().url;
     await disconnect();
     location.href = langPrefix;
 }
 
 async function getUSerPicture() {
     if (!loggedIn) {
+        // If not logged in, reset the profile picture cookie
+        imageSrc.value = nuxtApp.$changeProfilePicture().url;
         return;
     }
 
@@ -90,7 +90,8 @@ async function getUSerPicture() {
         credentials: 'include',
     });
     const result = await response.json();
-    imageSrc.value = `https://api.ardeco.app/profile_pictures/${result.data}.png`;
+    if (imageSrc.value !== result.data.url) imageSrc.value = result.data.url;
+    nuxtApp.$changeProfilePicture(result.data);
 }
 
 async function menuToggle() {

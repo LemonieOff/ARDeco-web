@@ -1,5 +1,5 @@
 <template>
-    <PolicyCard :title="content.howToUseArdecoTitle" id="how-to-use-ardeco">
+    <PolicyCard :title="content.howToUseArdecoTitle" id="how-to-use-ardeco" class="scroll-mt-14">
         <div id="howToUseArdecoText">{{ content.howToUseArdecoText }}</div>
     </PolicyCard>
 </template>
