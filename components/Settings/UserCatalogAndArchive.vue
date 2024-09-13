@@ -44,6 +44,7 @@
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
                     <div class="grid-item no-right-border" v-if="item.company === this.userID">
                         <button class="actionButton redBackground" @click="archiveItem(item.object_id)"> Archive </button>
+                        <button v-if="item.active === true" class="actionButton greenBackground" @click="setItemVisibility(item.object_id, item.active)"> Archive </button>
                     </div>
                 </div>
             </div>
@@ -248,7 +249,7 @@ export default {
 
         async goToFurnitureCreation() {
             window.location.href = this.$langPrefix + "furniture-creation";
-        }
+        },
     }
 }
 </script>

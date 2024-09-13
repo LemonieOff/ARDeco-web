@@ -28,6 +28,10 @@
         <button class="custom-button" id="startReportButton" style="margin-left: 2.5%" @click="startReport">
             {{ content.report }}
         </button>
+        <button v-if="this.GalleryData.user.id === this.userID" class="custom-button" style="margin-left: 2.5%" @click="setItemVisibility(this.GalleryData.id, this.GalleryData.visibility)">
+            <span v-if="this.GalleryData.visibility === false">{{ content.show }}</span>
+            <span v-if="this.GalleryData.visibility === true">{{ content.hide }}</span>
+        </button>
         <input type="text" id="reportDescription" placeholder="Décrivez le problème ici (optionnel)" hidden>
         <button id="confirmReport" class="custom-button" style="margin-left: 2.5%" @click="reportGallery" hidden>
             {{ content.confirm }}
@@ -37,17 +41,23 @@
         <div id="successText" class="textReportJustification successHandler"></div>
     </div>
     <CommentSection :galleryId="GalleryData.id"/>
+    <Notifications ref="notifications"/>
 </template>
 
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import {isLogged} from "public/ts/checkLogin";
+import {isLogged, loggedIn} from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "Gallery",
+    components: {
+        Notifications,
+    },
     data() {
         return {
+            userID: 0,
             GalleryData: [],
             UserData: [],
             errorMessage: '',
@@ -64,10 +74,11 @@ export default {
     },
     methods: {
         async checkLogin() {
-            const userID = await isLogged();
-            if (!userID) {
-                location.href = "/login";
+            const userID_TMP = await isLogged();
+            if (!loggedIn) {
+                location.href = this.$langPrefix + "login";
             }
+            this.userID = Number(userID_TMP);
         },
 
         async getGallery(id) {
@@ -91,8 +102,9 @@ export default {
 
                 const result = await response.json();
                 // TODO : Divide into better props, and adapt to ?user_details url (with new user result)
-                // console.log("RESULT : ", result);
+                console.log("RESULT : ", result);
                 this.GalleryData = result.data;
+                console.log(this.GalleryData.user.id, "/", this.userID)
             } catch (error) {
                 console.error(error.message);
                 this.errorMessage = error.message;
@@ -173,6 +185,31 @@ export default {
                 errorDiv.innerText = result.description;
                 console.error("Error fetching user information:", error);
                 return "Unknown user";
+            }
+        },
+
+        async setItemVisibility(itemInputID, activeOrNot) {
+            await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+            const response = await fetch('https://api.ardeco.app/gallery/' + itemInputID, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "visibility": !activeOrNot
+                }),
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200) {
+                this.$refs.notifications.showSuccess(result.description)
+            } else {
+                this.$refs.notifications.showError(result.description)
             }
         },
     }
