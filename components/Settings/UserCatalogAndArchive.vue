@@ -23,9 +23,24 @@
                 </div>
                 <div v-for="(item) in this.catalogList" class="flex">
                     <div class="grid-item font-bold" v-if="item.company === this.userID">{{ item.name }}</div>
-                    <div class="grid-item" v-if="item.company === this.userID">{{ item.colors }}</div>
-                    <div class="grid-item" v-if="item.company === this.userID">{{ item.rooms }}</div>
-                    <div class="grid-item" v-if="item.company === this.userID">{{ item.styles }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">
+                        <span v-for="(col, index) in item.colors" :key="index">
+                            {{ col.color }}
+                            <span v-if="index < item.colors.length - 1">, </span>
+                        </span>
+                    </div>
+                    <div class="grid-item" v-if="item.company === this.userID">
+                        <span v-for="(room, index) in item.rooms" :key="index">
+                            {{ room }}
+                            <span v-if="index < item.rooms.length - 1">, </span>
+                        </span>
+                    </div>
+                    <div class="grid-item" v-if="item.company === this.userID">
+                        <span v-for="(style, index) in item.styles" :key="index">
+                            {{ style }}
+                            <span v-if="index < item.styles.length - 1">, </span>
+                        </span>
+                    </div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
                     <div class="grid-item no-right-border" v-if="item.company === this.userID">
                         <button class="actionButton redBackground" @click="archiveItem(item.object_id)"> Archive </button>
@@ -43,9 +58,24 @@
                 </div>
                 <div v-for="(item) in this.archiveList" class="flex">
                     <div class="grid-item font-bold" v-if="item.company === this.userID">{{ item.name }}</div>
-                    <div class="grid-item" v-if="item.company === this.userID">{{ item.colors }}</div>
-                    <div class="grid-item" v-if="item.company === this.userID">{{ item.rooms }}</div>
-                    <div class="grid-item" v-if="item.company === this.userID">{{ item.styles }}</div>
+                    <div class="grid-item" v-if="item.company === this.userID">
+                        <span v-for="(col, index) in item.colors" :key="index">
+                            {{ col.color }}
+                            <span v-if="index < item.colors.length - 1">, </span>
+                        </span>
+                    </div>
+                    <div class="grid-item" v-if="item.company === this.userID">
+                        <span v-for="(room, index) in item.rooms" :key="index">
+                            {{ room }}
+                            <span v-if="index < item.rooms.length - 1">, </span>
+                        </span>
+                    </div>
+                    <div class="grid-item" v-if="item.company === this.userID">
+                        <span v-for="(style, index) in item.styles" :key="index">
+                            {{ style }}
+                            <span v-if="index < item.styles.length - 1">, </span>
+                        </span>
+                    </div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
                     <div class="grid-item no-right-border" v-if="item.company === this.userID">
                         <button class="actionButton greenBackground" @click="restoreItem(item.object_id)"> Restorer </button>
