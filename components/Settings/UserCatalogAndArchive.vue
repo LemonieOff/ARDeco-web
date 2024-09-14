@@ -132,7 +132,7 @@ export default {
         },
 
         async getCatalog() {
-            const response = await fetch('https://api.ardeco.app/catalog', {
+            const response = await fetch('https://api.ardeco.app/catalog/company/' + `${this.userID}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -358,7 +358,6 @@ export default {
     border: 2px solid $primary-black;
     border-radius: 5px;
     width: 65vw;
-    max-height: 100%;
     background-color: $secondary-white;
 }
 
