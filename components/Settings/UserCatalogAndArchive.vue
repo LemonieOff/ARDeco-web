@@ -85,7 +85,7 @@
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
                     <div class="grid-item no-right-border" v-if="item.company === this.userID">
                         <button class="actionButton greenBackground" @click="restoreItem(item.id)"> Restorer </button>
-                        <button class="actionButton redBackground" @click="deleteArchive(item.id)"> Supprimer </button>
+                        <button class="actionButton redBackground" @click="deleteArchivedItem(item.id)"> Supprimer </button>
                     </div>
                 </div>
             </div>
@@ -191,7 +191,7 @@ export default {
             await this.getCatalog();
         },
 
-        async deleteArchive(itemInputID) {
+        async deleteArchivedItem(itemInputID) {
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/' + `${this.userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
@@ -278,6 +278,31 @@ export default {
             } else {
                 this.$refs.notifications.showError(result.description)
             }
+        },
+
+        async deleteArchive() {
+            const userID = await isLogged();
+            if (!loggedIn) {
+                location.href = this.langPrefix + "login";
+            }
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200) {
+                this.$refs.notifications.showSuccess(result.description)
+            } else {
+                this.$refs.notifications.showError(result.description)
+            }
+            await this.getArchive();
+            await this.getCatalog();
         },
     }
 }
