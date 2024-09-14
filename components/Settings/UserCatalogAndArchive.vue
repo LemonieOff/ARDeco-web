@@ -43,7 +43,7 @@
                     </div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
                     <div class="grid-item no-right-border" v-if="item.company === this.userID">
-                        <button class="actionButton redBackground" @click="archiveItem(item.object_id)"> Archive </button>
+                        <button class="actionButton redBackground" @click="archiveItem(item.id)"> Archive </button>
                         <button v-if="item.active === true" class="addLeftMargin actionButton greenBackground" @click="changeItemActiveness(item.id, item.active)">
                             <span> {{content.buttons.public}} </span>
                         </button>
@@ -84,8 +84,8 @@
                     </div>
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
                     <div class="grid-item no-right-border" v-if="item.company === this.userID">
-                        <button class="actionButton greenBackground" @click="restoreItem(item.object_id)"> Restorer </button>
-                        <button class="actionButton redBackground" @click="deleteArchive(item.object_id)"> Supprimer </button>
+                        <button class="actionButton greenBackground" @click="restoreItem(item.id)"> Restorer </button>
+                        <button class="actionButton redBackground" @click="deleteArchive(item.id)"> Supprimer </button>
                     </div>
                 </div>
             </div>
