@@ -44,7 +44,12 @@
                     <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
                     <div class="grid-item no-right-border" v-if="item.company === this.userID">
                         <button class="actionButton redBackground" @click="archiveItem(item.object_id)"> Archive </button>
-                        <button v-if="item.active === true" class="actionButton greenBackground" @click="setItemVisibility(item.object_id, item.active)"> Archive </button>
+                        <button v-if="item.active === true" class="addLeftMargin actionButton greenBackground" @click="changeItemActiveness(item.id, item.active)">
+                            <span> {{content.buttons.public}} </span>
+                        </button>
+                        <button v-if="item.active === false" class="addLeftMargin actionButton redBackground" @click="changeItemActiveness(item.id, item.active)">
+                            <span> {{content.buttons.private}} </span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -136,13 +141,13 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);
             if (result.code === 200 && result.data.length === 0) {
                 this.catalogList = result.data;
                 this.$refs.notifications.showSuccess("Votre catalogue est vide")
             } else {
                 this.catalogList = result.data;
             }
+            console.log(this.catalogList);
         },
 
         async getArchive() {
@@ -249,6 +254,30 @@ export default {
 
         async goToFurnitureCreation() {
             window.location.href = this.$langPrefix + "furniture-creation";
+        },
+
+        async changeItemActiveness(CATALOG_ID, bool) {
+            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
+            console.log('https://api.ardeco.app/catalog/' + `${this.userID}` + '/edit/' + `${CATALOG_ID}`)
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${this.userID}` + '/edit/' + `${CATALOG_ID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "active": !bool
+                }),
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200) {
+                this.$refs.notifications.showSuccess(result.description)
+                location.reload();
+            } else {
+                this.$refs.notifications.showError(result.description)
+            }
         },
     }
 }
@@ -357,6 +386,10 @@ export default {
     padding: 5px;
     border: 1px solid $primary-black;
     border-radius: 5px;
+}
+
+.addLeftMargin {
+    margin-left: 5%;
 }
 
 .redBackground {

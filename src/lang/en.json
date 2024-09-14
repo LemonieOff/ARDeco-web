@@ -548,7 +548,9 @@
     "buttons": {
       "emptyCompagnyArchive": "Empty company archive",
       "resetCompagnyApiKey": "Reset API key",
-      "createNewFurniture": "Create a new furniture"
+      "createNewFurniture": "Create a new furniture",
+      "private": "Private",
+      "public": "Public"
     },
     "archiveTitle": "Archive",
     "title": "Catalog",

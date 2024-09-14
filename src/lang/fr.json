@@ -548,7 +548,9 @@
     "buttons": {
       "emptyCompagnyArchive": "Vider mon archive d'entreprise",
       "resetCompagnyApiKey": "Réinitialiser la clé API",
-      "createNewFurniture": "Créer un nouveau meuble"
+      "createNewFurniture": "Créer un nouveau meuble",
+      "private": "Privé",
+      "public": "Public"
     },
     "archiveTitle": "Archive",
     "title": "Catalogue",

@@ -64,34 +64,69 @@ export default {
             placeholders: {},
             langPrefix: "/",
             styles: {
-                minimaliste: { name: "Minimaliste", selected: false },
-                modern: { name: "Modern", selected: false },
-                contemporain: { name: "Contemporain", selected: false },
-                artDeco: { name: "Art déco", selected: false },
-                asiatique: { name: "Asiatique", selected: false },
-                rustique: { name: "Rustique", selected: false },
+                modern: { name: "modern", selected: false },
+                scandinavian: { name: "scandinavian", selected: false },
+                industrial: { name: "industrial", selected: false },
+                traditional: { name: "traditional", selected: false },
+                rustic: { name: "rustic", selected: false },
+                bohemian: { name: "bohemian", selected: false },
+                coastal: { name: "coastal", selected: false },
+                farmhouse: { name: "farmhouse", selected: false },
+                minimalist: { name: "minimalist", selected: false },
+                art_deco: { name: "art_deco", selected: false },
+                french_country: { name: "french_country", selected: false },
+                shabby_chic: { name: "shabby_chic", selected: false },
+                metal: { name: "metal", selected: false },
+                retro: { name: "retro", selected: false },
+                classic: { name: "classic", selected: false },
+                romantic: { name: "romantic", selected: false },
+                gothic: { name: "gothic", selected: false },
+                victorian: { name: "victorian", selected: false },
+                asian: { name: "asian", selected: false },
+                african: { name: "african", selected: false },
+                bauhaus: { name: "bauhaus", selected: false },
+                baroque: { name: "baroque", selected: false },
             },
             rooms: {
-                chambre: { name: "Chambre", selected: false },
-                salon: { name: "Salon", selected: false },
-                cuisine: { name: "Cuisine", selected: false },
-                salleDeBain: { name: "Salle de bain", selected: false },
-                garage: { name: "Garage", selected: false },
-                terrasse: { name: "Terrasse", selected: false },
+                bedroom: { name: "bedroom", selected: false },
+                living_room: { name: "living_room", selected: false },
+                dining_room: { name: "dining_room", selected: false },
+                kitchen: { name: "kitchen", selected: false },
+                bathroom: { name: "bathroom", selected: false },
+                office: { name: "office", selected: false },
+                guest_room: { name: "guest_room", selected: false },
+                gaming_room: { name: "gaming_room", selected: false },
+                library: { name: "library", selected: false },
+                hallway: { name: "hallway", selected: false },
+                laundry_room: { name: "laundry_room", selected: false },
+                balcony: { name: "balcony", selected: false },
+                patio: { name: "patio", selected: false },
+                garden: { name: "garden", selected: false },
+                family_room: { name: "family_room", selected: false },
+                attic: { name: "attic", selected: false },
+                garage: { name: "garage", selected: false },
+                pantry: { name: "pantry", selected: false },
             },
             colors: {
-                noir: { name: "Noir", hex: "#2A303D", selected: false },
-                blanc: { name: "Blanc", hex: "#FFFFFF", selected: false },
-                gris: { name: "Gris", hex: "#9B9B9B", selected: false },
-                bleuFonce: { name: "Bleu foncé", hex: "#0047AB", selected: false },
-                bleuClair: { name: "Bleu clair", hex: "#77B5F2", selected: false },
-                beige: { name: "Beige", hex: "#F5F5DC", selected: false },
-                ivoire: { name: "Ivoire", hex: "#FFFFD4", selected: false },
-                jaune: { name: "Jaune", hex: "#FDFD96", selected: false },
-                vertOlive: { name: "Vert olive", hex: "#628737", selected: false },
-                vertClair: { name: "Vert clair", hex: "#A3E571", selected: false },
-                marronFonce: { name: "Marron foncé", hex: "#523C20", selected: false },
-                marronClair: { name: "Marron clair", hex: "#B7894D", selected: false },
+                white: { name: "white", hex: "#FFFFFF", selected: false },
+                ivory: { name: "ivory", hex: "#FFFFD4", selected: false },
+                beige: { name: "beige", hex: "#F5F5DC", selected: false },
+                yellow: { name: "yellow", hex: "#FDFD96", selected: false },
+                pink: { name: "pink", hex: "#FFC0CB", selected: false },
+                gold: { name: "gold", hex: "#FFD700", selected: false },
+                orange: { name: "orange", hex: "#FF7F00", selected: false },
+                red: { name: "red", hex: "#FF0000", selected: false },
+                turquoise: { name: "turquoise", hex: "#40e0d0", selected: false },
+                green: { name: "green", hex: "#A3E571", selected: false },
+                olive: { name: "olive", hex: "#628737", selected: false },
+                purple: { name: "purple", hex: "#A020F0", selected: false },
+                teal: { name: "teal", hex: "#008080", selected: false },
+                blue: { name: "blue", hex: "#0047AB", selected: false },
+                silver: { name: "silver", hex: "#C0C0C0", selected: false },
+                gray: { name: "gray", hex: "#9B9B9B", selected: false },
+                brown: { name: "brown", hex: "#523C20", selected: false },
+                navy: { name: "navy", hex: "#000080", selected: false },
+                black: { name: "black", hex: "#2A303D", selected: false }
             }
         }
     },
@@ -117,42 +152,35 @@ export default {
             }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const furnitureName = document.querySelector('#furnitureName').value;
-            const furniturePrice = document.querySelector('#furniturePrice').value;
-            const furnitureHeight = document.querySelector('#furnitureHeight').value;
-            const furnitureWidth = document.querySelector('#furnitureWidth').value;
-            const furnitureDepth = document.querySelector('#furnitureDepth').value;
-            let furnitureColors = "";
-            let furnitureStyles = "";
-            let furnitureRooms = "";
+            const furniturePrice = Number(document.querySelector('#furniturePrice').value);
+            const furnitureHeight = Number(document.querySelector('#furnitureHeight').value);
+            const furnitureWidth = Number(document.querySelector('#furnitureWidth').value);
+            const furnitureDepth = Number(document.querySelector('#furnitureDepth').value);
+            let furnitureColors = [];
+            let furnitureStyles = [];
+            let furnitureRooms = [];
 
-            // Fix for the colors loop
             for (const color of Object.values(this.colors)) {
                 if (color.selected === true) {
-                    furnitureColors += color.name + ", ";
+                    furnitureColors.push(color.name);
                 }
             }
 
-            // Fix for the styles loop
             for (const style of Object.values(this.styles)) {
                 if (style.selected === true) {
-                    furnitureStyles += style.name + ", ";
+                    furnitureStyles.push(style.name);
                 }
             }
 
-            // Fix for the rooms loop
             for (const room of Object.values(this.rooms)) {
                 if (room.selected === true) {
-                    furnitureRooms += room.name + ", ";
+                    furnitureRooms.push(room.name);
                 }
             }
 
-            furnitureColors = furnitureColors.slice(0, -2);
-            furnitureStyles = furnitureStyles.slice(0, -2);
-            furnitureRooms = furnitureRooms.slice(0, -2);
-
-            if (furnitureName === "" || furniturePrice === "" || furnitureStyles === "" || furnitureRooms === "" ||
-                furnitureHeight === "" || furnitureWidth === "" || furnitureDepth === "" || furnitureColors === "") {
-                this.$refs.notifications.showError("Erreur : Vous n'avez pas rempli toutes les cases.");
+            if (furnitureName === "" || furniturePrice === null || furnitureStyles.length === 0 || furnitureRooms.length === 0 ||
+                furnitureHeight === null || furnitureWidth === null || furnitureDepth === null || furnitureColors.length === 0) {
+                this.$refs.notifications.showError("Erreur : Vous n'avez pas rempli ou sélectionné toutes les cases.");
                 return;
             }
 
@@ -251,6 +279,7 @@ export default {
 }
 
 .specificDetailTitle {
+    font-size: 14px;
     border-radius: 5px;
     text-align: center;
     height: 10%;
@@ -271,6 +300,7 @@ export default {
 }
 
 .option label {
+    font-size: 10px;
     cursor: pointer;
     display: inline-block;
     border: 1px solid $primary-black;
@@ -292,9 +322,10 @@ export default {
 }
 
 .colorOption label {
+    font-size: 10px;
     cursor: pointer;
     display: inline-block;
-    border: 4px solid;
+    border: 3px solid;
     border-radius: 5px;
     margin: 5px 5px 10px;
     align-items: center;
