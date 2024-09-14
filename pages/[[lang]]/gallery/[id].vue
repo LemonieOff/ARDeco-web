@@ -28,7 +28,7 @@
         <button class="custom-button" id="startReportButton" style="margin-left: 2.5%" @click="startReport">
             {{ content.report }}
         </button>
-        <button v-if="this.GalleryData.user.id === this.userID" class="custom-button" style="margin-left: 2.5%" @click="setItemVisibility(this.GalleryData.id, this.GalleryData.visibility)">
+        <button v-if="this.galleryUserId === this.userID" class="custom-button" style="margin-left: 2.5%" @click="setItemVisibility(this.GalleryData.id, this.GalleryData.visibility)">
             <span v-if="this.GalleryData.visibility === false">{{ content.show }}</span>
             <span v-if="this.GalleryData.visibility === true">{{ content.hide }}</span>
         </button>
@@ -40,7 +40,7 @@
         <div id="errorText" class="textReportJustification errorHandler" hidden></div>
         <div id="successText" class="textReportJustification successHandler"></div>
     </div>
-    <CommentSection :galleryId="GalleryData.id"/>
+    <CommentSection :galleryId="this.GalleryData.id"/>
     <Notifications ref="notifications"/>
 </template>
 
@@ -57,6 +57,7 @@ export default {
     },
     data() {
         return {
+            galleryUserId: 0,
             userID: 0,
             GalleryData: [],
             UserData: [],
@@ -71,6 +72,7 @@ export default {
         await this.checkLogin();
         const id = this.$route.params.id;
         await this.getGallery(id);
+        console.log(this.galleryUserId, "/", this.userID)
     },
     methods: {
         async checkLogin() {
@@ -104,7 +106,8 @@ export default {
                 // TODO : Divide into better props, and adapt to ?user_details url (with new user result)
                 console.log("RESULT : ", result);
                 this.GalleryData = result.data;
-                console.log(this.GalleryData.user.id, "/", this.userID)
+                this.galleryUserId = this.GalleryData.user.id;
+                console.log(this.galleryUserId, "/", this.userID)
             } catch (error) {
                 console.error(error.message);
                 this.errorMessage = error.message;
