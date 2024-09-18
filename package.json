@@ -10,6 +10,7 @@
   "devDependencies": {
     "@nuxt/icon": "^1.4.10",
     "@nuxt/image": "^1.7.0",
+    "@nuxt/types": "^2.18.1",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@playwright/test": "^1.46.1",

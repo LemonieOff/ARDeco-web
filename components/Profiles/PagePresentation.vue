@@ -23,8 +23,8 @@
                         <a class="shaking-effect" href="#louis-profile">
                             <img src="@/assets/images/profile-pictures/Louis.png" alt="Louis Villedieu">
                         </a>
-                        <a>
-                            <NuxtImg src="images/profile-pictures/Unknown.webp" alt="Hugo Delille"/>
+                        <a class="shaking-effect" href="#hugo2-profile">
+                            <img src="@/assets/images/profile-pictures/Hugo2.png" alt="Hugo Delille" />
                         </a>
                     </div>
                 </div>
@@ -52,11 +52,11 @@ export default {
     name: "PagePresentation",
     data() {
         return {
-            content: this.$lang === 'en' ? en.profilePages.presentationPage : fr.profilePages.presentationPage,
-            epitechSrc: this.$lang === 'fr' ? "https://www.epitech.eu" : "https://international.epitech.eu"
-        }
+            content: this.$lang === "en" ? en.profilePages.presentationPage : fr.profilePages.presentationPage,
+            epitechSrc: this.$lang === "fr" ? "https://www.epitech.eu" : "https://international.epitech.eu"
+        };
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
