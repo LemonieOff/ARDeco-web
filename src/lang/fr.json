@@ -40,25 +40,28 @@
       "presentationTextPart2": "Pendant ces 5 ans, nous sommes amenés à trouver des stages ou des emplois à temps partiel pour apprendre tout ce dont nous avons besoin pour connaître la vie dans le monde professionnel. Comme nous sommes tous en troisième année, nous pouvons confortablement dire que nous avons tous passé au moins un semestre dans une entreprise déjà, ce qui s'avère très bénéfique pour le développement de notre projet ARDeco."
     },
     "evan": {
-      "role": "Développeur AR",
+      "role": "Développeur mobile et AR",
       "internshipRole1": "Développeur Frontend Junior"
     },
     "hugo": {
-      "role": "Chef de projet",
+      "role": "Chef de projet, développeur polyvalent",
       "internshipRole1": "Développeur Backend",
       "internshipRole2": "Développeur de jeux vidéo"
     },
     "louis": {
-      "role": "Développeur AR",
+      "role": "Développeur mobile et web",
       "internshipRole1": "Développeur logiciel Junior",
       "internshipRole2": "Développeur Web",
       "internshipRole3": "Développeur de jeux vidéo"
     },
     "valentin": {
-      "role": "Conception et Partenariats",
+      "role": "Développeur web, designer",
       "internshipRole1": "Support technique et Web",
       "internshipRole2": "Développeur Frontend",
       "internshipRole3": "Développeur Frontend Junior"
+    },
+    "hugo2": {
+      "role": "Développeur mobile et AR, designer"
     }
   },
   "productPages": {
