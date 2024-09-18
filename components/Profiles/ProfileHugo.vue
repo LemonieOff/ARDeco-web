@@ -1,13 +1,11 @@
 <template>
-    <div class="profile-page-content bottom-right-yellow-fade-background" id="hugo-profile">
+    <div class="profile-page-content bg-port-brown dark:bg-AR-Dark-Grey" id="hugo-profile">
         <div class="sub-content">
             <div class="personal-content card">
                 <img class="hobby" src="../../assets/images/profile-hobbies/lemon.png" alt="Citron">
                 <a href="https://www.linkedin.com/in/hugo-becart/" target="_blank">
                     <img class="profile-picture" src="../../assets/images/profile-pictures/HUGO_.png" alt="Hugo Becart">
                 </a>
-                <div class="black-separation-bar"></div>
-                <div class="orange-separation-bar"></div>
                 <div class="name">Hugo Becart</div>
                 <div id="role-hugo" class="role">{{ content.role }}</div>
             </div>
