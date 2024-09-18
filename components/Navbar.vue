@@ -8,11 +8,11 @@
         <!-- Mobile navbar - BEGIN -->
         <!-- Width w-48 initially from direct testing with users, but set to w-40 while navbar doesn't have longer links -->
         <div v-show="mobileNavbarOpen" class="fixed top-14 w-40 bg-[#333] sm:hidden flex flex-col rounded-br-2xl">
-            <NavbarLink id="team" page-name="lang-team" :page-lang="rawLangPrefix" mobile-display>
-                {{ content.team }}
-            </NavbarLink>
             <NavbarLink id="product" page-name="lang-product" :page-lang=rawLangPrefix mobile-display>
                 {{ content.product }}
+            </NavbarLink>
+            <NavbarLink id="team" page-name="lang-team" :page-lang="rawLangPrefix" mobile-display>
+                {{ content.team }}
             </NavbarLink>
             <NavbarFunction id="theme-button" :fun="toggleDarkMode" mobile-display>
                 {{ darkMode ? content.lightmode : content.darkmode }}
@@ -27,11 +27,11 @@
         </NavbarLink>
 
         <!-- Disappear on mobile - BEGIN -->
-        <NavbarLink id="team" page-name="lang-team" :page-lang="rawLangPrefix" mobile-hidden>
-            {{ content.team }}
-        </NavbarLink>
         <NavbarLink id="product" page-name="lang-product" :page-lang=rawLangPrefix mobile-hidden>
             {{ content.product }}
+        </NavbarLink>
+        <NavbarLink id="team" page-name="lang-team" :page-lang="rawLangPrefix" mobile-hidden>
+            {{ content.team }}
         </NavbarLink>
         <NavbarFunction id="theme-button" :fun="toggleDarkMode" mobile-hidden>
             {{ darkMode ? content.lightmode : content.darkmode }}
