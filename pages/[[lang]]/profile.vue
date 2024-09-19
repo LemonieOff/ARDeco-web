@@ -6,57 +6,61 @@
         </div>
         <div class="profile-wrapper" style="display: none;">
             <div class="profile-elements-wrapper">
-                <div class="element">{{ info.firstName }}<span id="firstName"></span></div>
-                <div class="element2">{{ info.lastName }}<span id="lastName"></span></div>
+                <div class="element">{{ content.informations.firstName }}<span id="firstName"></span></div>
+                <div class="element2">{{ content.informations.lastName }}<span id="lastName"></span></div>
             </div>
             <div class="profile-elements-wrapper">
-                <div class="element">{{ info.email }}<span id="email"></span></div>
-                <div class="element2">{{ info.phone }}<span id="phone"></span></div>
+                <div class="element">{{ content.informations.email }}<span id="email"></span></div>
+                <div class="element2">{{ content.informations.phone }}<span id="phone"></span></div>
             </div>
             <div class="profile-elements-wrapper">
-                <div class="element">{{ info.city }}<span id="city"></span></div>
-                <div class="element2">{{ info.role }}<span id="role"></span></div>
+                <div class="element">{{ content.informations.city }}<span id="city"></span></div>
+                <div class="element2">{{ content.informations.role }}<span id="role"></span></div>
             </div>
             <div class="profile-elements-wrapper">
-                <div class="element">{{ info.savedItems }}<span id="savedItems"></span></div>
-                <div class="element2"><a id="yourFavoriteFurnitures" :href="`${langPrefix}orderHistory`" class="button">{{ info.commandsOrdered }}<span id="commandsOrdered"></span></a></div>
+                <div class="element">{{ content.informations.savedItems }}<span id="savedItems"></span></div>
+                <div class="element2"><a id="yourFavoriteFurnitures" :href="`${langPrefix}orderHistory`" class="button">{{ content.informations.commandsOrdered }}<span id="commandsOrdered"></span></a></div>
             </div>
             <div class="profile-edit-buttons-wrapper">
-                <button id="startEditButton" class="editProfileButton" @click="startEdit">{{ buttons.update }}</button>
-                <a id="deleteAccountButton" class="deleteAccountButton" :href="`${langPrefix}deleteAccount`">{{ buttons.delete }}</a>
+                <button id="startEditButton" class="editProfileButton" @click="startEdit">{{ content.buttons.update }}</button>
+                <a id="deleteAccountButton" class="deleteAccountButton" :href="`${langPrefix}deleteAccount`">{{ content.buttons.delete }}</a>
             </div>
         </div>
 
         <div class="profile-wrapper" style="display: none;">
             <div class="profile-elements-wrapper">
                 <div class="element">
-                    <label id="firstName2" for="first_name_edit">{{ info.firstName }}</label>
+                    <label id="firstName2" for="first_name_edit">{{ content.informations.firstName }}</label>
                     <input type="text" id="first_name_edit" name="first_name">
                 </div>
                 <div class="element2">
-                    <label id="lastName2" for="last_name_edit">{{ info.lastName }}</label>
+                    <label id="lastName2" for="last_name_edit">{{ content.informations.lastName }}</label>
                     <input type="text" id="last_name_edit" name="last_name">
                 </div>
             </div>
             <div class="profile-elements-wrapper">
                 <div class="element">
-                    <label id="email2" for="email_edit">{{ info.email }}</label>
+                    <label id="email2" for="email_edit">{{ content.informations.email }}</label>
                     <input type="text" id="email_edit" name="email">
                 </div>
                 <div class="element2">
-                    <label id="phone2" for="phone_edit">{{ info.phone }}</label>
+                    <label id="phone2" for="phone_edit">{{ content.informations.phone }}</label>
                     <input type="tel" id="phone_edit" name="phone">
                 </div>
             </div>
             <div class="profile-elements-wrapper">
                 <div class="element">
-                    <label id="city2" for="city_edit">{{ info.city }}</label>
+                    <label id="city2" for="city_edit">{{ content.informations.city }}</label>
                     <input type="text" id="city_edit" name="city">
+                </div>
+                <div class="element2">
+                    <label id="password2" for="password_edit">{{ content.informations.password }}</label>
+                    <input type="text" id="password_edit" name="password">
                 </div>
             </div>
             <div class="profile-edit-buttons-wrapper">
-                <button id="cancelEditButton" class="editProfileButton" @click="cancelEdit">{{ buttons.cancel }}</button>
-                <button id="editProfile" class="editProfileButton" @click="confirmEdit">{{ buttons.confirm }}</button>
+                <button id="cancelEditButton" class="editProfileButton" @click="cancelEdit">{{ content.buttons.cancel }}</button>
+                <button id="editProfile" class="editProfileButton" @click="confirmEdit">{{ content.buttons.confirm }}</button>
             </div>
         </div>
 
@@ -83,36 +87,22 @@
 
 <script setup>
 import {isLogged, loggedIn} from "public/ts/checkLogin";
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import {onMounted, ref, provide} from "vue";
 import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
 
-let lang = ref("");
-let content = ref({});
-let info = ref({});
-let buttons = ref({});
-let settings = ref({});
-const langPrefix = ref("");
+const nuxtApp = useNuxtApp();
+
+let lang = ref(nuxtApp.$lang);
+let content = ref(nuxtApp.$content.profile);
+const langPrefix = nuxtApp.$langPrefix;
 const profile = ref({});
 provide('profile', profile);
 
-const nuxtApp = useNuxtApp();
-
 onMounted(async () => {
-    langPrefix.value = nuxtApp.$langPrefix;
-    lang.value = nuxtApp.$lang;
-
     const userID = await isLogged();
     if (!loggedIn) {
         location.href = langPrefix.value + "login";
     }
-
-    // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.profile : fr.profile;
-    info.value = lang.value === 'en' ? en.profile.informations : fr.profile.informations;
-    buttons.value = lang.value === 'en' ? en.profile.buttons : fr.profile.buttons;
-    settings.value = lang.value === 'en' ? en.profile.settings : fr.profile.settings;
 
     // get profile data
     const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
@@ -169,6 +159,7 @@ const confirmEdit = async () => {
     const last_name_field = document.getElementById("last_name_edit").value;
     const city_field = document.getElementById("city_edit").value;
     const phone_field = document.getElementById("phone_edit").value;
+    const password_field = document.getElementById("password_edit").value;
 
     let json = {};
     if (email_field !== "") json.email = email_field;
@@ -176,6 +167,7 @@ const confirmEdit = async () => {
     if (last_name_field !== "") json.last_name = last_name_field;
     if (city_field !== "") json.city = city_field;
     if (phone_field !== "") json.phone = phone_field;
+    if (password_field !== "") json.password = password_field;
 
     const response = await fetch(`https://api.ardeco.app/user/${localStorage.getItem("userID")}`, {
         method: 'PUT',

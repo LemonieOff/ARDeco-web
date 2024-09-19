@@ -201,7 +201,8 @@
       "savedItems": "Élements sauvegardés dans la galerie : ",
       "commandsOrdered": "Nombre de commande(s) : ",
       "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)",
-      "role": "Rôle : "
+      "role": "Rôle : ",
+      "password": "Mot de passe : "
     },
     "loading": "Chargement en cours...",
     "buttons": {

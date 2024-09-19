@@ -201,7 +201,8 @@
       "savedItems": "Saved items in gallery : ",
       "commandsOrdered": "Ordered command(s) : ",
       "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)",
-      "role": "Role : "
+      "role": "Role : ",
+      "password": "Password : "
     },
     "loading": "Loading...",
     "buttons": {
