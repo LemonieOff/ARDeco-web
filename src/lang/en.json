@@ -183,7 +183,15 @@
     "mandatoryFields": "Mandatory fields",
     "consent": "I consent to the processing of my personal data as described in our Privacy Policy",
     "hasRead": "I have read and accept the Terms of Use",
-    "consentNotGiven": "You must consent to the Terms of Use and Privacy Policy to continue."
+    "consentNotGiven": "You must consent to the Terms of Use and Privacy Policy to continue.",
+    "placeholders": {
+      "email": "Enter your email",
+      "password": "Enter your password",
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name",
+      "city": "Enter your city",
+      "phone": "Enter your phone"
+    }
   },
   "profile": {
     "yourFavoriteThemes": "My favorites themes",

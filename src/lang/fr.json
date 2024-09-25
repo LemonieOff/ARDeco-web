@@ -183,7 +183,15 @@
     "mandatoryFields": "Champs obligatoires",
     "consent": "J'accepte que mes données soient collectées et traitées conformément à la Politique de Confidentialité",
     "hasRead": "J'ai lu et j'accepte les Conditions Générales d'Utilisation",
-    "consentNotGiven": "Vous devez accepter les Conditions Générales d'Utilisation et la Politique de Confidentialité pour continuer."
+    "consentNotGiven": "Vous devez accepter les Conditions Générales d'Utilisation et la Politique de Confidentialité pour continuer.",
+    "placeholders": {
+      "email": "Entrez votre email",
+      "password": "Entrez votre mot de passe",
+      "firstName": "Entrez votre prénom",
+      "lastName": "Entrez votre nom de famille",
+      "city": "Entrez votre ville",
+      "phone": "Entrez votre téléphone"
+    }
   },
   "profile": {
     "yourFavoriteThemes": "Mes thèmes favoris",
