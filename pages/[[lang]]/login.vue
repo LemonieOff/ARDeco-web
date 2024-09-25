@@ -1,114 +1,143 @@
 <template>
-    <div id="forms-container">
-        <div id="forms-loading" class="form">
+    <div class="mt-8 mb-4">
+        <div v-if="loading"
+             class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-6 w-1/3 mx-auto text-center rounded-lg">
             {{ content.loading }}
         </div>
-        <div id="forms-wrapper" style="display: none">
-            <div id="login-register-wrapper" class="login-register-wrapper">
-                <div id="login-form" class="form">
-                    <span class="typeTitle">{{ content.loginTitle }}</span>
-                    <div id="email_section_login">
-                        <label id="email" for="email">{{ content.email }}</label>
-                        <input type="text" id="email_login" name="email" placeholder="Email">
-                        <ul id="email_errors_login" class="login-error"></ul>
-                    </div>
-                    <div id="password_section_login">
-                        <label id="password" for="password">{{ content.password }}</label>
-                        <input type="password" id="password_login" name="password" placeholder="Password">
-                        <ul id="password_errors_login" class="login-error"></ul>
-                    </div>
-                    <div id="general_section_login">
-                        <ul id="general_errors_login" class="login-error"></ul>
-                        <ul id="general_success_login" class="login-success"></ul>
-                    </div>
-                    <button id="login" @click="login">{{ content.login }}</button>
+        <div v-else-if="userID" id="user-form">
+            <div id="user-welcome">{{ content.welcome }}<span>{{ userID }}</span>!</div>
+            <button id="logout" @click="logout">{{ content.logout }}</button>
+        </div>
+        <div v-else class="flex items-center justify-center">
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 md:w-[32rem] lg:w-[48rem]">
+                <div class="w-full inline-flex items-center justify-evenly pb-8">
+                    <span class="pr-8">{{ content.loginTitle }}</span>
+                    <label for="formSwitcher" class="relative inline-flex justify-center cursor-pointe">
+                        <input id="formSwitcher" type="checkbox" class="sr-only peer" v-model="activeForm"
+                               true-value="register" false-value="login" />
+                        <span
+                            class="relative w-[3.25rem] h-7 bg-gray-200 hover:bg-gray-300 peer-focus:outline-0 peer-focus:ring-transparent rounded-full transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-600 hover:peer-checked:bg-indigo-700"></span>
+                    </label>
+                    <span class="pl-8">{{ content.registerTitle }}</span>
                 </div>
-                <div id="register-form" class="form">
-                    <span class="typeTitle">{{ content.registerTitle }}</span>
-                    <div class="mandatory_fields">
-                        <span class="gdpr_indication">{{ content.mandatoryFields }}</span>
-                        <div id="email_section_register">
-                            <label id="email2" for="email">{{ content.email }}</label>
-                            <input type="text" id="email_register" name="email" placeholder="Email">
-                            <ul id="email_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="password_section_register">
-                            <label id="password2" for="password">{{ content.password }}</label>
-                            <input type="password" id="password_register" name="password" placeholder="Password">
-                            <ul id="password_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="password_confirm_section_register">
-                            <label id="passwordConfirm" for="password_confirm_register">{{ content.passwordConfirm }}</label>
-                            <input type="password" id="password_confirm_register" name="password_confirm" placeholder="Password">
-                            <ul id="password_confirm_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="first_name_section_register">
-                            <label id="firstName" for="first_name_register">{{ content.firstName }}</label>
-                            <input type="text" id="first_name_register" name="first_name" placeholder="John">
-                            <ul id="first_name_errors_register" class="login-error"></ul>
-                        </div>
-                    </div>
-                    <div class="optional_fields">
-                        <span class="gdpr_indication">{{ content.optionalFields }}</span>
-                        <div id="last_name_section_register">
-                            <label id="lastName" for="last_name_register">{{ content.lastName }}</label>
-                            <input type="text" id="last_name_register" name="last_name" placeholder="DOE">
-                            <ul id="last_name_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="city_section_register">
-                            <label id="city" for="city_register">{{ content.city }}</label>
-                            <input type="text" id="city_register" name="city" placeholder="Berlin">
-                            <ul id="city_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="phone_section_register">
-                            <label id="phone" for="phone_register">{{ content.phone }}</label>
-                            <input type="tel" id="phone_register" name="phone" placeholder="+33601020304">
-                            <ul id="phone_errors_register" class="login-error"></ul>
-                        </div>
-                    </div>
-                    <div class="gdpr_consent">
-                        <div><input type="checkbox" id="checkPolicy"/><label for="checkPolicy">{{ content.consent }}</label></div>
-                        <div><input type="checkbox" id="checkTOS"/><label for="checkTOS">{{ content.hasRead }}</label></div>
-                    </div>
-                    <div id="general_section_register">
-                        <ul id="general_errors_register" class="login-error"></ul>
-                        <ul id="general_success_register" class="login-success"></ul>
-                    </div>
-                    <button id="register" @click="register">{{ content.register }}</button>
+
+                <div class="mb-4">
+                    <label for="loginEmail" class="block text-sm font-bold mb-2">
+                        {{ content.email }} <span class="text-red-500">*</span>
+                    </label>
+                    <input type="email"
+                           id="loginEmail"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           :placeholder="content.placeholders.email"
+                           required
+                           ref="fieldEmail" />
                 </div>
-            </div>
-            <div id="user-form" class="form">
-                <div id="user-welcome">{{ content.welcome }}<span id="user-welcome-id"></span>!</div>
-                <button id="logout" @click="logout">{{ content.logout }}</button>
+                <div class="mb-4">
+                    <label for="loginPassword" class="block text-sm font-bold mb-2">
+                        {{ content.password }} <span class="text-red-500">*</span>
+                    </label>
+                    <input type="password"
+                           id="loginPassword"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           :placeholder="content.placeholders.password"
+                           required
+                           ref="fieldPassword" />
+                </div>
+                <div class="mb-4" v-show="activeForm === 'login'">
+                    <input type="checkbox" id="rememberMe" class="mr-2" ref="loginFieldRememberMe" />
+                    <label for="rememberMe" class="text-sm">Remember me</label>
+                </div>
+                <div class="flex justify-center">
+                    <button v-show="activeForm === 'login'" @click="login"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        {{ content.login }}
+                    </button>
+                </div>
+                <div class="mb-4" v-show="activeForm === 'register'">
+                    <label for="firstName" class="block text-sm font-bold mb-2">
+                        {{ content.firstName }} <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text"
+                           id="firstName"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           :placeholder="content.placeholders.firstName"
+                           ref="fieldFirstName"
+                           required />
+                </div>
+                <div class="mb-4" v-show="activeForm === 'register'">
+                    <label for="lastName" class="block text-sm font-bold mb-2">{{ content.lastName }}</label>
+                    <input type="text"
+                           id="lastName"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           :placeholder="content.placeholders.lastName"
+                           ref="fieldLastName" />
+                </div>
+                <div class="mb-4" v-show="activeForm === 'register'">
+                    <label for="city" class="block text-sm font-bold mb-2">{{ content.city }}</label>
+                    <input type="text"
+                           id="city"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           :placeholder="content.placeholders.city"
+                           ref="fieldCity" />
+                </div>
+                <div class="mb-4" v-show="activeForm === 'register'">
+                    <label for="phoneNumber" class="block text-sm font-bold mb-2">{{ content.phone }}</label>
+                    <input type="tel"
+                           id="phoneNumber"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           :placeholder="content.placeholders.phone"
+                           ref="fieldPhone" />
+                </div>
+                <div class="mb-4" v-show="activeForm === 'register'">
+                    <input type="checkbox" id="privacyConsent" class="mr-2" required ref="fieldPrivacy" />
+                    <label for="privacyConsent" class="text-sm">
+                        I agree to the <a href="#" class="text-blue-500 hover:underline">Privacy Policy</a>
+                    </label>
+                </div>
+                <div class="mb-4" v-show="activeForm === 'register'">
+                    <input type="checkbox" id="tosConsent" class="mr-2" required ref="fieldCgu" />
+                    <label for="tosConsent" class="text-sm">
+                        I agree to the <a href="#" class="text-blue-500 hover:underline">Terms of Service</a>
+                    </label>
+                </div>
+                <input type="hidden" ref="fieldBot" />
+                <div class="flex justify-center">
+                    <button @click="register" v-show="activeForm === 'register'"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        {{ content.register }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import {isLogged, loggedIn, disconnect} from "public/ts/checkLogin";
+import { disconnect, isLogged } from "public/ts/checkLogin";
+import type { ShallowRef } from "vue";
 
 const nuxtApp = useNuxtApp();
-let content = ref(nuxtApp.$content.login);
+const content = ref(nuxtApp.$content.login);
 const langPrefix = ref(nuxtApp.$langPrefix);
+const userID = ref<number | null>();
+const loading = ref(true);
+
+const activeForm = ref("login");
+
+const fieldEmail: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldEmail");
+const fieldPassword: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPassword");
+const fieldFirstName: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldFirstName");
+const fieldLastName: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldLastName");
+const fieldCity: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldCity");
+const fieldPhone: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPhone");
+const fieldPrivacy: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPrivacy");
+const fieldCgu: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldCgu");
+const fieldBot: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldBot");
 
 onMounted(async () => {
-    const userID = await isLogged();
-    if (userID) {
-        if (loggedIn) {
-            document.getElementById("login-register-wrapper").style.display = "none";
-            document.getElementById("user-form").style.display = "default";
-            document.getElementById("user-welcome-id").innerHTML = userID;
-        } else {
-            document.getElementById("login-register-wrapper").style.display = "default";
-            document.getElementById("user-form").style.display = "none";
-        }
-    } else {
-        document.getElementById("login-register-wrapper").style.display = "default";
-        document.getElementById("user-form").style.display = "none";
-    }
-    document.getElementById("forms-loading").style.display = "none";
-    document.getElementById("forms-wrapper").style.display = "flex";
+    userID.value = await isLogged();
+    loading.value = false;
 });
 
 const displayHTMLErrors = (result, response, type) => {
@@ -122,7 +151,7 @@ const displayHTMLErrors = (result, response, type) => {
         "phone": document.getElementById(`phone_errors_${type}`),
         "general": document.getElementById(`general_errors_${type}`),
         "success": document.getElementById(`general_success_${type}`)
-    }
+    };
     Object.values(errors).forEach(error => {
         if (error) {
             error.innerHTML = "";
@@ -180,26 +209,37 @@ const displayHTMLErrors = (result, response, type) => {
             errors.general.appendChild(li);
         }
     }
-}
+};
+
+const validateLogin = (): Boolean => {
+    let errors = 0;
+    if (!fieldEmail.value?.checkValidity()) errors++;
+    if (!fieldPassword.value?.checkValidity()) errors++;
+    return errors === 0;
+};
 
 const login = async () => {
-    const email_field = document.getElementById("email_login").value;
-    const password_field = document.getElementById("password_login").value;
+    if (!validateLogin()) return;
 
-    const response = await fetch('https://api.ardeco.app/login', {
-        method: 'POST',
+    const response = await fetch("https://api.ardeco.app/login", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
-        credentials: 'include',
-        body: JSON.stringify({email: email_field, password: password_field})
+        credentials: "include",
+        body: JSON.stringify({ email: fieldEmail.value?.value, password: fieldPassword.value?.value })
     });
 
     const result = await response.json();
     console.log(result);
 
-    displayHTMLErrors(result, response, "login");
-}
+    localStorage.setItem("userID", result.data["userID"]);
+    localStorage.setItem("role", result.data["role"]);
+    location.reload();
+    // location.href = langPrefix.value + "profile";
+
+    // displayHTMLErrors(result, response, "login");
+};
 
 const register = async () => {
     const email_field = document.getElementById("email_register").value;
@@ -217,12 +257,12 @@ const register = async () => {
         return;
     }
 
-    const response = await fetch('https://api.ardeco.app/register', {
-        method: 'POST',
+    const response = await fetch("https://api.ardeco.app/register", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify({
             email: email_field,
             password: password_field,
@@ -238,27 +278,22 @@ const register = async () => {
     console.log(result);
 
     displayHTMLErrors(result, response, "register");
-}
+};
 
 const logout = async () => {
-    const response = await fetch('https://api.ardeco.app/logout', {
-        method: 'GET',
-        credentials: 'include',
+    const response = await fetch("https://api.ardeco.app/logout", {
+        method: "GET",
+        credentials: "include"
     });
     await disconnect();
-    localStorage.removeItem('lang');
+    localStorage.removeItem("lang");
     const result = await response.text();
     console.log(result);
     location.href = langPrefix.value + "home";
-}
+};
 </script>
 
 <style scoped lang="scss">
-#forms-container {
-    margin-top: 4rem;
-    margin-bottom: 1rem;
-}
-
 button {
     outline-style: solid;
     outline-width: thin;
@@ -310,6 +345,7 @@ button {
                 margin-left: 5px;
             }
         }
+
         margin-top: -3%;
         margin-bottom: -5%;
     }
@@ -344,7 +380,7 @@ button {
     border-radius: 15px;
 }
 
-.login-register-wrapper {
+#login-register-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
