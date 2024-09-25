@@ -101,6 +101,9 @@
                         I agree to the <a href="#" class="text-blue-500 hover:underline">Terms of Service</a>
                     </label>
                 </div>
+                <div v-if="activeForm === 'register' && noConsent" class="text-red-600">
+                    {{ content.consentNotGiven }}
+                </div>
                 <input type="hidden" ref="fieldBot" />
                 <div class="flex justify-center">
                     <button @click="register" v-show="activeForm === 'register'"
@@ -134,6 +137,8 @@ const fieldPhone: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPho
 const fieldPrivacy: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPrivacy");
 const fieldCgu: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldCgu");
 const fieldBot: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldBot");
+
+const noConsent = ref(false);
 
 onMounted(async () => {
     userID.value = await isLogged();
@@ -233,29 +238,33 @@ const login = async () => {
     const result = await response.json();
     console.log(result);
 
-    localStorage.setItem("userID", result.data["userID"]);
-    localStorage.setItem("role", result.data["role"]);
-    location.reload();
-    // location.href = langPrefix.value + "profile";
+    if (result.status === "OK") {
+        localStorage.setItem("userID", result.data["userID"]);
+        localStorage.setItem("role", result.data["role"]);
+        location.reload();
+        // location.href = langPrefix.value + "profile";
+    }
 
     // displayHTMLErrors(result, response, "login");
 };
 
-const register = async () => {
-    const email_field = document.getElementById("email_register").value;
-    const password_field = document.getElementById("password_register").value;
-    const password_confirm_field = document.getElementById("password_confirm_register").value;
-    const first_name_field = document.getElementById("first_name_register").value;
-    const last_name_field = document.getElementById("last_name_register").value;
-    const city_field = document.getElementById("city_register").value;
-    const phone_field = document.getElementById("phone_register").value;
-
-    if (!document.getElementById("checkPolicy").checked || !document.getElementById("checkTOS").checked) {
-        const li = document.createElement("li");
-        li.innerHTML = content.value["consentNotGiven"];
-        document.getElementById("general_errors_register").replaceChildren(li);
-        return;
+const validateRegister = (): Boolean => {
+    let errors = 0;
+    if (!fieldEmail.value?.checkValidity()) errors++;
+    if (!fieldPassword.value?.checkValidity()) errors++;
+    if (!fieldPassword.value?.checkValidity()) errors++;
+    if (!fieldFirstName.value?.checkValidity()) errors++;
+    if (!fieldPrivacy.value?.checkValidity() || !fieldCgu.value?.checkValidity()) {
+        noConsent.value = true;
+        errors++;
+    } else {
+        noConsent.value = false;
     }
+    return errors === 0;
+};
+
+const register = async () => {
+    if (!validateRegister()) return;
 
     const response = await fetch("https://api.ardeco.app/register", {
         method: "POST",
@@ -264,20 +273,27 @@ const register = async () => {
         },
         credentials: "include",
         body: JSON.stringify({
-            email: email_field,
-            password: password_field,
-            password_confirm: password_confirm_field,
-            first_name: first_name_field,
-            last_name: last_name_field,
-            city: city_field,
-            phone: phone_field
+            email: fieldEmail.value?.value,
+            password: fieldPassword.value?.value,
+            password_confirm: fieldPassword.value?.value,
+            first_name: fieldFirstName.value?.value,
+            last_name: fieldLastName.value?.value,
+            city: fieldCity.value?.value,
+            phone: fieldPhone.value?.value
         })
     });
 
     const result = await response.json();
     console.log(result);
 
-    displayHTMLErrors(result, response, "register");
+    if (result.status === "OK") {
+        localStorage.setItem("userID", result.data["id"]);
+        localStorage.setItem("role", result.data["role"]);
+        location.reload();
+        // location.href = langPrefix.value + "profile";
+    }
+
+    // displayHTMLErrors(result, response, "register");
 };
 
 const logout = async () => {
