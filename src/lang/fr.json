@@ -183,6 +183,9 @@
     "mandatoryFields": "Champs obligatoires",
     "consent": "J'accepte que mes données soient collectées et traitées conformément à la Politique de Confidentialité",
     "hasRead": "J'ai lu et j'accepte les Conditions Générales d'Utilisation",
+    "agreement": "J'accepte et consens",
+    "agreementPrivacy": ["J'accepte et consens à la ","Politique de Confidentialité"],
+    "agreementCgu": ["J'accepte et consens aux ","Conditions Générales d'Utilisation"],
     "consentNotGiven": "Vous devez accepter les Conditions Générales d'Utilisation et la Politique de Confidentialité pour continuer.",
     "placeholders": {
       "email": "Entrez votre email",
@@ -191,7 +194,8 @@
       "lastName": "Entrez votre nom de famille",
       "city": "Entrez votre ville",
       "phone": "Entrez votre téléphone"
-    }
+    },
+    "rememberMe": "Se souvenir de moi"
   },
   "profile": {
     "yourFavoriteThemes": "Mes thèmes favoris",

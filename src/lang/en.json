@@ -183,6 +183,9 @@
     "mandatoryFields": "Mandatory fields",
     "consent": "I consent to the processing of my personal data as described in our Privacy Policy",
     "hasRead": "I have read and accept the Terms of Use",
+    "agreement": "I agree and consent to the",
+    "agreementPrivacy": ["I agree and consent to the","Privacy Policy"],
+    "agreementCgu": ["I agree and consent to the","Terms of Service"],
     "consentNotGiven": "You must consent to the Terms of Use and Privacy Policy to continue.",
     "placeholders": {
       "email": "Enter your email",
@@ -191,7 +194,8 @@
       "lastName": "Enter your last name",
       "city": "Enter your city",
       "phone": "Enter your phone"
-    }
+    },
+    "rememberMe": "Remember me"
   },
   "profile": {
     "yourFavoriteThemes": "My favorites themes",
