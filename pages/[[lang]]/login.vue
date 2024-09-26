@@ -12,7 +12,8 @@
             <div
                 class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 md:w-[32rem] lg:w-[48rem]">
                 <div class="w-full inline-flex items-center justify-evenly pb-8">
-                    <span class="pr-8" :class="activeForm === 'login' ? 'font-extrabold underline' : ''" @click="activeForm = 'login'">
+                    <span class="pr-8" :class="activeForm === 'login' ? 'font-extrabold underline' : ''"
+                          @click="activeForm = 'login'">
                         {{ content.loginTitle }}
                     </span>
                     <label for="formSwitcher" class="relative inline-flex justify-center cursor-pointe">
@@ -21,7 +22,8 @@
                         <span
                             class="relative w-[3.25rem] h-7 bg-gray-200 hover:bg-gray-300 peer-focus:outline-0 peer-focus:ring-transparent rounded-full transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-600 hover:peer-checked:bg-indigo-700"></span>
                     </label>
-                    <span class="pl-8" :class="activeForm === 'register' ? 'font-extrabold underline' : ''" @click="activeForm = 'register'">
+                    <span class="pl-8" :class="activeForm === 'register' ? 'font-extrabold underline' : ''"
+                          @click="activeForm = 'register'">
                         {{ content.registerTitle }}
                     </span>
                 </div>
@@ -96,13 +98,17 @@
                 <div class="mb-4" v-show="activeForm === 'register'">
                     <input type="checkbox" id="privacyConsent" class="mr-2" required ref="fieldPrivacy" />
                     <label for="privacyConsent" class="text-sm">
-                        {{ content.agreementPrivacy[0] }} <a :href="`${langPrefix}privacy-policy`" target="_blank" class="text-blue-500 hover:underline">{{ content.agreementPrivacy[1] }}</a> <span class="text-red-500">*</span>
+                        {{ content.agreementPrivacy[0] }} <a :href="`${langPrefix}privacy-policy`" target="_blank"
+                                                             class="text-blue-500 hover:underline">{{ content.agreementPrivacy[1]
+                        }}</a> <span class="text-red-500">*</span>
                     </label>
                 </div>
                 <div class="mb-4" v-show="activeForm === 'register'">
                     <input type="checkbox" id="tosConsent" class="mr-2" required ref="fieldCgu" />
                     <label for="tosConsent" class="text-sm">
-                        {{ content.agreementCgu[0] }} <a :href="`${langPrefix}cgu`" target="_blank" class="text-blue-500 hover:underline">{{ content.agreementCgu[1] }}</a> <span class="text-red-500">*</span>
+                        {{ content.agreementCgu[0] }} <a :href="`${langPrefix}cgu`" target="_blank"
+                                                         class="text-blue-500 hover:underline">{{ content.agreementCgu[1]
+                        }}</a> <span class="text-red-500">*</span>
                     </label>
                 </div>
                 <div v-if="activeForm === 'register' && noConsent" class="text-red-600">
@@ -144,9 +150,18 @@ const fieldBot: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldBot")
 
 const noConsent = ref(false);
 
+const route = useRoute();
+const redirectUrl = ref(langPrefix.value + "profile");
+
 onMounted(async () => {
     userID.value = await isLogged();
     loading.value = false;
+
+    if (route.query["redirect"] && route.query["redirect"] !== "") {
+        // TODO : Check for url (must be a url)
+        redirectUrl.value = route.query["redirect"] as string;
+    }
+    console.log("redirect", redirectUrl);
 });
 
 const validateLogin = (): Boolean => {
@@ -174,8 +189,7 @@ const login = async () => {
     if (result.status === "OK") {
         localStorage.setItem("userID", result.data["userID"]);
         localStorage.setItem("role", result.data["role"]);
-        location.reload();
-        // location.href = langPrefix.value + "profile";
+        location.href = redirectUrl.value;
     } else {
         // TODO : Add error logging to user
     }
@@ -223,7 +237,7 @@ const register = async () => {
         localStorage.setItem("userID", result.data["id"]);
         localStorage.setItem("role", result.data["role"]);
         location.reload();
-        // location.href = langPrefix.value + "profile";
+        location.href = redirectUrl.value;
     } else {
         // TODO : Add error logging to user
     }
