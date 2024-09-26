@@ -158,7 +158,6 @@ onMounted(async () => {
     loading.value = false;
 
     if (route.query["redirect"] && route.query["redirect"] !== "") {
-        // TODO : Check for url (must be a url)
         redirectUrl.value = route.query["redirect"] as string;
     }
     console.log("redirect", redirectUrl);
@@ -198,7 +197,6 @@ const login = async () => {
 const validateRegister = (): Boolean => {
     let errors = 0;
     if (!fieldEmail.value?.checkValidity()) errors++;
-    if (!fieldPassword.value?.checkValidity()) errors++;
     if (!fieldPassword.value?.checkValidity()) errors++;
     if (!fieldFirstName.value?.checkValidity()) errors++;
     if (!fieldPrivacy.value?.checkValidity() || !fieldCgu.value?.checkValidity()) {
