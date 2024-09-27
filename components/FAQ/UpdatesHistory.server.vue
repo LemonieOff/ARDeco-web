@@ -1,5 +1,5 @@
 <template>
-    <div class="centered topMargin title"> Historique de mises à jour </div>
+    <div class="centered topMargin title"> {{ content.updatesHistoryTitle }} </div>
     <div class="centered topMargin bordered bottomMargin">
         <table v-if="updatesData.length">
             <thead>
@@ -21,15 +21,18 @@
                 </tr>
             </tbody>
         </table>
-        <p v-else>Aucune mise à jour disponible pour le moment.</p>
+        <p v-else> {{ content.updatesHistoryError }} </p>
     </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import en from "~/src/lang/en.json";
+import fr from "~/src/lang/fr.json";
 
 const nuxtApp = useNuxtApp();
 const updatesData = ref([]);
+const content = nuxtApp.$lang === 'en' ? en.productPages : fr.productPages
 
 onMounted(async () => {
     await getUpdates();
