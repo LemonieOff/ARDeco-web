@@ -12,112 +12,116 @@
             <div
                 class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 md:w-[32rem] lg:w-[48rem]">
                 <div class="w-full inline-flex items-center justify-evenly pb-8">
-                    <span class="pr-8" :class="activeForm === 'login' ? 'font-extrabold underline' : ''"
+                    <span :class="activeForm === 'login' ? 'font-extrabold underline' : ''" class="pr-8"
                           @click="activeForm = 'login'">
                         {{ content.loginTitle }}
                     </span>
-                    <label for="formSwitcher" class="relative inline-flex justify-center cursor-pointe">
-                        <input id="formSwitcher" type="checkbox" class="sr-only peer" v-model="activeForm"
-                               true-value="register" false-value="login" />
+                    <label class="relative inline-flex justify-center cursor-pointe" for="formSwitcher">
+                        <input id="formSwitcher" v-model="activeForm" class="sr-only peer" false-value="login"
+                               true-value="register" type="checkbox" />
                         <span
                             class="relative w-[3.25rem] h-7 bg-gray-200 hover:bg-gray-300 peer-focus:outline-0 peer-focus:ring-transparent rounded-full transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-600 hover:peer-checked:bg-indigo-700"></span>
                     </label>
-                    <span class="pl-8" :class="activeForm === 'register' ? 'font-extrabold underline' : ''"
+                    <span :class="activeForm === 'register' ? 'font-extrabold underline' : ''" class="pl-8"
                           @click="activeForm = 'register'">
                         {{ content.registerTitle }}
                     </span>
                 </div>
 
                 <div class="mb-4">
-                    <label for="loginEmail" class="block text-sm font-bold mb-2">
+                    <label class="block text-sm font-bold mb-2" for="loginEmail">
                         {{ content.email }} <span class="text-red-500">*</span>
                     </label>
-                    <input type="email"
-                           id="loginEmail"
-                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                    <input id="loginEmail"
+                           ref="fieldEmail"
                            :placeholder="content.placeholders.email"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
                            required
-                           ref="fieldEmail" />
+                           type="email" />
                 </div>
                 <div class="mb-4">
-                    <label for="loginPassword" class="block text-sm font-bold mb-2">
+                    <label class="block text-sm font-bold mb-2" for="loginPassword">
                         {{ content.password }} <span class="text-red-500">*</span>
                     </label>
-                    <input type="password"
-                           id="loginPassword"
-                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                    <input id="loginPassword"
+                           ref="fieldPassword"
                            :placeholder="content.placeholders.password"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
                            required
-                           ref="fieldPassword" />
+                           type="password" />
                 </div>
-                <div class="mb-4" v-show="activeForm === 'login'">
-                    <input type="checkbox" id="rememberMe" class="mr-2" ref="loginFieldRememberMe" />
-                    <label for="rememberMe" class="text-sm">{{ content.rememberMe }}</label>
+                <div v-show="activeForm === 'login'" class="mb-4">
+                    <input id="rememberMe" ref="loginFieldRememberMe" class="mr-2" type="checkbox" />
+                    <label class="text-sm" for="rememberMe">{{ content.rememberMe }}</label>
                 </div>
                 <div class="flex justify-center">
-                    <button v-show="activeForm === 'login'" @click="login"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button v-show="activeForm === 'login'"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            @click="login">
                         {{ content.login }}
                     </button>
                 </div>
-                <div class="mb-4" v-show="activeForm === 'register'">
-                    <label for="firstName" class="block text-sm font-bold mb-2">
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="firstName">
                         {{ content.firstName }} <span class="text-red-500">*</span>
                     </label>
-                    <input type="text"
-                           id="firstName"
-                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
-                           :placeholder="content.placeholders.firstName"
+                    <input id="firstName"
                            ref="fieldFirstName"
-                           required />
-                </div>
-                <div class="mb-4" v-show="activeForm === 'register'">
-                    <label for="lastName" class="block text-sm font-bold mb-2">{{ content.lastName }}</label>
-                    <input type="text"
-                           id="lastName"
+                           :placeholder="content.placeholders.firstName"
                            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           required
+                           type="text" />
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="lastName">{{ content.lastName }}</label>
+                    <input id="lastName"
+                           ref="fieldLastName"
                            :placeholder="content.placeholders.lastName"
-                           ref="fieldLastName" />
-                </div>
-                <div class="mb-4" v-show="activeForm === 'register'">
-                    <label for="city" class="block text-sm font-bold mb-2">{{ content.city }}</label>
-                    <input type="text"
-                           id="city"
                            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="text" />
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="city">{{ content.city }}</label>
+                    <input id="city"
+                           ref="fieldCity"
                            :placeholder="content.placeholders.city"
-                           ref="fieldCity" />
-                </div>
-                <div class="mb-4" v-show="activeForm === 'register'">
-                    <label for="phoneNumber" class="block text-sm font-bold mb-2">{{ content.phone }}</label>
-                    <input type="tel"
-                           id="phoneNumber"
                            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
-                           :placeholder="content.placeholders.phone"
-                           ref="fieldPhone" />
+                           type="text" />
                 </div>
-                <div class="mb-4" v-show="activeForm === 'register'">
-                    <input type="checkbox" id="privacyConsent" class="mr-2" required ref="fieldPrivacy" />
-                    <label for="privacyConsent" class="text-sm">
-                        {{ content.agreementPrivacy[0] }} <a :href="`${langPrefix}privacy-policy`" target="_blank"
-                                                             class="text-blue-500 hover:underline">{{ content.agreementPrivacy[1]
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="phoneNumber">{{ content.phone }}</label>
+                    <input id="phoneNumber"
+                           ref="fieldPhone"
+                           :placeholder="content.placeholders.phone"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="tel" />
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <input id="privacyConsent" ref="fieldPrivacy" class="mr-2" required type="checkbox" />
+                    <label class="text-sm" for="privacyConsent">
+                        {{ content.agreementPrivacy[0] }} <a :href="`${langPrefix}privacy-policy`"
+                                                             class="text-blue-500 hover:underline"
+                                                             target="_blank">{{ content.agreementPrivacy[1]
                         }}</a> <span class="text-red-500">*</span>
                     </label>
                 </div>
-                <div class="mb-4" v-show="activeForm === 'register'">
-                    <input type="checkbox" id="tosConsent" class="mr-2" required ref="fieldCgu" />
-                    <label for="tosConsent" class="text-sm">
-                        {{ content.agreementCgu[0] }} <a :href="`${langPrefix}cgu`" target="_blank"
-                                                         class="text-blue-500 hover:underline">{{ content.agreementCgu[1]
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <input id="tosConsent" ref="fieldCgu" class="mr-2" required type="checkbox" />
+                    <label class="text-sm" for="tosConsent">
+                        {{ content.agreementCgu[0] }} <a :href="`${langPrefix}cgu`"
+                                                         class="text-blue-500 hover:underline"
+                                                         target="_blank">{{ content.agreementCgu[1]
                         }}</a> <span class="text-red-500">*</span>
                     </label>
                 </div>
                 <div v-if="activeForm === 'register' && noConsent" class="text-red-600">
                     {{ content.consentNotGiven }}
                 </div>
-                <input type="hidden" ref="fieldBot" />
+                <input ref="fieldBot" type="hidden" />
                 <div class="flex justify-center">
-                    <button @click="register" v-show="activeForm === 'register'"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button v-show="activeForm === 'register'"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            @click="register">
                         {{ content.register }}
                     </button>
                 </div>
@@ -126,7 +130,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { isLogged, logout } from "public/ts/checkLogin";
 import type { ShallowRef } from "vue";
 
@@ -251,7 +255,7 @@ const logoutUser = async () => {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 #logout {
     outline-style: solid;
     outline-width: thin;
@@ -269,5 +273,9 @@ const logoutUser = async () => {
     div {
         display: block;
     }
+}
+
+input {
+    @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
 }
 </style>
