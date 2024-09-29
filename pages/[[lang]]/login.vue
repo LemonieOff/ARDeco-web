@@ -20,7 +20,7 @@
                         <input id="formSwitcher" v-model="activeForm" class="sr-only peer" false-value="login"
                                true-value="register" type="checkbox" />
                         <span
-                            class="relative w-[3.25rem] h-7 bg-gray-200 hover:bg-gray-300 peer-focus:outline-0 peer-focus:ring-transparent rounded-full transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-600 hover:peer-checked:bg-indigo-700"></span>
+                            class="relative w-[3.25rem] h-7 bg-teal-600 hover:bg-teal-700 peer-focus:outline-0 peer-focus:ring-transparent rounded-full transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pink-500 hover:peer-checked:bg-pink-600"></span>
                     </label>
                     <span :class="activeForm === 'register' ? 'font-extrabold underline' : ''" class="pl-8"
                           @click="activeForm = 'register'">
