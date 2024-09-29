@@ -59,15 +59,26 @@ const isLogged = async () => {
     return userID;
 }
 
-const disconnect = async () => {
+/**
+ * Logout the current logged-in user
+ *
+ * If user is not logged-in, this forces the client to be reset to an "anonymous" state
+ */
+const logout = () => {
     loggedIn = false;
     localStorage.removeItem("userID");
     localStorage.removeItem("role");
 }
 
+/**
+ * @deprecated Use {@link logout} instead
+ */
+const disconnect = logout
+
 export {
     loggedIn,
     userID,
     isLogged,
-    disconnect
+    disconnect,
+    logout
 }
