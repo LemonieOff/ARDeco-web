@@ -19,7 +19,7 @@
     "team": "Notre équipe",
     "product": "Notre produit",
     "profile": "Mon profil",
-    "settings": "Paramètres",
+    "gallery": "Paramètres",
     "company": "Entreprise",
     "tickets": "Support",
     "darkmode": "Mode sombre",
@@ -255,7 +255,16 @@
       "getUserGallery": "Voir ma galerie",
       "currentUserSettingsTitle": "Vos paramètres actuels",
       "language": "Langue",
-      "title": "Paramètres"
+      "notifications": "Notifications",
+      "title": "Paramètres",
+      "yes": "Oui",
+      "no": "Non",
+      "french": "Français",
+      "english": "Anglais",
+      "name": "Nom",
+      "room": "Pièce",
+      "style": "Style",
+      "galleryIsEmpty": "Vous n'avez créé aucune galerie, faites-en une depuis notre application mobile !"
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",

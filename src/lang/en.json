@@ -255,7 +255,16 @@
       "getUserGallery": "Get user gallery",
       "currentUserSettingsTitle" : "Your current settings",
       "language" : "Language",
-      "title" : "Settings"
+      "notifications": "Notifications",
+      "title" : "Settings",
+      "yes": "Yes",
+      "no": "No",
+      "french": "French",
+      "english": "English",
+      "name": "Name",
+      "room": "Room",
+      "style": "Style",
+      "galleryIsEmpty": "Your haven't created a gallery yet, make one using our mobile app !"
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",
