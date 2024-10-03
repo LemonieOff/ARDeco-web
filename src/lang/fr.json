@@ -19,7 +19,7 @@
     "team": "Notre équipe",
     "product": "Notre produit",
     "profile": "Mon profil",
-    "gallery": "Paramètres",
+    "settings": "Paramètres",
     "company": "Entreprise",
     "tickets": "Support",
     "darkmode": "Mode sombre",
@@ -264,7 +264,11 @@
       "name": "Nom",
       "room": "Pièce",
       "style": "Style",
-      "galleryIsEmpty": "Vous n'avez créé aucune galerie, faites-en une depuis notre application mobile !"
+      "galleryIsEmpty": "Vous n'avez créé aucune galerie, faites-en une depuis notre application mobile !",
+      "notificationsActive": "Notifications actives",
+      "publicLastName": "Nom de famille publique",
+      "publicEmailAddress": "Adresse email publique",
+      "newGalleries": "Nouvelles galleries publiques"
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",

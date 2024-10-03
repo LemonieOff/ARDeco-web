@@ -4,17 +4,45 @@
         <hr>
         <div class="left-side-parameters">
             <div class="currentUserSettings">
-                <div class="currentUserSettingsTitle" id="currentUserSettings">{{content.currentUserSettingsTitle}}</div>
-                <div class="optionOnOff">
+                <!-- <div class="currentUserSettingsTitle" id="currentUserSettings">{{content.currentUserSettingsTitle}}</div> -->
+                <div class="parameterOption">
+                    <div class="parameterTitle"> {{ content.notificationsActive }} </div>
+                    <div class="parameterElement">
+                        <span id="notifications_enabled"></span>
+                        <button class="parameterModifier" @click="setSetting('notifications_enabled', !this.settings.notifications_enabled)"> Modifier </button>
+                    </div>
+                </div>
+                <div class="parameterOption">
+                    <div class="parameterTitle"> {{ content.publicLastName}} </div>
+                    <div class="parameterElement">
+                        <span id="display_lastname_on_public"></span>
+                        <button class="parameterModifier" @click="setSetting('display_lastname_on_public', !this.settings.display_lastname_on_public)"> Modifier </button>
+                    </div>
+                </div>
+                <div class="parameterOption">
+                    <div class="parameterTitle"> {{ content.publicEmailAddress }} </div>
+                    <div class="parameterElement">
+                        <span id="display_email_on_public"></span>
+                        <button class="parameterModifier" @click="setSetting('display_email_on_public', !this.settings.display_email_on_public)"> Modifier </button>
+                    </div>
+                </div>
+                <div class="parameterOption">
+                    <div class="parameterTitle"> {{ content.newGalleries }} </div>
+                    <div class="parameterElement">
+                        <span id="automatic_new_gallery_share"></span>
+                        <button class="parameterModifier" @click="setSetting('automatic_new_gallery_share', !this.settings.automatic_new_gallery_share)"> Modifier </button>
+                    </div>
+                </div>
+                <!-- <div class="optionOnOff">
                     <span>{{content.language}} : </span>
                     <span id="currentLang">{{content.no}}</span>
                 </div>
                 <div class="optionOnOff">
                     <span>{{content.notifications}} : </span>
                     <span id="currentNotifications">{{content.no}}</span>
-                </div>
+                </div> -->
             </div>
-            <div class="updateUserSettings">
+            <!-- <div class="updateUserSettings">
                 <button id="setUserSettings" class="buttonSettings" @click="setSettings">{{content.setUserSettings}}</button>
                 <div class="settingsSetter">
                     <span id="languageSetter">{{content.language}} : </span>
@@ -24,7 +52,7 @@
                     <span id="notificationsSetter">{{content.notifications}} : </span>
                     <button class="optionSetter" id="notificationsSetterButton" @click="changeNotificationsButton">{{content.yes}}</button>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="right-side-parameters">
             <div class="centered bordered">
@@ -41,6 +69,9 @@
                             <td>{{ gallery.name }}</td>
                             <td>{{ gallery.room }}</td>
                             <td>{{ gallery.style }}</td>
+                            <!-- <td>
+                                <button>TEST</button>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>
@@ -70,12 +101,14 @@ export default {
             content: {},
             placeholders: {},
             langPrefix: "/",
-            galleryData: []
+            galleryData: [],
+            settings: []
         }
     },
     mounted() {
         this.getGallery();
         let lang = this.urlLang
+        console.log("lang :", lang)
 
         if (lang !== 'en' && lang !== 'fr') {
             if (localStorage.getItem('lang')) {
@@ -91,56 +124,34 @@ export default {
         this.getSettings();
     },
     methods: {
-        async changeLanguageButton() {
+        // async changeNotificationsButton() {
+        //     await isLogged();
+        //     if (!loggedIn) {
+        //         location.href = this.langPrefix + "login";
+        //     }
+        //     console.log("document.getElementById('notificationsSetterButton').innerHTML = ", document.getElementById('notificationsSetterButton').innerHTML)
+        //     if (document.getElementById('notificationsSetterButton').innerHTML == this.content.yes) {
+        //         document.getElementById('notificationsSetterButton').innerHTML = this.content.no;
+        //         document.getElementById('notificationsSetterButton').style.backgroundColor = "red";
+        //     } else {
+        //         document.getElementById('notificationsSetterButton').innerHTML = this.content.yes;
+        //         document.getElementById('notificationsSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
+        //     }
+        // },
+        async setSetting(optionName, optionEffect) {
             await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            console.log("document.getElementById('languageSetterButton').innerHTML = ", document.getElementById('languageSetterButton').innerHTML)
-            if (document.getElementById('languageSetterButton').innerHTML == this.content.french) {
-                document.getElementById('languageSetterButton').innerHTML = this.content.english;
-                document.getElementById('languageSetterButton').style.backgroundColor = "red";
-            } else {
-                document.getElementById('languageSetterButton').innerHTML = this.content.french;
-                document.getElementById('languageSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
-            }
-        },
-        async changeNotificationsButton() {
-            await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
-            console.log("document.getElementById('notificationsSetterButton').innerHTML = ", document.getElementById('notificationsSetterButton').innerHTML)
-            if (document.getElementById('notificationsSetterButton').innerHTML == this.content.yes) {
-                document.getElementById('notificationsSetterButton').innerHTML = this.content.no;
-                document.getElementById('notificationsSetterButton').style.backgroundColor = "red";
-            } else {
-                document.getElementById('notificationsSetterButton').innerHTML = this.content.yes;
-                document.getElementById('notificationsSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
-            }
-        },
-        async setSettings() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
-            let lang = 'fr';
-            let notifs = true;
-            if (document.querySelector('#languageSetterButton').innerHTML == this.content.english) {
-                lang = 'en';
-            }
-            if (document.querySelector('#notificationsSetterButton').innerHTML == this.content.no) {
-                notifs = false;
-            }
-            console.log(lang, notifs, true, userID, 'https://api.ardeco.app/settings');
+            console.log(optionName, optionEffect);
+
             const response = await fetch('https://api.ardeco.app/settings', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    "language": lang,
-                    "notifications_enabled": notifs,
+                    [optionName]: optionEffect,
                 }),
                 credentials: 'include',
             });
@@ -149,10 +160,15 @@ export default {
             console.log(result);
             if (result.code == 200) {
                 this.$refs.notifications.showSuccess("Parameters changed successfully.");
-                localStorage.setItem('lang', lang);
+                if (optionEffect) {
+                    document.getElementById([optionName]).textContent = "Oui";
+                } else {
+                    document.getElementById([optionName]).textContent = "Non"
+                }
             } else {
                 this.$refs.notifications.showError("Error : We couldn't change your parameters, please try again.");
             }
+            this.getSettings();
         },
         async getSettings() {
             await isLogged();
@@ -168,20 +184,30 @@ export default {
             });
 
             const result = await response.json();
+            this.settings = result.data;
 
             console.log(result);
             if (result.code == 200) {
-                if (result.data.language == "fr") {
-                    document.getElementById('currentLang').innerHTML = this.content.french;
+                if (this.settings.notifications_enabled == true) {
+                    document.getElementById("notifications_enabled").textContent = this.content.yes;
                 } else {
-                    document.getElementById('currentLang').innerHTML = this.content.english;
+                    document.getElementById("notifications_enabled").textContent = this.content.no;
                 }
-                if (result.data.notifications_enabled == true) {
-                    document.getElementById('currentNotifications').innerHTML = this.content.yes;
+                if (this.settings.display_lastname_on_public == true) {
+                    document.getElementById("display_lastname_on_public").textContent = this.content.yes;
                 } else {
-                    document.getElementById('currentNotifications').innerHTML = this.content.no;
+                    document.getElementById("display_lastname_on_public").textContent = this.content.no;
                 }
-                localStorage.setItem('dark_mode', result.data.dark_mode);
+                if (this.settings.display_email_on_public == true) {
+                    document.getElementById("display_email_on_public").textContent = this.content.yes;
+                } else {
+                    document.getElementById("display_email_on_public").textContent = this.content.no;
+                }
+                if (this.settings.automatic_new_gallery_share == true) {
+                    document.getElementById("automatic_new_gallery_share").textContent = this.content.yes;
+                } else {
+                    document.getElementById("automatic_new_gallery_share").textContent = this.content.no;
+                }
             } else {
                 this.$refs.notifications.showError("Error : Couldn't receive your current settings, please try again later.");
             }
@@ -213,6 +239,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/ProfileSettings.scss";
+@import '@/styles/variables/ColorVariables.scss';
 
 .navbar-top-space {
     height: 10vh;
@@ -241,9 +268,9 @@ export default {
 
 .currentUserSettings {
     background-color: #F4F4F4;
-    min-height: 15%;
     align-self: center;
     border-radius: 10px;
+    padding: 10px;
 }
 
 .currentUserSettingsTitle {
@@ -251,9 +278,33 @@ export default {
     font-weight: bold;
 }
 
-.optionOnOff {
-    padding: 1%;
+.parameterOption {
+    width: 90%;
+    margin-left: 5%;
+    text-align: left;
+    padding: 10px;
 }
+
+.parameterTitle {
+    color: gray;
+}
+
+.parameterElement {
+    font-size: 14px;
+}
+
+.parameterModifier {
+    border: 1px solid $primary-black;
+    border-radius: 5px;
+    background-color: $background-main-theme;
+    padding: 5px;
+    float: right;
+    margin-top: -15px;
+}
+
+// .optionOnOff {
+//     padding: 1%;
+// }
 
 .updateUserSettings {
     margin-top: 10%;
