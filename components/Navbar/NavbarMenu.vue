@@ -28,13 +28,13 @@
                     {{ content.feedback }}
                 </NavbarMenuLink>
 
-                <NavbarMenuFunction v-if="userId" id="logoutMenuOption" :fun="logout"
+                <NavbarMenuFunction v-if="userId" id="logoutMenuOption" :fun="logoutUser"
                                     image-src="images/icons/logout.webp" :alt="content.disconnect">
                     {{ content.disconnect }}
                 </NavbarMenuFunction>
 
                 <NavbarMenuLink v-if="!userId" id="loginMenuOption" page-name="lang-login" :page-lang="langPrefix"
-                                image-src="images/icons/logout.webp" :alt="content.login">
+                                image-src="images/icons/logout.webp" :alt="content.login" :page-redirect="route.path">
                     {{ content.login }}
                 </NavbarMenuLink>
             </ul>
@@ -47,9 +47,10 @@
 </template>
 
 <script setup lang="ts">
-import {disconnect, isLogged, loggedIn} from "public/ts/checkLogin";
+import {logout, isLogged, loggedIn} from "public/ts/checkLogin";
 
 const nuxtApp = useNuxtApp();
+const route = useRoute();
 
 const langPrefix = nuxtApp.$rawLangPrefix;
 const content = nuxtApp.$content.navBar;
@@ -65,13 +66,13 @@ onMounted(async () => {
     await getUSerPicture();
 });
 
-async function logout() {
+async function logoutUser() {
     await fetch('https://api.ardeco.app/logout', {
         method: 'GET',
         credentials: 'include',
     });
     imageSrc.value = nuxtApp.$changeProfilePicture().url;
-    await disconnect();
+    logout();
     location.href = langPrefix;
 }
 
@@ -94,7 +95,7 @@ async function getUSerPicture() {
     nuxtApp.$changeProfilePicture(result.data);
 }
 
-async function menuToggle() {
+function menuToggle() {
     const toggleMenu = document.getElementById("navbarMenu");
     if (toggleMenu) toggleMenu.classList.toggle("invisible");
 }
