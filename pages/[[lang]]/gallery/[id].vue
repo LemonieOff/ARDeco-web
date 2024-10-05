@@ -37,8 +37,12 @@
             {{ content.confirm }}
         </button>
         <div id="textEncouragement" class="textReportJustification" hidden> {{ content.textReportEncouragement }}</div>
-        <div id="errorText" class="textReportJustification errorHandler" hidden></div>
-        <div id="successText" class="textReportJustification successHandler"></div>
+        <div id="errorText" class="textReportJustification" hidden></div>
+        <div id="successText" class="textReportJustification"></div>
+        <div class="stage">
+            <div class="heart" :class="{ 'is-active': isLiked }" @click="handleLike"></div>
+            <div id="numberOfLikes"></div>
+        </div>
     </div>
     <CommentSection :galleryId="this.GalleryData.id"/>
     <Notifications ref="notifications"/>
@@ -49,6 +53,7 @@ import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
+import $ from 'jquery';
 
 export default {
     name: "Gallery",
@@ -63,6 +68,7 @@ export default {
             UserData: [],
             errorMessage: '',
             successMessage: '',
+            isLiked: false,
             content: this.$lang === 'en' ? en.gallery : fr.gallery,
             urlLang: this.$urlLang,
             langPrefix: this.$langPrefix,
@@ -72,7 +78,15 @@ export default {
         await this.checkLogin();
         const id = this.$route.params.id;
         await this.getGallery(id);
-        console.log(this.galleryUserId, "/", this.userID)
+        await this.getNumberOfLikes();
+        await this.getLikeStatus();
+        // console.log(this.galleryUserId, "/", this.userID)
+
+        $(function() {
+            $(".heart").on("click", function() {
+                $(this).toggleClass("is-active");
+            });
+        });
     },
     methods: {
         async checkLogin() {
@@ -104,10 +118,10 @@ export default {
 
                 const result = await response.json();
                 // TODO : Divide into better props, and adapt to ?user_details url (with new user result)
-                console.log("RESULT : ", result);
+                // console.log("RESULT : ", result);
                 this.GalleryData = result.data;
                 this.galleryUserId = this.GalleryData.user.id;
-                console.log(this.galleryUserId, "/", this.userID)
+                // console.log(this.galleryUserId, "/", this.userID)
             } catch (error) {
                 console.error(error.message);
                 this.errorMessage = error.message;
@@ -169,7 +183,7 @@ export default {
                     credentials: 'include',
                 });
                 const result = await response.json();
-                console.log(result)
+                // console.log(result)
                 if (!response.ok) {
                     successDiv.hidden = true;
                     errorDiv.hidden = false;
@@ -208,12 +222,79 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);
+            // console.log(result);
             if (result.code === 200) {
                 this.$refs.notifications.showSuccess(result.description)
             } else {
                 this.$refs.notifications.showError(result.description)
             }
+        },
+
+        async getNumberOfLikes() {
+            const response = await fetch('https://api.ardeco.app/likes/gallery/' + this.GalleryData.id, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 200) {
+                document.getElementById("numberOfLikes").innerHTML = result.data;
+            } else {
+                this.$refs.notifications.showError("Error: Impossible de récupérer les informations des likes, réessayez plus tard.");
+            }
+        },
+
+        async getLikeStatus() {
+            const response = await fetch('https://api.ardeco.app/likes/user/' + this.userID + '/gallery/' + this.GalleryData.id, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log("getLikeStatus:", result);
+            if (result.code === 200) {
+                this.isLiked = result.data === true;
+            } else {
+                this.$refs.notifications.showError("Error: Impossible de savoir si l'utilisateur a liké cette galerie, réessayez plus tard.");
+            }
+        },
+
+        async handleLike() {
+            let response;
+            if (this.isLiked == false) {
+                response = await fetch('https://api.ardeco.app/likes/gallery/' + this.GalleryData.id, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                });
+            } else {
+                response = await fetch('https://api.ardeco.app/likes/gallery/' + this.GalleryData.id, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                });
+            }
+
+            const result = await response.json();
+            console.log(result);
+            if (result.code === 201) {
+                this.isLiked = !this.isLiked;
+            } else {
+                this.$refs.notifications.showError("Error: Impossible de liker ou unlike la galerie, réessayez plus tard.");
+            }
+            this.getNumberOfLikes();
+            response = null;
         },
     }
 }
@@ -280,6 +361,36 @@ export default {
     background-color: #F4F4F4;
     border: 1px solid $primary-red;
     color: $primary-red;
+}
+
+// Animation du like (test)
+
+.heart {
+    width: 100px;
+    height: 100px;
+    background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+    transition: background-position 1s steps(28);
+    transition-duration: 0s;
+    
+    &.is-active {
+        transition-duration: 1s;
+        background-position: -2800px 0;
+    }
+}
+
+.stage {
+    margin-left: 90%;
+    margin-top: -2.5%;
+    width: 10%;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+}
+
+#numberOfLikes {
+    font-size: 20px;
+    align-content: center;
 }
 
 </style>
