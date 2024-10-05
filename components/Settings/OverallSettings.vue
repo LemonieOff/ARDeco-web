@@ -33,26 +33,7 @@
                         <button class="parameterModifier" @click="setSetting('automatic_new_gallery_share', !this.settings.automatic_new_gallery_share)"> Modifier </button>
                     </div>
                 </div>
-                <!-- <div class="optionOnOff">
-                    <span>{{content.language}} : </span>
-                    <span id="currentLang">{{content.no}}</span>
-                </div>
-                <div class="optionOnOff">
-                    <span>{{content.notifications}} : </span>
-                    <span id="currentNotifications">{{content.no}}</span>
-                </div> -->
             </div>
-            <!-- <div class="updateUserSettings">
-                <button id="setUserSettings" class="buttonSettings" @click="setSettings">{{content.setUserSettings}}</button>
-                <div class="settingsSetter">
-                    <span id="languageSetter">{{content.language}} : </span>
-                    <button class="optionSetter" id="languageSetterButton" @click="changeLanguageButton">{{content.french}}</button>
-                </div>
-                <div class="settingsSetter">
-                    <span id="notificationsSetter">{{content.notifications}} : </span>
-                    <button class="optionSetter" id="notificationsSetterButton" @click="changeNotificationsButton">{{content.yes}}</button>
-                </div>
-            </div> -->
         </div>
         <div class="right-side-parameters">
             <div class="centered bordered">
@@ -69,9 +50,6 @@
                             <td>{{ gallery.name }}</td>
                             <td>{{ gallery.room }}</td>
                             <td>{{ gallery.style }}</td>
-                            <!-- <td>
-                                <button>TEST</button>
-                            </td> -->
                         </tr>
                     </tbody>
                 </table>
@@ -85,7 +63,7 @@
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
@@ -124,20 +102,6 @@ export default {
         this.getSettings();
     },
     methods: {
-        // async changeNotificationsButton() {
-        //     await isLogged();
-        //     if (!loggedIn) {
-        //         location.href = this.langPrefix + "login";
-        //     }
-        //     console.log("document.getElementById('notificationsSetterButton').innerHTML = ", document.getElementById('notificationsSetterButton').innerHTML)
-        //     if (document.getElementById('notificationsSetterButton').innerHTML == this.content.yes) {
-        //         document.getElementById('notificationsSetterButton').innerHTML = this.content.no;
-        //         document.getElementById('notificationsSetterButton').style.backgroundColor = "red";
-        //     } else {
-        //         document.getElementById('notificationsSetterButton').innerHTML = this.content.yes;
-        //         document.getElementById('notificationsSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
-        //     }
-        // },
         async setSetting(optionName, optionEffect) {
             await isLogged();
             if (!loggedIn) {
