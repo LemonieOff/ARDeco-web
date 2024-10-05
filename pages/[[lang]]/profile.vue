@@ -83,28 +83,41 @@
             </div>
         </div>
     </div>
+    <Notifications ref="notifications"/>
 </template>
 
 <script setup>
 import {isLogged, loggedIn} from "public/ts/checkLogin";
 import {onMounted, ref, provide} from "vue";
 import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
+import Notifications from "@/components/Notifications.vue";
 
 const nuxtApp = useNuxtApp();
 
 let lang = ref(nuxtApp.$lang);
 let content = ref(nuxtApp.$content.profile);
+let userID = 0;
 const langPrefix = nuxtApp.$langPrefix;
 const profile = ref({});
+const notifications = ref(null);
 provide('profile', profile);
 
 onMounted(async () => {
-    const userID = await isLogged();
+    userID = await isLogged();
     if (!loggedIn) {
         location.href = langPrefix.value + "login";
     }
 
-    // get profile data
+    await getProfileElements();
+
+    // Remove loading and display profile
+    document.getElementById("profile-loading").style.display = "none";
+    document.getElementById("profileSettings").style.display = "block";
+    document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
+    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block'
+});
+
+const getProfileElements = async () => {
     const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
         method: 'GET',
         credentials: 'include',
@@ -113,7 +126,7 @@ onMounted(async () => {
     const result_profile = data_profile.data;
     profile.value = result_profile;
 
-    // get gallery number data
+
     const response_gallery = await fetch(`https://api.ardeco.app/gallery/user/${userID}`, {
         method: 'GET',
         credentials: 'include',
@@ -121,7 +134,7 @@ onMounted(async () => {
     const data_gallery = await response_gallery.json();
     const result_gallery = data_gallery.data;
 
-    // get gallery number data
+
     const response_order_history = await fetch(`https://api.ardeco.app/order_history/user/${userID}`, {
         method: 'GET',
         credentials: 'include',
@@ -142,13 +155,7 @@ onMounted(async () => {
     document.getElementById("email_edit").placeholder = result_profile.email;
     document.getElementById("phone_edit").placeholder = result_profile.phone;
     document.getElementById("city_edit").placeholder = result_profile.city;
-
-    // Remove loading and display profile
-    document.getElementById("profile-loading").style.display = "none";
-    document.getElementById("profileSettings").style.display = "block";
-    document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block'
-});
+}
 
 const confirmEdit = async () => {
     document.getElementsByClassName("profile-wrapper")[0].style.display = 'block';
@@ -180,7 +187,13 @@ const confirmEdit = async () => {
 
     const result = await response.json();
     console.log(result);
-    location.reload();
+
+    if (result.code == 200) {
+        notifications.value.showSuccess("Informations modifiées avec succès");
+        await getProfileElements()
+    } else {
+        notifications.value.showError("Error: Impossible de modifier les informations pour le moment, réessayez plus tard.");
+    }
 }
 
 const startEdit = async () => {

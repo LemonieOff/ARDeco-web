@@ -47,12 +47,14 @@
             </span>
         </div>
     </div>
+    <Notifications ref="notifications"/>
 </template>
 
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "TicketPage",
@@ -100,6 +102,12 @@ export default {
 
             const result = await response.json();
             console.log(result);
+
+            if (result.code == 200) {
+                this.$refs.notifications.showSuccess("Le ticket a été créé avec succès.");
+            } else {
+                this.$refs.notifications.showError("Error: Impossible de créer le ticket pour le moment, réessayez plus tard.");
+            }
 
             this.$refs.titleInput.value = "";
             this.$refs.descriptionInput.value = "";
@@ -197,6 +205,12 @@ export default {
 
             const result = await response.json();
             console.log("result", result);
+
+            if (result.code == 200) {
+                this.$refs.notifications.showSuccess("Le ticket a été clos avec succès.");
+            } else {
+                this.$refs.notifications.showError("Error: Impossible de clore le ticket pour le moment, réessayez plus tard.");
+            }
 
             this.$refs.responseInput.value = "";
             await this.receiveTicketDetails(this.currentTicketID);

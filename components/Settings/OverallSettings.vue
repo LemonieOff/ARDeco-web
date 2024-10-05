@@ -2,44 +2,74 @@
     <div class="text-center font-bold text-xl md:text-4xl my-8">{{content.title}}</div>
     <div class="parameters">
         <hr>
-        <div class="center-side-parameters">
+        <div class="left-side-parameters">
             <div class="currentUserSettings">
-                <div class="currentUserSettingsTitle" id="currentUserSettings">{{content.currentUserSettingsTitle}}</div>
-                <div class="optionOnOff">
-                    <span>{{content.language}} : </span>
-                    <span id="currentLang">OFF</span>
+                <div class="parameterOption">
+                    <div class="parameterTitle"> {{ content.notificationsActive }} </div>
+                    <div class="parameterElement">
+                        <span id="notifications_enabled"></span>
+                        <button class="parameterModifier" @click="setSetting('notifications_enabled', !this.settings.notifications_enabled)"> Modifier </button>
+                    </div>
                 </div>
-                <div class="optionOnOff">
-                    <span>Notifications : </span>
-                    <span id="currentNotifications">OFF</span>
+                <div class="parameterOption">
+                    <div class="parameterTitle"> {{ content.publicLastName}} </div>
+                    <div class="parameterElement">
+                        <span id="display_lastname_on_public"></span>
+                        <button class="parameterModifier" @click="setSetting('display_lastname_on_public', !this.settings.display_lastname_on_public)"> Modifier </button>
+                    </div>
+                </div>
+                <div class="parameterOption">
+                    <div class="parameterTitle"> {{ content.publicEmailAddress }} </div>
+                    <div class="parameterElement">
+                        <span id="display_email_on_public"></span>
+                        <button class="parameterModifier" @click="setSetting('display_email_on_public', !this.settings.display_email_on_public)"> Modifier </button>
+                    </div>
+                </div>
+                <div class="parameterOption">
+                    <div class="parameterTitle"> {{ content.newGalleries }} </div>
+                    <div class="parameterElement">
+                        <span id="automatic_new_gallery_share"></span>
+                        <button class="parameterModifier" @click="setSetting('automatic_new_gallery_share', !this.settings.automatic_new_gallery_share)"> Modifier </button>
+                    </div>
                 </div>
             </div>
-            <div class="updateUserSettings">
-                <button id="setUserSettings" class="buttonSettings" @click="setSettings">{{content.setUserSettings}}</button>
-                <div class="settingsSetter">
-                    <span id="languageSetter">{{content.language}} : </span>
-                    <button class="optionSetter" id="languageSetterButton" @click="changeLanguageButton">FR</button>
-                </div>
-                <div class="settingsSetter">
-                    <span id="notificationsSetter">Notifications : </span>
-                    <button class="optionSetter" id="notificationsSetterButton" @click="changeNotificationsButton">ON</button>
-                </div>
-            </div>
-            <button id="getUserGallery" class="buttonSettings" style="margin-top: 10%;" @click="getGallery">{{content.getUserGallery}}</button>
         </div>
         <div class="right-side-parameters">
-            <div id="reponseText" class="buttonSettingsResponse"></div>
+            <div class="centered bordered">
+                <table v-if="galleryData.length">
+                    <thead>
+                        <tr>
+                            <th>{{content.name}}</th>
+                            <th>{{content.room}}</th>
+                            <th>{{content.style}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="gallery in galleryData" :key="gallery.id">
+                            <td>{{ gallery.name }}</td>
+                            <td>{{ gallery.room }}</td>
+                            <td>{{ gallery.style }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p v-else>{{content.galleryIsEmpty}}</p>
+            </div>
         </div>
     </div>
+    <Notifications ref="notifications"/>
 </template>
 
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "OverallSettings",
+    components: {
+        Notifications
+    },
     props: {
         urlLang: String | null
     },
@@ -47,11 +77,15 @@ export default {
         return {
             content: {},
             placeholders: {},
-            langPrefix: "/"
+            langPrefix: "/",
+            galleryData: [],
+            settings: []
         }
     },
     mounted() {
+        this.getGallery();
         let lang = this.urlLang
+        console.log("lang :", lang)
 
         if (lang !== 'en' && lang !== 'fr') {
             if (localStorage.getItem('lang')) {
@@ -67,56 +101,20 @@ export default {
         this.getSettings();
     },
     methods: {
-        async changeLanguageButton() {
+        async setSetting(optionName, optionEffect) {
             await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            console.log("document.getElementById('languageSetterButton').innerHTML = ", document.getElementById('languageSetterButton').innerHTML)
-            if (document.getElementById('languageSetterButton').innerHTML == "FR") {
-                document.getElementById('languageSetterButton').innerHTML = "EN";
-                document.getElementById('languageSetterButton').style.backgroundColor = "red";
-            } else {
-                document.getElementById('languageSetterButton').innerHTML = "FR";
-                document.getElementById('languageSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
-            }
-        },
-        async changeNotificationsButton() {
-            await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
-            console.log("document.getElementById('notificationsSetterButton').innerHTML = ", document.getElementById('notificationsSetterButton').innerHTML)
-            if (document.getElementById('notificationsSetterButton').innerHTML == "ON") {
-                document.getElementById('notificationsSetterButton').innerHTML = "OFF";
-                document.getElementById('notificationsSetterButton').style.backgroundColor = "red";
-            } else {
-                document.getElementById('notificationsSetterButton').innerHTML = "ON";
-                document.getElementById('notificationsSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
-            }
-        },
-        async setSettings() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
-            let lang = 'fr';
-            let notifs = true;
-            if (document.querySelector('#languageSetterButton').innerHTML == "EN") {
-                lang = 'en';
-            }
-            if (document.querySelector('#notificationsSetterButton').innerHTML == "OFF") {
-                notifs = false;
-            }
-            console.log(lang, notifs, true, userID, 'https://api.ardeco.app/settings');
+            console.log(optionName, optionEffect);
+
             const response = await fetch('https://api.ardeco.app/settings', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    "language": lang,
-                    "notifications_enabled": notifs,
+                    [optionName]: optionEffect,
                 }),
                 credentials: 'include',
             });
@@ -124,12 +122,16 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code == 200) {
-                document.getElementById('reponseText').innerHTML = result.description;
-                localStorage.setItem('lang', lang);
+                this.$refs.notifications.showSuccess("Parameters changed successfully.");
+                if (optionEffect) {
+                    document.getElementById([optionName]).textContent = "Oui";
+                } else {
+                    document.getElementById([optionName]).textContent = "Non"
+                }
             } else {
-                document.getElementById('reponseText').innerHTML = result.description;
+                this.$refs.notifications.showError("Error : We couldn't change your parameters, please try again.");
             }
-            location.reload()
+            this.getSettings();
         },
         async getSettings() {
             await isLogged();
@@ -145,22 +147,32 @@ export default {
             });
 
             const result = await response.json();
+            this.settings = result.data;
 
             console.log(result);
             if (result.code == 200) {
-                if (result.data.language == "fr") {
-                    document.getElementById('currentLang').innerHTML = "FR";
+                if (this.settings.notifications_enabled == true) {
+                    document.getElementById("notifications_enabled").textContent = this.content.yes;
                 } else {
-                    document.getElementById('currentLang').innerHTML = "EN";
+                    document.getElementById("notifications_enabled").textContent = this.content.no;
                 }
-                if (result.data.notifications_enabled == true) {
-                    document.getElementById('currentNotifications').innerHTML = "ON";
+                if (this.settings.display_lastname_on_public == true) {
+                    document.getElementById("display_lastname_on_public").textContent = this.content.yes;
                 } else {
-                    document.getElementById('currentNotifications').innerHTML = "OFF";
+                    document.getElementById("display_lastname_on_public").textContent = this.content.no;
                 }
-                localStorage.setItem('dark_mode', result.data.dark_mode);
+                if (this.settings.display_email_on_public == true) {
+                    document.getElementById("display_email_on_public").textContent = this.content.yes;
+                } else {
+                    document.getElementById("display_email_on_public").textContent = this.content.no;
+                }
+                if (this.settings.automatic_new_gallery_share == true) {
+                    document.getElementById("automatic_new_gallery_share").textContent = this.content.yes;
+                } else {
+                    document.getElementById("automatic_new_gallery_share").textContent = this.content.no;
+                }
             } else {
-                document.getElementById('reponseText').innerHTML = result.description;
+                this.$refs.notifications.showError("Error : Couldn't receive your current settings, please try again later.");
             }
         },
         async getGallery() {
@@ -177,18 +189,11 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);
-            document.getElementById('reponseText').innerHTML = '';
+            this.galleryData = result.data;
             if (result.code == 200 && result.data.length == 0) {
-                document.getElementById('reponseText').innerHTML = 'Gallery empty';
-            } else {
-                for (let i = 0; i < result.data.length; i++) {
-                    document.getElementById('reponseText').innerHTML += 
-                        '<p>' + (i + 1) + '. ' + `${result.data[i].name}` +
-                        ' - ' + `${result.data[i].room_type}` + 
-                        ' - ' + `${result.data[i].description}` +
-                        ' - ' + `${result.data[i].id}` + '</p>';
-                }
+                this.$refs.notifications.showSuccess("Your personnal gallery is currently empty.");
+            } else if (result.code != 200) {
+                this.$refs.notifications.showError("Error : We couldn't the informations of your gallery.");
             }
         }
     }
@@ -197,6 +202,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/ProfileSettings.scss";
+@import '@/styles/variables/ColorVariables.scss';
 
 .navbar-top-space {
     height: 10vh;
@@ -208,28 +214,26 @@ export default {
 }
 
 .parameters {
+    margin-top: 5%;
     display: inline-flex;
-    min-height: 100%;
-    width: 50%;
-    margin-left: 25%;
+    width: 70%;
+    margin-left: 15%;
 }
 
-.center-side-parameters {
-    width: 50%;
+.left-side-parameters {
+    width: 30%;
     text-align: center;
 }
 
 .right-side-parameters {
-    width: 50%;
+    width: 70%;
 }
 
 .currentUserSettings {
     background-color: #F4F4F4;
-    margin-left: 20%;
-    width: 60%;
-    min-height: 15%;
     align-self: center;
-    border-radius: 20px;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .currentUserSettingsTitle {
@@ -237,18 +241,40 @@ export default {
     font-weight: bold;
 }
 
-.optionOnOff {
-    padding: 1%;
+.parameterOption {
+    width: 90%;
+    margin-left: 5%;
+    text-align: left;
+    padding: 10px;
 }
+
+.parameterTitle {
+    color: gray;
+}
+
+.parameterElement {
+    font-size: 14px;
+}
+
+.parameterModifier {
+    border: 1px solid $primary-black;
+    border-radius: 5px;
+    background-color: $background-main-theme;
+    padding: 5px;
+    float: right;
+    margin-top: -15px;
+}
+
+// .optionOnOff {
+//     padding: 1%;
+// }
 
 .updateUserSettings {
     margin-top: 10%;
     background-color: #F4F4F4;
-    margin-left: 20%;
-    width: 60%;
     min-height: 15%;
     align-self: center;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 #setUserSettings {
@@ -296,7 +322,40 @@ button {
     width: 60%;
     height: 100%;
     align-self: center;
-    border-radius: 20px;
+    border-radius: 10px;
+}
+
+.centered {
+    width: 60%;
+    margin-left: 20%;
+    text-align: center;
+}
+
+.bottomMargin {
+    margin-bottom: 50px;
+}
+
+.bordered {
+    border: 1px solid #846700;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
 </style>
