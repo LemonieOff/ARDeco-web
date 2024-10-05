@@ -4,7 +4,6 @@
         <hr>
         <div class="left-side-parameters">
             <div class="currentUserSettings">
-                <!-- <div class="currentUserSettingsTitle" id="currentUserSettings">{{content.currentUserSettingsTitle}}</div> -->
                 <div class="parameterOption">
                     <div class="parameterTitle"> {{ content.notificationsActive }} </div>
                     <div class="parameterElement">

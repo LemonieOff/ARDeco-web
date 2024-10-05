@@ -3,8 +3,6 @@
         <NuxtImg width="50" height="50" class="icon" v-bind:src="imageSrc" alt="Own profile picture"/>
         <input id="commentInput" type="text" :placeholder="`${content['writePlaceholder']}`">
         <NuxtImg id="sendComment" class="icon" src="images/icons/send.webp" @click="postComment"/>
-        <div id="Error" class="requestReport" hidden></div>
-        <div id="Success" class="requestReport" hidden></div>
     </div>
     <div id="oldCommentSection" class="commentSection">
         <div class="comment" v-for="singleComment in comments.slice().reverse()" :key="singleComment.id">
@@ -20,12 +18,14 @@
             <div class="bottomCommentSection">{{ singleComment.comment }}</div>
         </div>
     </div>
+    <Notifications ref="notifications"/>
 </template>
 
 <script>
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "CommentSection",
@@ -62,6 +62,9 @@ export default {
                 credentials: 'include',
             });
             const result = await response.json();
+            if (result.code == 400) {
+                this.$refs.notifications.showError("Error: we couldn't receive informations about profile pictures, try again later.");
+            }
             this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data}.png`
         },
         async getComments() {
@@ -78,7 +81,12 @@ export default {
             });
 
             const result = await response.json();
+
+            if (result.code == 400) {
+                this.$refs.notifications.showError("Error: we couldn't receive the comments informations, try again later.");
+            }
             this.comments = result.data
+
             console.log("Comments :", this.comments);
         },
         async postComment() {
@@ -105,9 +113,9 @@ export default {
             const result = await response.json();
 
             if (result.code !== 201) {
-                await this.showError(result.message)
+                this.$refs.notifications.showError(result.message);
             } else {
-                await this.showSuccess(result.description)
+                // await this.$refs.notifications.showSuccess(result.description)
                 await this.getComments()
             }
             console.log("POST :", result);
@@ -129,31 +137,13 @@ export default {
             const result = await response.json();
 
             if (result.code !== 200) {
-                await this.showError(result.message)
+                this.$refs.notifications.showError(result.message);
             } else {
-                await this.showSuccess(result.description)
+                // await this.$refs.notifications.showSuccess(result.description)
                 await this.getComments()
             }
             console.log("DELETE :", result);
         },
-        async showError(errorExplanation) {
-            const error = document.getElementById('Error');
-            const success = document.getElementById('Success');
-
-            success.hidden = true;
-            error.hidden = false;
-            error.textContent = errorExplanation;
-        },
-        async showSuccess(successExplanation) {
-            const error = document.getElementById('Error');
-            const success = document.getElementById('Success');
-            const textArea = document.getElementById('commentInput');
-
-            success.hidden = false;
-            error.hidden = true;
-            success.textContent = successExplanation;
-            textArea.value = "";
-        }
     },
 };
 </script>
