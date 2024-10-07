@@ -1,7 +1,7 @@
 <template>
     <ProfileSettings id="profileSettings" style="display: none"></ProfileSettings>
     <div id="profile-container">
-        <div id="profile-loading" style="top: 10%;" class="form">
+        <div id="profile-loading" class="form" style="top: 10%;">
             {{ content.loading }}
         </div>
         <div class="profile-wrapper" style="display: none;">
@@ -19,11 +19,14 @@
             </div>
             <div class="profile-elements-wrapper">
                 <div class="element">{{ content.informations.savedItems }}<span id="savedItems"></span></div>
-                <div class="element2"><a id="yourFavoriteFurnitures" :href="`${langPrefix}orderHistory`" class="button">{{ content.informations.commandsOrdered }}<span id="commandsOrdered"></span></a></div>
+                <div class="element2"><a id="yourFavoriteFurnitures" :href="`${langPrefix}orderHistory`" class="button">{{ content.informations.commandsOrdered
+                    }}<span id="commandsOrdered"></span></a></div>
             </div>
             <div class="profile-edit-buttons-wrapper">
-                <button id="startEditButton" class="editProfileButton" @click="startEdit">{{ content.buttons.update }}</button>
-                <a id="deleteAccountButton" class="deleteAccountButton" :href="`${langPrefix}deleteAccount`">{{ content.buttons.delete }}</a>
+                <button id="startEditButton" class="editProfileButton" @click="startEdit">{{ content.buttons.update }}
+                </button>
+                <a id="deleteAccountButton" :href="`${langPrefix}deleteAccount`"
+                   class="deleteAccountButton">{{ content.buttons.delete }}</a>
             </div>
         </div>
 
@@ -31,46 +34,51 @@
             <div class="profile-elements-wrapper">
                 <div class="element">
                     <label id="firstName2" for="first_name_edit">{{ content.informations.firstName }}</label>
-                    <input type="text" id="first_name_edit" name="first_name">
+                    <input id="first_name_edit" name="first_name" type="text">
                 </div>
                 <div class="element2">
                     <label id="lastName2" for="last_name_edit">{{ content.informations.lastName }}</label>
-                    <input type="text" id="last_name_edit" name="last_name">
+                    <input id="last_name_edit" name="last_name" type="text">
                 </div>
             </div>
             <div class="profile-elements-wrapper">
                 <div class="element">
                     <label id="email2" for="email_edit">{{ content.informations.email }}</label>
-                    <input type="text" id="email_edit" name="email">
+                    <input id="email_edit" name="email" type="text">
                 </div>
                 <div class="element2">
                     <label id="phone2" for="phone_edit">{{ content.informations.phone }}</label>
-                    <input type="tel" id="phone_edit" name="phone">
+                    <input id="phone_edit" name="phone" type="tel">
                 </div>
             </div>
             <div class="profile-elements-wrapper">
                 <div class="element">
                     <label id="city2" for="city_edit">{{ content.informations.city }}</label>
-                    <input type="text" id="city_edit" name="city">
+                    <input id="city_edit" name="city" type="text">
                 </div>
                 <div class="element2">
                     <label id="password2" for="password_edit">{{ content.informations.password }}</label>
-                    <input type="text" id="password_edit" name="password">
+                    <input id="password_edit" name="password" type="text">
                 </div>
             </div>
             <div class="profile-edit-buttons-wrapper">
-                <button id="cancelEditButton" class="editProfileButton" @click="cancelEdit">{{ content.buttons.cancel }}</button>
-                <button id="editProfile" class="editProfileButton" @click="confirmEdit">{{ content.buttons.confirm }}</button>
+                <button id="cancelEditButton" class="editProfileButton" @click="cancelEdit">{{ content.buttons.cancel
+                    }}
+                </button>
+                <button id="editProfile" class="editProfileButton" @click="confirmEdit">{{ content.buttons.confirm }}
+                </button>
             </div>
         </div>
 
         <div class="profile-wrapper-lower-buttons">
             <div class="profile-elements-wrapper">
                 <div class="element">
-                    <a id="yourFavoriteFurnitures" :href="`${langPrefix}favFurniture`" class="button">{{ content.yourFavoriteFurnitures }}</a>
+                    <a id="yourFavoriteFurnitures" :href="`${langPrefix}favFurniture`"
+                       class="button">{{ content.yourFavoriteFurnitures }}</a>
                 </div>
                 <div class="element2">
-                    <a id="yourFavoriteGalleries" :href="`${langPrefix}favGallery`" class="button">{{ content.yourFavoriteGalleries }}</a>
+                    <a id="yourFavoriteGalleries" :href="`${langPrefix}favGallery`"
+                       class="button">{{ content.yourFavoriteGalleries }}</a>
                 </div>
             </div>
             <div class="profile-elements-wrapper">
@@ -78,17 +86,18 @@
                     <a id="galleryAccess" :href="`${langPrefix}gallery`" class="button">{{ content.gallery }}</a>
                 </div>
                 <div class="element2">
-                    <a id="blockedUsersAccess" :href="`${langPrefix}blockedUsers`" class="button">{{ content.blockedUsers }}</a>
+                    <a id="blockedUsersAccess" :href="`${langPrefix}blockedUsers`"
+                       class="button">{{ content.blockedUsers }}</a>
                 </div>
             </div>
         </div>
     </div>
-    <Notifications ref="notifications"/>
+    <Notifications ref="notifications" />
 </template>
 
 <script setup>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
-import {onMounted, ref, provide} from "vue";
+import { isLogged, loggedIn, logout } from "public/ts/checkLogin";
+import { onMounted, provide, ref } from "vue";
 import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
 import Notifications from "@/components/Notifications.vue";
 
@@ -100,7 +109,7 @@ let userID = 0;
 const langPrefix = nuxtApp.$langPrefix;
 const profile = ref({});
 const notifications = ref(null);
-provide('profile', profile);
+provide("profile", profile);
 
 onMounted(async () => {
     userID = await isLogged();
@@ -114,13 +123,13 @@ onMounted(async () => {
     document.getElementById("profile-loading").style.display = "none";
     document.getElementById("profileSettings").style.display = "block";
     document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block'
+    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = "block";
 });
 
 const getProfileElements = async () => {
     const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
-        method: 'GET',
-        credentials: 'include',
+        method: "GET",
+        credentials: "include"
     });
     const data_profile = await response_profile.json();
     const result_profile = data_profile.data;
@@ -128,16 +137,16 @@ const getProfileElements = async () => {
 
 
     const response_gallery = await fetch(`https://api.ardeco.app/gallery/user/${userID}`, {
-        method: 'GET',
-        credentials: 'include',
+        method: "GET",
+        credentials: "include"
     });
     const data_gallery = await response_gallery.json();
     const result_gallery = data_gallery.data;
 
 
     const response_order_history = await fetch(`https://api.ardeco.app/order_history/user/${userID}`, {
-        method: 'GET',
-        credentials: 'include',
+        method: "GET",
+        credentials: "include"
     });
     const data_order_history = await response_order_history.json();
     const result_order_history = data_order_history.data;
@@ -155,12 +164,12 @@ const getProfileElements = async () => {
     document.getElementById("email_edit").placeholder = result_profile.email;
     document.getElementById("phone_edit").placeholder = result_profile.phone;
     document.getElementById("city_edit").placeholder = result_profile.city;
-}
+};
 
 const confirmEdit = async () => {
-    document.getElementsByClassName("profile-wrapper")[0].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper")[1].style.display = 'none';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block';
+    document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
+    document.getElementsByClassName("profile-wrapper")[1].style.display = "none";
+    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = "block";
     const email_field = document.getElementById("email_edit").value;
     const first_name_field = document.getElementById("first_name_edit").value;
     const last_name_field = document.getElementById("last_name_edit").value;
@@ -168,20 +177,25 @@ const confirmEdit = async () => {
     const phone_field = document.getElementById("phone_edit").value;
     const password_field = document.getElementById("password_edit").value;
 
+    let isPasswordChanged = false;
     let json = {};
     if (email_field !== "") json.email = email_field;
     if (first_name_field !== "") json.first_name = first_name_field;
     if (last_name_field !== "") json.last_name = last_name_field;
     if (city_field !== "") json.city = city_field;
     if (phone_field !== "") json.phone = phone_field;
-    if (password_field !== "") json.password = password_field;
+    if (password_field !== "") {
+        json.password = password_field;
+        isPasswordChanged = true;
+    }
 
+    console.log(json.length);
     const response = await fetch(`https://api.ardeco.app/user/${localStorage.getItem("userID")}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify(json)
     });
 
@@ -190,26 +204,31 @@ const confirmEdit = async () => {
 
     if (result.code == 200) {
         notifications.value.showSuccess("Informations modifiées avec succès");
-        await getProfileElements()
+        if (isPasswordChanged) {
+            logout();
+            location.reload();
+        } else {
+            await getProfileElements();
+        }
     } else {
         notifications.value.showError("Error: Impossible de modifier les informations pour le moment, réessayez plus tard.");
     }
-}
+};
 
 const startEdit = async () => {
-    document.getElementsByClassName("profile-wrapper")[0].style.display = 'none';
-    document.getElementsByClassName("profile-wrapper")[1].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'none'
-}
+    document.getElementsByClassName("profile-wrapper")[0].style.display = "none";
+    document.getElementsByClassName("profile-wrapper")[1].style.display = "block";
+    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = "none";
+};
 
 const cancelEdit = async () => {
-    document.getElementsByClassName("profile-wrapper")[0].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper")[1].style.display = 'none';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block'
-}
+    document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
+    document.getElementsByClassName("profile-wrapper")[1].style.display = "none";
+    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = "block";
+};
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 #profile-container {
     display: flex;
     flex-direction: column;

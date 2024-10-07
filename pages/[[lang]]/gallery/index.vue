@@ -3,31 +3,24 @@
     <div class="form">
         <div class="grid">
             <div class="grid-header">
-                <div class="grid-item">{{ content.id }}</div>
                 <div class="grid-item">{{ content.name }}</div>
                 <div class="grid-item">{{ content.roomType }}</div>
                 <div class="grid-item">{{ content.author }}</div>
-                <div class="grid-item">{{ content.actionSingOrPlu}}</div>
+                <div class="grid-item">{{ content.actionSingOrPlu }}</div>
             </div>
             <div v-for="(item) in GalleryData" class="grid-row">
-                <div class="grid-item" v-if="item.visibility === true">{{ item.id }}</div>
-                <div class="grid-item" v-if="item.visibility === true">{{ item.name }}</div>
-                <div class="grid-item" v-if="item.visibility === true">{{ item.room_type }}</div>
-                <div class="grid-item" v-if="item.visibility === true">{{ item.user.first_name }} {{
+                <div v-if="item.visibility === true" class="grid-item">{{ item.name }}</div>
+                <div v-if="item.visibility === true" class="grid-item">{{ item.room_type }}</div>
+                <div v-if="item.visibility === true" class="grid-item">{{ item.user.first_name }} {{
                         item.user.last_name
                     }}
                 </div>
                 <div class="grid-item">
-                    <a :href="`${langPrefix}gallery/${item.id}`" class="custom-button" v-if="item.visibility === true">{{ content.details }}</a>
-                    <!--<button class="custom-button" @click="openSidebar(item.id)" v-if="item.visibility === true">
-                        {{ content.details }}
-                    </button>--><br/>
+                    <a v-if="item.visibility === true" :href="`${langPrefix}gallery/${item.id}`" class="custom-button">{{ content.details
+                        }}</a><br />
                     <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">
                         {{ content.blockUser }}
                     </button>
-                    <div class="sidebar" :id="`sidebar-${item.id}`" style="left: -250px">
-                        Sidebar Content
-                    </div>
                 </div>
             </div>
         </div>
@@ -35,13 +28,13 @@
 </template>
 
 <script setup>
-import {isLogged} from "public/ts/checkLogin";
+import { isLogged } from "public/ts/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 
 const nuxtApp = useNuxtApp();
 
-const content = ref(nuxtApp.$lang === 'en' ? en.gallery : fr.gallery);
+const content = ref(nuxtApp.$lang === "en" ? en.gallery : fr.gallery);
 const GalleryData = ref([]);
 const errorMessage = ref("");
 const successMessage = ref("");
@@ -64,16 +57,16 @@ async function checkLogin() {
 
 async function getGallery() {
     try {
-        const response = await fetch('https://api.ardeco.app/gallery?user_details', {
-            method: 'GET',
+        const response = await fetch("https://api.ardeco.app/gallery?user_details", {
+            method: "GET",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json"
             },
-            credentials: 'include',
+            credentials: "include"
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch data');
+            throw new Error("Failed to fetch data");
         }
 
         const result = await response.json();
@@ -84,47 +77,31 @@ async function getGallery() {
     }
 }
 
-async function openSidebar(id) {
-    /*const all_sidebars = document.getElementsByClassName('.sidebar');
-    all_sidebars.forEach(sidebar => {
-        if (sidebar.style.left === "0") {
-            sidebar.style.left = "-250px";
-        }
-      });*/
-
-    const sidebar = document.getElementById(`sidebar-${id}`);
-    if (sidebar.style.left === "-250px") {
-        sidebar.style.left = "0";
-    } else {
-        sidebar.style.left = "-250px";
-    }
-}
-
 async function blockUser(userID) {
     try {
         const response = await fetch(`https://api.ardeco.app/block/${userID}`, {
-            method: 'PUT',
+            method: "PUT",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json"
             },
-            credentials: 'include',
+            credentials: "include"
         });
         const json = await response.json();
-        alert(json.description);
+        alert(json.description); // TODO : Notification system instead of alert
         if (response.ok) {
-            successMessage.value = 'User blocked successfully';
-            // GalleryData.value = GalleryData.value.filter(item => item.user.id !== userID);
+            successMessage.value = "User blocked successfully";
+            GalleryData.value = GalleryData.value.filter(item => item.user.id !== userID);
         } else {
-            throw new Error('Failed to block user');
+            console.error(json.description);
+            errorMessage.value = "An error occurred while blocking the user.";
         }
     } catch (error) {
-        console.error(error);
-        errorMessage.value = 'An error occurred while blocking the user.';
+
     }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .container {
     padding: 20px;
 }
@@ -167,6 +144,8 @@ async function blockUser(userID) {
 }
 
 .grid {
+    min-width: 500px;
+    width: 75%;
     display: flex;
     flex-direction: column;
     border: 2px solid #000;
@@ -174,7 +153,6 @@ async function blockUser(userID) {
 }
 
 .grid-header {
-    min-width: 1400px;
     display: flex;
     font-weight: bold;
 
