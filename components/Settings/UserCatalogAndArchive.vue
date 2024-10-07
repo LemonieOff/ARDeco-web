@@ -1,18 +1,22 @@
 <template>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.myCompany }}</h1>
     <div class="listSelection flex justify-center mx-auto gap-10 sm:w-1/3">
-        <button v-for="(card, index) in cards" :key="index" :id="`card${index}`" class="showListButton" @click="selectedCard = index" :class="{ active: index === selectedCard }" >
+        <button v-for="(card, index) in cards" :id="`card${index}`" :key="index"
+                :class="{ active: index === selectedCard }"
+                class="showListButton" @click="selectedCard = index">
             {{ card.name }}
         </button>
     </div>
     <div class="pageContent">
         <div class="buttonsArea">
-            <button class="buttonSettings" @click="goToFurnitureCreation" style="margin-top: 0">{{ content.buttons.createNewFurniture }}</button>
-            <button class="buttonSettings" @click="deleteArchive">{{content.buttons.emptyCompagnyArchive}}</button>
-            <button class="buttonSettings" @click="getApiToken">{{content.buttons.resetCompagnyApiKey}}</button>
+            <button class="buttonSettings" style="margin-top: 0" @click="goToFurnitureCreation">
+                {{ content.buttons.createNewFurniture }}
+            </button>
+            <button class="buttonSettings" @click="deleteArchive">{{ content.buttons.emptyCompagnyArchive }}</button>
+            <button class="buttonSettings" @click="getApiToken">{{ content.buttons.resetCompagnyApiKey }}</button>
         </div>
         <div class="listArea">
-            <div class="catalog" v-if="selectedCard === 0">
+            <div v-if="selectedCard === 0" class="catalog">
                 <div class="grid-header">
                     <div class="grid-item">{{ content.list.name }}</div>
                     <div class="grid-item">{{ content.list.colors }}</div>
@@ -22,38 +26,40 @@
                     <div class="grid-item no-right-border">{{ content.list.actions }}</div>
                 </div>
                 <div v-for="(item) in this.catalogList" class="flex">
-                    <div class="grid-item font-bold" v-if="item.company === this.userID">{{ item.name }}</div>
-                    <div class="grid-item" v-if="item.company === this.userID">
+                    <div v-if="item.company === this.userID" class="grid-item font-bold">{{ item.name }}</div>
+                    <div v-if="item.company === this.userID" class="grid-item">
                         <span v-for="(col, index) in item.colors" :key="index">
                             {{ col.color }}
                             <span v-if="index < item.colors.length - 1">, </span>
                         </span>
                     </div>
-                    <div class="grid-item" v-if="item.company === this.userID">
+                    <div v-if="item.company === this.userID" class="grid-item">
                         <span v-for="(room, index) in item.rooms" :key="index">
                             {{ room }}
                             <span v-if="index < item.rooms.length - 1">, </span>
                         </span>
                     </div>
-                    <div class="grid-item" v-if="item.company === this.userID">
+                    <div v-if="item.company === this.userID" class="grid-item">
                         <span v-for="(style, index) in item.styles" :key="index">
                             {{ style }}
                             <span v-if="index < item.styles.length - 1">, </span>
                         </span>
                     </div>
-                    <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
-                    <div class="grid-item no-right-border" v-if="item.company === this.userID">
-                        <button class="actionButton redBackground" @click="archiveItem(item.id)"> Archive </button>
-                        <button v-if="item.active === true" class="addLeftMargin actionButton greenBackground" @click="changeItemActiveness(item.id, item.active)">
-                            <span> {{content.buttons.public}} </span>
+                    <div v-if="item.company === this.userID" class="grid-item">{{ item.price }}</div>
+                    <div v-if="item.company === this.userID" class="grid-item no-right-border">
+                        <button class="actionButton redBackground" @click="archiveItem(item.id)"> Archive</button>
+                        <button v-if="item.active === true" class="addLeftMargin actionButton greenBackground"
+                                @click="changeItemActiveness(item.id, item.active)">
+                            <span> {{ content.buttons.public }} </span>
                         </button>
-                        <button v-if="item.active === false" class="addLeftMargin actionButton redBackground" @click="changeItemActiveness(item.id, item.active)">
-                            <span> {{content.buttons.private}} </span>
+                        <button v-if="item.active === false" class="addLeftMargin actionButton redBackground"
+                                @click="changeItemActiveness(item.id, item.active)">
+                            <span> {{ content.buttons.private }} </span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="archive" v-else>
+            <div v-else class="archive">
                 <div class="grid-header">
                     <div class="grid-item">{{ content.list.name }}</div>
                     <div class="grid-item">{{ content.list.colors }}</div>
@@ -63,45 +69,46 @@
                     <div class="grid-item no-right-border">{{ content.list.actions }}</div>
                 </div>
                 <div v-for="(item) in this.archiveList" class="flex">
-                    <div class="grid-item font-bold" v-if="item.company === this.userID">{{ item.name }}</div>
-                    <div class="grid-item" v-if="item.company === this.userID">
+                    <div v-if="item.company === this.userID" class="grid-item font-bold">{{ item.name }}</div>
+                    <div v-if="item.company === this.userID" class="grid-item">
                         <span v-for="(col, index) in item.colors" :key="index">
                             {{ col.color }}
                             <span v-if="index < item.colors.length - 1">, </span>
                         </span>
                     </div>
-                    <div class="grid-item" v-if="item.company === this.userID">
+                    <div v-if="item.company === this.userID" class="grid-item">
                         <span v-for="(room, index) in item.rooms" :key="index">
                             {{ room }}
                             <span v-if="index < item.rooms.length - 1">, </span>
                         </span>
                     </div>
-                    <div class="grid-item" v-if="item.company === this.userID">
+                    <div v-if="item.company === this.userID" class="grid-item">
                         <span v-for="(style, index) in item.styles" :key="index">
                             {{ style }}
                             <span v-if="index < item.styles.length - 1">, </span>
                         </span>
                     </div>
-                    <div class="grid-item" v-if="item.company === this.userID">{{ item.price }}</div>
-                    <div class="grid-item no-right-border" v-if="item.company === this.userID">
-                        <button class="actionButton greenBackground" @click="restoreItem(item.id)"> Restorer </button>
-                        <button class="actionButton redBackground" @click="deleteArchivedItem(item.id)"> Supprimer </button>
+                    <div v-if="item.company === this.userID" class="grid-item">{{ item.price }}</div>
+                    <div v-if="item.company === this.userID" class="grid-item no-right-border">
+                        <button class="actionButton greenBackground" @click="restoreItem(item.id)"> Restorer</button>
+                        <button class="actionButton redBackground" @click="deleteArchivedItem(item.id)"> Supprimer
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <Notifications ref="notifications"/>
+    <Notifications ref="notifications" />
 </template>
 
 <script>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "UserCatalogAndArchive",
     components: {
-        Notifications,
+        Notifications
     },
     data() {
         return {
@@ -113,8 +120,8 @@ export default {
             userID: 0,
             selectedCard: 0,
             catalogList: [],
-            archiveList: [],
-        }
+            archiveList: []
+        };
     },
     mounted() {
         this.checkIfLogged();
@@ -127,23 +134,28 @@ export default {
             }
             this.userID = Number(userID_TMP);
 
-            await this.getArchive();
-            await this.getCatalog();
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            if (!COMPANY_API_TOKEN) {
+                this.$refs.notifications.showError("Vous devez réinitialiser votre clé API");
+            } else {
+                await this.getArchive();
+                await this.getCatalog();
+            }
         },
 
         async getCatalog() {
-            const response = await fetch('https://api.ardeco.app/catalog/company/' + `${this.userID}`, {
-                method: 'GET',
+            const response = await fetch("https://api.ardeco.app/catalog/company/" + `${this.userID}`, {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             if (result.code === 200 && result.data.length === 0) {
                 this.catalogList = result.data;
-                this.$refs.notifications.showSuccess("Votre catalogue est vide")
+                this.$refs.notifications.showSuccess("Votre catalogue est vide");
             } else {
                 this.catalogList = result.data;
             }
@@ -151,105 +163,107 @@ export default {
         },
 
         async getArchive() {
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/' + `${this.userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'GET',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch("https://api.ardeco.app/archive/" + `${this.userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log(result);
             if (result.code === 200 && result.data.length === 0) {
                 this.archiveList = result.data;
-                this.$refs.notifications.showSuccess("Votre archive est vide")
+                this.$refs.notifications.showSuccess("Votre archive est vide");
             } else if (result.code === 200) {
                 this.archiveList = result.data;
             }
         },
 
         async archiveItem(itemInputID) {
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/catalog/' + `${this.userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'DELETE',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch("https://api.ardeco.app/catalog/" + `${this.userID}` + "/remove/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "DELETE",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description)
+                this.$refs.notifications.showSuccess(result.description);
             } else {
-                this.$refs.notifications.showError(result.description)
+                this.$refs.notifications.showError(result.description);
             }
             await this.getArchive();
             await this.getCatalog();
         },
 
         async deleteArchivedItem(itemInputID) {
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/' + `${this.userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'DELETE',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch("https://api.ardeco.app/archive/" + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "DELETE",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description)
+                this.$refs.notifications.showSuccess(result.description);
             } else {
-                this.$refs.notifications.showError(result.description)
+                this.$refs.notifications.showError(result.description);
             }
             await this.getArchive();
             await this.getCatalog();
         },
 
         async restoreItem(itemInputID) {
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${this.userID}` + '/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'PUT',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch("https://api.ardeco.app/archive/restore/" + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description)
+                this.$refs.notifications.showSuccess(result.description);
             } else {
-                this.$refs.notifications.showError(result.description)
+                this.$refs.notifications.showError(result.description);
             }
             await this.getArchive();
             await this.getCatalog();
         },
 
         async getApiToken() {
-            const response = await fetch('https://api.ardeco.app/company/requestToken', {
-                method: 'GET',
+            const response = await fetch("https://api.ardeco.app/company/requestToken", {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description)
+                this.$refs.notifications.showSuccess(result.description);
             } else {
-                this.$refs.notifications.showError(result.description)
+                this.$refs.notifications.showError(result.description);
             }
-            localStorage.setItem('COMPANY_API_TOKEN', result.data);
+            localStorage.setItem("COMPANY_API_TOKEN", result.data);
+            await this.getArchive();
+            await this.getCatalog();
         },
 
         async goToFurnitureCreation() {
@@ -257,26 +271,26 @@ export default {
         },
 
         async changeItemActiveness(CATALOG_ID, bool) {
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            console.log('https://api.ardeco.app/catalog/' + `${this.userID}` + '/edit/' + `${CATALOG_ID}`)
-            const response = await fetch('https://api.ardeco.app/catalog/' + `${this.userID}` + '/edit/' + `${CATALOG_ID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'PUT',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            console.log("https://api.ardeco.app/catalog/" + `${this.userID}` + "/edit/" + `${CATALOG_ID}`);
+            const response = await fetch("https://api.ardeco.app/catalog/" + `${this.userID}` + "/edit/" + `${CATALOG_ID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     "active": !bool
                 }),
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description)
+                this.$refs.notifications.showSuccess(result.description);
                 location.reload();
             } else {
-                this.$refs.notifications.showError(result.description)
+                this.$refs.notifications.showError(result.description);
             }
         },
 
@@ -285,27 +299,27 @@ export default {
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'DELETE',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch("https://api.ardeco.app/archive/" + `${userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "DELETE",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description)
+                this.$refs.notifications.showSuccess(result.description);
             } else {
-                this.$refs.notifications.showError(result.description)
+                this.$refs.notifications.showError(result.description);
             }
             await this.getArchive();
             await this.getCatalog();
-        },
+        }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
