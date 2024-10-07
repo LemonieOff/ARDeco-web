@@ -5,20 +5,23 @@
         <div class="profile-wrapper">
             <div class="profile-elements-wrapper">
                 <div class="element">{{ content.email }}</div>
-                <input class="element2" type="email" id="email" :placeholder="`${placeholders.email}`"/>
+                <input id="email" :placeholder="`${content.placeholders.email}`" class="element2" type="email" />
             </div>
             <div class="profile-elements-wrapper">
                 <div class="element">{{ content.password }}</div>
-                <input class="element2" type="password" id="password" :placeholder="`${placeholders.password}`"/>
+                <input id="password" :placeholder="`${content.placeholders.password}`" class="element2"
+                       type="password" />
             </div>
             <div class="profile-elements-wrapper">
                 <div class="element">{{ content.passwordConfirm }}</div>
-                <input class="element2" type="password" id="passwordConfirm" :placeholder="`${placeholders.passwordConfirm}`"/>
+                <input id="passwordConfirm" :placeholder="`${content.placeholders.passwordConfirm}`" class="element2"
+                       type="password" />
             </div>
-            <div class="profile-elements-wrapper" id="errors"></div>
+            <div id="errors" class="profile-elements-wrapper"></div>
             <div class="delete-actions-buttons-wrapper">
-                <button id="cancelButton" class="cancelButton" @click="cancel">{{ buttons.cancel }}</button>
-                <button id="deleteAccountButton" class="deleteAccountButton" @click="deleteAccount">{{ buttons.delete }}
+                <button id="cancelButton" class="cancelButton" @click="cancel">{{ content.buttons.cancel }}</button>
+                <button id="deleteAccountButton" class="deleteAccountButton" @click="deleteAccount">
+                    {{ content.buttons.delete }}
                 </button>
             </div>
         </div>
@@ -26,22 +29,17 @@
 </template>
 
 <script setup>
-import Navbar from "~/components/Navbar.vue";
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 
-const route = useRoute();
-let lang = ref(route.params.lang);
-let content = ref({});
-let buttons = ref({});
-let placeholders = ref({});
-let errors = ref({});
-const langPrefix = ref("/");
+const nuxtApp = useNuxtApp();
+let content = ref(nuxtApp.$lang === "en" ? en.deleteAccount : fr.deleteAccount);
+let errors = ref(nuxtApp.$lang === "en" ? en.errors : fr.errors);
 
 const cancel = () => {
-    location.href = langPrefix.value + "profile";
+    location.href = nuxtApp.$langPrefix + "profile";
 };
 
 const deleteAccount = () => {
@@ -62,7 +60,7 @@ const deleteAccount = () => {
     fetch("https://api.ardeco.app/close", {
         method: "DELETE",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
             email: email,
@@ -85,40 +83,17 @@ const deleteAccount = () => {
             }
         }
     });
-}
+};
 
 onMounted(async () => {
-    const userID = await isLogged();
+    await isLogged();
     if (!loggedIn) {
-        location.href = langPrefix.value + "login";
-    }
-
-    // If lang selector is not passed in url, get the user's one or set it to french
-    if (lang.value !== 'en' && lang.value !== 'fr') {
-        const localStorageLang = localStorage.getItem('lang');
-        if (localStorageLang) {
-            lang.value = localStorageLang;
-        } else {
-            lang.value = 'fr';
-        }
-    }
-
-    // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.deleteAccount : fr.deleteAccount;
-    placeholders.value = lang.value === 'en' ? en.deleteAccount.placeholders : fr.deleteAccount.placeholders;
-    buttons.value = lang.value === 'en' ? en.deleteAccount.buttons : fr.deleteAccount.buttons;
-    errors.value = lang.value === 'en' ? en.errors : fr.errors;
-
-    // Prefix for links
-    if (location.href.includes("/fr/")) {
-        langPrefix.value = "/fr/";
-    } else if (location.href.includes("/en/")) {
-        langPrefix.value = "/en/";
+        location.href = nuxtApp.$langPrefix + "login?redirect=/deleteAccount";
     }
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .title {
     text-align: center;
     margin-top: 4rem;
