@@ -144,7 +144,8 @@ export default {
         },
 
         async getCatalog() {
-            const response = await fetch("https://api.ardeco.app/catalog/company/" + `${this.userID}`, {
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -164,7 +165,7 @@ export default {
 
         async getArchive() {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/" + `${this.userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`https://api.ardeco.app/archive/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
