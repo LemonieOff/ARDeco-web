@@ -186,8 +186,14 @@
     "consent": "J'accepte que mes données soient collectées et traitées conformément à la Politique de Confidentialité",
     "hasRead": "J'ai lu et j'accepte les Conditions Générales d'Utilisation",
     "agreement": "J'accepte et consens",
-    "agreementPrivacy": ["J'accepte et consens à la ","Politique de Confidentialité"],
-    "agreementCgu": ["J'accepte et consens aux ","Conditions Générales d'Utilisation"],
+    "agreementPrivacy": [
+      "J'accepte et consens à la ",
+      "Politique de Confidentialité"
+    ],
+    "agreementCgu": [
+      "J'accepte et consens aux ",
+      "Conditions Générales d'Utilisation"
+    ],
     "consentNotGiven": "Vous devez accepter les Conditions Générales d'Utilisation et la Politique de Confidentialité pour continuer.",
     "placeholders": {
       "email": "Entrez votre email",
@@ -202,9 +208,9 @@
   "profile": {
     "yourFavoriteThemes": "Mes thèmes favoris",
     "yourRecentPurchaces": "Mes récents achats",
-    "yourFavoriteFurnitures": "Mes meubles favoris",
-    "yourFavoriteGalleries": "Mes galeries favorites",
-    "gallery": "Galerie publique",
+    "yourFavoriteFurnitures": "Meubles favoris",
+    "yourFavoriteGalleries": "Aménagements favoris",
+    "gallery": "Aménagements publics",
     "blockedUsers": "Utilisateurs bloqués",
     "informations": {
       "firstName": "Prénom : ",
@@ -212,7 +218,7 @@
       "email": "Adresse email : ",
       "phone": "Téléphone : ",
       "city": "Ville : ",
-      "savedItems": "Élements sauvegardés dans la galerie : ",
+      "savedItems": "Aménagements personnels : ",
       "commandsOrdered": "Nombre de commande(s) : ",
       "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)",
       "role": "Rôle : ",
@@ -264,7 +270,7 @@
       "firstAndLastName": "Prénom et nom de famille",
       "getUserSettings": "Voir mes paramètres",
       "setUserSettings": "Mettre mes paramètres à jour",
-      "getUserGallery": "Voir ma galerie",
+      "getUserGallery": "Voir mes aménagements personnels",
       "currentUserSettingsTitle": "Vos paramètres actuels",
       "language": "Langue",
       "notifications": "Notifications",
@@ -276,7 +282,7 @@
       "name": "Nom",
       "room": "Pièce",
       "style": "Style",
-      "galleryIsEmpty": "Vous n'avez créé aucune galerie, faites-en une depuis notre application mobile !",
+      "galleryIsEmpty": "Vous n'avez créé aucun aménagement, faites-en un depuis notre application mobile !",
       "notificationsActive": "Notifications actives",
       "publicLastName": "Nom de famille publique",
       "publicEmailAddress": "Adresse email publique",
@@ -284,7 +290,7 @@
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",
-      "changeGalleryVisibility": "Changer la visibilité d'un item",
+      "changeGalleryVisibility": "Changer la visibilité d'un aménagement",
       "getCompagnyCatalog": "Voir mon catalogue d'entreprise",
       "getCompagnyArchive": "Voir mon archive d'entreprise",
       "emptyCompagnyArchive": "Vider mon archive d'entreprise",
@@ -506,10 +512,9 @@
   },
   "favorite": {
     "furniture": {
-
     },
     "gallery": {
-      "title": "Galeries (aménagements) favorites",
+      "title": "Aménagements favoris",
       "loading": "Chargement en cours...",
       "id": "ID",
       "name": "Nom",
@@ -531,11 +536,11 @@
     }
   },
   "gallery": {
-    "title": "Galerie",
-    "galleryDetailsTitle": "Détails de la Galerie",
+    "title": "Aménagements publics",
+    "galleryDetailsTitle": "Détails d'un aménagement",
     "loading": "Chargement en cours...",
-    "noGalleries": "Aucune galerie trouvée.",
-    "gallery": "Galerie",
+    "noGalleries": "Aucun aménagement trouvé.",
+    "gallery": "Aménagement",
     "id": "ID",
     "name": "Nom",
     "description": "Description",
@@ -586,7 +591,7 @@
     "archiveTitle": "Archive",
     "title": "Catalogue",
     "loading": "Chargement en cours...",
-    "noGalleries": "Aucune galerie trouvée.",
+    "noGalleries": "Aucun aménagement trouvé.",
     "id": "ID",
     "name": "Nom et entreprise",
     "styles": "Styles",

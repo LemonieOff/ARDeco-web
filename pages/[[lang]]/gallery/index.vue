@@ -9,14 +9,12 @@
                 <div class="grid-item">{{ content.actionSingOrPlu }}</div>
             </div>
             <div v-for="(item) in GalleryData" class="grid-row">
-                <div v-if="item.visibility === true" class="grid-item">{{ item.name }}</div>
-                <div v-if="item.visibility === true" class="grid-item">{{ item.room_type }}</div>
-                <div v-if="item.visibility === true" class="grid-item">{{ item.user.first_name }} {{
-                        item.user.last_name
-                    }}
-                </div>
+                <div v-if="item.visibility" class="grid-item">{{ item.name }}</div>
+                <div v-if="item.visibility" class="grid-item">{{ item.room }}</div>
+                <div v-if="item.visibility" class="grid-item">{{ item.user.first_name }} {{ item.user.last_name }}</div>
                 <div class="grid-item">
-                    <a v-if="item.visibility === true" :href="`${langPrefix}gallery/${item.id}`" class="custom-button">{{ content.details
+                    <a v-if="item.visibility" :href="`${langPrefix}gallery/${item.id}`"
+                       class="custom-button">{{ content.details
                         }}</a><br />
                     <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">
                         {{ content.blockUser }}
@@ -27,15 +25,20 @@
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { isLogged } from "public/ts/checkLogin";
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 
 const nuxtApp = useNuxtApp();
 
-const content = ref(nuxtApp.$lang === "en" ? en.gallery : fr.gallery);
-const GalleryData = ref([]);
+const content = ref(nuxtApp.$content.gallery);
+const GalleryData = ref<{
+    user: { id: number; first_name: string, last_name: string | null },
+    room: string,
+    name: string,
+    description: string | null,
+    visibility: boolean,
+    id: number
+}[]>();
 const errorMessage = ref("");
 const successMessage = ref("");
 const langPrefix = ref(nuxtApp.$langPrefix);
@@ -44,7 +47,7 @@ const userID = ref(0);
 onMounted(async () => {
     await checkLogin();
     await getGallery();
-    console.log(GalleryData.value);
+    console.debug(GalleryData.value);
 });
 
 async function checkLogin() {
@@ -56,47 +59,41 @@ async function checkLogin() {
 }
 
 async function getGallery() {
-    try {
-        const response = await fetch("https://api.ardeco.app/gallery?user_details", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include"
-        });
+    const response = await fetch("https://api.ardeco.app/gallery?user_details", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    });
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch data");
-        }
-
-        const result = await response.json();
-        GalleryData.value = result.data;
-    } catch (error) {
-        console.error(error.message);
-        errorMessage.value = error.message;
+    if (!response.ok) {
+        console.error("Fail to fetch data");
+        errorMessage.value = "Fail to fetch data";
     }
+
+    const result = await response.json();
+    GalleryData.value = result.data;
 }
 
-async function blockUser(userID) {
-    try {
-        const response = await fetch(`https://api.ardeco.app/block/${userID}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include"
-        });
-        const json = await response.json();
-        alert(json.description); // TODO : Notification system instead of alert
-        if (response.ok) {
-            successMessage.value = "User blocked successfully";
+async function blockUser(userID: number) {
+    const response = await fetch(`https://api.ardeco.app/block/${userID}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    });
+    const json = await response.json();
+    alert(json.description); // TODO : Notification system instead of alert
+    if (response.ok) {
+        successMessage.value = "User blocked successfully";
+        if (GalleryData.value) {
             GalleryData.value = GalleryData.value.filter(item => item.user.id !== userID);
-        } else {
-            console.error(json.description);
-            errorMessage.value = "An error occurred while blocking the user.";
         }
-    } catch (error) {
-
+    } else {
+        console.error(json.description);
+        errorMessage.value = "An error occurred while blocking the user.";
     }
 }
 </script>
