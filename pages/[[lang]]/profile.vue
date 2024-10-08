@@ -73,21 +73,21 @@
         <div class="profile-wrapper-lower-buttons">
             <div class="profile-elements-wrapper">
                 <div class="element">
-                    <a id="yourFavoriteFurnitures" :href="`${langPrefix}favFurniture`"
-                       class="button">{{ content.yourFavoriteFurnitures }}</a>
-                </div>
-                <div class="element2">
-                    <a id="yourFavoriteGalleries" :href="`${langPrefix}favGallery`"
-                       class="button">{{ content.yourFavoriteGalleries }}</a>
-                </div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">
                     <a id="galleryAccess" :href="`${langPrefix}gallery`" class="button">{{ content.gallery }}</a>
                 </div>
                 <div class="element2">
                     <a id="blockedUsersAccess" :href="`${langPrefix}blockedUsers`"
                        class="button">{{ content.blockedUsers }}</a>
+                </div>
+            </div>
+            <div class="profile-elements-wrapper">
+                <div class="element">
+                    <a id="yourFavoriteGalleries" :href="`${langPrefix}favGallery`"
+                       class="button">{{ content.yourFavoriteGalleries }}</a>
+                </div>
+                <div class="element2">
+                    <a id="yourFavoriteFurnitures" :href="`${langPrefix}favFurniture`"
+                       class="button">{{ content.yourFavoriteFurnitures }}</a>
                 </div>
             </div>
         </div>
@@ -96,9 +96,10 @@
 </template>
 
 <script setup>
+// TODO : TypeScript
 import { isLogged, loggedIn, logout } from "public/ts/checkLogin";
 import { onMounted, provide, ref } from "vue";
-import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
+import ProfileSettings from "@/components/UserProfile/ProfileSettings.vue";
 import Notifications from "@/components/Notifications.vue";
 
 const nuxtApp = useNuxtApp();
@@ -202,7 +203,7 @@ const confirmEdit = async () => {
     const result = await response.json();
     console.log(result);
 
-    if (result.code == 200) {
+    if (result.code === 200) {
         notifications.value.showSuccess("Informations modifiées avec succès");
         if (isPasswordChanged) {
             logout();
