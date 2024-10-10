@@ -154,8 +154,9 @@ export default {
 
         async getFurniture() {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            console.log(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`)
-            const response = await fetch(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
+            // console.log(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`)
+            // https://api.ardeco.app/catalog/FURNITURE_ID
+            const response = await fetch(`https://api.ardeco.app/catalog/${this.furnitureID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -166,13 +167,8 @@ export default {
             const result = await response.json();
             console.log("result.data:", result.data)
             if (result.code === 200) {
-                for (let furniture of result.data) {
-                    if (furniture.id === this.furnitureID) {
-                        this.furnitureObj = JSON.parse(JSON.stringify(furniture));
-                        console.log("Parsed furniture object:", this.furnitureObj);
-                        break;
-                    }
-                }
+                this.furnitureObj = result.data
+                console.log("Parsed furniture object:", this.furnitureObj);
             } else {
                 this.$refs.notifications.showError("Couldn't find this furniture, are you certain it's the right ID ?");
             }
@@ -271,12 +267,7 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                document.querySelector('#furnitureName').value = "";
-                document.querySelector('#furniturePrice').value = "";
-                document.querySelector('#furnitureHeight').value = "";
-                document.querySelector('#furnitureWidth').value = "";
-                document.querySelector('#furnitureDepth').value = "";
-                this.$refs.notifications.showSuccess(result.description);
+                this.$router.push(`${this.langPrefix}company`);
             } else {
                 this.$refs.notifications.showError(result.description);
             }
