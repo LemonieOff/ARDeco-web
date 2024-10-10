@@ -39,7 +39,6 @@ export default {
             langPrefix: this.$langPrefix,
             comments: [],
             userId: null,
-            // usersThatCommended: [],
             defaultUserPicture: "https://api.ardeco.app/profile_pictures/0.png"
         }
     },
@@ -62,10 +61,11 @@ export default {
                 credentials: 'include',
             });
             const result = await response.json();
+            console.log(result)
             if (result.code == 400) {
                 this.$refs.notifications.showError("Error: we couldn't receive informations about profile pictures, try again later.");
             }
-            this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data}.png`
+            this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data.id}.png`
         },
         async getComments() {
             await isLogged();
