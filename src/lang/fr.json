@@ -586,7 +586,9 @@
       "resetCompagnyApiKey": "Réinitialiser la clé API",
       "createNewFurniture": "Créer un nouveau meuble",
       "private": "Privé",
-      "public": "Public"
+      "public": "Public",
+      "restore": "Restaurer",
+      "delete": "Supprimer"
     },
     "archiveTitle": "Archive",
     "title": "Catalogue",

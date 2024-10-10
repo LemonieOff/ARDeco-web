@@ -90,9 +90,8 @@
                     </div>
                     <div v-if="item.company === this.userID" class="grid-item">{{ item.price }}</div>
                     <div v-if="item.company === this.userID" class="grid-item no-right-border">
-                        <button class="actionButton greenBackground" @click="restoreItem(item.id)"> Restorer</button>
-                        <button class="actionButton redBackground" @click="deleteArchivedItem(item.id)"> Supprimer
-                        </button>
+                        <button class="actionButton greenBackground" @click="restoreItem(item.id)"> {{  content.buttons.restore }}</button>
+                        <button class="actionButton redBackground" @click="deleteArchivedItem(item.id)"> {{ content.buttons.delete }} </button>
                     </div>
                 </div>
             </div>
