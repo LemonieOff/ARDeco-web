@@ -284,6 +284,7 @@
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",
+      "modifyFurniture": "Modify my furniture",
       "changeGalleryVisibility": "Change gallery item visibility",
       "getCompagnyCatalog": "Get compagny catalog",
       "getCompagnyArchive": "Get compagny archive",

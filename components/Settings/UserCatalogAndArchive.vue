@@ -144,6 +144,7 @@ export default {
 
         async getCatalog() {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            console.log(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`)
             const response = await fetch(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {

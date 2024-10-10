@@ -290,6 +290,7 @@
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",
+      "modifyFurniture": "Modifier mon meuble",
       "changeGalleryVisibility": "Changer la visibilité d'un aménagement",
       "getCompagnyCatalog": "Voir mon catalogue d'entreprise",
       "getCompagnyArchive": "Voir mon archive d'entreprise",
