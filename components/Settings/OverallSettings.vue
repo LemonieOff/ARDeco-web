@@ -45,7 +45,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="gallery in galleryData" :key="gallery.id">
+                        <tr v-for="gallery in galleryData" :key="gallery.id" @click="redirectToGallery(gallery.id)" style="cursor: pointer;">
                             <td>{{ gallery.name }}</td>
                             <td>{{ gallery.room }}</td>
                             <td>{{ gallery.style }}</td>
@@ -190,11 +190,15 @@ export default {
 
             const result = await response.json();
             this.galleryData = result.data;
+            console.log("this.galleryData : ", this.galleryData)
             if (result.code == 200 && result.data.length == 0) {
                 this.$refs.notifications.showSuccess("Your personnal gallery is currently empty.");
             } else if (result.code != 200) {
                 this.$refs.notifications.showError("Error : We couldn't the informations of your gallery.");
             }
+        },
+        async redirectToGallery(galleryId) {
+            this.$router.push(`${this.langPrefix}gallery/` + galleryId);
         }
     }
 }

@@ -290,6 +290,7 @@
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",
+      "modifyFurniture": "Modifier mon meuble",
       "changeGalleryVisibility": "Changer la visibilité d'un aménagement",
       "getCompagnyCatalog": "Voir mon catalogue d'entreprise",
       "getCompagnyArchive": "Voir mon archive d'entreprise",
@@ -299,6 +300,8 @@
       "restoreItemFromArchive": "Restaurer cet élement de l'archive",
       "resetCompagnyApiKey": "Réinitialiser mon clé API",
       "title": "Paramètres d'entreprise",
+      "titleCreateFurniture" : "Créez votre meuble !",
+      "titleModifyFurniture" : "Modifiez votre meuble !",
       "placeholders": {
         "furnitureName": "Nom du meuble",
         "furniturePrice": "Prix du meuble",
@@ -586,7 +589,9 @@
       "resetCompagnyApiKey": "Réinitialiser la clé API",
       "createNewFurniture": "Créer un nouveau meuble",
       "private": "Privé",
-      "public": "Public"
+      "public": "Public",
+      "restore": "Restaurer",
+      "delete": "Supprimer"
     },
     "archiveTitle": "Archive",
     "title": "Catalogue",

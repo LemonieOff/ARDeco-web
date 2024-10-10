@@ -11,11 +11,15 @@
             <div v-for="(item) in GalleryData" class="grid-row">
                 <div v-if="item.visibility" class="grid-item">{{ item.name }}</div>
                 <div v-if="item.visibility" class="grid-item">{{ item.room }}</div>
-                <div v-if="item.visibility" class="grid-item">{{ item.user.first_name }} {{ item.user.last_name }}</div>
+                <div v-if="item.visibility" class="grid-item">
+                    {{ item.user.first_name }} {{ item.user.last_name }}
+                    <span v-if="item.visibility && item.user.id === userID">- (You) </span>
+                </div>
                 <div class="grid-item">
                     <a v-if="item.visibility" :href="`${langPrefix}gallery/${item.id}`"
-                       class="custom-button">{{ content.details
-                        }}</a><br />
+                       class="custom-button">{{ content.details }}
+                    </a>
+                    <br/>
                     <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">
                         {{ content.blockUser }}
                     </button>
@@ -74,6 +78,7 @@ async function getGallery() {
 
     const result = await response.json();
     GalleryData.value = result.data;
+    // console.log("GalleryData : ", GalleryData)
 }
 
 async function blockUser(userID: number) {

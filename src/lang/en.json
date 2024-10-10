@@ -284,6 +284,7 @@
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",
+      "modifyFurniture": "Modify my furniture",
       "changeGalleryVisibility": "Change gallery item visibility",
       "getCompagnyCatalog": "Get compagny catalog",
       "getCompagnyArchive": "Get compagny archive",
@@ -292,7 +293,9 @@
       "deleteItem": "Delete single item",
       "restoreItemFromArchive": "Restore item from archive",
       "resetCompagnyApiKey": "Reset company API key",
-      "title" : "Company settings",
+      "title": "Company settings",
+      "titleCreateFurniture" : "Create your new furniture !",
+      "titleModifyFurniture" : "Modify your furniture !",
       "placeholders": {
         "furnitureName" : "Furniture name",
         "furniturePrice" : "Furniture price",
@@ -581,7 +584,9 @@
       "resetCompagnyApiKey": "Reset API key",
       "createNewFurniture": "Create a new furniture",
       "private": "Private",
-      "public": "Public"
+      "public": "Public",
+      "restore": "Restore",
+      "delete": "Delete"
     },
     "archiveTitle": "Archive",
     "title": "Catalog",

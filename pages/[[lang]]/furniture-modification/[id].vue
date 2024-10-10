@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{content.titleCreateFurniture}}</h1>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{content.titleModifyFurniture}}</h1>
     <div class="mainContent">
         <div class="furniturePictureArea">
             <img id="furnitureImg" src="@/assets/images/furnitures/defaultFurnitureCreationImage.png">
@@ -42,7 +42,7 @@
                 <input class="basicButton" id="furnitureHeight" :placeholder="`${content.placeholders.furnitureHeight}`">
                 <input class="basicButton" id="furnitureWidth" :placeholder="`${content.placeholders.furnitureWidth}`">
                 <input class="basicButton" id="furnitureDepth" :placeholder="`${content.placeholders.furnitureDepth}`">
-                <button id="addFurnitureToCatalog" class="basicButton bottomButton" @click="addFurniture">{{content.addFurnitureToCatalog}}</button>
+                <button id="addFurnitureToCatalog" class="basicButton bottomButton" @click="modifyFurniture">{{content.modifyFurniture}}</button>
             </div>
         </div>
     </div>
@@ -50,11 +50,11 @@
 </template>
 
 <script>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
-    name: "CreateNewFurniture",
+    name: "ModifyFurniture",
     components: {
         Notifications
     },
@@ -62,7 +62,10 @@ export default {
         return {
             content: this.$content.settings.companies,
             placeholders: {},
+            userID: 36,
             langPrefix: "/",
+            furnitureID: Number(this.$route.params.id),
+            furnitureObj: [],
             styles: {
                 modern: { name: "modern", selected: false },
                 scandinavian: { name: "scandinavian", selected: false },
@@ -132,6 +135,9 @@ export default {
     },
     mounted() {
         this.checkIfLogged();
+        this.getFurniture().then(() => {
+            this.fillFurnitureInformations();
+        });
     },
     methods: {
         toggleSelection(item) {
@@ -139,13 +145,68 @@ export default {
         },
 
         async checkIfLogged() {
-            await isLogged();
+            const userID_TMP = await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
+            this.userID = Number(userID_TMP);
         },
 
-        async addFurniture() {
+        async getFurniture() {
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            // console.log(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`)
+            // https://api.ardeco.app/catalog/FURNITURE_ID
+            const response = await fetch(`https://api.ardeco.app/catalog/${this.furnitureID}?company_api_key=${COMPANY_API_TOKEN}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+
+            const result = await response.json();
+            console.log("result.data:", result.data)
+            if (result.code === 200) {
+                this.furnitureObj = result.data
+                console.log("Parsed furniture object:", this.furnitureObj);
+            } else {
+                this.$refs.notifications.showError("Couldn't find this furniture, are you certain it's the right ID ?");
+            }
+        },
+
+        async fillFurnitureInformations() {
+            document.querySelector('#furnitureName').value = this.furnitureObj.name || "";
+            document.querySelector('#furniturePrice').value = this.furnitureObj.price || "";
+            document.querySelector('#furnitureHeight').value = this.furnitureObj.height || "";
+            document.querySelector('#furnitureWidth').value = this.furnitureObj.width || "";
+            document.querySelector('#furnitureDepth').value = this.furnitureObj.depth || "";
+
+            for (let selectedColor of this.furnitureObj.colors) {
+                for (let selectableColor of Object.values(this.colors)) {
+                    if (selectedColor.color === selectableColor.name) {
+                        selectableColor.selected = true;
+                    }
+                }
+            }
+
+            for (let selectedStyle of this.furnitureObj.styles) {
+                for (let selectableStyle of Object.values(this.styles)) {
+                    if (selectedStyle === selectableStyle.name) {
+                        selectableStyle.selected = true;
+                    }
+                }
+            }
+
+            for (let selectedRoom of this.furnitureObj.rooms) {
+                for (let selectableRoom of Object.values(this.rooms)) {
+                    if (selectedRoom === selectableRoom.name) {
+                        selectableRoom.selected = true;
+                    }
+                }
+            }
+        },
+
+        async modifyFurniture() {
             const userID = await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
@@ -184,13 +245,13 @@ export default {
                 return;
             }
 
-            console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`);
-            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'POST',
+            console.log('furnitureName',  furnitureName)
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/edit/' + this.furnitureObj.id + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify([{
+                body: JSON.stringify({
                     "name": furnitureName,
                     "price": furniturePrice,
                     "styles": furnitureStyles,
@@ -199,19 +260,14 @@ export default {
                     "width": furnitureWidth,
                     "depth": furnitureDepth,
                     "colors": furnitureColors
-                }]),
+                }),
                 credentials: 'include',
             });
 
             const result = await response.json();
             console.log(result);
-            if (result.code === 201) {
-                document.querySelector('#furnitureName').value = "";
-                document.querySelector('#furniturePrice').value = "";
-                document.querySelector('#furnitureHeight').value = "";
-                document.querySelector('#furnitureWidth').value = "";
-                document.querySelector('#furnitureDepth').value = "";
-                this.$refs.notifications.showSuccess(result.description);
+            if (result.code === 200) {
+                this.$router.push(`${this.langPrefix}company`);
             } else {
                 this.$refs.notifications.showError(result.description);
             }
