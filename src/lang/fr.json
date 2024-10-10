@@ -300,6 +300,8 @@
       "restoreItemFromArchive": "Restaurer cet élement de l'archive",
       "resetCompagnyApiKey": "Réinitialiser mon clé API",
       "title": "Paramètres d'entreprise",
+      "titleCreateFurniture" : "Créez votre meuble !",
+      "titleModifyFurniture" : "Modifiez votre meuble !",
       "placeholders": {
         "furnitureName": "Nom du meuble",
         "furniturePrice": "Prix du meuble",

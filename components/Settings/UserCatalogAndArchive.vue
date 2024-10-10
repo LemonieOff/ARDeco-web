@@ -48,11 +48,12 @@
                     <div v-if="item.company === this.userID" class="grid-item">{{ item.price }}</div>
                     <div v-if="item.company === this.userID" class="grid-item no-right-border">
                         <button class="actionButton redBackground" @click="archiveItem(item.id)"> Archive</button>
-                        <button v-if="item.active === true" class="addLeftMargin actionButton greenBackground"
+                        <button class="actionButton addLeftMargin greenBackground" @click="modifyFurniture(item.id)"> Modifier </button>
+                        <button v-if="item.active === true" class="actionButton greenBackground"
                                 @click="changeItemActiveness(item.id, item.active)">
                             <span> {{ content.buttons.public }} </span>
                         </button>
-                        <button v-if="item.active === false" class="addLeftMargin actionButton redBackground"
+                        <button v-if="item.active === false" class="actionButton redBackground"
                                 @click="changeItemActiveness(item.id, item.active)">
                             <span> {{ content.buttons.private }} </span>
                         </button>
@@ -117,6 +118,7 @@ export default {
             ],
             content: this.$content.catalog,
             userID: 0,
+            langPrefix: "/",
             selectedCard: 0,
             catalogList: [],
             archiveList: []
@@ -202,6 +204,10 @@ export default {
             }
             await this.getArchive();
             await this.getCatalog();
+        },
+
+        async modifyFurniture(id) {
+            this.$router.push(`${this.langPrefix}furniture-modification/` + `${id}`);
         },
 
         async deleteArchivedItem(itemInputID) {
@@ -425,6 +431,7 @@ export default {
     padding: 5px;
     border: 1px solid $primary-black;
     border-radius: 5px;
+    font-size: 12px;
 }
 
 .addLeftMargin {

@@ -293,7 +293,9 @@
       "deleteItem": "Delete single item",
       "restoreItemFromArchive": "Restore item from archive",
       "resetCompagnyApiKey": "Reset company API key",
-      "title" : "Company settings",
+      "title": "Company settings",
+      "titleCreateFurniture" : "Create your new furniture !",
+      "titleModifyFurniture" : "Modify your furniture !",
       "placeholders": {
         "furnitureName" : "Furniture name",
         "furniturePrice" : "Furniture price",

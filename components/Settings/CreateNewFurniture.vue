@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{content.title}}</h1>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{content.titleCreateFurniture}}</h1>
     <div class="mainContent">
         <div class="furniturePictureArea">
             <img id="furnitureImg" src="@/assets/images/furnitures/defaultFurnitureCreationImage.png">
