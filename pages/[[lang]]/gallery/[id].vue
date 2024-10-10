@@ -32,13 +32,14 @@
             <span v-if="this.GalleryData.visibility === false">{{ content.show }}</span>
             <span v-if="this.GalleryData.visibility === true">{{ content.hide }}</span>
         </button>
+        <span v-if="this.galleryUserId === this.userID" class="yourCreation"> You created this gallery </span>
         <input type="text" id="reportDescription" placeholder="Décrivez le problème ici (optionnel)" hidden>
         <button id="confirmReport" class="custom-button" style="margin-left: 2.5%" @click="reportGallery" hidden>
             {{ content.confirm }}
         </button>
-        <div id="textEncouragement" class="textReportJustification" hidden> {{ content.textReportEncouragement }}</div>
-        <div id="errorText" class="textReportJustification" hidden></div>
-        <div id="successText" class="textReportJustification"></div>
+        <div id="textEncouragement" hidden> {{ content.textReportEncouragement }}</div>
+        <div id="errorText" hidden></div>
+        <div id="successText"></div>
         <div class="stage">
             <div class="heart" :class="{ 'is-active': isLiked }" @click="handleLike"></div>
             <div id="numberOfLikes"></div>
@@ -224,10 +225,11 @@ export default {
             const result = await response.json();
             // console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description)
+                this.$refs.notifications.showSuccess("Successfully changed your gallery's visibility !");
             } else {
-                this.$refs.notifications.showError(result.description)
+                this.$refs.notifications.showError("Error : Failed to hide or show your gallery, try again later.");
             }
+            location.reload();
         },
 
         async getNumberOfLikes() {
@@ -347,7 +349,7 @@ export default {
 
 #reportDescription {
     margin-left: 2.5%;
-    width: 60%;
+    width: 35%;
     height: 5vh;
     border-radius: 5px;
     text-align: center;
@@ -361,6 +363,11 @@ export default {
     background-color: #F4F4F4;
     border: 1px solid $primary-red;
     color: $primary-red;
+}
+
+.yourCreation {
+    color: green;
+    margin-left: 25px;
 }
 
 // Animation du like (test)
@@ -382,7 +389,7 @@ export default {
 
 .stage {
     margin-left: 90%;
-    margin-top: -2.5%;
+    margin-top: -1.5%;
     width: 10%;
     transform: translate(-50%, -50%);
     display: inline-flex;

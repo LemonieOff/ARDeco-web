@@ -190,6 +190,7 @@ export default {
 
             const result = await response.json();
             this.galleryData = result.data;
+            console.log("this.galleryData : ", this.galleryData)
             if (result.code == 200 && result.data.length == 0) {
                 this.$refs.notifications.showSuccess("Your personnal gallery is currently empty.");
             } else if (result.code != 200) {
