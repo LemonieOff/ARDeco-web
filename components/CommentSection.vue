@@ -29,8 +29,15 @@ import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "CommentSection",
+    components: {
+        Notifications,
+    },
     props: {
-        galleryId: Number | null
+        galleryId: Number | null,
+        notifications: {
+            type: Object,
+            required: true,
+        },
     },
     data() {
         return {
@@ -51,6 +58,7 @@ export default {
             this.getUserPicture()
         }
     },
+    inject: ["notifications"],
     methods: {
         async getUserPicture() {
             const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
@@ -63,7 +71,7 @@ export default {
             const result = await response.json();
             console.log(result)
             if (result.code == 400) {
-                this.$refs.notifications.showError("Error: we couldn't receive informations about profile pictures, try again later.");
+                this.notifications.showError("Error: we couldn't receive informations about profile pictures, try again later.");
             }
             this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data.id}.png`
         },
@@ -83,7 +91,7 @@ export default {
             const result = await response.json();
 
             if (result.code == 400) {
-                this.$refs.notifications.showError("Error: we couldn't receive the comments informations, try again later.");
+                this.notifications.showError("Error: we couldn't receive the comments informations, try again later.");
             }
             this.comments = result.data
 
@@ -113,9 +121,9 @@ export default {
             const result = await response.json();
 
             if (result.code !== 201) {
-                this.$refs.notifications.showError(result.message);
+                this.notifications.showError(result.message);
             } else {
-                // await this.$refs.notifications.showSuccess(result.description)
+                // await this.notifications.showSuccess(result.description)
                 await this.getComments()
             }
             console.log("POST :", result);
@@ -137,9 +145,9 @@ export default {
             const result = await response.json();
 
             if (result.code !== 200) {
-                this.$refs.notifications.showError(result.message);
+                this.notifications.showError(result.message);
             } else {
-                // await this.$refs.notifications.showSuccess(result.description)
+                // await this.notifications.showSuccess(result.description)
                 await this.getComments()
             }
             console.log("DELETE :", result);

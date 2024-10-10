@@ -32,7 +32,6 @@
             <span v-if="this.GalleryData.visibility === false">{{ content.show }}</span>
             <span v-if="this.GalleryData.visibility === true">{{ content.hide }}</span>
         </button>
-        <span v-if="this.galleryUserId === this.userID" class="yourCreation"> You created this gallery </span>
         <input type="text" id="reportDescription" placeholder="Décrivez le problème ici (optionnel)" hidden>
         <button id="confirmReport" class="custom-button" style="margin-left: 2.5%" @click="reportGallery" hidden>
             {{ content.confirm }}
@@ -45,8 +44,8 @@
             <div id="numberOfLikes"></div>
         </div>
     </div>
-    <CommentSection :galleryId="this.GalleryData.id"/>
     <Notifications ref="notifications"/>
+    <CommentSection :galleryId="this.GalleryData.id" :notifications="this.$refs.notifications"/>
 </template>
 
 <script>
@@ -54,12 +53,14 @@ import en from "~/src/lang/en.json";
 import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
+import CommentSection from "@/components/CommentSection.vue";
 import $ from 'jquery';
 
 export default {
     name: "Gallery",
     components: {
         Notifications,
+        CommentSection
     },
     data() {
         return {
@@ -75,6 +76,11 @@ export default {
             langPrefix: this.$langPrefix,
         };
     },
+    provide() {
+        return {
+            notifications: this.$refs.notifications,
+        };
+    },
     async mounted() {
         await this.checkLogin();
         const id = this.$route.params.id;
@@ -83,11 +89,19 @@ export default {
         await this.getLikeStatus();
         // console.log(this.galleryUserId, "/", this.userID)
 
+        this.$nextTick(() => {
+            this.notifications = this.$refs.notifications;
+        });
+
         $(function() {
             $(".heart").on("click", function() {
                 $(this).toggleClass("is-active");
             });
         });
+
+        if (this.galleryUserId === this.userID) {
+            this.$refs.notifications.showSuccess("You created this gallery !")
+        }
     },
     methods: {
         async checkLogin() {
@@ -349,7 +363,7 @@ export default {
 
 #reportDescription {
     margin-left: 2.5%;
-    width: 35%;
+    width: 50%;
     height: 5vh;
     border-radius: 5px;
     text-align: center;
