@@ -3,51 +3,57 @@
         <div id="navbarMenu"
              class="invisible opacity-0 fixed top-32 -right-2.5 bg-white py-2.5 px-5 rounded-2xl w-52 duration-500">
             <ul>
-                <NavbarMenuLink v-if="userId" id="profileMenuOption" page-name="lang-profile" :page-lang="langPrefix"
-                                image-src="images/icons/user.webp" :alt="content.profile">
+                <NavbarMenuLink v-if="userId" id="profileMenuOption" :alt="content.profile" :page-lang="langPrefix"
+                                image-src="images/icons/user.webp"
+                                page-name="lang-profile" @click="menuToggle">
                     {{ content.profile }}
                 </NavbarMenuLink>
 
-                <NavbarMenuLink v-if="userId" id="settingsMenuOption" page-name="lang-settings" :page-lang="langPrefix"
-                                image-src="images/icons/settings.webp" :alt="content.settings">
+                <NavbarMenuLink v-if="userId" id="settingsMenuOption" :alt="content.settings" :page-lang="langPrefix"
+                                image-src="images/icons/settings.webp"
+                                page-name="lang-settings" @click="menuToggle">
                     {{ content.settings }}
                 </NavbarMenuLink>
 
-                <NavbarMenuLink v-if="userId && role === 'company'" id="companyMenuOption" page-name="lang-company"
-                                :page-lang="langPrefix" image-src="images/icons/company.webp" :alt="content.company">
+                <NavbarMenuLink v-if="userId && role === 'company'" id="companyMenuOption" :alt="content.company"
+                                :page-lang="langPrefix"
+                                image-src="images/icons/company.webp" page-name="lang-company" @click="menuToggle">
                     {{ content.company }}
                 </NavbarMenuLink>
 
-                <NavbarMenuLink v-if="userId" id="ticketsMenuOption" page-name="lang-tickets" :page-lang="langPrefix"
-                                image-src="images/icons/support.webp" :alt="content.tickets">
+                <NavbarMenuLink v-if="userId" id="ticketsMenuOption" :alt="content.tickets" :page-lang="langPrefix"
+                                image-src="images/icons/support.webp"
+                                page-name="lang-tickets" @click="menuToggle">
                     {{ content.tickets }}
                 </NavbarMenuLink>
 
-                <NavbarMenuLink v-if="userId" id="feedbackMenuOption" page-name="lang-feedback" :page-lang="langPrefix"
-                                image-src="images/icons/feedback.webp" :alt="content.feedback">
+                <NavbarMenuLink v-if="userId" id="feedbackMenuOption" :alt="content.feedback" :page-lang="langPrefix"
+                                image-src="images/icons/feedback.webp"
+                                page-name="lang-feedback" @click="menuToggle">
                     {{ content.feedback }}
                 </NavbarMenuLink>
 
-                <NavbarMenuFunction v-if="userId" id="logoutMenuOption" :fun="logoutUser"
-                                    image-src="images/icons/logout.webp" :alt="content.disconnect">
+                <NavbarMenuFunction v-if="userId" id="logoutMenuOption" :alt="content.disconnect" :fun="logoutUser"
+                                    image-src="images/icons/logout.webp" @click="menuToggle">
                     {{ content.disconnect }}
                 </NavbarMenuFunction>
 
-                <NavbarMenuLink v-if="!userId" id="loginMenuOption" page-name="lang-login" :page-lang="langPrefix"
-                                image-src="images/icons/logout.webp" :alt="content.login" :page-redirect="route.path">
+                <NavbarMenuLink v-if="!userId" id="loginMenuOption" :alt="content.login" :page-lang="langPrefix"
+                                :page-redirect="route.path"
+                                image-src="images/icons/logout.webp" page-name="lang-login" @click="menuToggle">
                     {{ content.login }}
                 </NavbarMenuLink>
             </ul>
         </div>
         <div id="user" @click="menuToggle">
-            <NuxtImg width="50px" height="50px" id="profileImage" class="navbar-icon rounded-[50%]"
-                     v-bind:src="imageSrc" alt="Profile picture"/>
+            <NuxtImg id="profileImage" alt="Profile picture" class="navbar-icon rounded-[50%]" height="50px"
+                     v-bind:src="imageSrc" width="50px" />
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
-import {logout, isLogged, loggedIn} from "public/ts/checkLogin";
+<script lang="ts" setup>
+import { isLogged, loggedIn, logout } from "public/ts/checkLogin";
 
 const nuxtApp = useNuxtApp();
 const route = useRoute();
@@ -61,15 +67,15 @@ const imageSrc = ref(nuxtApp.$profilePicture.url);
 onMounted(async () => {
     userId.value = await isLogged();
 
-    role.value = localStorage.getItem('role');
+    role.value = localStorage.getItem("role");
 
     await getUSerPicture();
 });
 
 async function logoutUser() {
-    await fetch('https://api.ardeco.app/logout', {
-        method: 'GET',
-        credentials: 'include',
+    await fetch("https://api.ardeco.app/logout", {
+        method: "GET",
+        credentials: "include"
     });
     imageSrc.value = nuxtApp.$changeProfilePicture().url;
     logout();
@@ -84,11 +90,11 @@ async function getUSerPicture() {
     }
 
     const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
-        credentials: 'include',
+        credentials: "include"
     });
     const result = await response.json();
     if (imageSrc.value !== result.data.url) imageSrc.value = result.data.url;
@@ -101,7 +107,7 @@ function menuToggle() {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 #navbarMenu {
     box-shadow: -5px 5px 10px 0px rgba(0, 0, 0, .1);
 }
