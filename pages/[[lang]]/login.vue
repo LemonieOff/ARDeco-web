@@ -44,12 +44,19 @@
                     <label class="block text-sm font-bold mb-2" for="loginPassword">
                         {{ content.password }} <span class="text-red-500">*</span>
                     </label>
-                    <input id="loginPassword"
-                           ref="fieldPassword"
-                           :placeholder="content.placeholders.password"
-                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
-                           required
-                           type="password" />
+                    <div class="flex">
+                        <input id="loginPassword"
+                               ref="fieldPassword"
+                               :placeholder="content.placeholders.password"
+                               :type="hiddenPassword ? 'password' : 'text'"
+                               class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                               required />
+                        <Icon :name="`material-symbols:visibility-${hiddenPassword ? 'off-' : ''}outline-rounded`"
+                              class="inline-flex w-1/12 justify-center self-center cursor-pointer ml-2"
+                              size="24"
+                              @click="hiddenPassword = !hiddenPassword"
+                        />
+                    </div>
                 </div>
                 <div v-show="activeForm === 'login'" class="mb-4">
                     <input id="rememberMe" ref="loginFieldRememberMe" class="mr-2" type="checkbox" />
