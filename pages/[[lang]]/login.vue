@@ -161,6 +161,7 @@ const fieldCgu: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldCgu")
 const fieldBot: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldBot");
 
 const noConsent = ref(false);
+const hiddenPassword = ref(true);
 
 const route = useRoute();
 const redirectUrl = ref(langPrefix.value + "profile");
