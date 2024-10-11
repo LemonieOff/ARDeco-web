@@ -12,7 +12,7 @@
             <div
                 class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 md:w-[32rem] lg:w-[48rem]">
                 <div class="w-full inline-flex items-center justify-evenly pb-8">
-                    <span :class="activeForm === 'login' ? 'font-extrabold underline' : ''" class="pr-8"
+                    <span :class="activeForm === 'login' ? 'font-extrabold underline' : 'cursor-pointer'" class="pr-8"
                           @click="activeForm = 'login'">
                         {{ content.loginTitle }}
                     </span>
@@ -22,7 +22,8 @@
                         <span
                             class="relative w-[3.25rem] h-7 bg-teal-600 hover:bg-teal-700 peer-focus:outline-0 peer-focus:ring-transparent rounded-full transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pink-500 hover:peer-checked:bg-pink-600"></span>
                     </label>
-                    <span :class="activeForm === 'register' ? 'font-extrabold underline' : ''" class="pl-8"
+                    <span :class="activeForm === 'register' ? 'font-extrabold underline' : 'cursor-pointer'"
+                          class="pl-8"
                           @click="activeForm = 'register'">
                         {{ content.registerTitle }}
                     </span>
@@ -97,20 +98,20 @@
                            type="tel" />
                 </div>
                 <div v-show="activeForm === 'register'" class="mb-4">
-                    <input id="privacyConsent" ref="fieldPrivacy" class="mr-2" required type="checkbox" />
-                    <label class="text-sm" for="privacyConsent">
-                        {{ content.agreementPrivacy[0] }} <a :href="`${langPrefix}privacy-policy`"
-                                                             class="text-blue-500 hover:underline"
-                                                             target="_blank">{{ content.agreementPrivacy[1]
-                        }}</a> <span class="text-red-500">*</span>
-                    </label>
-                </div>
-                <div v-show="activeForm === 'register'" class="mb-4">
                     <input id="tosConsent" ref="fieldCgu" class="mr-2" required type="checkbox" />
                     <label class="text-sm" for="tosConsent">
                         {{ content.agreementCgu[0] }} <a :href="`${langPrefix}cgu`"
                                                          class="text-blue-500 hover:underline"
                                                          target="_blank">{{ content.agreementCgu[1]
+                        }}</a> <span class="text-red-500">*</span>
+                    </label>
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <input id="privacyConsent" ref="fieldPrivacy" class="mr-2" required type="checkbox" />
+                    <label class="text-sm" for="privacyConsent">
+                        {{ content.agreementPrivacy[0] }} <a :href="`${langPrefix}privacy-policy`"
+                                                             class="text-blue-500 hover:underline"
+                                                             target="_blank">{{ content.agreementPrivacy[1]
                         }}</a> <span class="text-red-500">*</span>
                     </label>
                 </div>
