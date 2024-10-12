@@ -84,7 +84,7 @@ onBeforeUnmount(() => {
 
 function handleClickOutside(event: MouseEvent) {
     if (divRef.value) {
-        const isClickedOnMenu = divRef.value.contains(<Node>event.target);
+        const isClickedOnMenu = divRef.value.contains(event.target as Node);
         if (!isClickedOnMenu) menuToggle(false);
     }
 }
