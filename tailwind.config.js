@@ -27,7 +27,9 @@ module.exports = {
                 "card-border-dark": "#4A3936",
                 "card-background": "#F5DBAF",
                 "card-background-dark": "#242424",
-                "card-text-dark": "#DECDC3"
+                "card-text-dark": "#DECDC3",
+                "AR-Blue": "#1c3765",
+                "AR-Light-Blue": "#acdee5"
             }
         }
     },
