@@ -1,107 +1,75 @@
 <template>
-    <div class="centered topMargin title"> {{ content.updatesHistoryTitle }} </div>
-    <div class="centered topMargin bordered bottomMargin">
-        <table v-if="updatesData.length">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Version</th>
-                    <th>Date</th>
-                    <th>Changelog</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="update in updatesData" :key="update.id">
-                    <td>{{ update.id }}</td>
-                    <td>{{ update.name }}</td>
-                    <td>{{ update.version }}</td>
-                    <td>{{ new Date(update.date).toLocaleDateString() }}</td>
-                    <td>{{ update.changelog }}</td>
-                </tr>
-            </tbody>
-        </table>
-        <p v-else> {{ content.updatesHistoryError }} </p>
+    <div class="w-4/5 xl:w-3/5 mx-auto">
+        <h2 class="text-center text-xl md:text-3xl text-black dark:text-white mb-6">
+            {{ content.updatesHistoryTitle }}
+        </h2>
+
+        <div v-if="updatesData.length > 0">
+            <div v-for="update in updatesData" :key="update.id"
+                 class="mb-3 flex flex-col bg-card-background dark:bg-card-background-dark border-card-border dark:border-card-border-dark rounded-xl p-2 px-4 border-2">
+                <div class="flex justify-between mb-2">
+                    <span class="font-bold">{{ update.version }} - {{ update.name }}</span>
+                    <span class="opacity-50">{{ new Date(update.date).toLocaleDateString() }}</span>
+                </div>
+                <ul class="list-disc list-inside">
+                    <li v-for="change in update.changelog">
+                        {{ change }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p v-else class="text-center"> {{ content.updatesHistoryError }} </p>
     </div>
 </template>
 
-<script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
+<script lang="ts" setup>
 
 const nuxtApp = useNuxtApp();
-const updatesData = ref([]);
-const content = nuxtApp.$lang === 'en' ? en.productPages : fr.productPages
+const updatesData = ref<{
+    changelog: string[],
+    date: Date,
+    id: number,
+    name: string,
+    version: string
+}[]>([]);
+const content = nuxtApp.$content.productPages;
 
 onMounted(async () => {
     await getUpdates();
 });
 
 async function getUpdates() {
-    try {
-        const response = await fetch('https://api.ardeco.app/changelog', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-        });
+    const response = await fetch("https://api.ardeco.app/changelog", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    });
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch data');
-        }
-
-        const result = await response.json();
-        updatesData.value = result.data;
-        console.log(updatesData);
-    } catch (error) {
-        console.error(error.message);
+    if (!response.ok) {
+        console.error("Error while fetching changelog", response.status, response);
     }
+
+    const result: {
+        status: "OK" | "KO",
+        description: string,
+        code: number,
+        data: [{
+            changelog: string,
+            date: Date,
+            id: number,
+            name: string,
+            version: string
+        }]
+    } = await response.json();
+
+    updatesData.value = result.data.map(item => {
+        return {
+            ...item,
+            changelog: item.changelog.split("\n")
+        };
+    });
+    console.log(updatesData);
 }
 </script>
-
-<style scoped>
-
-.title {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.centered {
-    width: 60%;
-    margin-left: 20%;
-    text-align: center;
-}
-
-.topMargin {
-    margin-top: 50px;
-}
-
-.bottomMargin {
-    margin-bottom: 50px;
-}
-
-.bordered {
-    border: 1px solid #846700;
-    border-radius: 5px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-
-th {
-    background-color: #f4f4f4;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-</style>

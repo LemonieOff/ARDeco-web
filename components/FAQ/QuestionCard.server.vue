@@ -1,11 +1,12 @@
 <template>
-    <a :id="id" :href="link" class="text-AR-Grey dark:text-[#DECDC3] rounded-xl border-2 border-[#846700] dark:border-[#D8DF81] bg-[#F5DBAF] dark:bg-[#4E360E] question-card flex flex-row-reverse justify-around md:flex-col items-center text-center w-80 xl:w-96 md:h-28">
-        <slot/>
-        <NuxtImg width="64" height="64" :src="imgSrc" :alt="imgAlt" class=""/>
+    <a :id="id" :href="link"
+       class="rounded-xl border-2 border-card-border dark:border-card-border-dark bg-card-background dark:bg-card-background-dark question-card flex flex-row-reverse justify-around md:flex-col items-center text-center w-80 xl:w-96 md:h-28">
+        <slot />
+        <NuxtImg :alt="imgAlt" :src="imgSrc" class="" height="64" width="64" />
     </a>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 defineProps({
     id: {
         type: String,

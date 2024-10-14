@@ -79,7 +79,7 @@
     "whyUseArdecoText": "The project therefore saves time when furnishing your room. Thanks to the budget and style selection, the scanning of the room to capture the dimensions of the walls and furniture (if present in the room) and the AI previously described which retrieves furniture corresponding to the criteria and dimensions then pose, saving user time and agent. Another improvement that the project brings to the user is that he is sure of the final rendering of his room and will not be disappointed, since he can visualize in augmented reality in his room the final arrangement, and even carry out tests to be sure.",
     "inAppPurchaseTitle": "Can I buy furniture from the app ?",
     "inAppPurchaseText": "Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user.",
-    "updatesHistoryTitle": "Lastest updates history",
+    "updatesHistoryTitle": "Mobile app changelog (in French only)",
     "updatesHistoryError": "There was an error trying to recover latest updates informations, please re-try later."
   },
   "footer": {
@@ -186,8 +186,14 @@
     "consent": "I consent to the processing of my personal data as described in our Privacy Policy",
     "hasRead": "I have read and accept the Terms of Use",
     "agreement": "I agree and consent to the",
-    "agreementPrivacy": ["I agree and consent to the","Privacy Policy"],
-    "agreementCgu": ["I agree and consent to the","Terms of Service"],
+    "agreementPrivacy": [
+      "I agree and consent to the",
+      "Privacy Policy"
+    ],
+    "agreementCgu": [
+      "I agree and consent to the",
+      "Terms of Service"
+    ],
     "consentNotGiven": "You must consent to the Terms of Use and Privacy Policy to continue.",
     "placeholders": {
       "email": "Enter your email",
@@ -265,10 +271,10 @@
       "getUserSettings": "Get user settings",
       "setUserSettings": "Set user settings",
       "getUserGallery": "Get user gallery",
-      "currentUserSettingsTitle" : "Your current settings",
-      "language" : "Language",
+      "currentUserSettingsTitle": "Your current settings",
+      "language": "Language",
       "notifications": "Notifications",
-      "title" : "Settings",
+      "title": "Settings",
       "yes": "Yes",
       "no": "No",
       "french": "French",
@@ -294,18 +300,18 @@
       "restoreItemFromArchive": "Restore item from archive",
       "resetCompagnyApiKey": "Reset company API key",
       "title": "Company settings",
-      "titleCreateFurniture" : "Create your new furniture !",
-      "titleModifyFurniture" : "Modify your furniture !",
+      "titleCreateFurniture": "Create your new furniture !",
+      "titleModifyFurniture": "Modify your furniture !",
       "placeholders": {
-        "furnitureName" : "Furniture name",
-        "furniturePrice" : "Furniture price",
-        "furnitureStyles" : "Furniture styles",
-        "furnitureRooms" : "Furniture rooms",
-        "furnitureHeight" : "Furniture height",
-        "furnitureWidth" : "Furniture width",
-        "furnitureDepth" : "Furniture depths",
-        "furnitureColors" : "Furniture colors",
-        "itemInputID" : "Item ID"
+        "furnitureName": "Furniture name",
+        "furniturePrice": "Furniture price",
+        "furnitureStyles": "Furniture styles",
+        "furnitureRooms": "Furniture rooms",
+        "furnitureHeight": "Furniture height",
+        "furnitureWidth": "Furniture width",
+        "furnitureDepth": "Furniture depths",
+        "furnitureColors": "Furniture colors",
+        "itemInputID": "Item ID"
       }
     }
   },
@@ -426,7 +432,7 @@
       "responsibility": "The User is responsible for any content he publishes. The User undertakes to only publish content for which he has the necessary rights.",
       "moderation": "The Service reserves the right to moderate or delete any content published by the User at any time and without notice or justification.",
       "data": "The User is informed and accepts that the implementation of the Service requires that his personal data be transmitted to third parties.",
-      "availability": "The Service strives to provide the Service 24 hours a day, 7 days a week. In the event of an interruption, the Service will endeavor to communicate to Users in advance the dates and times of the intervention." ,
+      "availability": "The Service strives to provide the Service 24 hours a day, 7 days a week. In the event of an interruption, the Service will endeavor to communicate to Users in advance the dates and times of the intervention.",
       "responsibility2": "The Publisher cannot be held responsible for any direct or indirect damage caused to the User's equipment when accessing the Service.",
       "cookies": "The Service may use cookies. In this case, the Service informs the User of the possibility of deactivating cookies from their browser settings.",
       "proprietary": "The Service and its content (texts, images, sounds, videos, etc.) are the exclusive property of the Publisher.",
@@ -509,7 +515,6 @@
   },
   "favorite": {
     "furniture": {
-
     },
     "gallery": {
       "title": "Favorite galleries (designs)",
