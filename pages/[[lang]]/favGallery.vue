@@ -56,10 +56,10 @@
                 <span class="opacity-50">{{ content.by }} {{ data.user.first_name
                     }}{{ data.user.last_name.trim() === "" ? "" : ` ${data.user.last_name}` }}</span>
             </div>
-            <button v-if="!blockedUsers.includes(data.user.id)"
-                    class="block text-[#086100] dark:text-[#ade5a8] border-2 border-[#086100] dark:border-[#ade5a8] hover:bg-AR-Beige hover:dark:bg-AR-Dark-Grey rounded text-center mt-2.5 py-2.5 px-5 duration-100 transition-colors">
+            <a v-if="!blockedUsers.includes(data.user.id)" :href="`${langPrefix}gallery/${data.id}`"
+               class="block text-[#086100] dark:text-[#ade5a8] border-2 border-[#086100] dark:border-[#ade5a8] hover:bg-AR-Beige hover:dark:bg-AR-Dark-Grey rounded text-center mt-2.5 py-2.5 px-5 duration-100 transition-colors">
                 {{ content.accessDetails }}
-            </button>
+            </a>
             <div v-else
                  class="block text-[#a91a1a] dark:text-[#ffc7c7] border-2 border-[#a91a1a] dark:border-[#ffc7c7] cursor-not-allowed rounded text-center mt-2.5 py-2.5 px-5 duration-100 transition-colors">
                 {{ content.blockedUser }}
@@ -178,6 +178,7 @@ async function deleteGallery(id: number) {
     });
     if (response.ok) {
         galleryData.value = galleryData.value.filter(item => item.id !== id);
+        if (galleryData.value.length <= 0) errorMessage.value = content.noItems;
     } else {
         console.error("Failed to delete Gallery");
         errorMessage.value = "An error occurred while deleting the gallery.";
