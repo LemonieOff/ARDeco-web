@@ -515,6 +515,19 @@
   },
   "favorite": {
     "furniture": {
+      "title": "Favorite furniture",
+      "loading": "Loading...",
+      "colorSing": "color",
+      "colorMul": "colors",
+      "styleSing": "style",
+      "styleMul": "styles",
+      "roomSing": "room",
+      "roomMul": "rooms",
+      "noItems": "No favorite furniture found.",
+      "delete": "Delete",
+      "accessDetails": "Access details",
+      "by": "by",
+      "inactive": "Inactive furniture"
     },
     "gallery": {
       "title": "Favorite designs",
