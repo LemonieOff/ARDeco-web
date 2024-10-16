@@ -50,7 +50,7 @@
 const nuxtApp = useNuxtApp();
 
 const content = nuxtApp.$content.navBar;
-const rawLangPrefix = nuxtApp.$langPrefix;
+const rawLangPrefix = nuxtApp.$rawLangPrefix;
 const darkMode = nuxtApp.$darkMode;
 const mobileNavbarOpen = ref(false);
 
