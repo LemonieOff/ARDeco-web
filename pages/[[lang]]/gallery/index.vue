@@ -1,65 +1,123 @@
 <template>
-    <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
-    <div class="form">
-        <div class="grid">
-            <div class="grid-header">
-                <div class="grid-item">{{ content.name }}</div>
-                <div class="grid-item">{{ content.roomType }}</div>
-                <div class="grid-item">{{ content.author }}</div>
-                <div class="grid-item">{{ content.actionSingOrPlu }}</div>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
+    <div v-if="galleryData.length > 0 && errorMessage === ''" class="flex flex-wrap justify-center gap-5 mb-8">
+        <div v-for="data in galleryData" :key="data.user.id"
+             class="rounded-lg bg-AR-Floral-White dark:bg-AR-Grey h-fit flex flex-col p-5 min-w-56 max-w-56 sm:min-w-96 sm:max-w-96"
+             style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+            <div class="flex flex-row justify-between items-center mb-2">
+                <a :href="`${langPrefix}gallery/${data.id}`"
+                   class="font-bold underline text-xl cursor-pointer hover:opacity-75">{{ data.name }}</a>
+                <span class="text-sm min-w-fit">{{ data.model_data.length
+                    }} {{ data.model_data.length > 1 ? `${content.furnitureMul}` : `${content.furnitureSing}` }}
+                    </span>
             </div>
-            <div v-for="(item) in GalleryData" class="grid-row">
-                <div v-if="item.visibility" class="grid-item">{{ item.name }}</div>
-                <div v-if="item.visibility" class="grid-item">{{ item.room }}</div>
-                <div v-if="item.visibility" class="grid-item">
-                    {{ item.user.first_name }} {{ item.user.last_name }}
-                    <span v-if="item.visibility && item.user.id === userID">- (You) </span>
-                </div>
-                <div class="grid-item">
-                    <a v-if="item.visibility" :href="`${langPrefix}gallery/${item.id}`"
-                       class="custom-button">{{ content.details }}
-                    </a>
-                    <br/>
-                    <button v-if="item.user.id !== userID" class="custom-button" @click="blockUser(item.user.id)">
-                        {{ content.blockUser }}
-                    </button>
-                </div>
+            <span class="mb-6 italic">{{ data.description }}</span>
+            <div class="flex flex-col sm:flex-row justify-between mb-2">
+                    <span class="inline-flex items-center"><svg height="1.25em" viewBox="0 0 36 36"
+                                                                width="1.25em"
+                                                                xmlns="http://www.w3.org/2000/svg"><path
+                        d="M9.344 14.702h-2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5"
+                        fill="#a0041e" /><path
+                        d="M5 16L18 3l13 13v17H5z" fill="#ffe8b6" /><path d="M18 16h1v16h-1z" fill="#ffcc4d" /><path
+                        d="M31 17a1 1 0 0 1-.707-.293L18 4.414L5.707 16.707a.999.999 0 1 1-1.414-1.414l13-13a1 1 0 0 1 1.414 0l13 13A.999.999 0 0 1 31 17"
+                        fill="#66757f" /><path
+                        d="M18 17a.999.999 0 0 1-.707-1.707l6.5-6.5a.999.999 0 1 1 1.414 1.414l-6.5 6.5A1 1 0 0 1 18 17"
+                        fill="#66757f" /><path
+                        d="M10 26h4v6h-4z" fill="#c1694f" /><path d="M10 17h4v4h-4zm12.5 0h4v4h-4zm0 9h4v4h-4z"
+                                                                  fill="#55acee" /><path
+                        d="M33.5 33.5A1.5 1.5 0 0 1 32 35H4a1.5 1.5 0 0 1 0-3h28a1.5 1.5 0 0 1 1.5 1.5"
+                        fill="#5c913b" /></svg><span class="ml-2">{{ values.rooms[data.room] }}</span></span>
+                <span class="inline-flex items-center"><svg height="1.25em" viewBox="0 0 36 36"
+                                                            width="1.25em"
+                                                            xmlns="http://www.w3.org/2000/svg"><path
+                    d="M35 30a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h30a2 2 0 0 1 2 2z" fill="#d79e84" /><path
+                    d="M33 4H3a2 2 0 0 0-2 2v24c0 .389.116.748.307 1.055l33.33-26.198A2 2 0 0 0 33 4"
+                    fill="#bf6952" /><path
+                    d="M31 22V9a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v13z" fill="#8ccaf7" /><path
+                    d="M6 28h13v-7H5v6a1 1 0 0 0 1 1"
+                    fill="#5dadec" /><path
+                    d="M19 21v7h11a1 1 0 0 0 1-1v-6z" fill="#292f33" /><path
+                    d="M20 19c-.613 0-.852 1.127-1.405 2c-.349.55-.822 1-1.595 1c-2 0-2 3-3 3c-1.256 0-2.512 1.578-3.273 3H19c.879-1.758 1.761-3.514 4-3.913A5.6 5.6 0 0 1 24 24c3 0 3.106-1.553 4-2c1.358-.679 2.251-.437 3-.211V19z"
+                    fill="#67757f" /><path
+                    d="m25 11l-4 4v4h8v-4z" fill="#e75a70" /><path
+                    d="M29 16a1 1 0 0 1-.707-.293L25 12.414l-3.293 3.293a.999.999 0 1 1-1.414-1.414l4-4a1 1 0 0 1 1.414 0l4 4A.999.999 0 0 1 29 16"
+                    fill="#292f33" /><path
+                    d="M23 16h2v3h-2z" fill="#bb1a34" /><path
+                    d="M17.219 14.125a1.874 1.874 0 0 0-1.875-1.875c-.079 0-.155.014-.232.023q.043-.193.044-.398A1.874 1.874 0 0 0 13.281 10a1.87 1.87 0 0 0-1.583.878a1.9 1.9 0 0 0-.667-.128a1.87 1.87 0 0 0-1.851 1.632a1.9 1.9 0 0 0-.68-.132a1.874 1.874 0 1 0 0 3.75c.041 0 .08-.01.121-.012l.004.012h6.75v-.003a1.873 1.873 0 0 0 1.844-1.872"
+                    fill="#fff" /></svg><span class="ml-2">{{ values.styles[data.style] }}</span></span>
             </div>
+            <div class="flex flex-col sm:flex-row justify-between mb-2 items-center">
+                <span class="opacity-50">{{ content.by }} {{ data.user.first_name
+                    }}{{ data.user.last_name.trim() === "" ? "" : ` ${data.user.last_name}` }}</span>
+                <span v-if="data.user.id === userID"
+                      class="text-sm opacity-75 text-[#086100] dark:text-[#ade5a8]">
+                    {{ content.you }}
+                </span>
+                <button v-else
+                        class="text-sm opacity-75 text-[#a91a1a] dark:text-[#ffc7c7] cursor-pointer hover:text-[#c91515] dark:hover:text-[#ffd8d8] inline-flex items-center"
+                        @click="blockUser(data.user.id)">
+                    <svg class="mr-1" height="1em" viewBox="0 0 36 36" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M18 0C8.059 0 0 8.059 0 18s8.059 18 18 18s18-8.059 18-18S27.941 0 18 0m13 18c0 2.565-.753 4.95-2.035 6.965L11.036 7.036A12.9 12.9 0 0 1 18 5c7.18 0 13 5.821 13 13M5 18c0-2.565.753-4.95 2.036-6.964l17.929 17.929A12.93 12.93 0 0 1 18 31c-7.179 0-13-5.82-13-13"
+                            fill="#dd2e44" />
+                    </svg>
+                    {{ content.blockUser }}
+                </button>
+            </div>
+            <a :href="`${langPrefix}gallery/${data.id}`"
+               class="block text-[#086100] dark:text-[#ade5a8] border-2 border-[#086100] dark:border-[#ade5a8] hover:bg-AR-Beige hover:dark:bg-AR-Dark-Grey rounded text-center mt-2.5 py-2.5 px-5 duration-100 transition-colors">
+                {{ content.accessDetails }}
+            </a>
         </div>
     </div>
+    <p v-else class="text-center italic mt-5">
+        {{ errorMessage === "" ? content.loading : errorMessage }}
+    </p>
 </template>
 
 <script lang="ts" setup>
-import { isLogged } from "public/ts/checkLogin";
+import { isLogged, userID } from "public/ts/checkLogin";
 
 const nuxtApp = useNuxtApp();
 
-const content = ref(nuxtApp.$content.gallery);
-const GalleryData = ref<{
-    user: { id: number; first_name: string, last_name: string | null },
-    room: string,
+const content = nuxtApp.$content.gallery;
+const values = nuxtApp.$content.values;
+
+const galleryData = ref<{
+    id: number,
+    user: {
+        id: number,
+        first_name: string,
+        last_name: string
+    },
     name: string,
-    description: string | null,
-    visibility: boolean,
-    id: number
-}[]>();
+    description: string,
+    style: keyof typeof values.styles,
+    room: keyof typeof values.rooms,
+    model_data: [],
+    visibility: true
+}[]>([]);
 const errorMessage = ref("");
 const successMessage = ref("");
-const langPrefix = ref(nuxtApp.$langPrefix);
-const userID = ref(0);
+const langPrefix = nuxtApp.$langPrefix;
+const userId = ref(0);
 
 onMounted(async () => {
     await checkLogin();
     await getGallery();
-    console.debug(GalleryData.value);
 });
 
 async function checkLogin() {
-    const userID_tmp = await isLogged();
-    if (!userID_tmp) {
-        location.href = "/login";
+    if (!userID) {
+        let userID_tmp = await isLogged();
+        if (!userID_tmp) {
+            location.href = `${langPrefix}login?redirect=${langPrefix}gallery`;
+            return;
+        }
+        userId.value = userID_tmp;
+    } else {
+        userId.value = userID;
     }
-    userID.value = Number(userID_tmp);
 }
 
 async function getGallery() {
@@ -71,14 +129,23 @@ async function getGallery() {
         credentials: "include"
     });
 
-    if (!response.ok) {
-        console.error("Fail to fetch data");
-        errorMessage.value = "Fail to fetch data";
+    if (response.type === "error") {
+        errorMessage.value = "Fail to fetch galeries, network error";
+        return;
     }
 
     const result = await response.json();
-    GalleryData.value = result.data;
-    // console.log("GalleryData : ", GalleryData)
+    console.debug(result);
+
+    if (!response.ok) {
+        if (response.status === 404) {
+            errorMessage.value = content.noItems;
+        } else {
+            errorMessage.value = "Fail to fetch data";
+        }
+        return;
+    }
+    galleryData.value = result.data;
 }
 
 async function blockUser(userID: number) {
@@ -93,119 +160,11 @@ async function blockUser(userID: number) {
     alert(json.description); // TODO : Notification system instead of alert
     if (response.ok) {
         successMessage.value = "User blocked successfully";
-        if (GalleryData.value) {
-            GalleryData.value = GalleryData.value.filter(item => item.user.id !== userID);
-        }
+        galleryData.value = galleryData.value.filter(item => item.user.id !== userID);
+        if (galleryData.value.length <= 0) errorMessage.value = content.noItems;
     } else {
         console.error(json.description);
         errorMessage.value = "An error occurred while blocking the user.";
     }
 }
 </script>
-
-<style lang="scss" scoped>
-.container {
-    padding: 20px;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 15px 0;
-}
-
-.edit-error {
-    color: red;
-}
-
-.edit-success {
-    color: green;
-}
-
-.custom-button {
-    display: inline-block;
-    padding: 10px 25px;
-    background-color: #F2EBDF;
-    color: rgb(62, 64, 63);
-    border: 2px solid rgb(62, 64, 63);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-.custom-button:hover {
-    background-color: #e0d8c6;
-    color: rgb(35, 37, 36);
-    border-color: rgb(35, 37, 36);
-}
-
-.custom-button:active {
-    transform: translateY(2px);
-}
-
-.grid {
-    min-width: 500px;
-    width: 75%;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid #000;
-    border-radius: 5px;
-}
-
-.grid-header {
-    display: flex;
-    font-weight: bold;
-
-}
-
-.grid-row {
-    display: flex;
-}
-
-.grid-item {
-    flex: 1;
-    padding: 10px;
-    border-right: 1px solid #000;
-}
-
-.grid-item:last-child {
-    border-right: none;
-}
-
-.grid-row:hover {
-    background-color: rgb(191, 178, 170);
-}
-
-.grid-item {
-    flex: 1;
-    padding: 12px;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    align-content: center;
-}
-
-.title {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 5%;
-}
-
-.container {
-    padding-top: 90px;
-}
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px; /* Caché par défaut */
-    width: 250px;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    transition: left 0.3s ease;
-}
-</style>
