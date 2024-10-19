@@ -140,7 +140,6 @@
 
 <script lang="ts" setup>
 import { isLogged, logout } from "public/ts/checkLogin";
-import type { ShallowRef } from "vue";
 
 const nuxtApp = useNuxtApp();
 const content = ref(nuxtApp.$content.login);
@@ -150,15 +149,15 @@ const loading = ref(true);
 
 const activeForm = ref("login");
 
-const fieldEmail: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldEmail");
-const fieldPassword: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPassword");
-const fieldFirstName: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldFirstName");
-const fieldLastName: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldLastName");
-const fieldCity: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldCity");
-const fieldPhone: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPhone");
-const fieldPrivacy: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPrivacy");
-const fieldCgu: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldCgu");
-const fieldBot: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldBot");
+const fieldEmail = useTemplateRef("fieldEmail");
+const fieldPassword = useTemplateRef("fieldPassword");
+const fieldFirstName = useTemplateRef("fieldFirstName");
+const fieldLastName = useTemplateRef("fieldLastName");
+const fieldCity = useTemplateRef("fieldCity");
+const fieldPhone = useTemplateRef("fieldPhone");
+const fieldPrivacy = useTemplateRef("fieldPrivacy");
+const fieldCgu = useTemplateRef("fieldCgu");
+const fieldBot = useTemplateRef("fieldBot");
 
 const noConsent = ref(false);
 const hiddenPassword = ref(true);
