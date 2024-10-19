@@ -1,4 +1,115 @@
 <template>
+    <div class="mt-8 mb-4">
+        <div v-if="loading"
+             class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-6 w-1/3 mx-auto text-center rounded-lg">
+            {{ content.loading }}
+        </div>
+        <div v-else class="flex flex-col items-center justify-center">
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 md:w-[32rem] lg:w-[48rem] mb-8">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.personalInformation }}</h2>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="email">
+                        {{ content.informations.email }} <span class="text-red-500">*</span>
+                    </label>
+                    <input id="email"
+                           ref="fieldEmail"
+                           :placeholder="content.placeholders.email"
+                           :value="profile ? profile.email : ''"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           required
+                           type="email" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="firstName">
+                        {{ content.informations.firstName }} <span class="text-red-500">*</span>
+                    </label>
+                    <input id="firstName"
+                           ref="fieldFirstName"
+                           :placeholder="content.placeholders.firstName"
+                           :value="profile ? profile.firstname : ''"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           required
+                           type="text" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="lastName">{{ content.informations.lastName
+                        }}</label>
+                    <input id="lastName"
+                           ref="fieldLastName"
+                           :placeholder="content.placeholders.lastName"
+                           :value="profile ? profile.lastname : ''"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="text" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="city">{{ content.informations.city }}</label>
+                    <input id="city"
+                           ref="fieldCity"
+                           :placeholder="content.placeholders.city"
+                           :value="profile ? profile.city : ''"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="text" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="phoneNumber">{{ content.informations.phone
+                        }}</label>
+                    <input id="phoneNumber"
+                           ref="fieldPhone"
+                           :placeholder="content.placeholders.phone"
+                           :value="profile ? profile.phone : ''"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="tel" />
+                </div>
+                <div class="flex justify-evenly">
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        @click="resetPersonalData">
+                        {{ content.buttons.reset }}
+                    </button>
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        @click="editPersonalData">
+                        {{ content.buttons.confirm }}
+                    </button>
+                </div>
+            </div>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 md:w-[32rem] lg:w-[48rem]">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.changePassword }}</h2>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="password">
+                        {{ content.informations.password }}
+                    </label>
+                    <div class="flex">
+                        <input id="password"
+                               ref="fieldPassword"
+                               :placeholder="content.placeholders.password"
+                               :type="hiddenPassword ? 'password' : 'text'"
+                               class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500" />
+                        <Icon :name="`material-symbols:visibility-${hiddenPassword ? 'off-' : ''}outline-rounded`"
+                              class="inline-flex w-1/12 justify-center self-center cursor-pointer ml-2"
+                              size="24"
+                              @click="hiddenPassword = !hiddenPassword"
+                        />
+                    </div>
+                </div>
+                <div class="flex justify-evenly">
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        @click="resetPersonalData">
+                        {{ content.buttons.reset }}
+                    </button>
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        @click="editPersonalData">
+                        {{ content.buttons.confirm }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <ProfileSettings id="profileSettings" style="display: none"></ProfileSettings>
     <div id="profile-container">
         <div id="profile-loading" class="form" style="top: 10%;">
@@ -6,15 +117,6 @@
         </div>
         <div class="profile-wrapper" style="display: none;">
             <div class="profile-elements-wrapper">
-                <div class="element">{{ content.informations.firstName }}<span id="firstName"></span></div>
-                <div class="element2">{{ content.informations.lastName }}<span id="lastName"></span></div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ content.informations.email }}<span id="email"></span></div>
-                <div class="element2">{{ content.informations.phone }}<span id="phone"></span></div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ content.informations.city }}<span id="city"></span></div>
                 <div class="element2">{{ content.informations.role }}<span id="role"></span></div>
             </div>
             <div class="profile-elements-wrapper">
@@ -23,50 +125,8 @@
                     }}<span id="commandsOrdered"></span></a></div>
             </div>
             <div class="profile-edit-buttons-wrapper">
-                <button id="startEditButton" class="editProfileButton" @click="startEdit">{{ content.buttons.update }}
-                </button>
                 <a id="deleteAccountButton" :href="`${langPrefix}deleteAccount`"
                    class="deleteAccountButton">{{ content.buttons.delete }}</a>
-            </div>
-        </div>
-
-        <div class="profile-wrapper" style="display: none;">
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <label id="firstName2" for="first_name_edit">{{ content.informations.firstName }}</label>
-                    <input id="first_name_edit" name="first_name" type="text">
-                </div>
-                <div class="element2">
-                    <label id="lastName2" for="last_name_edit">{{ content.informations.lastName }}</label>
-                    <input id="last_name_edit" name="last_name" type="text">
-                </div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <label id="email2" for="email_edit">{{ content.informations.email }}</label>
-                    <input id="email_edit" name="email" type="text">
-                </div>
-                <div class="element2">
-                    <label id="phone2" for="phone_edit">{{ content.informations.phone }}</label>
-                    <input id="phone_edit" name="phone" type="tel">
-                </div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <label id="city2" for="city_edit">{{ content.informations.city }}</label>
-                    <input id="city_edit" name="city" type="text">
-                </div>
-                <div class="element2">
-                    <label id="password2" for="password_edit">{{ content.informations.password }}</label>
-                    <input id="password_edit" name="password" type="text">
-                </div>
-            </div>
-            <div class="profile-edit-buttons-wrapper">
-                <button id="cancelEditButton" class="editProfileButton" @click="cancelEdit">{{ content.buttons.cancel
-                    }}
-                </button>
-                <button id="editProfile" class="editProfileButton" @click="confirmEdit">{{ content.buttons.confirm }}
-                </button>
             </div>
         </div>
 
@@ -95,30 +155,50 @@
     <Notifications ref="notifications" />
 </template>
 
-<script setup>
-// TODO : TypeScript
-import { isLogged, loggedIn, logout } from "public/ts/checkLogin";
-import { onMounted, provide, ref } from "vue";
+<script lang="ts" setup>
+import { isLogged, logout, userID } from "public/ts/checkLogin";
 import ProfileSettings from "@/components/UserProfile/ProfileSettings.vue";
 import Notifications from "@/components/Notifications.vue";
 
 const nuxtApp = useNuxtApp();
 
-let lang = ref(nuxtApp.$lang);
-let content = ref(nuxtApp.$content.profile);
-let userID = 0;
+let content = nuxtApp.$content.profile;
+let userId = ref(0);
+const loading = ref(true);
+const hiddenPassword = ref(true);
 const langPrefix = nuxtApp.$langPrefix;
-const profile = ref({});
-const notifications = ref(null);
+const profile = ref<{
+    id: number;
+    email: string,
+    firstname: string,
+    lastname: string,
+    city: string,
+    phone: string,
+}>();
 provide("profile", profile);
 
+const notifications = useTemplateRef("notifications");
+const fieldEmail = useTemplateRef("fieldEmail");
+const fieldPassword = useTemplateRef("fieldPassword");
+const fieldFirstName = useTemplateRef("fieldFirstName");
+const fieldLastName = useTemplateRef("fieldLastName");
+const fieldCity = useTemplateRef("fieldCity");
+const fieldPhone = useTemplateRef("fieldPhone");
+
 onMounted(async () => {
-    userID = await isLogged();
-    if (!loggedIn) {
-        location.href = langPrefix.value + "login";
+    if (!userID) {
+        let userID_tmp = await isLogged();
+        if (!userID_tmp) {
+            location.href = `${langPrefix}login?redirect=${langPrefix}profile`;
+            return;
+        }
+        userId.value = userID_tmp;
+    } else {
+        userId.value = userID;
     }
 
     await getProfileElements();
+    loading.value = false;
 
     // Remove loading and display profile
     document.getElementById("profile-loading").style.display = "none";
@@ -136,14 +216,12 @@ const getProfileElements = async () => {
     const result_profile = data_profile.data;
     profile.value = result_profile;
 
-
     const response_gallery = await fetch(`https://api.ardeco.app/gallery/user/${userID}`, {
         method: "GET",
         credentials: "include"
     });
     const data_gallery = await response_gallery.json();
     const result_gallery = data_gallery.data;
-
 
     const response_order_history = await fetch(`https://api.ardeco.app/order_history/user/${userID}`, {
         method: "GET",
@@ -152,19 +230,12 @@ const getProfileElements = async () => {
     const data_order_history = await response_order_history.json();
     const result_order_history = data_order_history.data;
 
+    if (fieldEmail.value) fieldEmail.value.value = result_profile.email;
+    else console.error(result_profile.email);
+
     document.getElementById("role").innerText = result_profile.role;
-    document.getElementById("firstName").innerHTML = result_profile.firstname;
-    document.getElementById("lastName").innerHTML = result_profile.lastname;
-    document.getElementById("email").innerHTML = result_profile.email;
-    document.getElementById("phone").innerHTML = result_profile.phone;
-    document.getElementById("city").innerHTML = result_profile.city;
     document.getElementById("savedItems").innerHTML = result_gallery.length;
     document.getElementById("commandsOrdered").innerHTML = result_order_history;
-    document.getElementById("first_name_edit").placeholder = result_profile.firstname;
-    document.getElementById("last_name_edit").placeholder = result_profile.lastname;
-    document.getElementById("email_edit").placeholder = result_profile.email;
-    document.getElementById("phone_edit").placeholder = result_profile.phone;
-    document.getElementById("city_edit").placeholder = result_profile.city;
 };
 
 const confirmEdit = async () => {
@@ -216,16 +287,65 @@ const confirmEdit = async () => {
     }
 };
 
-const startEdit = async () => {
-    document.getElementsByClassName("profile-wrapper")[0].style.display = "none";
-    document.getElementsByClassName("profile-wrapper")[1].style.display = "block";
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = "none";
+const validatePersonalData = (): Boolean => {
+    const errors = [];
+    if (!fieldEmail.value?.checkValidity()) errors.push("Une adresse email doit être renseignée");
+    if (!fieldFirstName.value?.checkValidity()) errors.push("Un prénom doit être renseigné");
+    if (errors.length > 0) {
+        errors.forEach(value => {
+            if (notifications.value) {
+                notifications.value.showError(value);
+            }
+        });
+        return false;
+    } else return true;
 };
 
-const cancelEdit = async () => {
-    document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
-    document.getElementsByClassName("profile-wrapper")[1].style.display = "none";
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = "block";
+const editPersonalData = async () => {
+    if (!validatePersonalData()) return;
+
+    let json: {
+        email?: string,
+        first_name?: string,
+        last_name?: string,
+        city?: string,
+        phone?: string
+    } = {};
+    if (fieldEmail.value && (fieldEmail.value.value !== profile.value?.email)) json.email = fieldEmail.value.value;
+    if (fieldFirstName.value && (fieldFirstName.value.value !== profile.value?.firstname)) json.first_name = fieldFirstName.value.value;
+    if (fieldLastName.value && fieldLastName.value.value !== profile.value?.lastname) json.last_name = fieldLastName.value.value;
+    if (fieldCity.value && fieldCity.value.value !== profile.value?.city) json.city = fieldCity.value.value;
+    if (fieldPhone.value && fieldPhone.value.value !== profile.value?.phone) json.phone = fieldPhone.value.value;
+
+    if (Object.keys(json).length > 0) {
+        const response = await fetch(`https://api.ardeco.app/user/${userId.value}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify(json)
+        });
+
+        const result = await response.json();
+        console.log(result);
+
+        if (result.status === "OK") {
+            if (notifications.value) notifications.value.showSuccess(result.description);
+        } else {
+            if (notifications.value) notifications.value.showError(result.description);
+        }
+    }
+};
+
+const resetPersonalData = async () => {
+    const values = profile.value ? profile.value : undefined;
+
+    if (fieldEmail.value) fieldEmail.value.value = values ? values.email : "";
+    if (fieldFirstName.value) fieldFirstName.value.value = values ? values.firstname : "";
+    if (fieldLastName.value) fieldLastName.value.value = values ? values.lastname : "";
+    if (fieldCity.value) fieldCity.value.value = values ? values.city : "";
+    if (fieldPhone.value) fieldPhone.value.value = values ? values.phone : "";
 };
 </script>
 
@@ -266,11 +386,6 @@ const cancelEdit = async () => {
     justify-content: center;
 }
 
-.editProfileButton {
-    width: 10%;
-    border-radius: 5px;
-}
-
 .deleteAccountButton {
     width: 20%;
     margin-left: 5%;
@@ -283,10 +398,6 @@ const cancelEdit = async () => {
     text-align: center;
 }
 
-#startEditButton {
-    width: 20%;
-}
-
 .element {
     width: 47.5%;
     text-align: right;
@@ -296,14 +407,6 @@ const cancelEdit = async () => {
     margin-left: 5%;
     width: 45%;
     text-align: left;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 10% 0;
 }
 
 button {
@@ -319,4 +422,7 @@ button {
     background-color: #F4F4F4;
 }
 
+input {
+    @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
+}
 </style>

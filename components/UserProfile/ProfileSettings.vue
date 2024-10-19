@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="content">
-            <div @click="showModal" class="image-container profile-picture">
-                <img v-bind:src="imageSrc" alt="Profile picture">
+            <div class="image-container profile-picture" @click="showModal">
+                <img alt="Profile picture" v-bind:src="imageSrc">
                 <span class="edit-icon">&#9998;</span>
             </div>
         </div>
@@ -10,24 +10,24 @@
             <div id="profile_picture_div">
                 <div id="profile_picture_select">
                     <label style="display: none">
-                        <img src="https://api.ardeco.app/profile_pictures/0.png" alt="Default profile picture"/>
-                        <input name="select_image" type="radio" value="0"/>
+                        <img alt="Default profile picture" src="https://api.ardeco.app/profile_pictures/0.png" />
+                        <input name="select_image" type="radio" value="0" />
                     </label>
                     <label>
-                        <img src="https://api.ardeco.app/profile_pictures/1.png" alt="Profile picture 1"/>
-                        <input name="select_image" type="radio" value="1"/>
+                        <img alt="Profile picture 1" src="https://api.ardeco.app/profile_pictures/1.png" />
+                        <input name="select_image" type="radio" value="1" />
                     </label>
                     <label>
-                        <img src="https://api.ardeco.app/profile_pictures/2.png" alt="Profile picture 2"/>
-                        <input name="select_image" type="radio" value="2"/>
+                        <img alt="Profile picture 2" src="https://api.ardeco.app/profile_pictures/2.png" />
+                        <input name="select_image" type="radio" value="2" />
                     </label>
                     <label>
-                        <img src="https://api.ardeco.app/profile_pictures/3.png" alt="Profile picture 3"/>
-                        <input name="select_image" type="radio" value="3"/>
+                        <img alt="Profile picture 3" src="https://api.ardeco.app/profile_pictures/3.png" />
+                        <input name="select_image" type="radio" value="3" />
                     </label>
                     <label>
-                        <img src="https://api.ardeco.app/profile_pictures/4.png" alt="Profile picture 4"/>
-                        <input name="select_image" type="radio" value="4"/>
+                        <img alt="Profile picture 4" src="https://api.ardeco.app/profile_pictures/4.png" />
+                        <input name="select_image" type="radio" value="4" />
                     </label>
                 </div>
                 <div id="profile_picture_info_text">
@@ -37,42 +37,29 @@
                 <div id="profile_picture_buttons">
                     <button id="profile_picture_button_reset" @click="resetSelection">{{ buttons.reset }}</button>
                     <button id="profile_picture_button_cancel" @click="hideModal">{{ buttons.cancel }}</button>
-                    <button id="profile_picture_button_confirm" @click="confirmNewPicture">{{ buttons.confirm }}</button>
+                    <button id="profile_picture_button_confirm" @click="confirmNewPicture">{{ buttons.confirm }}
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<script>
-import FavoriteThemes from "~/components/UserProfile/FavoriteThemes.vue"
-import RecentPurchases from "~/components/UserProfile/RecentPurchases.vue"
-import "assets/images/profile-settings/default-profile-picture.png";
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
+<script lang="ts">
+import "@/assets/images/profile-settings/default-profile-picture.png";
 
 export default {
-    name: "ProfileSettings",
     data() {
         return {
             imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
-            content: {},
-            picture: {},
-            buttons: {}
-        }
+            content: this.$content.profile,
+            picture: this.$content.profile.picture,
+            buttons: this.$content.profile.buttons
+        };
     },
-    inject: ['profile'],
-    components: {
-        FavoriteThemes,
-        RecentPurchases
-    },
+    inject: ["profile"],
     watch: {
         profile() {
-            // Set the content variable to the correct language
-            this.content = this.urlLang === 'en' ? en.profile : fr.profile;
-            this.picture = this.urlLang === 'en' ? en.profile.picture : fr.profile.picture;
-            this.buttons = this.urlLang === 'en' ? en.profile.buttons : fr.profile.buttons;
-
             if (this.profile) {
                 this.imageSrc = `https://api.ardeco.app/profile_pictures/${this.profile.profile_picture_id}.png`;
                 document.querySelector(`input[name="select_image"][value="${this.profile.profile_picture_id}"]`).checked = true;
@@ -82,7 +69,7 @@ export default {
                 }
             } else {
                 // document.getElementById("profile_picture_button_reset").style.display = "none";
-                document.querySelector('input[name="select_image"][value="0"]').checked = true;
+                document.querySelector("input[name=\"select_image\"][value=\"0\"]").checked = true;
             }
         }
     },
@@ -92,7 +79,7 @@ export default {
 
         const hideModal = this.hideModal;
 
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target === modal) {
                 hideModal();
             }
@@ -119,14 +106,14 @@ export default {
             if (this.profile.profile_picture_id) {
                 document.querySelector(`input[name="select_image"][value="${this.profile.profile_picture_id}"]`).checked = true;
             } else {
-                document.querySelector('input[name="select_image"][value="0"]').checked = true;
+                document.querySelector("input[name=\"select_image\"][value=\"0\"]").checked = true;
             }
         },
         resetSelection() {
             document.getElementsByName("select_image")[0].checked = true;
         },
         async confirmNewPicture() {
-            const checked = document.querySelector('input[name="select_image"]:checked');
+            const checked = document.querySelector("input[name=\"select_image\"]:checked");
             if (checked) {
                 const value = checked.value;
                 if (value <= 0 || value > 4) {
@@ -140,11 +127,11 @@ export default {
         },
         async resetProfilePictureRequest() {
             const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
-                method: 'DELETE',
+                method: "DELETE",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include'
+                credentials: "include"
             });
             const result = await response.json();
             console.debug("Reset picture result : " + result);
@@ -162,11 +149,11 @@ export default {
                 "picture_id": Number(value)
             });
             const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
-                method: 'PUT',
+                method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include",
                 body: json
             });
             const result = await response.json();
@@ -175,11 +162,11 @@ export default {
             location.reload();
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import "/styles/ProfileSettings.scss";
+@import "@/styles/ProfileSettings.scss";
 
 #profile_picture_modal {
     display: none;
