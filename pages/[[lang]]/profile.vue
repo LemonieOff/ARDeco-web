@@ -14,8 +14,8 @@
                     </label>
                     <input id="email"
                            ref="fieldEmail"
+                           v-model="emailVal"
                            :placeholder="content.placeholders.email"
-                           :value="profile ? profile.email : ''"
                            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
                            required
                            type="email" />
@@ -26,8 +26,8 @@
                     </label>
                     <input id="firstName"
                            ref="fieldFirstName"
+                           v-model="firstNameVal"
                            :placeholder="content.placeholders.firstName"
-                           :value="profile ? profile.firstname : ''"
                            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
                            required
                            type="text" />
@@ -37,8 +37,8 @@
                         }}</label>
                     <input id="lastName"
                            ref="fieldLastName"
+                           v-model="lastNameVal"
                            :placeholder="content.placeholders.lastName"
-                           :value="profile ? profile.lastname : ''"
                            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
                            type="text" />
                 </div>
@@ -46,8 +46,8 @@
                     <label class="block text-sm font-bold mb-2" for="city">{{ content.informations.city }}</label>
                     <input id="city"
                            ref="fieldCity"
+                           v-model="cityVal"
                            :placeholder="content.placeholders.city"
-                           :value="profile ? profile.city : ''"
                            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
                            type="text" />
                 </div>
@@ -56,12 +56,12 @@
                         }}</label>
                     <input id="phoneNumber"
                            ref="fieldPhone"
+                           v-model="phoneVal"
                            :placeholder="content.placeholders.phone"
-                           :value="profile ? profile.phone : ''"
                            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
                            type="tel" />
                 </div>
-                <div class="flex justify-evenly">
+                <div v-show="showPersonalInfoButtons" class="flex justify-evenly">
                     <button
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         @click="resetPersonalData">
@@ -84,6 +84,7 @@
                     <div class="flex">
                         <input id="password"
                                ref="fieldPassword"
+                               v-model="passwordVal"
                                :placeholder="content.placeholders.password"
                                :type="hiddenPassword ? 'password' : 'text'"
                                class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500" />
@@ -94,15 +95,15 @@
                         />
                     </div>
                 </div>
-                <div class="flex justify-evenly">
+                <div v-show="passwordVal.length > 0" class="flex justify-evenly">
                     <button
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        @click="resetPersonalData">
-                        {{ content.buttons.reset }}
+                        @click="passwordVal = ''">
+                        {{ content.buttons.cancel }}
                     </button>
                     <button
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        @click="editPersonalData">
+                        @click="editPassword">
                         {{ content.buttons.confirm }}
                     </button>
                 </div>
@@ -179,11 +180,23 @@ provide("profile", profile);
 
 const notifications = useTemplateRef("notifications");
 const fieldEmail = useTemplateRef("fieldEmail");
-const fieldPassword = useTemplateRef("fieldPassword");
 const fieldFirstName = useTemplateRef("fieldFirstName");
-const fieldLastName = useTemplateRef("fieldLastName");
-const fieldCity = useTemplateRef("fieldCity");
-const fieldPhone = useTemplateRef("fieldPhone");
+
+const emailVal = ref("");
+const firstNameVal = ref("");
+const lastNameVal = ref("");
+const cityVal = ref("");
+const phoneVal = ref("");
+
+const passwordVal = ref("");
+
+const showPersonalInfoButtons = computed(() => {
+    return emailVal.value !== profile.value?.email
+        || firstNameVal.value !== profile.value.firstname
+        || lastNameVal.value !== profile.value.lastname
+        || cityVal.value !== profile.value.city
+        || phoneVal.value !== profile.value.phone;
+});
 
 onMounted(async () => {
     if (!userID) {
@@ -215,6 +228,11 @@ const getProfileElements = async () => {
     const data_profile = await response_profile.json();
     const result_profile = data_profile.data;
     profile.value = result_profile;
+    emailVal.value = result_profile.email;
+    firstNameVal.value = result_profile.firstname;
+    lastNameVal.value = result_profile.lastname;
+    cityVal.value = result_profile.city;
+    phoneVal.value = result_profile.phone;
 
     const response_gallery = await fetch(`https://api.ardeco.app/gallery/user/${userID}`, {
         method: "GET",
@@ -230,67 +248,15 @@ const getProfileElements = async () => {
     const data_order_history = await response_order_history.json();
     const result_order_history = data_order_history.data;
 
-    if (fieldEmail.value) fieldEmail.value.value = result_profile.email;
-    else console.error(result_profile.email);
-
     document.getElementById("role").innerText = result_profile.role;
     document.getElementById("savedItems").innerHTML = result_gallery.length;
     document.getElementById("commandsOrdered").innerHTML = result_order_history;
 };
 
-const confirmEdit = async () => {
-    document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
-    document.getElementsByClassName("profile-wrapper")[1].style.display = "none";
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = "block";
-    const email_field = document.getElementById("email_edit").value;
-    const first_name_field = document.getElementById("first_name_edit").value;
-    const last_name_field = document.getElementById("last_name_edit").value;
-    const city_field = document.getElementById("city_edit").value;
-    const phone_field = document.getElementById("phone_edit").value;
-    const password_field = document.getElementById("password_edit").value;
-
-    let isPasswordChanged = false;
-    let json = {};
-    if (email_field !== "") json.email = email_field;
-    if (first_name_field !== "") json.first_name = first_name_field;
-    if (last_name_field !== "") json.last_name = last_name_field;
-    if (city_field !== "") json.city = city_field;
-    if (phone_field !== "") json.phone = phone_field;
-    if (password_field !== "") {
-        json.password = password_field;
-        isPasswordChanged = true;
-    }
-
-    console.log(json.length);
-    const response = await fetch(`https://api.ardeco.app/user/${localStorage.getItem("userID")}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        credentials: "include",
-        body: JSON.stringify(json)
-    });
-
-    const result = await response.json();
-    console.log(result);
-
-    if (result.code === 200) {
-        notifications.value.showSuccess("Informations modifiées avec succès");
-        if (isPasswordChanged) {
-            logout();
-            location.reload();
-        } else {
-            await getProfileElements();
-        }
-    } else {
-        notifications.value.showError("Error: Impossible de modifier les informations pour le moment, réessayez plus tard.");
-    }
-};
-
 const validatePersonalData = (): Boolean => {
     const errors = [];
-    if (!fieldEmail.value?.checkValidity()) errors.push("Une adresse email doit être renseignée");
-    if (!fieldFirstName.value?.checkValidity()) errors.push("Un prénom doit être renseigné");
+    if (!fieldEmail.value?.checkValidity()) errors.push("Une adresse email doit être renseignée"); // TODO : Translate
+    if (!fieldFirstName.value?.checkValidity()) errors.push("Un prénom doit être renseigné"); // TODO : Translate
     if (errors.length > 0) {
         errors.forEach(value => {
             if (notifications.value) {
@@ -311,11 +277,12 @@ const editPersonalData = async () => {
         city?: string,
         phone?: string
     } = {};
-    if (fieldEmail.value && (fieldEmail.value.value !== profile.value?.email)) json.email = fieldEmail.value.value;
-    if (fieldFirstName.value && (fieldFirstName.value.value !== profile.value?.firstname)) json.first_name = fieldFirstName.value.value;
-    if (fieldLastName.value && fieldLastName.value.value !== profile.value?.lastname) json.last_name = fieldLastName.value.value;
-    if (fieldCity.value && fieldCity.value.value !== profile.value?.city) json.city = fieldCity.value.value;
-    if (fieldPhone.value && fieldPhone.value.value !== profile.value?.phone) json.phone = fieldPhone.value.value;
+
+    if (emailVal.value !== profile.value?.email) json.email = emailVal.value;
+    if (firstNameVal.value !== profile.value?.firstname) json.first_name = firstNameVal.value;
+    if (lastNameVal.value !== profile.value?.lastname) json.last_name = lastNameVal.value;
+    if (cityVal.value !== profile.value?.city) json.city = cityVal.value;
+    if (phoneVal.value !== profile.value?.phone) json.phone = phoneVal.value;
 
     if (Object.keys(json).length > 0) {
         const response = await fetch(`https://api.ardeco.app/user/${userId.value}`, {
@@ -331,7 +298,18 @@ const editPersonalData = async () => {
         console.log(result);
 
         if (result.status === "OK") {
-            if (notifications.value) notifications.value.showSuccess(result.description);
+            profile.value = {
+                id: profile.value!.id,
+                email: emailVal.value,
+                firstname: firstNameVal.value,
+                lastname: lastNameVal.value,
+                city: cityVal.value,
+                phone: phoneVal.value
+            }; // Temporary update values with local ones
+            if (notifications.value) {
+                notifications.value.showSuccess(result.description);
+            }
+            await getProfileElements(); // Make sure all values are up to date
         } else {
             if (notifications.value) notifications.value.showError(result.description);
         }
@@ -341,11 +319,37 @@ const editPersonalData = async () => {
 const resetPersonalData = async () => {
     const values = profile.value ? profile.value : undefined;
 
-    if (fieldEmail.value) fieldEmail.value.value = values ? values.email : "";
-    if (fieldFirstName.value) fieldFirstName.value.value = values ? values.firstname : "";
-    if (fieldLastName.value) fieldLastName.value.value = values ? values.lastname : "";
-    if (fieldCity.value) fieldCity.value.value = values ? values.city : "";
-    if (fieldPhone.value) fieldPhone.value.value = values ? values.phone : "";
+    emailVal.value = values ? values.email : "";
+    firstNameVal.value = values ? values.firstname : "";
+    lastNameVal.value = values ? values.lastname : "";
+    cityVal.value = values ? values.city : "";
+    phoneVal.value = values ? values.phone : "";
+};
+
+const editPassword = async () => {
+    const response = await fetch(`https://api.ardeco.app/user/${userId.value}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+            password: passwordVal.value
+        })
+    });
+
+    const result = await response.json();
+    console.log(result);
+
+    if (result.status === "OK") {
+        if (notifications.value) {
+            notifications.value.showSuccess(result.description);
+        }
+        logout();
+        location.href = `${langPrefix}login?redirect=${langPrefix}profile`;
+    } else {
+        if (notifications.value) notifications.value.showError(result.description);
+    }
 };
 </script>
 
