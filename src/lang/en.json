@@ -208,17 +208,22 @@
   "profile": {
     "yourFavoriteThemes": "My favorites themes",
     "yourRecentPurchaces": "My recent purchases",
-    "yourFavoriteFurnitures": "My favorites furnitures",
-    "yourFavoriteGalleries": "My favorites galleries",
-    "gallery": "Public gallery",
+    "yourFavoriteFurnitures": "My favorite furniture",
+    "yourFavoriteGalleries": "My favorite designs",
+    "gallery": "Public designs",
     "blockedUsers": "Blocked users",
+    "title": {
+      "personalInformation": "Personal information",
+      "changePassword": "Change password",
+      "confidentiality": "Privacy"
+    },
     "informations": {
       "firstName": "First name : ",
       "lastName": "Last name : ",
       "email": "Email : ",
       "phone": "Phone : ",
       "city": "City : ",
-      "savedItems": "Saved items in gallery : ",
+      "savedItems": "Personal designs : ",
       "commandsOrdered": "Ordered command(s) : ",
       "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)",
       "role": "Role : ",
@@ -235,6 +240,14 @@
     "picture": {
       "infoText": "If no image is selected, the image will be reset to the default one.",
       "confirmText": "Changes take effect only upon confirmation."
+    },
+    "placeholders": {
+      "email": "Enter your email",
+      "password": "New password",
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name",
+      "city": "Enter your city",
+      "phone": "Enter your phone"
     }
   },
   "blockedUsers": {
@@ -720,6 +733,12 @@
       "african": "African",
       "bauhaus": "Bauhaus",
       "baroque": "Baroque"
+    },
+    "roles": {
+      "client": "Client",
+      "company": "Company",
+      "pro": "Professional",
+      "admin": "Administrator"
     }
   }
 }
