@@ -764,6 +764,7 @@
     "passwordCantBeEmpty": "Error : password can't be empty.",
     "cannotFindFurniture": "Error : we couldn't find this furniture, are you certain it's the right ID ?",
     "couldntLikeOrDislike": "Error : we couldn't like or dislike this gallery, please try again later.",
+    "galleryAlreadyReportedOrFailed": "Error : your already reported this gallery, or the report failed, please try again later.",
 
     "furnitureCreated": "Your furniture has been created successfully !",
     "informationsUpdated": "Informations updated",
@@ -771,6 +772,7 @@
     "ticketSuccessfullyCreated": "Ticket successfully created !",
     "ticketSuccessfullyClosed": "Ticket successfully closed.",
     "formSent": "Form sent !",
-    "galleryBelongToUser": "This gallery is your creation !"
+    "galleryBelongToUser": "This gallery is your creation !",
+    "reportSuccessful": "Report sent !"
   }
 }

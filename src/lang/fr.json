@@ -763,6 +763,7 @@
     "passwordCantBeEmpty": "Erreur : le mot de passe ne peut pas être vide.",
     "cannotFindFurniture": "Erreur : nous n'avons pas trouvé ce meuble, êtes-vous certain que c'est le bon ID ?",
     "couldntLikeOrDislike": "Erreur : nous n'avons pas pu aimer ou ne pas aimer cette galerie, veuillez réessayer plus tard.",
+    "galleryAlreadyReportedOrFailed": "Erreur : cette galerie a déjà été signalée ou le signalement a échoué, veuillez réessayer plus tard.",
 
     "furnitureCreated": "Votre meuble a été créé avec succès !",
     "informationsUpdated": "Informations mises à jour.",
@@ -770,6 +771,7 @@
     "ticketSuccessfullyCreated": "Ticket créé avec succès !",
     "ticketSuccessfullyClosed": "Ticket fermé avec succès.",
     "formSent": "Formulaire envoyé !",
-    "galleryBelongToUser": "Cette galerie est votre création !"
+    "galleryBelongToUser": "Cette galerie est votre création !",
+    "reportSuccessful": "Signalement effectué avec succès !"
   }
 }

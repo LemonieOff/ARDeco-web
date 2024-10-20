@@ -37,8 +37,6 @@
             {{ content.confirm }}
         </button>
         <div id="textEncouragement" hidden> {{ content.textReportEncouragement }}</div>
-        <div id="errorText" hidden></div>
-        <div id="successText"></div>
         <div class="stage">
             <div class="heart" :class="{ 'is-active': isLiked }" @click="handleLike"></div>
             <div id="numberOfLikes"></div>
@@ -173,20 +171,16 @@ export default {
                 document.getElementById('confirmReport').hidden = true;
                 document.getElementById('textEncouragement').hidden = true;
                 document.getElementById('startReportButton').textContent = "Signaler";
-                document.getElementById('errorText').hidden = true;
             } else {
                 document.getElementById('reportDescription').hidden = false;
                 document.getElementById('confirmReport').hidden = false;
                 document.getElementById('textEncouragement').hidden = false;
                 document.getElementById('startReportButton').textContent = "Annuler";
-                document.getElementById('successText').hidden = true;
             }
         },
 
         async reportGallery() {
             const text = document.querySelector('#reportDescription').value;
-            const errorDiv = document.getElementById('errorText');
-            const successDiv = document.getElementById('successText');
             try {
                 const response = await fetch(`https://api.ardeco.app/gallery_report/${this.GalleryData.id}`, {
                     method: 'POST',
@@ -201,21 +195,14 @@ export default {
                 const result = await response.json();
                 // console.log(result)
                 if (!response.ok) {
-                    successDiv.hidden = true;
-                    errorDiv.hidden = false;
-                    errorDiv.innerText = result.description;
+                    this.$refs.notifications.showError(this.notificationsMessages.galleryAlreadyReportedOrFailed);
                     throw new Error("Failed to report gallery");
                 } else {
                     await this.startReport();
                     document.getElementById('reportDescription').textContent = "";
-                    successDiv.hidden = false;
-                    errorDiv.hidden = true;
-                    successDiv.innerText = result.description;
+                    this.$refs.notifications.showSuccess(this.notificationsMessages.reportSuccessful);
                 }
             } catch (error) {
-                successDiv.hidden = true;
-                errorDiv.hidden = false;
-                errorDiv.innerText = result.description;
                 console.error("Error fetching user information:", error);
                 return "Unknown user";
             }
