@@ -601,7 +601,6 @@
     "hide": "Cacher",
     "confirm": "Confirmer",
     "blockUser": "Bloquer l'utilisateur",
-    "textReportEncouragement": "Bien que l'indication d'une raison de signalement soit optionnelle, elle est vivement recommandée. En fournissant des détails sur le problème rencontré, vous nous aidez à mieux comprendre la situation et à traiter votre signalement le plus rapidement possible. Nous apprécions votre coopération et votre aide pour améliorer notre site web.",
     "by": "par",
     "furnitureSing": "meuble",
     "furnitureMul": "meubles",
@@ -776,6 +775,8 @@
     "ticketSuccessfullyClosed": "Ticket fermé avec succès.",
     "formSent": "Formulaire envoyé !",
     "galleryBelongToUser": "Cette galerie est votre création !",
-    "reportSuccessful": "Signalement effectué avec succès !"
+    "reportSuccessful": "Signalement effectué avec succès !",
+
+    "pleaseReportDetails": "Nous écrire en détail la raison de votre signalement nous aiderai beaucoup !"
   }
 }

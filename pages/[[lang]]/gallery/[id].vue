@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.galleryDetailsTitle }}</div>
-        <div style="display: inline-flex; width: 100%;">
+        <div style="display: inline-flex; width: 100%; margin-bottom: 20px">
             <div class="card">
                 <div class="card-content">
                     <div class="card-item">
@@ -34,7 +34,6 @@
                 </div>
             </div>
         </div>
-        <br>
         <button class="custom-button" @click="goToGallery"> {{ content.goBack }}</button>
         <button class="custom-button" id="startReportButton" style="margin-left: 2.5%" @click="startReport">
             {{ content.report }}
@@ -47,7 +46,6 @@
         <button id="confirmReport" class="custom-button" style="margin-left: 2.5%" @click="reportGallery" hidden>
             {{ content.confirm }}
         </button>
-        <div id="textEncouragement" hidden> {{ content.textReportEncouragement }}</div>
     </div>
     <Notifications ref="notifications"/>
     <CommentSection :galleryId="this.GalleryData.id" :notifications="this.$refs.notifications"/>
@@ -176,12 +174,11 @@ export default {
             if (active) {
                 document.getElementById('reportDescription').hidden = true;
                 document.getElementById('confirmReport').hidden = true;
-                document.getElementById('textEncouragement').hidden = true;
                 document.getElementById('startReportButton').textContent = "Signaler";
             } else {
+                this.$refs.notifications.showSuccess(this.notificationsMessages.pleaseReportDetails);
                 document.getElementById('reportDescription').hidden = false;
                 document.getElementById('confirmReport').hidden = false;
-                document.getElementById('textEncouragement').hidden = false;
                 document.getElementById('startReportButton').textContent = "Annuler";
             }
         },
