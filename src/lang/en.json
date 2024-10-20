@@ -755,6 +755,7 @@
     "infoNotReceived": "Error: we couldn't receive some of the page's informations, please try again later.",
     "failedToPostComment": "Error: we couldn't post your comment, please try again later.",
     "failedToDeleteComment": "Error: we couldn't delete your comment, please try again later.",
+    "failedToModifyComment": "Error: we couldn't modify your comment, please try again later.",
     "missingInformations": "Error: you didn't fill all the requiered informations, please try again.",
     "furnitureCreationFailed": "Error : something went wrong when creating your furniture, please try again later.",
     "informationsUpdateFailed": "Error : we couldn't update your informations, please try again later.",

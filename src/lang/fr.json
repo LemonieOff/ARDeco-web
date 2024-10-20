@@ -754,6 +754,7 @@
     "infoNotReceived": "Erreur : nous n'avons pas pu recevoir certaines informations de la page, veuillez réessayer plus tard.",
     "failedToPostComment": "Erreur : nous n'avons pas pu poster votre commentaire, veuillez réessayer plus tard.",
     "failedToDeleteComment": "Erreur : nous n'avons pas pu supprimer votre commentaire, veuillez réessayer plus tard.",
+    "failedToModifyComment": "Erreur : nous n'avons pas pu modifier votre commentaire, veuillez réessayer plus tard.",
     "missingInformations": "Erreur : vous n'avez pas rempli toutes les informations requises, veuillez réessayer.",
     "furnitureCreationFailed": "Erreur : un problème est survenu lors de la création de votre meuble, veuillez réessayer plus tard.",
     "informationsUpdateFailed": "Erreur : nous n'avons pas pu mettre à jour vos informations, veuillez réessayer plus tard.",

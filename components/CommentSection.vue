@@ -160,14 +160,34 @@ export default {
             const finishModifyButton = document.getElementById('finishModifyButton_' + commentId);
             const existingComment = document.getElementById('existingComment_' + commentId);
             const modifiedComment = document.getElementById('modifiedComment_' + commentId);
-            console.log('existingComment', existingComment);
+            const newMessage = modifiedComment.value;
             if (existingComment.hidden === false) {
                 modifiedComment.hidden = false;
                 existingComment.hidden = true;
                 modifyButton.hidden = true;
                 finishModifyButton.hidden = false;
             } else {
-                // Ajouter la requête quand elle existera
+                if (newMessage.length != 0) {
+                    const response = await fetch('https://api.ardeco.app/gallery/' + `${this.galleryId}` + '/comments/' + `${commentId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            "comment": newMessage
+                        }),
+                        credentials: 'include',
+                    });
+
+                    const result = await response.json();
+
+                    if (result.code !== 200) {
+                        this.notifications.showError(this.notificationMessages.failedToModifyComment);
+                    } else {
+                        this.notifications.showSuccess(this.notificationMessages.informationsUpdated);
+                        await this.getComments()
+                    }
+                }
                 modifiedComment.hidden = true;
                 existingComment.hidden = false;
                 modifyButton.hidden = false;
