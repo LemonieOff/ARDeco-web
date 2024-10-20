@@ -13,9 +13,12 @@
                     <div id="commentUserName">{{ content.user }} {{ singleComment.user_id }} </div>
                     <div id="commentDate">{{ singleComment.creation_date }}</div>
                 </div>
-                <NuxtImg id="deleteButton" class="icon" src="images/icons/trash.webp" alt="Delete" v-if="Number(singleComment.user_id) === Number(userId)" @click="deleteComment(singleComment.id)"/>
+                <NuxtImg :id="'modifyButton_' + singleComment.id" class="icon modifyButton" src="https://img.icons8.com/color/200/edit.png" alt="Modify" v-if="Number(singleComment.user_id) === Number(userId)" @click="modifyComment(singleComment.id)"/>
+                <NuxtImg :id="'finishModifyButton_' + singleComment.id" class="icon modifyButton" src="https://cdn-icons-png.flaticon.com/512/1538/1538471.png" alt="Modify" v-if="Number(singleComment.user_id) === Number(userId)" @click="modifyComment(singleComment.id)" hidden/>
+                <NuxtImg id="deleteButton" class="icon deleteButton" src="images/icons/trash.webp" alt="Delete" v-if="Number(singleComment.user_id) === Number(userId)" @click="deleteComment(singleComment.id)"/>
             </div>
-            <div class="bottomCommentSection">{{ singleComment.comment }}</div>
+            <div :id="'existingComment_' + singleComment.id" class="bottomCommentSection">{{ singleComment.comment }}</div>
+            <input :id="'modifiedComment_' + singleComment.id" class="bottomCommentSection" :placeholder="`${singleComment.comment}`" hidden>
         </div>
     </div>
     <Notifications ref="notifications"/>
@@ -151,6 +154,26 @@ export default {
             }
             console.log("DELETE :", result);
         },
+
+        async modifyComment(commentId) {
+            const modifyButton = document.getElementById('modifyButton_' + commentId);
+            const finishModifyButton = document.getElementById('finishModifyButton_' + commentId);
+            const existingComment = document.getElementById('existingComment_' + commentId);
+            const modifiedComment = document.getElementById('modifiedComment_' + commentId);
+            console.log('existingComment', existingComment);
+            if (existingComment.hidden === false) {
+                modifiedComment.hidden = false;
+                existingComment.hidden = true;
+                modifyButton.hidden = true;
+                finishModifyButton.hidden = false;
+            } else {
+                // Ajouter la requête quand elle existera
+                modifiedComment.hidden = true;
+                existingComment.hidden = false;
+                modifyButton.hidden = false;
+                finishModifyButton.hidden = true;
+            }
+        }
     },
 };
 </script>
@@ -255,10 +278,18 @@ export default {
     border: 2px outset $primary-black;
 }
 
-#deleteButton {
+.deleteButton {
     border-radius: 0;
     max-height: 35px;
-    margin-left: 25vw;
+    margin-top: 4%;
+    border: none;
+    cursor: pointer;
+}
+
+.modifyButton {
+    border-radius: 0;
+    max-height: 35px;
+    margin-left: 20vw;
     margin-top: 4%;
     border: none;
     cursor: pointer;
