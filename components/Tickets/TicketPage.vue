@@ -61,6 +61,7 @@ export default {
     data() {
         return {
             content: this.$lang === 'en' ? en.tickets : fr.tickets,
+            notificationsMessages: this.$lang === 'en' ? en.notifications : fr.notifications,
             tickets: [],
             messages: [],
             langPrefix: this.$langPrefix,
@@ -104,9 +105,9 @@ export default {
             console.log(result);
 
             if (result.code == 200) {
-                this.$refs.notifications.showSuccess("Le ticket a été créé avec succès.");
+                this.$refs.notifications.showSuccess(this.notificationsMessages.ticketSuccessfullyCreated);
             } else {
-                this.$refs.notifications.showError("Error: Impossible de créer le ticket pour le moment, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.ticketCreationFailed);
             }
 
             this.$refs.titleInput.value = "";
@@ -207,9 +208,9 @@ export default {
             console.log("result", result);
 
             if (result.code == 200) {
-                this.$refs.notifications.showSuccess("Le ticket a été clos avec succès.");
+                this.$refs.notifications.showSuccess(this.notificationsMessages.ticketSuccessfullyClosed);
             } else {
-                this.$refs.notifications.showError("Error: Impossible de clore le ticket pour le moment, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.ticketSuccessfullyClosed.ticketClosureFailed);
             }
 
             this.$refs.responseInput.value = "";

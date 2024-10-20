@@ -61,6 +61,7 @@ export default {
     data() {
         return {
             content: this.$content.settings.companies,
+            notificationsMessages: this.$content.notifications,
             placeholders: {},
             userID: 36,
             langPrefix: "/",
@@ -170,7 +171,7 @@ export default {
                 this.furnitureObj = result.data
                 console.log("Parsed furniture object:", this.furnitureObj);
             } else {
-                this.$refs.notifications.showError("Couldn't find this furniture, are you certain it's the right ID ?");
+                this.$refs.notifications.showError(this.notificationsMessages.cannotFindFurniture);
             }
         },
 
@@ -241,7 +242,7 @@ export default {
 
             if (furnitureName === "" || furniturePrice === null || furnitureStyles.length === 0 || furnitureRooms.length === 0 ||
                 furnitureHeight === null || furnitureWidth === null || furnitureDepth === null || furnitureColors.length === 0) {
-                this.$refs.notifications.showError("Erreur : Vous n'avez pas rempli ou sélectionné toutes les cases.");
+                this.$refs.notifications.showError(this.notificationsMessages.missingInformations);
                 return;
             }
 
@@ -269,7 +270,7 @@ export default {
             if (result.code === 200) {
                 this.$router.push(`${this.langPrefix}company`);
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
         }
     }

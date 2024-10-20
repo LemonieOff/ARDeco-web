@@ -749,5 +749,28 @@
       "pro": "Professional",
       "admin": "Administrator"
     }
+  },
+  "notifications": {
+    "infoNotReceived": "Error: we couldn't receive some of the page's informations, please try again later.",
+    "failedToPostComment": "Error: we couldn't post your comment, please try again later.",
+    "failedToDeleteComment": "Error: we couldn't delete your comment, please try again later.",
+    "missingInformations": "Error: you didn't fill all the requiered informations, please try again.",
+    "furnitureCreationFailed": "Error : something went wrong when creating your furniture, please try again later.",
+    "informationsUpdateFailed": "Error : we couldn't update your informations, please try again later.",
+    "resetApiKey": "Please reset your API key in your settings.",
+    "ticketCreationFailed": "Error : we failed to create your ticket, please try again later.",
+    "ticketClosureFailed": "Error : we failed to close your ticket, please try again later.",
+    "failedToSendForm": "Error : we failed to send your form, please try again later.",
+    "passwordCantBeEmpty": "Error : password can't be empty.",
+    "cannotFindFurniture": "Error : we couldn't find this furniture, are you certain it's the right ID ?",
+    "couldntLikeOrDislike": "Error : we couldn't like or dislike this gallery, please try again later.",
+
+    "furnitureCreated": "Your furniture has been created successfully !",
+    "informationsUpdated": "Informations updated",
+    "emptyGallery": "Your gallery is curently empty.",
+    "ticketSuccessfullyCreated": "Ticket successfully created !",
+    "ticketSuccessfullyClosed": "Ticket successfully closed.",
+    "formSent": "Form sent !",
+    "galleryBelongToUser": "This gallery is your creation !"
   }
 }

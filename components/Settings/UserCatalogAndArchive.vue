@@ -117,6 +117,7 @@ export default {
                 { name: this.$content.catalog.archiveTitle }
             ],
             content: this.$content.catalog,
+            notificationsMessages: this.$content.notifications,
             userID: 0,
             langPrefix: "/",
             selectedCard: 0,
@@ -137,7 +138,7 @@ export default {
 
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
             if (!COMPANY_API_TOKEN) {
-                this.$refs.notifications.showError("Vous devez réinitialiser votre clé API");
+                this.$refs.notifications.showError(this.notificationsMessages.resetApiKey);
             } else {
                 await this.getArchive();
                 await this.getCatalog();
@@ -158,7 +159,7 @@ export default {
             const result = await response.json();
             if (result.code === 200 && result.data.length === 0) {
                 this.catalogList = result.data;
-                this.$refs.notifications.showSuccess("Votre catalogue est vide");
+                // this.$refs.notifications.showSuccess("Votre catalogue est vide");
             } else {
                 this.catalogList = result.data;
             }
@@ -179,7 +180,7 @@ export default {
             console.log(result);
             if (result.code === 200 && result.data.length === 0) {
                 this.archiveList = result.data;
-                this.$refs.notifications.showSuccess("Votre archive est vide");
+                // this.$refs.notifications.showSuccess("Votre archive est vide");
             } else if (result.code === 200) {
                 this.archiveList = result.data;
             }
@@ -198,9 +199,9 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description);
+                this.$refs.notifications.showSuccess(this.notificationsMessages.informationsUpdated);
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
             await this.getArchive();
             await this.getCatalog();
@@ -223,9 +224,9 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description);
+                this.$refs.notifications.showSuccess(this.notificationsMessages.informationsUpdated);
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
             await this.getArchive();
             await this.getCatalog();
@@ -244,9 +245,9 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description);
+                this.$refs.notifications.showSuccess(this.notificationsMessages.informationsUpdated);
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
             await this.getArchive();
             await this.getCatalog();
@@ -264,9 +265,9 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description);
+                this.$refs.notifications.showSuccess(this.notificationsMessages.informationsUpdated);
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
             localStorage.setItem("COMPANY_API_TOKEN", result.data);
             await this.getArchive();
@@ -294,10 +295,10 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description);
+                this.$refs.notifications.showSuccess(this.notificationsMessages.informationsUpdated);
                 location.reload();
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
         },
 
@@ -318,9 +319,9 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess(result.description);
+                this.$refs.notifications.showSuccess(this.notificationsMessages.informationsUpdated);
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
             await this.getArchive();
             await this.getCatalog();

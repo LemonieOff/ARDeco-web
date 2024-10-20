@@ -61,6 +61,7 @@ export default {
     data() {
         return {
             content: this.$content.settings.companies,
+            notificationsMessages: this.$content.notifications,
             placeholders: {},
             langPrefix: "/",
             styles: {
@@ -180,7 +181,7 @@ export default {
 
             if (furnitureName === "" || furniturePrice === null || furnitureStyles.length === 0 || furnitureRooms.length === 0 ||
                 furnitureHeight === null || furnitureWidth === null || furnitureDepth === null || furnitureColors.length === 0) {
-                this.$refs.notifications.showError("Erreur : Vous n'avez pas rempli ou sélectionné toutes les cases.");
+                this.$refs.notifications.showError(this.notificationsMessages.missingInformations);
                 return;
             }
 
@@ -211,9 +212,9 @@ export default {
                 document.querySelector('#furnitureHeight').value = "";
                 document.querySelector('#furnitureWidth').value = "";
                 document.querySelector('#furnitureDepth').value = "";
-                this.$refs.notifications.showSuccess(result.description);
+                this.$refs.notifications.showSuccess(this.notificationsMessages.furnitureCreated);
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.furnitureCreationFailed);
             }
         }
     }

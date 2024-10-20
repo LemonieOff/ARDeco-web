@@ -72,6 +72,7 @@ export default {
             successMessage: '',
             isLiked: false,
             content: this.$lang === 'en' ? en.gallery : fr.gallery,
+            notificationsMessages: this.$lang === 'en' ? en.notifications : fr.notifications,
             urlLang: this.$urlLang,
             langPrefix: this.$langPrefix,
         };
@@ -100,7 +101,7 @@ export default {
         });
 
         if (this.galleryUserId === this.userID) {
-            this.$refs.notifications.showSuccess("You created this gallery !")
+            this.$refs.notifications.showSuccess(this.notificationsMessages.galleryBelongToUser)
         }
     },
     methods: {
@@ -239,9 +240,9 @@ export default {
             const result = await response.json();
             // console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess("Successfully changed your gallery's visibility !");
+                this.$refs.notifications.showSuccess(this.notificationsMessages.informationsUpdated);
             } else {
-                this.$refs.notifications.showError("Error : Failed to hide or show your gallery, try again later.");
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
             location.reload();
         },
@@ -260,7 +261,7 @@ export default {
             if (result.code === 200) {
                 document.getElementById("numberOfLikes").innerHTML = result.data;
             } else {
-                this.$refs.notifications.showError("Error: Impossible de récupérer les informations des likes, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.infoNotReceived);
             }
         },
 
@@ -278,7 +279,7 @@ export default {
             if (result.code === 200) {
                 this.isLiked = result.data === true;
             } else {
-                this.$refs.notifications.showError("Error: Impossible de savoir si l'utilisateur a liké cette galerie, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.infoNotReceived);
             }
         },
 
@@ -307,7 +308,7 @@ export default {
             if (result.code === 201) {
                 this.isLiked = !this.isLiked;
             } else {
-                this.$refs.notifications.showError("Error: Impossible de liker ou unlike la galerie, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.couldntLikeOrDislike);
             }
             this.getNumberOfLikes();
             response = null;
