@@ -206,14 +206,20 @@
     "rememberMe": "Se souvenir de moi"
   },
   "profile": {
-    "yourFavoriteThemes": "Mes thèmes favoris",
-    "yourRecentPurchaces": "Mes récents achats",
-    "yourFavoriteFurnitures": "Meubles favoris",
-    "yourFavoriteGalleries": "Aménagements favoris",
-    "gallery": "Aménagements publics",
+    "gallery": {
+      "personal": "Aménagements personnels",
+      "public": "Aménagements publics"
+    },
+    "favorite": {
+      "gallery": "Aménagements favoris",
+      "furniture": "Meubles favoris"
+    },
     "blockedUsers": "Utilisateurs bloqués",
     "title": {
       "personalInformation": "Informations personnelles",
+      "galleries": "Aménagements",
+      "favorites": "Favoris",
+      "orders": "Commandes",
       "changePassword": "Modifier le mot de passe",
       "confidentiality": "Confidentialité"
     },
@@ -223,19 +229,21 @@
       "email": "Adresse email : ",
       "phone": "Téléphone : ",
       "city": "Ville : ",
-      "savedItems": "Aménagements personnels : ",
-      "commandsOrdered": "Nombre de commande(s) : ",
       "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)",
-      "role": "Rôle : ",
+      "role": "Type de compte : ",
       "password": "Mot de passe : "
     },
+    "orderHistory": "Historique des commandes",
+    "orderSing": "commande",
+    "orderMul": "commandes",
     "loading": "Chargement en cours...",
     "buttons": {
       "cancel": "Annuler",
       "update": "Modifier",
       "confirm": "Confirmer",
       "delete": "Supprimer le compte",
-      "reset": "Réinitialiser"
+      "reset": "Réinitialiser",
+      "access": "Accéder"
     },
     "picture": {
       "infoText": "Si aucune image n'est sélectionnée, l'image sera réinitialisée et utilisera celle par défaut.",
