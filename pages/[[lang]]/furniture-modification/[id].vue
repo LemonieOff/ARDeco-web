@@ -1,6 +1,6 @@
 <template>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{content.titleModifyFurniture}}</h1>
-    <div class="mainContent">
+    <div class="mainContent" style="overflow-x: hidden; overflow-y: auto">
         <div class="furniturePictureArea">
             <img id="furnitureImg" src="@/assets/images/furnitures/defaultFurnitureCreationImage.png">
         </div>
@@ -287,8 +287,6 @@ export default {
 
 .mainContent {
     margin-left: 7.5vw;
-    width: 85vw;
-    height: 65vh;
     display: flex;
 }
 
@@ -299,7 +297,6 @@ export default {
 
 #furnitureImg {
     border: 2px solid $primary-black;
-    height: 100%;
     width: auto;
     border-radius: 10px;
 }
@@ -307,8 +304,6 @@ export default {
 .furnitureDetails {
     display: flex;
     margin-left: 2.5%;
-    border: 2px solid $primary-black;
-    border-radius: 10px;
     padding: 2.5%;
     width: 100%;
 }
