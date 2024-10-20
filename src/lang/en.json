@@ -651,6 +651,7 @@
     "dimensions": "Dimensions (cm): ",
     "addToCart": "Add to cart",
     "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites",
     "available": "Available",
     "unavailable": "Unavailable",
     "goBack": "Go back",
@@ -766,6 +767,7 @@
     "couldntLikeOrDislike": "Error : we couldn't like or dislike this gallery, please try again later.",
     "galleryAlreadyReportedOrFailed": "Error : your already reported this gallery, or the report failed, please try again later.",
     "couldntAddFavorite": "Error : we coundl't add this element to your favorites, please try again later.",
+    "couldntRemoveFavorite": "Error : we coundl't remove this element from your favorites, please try again later.",
 
     "furnitureCreated": "Your furniture has been created successfully !",
     "informationsUpdated": "Informations updated",

@@ -650,6 +650,7 @@
     "dimensions": "Dimensions (cm): ",
     "addToCart": "Ajouter au panier",
     "addToFavorites": "Ajouter aux favoris",
+    "removeFromFavorites": "Retirer des favoris",
     "available": "Disponible",
     "unavailable": "Indisponible",
     "goBack": "Retour",
@@ -765,6 +766,7 @@
     "couldntLikeOrDislike": "Erreur : nous n'avons pas pu aimer ou ne pas aimer cette galerie, veuillez réessayer plus tard.",
     "galleryAlreadyReportedOrFailed": "Erreur : cette galerie a déjà été signalée ou le signalement a échoué, veuillez réessayer plus tard.",
     "couldntAddFavorite": "Erreur : nous n'avons pas pu ajouter cet élement à vos favoris, veuillez réessayer plus tard.",
+    "couldntRemoveFavorite": "Erreur : nous n'avons pas pu retirer cet élement de vos favoris, veuillez réessayer plus tard.",
 
     "furnitureCreated": "Votre meuble a été créé avec succès !",
     "informationsUpdated": "Informations mises à jour.",
