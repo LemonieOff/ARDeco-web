@@ -51,8 +51,6 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
@@ -60,7 +58,8 @@ export default {
     name: "TicketPage",
     data() {
         return {
-            content: this.$lang === 'en' ? en.tickets : fr.tickets,
+            content: this.$content.tickets,
+            notificationsMessages: this.$content.notifications,
             tickets: [],
             messages: [],
             langPrefix: this.$langPrefix,
@@ -104,9 +103,9 @@ export default {
             console.log(result);
 
             if (result.code == 200) {
-                this.$refs.notifications.showSuccess("Le ticket a été créé avec succès.");
+                this.$refs.notifications.showSuccess(this.notificationsMessages.ticketSuccessfullyCreated);
             } else {
-                this.$refs.notifications.showError("Error: Impossible de créer le ticket pour le moment, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.ticketCreationFailed);
             }
 
             this.$refs.titleInput.value = "";
@@ -207,9 +206,9 @@ export default {
             console.log("result", result);
 
             if (result.code == 200) {
-                this.$refs.notifications.showSuccess("Le ticket a été clos avec succès.");
+                this.$refs.notifications.showSuccess(this.notificationsMessages.ticketSuccessfullyClosed);
             } else {
-                this.$refs.notifications.showError("Error: Impossible de clore le ticket pour le moment, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.ticketSuccessfullyClosed.ticketClosureFailed);
             }
 
             this.$refs.responseInput.value = "";

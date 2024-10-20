@@ -6,9 +6,6 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-
 export default {
     name: "FavoriteThemes",
     props: {
@@ -16,13 +13,9 @@ export default {
     },
     data() {
         return {
-            content: {},
+            content: this.$content.profile,
         }
     },
-    mounted() {
-        // Set the content variable to the correct language
-        this.content = this.$lang === 'en' ? en.profile : fr.profile;
-    }
 }
 </script>
 

@@ -60,6 +60,7 @@ const cards = [
 ];
 const selectedCard = ref(0);
 const content = nuxtApp.$content.feedback;
+const notificationsMessages = nuxtApp.$content.notifications;
 const langPrefix = nuxtApp.$langPrefix;
 const userID = ref<number>();
 
@@ -86,14 +87,14 @@ async function sendForm() {
     const todaysDate = date.toDateString();
 
     if (textInput.value === null) {
-        if (notifications.value) notifications.value.showError("Erreur : Le champ de texte ne semble pas être présent.");
+        if (notifications.value) notifications.value.showError(notificationsMessages.missingInformations);
         return;
     }
 
     const feedbackContent = textInput.value.value;
 
     if (feedbackContent == "") {
-        if (notifications.value) notifications.value.showError("Erreur : Veuillez ajouter un texte.");
+        if (notifications.value) notifications.value.showError(notificationsMessages.missingInformations);
         return;
     }
 
@@ -140,9 +141,9 @@ async function sendForm() {
     console.log(result);
 
     if (result.code != 201) {
-        if (notifications.value) notifications.value.showError(result.description);
+        if (notifications.value) notifications.value.showError(notificationsMessages.formSent);
     } else {
-        if (notifications.value) notifications.value.showSuccess(result.description);
+        if (notifications.value) notifications.value.showSuccess(notificationsMessages.failedToSendForm);
         textInput.value.value = "";
     }
 

@@ -60,8 +60,6 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import { isLogged, loggedIn } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
@@ -75,11 +73,11 @@ export default {
     },
     data() {
         return {
-            content: {},
-            placeholders: {},
+            content: this.$content.settings.users,
             langPrefix: "/",
             galleryData: [],
-            settings: []
+            settings: [],
+            notificationMessages: this.$content.notifications
         }
     },
     mounted() {
@@ -94,10 +92,6 @@ export default {
                 lang = 'fr';
             }
         }
-
-        this.content = lang === 'en' ? en.settings.users : fr.settings.users;
-        this.placeholders = lang === 'en' ? en.settings.users.placeholders : fr.settings.users.placeholders;
-
         this.getSettings();
     },
     methods: {
@@ -122,14 +116,14 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code == 200) {
-                this.$refs.notifications.showSuccess("Parameters changed successfully.");
+                this.$refs.notifications.showSuccess(this.notificationMessages.informationsUpdated);
                 if (optionEffect) {
                     document.getElementById([optionName]).textContent = "Oui";
                 } else {
                     document.getElementById([optionName]).textContent = "Non"
                 }
             } else {
-                this.$refs.notifications.showError("Error : We couldn't change your parameters, please try again.");
+                this.$refs.notifications.showError(this.notificationMessages.informationsUpdateFailed);
             }
             this.getSettings();
         },
@@ -172,7 +166,7 @@ export default {
                     document.getElementById("automatic_new_gallery_share").textContent = this.content.no;
                 }
             } else {
-                this.$refs.notifications.showError("Error : Couldn't receive your current settings, please try again later.");
+                this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
         },
         async getGallery() {
@@ -192,9 +186,9 @@ export default {
             this.galleryData = result.data;
             console.log("this.galleryData : ", this.galleryData)
             if (result.code == 200 && result.data.length == 0) {
-                this.$refs.notifications.showSuccess("Your personnal gallery is currently empty.");
+                this.$refs.notifications.showSuccess(this.notificationMessages.emptyGallery);
             } else if (result.code != 200) {
-                this.$refs.notifications.showError("Error : We couldn't the informations of your gallery.");
+                this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
         },
         async redirectToGallery(galleryId) {

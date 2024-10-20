@@ -221,6 +221,7 @@ import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
 const nuxtApp = useNuxtApp();
 
 const content = nuxtApp.$content.profile;
+const notificationsMessages = nuxtApp.$content.notifications;
 const roles = nuxtApp.$content.values.roles;
 const userId = ref(0);
 const loading = ref(true);
@@ -363,11 +364,11 @@ const editPersonalData = async () => {
                 phone: phoneVal.value
             }; // Temporary update values with local ones
             if (notifications.value) {
-                notifications.value.showSuccess(result.description);
+                notifications.value.showSuccess(notificationsMessages.informationsUpdated);
             }
             await getProfileElements(); // Make sure all values are up to date
         } else {
-            if (notifications.value) notifications.value.showError(result.description);
+            if (notifications.value) notifications.value.showError(notificationsMessages.informationsUpdateFailed);
         }
     }
 };
@@ -384,7 +385,7 @@ const resetPersonalData = async () => {
 
 const editPassword = async () => {
     if (passwordVal.value.length === 0) {
-        if (notifications.value) notifications.value.showError("Le nouveau mot de passe ne peut pas être vide"); // TODO : Translate
+        if (notifications.value) notifications.value.showError(notificationsMessages.passwordCantBeEmpty);
         return;
     }
 
@@ -404,12 +405,12 @@ const editPassword = async () => {
 
     if (result.status === "OK") {
         if (notifications.value) {
-            notifications.value.showSuccess(result.description);
+            notifications.value.showSuccess(notificationsMessages.informationsUpdated);
         }
         logout();
         location.href = `${langPrefix}login?redirect=${langPrefix}profile`;
     } else {
-        if (notifications.value) notifications.value.showError(result.description);
+        if (notifications.value) notifications.value.showError(notificationsMessages.informationsUpdateFailed);
     }
 };
 </script>

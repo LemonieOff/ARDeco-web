@@ -1,6 +1,6 @@
 <template>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{content.titleModifyFurniture}}</h1>
-    <div class="mainContent">
+    <div class="mainContent" style="overflow-x: hidden; overflow-y: auto">
         <div class="furniturePictureArea">
             <img id="furnitureImg" src="@/assets/images/furnitures/defaultFurnitureCreationImage.png">
         </div>
@@ -61,6 +61,7 @@ export default {
     data() {
         return {
             content: this.$content.settings.companies,
+            notificationsMessages: this.$content.notifications,
             placeholders: {},
             userID: 36,
             langPrefix: "/",
@@ -170,7 +171,7 @@ export default {
                 this.furnitureObj = result.data
                 console.log("Parsed furniture object:", this.furnitureObj);
             } else {
-                this.$refs.notifications.showError("Couldn't find this furniture, are you certain it's the right ID ?");
+                this.$refs.notifications.showError(this.notificationsMessages.cannotFindFurniture);
             }
         },
 
@@ -241,7 +242,7 @@ export default {
 
             if (furnitureName === "" || furniturePrice === null || furnitureStyles.length === 0 || furnitureRooms.length === 0 ||
                 furnitureHeight === null || furnitureWidth === null || furnitureDepth === null || furnitureColors.length === 0) {
-                this.$refs.notifications.showError("Erreur : Vous n'avez pas rempli ou sélectionné toutes les cases.");
+                this.$refs.notifications.showError(this.notificationsMessages.missingInformations);
                 return;
             }
 
@@ -269,7 +270,7 @@ export default {
             if (result.code === 200) {
                 this.$router.push(`${this.langPrefix}company`);
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
         }
     }
@@ -286,8 +287,6 @@ export default {
 
 .mainContent {
     margin-left: 7.5vw;
-    width: 85vw;
-    height: 65vh;
     display: flex;
 }
 
@@ -298,7 +297,6 @@ export default {
 
 #furnitureImg {
     border: 2px solid $primary-black;
-    height: 100%;
     width: auto;
     border-radius: 10px;
 }
@@ -306,8 +304,6 @@ export default {
 .furnitureDetails {
     display: flex;
     margin-left: 2.5%;
-    border: 2px solid $primary-black;
-    border-radius: 10px;
     padding: 2.5%;
     width: 100%;
 }

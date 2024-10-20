@@ -1,53 +1,56 @@
 <template>
-    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{content.titleCreateFurniture}}</h1>
-    <div class="mainContent">
-        <div class="furniturePictureArea">
-            <img id="furnitureImg" src="@/assets/images/furnitures/defaultFurnitureCreationImage.png">
-        </div>
-        <div class="furnitureDetails">
-            <div class="furnitureSpecificDetails">
-                <div class="specificDetailTitle" id="furnitureStyles">{{content.placeholders.furnitureStyles}}</div>
-                <div class="options">
-                    <div v-for="(style, key) in styles" :key="key" class="option">
-                        <label :for="`style_${key}`" @click="toggleSelection(style)" :class="{ 'selected': style.selected }">
-                            {{ style.name }}
-                        </label>
-                    </div>
-                </div>
-                <div class="specificDetailTitle" id="furnitureRooms">{{content.placeholders.furnitureRooms}}</div>
-                <div class="options">
-                    <div v-for="(room, key) in rooms" :key="key" class="option">
-                        <label :for="`room_${key}`" @click="toggleSelection(room)" :class="{ 'selected': room.selected }">
-                            {{ room.name }}
-                        </label>
-                    </div>
-                </div>
-                <div class="specificDetailTitle" id="furnitureColors">{{content.placeholders.furnitureColors}}</div>
-                <div class="options">
-                    <div v-for="(_color, key) in colors" :key="key" class="colorOption">
-                        <label :for="`color_${key}`"
-                        @click="toggleSelection(_color)"
-                        :class="{ 'selected': _color.selected }"
-                        :style="{ 'background-color': _color.hex,
-                            'border-color': _color.selected ? 'black' : _color.hex,
-                            'color': _color.selected ? _color.hex : 'black' }">
-                            {{ _color.name }}
-                        </label>
-                    </div>
-                </div>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.titleCreateFurniture }}</h1>
+    <div class="flex flex-col md:flex-row justify-center md:space-x-8 my-8">
+      <div class="furniturePictureArea flex justify-center">
+        <img id="furnitureImg" src="@/assets/images/furnitures/defaultFurnitureCreationImage.png" class="border-2 border-primary-black rounded-lg h-full md:w-1/2">
+      </div>
+      <div class="furnitureDetails flex flex-col md:flex-row rounded-lg p-4 w-full">
+        <div class="furnitureSpecificDetails md:w-1/2">
+          <div class="specificDetailTitle text-lg font-bold" id="furnitureStyles">{{ content.placeholders.furnitureStyles }}</div>
+          <div class="options flex flex-wrap justify-center">
+            <div v-for="(style, key) in styles" :key="key" class="option">
+              <label :for="`style_${key}`" @click="toggleSelection(style)" :class="{ 'selected': style.selected }" class="cursor-pointer border border-primary-black rounded px-2 py-1 m-1">
+                {{ style.name }}
+              </label>
             </div>
-            <div class="furnitureBasicDetails">
-                <input class="basicButton" id="furnitureName" :placeholder="`${content.placeholders.furnitureName}`">
-                <input class="basicButton" id="furniturePrice" :placeholder="`${content.placeholders.furniturePrice}`">
-                <input class="basicButton" id="furnitureHeight" :placeholder="`${content.placeholders.furnitureHeight}`">
-                <input class="basicButton" id="furnitureWidth" :placeholder="`${content.placeholders.furnitureWidth}`">
-                <input class="basicButton" id="furnitureDepth" :placeholder="`${content.placeholders.furnitureDepth}`">
-                <button id="addFurnitureToCatalog" class="basicButton bottomButton" @click="addFurniture">{{content.addFurnitureToCatalog}}</button>
+          </div>
+          
+          <div class="specificDetailTitle text-lg font-bold" id="furnitureRooms">{{ content.placeholders.furnitureRooms }}</div>
+          <div class="options flex flex-wrap justify-center">
+            <div v-for="(room, key) in rooms" :key="key" class="option">
+              <label :for="`room_${key}`" @click="toggleSelection(room)" :class="{ 'selected': room.selected }" class="cursor-pointer border border-primary-black rounded px-2 py-1 m-1">
+                {{ room.name }}
+              </label>
             </div>
+          </div>
+          
+          <div class="specificDetailTitle text-lg font-bold" id="furnitureColors">{{ content.placeholders.furnitureColors }}</div>
+          <div class="options flex flex-wrap justify-center">
+            <div v-for="(_color, key) in colors" :key="key" class="colorOption">
+              <label :for="`color_${key}`"
+                @click="toggleSelection(_color)"
+                :class="{ 'selected': _color.selected }"
+                :style="{ 'background-color': _color.hex, 'border-color': _color.selected ? 'black' : _color.hex, 'color': _color.selected ? _color.hex : 'black' }"
+                class="cursor-pointer border-3 rounded px-2 py-1 m-1">
+                {{ _color.name }}
+              </label>
+            </div>
+          </div>
         </div>
+        
+        <div class="furnitureBasicDetails md:w-1/2 flex flex-col space-y-4">
+          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furnitureName" :placeholder="`${content.placeholders.furnitureName}`">
+          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furniturePrice" :placeholder="`${content.placeholders.furniturePrice}`">
+          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furnitureHeight" :placeholder="`${content.placeholders.furnitureHeight}`">
+          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furnitureWidth" :placeholder="`${content.placeholders.furnitureWidth}`">
+          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furnitureDepth" :placeholder="`${content.placeholders.furnitureDepth}`">
+          <button id="addFurnitureToCatalog" class="basicButton border border-primary-black rounded py-2 px-4 font-bold" @click="addFurniture">{{ content.addFurnitureToCatalog }}</button>
+        </div>
+      </div>
     </div>
     <Notifications ref="notifications"/>
 </template>
+  
 
 <script>
 import {isLogged, loggedIn} from "public/ts/checkLogin";
@@ -61,6 +64,7 @@ export default {
     data() {
         return {
             content: this.$content.settings.companies,
+            notificationsMessages: this.$content.notifications,
             placeholders: {},
             langPrefix: "/",
             styles: {
@@ -180,7 +184,7 @@ export default {
 
             if (furnitureName === "" || furniturePrice === null || furnitureStyles.length === 0 || furnitureRooms.length === 0 ||
                 furnitureHeight === null || furnitureWidth === null || furnitureDepth === null || furnitureColors.length === 0) {
-                this.$refs.notifications.showError("Erreur : Vous n'avez pas rempli ou sélectionné toutes les cases.");
+                this.$refs.notifications.showError(this.notificationsMessages.missingInformations);
                 return;
             }
 
@@ -211,9 +215,9 @@ export default {
                 document.querySelector('#furnitureHeight').value = "";
                 document.querySelector('#furnitureWidth').value = "";
                 document.querySelector('#furnitureDepth').value = "";
-                this.$refs.notifications.showSuccess(result.description);
+                this.$refs.notifications.showSuccess(this.notificationsMessages.furnitureCreated);
             } else {
-                this.$refs.notifications.showError(result.description);
+                this.$refs.notifications.showError(this.notificationsMessages.furnitureCreationFailed);
             }
         }
     }
@@ -250,8 +254,6 @@ export default {
 .furnitureDetails {
     display: flex;
     margin-left: 2.5%;
-    border: 2px solid $primary-black;
-    border-radius: 10px;
     padding: 2.5%;
     width: 100%;
 }

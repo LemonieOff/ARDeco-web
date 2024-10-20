@@ -1,29 +1,39 @@
 <template>
     <div class="container">
-        <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.galleryDetailsTitle }}</div>
-        <div class="card">
-            <div class="card-content">
-                <div class="card-item">
-                    <strong>{{ content.id }}:</strong> {{ GalleryData.id }}
+        <div class="text-center font-bold text-xl md:text-4xl my-8 title">{{ content.galleryDetailsTitle }}</div>
+        <div style="display: inline-flex; width: 100%; margin-bottom: 20px">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-item">
+                        <strong>{{ content.id }}:</strong> {{ GalleryData.id }}
+                    </div>
+                    <div class="card-item">
+                        <strong>{{ content.name }}:</strong> {{ GalleryData.name }}
+                    </div>
+                    <div class="card-item">
+                        <strong>{{ content.description }}:</strong> {{ GalleryData.description }}
+                    </div>
+                    <div class="card-item" v-if="GalleryData.user_id">
+                        <strong>{{ content.author }}:</strong> {{ UserData.data.lastname }} {{ UserData.data.firstname }}
+                    </div>
+                    <div class="card-item">
+                        <strong>{{ content.rooms }}:</strong> {{ GalleryData.room_type }}
+                    </div>
+                    <div class="card-item">
+                        <strong>{{ content.furnitureTable }}:</strong> {{ GalleryData.furniture }}
+                    </div>
                 </div>
-                <div class="card-item">
-                    <strong>{{ content.name }}:</strong> {{ GalleryData.name }}
+            </div>
+            <div style="width: 20%;">
+                <div class="stage">
+                    <div class="heart" :class="{ 'is-active': isLiked }" @click="handleLike"></div>
+                    <div id="numberOfLikes"></div>
                 </div>
-                <div class="card-item">
-                    <strong>{{ content.description }}:</strong> {{ GalleryData.description }}
-                </div>
-                <div class="card-item" v-if="GalleryData.user_id">
-                    <strong>{{ content.author }}:</strong> {{ UserData.data.lastname }} {{ UserData.data.firstname }}
-                </div>
-                <div class="card-item">
-                    <strong>{{ content.rooms }}:</strong> {{ GalleryData.room_type }}
-                </div>
-                <div class="card-item">
-                    <strong>{{ content.furnitureTable }}:</strong> {{ GalleryData.furniture }}
+                <div class="rating" @click="toggleStar">
+                    <div class="star" :class="{ 'filled': isStarFilled }"></div>
                 </div>
             </div>
         </div>
-        <br>
         <button class="custom-button" @click="goToGallery"> {{ content.goBack }}</button>
         <button class="custom-button" id="startReportButton" style="margin-left: 2.5%" @click="startReport">
             {{ content.report }}
@@ -36,21 +46,12 @@
         <button id="confirmReport" class="custom-button" style="margin-left: 2.5%" @click="reportGallery" hidden>
             {{ content.confirm }}
         </button>
-        <div id="textEncouragement" hidden> {{ content.textReportEncouragement }}</div>
-        <div id="errorText" hidden></div>
-        <div id="successText"></div>
-        <div class="stage">
-            <div class="heart" :class="{ 'is-active': isLiked }" @click="handleLike"></div>
-            <div id="numberOfLikes"></div>
-        </div>
     </div>
     <Notifications ref="notifications"/>
     <CommentSection :galleryId="this.GalleryData.id" :notifications="this.$refs.notifications"/>
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 import CommentSection from "@/components/CommentSection.vue";
@@ -71,9 +72,11 @@ export default {
             errorMessage: '',
             successMessage: '',
             isLiked: false,
-            content: this.$lang === 'en' ? en.gallery : fr.gallery,
+            content: this.$content.gallery,
+            notificationsMessages: this.$content.notifications,
             urlLang: this.$urlLang,
             langPrefix: this.$langPrefix,
+            isStarFilled: false,
         };
     },
     provide() {
@@ -87,6 +90,7 @@ export default {
         await this.getGallery(id);
         await this.getNumberOfLikes();
         await this.getLikeStatus();
+        await this.getFavorites();
         // console.log(this.galleryUserId, "/", this.userID)
 
         this.$nextTick(() => {
@@ -100,7 +104,7 @@ export default {
         });
 
         if (this.galleryUserId === this.userID) {
-            this.$refs.notifications.showSuccess("You created this gallery !")
+            this.$refs.notifications.showSuccess(this.notificationsMessages.galleryBelongToUser)
         }
     },
     methods: {
@@ -170,22 +174,17 @@ export default {
             if (active) {
                 document.getElementById('reportDescription').hidden = true;
                 document.getElementById('confirmReport').hidden = true;
-                document.getElementById('textEncouragement').hidden = true;
                 document.getElementById('startReportButton').textContent = "Signaler";
-                document.getElementById('errorText').hidden = true;
             } else {
+                this.$refs.notifications.showSuccess(this.notificationsMessages.pleaseReportDetails);
                 document.getElementById('reportDescription').hidden = false;
                 document.getElementById('confirmReport').hidden = false;
-                document.getElementById('textEncouragement').hidden = false;
                 document.getElementById('startReportButton').textContent = "Annuler";
-                document.getElementById('successText').hidden = true;
             }
         },
 
         async reportGallery() {
             const text = document.querySelector('#reportDescription').value;
-            const errorDiv = document.getElementById('errorText');
-            const successDiv = document.getElementById('successText');
             try {
                 const response = await fetch(`https://api.ardeco.app/gallery_report/${this.GalleryData.id}`, {
                     method: 'POST',
@@ -200,21 +199,14 @@ export default {
                 const result = await response.json();
                 // console.log(result)
                 if (!response.ok) {
-                    successDiv.hidden = true;
-                    errorDiv.hidden = false;
-                    errorDiv.innerText = result.description;
+                    this.$refs.notifications.showError(this.notificationsMessages.galleryAlreadyReportedOrFailed);
                     throw new Error("Failed to report gallery");
                 } else {
                     await this.startReport();
                     document.getElementById('reportDescription').textContent = "";
-                    successDiv.hidden = false;
-                    errorDiv.hidden = true;
-                    successDiv.innerText = result.description;
+                    this.$refs.notifications.showSuccess(this.notificationsMessages.reportSuccessful);
                 }
             } catch (error) {
-                successDiv.hidden = true;
-                errorDiv.hidden = false;
-                errorDiv.innerText = result.description;
                 console.error("Error fetching user information:", error);
                 return "Unknown user";
             }
@@ -239,9 +231,9 @@ export default {
             const result = await response.json();
             // console.log(result);
             if (result.code === 200) {
-                this.$refs.notifications.showSuccess("Successfully changed your gallery's visibility !");
+                this.$refs.notifications.showSuccess(this.notificationsMessages.informationsUpdated);
             } else {
-                this.$refs.notifications.showError("Error : Failed to hide or show your gallery, try again later.");
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
             location.reload();
         },
@@ -260,7 +252,7 @@ export default {
             if (result.code === 200) {
                 document.getElementById("numberOfLikes").innerHTML = result.data;
             } else {
-                this.$refs.notifications.showError("Error: Impossible de récupérer les informations des likes, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.infoNotReceived);
             }
         },
 
@@ -278,7 +270,7 @@ export default {
             if (result.code === 200) {
                 this.isLiked = result.data === true;
             } else {
-                this.$refs.notifications.showError("Error: Impossible de savoir si l'utilisateur a liké cette galerie, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.infoNotReceived);
             }
         },
 
@@ -307,10 +299,64 @@ export default {
             if (result.code === 201) {
                 this.isLiked = !this.isLiked;
             } else {
-                this.$refs.notifications.showError("Error: Impossible de liker ou unlike la galerie, réessayez plus tard.");
+                this.$refs.notifications.showError(this.notificationsMessages.couldntLikeOrDislike);
             }
             this.getNumberOfLikes();
             response = null;
+        },
+
+        async getFavorites() {
+            const response = await fetch('https://api.ardeco.app/favorite/gallery', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+
+            for (let singleData of result.data) {
+                if (singleData.id === this.GalleryData.id) {
+                    this.isStarFilled = true;
+                }
+            }
+
+            if (result.code === 404) {
+                this.isStarFilled = false;
+            } else if (result.code != 200) {
+                this.$refs.notifications.showError(this.notificationsMessages.infoNotReceived);
+            }
+        },
+
+        async toggleStar() {
+            let response;
+            if (this.isStarFilled === false) {
+                response = await fetch('https://api.ardeco.app/favorite/gallery/' + this.GalleryData.id, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                });
+            } else {
+                response = await fetch('https://api.ardeco.app/favorite/gallery/' + this.GalleryData.id, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                });
+            }
+
+            const result = await response.json();
+            console.log("toggleStar", result);
+            if (result.code === 200 || result.code === 201) {
+                this.isStarFilled = !this.isStarFilled;
+            } else {
+                this.$refs.notifications.showError(this.notificationsMessages.couldntAddFavorite);
+            }
+            await this.getFavorites();
         },
     }
 }
@@ -321,16 +367,16 @@ export default {
 
 .title {
     text-align: center;
-    font-size: 25px;
     font-weight: bold;
 }
 
 .container {
-    width: 80%;
-    margin-left: 10%;
+    margin-left: 8.5%;
 }
 
 .card {
+    width: 60%;
+    margin-left: 10%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -347,12 +393,13 @@ export default {
 }
 
 .custom-button {
+    margin-left: 10%;
     background-color: rgb(191, 178, 170);
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1.75vh;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -363,7 +410,7 @@ export default {
 
 #reportDescription {
     margin-left: 2.5%;
-    width: 50%;
+    width: 33%;
     height: 5vh;
     border-radius: 5px;
     text-align: center;
@@ -402,16 +449,36 @@ export default {
 }
 
 .stage {
-    margin-left: 90%;
-    margin-top: -1.5%;
-    width: 10%;
+    margin-left: 50%;
+    margin-top: 25%;
     transform: translate(-50%, -50%);
     display: inline-flex;
 }
 
 #numberOfLikes {
-    font-size: 20px;
+    font-size: 1.75vh;
     align-content: center;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20px;
+}
+
+.star {
+    width: 50px;
+    height: 50px;
+    background: url('https://icones.pro/wp-content/uploads/2021/02/icone-etoile-vide-jaune.png') no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.star.filled {
+    background: url('https://cdn1.iconfinder.com/data/icons/essentials-soft-fill-1/60/Star-ui-ux-stars-rating-512.png') no-repeat;
+    background-size: contain;
 }
 
 </style>

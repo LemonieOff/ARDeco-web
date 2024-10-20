@@ -1,46 +1,56 @@
 <template>
     <div class="navbar-top-space"></div>
-    <div class="title"> {{ catalogElement.name }}</div>
-    <div class="furnitureElements">
-        <img src="~/.././assets/images/furnitures/furnitureDefault.png" class="furniturePicture solidBorders roundedBorders">
-        <div class="sideActions">
-            <div class="furnitureDetails solidBorders roundedBorders">
-                <div class="furnitureRooms"> {{ catalogElement.rooms }}</div>
-                <div class="furnitureStyles"> {{ catalogElement.styles }}</div>
-                <div class="furnitureDimentions">{{ content.dimensions }} {{ catalogElement.width }} / {{ catalogElement.height }} / {{ catalogElement.depth }}</div>
-                <div class="furniturePrice">{{ catalogElement.price }}€</div>
-                <button class="addToCart solidBorders primaryButton"> {{ content.addToCart }} </button>
-            </div>
-            <div class="furnitureActions">
-                <button class="addFavoriteButton solidBorders roundedBorders secondaryButton"> {{ content.addToFavorites }} </button>
-                <div class="availableOrNot solidBorders roundedBorders statusElement"> {{ content.available }} </div>
-                <div id="errorText" class="textReportJustification errorHandler" hidden></div>
-                <div id="successText" class="textReportJustification successHandler"></div>
-            </div>
+    <div class="text-center text-3xl mb-9">{{ catalogElement.name }}</div>
+    
+    <div class="flex flex-col md:flex-row md:justify-between w-full md:px-10">
+      <img src="~/.././assets/images/furnitures/furnitureDefault.png" class="w-full md:w-1/3 rounded-lg border-3 border-black mb-4 md:mb-0">
+      
+      <div class="flex flex-col justify-between w-full md:w-1/2 md:ml-4">
+        <div class="bg-white border-3 border-black p-4 rounded-lg h-80 flex flex-col">
+          <div class="text-xl">{{ catalogElement.rooms }}</div>
+          <div class="text-xl mt-2">{{ catalogElement.styles }}</div>
+          <div class="mt-4 text-lg">{{ content.dimensions }} {{ catalogElement.width }} / {{ catalogElement.height }} / {{ catalogElement.depth }}</div>
+          <div class="mt-2 text-2xl font-bold">{{ catalogElement.price }}€</div>
+          <button class="mt-4 bg-black text-white py-2 rounded hover:bg-white hover:text-black hover:border transition duration-200">{{ content.addToCart }}</button>
         </div>
+        
+        <div class="mt-4">
+          <button id="addToFavorite" class="bg-blue-300 rounded-lg py-2 px-4 w-full hover:bg-white transition duration-200" @click="addToFavorite">{{ content.addToFavorites }}</button>
+          <button id="removeFromFavorite" class="bg-blue-300 rounded-lg py-2 px-4 w-full hover:bg-white transition duration-200" @click="removeFromFavorite" hidden>{{ content.removeFromFavorites }}</button>
+          <div class="bg-green-300 text-center rounded-lg py-2 mt-2">{{ content.available }}</div>
+          <div id="errorText" class="text-red-600 text-center mt-4 hidden"></div>
+          <div id="successText" class="text-green-600 text-center mt-4"></div>
+        </div>
+      </div>
     </div>
-    <div class="adminActions">
-        <button class="solidBorders roundedBorders primaryButton adminButton goBack" @click="goToCatalog"> {{ content.goBack }} </button>
-        <button class="solidBorders roundedBorders secondaryButton adminButton companyAction companyAction adminAction"> {{ content.hide }} </button> <!-- Est plutôt une "adminAction", mais pour l'instant je le met en "companyAction" -->
-        <button id="archiveButton" class="solidBorders roundedBorders secondaryButton adminButton companyAction" @click="archiveElement"> {{ content.archive }} </button>
-        <button id="restoreButton" class="solidBorders roundedBorders secondaryButton adminButton companyAction" @click="restoreElement" hidden> {{ content.restore }} </button>
-        <button id="deleteButton" class="solidBorders roundedBorders secondaryButton adminButton deleteButton companyAction" @click="deleteElement" hidden> {{ content.delete }} </button>
+    
+    <div class="flex flex-wrap justify-center mt-4 md:px-10">
+      <button class="bg-black text-white rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white hover:text-black transition duration-200" @click="goToCatalog">{{ content.goBack }}</button>
+      <button class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction adminAction" @click="archiveElement">{{ content.hide }}</button>
+      <button id="archiveButton" class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction" @click="archiveElement">{{ content.archive }}</button>
+      <button id="restoreButton" class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction" @click="restoreElement" hidden>{{ content.restore }}</button>
+      <button id="deleteButton" class="bg-red-600 text-white rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white hover:text-red-600 transition duration-200 deleteButton companyAction" @click="deleteElement" hidden>{{ content.delete }}</button>
     </div>
+    
+    <Notifications ref="notifications"/>
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import { isLogged, loggedIn } from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "FurnitureDetails",
+    components: {
+        Notifications,
+    },
     props: {
         urlLang: String | null
     },
     data() {
         return {
-            content: {},
+            content: this.$content.catalog,
+            notificationMessages: this.$content.notifications,
             langPrefix: "/",
             catalogElement: {},
             elementIsNotArchived: false,
@@ -60,8 +70,9 @@ export default {
             }
         }
     
-        this.getCatalogAndCompanyName();
-        this.content = lang === 'en' ? en.catalog : fr.catalog;
+        this.getCatalogAndCompanyName().then(() => {
+            this.isElementInFavorites();
+        });
     },
     methods: {
         async getCatalogAndCompanyName() {
@@ -289,7 +300,71 @@ export default {
                 successDiv.innerText = result.description;
                 this.goToCatalog();
             }
-        }
+        },
+
+        async addToFavorite() {
+            const response = await fetch('https://api.ardeco.app/favorite/furniture/' + `${this.catalogElement.id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+
+            if (result.code === 201) {
+                document.getElementById('addToFavorite').hidden = true;
+                document.getElementById('removeFromFavorite').hidden = false;
+            } else {
+                this.refs.notifications.showError(this.notificationMessages.couldntAddFavorite);
+            }
+        },
+
+        async removeFromFavorite() {
+            const response = await fetch('https://api.ardeco.app/favorite/furniture/' + `${this.catalogElement.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result);
+
+            if (result.code === 200) {
+                document.getElementById('addToFavorite').hidden = false;
+                document.getElementById('removeFromFavorite').hidden = true;
+            } else {
+                this.$refs.notifications.showError(this.notificationMessages.couldntRemoveFavorite);
+            }
+        },
+
+        async isElementInFavorites() {
+            const response = await fetch('https://api.ardeco.app/favorite/furniture/', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+            console.log(result.data)
+
+            if (result.code === 200) {
+                for (let item of result.data) {
+                    if (item.favorite_furniture.furniture_id == this.catalogElement.id) {
+                        document.getElementById('addToFavorite').hidden = true;
+                        document.getElementById('removeFromFavorite').hidden = false;
+                    }
+                }
+            } else if (result.code != 404) {
+                this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
+            }
+        },
     }
 }
 </script>
@@ -327,6 +402,17 @@ export default {
     border-color: $secondary-blue;
 }
 
+.deleteButton {
+    background-color: #860000;
+    transition: 0.25s;
+}
+
+.deleteButton:hover {
+    background-color: $primary-white;
+    color: #860000;
+    border-color: #860000;
+}
+
 .statusElement {
     background-color: $primary-green;
     transition: 0.25s;
@@ -345,7 +431,7 @@ export default {
 }
 
 .navbar-top-space {
-    height: 10vh;
+    height: 5vh;
 }
 
 .textReportJustification {
