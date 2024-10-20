@@ -1,25 +1,36 @@
 <template>
     <div class="container">
         <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.galleryDetailsTitle }}</div>
-        <div class="card">
-            <div class="card-content">
-                <div class="card-item">
-                    <strong>{{ content.id }}:</strong> {{ GalleryData.id }}
+        <div style="display: inline-flex; width: 100%;">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-item">
+                        <strong>{{ content.id }}:</strong> {{ GalleryData.id }}
+                    </div>
+                    <div class="card-item">
+                        <strong>{{ content.name }}:</strong> {{ GalleryData.name }}
+                    </div>
+                    <div class="card-item">
+                        <strong>{{ content.description }}:</strong> {{ GalleryData.description }}
+                    </div>
+                    <div class="card-item" v-if="GalleryData.user_id">
+                        <strong>{{ content.author }}:</strong> {{ UserData.data.lastname }} {{ UserData.data.firstname }}
+                    </div>
+                    <div class="card-item">
+                        <strong>{{ content.rooms }}:</strong> {{ GalleryData.room_type }}
+                    </div>
+                    <div class="card-item">
+                        <strong>{{ content.furnitureTable }}:</strong> {{ GalleryData.furniture }}
+                    </div>
                 </div>
-                <div class="card-item">
-                    <strong>{{ content.name }}:</strong> {{ GalleryData.name }}
+            </div>
+            <div style="width: 20%;">
+                <div class="stage">
+                    <div class="heart" :class="{ 'is-active': isLiked }" @click="handleLike"></div>
+                    <div id="numberOfLikes"></div>
                 </div>
-                <div class="card-item">
-                    <strong>{{ content.description }}:</strong> {{ GalleryData.description }}
-                </div>
-                <div class="card-item" v-if="GalleryData.user_id">
-                    <strong>{{ content.author }}:</strong> {{ UserData.data.lastname }} {{ UserData.data.firstname }}
-                </div>
-                <div class="card-item">
-                    <strong>{{ content.rooms }}:</strong> {{ GalleryData.room_type }}
-                </div>
-                <div class="card-item">
-                    <strong>{{ content.furnitureTable }}:</strong> {{ GalleryData.furniture }}
+                <div class="rating" @click="toggleStar">
+                    <div class="star" :class="{ 'filled': isStarFilled }"></div>
                 </div>
             </div>
         </div>
@@ -37,10 +48,6 @@
             {{ content.confirm }}
         </button>
         <div id="textEncouragement" hidden> {{ content.textReportEncouragement }}</div>
-        <div class="stage">
-            <div class="heart" :class="{ 'is-active': isLiked }" @click="handleLike"></div>
-            <div id="numberOfLikes"></div>
-        </div>
     </div>
     <Notifications ref="notifications"/>
     <CommentSection :galleryId="this.GalleryData.id" :notifications="this.$refs.notifications"/>
@@ -73,6 +80,7 @@ export default {
             notificationsMessages: this.$lang === 'en' ? en.notifications : fr.notifications,
             urlLang: this.$urlLang,
             langPrefix: this.$langPrefix,
+            isStarFilled: false,
         };
     },
     provide() {
@@ -86,6 +94,7 @@ export default {
         await this.getGallery(id);
         await this.getNumberOfLikes();
         await this.getLikeStatus();
+        await this.getFavorites();
         // console.log(this.galleryUserId, "/", this.userID)
 
         this.$nextTick(() => {
@@ -300,6 +309,60 @@ export default {
             this.getNumberOfLikes();
             response = null;
         },
+
+        async getFavorites() {
+            const response = await fetch('https://api.ardeco.app/favorite/gallery', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+
+            for (let singleData of result.data) {
+                if (singleData.id === this.GalleryData.id) {
+                    this.isStarFilled = true;
+                }
+            }
+
+            if (result.code === 404) {
+                this.isStarFilled = false;
+            } else if (result.code != 200) {
+                this.$refs.notifications.showError(this.notificationsMessages.infoNotReceived);
+            }
+        },
+
+        async toggleStar() {
+            let response;
+            if (this.isStarFilled === false) {
+                response = await fetch('https://api.ardeco.app/favorite/gallery/' + this.GalleryData.id, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                });
+            } else {
+                response = await fetch('https://api.ardeco.app/favorite/gallery/' + this.GalleryData.id, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                });
+            }
+
+            const result = await response.json();
+            console.log("toggleStar", result);
+            if (result.code === 200 || result.code === 201) {
+                this.isStarFilled = !this.isStarFilled;
+            } else {
+                this.$refs.notifications.showError(this.notificationsMessages.couldntAddFavorite);
+            }
+            await this.getFavorites();
+        },
     }
 }
 </script>
@@ -319,6 +382,7 @@ export default {
 }
 
 .card {
+    width: 80%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -390,9 +454,8 @@ export default {
 }
 
 .stage {
-    margin-left: 90%;
-    margin-top: -1.5%;
-    width: 10%;
+    margin-left: 50%;
+    margin-top: 25%;
     transform: translate(-50%, -50%);
     display: inline-flex;
 }
@@ -400,6 +463,27 @@ export default {
 #numberOfLikes {
     font-size: 20px;
     align-content: center;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20px;
+}
+
+.star {
+    width: 50px;
+    height: 50px;
+    background: url('https://icones.pro/wp-content/uploads/2021/02/icone-etoile-vide-jaune.png') no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.star.filled {
+    background: url('https://cdn1.iconfinder.com/data/icons/essentials-soft-fill-1/60/Star-ui-ux-stars-rating-512.png') no-repeat;
+    background-size: contain;
 }
 
 </style>

@@ -764,6 +764,7 @@
     "cannotFindFurniture": "Erreur : nous n'avons pas trouvé ce meuble, êtes-vous certain que c'est le bon ID ?",
     "couldntLikeOrDislike": "Erreur : nous n'avons pas pu aimer ou ne pas aimer cette galerie, veuillez réessayer plus tard.",
     "galleryAlreadyReportedOrFailed": "Erreur : cette galerie a déjà été signalée ou le signalement a échoué, veuillez réessayer plus tard.",
+    "couldntAddFavorite": "Erreur : nous n'avons pas pu ajouter cet élement à vos favoris, veuillez réessayer plus tard.",
 
     "furnitureCreated": "Votre meuble a été créé avec succès !",
     "informationsUpdated": "Informations mises à jour.",
