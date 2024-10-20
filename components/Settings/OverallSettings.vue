@@ -74,7 +74,6 @@ export default {
     data() {
         return {
             content: this.$content.settings.users,
-            placeholders: this.$content.users.placeholders,
             langPrefix: "/",
             galleryData: [],
             settings: [],
