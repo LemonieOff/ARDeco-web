@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.galleryDetailsTitle }}</div>
+        <div class="text-center font-bold text-xl md:text-4xl my-8 title">{{ content.galleryDetailsTitle }}</div>
         <div style="display: inline-flex; width: 100%; margin-bottom: 20px">
             <div class="card">
                 <div class="card-content">
@@ -367,17 +367,16 @@ export default {
 
 .title {
     text-align: center;
-    font-size: 25px;
     font-weight: bold;
 }
 
 .container {
-    width: 80%;
-    margin-left: 10%;
+    margin-left: 8.5%;
 }
 
 .card {
-    width: 80%;
+    width: 60%;
+    margin-left: 10%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -394,12 +393,13 @@ export default {
 }
 
 .custom-button {
+    margin-left: 10%;
     background-color: rgb(191, 178, 170);
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1.75vh;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -410,7 +410,7 @@ export default {
 
 #reportDescription {
     margin-left: 2.5%;
-    width: 50%;
+    width: 33%;
     height: 5vh;
     border-radius: 5px;
     text-align: center;
@@ -456,7 +456,7 @@ export default {
 }
 
 #numberOfLikes {
-    font-size: 20px;
+    font-size: 1.75vh;
     align-content: center;
 }
 
