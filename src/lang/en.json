@@ -206,14 +206,20 @@
     "rememberMe": "Remember me"
   },
   "profile": {
-    "yourFavoriteThemes": "My favorites themes",
-    "yourRecentPurchaces": "My recent purchases",
-    "yourFavoriteFurnitures": "My favorite furniture",
-    "yourFavoriteGalleries": "My favorite designs",
-    "gallery": "Public designs",
+    "gallery": {
+      "personal": "Personal designs",
+      "public": "Public designs"
+    },
+    "favorite": {
+      "gallery": "Favorite designs",
+      "furniture": "Favorite furniture"
+    },
     "blockedUsers": "Blocked users",
     "title": {
       "personalInformation": "Personal information",
+      "galleries": "Designs",
+      "favorites": "Favorites",
+      "orders": "Orders",
       "changePassword": "Change password",
       "confidentiality": "Privacy"
     },
@@ -223,19 +229,22 @@
       "email": "Email : ",
       "phone": "Phone : ",
       "city": "City : ",
-      "savedItems": "Personal designs : ",
       "commandsOrdered": "Ordered command(s) : ",
       "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)",
-      "role": "Role : ",
+      "role": "Account type : ",
       "password": "Password : "
     },
+    "orderHistory": "Order history",
+    "orderSing": "order",
+    "orderMul": "orders",
     "loading": "Loading...",
     "buttons": {
       "cancel": "Cancel",
       "update": "Update settings",
       "confirm": "Confirm",
       "delete": "Delete account",
-      "reset": "Reset"
+      "reset": "Reset",
+      "access": "Access"
     },
     "picture": {
       "infoText": "If no image is selected, the image will be reset to the default one.",

@@ -5,8 +5,10 @@
             {{ content.loading }}
         </div>
         <div v-else class="flex flex-col items-center justify-center">
+            <ProfileSettings id="profileSettings" class="mb-8"></ProfileSettings>
+
             <div
-                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 md:w-[32rem] lg:w-[48rem] mb-8">
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
                 <h2 class="mb-4 font-bold text-xl">{{ content.title.personalInformation }}</h2>
                 <div class="mb-4">
                     <label class="block text-sm font-bold mb-2" for="email">
@@ -61,6 +63,15 @@
                            class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
                            type="tel" />
                 </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2"
+                           for="fieldRole">{{ content.informations.role }}</label>
+                    <input
+                        id="fieldRole"
+                        :value="roleVal"
+                        class="shadow appearance-none border rounded min-w-full py-2 px-3 leading-tight cursor-not-allowed"
+                        disabled readonly />
+                </div>
                 <div v-show="showPersonalInfoButtons" class="flex justify-evenly">
                     <button
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -75,7 +86,72 @@
                 </div>
             </div>
             <div
-                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 md:w-[32rem] lg:w-[48rem]">
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.galleries }}</h2>
+                <div class="mb-4 flex flex-col md:flex-row justify-between">
+                    <div class="flex flex-col md:w-5/12 mb-4 md:mb-0">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.gallery.personal }}
+                        </span>
+                        <!--<a :href="`${langPrefix}personalGallery`"
+                               class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                                personal
+                        </a>-->
+                        <span
+                            class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ personalGalleries }}
+                        </span>
+                    </div>
+                    <div class="flex flex-col md:w-5/12">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.gallery.public }}
+                        </span>
+                        <a :href="`${langPrefix}gallery`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.favorites }}</h2>
+                <div class="mb-4 flex flex-col md:flex-row justify-between">
+                    <div class="flex flex-col md:w-5/12 mb-4 md:mb-0">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.favorite.gallery }}
+                        </span>
+                        <a :href="`${langPrefix}favGallery`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
+                    <div class="flex flex-col md:w-5/12">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.favorite.furniture }}
+                        </span>
+                        <a :href="`${langPrefix}favFurniture`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.orders }}</h2>
+                <div class="flex flex-col w-12/12 mb-4 md:mb-0">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.orderHistory }}
+                        </span>
+                    <a :href="`${langPrefix}orderHistory`"
+                       class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                        {{ orders }} {{ orders > 1 ? content.orderMul : content.orderSing }}
+                    </a>
+                </div>
+            </div>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
                 <h2 class="mb-4 font-bold text-xl">{{ content.title.changePassword }}</h2>
                 <div class="mb-4">
                     <label class="block text-sm font-bold mb-2" for="password">
@@ -108,47 +184,28 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <ProfileSettings id="profileSettings" style="display: none"></ProfileSettings>
-    <div id="profile-container">
-        <div id="profile-loading" class="form" style="top: 10%;">
-            {{ content.loading }}
-        </div>
-        <div class="profile-wrapper" style="display: none;">
-            <div class="profile-elements-wrapper">
-                <div class="element2">{{ content.informations.role }}<span id="role"></span></div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ content.informations.savedItems }}<span id="savedItems"></span></div>
-                <div class="element2"><a id="yourFavoriteFurnitures" :href="`${langPrefix}orderHistory`" class="button">{{ content.informations.commandsOrdered
-                    }}<span id="commandsOrdered"></span></a></div>
-            </div>
-            <div class="profile-edit-buttons-wrapper">
-                <a id="deleteAccountButton" :href="`${langPrefix}deleteAccount`"
-                   class="deleteAccountButton">{{ content.buttons.delete }}</a>
-            </div>
-        </div>
-
-        <div class="profile-wrapper-lower-buttons">
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <a id="galleryAccess" :href="`${langPrefix}gallery`" class="button">{{ content.gallery }}</a>
-                </div>
-                <div class="element2">
-                    <a id="blockedUsersAccess" :href="`${langPrefix}blockedUsers`"
-                       class="button">{{ content.blockedUsers }}</a>
-                </div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <a id="yourFavoriteGalleries" :href="`${langPrefix}favGallery`"
-                       class="button">{{ content.yourFavoriteGalleries }}</a>
-                </div>
-                <div class="element2">
-                    <a id="yourFavoriteFurnitures" :href="`${langPrefix}favFurniture`"
-                       class="button">{{ content.yourFavoriteFurnitures }}</a>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem]">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.confidentiality }}</h2>
+                <div class="mb-4 flex flex-col md:flex-row justify-between">
+                    <div class="flex flex-col md:w-5/12 mb-4 md:mb-0">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.blockedUsers }}
+                        </span>
+                        <a :href="`${langPrefix}blockedUsers`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
+                    <div class="flex flex-col md:w-5/12">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.buttons.delete }}
+                        </span>
+                        <a :href="`${langPrefix}deleteAccount`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -158,13 +215,14 @@
 
 <script lang="ts" setup>
 import { isLogged, logout, userID } from "public/ts/checkLogin";
-import ProfileSettings from "@/components/UserProfile/ProfileSettings.vue";
 import Notifications from "@/components/Notifications.vue";
+import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
 
 const nuxtApp = useNuxtApp();
 
-let content = nuxtApp.$content.profile;
-let userId = ref(0);
+const content = nuxtApp.$content.profile;
+const roles = nuxtApp.$content.values.roles;
+const userId = ref(0);
 const loading = ref(true);
 const hiddenPassword = ref(true);
 const langPrefix = nuxtApp.$langPrefix;
@@ -187,6 +245,7 @@ const firstNameVal = ref("");
 const lastNameVal = ref("");
 const cityVal = ref("");
 const phoneVal = ref("");
+const roleVal = ref("");
 
 const passwordVal = ref("");
 
@@ -197,6 +256,9 @@ const showPersonalInfoButtons = computed(() => {
         || cityVal.value !== profile.value.city
         || phoneVal.value !== profile.value.phone;
 });
+
+const personalGalleries = ref(0);
+const orders = ref(0);
 
 onMounted(async () => {
     if (!userID) {
@@ -212,12 +274,6 @@ onMounted(async () => {
 
     await getProfileElements();
     loading.value = false;
-
-    // Remove loading and display profile
-    document.getElementById("profile-loading").style.display = "none";
-    document.getElementById("profileSettings").style.display = "block";
-    document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = "block";
 });
 
 const getProfileElements = async () => {
@@ -248,9 +304,9 @@ const getProfileElements = async () => {
     const data_order_history = await response_order_history.json();
     const result_order_history = data_order_history.data;
 
-    document.getElementById("role").innerText = result_profile.role;
-    document.getElementById("savedItems").innerHTML = result_gallery.length;
-    document.getElementById("commandsOrdered").innerHTML = result_order_history;
+    roleVal.value = roles[result_profile.role as keyof typeof roles];
+    personalGalleries.value = result_gallery.length;
+    orders.value = result_order_history;
 };
 
 const validatePersonalData = (): Boolean => {
@@ -327,6 +383,11 @@ const resetPersonalData = async () => {
 };
 
 const editPassword = async () => {
+    if (passwordVal.value.length === 0) {
+        if (notifications.value) notifications.value.showError("Le nouveau mot de passe ne peut pas être vide"); // TODO : Translate
+        return;
+    }
+
     const response = await fetch(`https://api.ardeco.app/user/${userId.value}`, {
         method: "PUT",
         headers: {
@@ -428,5 +489,9 @@ button {
 
 input {
     @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
+}
+
+input[disabled] {
+    @apply bg-opacity-50 shadow-none border-0;
 }
 </style>
