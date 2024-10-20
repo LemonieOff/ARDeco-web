@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
@@ -45,8 +43,8 @@ export default {
     data() {
         return {
             imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
-            content: this.$lang === 'en' ? en.comments : fr.comments,
-            notificationMessages: this.$lang === 'en' ? en.notifications : fr.notifications,
+            content: this.$content.comments,
+            notificationMessages: this.$content.notifications,
             langPrefix: this.$langPrefix,
             comments: [],
             userId: null,

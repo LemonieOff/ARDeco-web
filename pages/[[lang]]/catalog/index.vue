@@ -27,12 +27,10 @@
 <script setup>
 import {isLogged} from "public/ts/checkLogin";
 import {onMounted, ref} from "vue";
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 
 const route = useRoute();
 let lang = ref(route.params.lang);
-const content = ref({});
+const content = ref(nuxtApp.$content.catalog);
 const CatalogData = ref([]);
 const errorMessage = ref("");
 const successMessage = ref("");
@@ -49,9 +47,6 @@ onMounted(async () => {
             lang.value = 'fr';
         }
     }
-
-    // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.catalog : fr.catalog;
 
     // Prefix for links
     langPrefix.value = lang.value === 'en' ? '/en/' : '/fr/';

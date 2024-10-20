@@ -54,8 +54,6 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 import CommentSection from "@/components/CommentSection.vue";
@@ -76,8 +74,8 @@ export default {
             errorMessage: '',
             successMessage: '',
             isLiked: false,
-            content: this.$lang === 'en' ? en.gallery : fr.gallery,
-            notificationsMessages: this.$lang === 'en' ? en.notifications : fr.notifications,
+            content: this.$content.gallery,
+            notificationsMessages: this.$content.notifications,
             urlLang: this.$urlLang,
             langPrefix: this.$langPrefix,
             isStarFilled: false,

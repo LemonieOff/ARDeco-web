@@ -60,8 +60,6 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import { isLogged, loggedIn } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
@@ -75,12 +73,12 @@ export default {
     },
     data() {
         return {
-            content: {},
-            placeholders: {},
+            content: this.$content.settings.users,
+            placeholders: this.$content.users.placeholders,
             langPrefix: "/",
             galleryData: [],
             settings: [],
-            notificationMessages: {}
+            notificationMessages: this.$content.notifications
         }
     },
     mounted() {
@@ -95,11 +93,6 @@ export default {
                 lang = 'fr';
             }
         }
-
-        this.content = lang === 'en' ? en.settings.users : fr.settings.users;
-        this.placeholders = lang === 'en' ? en.settings.users.placeholders : fr.settings.users.placeholders;
-        this.notificationMessages = lang === 'en' ? en.notifications : fr.notifications;
-
         this.getSettings();
     },
     methods: {

@@ -40,14 +40,11 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-
 export default {
     name: "ProfileEvan",
     data() {
         return {
-            content: this.$lang === 'en' ? en.profilePages.evan : fr.profilePages.evan,
+            content: this.$content.profilePages.evan,
             epitechSrc: this.$lang === 'fr' ? "https://www.epitech.eu" : "https://international.epitech.eu"
         }
     }

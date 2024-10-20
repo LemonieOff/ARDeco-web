@@ -51,8 +51,6 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import {isLogged, loggedIn} from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
@@ -60,8 +58,8 @@ export default {
     name: "TicketPage",
     data() {
         return {
-            content: this.$lang === 'en' ? en.tickets : fr.tickets,
-            notificationsMessages: this.$lang === 'en' ? en.notifications : fr.notifications,
+            content: this.$content.tickets,
+            notificationsMessages: this.$content.notifications,
             tickets: [],
             messages: [],
             langPrefix: this.$langPrefix,

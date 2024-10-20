@@ -33,11 +33,9 @@
     </div>
     
     <Notifications ref="notifications"/>
-  </template>
+</template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
 import { isLogged, loggedIn } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
@@ -51,8 +49,8 @@ export default {
     },
     data() {
         return {
-            content: {},
-            notificationMessages: {},
+            content: this.$content.catalog,
+            notificationMessages: this.$content.notifications,
             langPrefix: "/",
             catalogElement: {},
             elementIsNotArchived: false,
@@ -75,8 +73,6 @@ export default {
         this.getCatalogAndCompanyName().then(() => {
             this.isElementInFavorites();
         });
-        this.content = lang === 'en' ? en.catalog : fr.catalog;
-        this.notificationMessages = lang === 'en' ? en.notifications : fr.notifications;
     },
     methods: {
         async getCatalogAndCompanyName() {

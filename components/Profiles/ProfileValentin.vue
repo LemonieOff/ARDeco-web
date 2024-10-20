@@ -44,14 +44,11 @@
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-
 export default {
     name: "ProfileValentin",
     data() {
         return {
-            content: this.$lang === 'en' ? en.profilePages.valentin : fr.profilePages.valentin,
+            content: this.$content.profilePages.valentin,
             epitechSrc: this.$lang === 'fr' ? "https://www.epitech.eu" : "https://international.epitech.eu"
         }
     }
