@@ -1,58 +1,74 @@
 <template>
-    <div class="titleElements alignCenter">
+    <div class="flex flex-col items-center px-4">
         <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
-        <br>
-        <div class="subTitle">{{ content.somethingWrong }}</div>
-        <div class="subTitle">{{ content.askUs }}</div>
+        <div>{{ content.somethingWrong }}</div>
+        <div>{{ content.askUs }}</div>
     </div>
-    <div class="pageContent">
-        <div class="pendingTickets">
-            <div class="alignCenter">{{ content.pendingTickets }}</div>
-            <div class="alignCenter pendingTicket" v-for="ticket in tickets" :key="ticket.id"
-                 :class="getTicketStatusClass(ticket.status)" @click="receiveTicketDetails(ticket.id)">
-                <div class="ticketStatus">{{ content[ticket.status] }}</div>
-                <div class="ticketTitle">{{ ticket.title }}</div>
+    <div class="flex flex-col md:flex-row w-full px-4 h-[55dvh] justify-evenly">
+        <div
+            class="overflow-y-auto bg-port-brown bg-opacity-20 p-2 border border-gray-300 rounded-md w-full md:w-1/3 mb-4 md:mb-0 md:mr-4 h-2/4 md:h-full">
+            <div class="text-center">{{ content.pendingTickets }}</div>
+            <div v-for="ticket in tickets" :key="ticket.id"
+                 :class="getTicketStatusClass(ticket.status)"
+                 class="flex items-center cursor-pointer border border-gray-400 rounded-md p-2 my-3 w-full"
+                 @click="receiveTicketDetails(ticket.id)">
+                <div class="w-1/3 text-center">{{ content[ticket.status] }}</div>
+                <div class="w-2/3 text-center">{{ ticket.title }}</div>
             </div>
         </div>
-        <div ref="ticketCreator" class="manageTicket">
-            <input ref="titleInput" type="text" class="titleOrDescription" :placeholder="content.writeYourTitleHere">
-            <textarea ref="descriptionInput" class="titleOrDescription"
-                      :placeholder="content.shortDescriptionOfYourProblem"></textarea>
-            <textarea ref="messageInput" class="textContent" :placeholder="content.writeYourProblemHere"></textarea>
-            <button class="alignCenter ticketManagementButton" @click="createTicket">{{ content.createTicket }}</button>
+        <div ref="ticketCreator"
+             class="bg-port-brown bg-opacity-20 p-2 border border-gray-300 rounded-md w-full md:w-1/2 h-2/4 mb-4 md:mb-0">
+            <input ref="titleInput" :placeholder="content.writeYourTitleHere"
+                   class="w-full p-2 rounded-md border border-gray-400 mb-2 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"
+                   type="text">
+            <textarea ref="descriptionInput" :placeholder="content.shortDescriptionOfYourProblem"
+                      class="w-full p-2 rounded-md border border-gray-400 mb-2 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"></textarea>
+            <textarea ref="messageInput" :placeholder="content.writeYourProblemHere"
+                      class="w-full p-2 rounded-md border border-gray-400 mb-2 h-2/3 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"></textarea>
+            <button
+                class="bg-gray-300 hover:bg-gray-400 text-AR-Grey text-center py-2 px-4 rounded-md w-2/5 mx-auto block"
+                @click="createTicket">{{ content.createTicket }}
+            </button>
         </div>
-        <div ref="ticketManage" class="manageTicket" style="display: none;">
-            <div class="messageHistory">
-                <div class="message" v-for="message in messages" :key="message.timestamp"
-                     :class="{ 'fromUser': message.sender !== 'Support', 'fromSupport': message.sender === 'Support' }">
+        <div ref="ticketManage"
+             class="bg-port-brown bg-opacity-20 p-2 border border-gray-300 rounded-md w-full md:w-1/2 h-2/4 md:h-full hidden">
+            <div class="h-2/3 overflow-y-auto border border-gray-400 rounded-md mb-4">
+                <div v-for="message in messages" :key="message.timestamp"
+                     :class="{ 'bg-green-200': message.sender !== 'Support', 'bg-blue-100 text-right ml-auto mr-4 w-2/3': message.sender === 'Support' }"
+                     class="p-3 my-2 mx-4 rounded-md text-sm text-AR-Grey">
                     {{ message.content }}
-                    <div class="messageDetails">
-                        <span> {{ message.sender }}</span>
-                        <span> - </span>
-                        <span> {{ formatDate(message.timestamp) }}</span>
+                    <div class="text-xs text-gray-500 mt-1">
+                        <span>{{ message.sender }}</span> - <span>{{ formatDate(message.timestamp) }}</span>
                     </div>
                 </div>
             </div>
-            <textarea ref="responseInput" v-if="currentTicketStatus === 'pending'" class="newMessageInput"
-                      :placeholder="content.typeYourTextHere"></textarea>
-            <textarea ref="responseInput" v-if="currentTicketStatus === 'closed'" class="newMessageInput"
-                      :placeholder="content.youCantReplyToAClosedTicket" disabled
-                      style="cursor: not-allowed;"></textarea>
-            <span class="ticketButtons">
-                <button class="buttonFontClass sendMessage" v-if="currentTicketStatus === 'pending'"
-                        @click="sendNewMessage"> {{ content.send }}</button>
-                <button class="buttonFontClass closeMessage" v-if="currentTicketStatus === 'pending'"
-                        @click="closeTicket"> {{ content.close }}</button>
-                <button class="buttonFontClass goBack" @click="closeConversation"> {{ content.back }}</button>
-            </span>
+            <textarea v-if="currentTicketStatus === 'pending'" ref="responseInput"
+                      :placeholder="content.typeYourTextHere"
+                      class="w-full p-2 rounded-md border border-gray-400 mb-2 h-1/6 resize-none bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"></textarea>
+            <textarea v-if="currentTicketStatus === 'closed'" ref="responseInput"
+                      :placeholder="content.youCantReplyToAClosedTicket"
+                      class="w-full p-2 rounded-md border border-gray-400 mb-2 h-1/6 resize-none cursor-not-allowed placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"
+                      disabled></textarea>
+            <div class="flex">
+                <button v-if="currentTicketStatus === 'pending'"
+                        class="bg-green-400 hover:bg-green-500 text-white text-xs py-1 px-2 rounded-md mr-2"
+                        @click="sendNewMessage">{{ content.send }}
+                </button>
+                <button v-if="currentTicketStatus === 'pending'"
+                        class="bg-red-500 hover:bg-red-600 text-white text-xs py-1 px-2 rounded-md mr-2"
+                        @click="closeTicket">{{ content.close }}
+                </button>
+                <button class="bg-gray-400 hover:bg-gray-500 text-white text-xs py-1 px-2 rounded-md"
+                        @click="closeConversation">{{ content.back }}
+                </button>
+            </div>
         </div>
     </div>
-    <Notifications ref="notifications"/>
+    <Notifications ref="notifications" />
 </template>
 
 <script>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
-import Notifications from "@/components/Notifications.vue";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 
 export default {
     name: "TicketPage",
@@ -65,7 +81,7 @@ export default {
             langPrefix: this.$langPrefix,
             currentTicketID: null,
             currentTicketStatus: null
-        }
+        };
     },
     async mounted() {
         await this.checkIfLogged();
@@ -86,23 +102,23 @@ export default {
             const title = this.$refs.titleInput.value;
             const description = this.$refs.descriptionInput.value;
             const message = this.$refs.messageInput.value;
-            const response = await fetch('https://api.ardeco.app/ticket/create?mode=id', {
-                method: 'POST',
+            const response = await fetch("https://api.ardeco.app/ticket/create?mode=id", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     "title": title,
                     "description": description,
                     "message": message
                 }),
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log(result);
 
-            if (result.code == 200) {
+            if (result.code === 200) {
                 this.$refs.notifications.showSuccess(this.notificationsMessages.ticketSuccessfullyCreated);
             } else {
                 this.$refs.notifications.showError(this.notificationsMessages.ticketCreationFailed);
@@ -120,12 +136,12 @@ export default {
                 location.href = this.langPrefix + "login";
             }
 
-            const response = await fetch('https://api.ardeco.app/ticket/' + `${ticketID}`, {
-                method: 'GET',
+            const response = await fetch("https://api.ardeco.app/ticket/" + `${ticketID}`, {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             this.$refs.ticketManage.style.display = "block";
@@ -149,12 +165,12 @@ export default {
                 location.href = this.langPrefix + "login";
             }
 
-            const response = await fetch('https://api.ardeco.app/ticket/user/' + `${userID}`, {
-                method: 'GET',
+            const response = await fetch("https://api.ardeco.app/ticket/user/" + `${userID}`, {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
@@ -171,15 +187,15 @@ export default {
             }
 
             const message = this.$refs.responseInput.value;
-            const response = await fetch('https://api.ardeco.app/ticket/write/' + `${this.currentTicketID}`, {
-                method: 'PUT',
+            const response = await fetch("https://api.ardeco.app/ticket/write/" + `${this.currentTicketID}`, {
+                method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     "message": message
                 }),
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
@@ -194,18 +210,18 @@ export default {
                 location.href = this.langPrefix + "login";
             }
 
-            const response = await fetch('https://api.ardeco.app/ticket/close/' + `${this.currentTicketID}`, {
-                method: 'PUT',
+            const response = await fetch("https://api.ardeco.app/ticket/close/" + `${this.currentTicketID}`, {
+                method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log("result", result);
 
-            if (result.code == 200) {
+            if (result.code === 200) {
                 this.$refs.notifications.showSuccess(this.notificationsMessages.ticketSuccessfullyClosed);
             } else {
                 this.$refs.notifications.showError(this.notificationsMessages.ticketSuccessfullyClosed.ticketClosureFailed);
@@ -229,42 +245,16 @@ export default {
             else return "";
         },
         formatDate(timestamp) {
-            const newTimestamp = timestamp.replace(/,/g, '');
+            const newTimestamp = timestamp.replace(/,/g, "");
             const date = new Date(parseInt(newTimestamp) * 1000);
             return date.toLocaleString();
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-
-.pendingTicket {
-    cursor: pointer;
-    display: inline-flex;
-    border-radius: 5px;
-    border: 1px solid black;
-    height: 10%;
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 2.5%;
-}
-
-.ticketStatus {
-    margin-left: 5%;
-    align-self: center;
-    width: 30%;
-    padding: 1%;
-}
-
-.ticketTitle {
-    align-self: center;
-    max-width: 60%;
-    margin-left: 5%;
-}
-
 .pending {
-    background-color: #f5f5f5;
     color: #fe9496;
     font-weight: bold;
 }
@@ -275,7 +265,6 @@ export default {
 }
 
 .closed {
-    background-color: #f5f5f5;
     color: #1bcfc4;
     font-weight: bold;
 }
@@ -286,7 +275,6 @@ export default {
 }
 
 .deleted {
-    background-color: #f5f5f5;
     color: #9e58ff;
     font-weight: bold;
 }
@@ -298,195 +286,11 @@ export default {
 
 ::placeholder {
     text-align: center;
-}
-
-.alignCenter {
-    text-align: center;
-}
-
-.navbar-top-space {
-    height: 10vh;
-}
-
-.titleElements {
-    font-weight: bold;
-    margin-bottom: 5%;
-}
-
-.title {
-    font-size: xx-large;
-}
-
-.subTitle {
-    font-size: large;
-    color: gray;
-}
-
-.pageContent {
-    display: inline-flex;
-    width: 100dvw;
-    height: 55dvh;
-}
-
-.pendingTickets {
-    overflow-y: auto;
-    background-color: #F5F5F5;
-    padding: 1%;
-    border: 1px solid;
-    border-radius: 10px;
-    max-width: 30%;
-    height: 100%;
-    margin-left: 7.5%;
-}
-
-.manageTicket {
-    background-color: #F5F5F5;
-    padding: 1%;
-    border: 1px solid;
-    border-radius: 10px;
-    margin-left: 5%;
-    width: 50%;
-}
-
-.messageHistory {
-    height: 70%;
-    border: 1px solid black;
-    border-radius: 5px;
-    overflow-y: auto;
-    margin-bottom: 4%;
-}
-
-.newMessageInput {
-    margin-top: 1%;
-    min-width: 78%;
-    min-height: 18%;
-    border: 1px solid black;
-    border-radius: 5px;
-}
-
-.buttonFontClass {
-    font-size: 10px;
-}
-
-.ticketButtons {
-    display: flex;
-}
-
-.sendMessage {
-    margin-left: 1%;
-    background-color: #1bcfc4;
-    color: #FFFFFF;
-    font-weight: bold;
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 4px;
-}
-
-.sendMessage:hover {
-    color: #1bcfc4;
-    background-color: #FFFFFF;
-    cursor: pointer;
-}
-
-.closeMessage {
-    margin-left: 1%;
-    background-color: #fe9496;
-    color: #FFFFFF;
-    font-weight: bold;
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 4px;
-}
-
-.closeMessage:hover {
-    color: #fe9496;
-    background-color: #FFFFFF;
-    cursor: pointer;
-}
-
-.goBack {
-    margin-left: 1%;
-    background-color: #505050;
-    color: #FFFFFF;
-    font-weight: bold;
-    border: 1px solid black;
-    border-radius: 3px;
-    padding: 4px;
-}
-
-.goBack:hover {
-    color: #505050;
-    background-color: #FFFFFF;
-    cursor: pointer;
-}
-
-.message {
-    font-size: 16px;
-    border: 1px solid black;
-    padding: 1.5% 2% 1%;
-    margin: 1%;
-    max-width: 60%;
-    min-height: 4%;
-    border-radius: 5px;
-}
-
-.messageDetails {
-    font-size: 10px;
-}
-
-.fromUser {
-    background-color: #1bcfc4;
-}
-
-.fromSupport {
-    background-color: #e1e9f5;
-    text-align: end;
-    margin-left: 40%;
-}
-
-.ticketManagementButton {
-    background-color: #F2EBDF;
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 1%;
-    margin-left: 30%;
-    width: 40%;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 #messageInput {
     text-align: start;
 }
-
-::placeholder {
-    text-align: center;
-    white-space: normal;
-    word-wrap: break-word;
-}
-
-.titleOrDescription,
-.textContent,
-.newMessageInput {
-    overflow-wrap: break-word;
-    word-break: break-all;
-    white-space: pre-wrap;
-    background-color: #FFFFFF;
-    margin: 0 2.5% 1%;
-    width: 95%;
-    border-radius: 5px;
-    border: 1px solid;
-    padding: 1%;
-}
-
-.titleOrDescription {
-    height: 10%;
-}
-
-.textContent {
-    height: 55%;
-}
-
-.newMessageInput {
-    min-height: 18%;
-}
-
 </style>
