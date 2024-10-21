@@ -1,45 +1,43 @@
 <template>
-    <div>
-        <div class="content">
-            <div class="image-container profile-picture" @click="showModal">
-                <img alt="Profile picture" v-bind:src="imageSrc">
-                <span class="edit-icon">&#9998;</span>
-            </div>
+    <div class="content">
+        <div class="image-container profile-picture" @click="showModal">
+            <img alt="Profile picture" v-bind:src="imageSrc">
+            <span class="edit-icon">&#9998;</span>
         </div>
-        <div id="profile_picture_modal">
-            <div id="profile_picture_div">
-                <div id="profile_picture_select">
-                    <label style="display: none">
-                        <img alt="Default profile picture" src="https://api.ardeco.app/profile_pictures/0.png" />
-                        <input name="select_image" type="radio" value="0" />
-                    </label>
-                    <label>
-                        <img alt="Profile picture 1" src="https://api.ardeco.app/profile_pictures/1.png" />
-                        <input name="select_image" type="radio" value="1" />
-                    </label>
-                    <label>
-                        <img alt="Profile picture 2" src="https://api.ardeco.app/profile_pictures/2.png" />
-                        <input name="select_image" type="radio" value="2" />
-                    </label>
-                    <label>
-                        <img alt="Profile picture 3" src="https://api.ardeco.app/profile_pictures/3.png" />
-                        <input name="select_image" type="radio" value="3" />
-                    </label>
-                    <label>
-                        <img alt="Profile picture 4" src="https://api.ardeco.app/profile_pictures/4.png" />
-                        <input name="select_image" type="radio" value="4" />
-                    </label>
-                </div>
-                <div id="profile_picture_info_text">
-                    <p>{{ picture.infoText }}</p><br />
-                    <p>{{ picture.confirmText }}</p>
-                </div>
-                <div id="profile_picture_buttons">
-                    <button id="profile_picture_button_reset" @click="resetSelection">{{ buttons.reset }}</button>
-                    <button id="profile_picture_button_cancel" @click="hideModal">{{ buttons.cancel }}</button>
-                    <button id="profile_picture_button_confirm" @click="confirmNewPicture">{{ buttons.confirm }}
-                    </button>
-                </div>
+    </div>
+    <div id="profile_picture_modal">
+        <div id="profile_picture_div">
+            <div id="profile_picture_select">
+                <label style="display: none">
+                    <img alt="Default profile picture" src="https://api.ardeco.app/profile_pictures/0.png" />
+                    <input name="select_image" type="radio" value="0" />
+                </label>
+                <label>
+                    <img alt="Profile picture 1" src="https://api.ardeco.app/profile_pictures/1.png" />
+                    <input name="select_image" type="radio" value="1" />
+                </label>
+                <label>
+                    <img alt="Profile picture 2" src="https://api.ardeco.app/profile_pictures/2.png" />
+                    <input name="select_image" type="radio" value="2" />
+                </label>
+                <label>
+                    <img alt="Profile picture 3" src="https://api.ardeco.app/profile_pictures/3.png" />
+                    <input name="select_image" type="radio" value="3" />
+                </label>
+                <label>
+                    <img alt="Profile picture 4" src="https://api.ardeco.app/profile_pictures/4.png" />
+                    <input name="select_image" type="radio" value="4" />
+                </label>
+            </div>
+            <div id="profile_picture_info_text">
+                <p>{{ content.picture.infoText }}</p><br />
+                <p>{{ content.picture.confirmText }}</p>
+            </div>
+            <div id="profile_picture_buttons">
+                <button id="profile_picture_button_reset" @click="resetSelection">{{ content.buttons.reset }}</button>
+                <button id="profile_picture_button_cancel" @click="hideModal">{{ content.buttons.cancel }}</button>
+                <button id="profile_picture_button_confirm" @click="confirmNewPicture">{{ content.buttons.confirm }}
+                </button>
             </div>
         </div>
     </div>
@@ -52,9 +50,7 @@ export default {
     data() {
         return {
             imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
-            content: this.$content.profile,
-            picture: this.$content.profile.picture,
-            buttons: this.$content.profile.buttons
+            content: this.$content.profile
         };
     },
     inject: ["profile"],
