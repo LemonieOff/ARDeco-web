@@ -7,17 +7,19 @@
                 <div class="grid-item">{{ content.name }}</div>
                 <div class="grid-item">{{ content.roomType }}</div>
                 <div class="grid-item">{{ content.styles }}</div>
-                <div class="grid-item">{{ content.actionSingOrPlu}}</div>
+                <div class="grid-item">{{ content.actionSingOrPlu }}</div>
             </div>
             <div v-for="(item) in CatalogData" class="grid-row">
-                <div class="grid-item" v-if="item.active === true">{{ item.id }}</div>
-                <div class="grid-item" v-if="item.active === true">{{ item.name }}, {{
+                <div v-if="item.active === true" class="grid-item">{{ item.id }}</div>
+                <div v-if="item.active === true" class="grid-item">{{ item.name }}, {{
                         item.company_name
-                }}</div>
-                <div class="grid-item" v-if="item.active === true">{{ item.rooms }}</div>
-                <div class="grid-item" v-if="item.active === true">{{ item.styles }}</div>
+                    }}
+                </div>
+                <div v-if="item.active === true" class="grid-item">{{ item.rooms }}</div>
+                <div v-if="item.active === true" class="grid-item">{{ item.styles }}</div>
                 <div class="grid-item">
-                    <a :href="`${langPrefix}catalog/${item.id}`" class="custom-button" v-if="item.active === true">{{ content.details }}</a>
+                    <a v-if="item.active === true" :href="`${langPrefix}catalog/${item.id}`"
+                       class="custom-button">{{ content.details }}</a>
                 </div>
             </div>
         </div>
@@ -25,8 +27,9 @@
 </template>
 
 <script setup>
-import {isLogged} from "public/ts/checkLogin";
-import {onMounted, ref} from "vue";
+import { isLogged } from "public/ts/checkLogin";
+
+const nuxtApp = useNuxtApp();
 
 const route = useRoute();
 let lang = ref(route.params.lang);
@@ -38,19 +41,6 @@ const langPrefix = ref("/");
 const userID = ref(0);
 
 onMounted(async () => {
-    // If lang selector is not passed in url, get the user's one or set it to french
-    if (lang.value !== 'en' && lang.value !== 'fr') {
-        const localStorageLang = localStorage.getItem('lang');
-        if (localStorageLang) {
-            lang.value = localStorageLang;
-        } else {
-            lang.value = 'fr';
-        }
-    }
-
-    // Prefix for links
-    langPrefix.value = lang.value === 'en' ? '/en/' : '/fr/';
-
     await checkLogin();
     await getCatalog();
     console.log(CatalogData.value);
@@ -66,16 +56,16 @@ async function checkLogin() {
 
 async function getCatalog() {
     try {
-        const response = await fetch('https://api.ardeco.app/catalog', {
-            method: 'GET',
+        const response = await fetch("https://api.ardeco.app/catalog", {
+            method: "GET",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json"
             },
-            credentials: 'include',
+            credentials: "include"
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch data');
+            throw new Error("Failed to fetch data");
         }
 
         const result = await response.json();
@@ -87,7 +77,7 @@ async function getCatalog() {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .container {
     padding: 20px;
 }
