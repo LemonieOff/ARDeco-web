@@ -768,6 +768,8 @@
     "galleryAlreadyReportedOrFailed": "Error : your already reported this gallery, or the report failed, please try again later.",
     "couldntAddFavorite": "Error : we coundl't add this element to your favorites, please try again later.",
     "couldntRemoveFavorite": "Error : we coundl't remove this element from your favorites, please try again later.",
+    "loginFailed": "Error: login failed, please check your email or password again.",
+    "registrationFailed": "Error: registration failed, please check your informations again.",
 
     "furnitureCreated": "Your furniture has been created successfully !",
     "informationsUpdated": "Informations updated",

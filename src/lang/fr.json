@@ -767,6 +767,8 @@
     "galleryAlreadyReportedOrFailed": "Erreur : cette galerie a déjà été signalée ou le signalement a échoué, veuillez réessayer plus tard.",
     "couldntAddFavorite": "Erreur : nous n'avons pas pu ajouter cet élement à vos favoris, veuillez réessayer plus tard.",
     "couldntRemoveFavorite": "Erreur : nous n'avons pas pu retirer cet élement de vos favoris, veuillez réessayer plus tard.",
+    "loginFailed": "Erreur: impossible de vous connecter, veuillez vérifier votre email ou votre mot de passe.",
+    "registrationFailed": "Erreur: impossible de créer votre compte, veuillez vérifier vos informations à nouveau.",
 
     "furnitureCreated": "Votre meuble a été créé avec succès !",
     "informationsUpdated": "Informations mises à jour.",

@@ -136,18 +136,23 @@
             </div>
         </div>
     </div>
+    <Notifications ref="notifications"/>
 </template>
 
 <script lang="ts" setup>
 import { isLogged, logout } from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 const nuxtApp = useNuxtApp();
 const content = ref(nuxtApp.$content.login);
+const notificationsContent = ref(nuxtApp.$content.notifications);
 const langPrefix = ref(nuxtApp.$langPrefix);
 const userID = ref<number | null>();
 const loading = ref(true);
 
 const activeForm = ref("login");
+
+const notifications = ref();
 
 const fieldEmail = useTemplateRef("fieldEmail");
 const fieldPassword = useTemplateRef("fieldPassword");
@@ -183,7 +188,10 @@ const validateLogin = (): Boolean => {
 };
 
 const login = async () => {
-    if (!validateLogin()) return;
+    if (!validateLogin()) {
+        notifications.value?.showError(notificationsContent.value.loginFailed);
+        return;
+    }
 
     const response = await fetch("https://api.ardeco.app/login", {
         method: "POST",
@@ -202,7 +210,7 @@ const login = async () => {
         localStorage.setItem("role", result.data["role"]);
         location.href = redirectUrl.value;
     } else {
-        // TODO : Add error logging to user
+        notifications.value?.showError(notificationsContent.value.loginFailed);
     }
 };
 
@@ -221,7 +229,10 @@ const validateRegister = (): Boolean => {
 };
 
 const register = async () => {
-    if (!validateRegister()) return;
+    if (!validateRegister()) {
+        notifications.value?.showError(notificationsContent.value.registrationFailed);
+        return;
+    }
 
     const response = await fetch("https://api.ardeco.app/register", {
         method: "POST",
@@ -249,7 +260,7 @@ const register = async () => {
         location.reload();
         location.href = redirectUrl.value;
     } else {
-        // TODO : Add error logging to user
+        notifications.value?.showError(notificationsContent.value.registrationFailed);
     }
 };
 
