@@ -21,6 +21,7 @@
     "profile": "Mon profil",
     "settings": "Paramètres",
     "company": "Entreprise",
+    "catalog": "Catalogue",
     "tickets": "Support",
     "darkmode": "Mode sombre",
     "lightmode": "Mode clair",
@@ -80,6 +81,7 @@
     "inAppPurchaseTitle": "Puis-je acheter des meubles depuis l'application ?",
     "inAppPurchaseText": "Oui. Notre objectif est de simplifier et d'accélérer la vie de l'utilisateur, et nous continuons dans cette direction en lui faisant gagner du temps pour se rendre sur les sites Web (ou en magasin) des marques, pour rechercher la référence, pour vérifier qu'il s'agit bien de la bonne pièce de mobilier, puis pour l'acheter. En effet, depuis l'application, il suffit d'appuyer sur \"Acheter\" sur un meuble ou d'appuyer sur \"Acheter tous les meubles\" et après avoir saisi le mode de paiement et l'adresse de livraison ou de retrait, l'application se chargera de contacter les marques et de faire les achats au nom de l'utilisateur.",
     "updatesHistoryTitle": "Historique des mises à jour de l'application mobile",
+    "updatesHistoryLoading": "Chargement des mises à jour en cours...",
     "updatesHistoryError": "Nous avons rencontré une erreur en récupérant les dernières informations de mises a jour, réessayez plus tard."
   },
   "footer": {
@@ -640,7 +642,7 @@
     "styles": "Styles",
     "roomType": "Type de pièce",
     "item": "Élément",
-    "noItems": "Aucun élément trouvé.",
+    "noItems": "Aucun meuble trouvé.",
     "action": "Action",
     "actions": "Actions",
     "actionSingOrPlu": "Action(s)",
@@ -656,7 +658,18 @@
     "archive": "Archiver",
     "restore": "Désarchiver",
     "hide": "Masquer",
-    "show": "Démasquer"
+    "show": "Démasquer",
+    "colorSing": "couleur",
+    "colorMul": "couleurs",
+    "styleSing": "style",
+    "styleMul": "styles",
+    "roomSing": "pièce",
+    "roomMul": "pièces",
+    "accessDetails": "Accéder aux détails",
+    "by": "par",
+    "inactive": "Meuble inactif",
+    "dimensions_legend": "(LxPxH)",
+    "fetch_error": "Erreur lors de la récupération du catalogue."
   },
   "feedback": {
     "title": "Donnez nous votre avis !",
@@ -767,7 +780,6 @@
     "galleryAlreadyReportedOrFailed": "Erreur : cette galerie a déjà été signalée ou le signalement a échoué, veuillez réessayer plus tard.",
     "couldntAddFavorite": "Erreur : nous n'avons pas pu ajouter cet élement à vos favoris, veuillez réessayer plus tard.",
     "couldntRemoveFavorite": "Erreur : nous n'avons pas pu retirer cet élement de vos favoris, veuillez réessayer plus tard.",
-
     "furnitureCreated": "Votre meuble a été créé avec succès !",
     "informationsUpdated": "Informations mises à jour.",
     "emptyGallery": "Votre galerie est actuellement vide.",
@@ -776,7 +788,6 @@
     "formSent": "Formulaire envoyé !",
     "galleryBelongToUser": "Cette galerie est votre création !",
     "reportSuccessful": "Signalement effectué avec succès !",
-
     "pleaseReportDetails": "Nous écrire en détail la raison de votre signalement nous aiderai beaucoup !"
   }
 }

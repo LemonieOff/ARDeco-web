@@ -21,6 +21,7 @@
     "profile": "My profile",
     "settings": "Settings",
     "company": "Company",
+    "catalog": "Catalog",
     "tickets": "Support",
     "darkmode": "Dark mode",
     "lightmode": "Light mode",
@@ -80,6 +81,7 @@
     "inAppPurchaseTitle": "Can I buy furniture from the app ?",
     "inAppPurchaseText": "Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user.",
     "updatesHistoryTitle": "Mobile app changelog (in French only)",
+    "updatesHistoryLoading": "Chargement des mises à jour en cours...",
     "updatesHistoryError": "There was an error trying to recover latest updates informations, please re-try later."
   },
   "footer": {
@@ -641,7 +643,7 @@
     "styles": "Styles",
     "roomType": "Room type",
     "item": "Item",
-    "noItems": "No item found.",
+    "noItems": "No furniture found.",
     "action": "Action",
     "actions": "Actions",
     "actionSingOrPlu": "Action(s)",
@@ -657,7 +659,18 @@
     "archive": "Archive",
     "restore": "Unarchive",
     "hide": "Hide",
-    "show": "Stop hidding"
+    "show": "Stop hiding",
+    "colorSing": "color",
+    "colorMul": "colors",
+    "styleSing": "style",
+    "styleMul": "styles",
+    "roomSing": "room",
+    "roomMul": "rooms",
+    "accessDetails": "Access details",
+    "by": "by",
+    "inactive": "Inactive furniture",
+    "dimensions_legend": "(WxDxH)",
+    "fetch_error": "Error occurred while fetching catalog."
   },
   "feedback": {
     "title": "Give us your opinion !",
@@ -768,7 +781,6 @@
     "galleryAlreadyReportedOrFailed": "Error : your already reported this gallery, or the report failed, please try again later.",
     "couldntAddFavorite": "Error : we coundl't add this element to your favorites, please try again later.",
     "couldntRemoveFavorite": "Error : we coundl't remove this element from your favorites, please try again later.",
-
     "furnitureCreated": "Your furniture has been created successfully !",
     "informationsUpdated": "Informations updated",
     "emptyGallery": "Your gallery is curently empty.",
@@ -777,7 +789,6 @@
     "formSent": "Form sent !",
     "galleryBelongToUser": "This gallery is your creation !",
     "reportSuccessful": "Report sent !",
-
     "pleaseReportDetails": "Writing in details the reason of your report would help us a lot !"
   }
 }
