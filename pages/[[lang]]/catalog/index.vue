@@ -88,29 +88,6 @@
     <p v-else class="text-center italic mt-5">
         {{ errorMessage === "" ? content.loading : errorMessage }}
     </p>
-
-    <div class="form">
-        <div class="grid">
-            <div class="grid-header">
-                <div class="grid-item">{{ content.name }}</div>
-                <div class="grid-item">{{ content.roomType }}</div>
-                <div class="grid-item">{{ content.styles }}</div>
-                <div class="grid-item">{{ content.actionSingOrPlu }}</div>
-            </div>
-            <div v-for="(item) in catalogData" class="grid-row">
-                <div v-if="item.active === true" class="grid-item">{{ item.name }}, {{
-                        item.company_name
-                    }}
-                </div>
-                <div v-if="item.active === true" class="grid-item">{{ item.rooms }}</div>
-                <div v-if="item.active === true" class="grid-item">{{ item.styles }}</div>
-                <div class="grid-item">
-                    <a v-if="item.active === true" :href="`${langPrefix}catalog/${item.id}`"
-                       class="custom-button">{{ content.details }}</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script lang="ts" setup>
