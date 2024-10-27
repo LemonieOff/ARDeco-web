@@ -22,6 +22,13 @@
                     {{ content.company }}
                 </NavbarMenuLink>
 
+                <NavbarMenuLink id="catalogMenuOption" :alt="content.catalog"
+                                :page-lang="langPrefix"
+                                image-src="images/icons/catalog.webp" page-name="lang-catalog"
+                                @click="menuToggle(false)">
+                    {{ content.catalog }}
+                </NavbarMenuLink>
+
                 <NavbarMenuLink v-if="userId" id="ticketsMenuOption" :alt="content.tickets" :page-lang="langPrefix"
                                 image-src="images/icons/support.webp"
                                 page-name="lang-tickets" @click="menuToggle(false)">

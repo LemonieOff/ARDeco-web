@@ -21,6 +21,7 @@
     "profile": "Mon profil",
     "settings": "Paramètres",
     "company": "Entreprise",
+    "catalog": "Catalogue",
     "tickets": "Support",
     "darkmode": "Mode sombre",
     "lightmode": "Mode clair",
@@ -767,7 +768,6 @@
     "galleryAlreadyReportedOrFailed": "Erreur : cette galerie a déjà été signalée ou le signalement a échoué, veuillez réessayer plus tard.",
     "couldntAddFavorite": "Erreur : nous n'avons pas pu ajouter cet élement à vos favoris, veuillez réessayer plus tard.",
     "couldntRemoveFavorite": "Erreur : nous n'avons pas pu retirer cet élement de vos favoris, veuillez réessayer plus tard.",
-
     "furnitureCreated": "Votre meuble a été créé avec succès !",
     "informationsUpdated": "Informations mises à jour.",
     "emptyGallery": "Votre galerie est actuellement vide.",
@@ -776,7 +776,6 @@
     "formSent": "Formulaire envoyé !",
     "galleryBelongToUser": "Cette galerie est votre création !",
     "reportSuccessful": "Signalement effectué avec succès !",
-
     "pleaseReportDetails": "Nous écrire en détail la raison de votre signalement nous aiderai beaucoup !"
   }
 }
