@@ -642,7 +642,7 @@
     "styles": "Styles",
     "roomType": "Type de pièce",
     "item": "Élément",
-    "noItems": "Aucun élément trouvé.",
+    "noItems": "Aucun meuble trouvé.",
     "action": "Action",
     "actions": "Actions",
     "actionSingOrPlu": "Action(s)",
@@ -658,7 +658,17 @@
     "archive": "Archiver",
     "restore": "Désarchiver",
     "hide": "Masquer",
-    "show": "Démasquer"
+    "show": "Démasquer",
+    "colorSing": "couleur",
+    "colorMul": "couleurs",
+    "styleSing": "style",
+    "styleMul": "styles",
+    "roomSing": "pièce",
+    "roomMul": "pièces",
+    "accessDetails": "Accéder aux détails",
+    "by": "par",
+    "inactive": "Meuble inactif",
+    "dimensions_legend": "(LxPxH)"
   },
   "feedback": {
     "title": "Donnez nous votre avis !",

@@ -643,7 +643,7 @@
     "styles": "Styles",
     "roomType": "Room type",
     "item": "Item",
-    "noItems": "No item found.",
+    "noItems": "No furniture found.",
     "action": "Action",
     "actions": "Actions",
     "actionSingOrPlu": "Action(s)",
@@ -659,7 +659,17 @@
     "archive": "Archive",
     "restore": "Unarchive",
     "hide": "Hide",
-    "show": "Stop hidding"
+    "show": "Stop hiding",
+    "colorSing": "color",
+    "colorMul": "colors",
+    "styleSing": "style",
+    "styleMul": "styles",
+    "roomSing": "room",
+    "roomMul": "rooms",
+    "accessDetails": "Access details",
+    "by": "by",
+    "inactive": "Inactive furniture",
+    "dimensions_legend": "(WxDxH)"
   },
   "feedback": {
     "title": "Give us your opinion !",
