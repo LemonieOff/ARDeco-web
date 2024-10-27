@@ -35,6 +35,13 @@
             </div>
         </div>
         <div class="right-side-parameters">
+            <div class="flex justify-center mb-4 space-x-4">
+                <div>Trier par : </div>
+                <div id="dateFilter" style="cursor: pointer;" @click="handleFilters('dateFilter'); filterByDate()">Ancienneté</div>
+                <div id="nameFilter" style="cursor: pointer;" @click="handleFilters('nameFilter'); filterByName()">Nom</div>
+                <div id="roomFilter" style="cursor: pointer;" @click="handleFilters('roomFilter'); filterByRoom()">Pièce</div>
+                <div id="styleFilter" style="cursor: pointer;" @click="handleFilters('styleFilter'); filterByStyle()">Style</div>
+            </div>
             <div class="centered bordered">
                 <table v-if="galleryData.length">
                     <thead>
@@ -84,6 +91,8 @@ export default {
         this.getGallery();
         let lang = this.urlLang
         console.log("lang :", lang)
+
+        document.getElementById('dateFilter').style.fontWeight = 'bold';
 
         if (lang !== 'en' && lang !== 'fr') {
             if (localStorage.getItem('lang')) {
@@ -191,9 +200,56 @@ export default {
                 this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
         },
+
         async redirectToGallery(galleryId) {
             this.$router.push(`${this.langPrefix}gallery/` + galleryId);
-        }
+        },
+
+        async handleFilters(id) {
+            const dateFilter = document.getElementById('dateFilter');
+            const nameFilter = document.getElementById('nameFilter');
+            const roomFilter = document.getElementById('roomFilter');
+            const styleFilter = document.getElementById('styleFilter');
+            const div = document.getElementById(id);
+
+            if (id === "dateFilter") {
+                div.style.fontWeight = 'bold';
+                nameFilter.style.fontWeight = 'normal';
+                roomFilter.style.fontWeight = 'normal';
+                styleFilter.style.fontWeight = 'normal';
+            } else if (id === "nameFilter") {
+                div.style.fontWeight = 'bold';
+                dateFilter.style.fontWeight = 'normal';
+                roomFilter.style.fontWeight = 'normal';
+                styleFilter.style.fontWeight = 'normal';
+            } else if (id === "roomFilter") {
+                div.style.fontWeight = 'bold';
+                dateFilter.style.fontWeight = 'normal';
+                nameFilter.style.fontWeight = 'normal';
+                styleFilter.style.fontWeight = 'normal';
+            } else if (id === "styleFilter") {
+                div.style.fontWeight = 'bold';
+                dateFilter.style.fontWeight = 'normal';
+                nameFilter.style.fontWeight = 'normal';
+                roomFilter.style.fontWeight = 'normal';
+            }
+        },
+
+        async filterByDate() {
+            return this.galleryData.sort((a, b) => a.id - b.id);
+        },
+
+        async filterByName() {
+            this.galleryData.sort((a, b) => a.name.localeCompare(b.name));
+        },
+
+        async filterByRoom() {
+            this.galleryData.sort((a, b) => a.room.localeCompare(b.room));
+        },
+
+        async filterByStyle() {
+            this.galleryData.sort((a, b) => a.room.localeCompare(b.room));
+        },
     }
 }
 </script>
