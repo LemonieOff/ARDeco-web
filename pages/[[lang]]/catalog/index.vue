@@ -136,25 +136,22 @@ async function checkLogin() {
 }
 
 async function getCatalog() {
-    try {
-        const response = await fetch("https://api.ardeco.app/catalog", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include"
-        });
+    const response = await fetch("https://api.ardeco.app/catalog", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    });
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch data");
-        }
-
-        const result = await response.json();
-        catalogData.value = result.data;
-    } catch (error) {
-        console.error(error.message);
-        errorMessage.value = error.message;
+    if (!response.ok) {
+        console.error("Failed to fetch data");
+        errorMessage.value = "Failed to fetch data";
+        return;
     }
+
+    const result = await response.json();
+    catalogData.value = result.data;
 }
 </script>
 
