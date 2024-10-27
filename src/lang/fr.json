@@ -307,7 +307,12 @@
       "notificationsActive": "Notifications actives",
       "publicLastName": "Nom de famille publique",
       "publicEmailAddress": "Adresse email publique",
-      "newGalleries": "Nouvelles galleries publiques"
+      "newGalleries": "Nouvelles galleries publiques",
+      "sortBy": "Trier par : ",
+      "dateFilter": "Ancienneté",
+      "nameFilter": "Nom",
+      "roomFilter": "Pièce",
+      "styleFilter": "Style"
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",

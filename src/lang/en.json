@@ -308,7 +308,12 @@
       "notificationsActive": "Notifications active",
       "publicLastName": "Last name is public",
       "publicEmailAddress": "Email is public",
-      "newGalleries": "New galleries"
+      "newGalleries": "New galleries",
+      "sortBy": "Sort by : ",
+      "dateFilter": "Date",
+      "nameFilter": "Name",
+      "roomFilter": "Room",
+      "styleFilter": "Style"
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",

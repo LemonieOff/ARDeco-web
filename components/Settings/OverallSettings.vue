@@ -36,11 +36,11 @@
         </div>
         <div class="right-side-parameters">
             <div class="flex justify-center mb-4 space-x-4">
-                <div>Trier par : </div>
-                <div id="dateFilter" style="cursor: pointer;" @click="handleFilters('dateFilter'); filterByDate()">Ancienneté</div>
-                <div id="nameFilter" style="cursor: pointer;" @click="handleFilters('nameFilter'); filterByName()">Nom</div>
-                <div id="roomFilter" style="cursor: pointer;" @click="handleFilters('roomFilter'); filterByRoom()">Pièce</div>
-                <div id="styleFilter" style="cursor: pointer;" @click="handleFilters('styleFilter'); filterByStyle()">Style</div>
+                <div style="font-weight: bold;">{{ content.sortBy }}</div>
+                <div id="dateFilter" style="cursor: pointer;" @click="handleFilters('dateFilter'); filterByDate()">{{ content.dateFilter }}</div>
+                <div id="nameFilter" style="cursor: pointer;" @click="handleFilters('nameFilter'); filterByName()">{{ content.nameFilter }}</div>
+                <div id="roomFilter" style="cursor: pointer;" @click="handleFilters('roomFilter'); filterByRoom()">{{ content.roomFilter }}</div>
+                <div id="styleFilter" style="cursor: pointer;" @click="handleFilters('styleFilter'); filterByStyle()">{{ content.styleFilter }}</div>
             </div>
             <div class="centered bordered">
                 <table v-if="galleryData.length">
