@@ -81,6 +81,7 @@
     "inAppPurchaseTitle": "Puis-je acheter des meubles depuis l'application ?",
     "inAppPurchaseText": "Oui. Notre objectif est de simplifier et d'accélérer la vie de l'utilisateur, et nous continuons dans cette direction en lui faisant gagner du temps pour se rendre sur les sites Web (ou en magasin) des marques, pour rechercher la référence, pour vérifier qu'il s'agit bien de la bonne pièce de mobilier, puis pour l'acheter. En effet, depuis l'application, il suffit d'appuyer sur \"Acheter\" sur un meuble ou d'appuyer sur \"Acheter tous les meubles\" et après avoir saisi le mode de paiement et l'adresse de livraison ou de retrait, l'application se chargera de contacter les marques et de faire les achats au nom de l'utilisateur.",
     "updatesHistoryTitle": "Historique des mises à jour de l'application mobile",
+    "updatesHistoryLoading": "Chargement des mises à jour en cours...",
     "updatesHistoryError": "Nous avons rencontré une erreur en récupérant les dernières informations de mises a jour, réessayez plus tard."
   },
   "footer": {
