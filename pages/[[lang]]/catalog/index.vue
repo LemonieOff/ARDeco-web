@@ -145,8 +145,8 @@ async function getCatalog() {
     });
 
     if (!response.ok) {
-        console.error("Failed to fetch data");
-        errorMessage.value = "Failed to fetch data";
+        console.error(response);
+        errorMessage.value = content.fetch_error;
         return;
     }
 

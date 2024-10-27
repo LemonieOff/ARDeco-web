@@ -668,7 +668,8 @@
     "accessDetails": "Accéder aux détails",
     "by": "par",
     "inactive": "Meuble inactif",
-    "dimensions_legend": "(LxPxH)"
+    "dimensions_legend": "(LxPxH)",
+    "fetch_error": "Erreur lors de la récupération du catalogue."
   },
   "feedback": {
     "title": "Donnez nous votre avis !",

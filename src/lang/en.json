@@ -669,7 +669,8 @@
     "accessDetails": "Access details",
     "by": "by",
     "inactive": "Inactive furniture",
-    "dimensions_legend": "(WxDxH)"
+    "dimensions_legend": "(WxDxH)",
+    "fetch_error": "Error occurred while fetching catalog."
   },
   "feedback": {
     "title": "Give us your opinion !",
