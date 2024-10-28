@@ -50,10 +50,18 @@
         <div>
             <div class="flex justify-center mb-4 space-x-4">
                 <div style="font-weight: bold;">{{ content.sortBy }}</div>
-                <div id="dateFilter" style="cursor: pointer;" @click="handleFilters('dateFilter'); filterByDate()">{{ content.dateFilter }}</div>
-                <div id="nameFilter" style="cursor: pointer;" @click="handleFilters('nameFilter'); filterByName()">{{ content.nameFilter }}</div>
-                <div id="roomFilter" style="cursor: pointer;" @click="handleFilters('roomFilter'); filterByRoom()">{{ content.roomFilter }}</div>
-                <div id="styleFilter" style="cursor: pointer;" @click="handleFilters('styleFilter'); filterByStyle()">{{ content.styleFilter }}</div>
+                <div id="dateFilter" style="cursor: pointer;" @click="handleFilters('dateFilter'); filterByDate()">
+                    {{ content.dateFilter }}
+                </div>
+                <div id="nameFilter" style="cursor: pointer;" @click="handleFilters('nameFilter'); filterByName()">
+                    {{ content.nameFilter }}
+                </div>
+                <div id="roomFilter" style="cursor: pointer;" @click="handleFilters('roomFilter'); filterByRoom()">
+                    {{ content.roomFilter }}
+                </div>
+                <div id="styleFilter" style="cursor: pointer;" @click="handleFilters('styleFilter'); filterByStyle()">
+                    {{ content.styleFilter }}
+                </div>
             </div>
             <table v-if="galleryData.length" class="w-96 border-[1px] rounded-md border-spacing-0 border-separate">
                 <thead>
@@ -250,7 +258,7 @@ export default {
         },
 
         async filterByStyle() {
-            this.galleryData.sort((a, b) => a.room.localeCompare(b.room));
+            this.galleryData.sort((a, b) => a.style.localeCompare(b.style));
         }
     }
 };
