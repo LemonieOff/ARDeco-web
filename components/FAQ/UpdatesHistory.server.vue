@@ -18,7 +18,7 @@
                 </ul>
             </div>
         </div>
-        <p v-else class="text-center"> {{ content.updatesHistoryError }} </p>
+        <p v-else class="text-center"> {{ error }} </p>
     </div>
 </template>
 
@@ -34,6 +34,8 @@ const updatesData = ref<{
 }[]>([]);
 const content = nuxtApp.$content.productPages;
 
+const error = ref(content.updatesHistoryLoading);
+
 onMounted(async () => {
     await getUpdates();
 });
@@ -48,7 +50,9 @@ async function getUpdates() {
     });
 
     if (!response.ok) {
+        error.value = content.updatesHistoryError;
         console.error("Error while fetching changelog", response.status, response);
+        return;
     }
 
     const result: {
@@ -70,6 +74,6 @@ async function getUpdates() {
             changelog: item.changelog.split("\n")
         };
     });
-    console.log(updatesData);
+    console.debug(updatesData);
 }
 </script>
