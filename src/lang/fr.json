@@ -309,7 +309,12 @@
       "notificationsActive": "Notifications actives",
       "publicLastName": "Nom de famille publique",
       "publicEmailAddress": "Adresse email publique",
-      "newGalleries": "Nouvelles galleries publiques"
+      "newGalleries": "Nouvelles galleries publiques",
+      "sortBy": "Trier par : ",
+      "dateFilter": "Ancienneté",
+      "nameFilter": "Nom",
+      "roomFilter": "Pièce",
+      "styleFilter": "Style"
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",
@@ -618,7 +623,7 @@
       "styles": "Style(s)",
       "colors": "Couleur(s)",
       "width": "Largeur (cm)",
-      "height": "Longeur (cm)",
+      "height": "Longueur (cm)",
       "depth": "Hauteur (cm)",
       "actions": "Actions",
       "catalog": "Catalogue",
@@ -780,6 +785,8 @@
     "galleryAlreadyReportedOrFailed": "Erreur : cette galerie a déjà été signalée ou le signalement a échoué, veuillez réessayer plus tard.",
     "couldntAddFavorite": "Erreur : nous n'avons pas pu ajouter cet élement à vos favoris, veuillez réessayer plus tard.",
     "couldntRemoveFavorite": "Erreur : nous n'avons pas pu retirer cet élement de vos favoris, veuillez réessayer plus tard.",
+    "loginFailed": "Erreur: impossible de vous connecter, veuillez vérifier votre email ou votre mot de passe.",
+    "registrationFailed": "Erreur: impossible de créer votre compte, veuillez vérifier vos informations à nouveau.",
     "furnitureCreated": "Votre meuble a été créé avec succès !",
     "informationsUpdated": "Informations mises à jour.",
     "emptyGallery": "Votre galerie est actuellement vide.",

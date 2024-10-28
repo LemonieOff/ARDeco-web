@@ -105,10 +105,8 @@ export default {
                 location.href = this.langPrefix + "login";
             }
 
-            const value = document.getElementById('commentInput').value;
-            const textContent = document.getElementById('commentInput').textContent;
-            console.log("value :", value)
-            console.log("textContent :", textContent)
+            const textInput = document.getElementById('commentInput');
+            const value = textInput.value;
             const response = await fetch('https://api.ardeco.app/gallery/' + `${this.galleryId}` + '/comments', {
                 method: 'POST',
                 headers: {
@@ -125,6 +123,7 @@ export default {
             if (result.code !== 201) {
                 this.notifications.showError(this.notificationMessages.failedToPostComment);
             } else {
+                textInput.value = "";
                 await this.getComments()
             }
             console.log("POST :", result);

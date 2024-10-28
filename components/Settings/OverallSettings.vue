@@ -47,25 +47,42 @@
                 </button>
             </div>
         </div>
-        <table v-if="galleryData.length" class="w-96 border-[1px] rounded-md border-spacing-0 border-separate">
-            <thead>
-            <tr>
-                <th class="p-2.5">{{ content.name }}</th>
-                <th class="p-2.5">{{ content.room }}</th>
-                <th class="p-2.5">{{ content.style }}</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr v-for="gallery in galleryData" :key="gallery.id"
-                    class="cursor-pointer odd:dark:bg-AR-Grey odd:bg-AR-Floral-White"
-                    @click="redirectToGallery(gallery.id)">
-                    <td class="p-2.5">{{ gallery.name }}</td>
-                    <td class="p-2.5">{{ gallery.room }}</td>
-                    <td class="p-2.5">{{ gallery.style }}</td>
+        <div>
+            <div class="flex justify-center mb-4 space-x-4">
+                <div style="font-weight: bold;">{{ content.sortBy }}</div>
+                <div id="dateFilter" style="cursor: pointer;" @click="handleFilters('dateFilter'); filterByDate()">
+                    {{ content.dateFilter }}
+                </div>
+                <div id="nameFilter" style="cursor: pointer;" @click="handleFilters('nameFilter'); filterByName()">
+                    {{ content.nameFilter }}
+                </div>
+                <div id="roomFilter" style="cursor: pointer;" @click="handleFilters('roomFilter'); filterByRoom()">
+                    {{ content.roomFilter }}
+                </div>
+                <div id="styleFilter" style="cursor: pointer;" @click="handleFilters('styleFilter'); filterByStyle()">
+                    {{ content.styleFilter }}
+                </div>
+            </div>
+            <table v-if="galleryData.length" class="w-96 border-[1px] rounded-md border-spacing-0 border-separate">
+                <thead>
+                <tr>
+                    <th class="p-2.5">{{ content.name }}</th>
+                    <th class="p-2.5">{{ content.room }}</th>
+                    <th class="p-2.5">{{ content.style }}</th>
                 </tr>
-            </tbody>
-        </table>
-        <p v-else>{{ content.galleryIsEmpty }}</p>
+                </thead>
+                <tbody>
+                    <tr v-for="gallery in galleryData" :key="gallery.id"
+                        class="cursor-pointer odd:dark:bg-AR-Grey odd:bg-AR-Floral-White"
+                        @click="redirectToGallery(gallery.id)">
+                        <td class="p-2.5">{{ gallery.name }}</td>
+                        <td class="p-2.5">{{ gallery.room }}</td>
+                        <td class="p-2.5">{{ gallery.style }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p v-else>{{ content.galleryIsEmpty }}</p>
+        </div>
     </div>
     <Notifications ref="notifications" />
 </template>
@@ -93,6 +110,7 @@ export default {
     },
     mounted() {
         this.getGallery();
+        document.getElementById("dateFilter").style.fontWeight = "bold";
         this.getSettings();
     },
     methods: {
@@ -192,8 +210,55 @@ export default {
                 this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
         },
+
         async redirectToGallery(galleryId) {
             this.$router.push(`${this.langPrefix}gallery/` + galleryId);
+        },
+
+        async handleFilters(id) {
+            const dateFilter = document.getElementById("dateFilter");
+            const nameFilter = document.getElementById("nameFilter");
+            const roomFilter = document.getElementById("roomFilter");
+            const styleFilter = document.getElementById("styleFilter");
+            const div = document.getElementById(id);
+
+            if (id === "dateFilter") {
+                div.style.fontWeight = "bold";
+                nameFilter.style.fontWeight = "normal";
+                roomFilter.style.fontWeight = "normal";
+                styleFilter.style.fontWeight = "normal";
+            } else if (id === "nameFilter") {
+                div.style.fontWeight = "bold";
+                dateFilter.style.fontWeight = "normal";
+                roomFilter.style.fontWeight = "normal";
+                styleFilter.style.fontWeight = "normal";
+            } else if (id === "roomFilter") {
+                div.style.fontWeight = "bold";
+                dateFilter.style.fontWeight = "normal";
+                nameFilter.style.fontWeight = "normal";
+                styleFilter.style.fontWeight = "normal";
+            } else if (id === "styleFilter") {
+                div.style.fontWeight = "bold";
+                dateFilter.style.fontWeight = "normal";
+                nameFilter.style.fontWeight = "normal";
+                roomFilter.style.fontWeight = "normal";
+            }
+        },
+
+        async filterByDate() {
+            return this.galleryData.sort((a, b) => a.id - b.id);
+        },
+
+        async filterByName() {
+            this.galleryData.sort((a, b) => a.name.localeCompare(b.name));
+        },
+
+        async filterByRoom() {
+            this.galleryData.sort((a, b) => a.room.localeCompare(b.room));
+        },
+
+        async filterByStyle() {
+            this.galleryData.sort((a, b) => a.style.localeCompare(b.style));
         }
     }
 };
