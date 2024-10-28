@@ -21,6 +21,7 @@
     "profile": "My profile",
     "settings": "Settings",
     "company": "Company",
+    "catalog": "Catalog",
     "tickets": "Support",
     "darkmode": "Dark mode",
     "lightmode": "Light mode",
@@ -78,7 +79,10 @@
     "whyUseArdecoTitle": "Why should I use ARDeco ?",
     "whyUseArdecoText": "The project therefore saves time when furnishing your room. Thanks to the budget and style selection, the scanning of the room to capture the dimensions of the walls and furniture (if present in the room) and the AI previously described which retrieves furniture corresponding to the criteria and dimensions then pose, saving user time and agent. Another improvement that the project brings to the user is that he is sure of the final rendering of his room and will not be disappointed, since he can visualize in augmented reality in his room the final arrangement, and even carry out tests to be sure.",
     "inAppPurchaseTitle": "Can I buy furniture from the app ?",
-    "inAppPurchaseText": "Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user."
+    "inAppPurchaseText": "Yes. Our goal is to make life simpler and faster for the user, and we continue in this direction by saving him the time to go to the websites (or in-store) of the brands, to look for the reference, to check that it is indeed the right piece of furniture and then to buy it. Indeed, from the application, simply press \"Buy\" on a piece of furniture or press \"Buy all furniture\" and after having entered the payment method and the delivery or collection address, the The application will take care of contacting the brands and making purchases on behalf of the user.",
+    "updatesHistoryTitle": "Mobile app changelog (in French only)",
+    "updatesHistoryLoading": "Chargement des mises à jour en cours...",
+    "updatesHistoryError": "There was an error trying to recover latest updates informations, please re-try later."
   },
   "footer": {
     "stayTuned": "Stay tuned",
@@ -183,37 +187,78 @@
     "mandatoryFields": "Mandatory fields",
     "consent": "I consent to the processing of my personal data as described in our Privacy Policy",
     "hasRead": "I have read and accept the Terms of Use",
-    "consentNotGiven": "You must consent to the Terms of Use and Privacy Policy to continue."
+    "agreement": "I agree and consent to the",
+    "agreementPrivacy": [
+      "I agree and consent to the",
+      "Privacy Policy"
+    ],
+    "agreementCgu": [
+      "I agree and consent to the",
+      "Terms of Service"
+    ],
+    "consentNotGiven": "You must consent to the Terms of Use and Privacy Policy to continue.",
+    "placeholders": {
+      "email": "Enter your email",
+      "password": "Enter your password",
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name",
+      "city": "Enter your city",
+      "phone": "Enter your phone"
+    },
+    "rememberMe": "Remember me"
   },
   "profile": {
-    "yourFavoriteThemes": "My favorites themes",
-    "yourRecentPurchaces": "My recent purchases",
-    "yourFavoriteFurnitures": "My favorites furnitures",
-    "yourFavoriteGalleries": "My favorites galleries",
-    "gallery": "Public gallery",
+    "gallery": {
+      "personal": "Personal designs",
+      "public": "Public designs"
+    },
+    "favorite": {
+      "gallery": "Favorite designs",
+      "furniture": "Favorite furniture"
+    },
     "blockedUsers": "Blocked users",
+    "title": {
+      "personalInformation": "Personal information",
+      "galleries": "Designs",
+      "favorites": "Favorites",
+      "orders": "Orders",
+      "changePassword": "Change password",
+      "confidentiality": "Privacy"
+    },
     "informations": {
       "firstName": "First name : ",
       "lastName": "Last name : ",
       "email": "Email : ",
       "phone": "Phone : ",
       "city": "City : ",
-      "savedItems": "Saved items in gallery : ",
       "commandsOrdered": "Ordered command(s) : ",
       "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)",
-      "role": "Role : "
+      "role": "Account type : ",
+      "password": "Password : "
     },
+    "orderHistory": "Order history",
+    "orderSing": "order",
+    "orderMul": "orders",
     "loading": "Loading...",
     "buttons": {
       "cancel": "Cancel",
       "update": "Update settings",
       "confirm": "Confirm",
       "delete": "Delete account",
-      "reset": "Reset"
+      "reset": "Reset",
+      "access": "Access"
     },
     "picture": {
       "infoText": "If no image is selected, the image will be reset to the default one.",
       "confirmText": "Changes take effect only upon confirmation."
+    },
+    "placeholders": {
+      "email": "Enter your email",
+      "password": "New password",
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name",
+      "city": "Enter your city",
+      "phone": "Enter your phone"
     }
   },
   "blockedUsers": {
@@ -250,31 +295,52 @@
       "getUserSettings": "Get user settings",
       "setUserSettings": "Set user settings",
       "getUserGallery": "Get user gallery",
-      "currentUserSettingsTitle" : "Your current settings",
-      "language" : "Language",
-      "title" : "Settings"
+      "currentUserSettingsTitle": "Your current settings",
+      "language": "Language",
+      "notifications": "Notifications",
+      "title": "Settings",
+      "yes": "Yes",
+      "no": "No",
+      "french": "French",
+      "english": "English",
+      "name": "Name",
+      "room": "Room",
+      "style": "Style",
+      "galleryIsEmpty": "Your haven't created a gallery yet, make one using our mobile app !",
+      "notificationsActive": "Notifications active",
+      "publicLastName": "Last name is public",
+      "publicEmailAddress": "Email is public",
+      "newGalleries": "New galleries",
+      "sortBy": "Sort by : ",
+      "dateFilter": "Date",
+      "nameFilter": "Name",
+      "roomFilter": "Room",
+      "styleFilter": "Style"
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",
+      "modifyFurniture": "Modify my furniture",
       "changeGalleryVisibility": "Change gallery item visibility",
-      "getCompagnyCatalog": "Get compagny catalog",
-      "getCompagnyArchive": "Get compagny archive",
-      "emptyCompagnyArchive": "Empty compagny archive",
+      "getCompagnyCatalog": "Get company catalog",
+      "getCompagnyArchive": "Get company archive",
+      "emptyCompagnyArchive": "Empty company archive",
       "archiveItem": "Archive item",
       "deleteItem": "Delete single item",
       "restoreItemFromArchive": "Restore item from archive",
       "resetCompagnyApiKey": "Reset company API key",
-      "title" : "Company settings",
+      "title": "Company settings",
+      "titleCreateFurniture": "Create your new furniture !",
+      "titleModifyFurniture": "Modify your furniture !",
       "placeholders": {
-        "furnitureName" : "Furniture name",
-        "furniturePrice" : "Furniture price",
-        "furnitureStyles" : "Furniture styles",
-        "furnitureRooms" : "Furniture rooms",
-        "furnitureHeight" : "Furniture height",
-        "furnitureWidth" : "Furniture width",
-        "furnitureDepth" : "Furniture depths",
-        "furnitureColors" : "Furniture colors",
-        "itemInputID" : "Item ID"
+        "furnitureName": "Furniture name",
+        "furniturePrice": "Furniture price",
+        "furnitureStyles": "Furniture styles",
+        "furnitureRooms": "Furniture rooms",
+        "furnitureHeight": "Furniture height",
+        "furnitureWidth": "Furniture width",
+        "furnitureDepth": "Furniture depths",
+        "furnitureColors": "Furniture colors",
+        "itemInputID": "Item ID"
       }
     }
   },
@@ -288,7 +354,7 @@
     "pendingTickets": "Awaiting issues",
     "createTicket": "Create an issue",
     "updateTicket": "Update my issue",
-    "typeYourTextHere": "Type yout message here",
+    "typeYourTextHere": "Type your message here",
     "youCantReplyToAClosedTicket": "You can't reply to a closed ticket",
     "send": "SEND",
     "close": "CLOSE",
@@ -395,7 +461,7 @@
       "responsibility": "The User is responsible for any content he publishes. The User undertakes to only publish content for which he has the necessary rights.",
       "moderation": "The Service reserves the right to moderate or delete any content published by the User at any time and without notice or justification.",
       "data": "The User is informed and accepts that the implementation of the Service requires that his personal data be transmitted to third parties.",
-      "availability": "The Service strives to provide the Service 24 hours a day, 7 days a week. In the event of an interruption, the Service will endeavor to communicate to Users in advance the dates and times of the intervention." ,
+      "availability": "The Service strives to provide the Service 24 hours a day, 7 days a week. In the event of an interruption, the Service will endeavor to communicate to Users in advance the dates and times of the intervention.",
       "responsibility2": "The Publisher cannot be held responsible for any direct or indirect damage caused to the User's equipment when accessing the Service.",
       "cookies": "The Service may use cookies. In this case, the Service informs the User of the possibility of deactivating cookies from their browser settings.",
       "proprietary": "The Service and its content (texts, images, sounds, videos, etc.) are the exclusive property of the Publisher.",
@@ -478,28 +544,40 @@
   },
   "favorite": {
     "furniture": {
-
+      "title": "Favorite furniture",
+      "loading": "Loading...",
+      "colorSing": "color",
+      "colorMul": "colors",
+      "styleSing": "style",
+      "styleMul": "styles",
+      "roomSing": "room",
+      "roomMul": "rooms",
+      "noItems": "No favorite furniture found.",
+      "delete": "Delete",
+      "accessDetails": "Access details",
+      "by": "by",
+      "inactive": "Inactive furniture"
     },
     "gallery": {
-      "title": "Favorite galleries (designs)",
+      "title": "Favorite designs",
       "loading": "Loading...",
-      "id": "ID",
       "name": "Name",
       "description": "Description",
       "firstName": "First name",
       "lastName": "Last name",
       "date": "Date",
       "author": "Author",
-      "furnitureTable": "Furniture",
-      "roomType": "Room type",
+      "furnitureSing": "furniture",
+      "furnitureMul": "furniture",
+      "by": "by",
+      "room": "Room",
       "item": "Item",
-      "noItems": "No items found.",
-      "action": "Action",
-      "actions": "Actions",
-      "actionSingOrPlu": "Action(s)",
+      "noItems": "No favorite design found.",
       "delete": "Delete",
       "deleteAll": "Delete all",
-      "blockUser": "Block user"
+      "blockUser": "Block user",
+      "blockedUser": "Blocked user",
+      "accessDetails": "Access details"
     }
   },
   "gallery": {
@@ -531,7 +609,11 @@
     "hide": "Hide",
     "confirm": "Confirm",
     "blockUser": "Block user",
-    "textReportEncouragement": "Although providing a reason for the report is optional, it is highly recommended. By giving us details about the issue, you help us better understand the situation and address your report as quickly as possible. We appreciate your cooperation and assistance in improving our website."
+    "by": "by",
+    "furnitureSing": "furniture",
+    "furnitureMul": "furniture",
+    "accessDetails": "Access details",
+    "you": "It's you"
   },
   "catalog": {
     "myCompany": "My company",
@@ -553,7 +635,9 @@
       "resetCompagnyApiKey": "Reset API key",
       "createNewFurniture": "Create a new furniture",
       "private": "Private",
-      "public": "Public"
+      "public": "Public",
+      "restore": "Restore",
+      "delete": "Delete"
     },
     "archiveTitle": "Archive",
     "title": "Catalog",
@@ -564,7 +648,7 @@
     "styles": "Styles",
     "roomType": "Room type",
     "item": "Item",
-    "noItems": "No item found.",
+    "noItems": "No furniture found.",
     "action": "Action",
     "actions": "Actions",
     "actionSingOrPlu": "Action(s)",
@@ -573,13 +657,25 @@
     "dimensions": "Dimensions (cm): ",
     "addToCart": "Add to cart",
     "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites",
     "available": "Available",
     "unavailable": "Unavailable",
     "goBack": "Go back",
     "archive": "Archive",
     "restore": "Unarchive",
     "hide": "Hide",
-    "show": "Stop hidding"
+    "show": "Stop hiding",
+    "colorSing": "color",
+    "colorMul": "colors",
+    "styleSing": "style",
+    "styleMul": "styles",
+    "roomSing": "room",
+    "roomMul": "rooms",
+    "accessDetails": "Access details",
+    "by": "by",
+    "inactive": "Inactive furniture",
+    "dimensions_legend": "(WxDxH)",
+    "fetch_error": "Error occurred while fetching catalog."
   },
   "feedback": {
     "title": "Give us your opinion !",
@@ -597,5 +693,109 @@
   "comments": {
     "user": "User",
     "writePlaceholder": "Write a comment"
+  },
+  "values": {
+    "colors": {
+      "red": "Red",
+      "orange": "Orange",
+      "yellow": "Yellow",
+      "green": "Green",
+      "blue": "Blue",
+      "purple": "Purple",
+      "pink": "Pink",
+      "brown": "Brown",
+      "black": "Black",
+      "white": "White",
+      "grey": "Grey",
+      "beige": "Beige",
+      "turquoise": "Turquoise",
+      "gold": "Gold",
+      "silver": "Silver",
+      "olive": "Olive",
+      "navy": "Navy",
+      "teal": "Teal",
+      "ivory": "Ivory"
+    },
+    "rooms": {
+      "living_room": "Living room",
+      "kitchen": "Kitchen",
+      "dining_room": "Dining room",
+      "bedroom": "Bedroom",
+      "bathroom": "Bathroom",
+      "office": "Office",
+      "guest_room": "Guest room",
+      "gaming_room": "Gaming room",
+      "library": "Library",
+      "hallway": "Hallway",
+      "laundry_room": "Laundry room",
+      "balcony": "Balcony",
+      "patio": "Patio",
+      "garden": "Garden",
+      "family_room": "Family room",
+      "attic": "Attic",
+      "garage": "Garage",
+      "pantry": "Pantry"
+    },
+    "styles": {
+      "modern": "Modern",
+      "scandinavian": "Scandinavian",
+      "industrial": "Industrial",
+      "traditional": "Traditional",
+      "contemporary": "Contemporary",
+      "rustic": "Rustic",
+      "bohemian": "Bohemian",
+      "coastal": "Coastal",
+      "farmhouse": "Farmhouse",
+      "minimalist": "Minimalist",
+      "art_deco": "Art deco",
+      "french_country": "French country",
+      "shabby_chic": "Shabby chic",
+      "metal": "Metal",
+      "retro": "Retro",
+      "classic": "Classic",
+      "romantic": "Romantic",
+      "gothic": "Gothic",
+      "victorian": "Victorian",
+      "asian": "Asian",
+      "african": "African",
+      "bauhaus": "Bauhaus",
+      "baroque": "Baroque"
+    },
+    "roles": {
+      "client": "Client",
+      "company": "Company",
+      "pro": "Professional",
+      "admin": "Administrator"
+    }
+  },
+  "notifications": {
+    "infoNotReceived": "Error: we couldn't receive some of the page's informations, please try again later.",
+    "failedToPostComment": "Error: we couldn't post your comment, please try again later.",
+    "failedToDeleteComment": "Error: we couldn't delete your comment, please try again later.",
+    "failedToModifyComment": "Error: we couldn't modify your comment, please try again later.",
+    "missingInformations": "Error: you didn't fill all the required informations, please try again.",
+    "furnitureCreationFailed": "Error : something went wrong when creating your furniture, please try again later.",
+    "informationsUpdateFailed": "Error : we couldn't update your informations, please try again later.",
+    "resetApiKey": "Please reset your API key in your settings.",
+    "ticketCreationFailed": "Error : we failed to create your ticket, please try again later.",
+    "ticketClosureFailed": "Error : we failed to close your ticket, please try again later.",
+    "failedToSendForm": "Error : we failed to send your form, please try again later.",
+    "passwordCantBeEmpty": "Error : password can't be empty.",
+    "cannotFindFurniture": "Error : we couldn't find this furniture, are you certain it's the right ID ?",
+    "couldntLikeOrDislike": "Error : we couldn't like or dislike this gallery, please try again later.",
+    "galleryAlreadyReportedOrFailed": "Error : your already reported this gallery, or the report failed, please try again later.",
+    "couldntAddFavorite": "Error : we couldn't add this element to your favorites, please try again later.",
+    "couldntRemoveFavorite": "Error : we couldn't remove this element from your favorites, please try again later.",
+    "loginFailed": "Error: login failed, please check your email or password again.",
+    "registrationFailed": "Error: registration failed, please check your informations again.",
+    "furnitureCreated": "Your furniture has been created successfully !",
+    "informationsUpdated": "Informations updated",
+    "emptyGallery": "Your gallery is currently empty.",
+    "ticketSuccessfullyCreated": "Ticket successfully created !",
+    "ticketSuccessfullyClosed": "Ticket successfully closed.",
+    "formSent": "Form sent !",
+    "galleryBelongToUser": "This gallery is your creation !",
+    "reportSuccessful": "Report sent !",
+    "pleaseReportDetails": "Writing in details the reason of your report would help us a lot !"
   }
 }

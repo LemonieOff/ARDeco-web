@@ -5,64 +5,70 @@
         <div class="profile-wrapper">
             <div class="profile-elements-wrapper">
                 <div class="element">{{ content.email }}</div>
-                <input class="element2" type="email" id="email" :placeholder="`${placeholders.email}`"/>
+                <input id="email" ref="fieldEmail" :placeholder="`${content.placeholders.email}`" class="element2"
+                       type="email" />
             </div>
             <div class="profile-elements-wrapper">
                 <div class="element">{{ content.password }}</div>
-                <input class="element2" type="password" id="password" :placeholder="`${placeholders.password}`"/>
+                <input id="password" ref="fieldPassword" :placeholder="`${content.placeholders.password}`"
+                       class="element2"
+                       type="password" />
             </div>
             <div class="profile-elements-wrapper">
                 <div class="element">{{ content.passwordConfirm }}</div>
-                <input class="element2" type="password" id="passwordConfirm" :placeholder="`${placeholders.passwordConfirm}`"/>
+                <input id="passwordConfirm" ref="fieldPasswordConfirm"
+                       :placeholder="`${content.placeholders.passwordConfirm}`"
+                       class="element2" type="password" />
             </div>
-            <div class="profile-elements-wrapper" id="errors"></div>
+            <div id="errors" ref="errorsDiv" class="profile-elements-wrapper"></div>
             <div class="delete-actions-buttons-wrapper">
-                <button id="cancelButton" class="cancelButton" @click="cancel">{{ buttons.cancel }}</button>
-                <button id="deleteAccountButton" class="deleteAccountButton" @click="deleteAccount">{{ buttons.delete }}
+                <button id="cancelButton" class="cancelButton" @click="cancel">{{ content.buttons.cancel }}</button>
+                <button id="deleteAccountButton" class="deleteAccountButton" @click="deleteAccount">
+                    {{ content.buttons.delete }}
                 </button>
             </div>
         </div>
     </div>
 </template>
 
-<script setup>
-import Navbar from "~/components/Navbar.vue";
-import {isLogged, loggedIn} from "public/ts/checkLogin";
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-import {onMounted, ref} from "vue";
+<script lang="ts" setup>
+import { isLogged, loggedIn } from "public/ts/checkLogin";
+import type { ShallowRef } from "vue";
+import fr from "@/src/lang/fr.json";
 
-const route = useRoute();
-let lang = ref(route.params.lang);
-let content = ref({});
-let buttons = ref({});
-let placeholders = ref({});
-let errors = ref({});
-const langPrefix = ref("/");
+const nuxtApp = useNuxtApp();
+const langPrefix = ref(nuxtApp.$langPrefix);
+let content = ref(nuxtApp.$content.deleteAccount);
+let errors = ref(nuxtApp.$content.errors);
+
+const fieldEmail: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldEmail");
+const fieldPassword: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPassword");
+const fieldPasswordConfirm: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPasswordConfirm");
+const errorsDiv: ShallowRef<HTMLDivElement> = useTemplateRef("errorsDiv") as ShallowRef<HTMLDivElement>;
 
 const cancel = () => {
-    location.href = langPrefix.value + "profile";
+    location.href = nuxtApp.$langPrefix + "profile";
 };
 
 const deleteAccount = () => {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const passwordConfirm = document.getElementById("passwordConfirm").value;
+    const email = fieldEmail.value ? fieldEmail.value.value : "";
+    const password = fieldPassword.value ? fieldPassword.value.value : "";
+    const passwordConfirm = fieldPasswordConfirm.value ? fieldPasswordConfirm.value.value : "";
 
     if (email === "" || password === "" || passwordConfirm === "") {
-        document.getElementById("errors").innerHTML = `<p class="error">${errors.value["fields"]["notFullyCompleted"]}</p>`;
+        errorsDiv.value.innerHTML = `<p class="error">${errors.value.fields.notFullyCompleted}</p>`;
         return;
     }
 
     if (password !== passwordConfirm) {
-        document.getElementById("errors").innerHTML = `<p class="error">${errors.value["fields"]["passwordsDoNotMatch"]}</p>`;
+        errorsDiv.value.innerHTML = `<p class="error">${errors.value.fields.passwordsDoNotMatch}</p>`;
         return;
     }
 
     fetch("https://api.ardeco.app/close", {
         method: "DELETE",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
             email: email,
@@ -76,49 +82,26 @@ const deleteAccount = () => {
             location.href = langPrefix.value + "login";
         } else {
             if (data.data) {
-                const error = data.data.split("_");
-                document.getElementById("errors").innerHTML = `<p class="error">${errors.value[error[0]][error[1]]}</p>`;
+                const [key, error]: ["user", keyof typeof fr.errors.user] = data["data"].split("_");
+                errorsDiv.value.innerHTML = `<p class="error">${errors.value[key][error]}</p>`;
             } else if (data.message) {
-                document.getElementById("errors").innerHTML = `<p class="error">${data.message}</p>`;
+                errorsDiv.value.innerHTML = `<p class="error">${data.message}</p>`;
             } else {
-                document.getElementById("errors").innerHTML = `<p class="error">${data}</p>`;
+                errorsDiv.value.innerHTML = `<p class="error">${data}</p>`;
             }
         }
     });
-}
+};
 
 onMounted(async () => {
-    const userID = await isLogged();
+    await isLogged();
     if (!loggedIn) {
-        location.href = langPrefix.value + "login";
-    }
-
-    // If lang selector is not passed in url, get the user's one or set it to french
-    if (lang.value !== 'en' && lang.value !== 'fr') {
-        const localStorageLang = localStorage.getItem('lang');
-        if (localStorageLang) {
-            lang.value = localStorageLang;
-        } else {
-            lang.value = 'fr';
-        }
-    }
-
-    // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.deleteAccount : fr.deleteAccount;
-    placeholders.value = lang.value === 'en' ? en.deleteAccount.placeholders : fr.deleteAccount.placeholders;
-    buttons.value = lang.value === 'en' ? en.deleteAccount.buttons : fr.deleteAccount.buttons;
-    errors.value = lang.value === 'en' ? en.errors : fr.errors;
-
-    // Prefix for links
-    if (location.href.includes("/fr/")) {
-        langPrefix.value = "/fr/";
-    } else if (location.href.includes("/en/")) {
-        langPrefix.value = "/en/";
+        location.href = nuxtApp.$langPrefix + "login?redirect=/deleteAccount";
     }
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .title {
     text-align: center;
     margin-top: 4rem;

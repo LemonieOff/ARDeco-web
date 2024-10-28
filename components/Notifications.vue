@@ -1,91 +1,66 @@
 <template>
-    <div id="error" class="notificationBubble">
-        {{ message }}
-    </div>
-    <div id="success" class="notificationBubble">
-        {{ message }}
+    <div class="flex flex-col absolute top-20 left-2.5 z-0">
+        <TransitionGroup name="message">
+            <div v-for="message in messages" :key="message.id" :class="message.type === 'success' ? 'success' : 'error'"
+                 class="w-60 text-white rounded p-1 text-center mb-2">
+                {{ message.message }}
+            </div>
+        </TransitionGroup>
     </div>
 </template>
-  
-<script>
-  export default {
-    data() {
-        return {
-            message: ''
-        }
-    },
-    methods: {
-        showError(message) {
-            const bubble = document.getElementById('error');
-            bubble.classList.toggle('visible');
-            this.message = message
-            setTimeout(() => {
-                bubble.classList.remove('visible');
-            }, 3000)
-        },
-        showSuccess(message) {
-            const bubble = document.getElementById('success');
-            bubble.classList.toggle('visible');
-            this.message = message
-            setTimeout(() => {
-                bubble.classList.remove('visible');
-            }, 3000)
-        }
-    }
-  }
+
+<script lang="ts" setup>
+const messages = ref<{ id: number, type: "success" | "error", message: string }[]>([]);
+const latestId = ref(0);
+
+const showError = (message: string) => {
+    messages.value.push({
+        id: latestId.value++,
+        type: "error",
+        message: message
+    });
+    setTimeout(() => {
+        messages.value.shift();
+    }, 3000);
+};
+
+const showSuccess = (message: string) => {
+    messages.value?.push({
+        id: latestId.value++,
+        type: "success",
+        message: message
+    });
+    setTimeout(() => {
+        messages.value?.shift();
+    }, 3000);
+};
+
+defineExpose({
+    showError,
+    showSuccess
+});
 </script>
-  
-<style scoped lang="scss">
-@import '~/styles/variables/ColorVariables.scss';
 
-.visible {
-    animation: movein 0.5s ease forwards, moveout 0.5s 3s ease forwards;
+<style lang="scss" scoped>
+@import '@/styles/variables/ColorVariables.scss';
+
+.message-move,
+.message-enter-active,
+.message-leave-active {
+    transition: all 0.5s ease;
 }
 
-.notificationBubble {
-    width: 250px;
-    color: white;
-    border-radius: 3px;
-    font-size: 16px;
-    padding: 5px;
-
-    position: fixed;
-    text-align: center;
-    align-items: center;
-
-    top: 100px;
-    left: -300px;
+.message-enter-from,
+.message-leave-to {
+    opacity: 0;
+    transform: translateX(-100%);
 }
 
-#success {
+.success {
     background: $primary-green;
 }
 
-#error {
+.error {
     background: $primary-red;
 }
-
-@keyframes movein {
-  from { left: -300px; }
-  to   { left: 10px; }
-}
-
-@keyframes moveout {
-  from { left: 10px; }
-  to   { left: -300px; }
-}
-
-
-@media screen and (max-width: 768px) {
-
-    .notificationBubble {
-        font-size: 14px;
-
-        top: 45px;
-        left: -300px;
-    }
-}
-
-
 </style>
-  

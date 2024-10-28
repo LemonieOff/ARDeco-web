@@ -1,63 +1,60 @@
 <template>
-    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.titleCreateFurniture }}</h1>
-    <div class="flex flex-col md:flex-row justify-center md:space-x-8 my-8">
-      <div class="furniturePictureArea flex justify-center">
-        <img id="furnitureImg" src="@/assets/images/furnitures/defaultFurnitureCreationImage.png" class="border-2 border-primary-black rounded-lg h-full md:w-1/2">
-      </div>
-      <div class="furnitureDetails flex flex-col md:flex-row rounded-lg p-4 w-full">
-        <div class="furnitureSpecificDetails md:w-1/2">
-          <div class="specificDetailTitle text-lg font-bold" id="furnitureStyles">{{ content.placeholders.furnitureStyles }}</div>
-          <div class="options flex flex-wrap justify-center">
-            <div v-for="(style, key) in styles" :key="key" class="option">
-              <label :for="`style_${key}`" @click="toggleSelection(style)" :class="{ 'selected': style.selected }" class="cursor-pointer border border-primary-black rounded px-2 py-1 m-1">
-                {{ style.name }}
-              </label>
-            </div>
-          </div>
-          
-          <div class="specificDetailTitle text-lg font-bold" id="furnitureRooms">{{ content.placeholders.furnitureRooms }}</div>
-          <div class="options flex flex-wrap justify-center">
-            <div v-for="(room, key) in rooms" :key="key" class="option">
-              <label :for="`room_${key}`" @click="toggleSelection(room)" :class="{ 'selected': room.selected }" class="cursor-pointer border border-primary-black rounded px-2 py-1 m-1">
-                {{ room.name }}
-              </label>
-            </div>
-          </div>
-          
-          <div class="specificDetailTitle text-lg font-bold" id="furnitureColors">{{ content.placeholders.furnitureColors }}</div>
-          <div class="options flex flex-wrap justify-center">
-            <div v-for="(_color, key) in colors" :key="key" class="colorOption">
-              <label :for="`color_${key}`"
-                @click="toggleSelection(_color)"
-                :class="{ 'selected': _color.selected }"
-                :style="{ 'background-color': _color.hex, 'border-color': _color.selected ? 'black' : _color.hex, 'color': _color.selected ? _color.hex : 'black' }"
-                class="cursor-pointer border-3 rounded px-2 py-1 m-1">
-                {{ _color.name }}
-              </label>
-            </div>
-          </div>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{content.titleModifyFurniture}}</h1>
+    <div class="mainContent" style="overflow-x: hidden; overflow-y: auto">
+        <div class="furniturePictureArea">
+            <img id="furnitureImg" src="@/assets/images/furnitures/defaultFurnitureCreationImage.png">
         </div>
-        
-        <div class="furnitureBasicDetails md:w-1/2 flex flex-col space-y-4">
-          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furnitureName" :placeholder="`${content.placeholders.furnitureName}`">
-          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furniturePrice" :placeholder="`${content.placeholders.furniturePrice}`">
-          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furnitureHeight" :placeholder="`${content.placeholders.furnitureHeight}`">
-          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furnitureWidth" :placeholder="`${content.placeholders.furnitureWidth}`">
-          <input class="basicButton border border-primary-black rounded py-2 px-4" id="furnitureDepth" :placeholder="`${content.placeholders.furnitureDepth}`">
-          <button id="addFurnitureToCatalog" class="basicButton border border-primary-black rounded py-2 px-4 font-bold" @click="addFurniture">{{ content.addFurnitureToCatalog }}</button>
+        <div class="furnitureDetails">
+            <div class="furnitureSpecificDetails">
+                <div class="specificDetailTitle" id="furnitureStyles">{{content.placeholders.furnitureStyles}}</div>
+                <div class="options">
+                    <div v-for="(style, key) in styles" :key="key" class="option">
+                        <label :for="`style_${key}`" @click="toggleSelection(style)" :class="{ 'selected': style.selected }">
+                            {{ style.name }}
+                        </label>
+                    </div>
+                </div>
+                <div class="specificDetailTitle" id="furnitureRooms">{{content.placeholders.furnitureRooms}}</div>
+                <div class="options">
+                    <div v-for="(room, key) in rooms" :key="key" class="option">
+                        <label :for="`room_${key}`" @click="toggleSelection(room)" :class="{ 'selected': room.selected }">
+                            {{ room.name }}
+                        </label>
+                    </div>
+                </div>
+                <div class="specificDetailTitle" id="furnitureColors">{{content.placeholders.furnitureColors}}</div>
+                <div class="options">
+                    <div v-for="(_color, key) in colors" :key="key" class="colorOption">
+                        <label :for="`color_${key}`"
+                        @click="toggleSelection(_color)"
+                        :class="{ 'selected': _color.selected }"
+                        :style="{ 'background-color': _color.hex,
+                            'border-color': _color.selected ? 'black' : _color.hex,
+                            'color': _color.selected ? _color.hex : 'black' }">
+                            {{ _color.name }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="furnitureBasicDetails">
+                <input class="basicButton" id="furnitureName" :placeholder="`${content.placeholders.furnitureName}`">
+                <input class="basicButton" id="furniturePrice" :placeholder="`${content.placeholders.furniturePrice}`">
+                <input class="basicButton" id="furnitureHeight" :placeholder="`${content.placeholders.furnitureHeight}`">
+                <input class="basicButton" id="furnitureWidth" :placeholder="`${content.placeholders.furnitureWidth}`">
+                <input class="basicButton" id="furnitureDepth" :placeholder="`${content.placeholders.furnitureDepth}`">
+                <button id="addFurnitureToCatalog" class="basicButton bottomButton" @click="modifyFurniture">{{content.modifyFurniture}}</button>
+            </div>
         </div>
-      </div>
     </div>
     <Notifications ref="notifications"/>
 </template>
-  
 
 <script>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
-    name: "CreateNewFurniture",
+    name: "ModifyFurniture",
     components: {
         Notifications
     },
@@ -66,7 +63,10 @@ export default {
             content: this.$content.settings.companies,
             notificationsMessages: this.$content.notifications,
             placeholders: {},
+            userID: 36,
             langPrefix: "/",
+            furnitureID: Number(this.$route.params.id),
+            furnitureObj: [],
             styles: {
                 modern: { name: "modern", selected: false },
                 scandinavian: { name: "scandinavian", selected: false },
@@ -136,6 +136,9 @@ export default {
     },
     mounted() {
         this.checkIfLogged();
+        this.getFurniture().then(() => {
+            this.fillFurnitureInformations();
+        });
     },
     methods: {
         toggleSelection(item) {
@@ -143,13 +146,68 @@ export default {
         },
 
         async checkIfLogged() {
-            await isLogged();
+            const userID_TMP = await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
+            this.userID = Number(userID_TMP);
         },
 
-        async addFurniture() {
+        async getFurniture() {
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            // console.log(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`)
+            // https://api.ardeco.app/catalog/FURNITURE_ID
+            const response = await fetch(`https://api.ardeco.app/catalog/${this.furnitureID}?company_api_key=${COMPANY_API_TOKEN}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+
+            const result = await response.json();
+            console.log("result.data:", result.data)
+            if (result.code === 200) {
+                this.furnitureObj = result.data
+                console.log("Parsed furniture object:", this.furnitureObj);
+            } else {
+                this.$refs.notifications.showError(this.notificationsMessages.cannotFindFurniture);
+            }
+        },
+
+        async fillFurnitureInformations() {
+            document.querySelector('#furnitureName').value = this.furnitureObj.name || "";
+            document.querySelector('#furniturePrice').value = this.furnitureObj.price || "";
+            document.querySelector('#furnitureHeight').value = this.furnitureObj.height || "";
+            document.querySelector('#furnitureWidth').value = this.furnitureObj.width || "";
+            document.querySelector('#furnitureDepth').value = this.furnitureObj.depth || "";
+
+            for (let selectedColor of this.furnitureObj.colors) {
+                for (let selectableColor of Object.values(this.colors)) {
+                    if (selectedColor.color === selectableColor.name) {
+                        selectableColor.selected = true;
+                    }
+                }
+            }
+
+            for (let selectedStyle of this.furnitureObj.styles) {
+                for (let selectableStyle of Object.values(this.styles)) {
+                    if (selectedStyle === selectableStyle.name) {
+                        selectableStyle.selected = true;
+                    }
+                }
+            }
+
+            for (let selectedRoom of this.furnitureObj.rooms) {
+                for (let selectableRoom of Object.values(this.rooms)) {
+                    if (selectedRoom === selectableRoom.name) {
+                        selectableRoom.selected = true;
+                    }
+                }
+            }
+        },
+
+        async modifyFurniture() {
             const userID = await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
@@ -188,13 +246,13 @@ export default {
                 return;
             }
 
-            console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`);
-            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'POST',
+            console.log('furnitureName',  furnitureName)
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/edit/' + this.furnitureObj.id + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify([{
+                body: JSON.stringify({
                     "name": furnitureName,
                     "price": furniturePrice,
                     "styles": furnitureStyles,
@@ -203,21 +261,16 @@ export default {
                     "width": furnitureWidth,
                     "depth": furnitureDepth,
                     "colors": furnitureColors
-                }]),
+                }),
                 credentials: 'include',
             });
 
             const result = await response.json();
             console.log(result);
-            if (result.code === 201) {
-                document.querySelector('#furnitureName').value = "";
-                document.querySelector('#furniturePrice').value = "";
-                document.querySelector('#furnitureHeight').value = "";
-                document.querySelector('#furnitureWidth').value = "";
-                document.querySelector('#furnitureDepth').value = "";
-                this.$refs.notifications.showSuccess(this.notificationsMessages.furnitureCreated);
+            if (result.code === 200) {
+                this.$router.push(`${this.langPrefix}company`);
             } else {
-                this.$refs.notifications.showError(this.notificationsMessages.furnitureCreationFailed);
+                this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
         }
     }
@@ -234,8 +287,6 @@ export default {
 
 .mainContent {
     margin-left: 7.5vw;
-    width: 85vw;
-    height: 65vh;
     display: flex;
 }
 
@@ -246,7 +297,6 @@ export default {
 
 #furnitureImg {
     border: 2px solid $primary-black;
-    height: 100%;
     width: auto;
     border-radius: 10px;
 }

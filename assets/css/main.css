@@ -9,7 +9,7 @@
 
     body {
         font-family: 'Roboto', sans-serif;
-        @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown;
+        @apply bg-AR-Beige dark:bg-AR-Dark-Grey text-AR-Grey dark:text-AR-Beige;
     }
 
     button {

@@ -1,19 +1,16 @@
 <template>
-    <button :id="id" @click="finalFun"
-            class="navbar-option text-AR-Beige content-center hover:text-black hover:bg-AR-Beige"
-            :class="[!mobileDisplay ? 'h-full px-4' : 'w-full py-4 last:rounded-br-2xl', mobileHidden ? 'hidden sm:inline-block' : (mobileOnly ? 'inline-block sm:hidden' : '')]">
+    <button
+        :class="[!mobileDisplay ? 'h-full px-4' : 'w-full py-4 last:rounded-br-2xl inline-flex', mobileHidden ? 'hidden sm:inline-flex' : (mobileOnly ? 'inline-flex sm:hidden' : '')]"
+        class="navbar-option text-AR-Beige items-center justify-center hover:text-black hover:bg-AR-Beige"
+        @click="finalFun">
         <slot></slot>
     </button>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 const props = defineProps({
     fun: {
         type: Function,
-        required: true
-    },
-    id: {
-        type: String,
         required: true
     },
     mobileDisplay: Boolean,
@@ -23,7 +20,7 @@ const props = defineProps({
         default: false,
         validator(value, props): boolean {
             if (value === true && props.mobileOnly === true) {
-                console.error("This component can't be 'mobileHidden' and 'mobileOnly' at the same time")
+                console.error("This component can't be 'mobileHidden' and 'mobileOnly' at the same time");
                 return false;
             }
             return true;

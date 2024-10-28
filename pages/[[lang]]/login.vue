@@ -1,318 +1,283 @@
 <template>
-    <div id="forms-container">
-        <div id="forms-loading" class="form">
+    <div class="mt-8 mb-4">
+        <div v-if="loading"
+             class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-6 w-1/3 mx-auto text-center rounded-lg">
             {{ content.loading }}
         </div>
-        <div id="forms-wrapper" style="display: none">
-            <div id="login-register-wrapper" class="login-register-wrapper">
-                <div id="login-form" class="form">
-                    <span class="typeTitle">{{ content.loginTitle }}</span>
-                    <div id="email_section_login">
-                        <label id="email" for="email">{{ content.email }}</label>
-                        <input type="text" id="email_login" name="email" placeholder="Email">
-                        <ul id="email_errors_login" class="login-error"></ul>
-                    </div>
-                    <div id="password_section_login">
-                        <label id="password" for="password">{{ content.password }}</label>
-                        <input type="password" id="password_login" name="password" placeholder="Password">
-                        <ul id="password_errors_login" class="login-error"></ul>
-                    </div>
-                    <div id="general_section_login">
-                        <ul id="general_errors_login" class="login-error"></ul>
-                        <ul id="general_success_login" class="login-success"></ul>
-                    </div>
-                    <button id="login" @click="login">{{ content.login }}</button>
+        <div v-else-if="userID" id="user-form">
+            <div id="user-welcome">{{ content.welcome }}<span>{{ userID }}</span>!</div>
+            <button id="logout" @click="logoutUser">{{ content.logout }}</button>
+        </div>
+        <div v-else class="flex items-center justify-center">
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 md:w-[32rem] lg:w-[48rem]">
+                <div class="w-full inline-flex items-center justify-evenly pb-8">
+                    <span :class="activeForm === 'login' ? 'font-extrabold underline' : 'cursor-pointer'" class="pr-8"
+                          @click="activeForm = 'login'">
+                        {{ content.loginTitle }}
+                    </span>
+                    <label class="relative inline-flex justify-center cursor-pointe" for="formSwitcher">
+                        <input id="formSwitcher" v-model="activeForm" class="sr-only peer" false-value="login"
+                               true-value="register" type="checkbox" />
+                        <span
+                            class="relative w-[3.25rem] h-7 bg-teal-600 hover:bg-teal-700 peer-focus:outline-0 peer-focus:ring-transparent rounded-full transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pink-500 hover:peer-checked:bg-pink-600"></span>
+                    </label>
+                    <span :class="activeForm === 'register' ? 'font-extrabold underline' : 'cursor-pointer'"
+                          class="pl-8"
+                          @click="activeForm = 'register'">
+                        {{ content.registerTitle }}
+                    </span>
                 </div>
-                <div id="register-form" class="form">
-                    <span class="typeTitle">{{ content.registerTitle }}</span>
-                    <div class="mandatory_fields">
-                        <span class="gdpr_indication">{{ content.mandatoryFields }}</span>
-                        <div id="email_section_register">
-                            <label id="email2" for="email">{{ content.email }}</label>
-                            <input type="text" id="email_register" name="email" placeholder="Email">
-                            <ul id="email_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="password_section_register">
-                            <label id="password2" for="password">{{ content.password }}</label>
-                            <input type="password" id="password_register" name="password" placeholder="Password">
-                            <ul id="password_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="password_confirm_section_register">
-                            <label id="passwordConfirm" for="password_confirm_register">{{ content.passwordConfirm }}</label>
-                            <input type="password" id="password_confirm_register" name="password_confirm" placeholder="Password">
-                            <ul id="password_confirm_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="first_name_section_register">
-                            <label id="firstName" for="first_name_register">{{ content.firstName }}</label>
-                            <input type="text" id="first_name_register" name="first_name" placeholder="John">
-                            <ul id="first_name_errors_register" class="login-error"></ul>
-                        </div>
-                    </div>
-                    <div class="optional_fields">
-                        <span class="gdpr_indication">{{ content.optionalFields }}</span>
-                        <div id="last_name_section_register">
-                            <label id="lastName" for="last_name_register">{{ content.lastName }}</label>
-                            <input type="text" id="last_name_register" name="last_name" placeholder="DOE">
-                            <ul id="last_name_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="city_section_register">
-                            <label id="city" for="city_register">{{ content.city }}</label>
-                            <input type="text" id="city_register" name="city" placeholder="Berlin">
-                            <ul id="city_errors_register" class="login-error"></ul>
-                        </div>
-                        <div id="phone_section_register">
-                            <label id="phone" for="phone_register">{{ content.phone }}</label>
-                            <input type="tel" id="phone_register" name="phone" placeholder="+33601020304">
-                            <ul id="phone_errors_register" class="login-error"></ul>
-                        </div>
-                    </div>
-                    <div class="gdpr_consent">
-                        <div><input type="checkbox" id="checkPolicy"/><label for="checkPolicy">{{ content.consent }}</label></div>
-                        <div><input type="checkbox" id="checkTOS"/><label for="checkTOS">{{ content.hasRead }}</label></div>
-                    </div>
-                    <div id="general_section_register">
-                        <ul id="general_errors_register" class="login-error"></ul>
-                        <ul id="general_success_register" class="login-success"></ul>
-                    </div>
-                    <button id="register" @click="register">{{ content.register }}</button>
+
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="loginEmail">
+                        {{ content.email }} <span class="text-red-500">*</span>
+                    </label>
+                    <input id="loginEmail"
+                           ref="fieldEmail"
+                           :placeholder="content.placeholders.email"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           required
+                           type="email" />
                 </div>
-            </div>
-            <div id="user-form" class="form">
-                <div id="user-welcome">{{ content.welcome }}<span id="user-welcome-id"></span>!</div>
-                <button id="logout" @click="logout">{{ content.logout }}</button>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="loginPassword">
+                        {{ content.password }} <span class="text-red-500">*</span>
+                    </label>
+                    <div class="flex">
+                        <input id="loginPassword"
+                               ref="fieldPassword"
+                               :placeholder="content.placeholders.password"
+                               :type="hiddenPassword ? 'password' : 'text'"
+                               class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                               required />
+                        <Icon :name="`material-symbols:visibility-${hiddenPassword ? 'off-' : ''}outline-rounded`"
+                              class="inline-flex w-1/12 justify-center self-center cursor-pointer ml-2"
+                              size="24"
+                              @click="hiddenPassword = !hiddenPassword"
+                        />
+                    </div>
+                </div>
+                <div v-show="activeForm === 'login'" class="mb-4">
+                    <input id="rememberMe" ref="loginFieldRememberMe" class="mr-2" type="checkbox" />
+                    <label class="text-sm" for="rememberMe">{{ content.rememberMe }}</label>
+                </div>
+                <div class="flex justify-center">
+                    <button v-show="activeForm === 'login'"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            @click="login">
+                        {{ content.login }}
+                    </button>
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="firstName">
+                        {{ content.firstName }} <span class="text-red-500">*</span>
+                    </label>
+                    <input id="firstName"
+                           ref="fieldFirstName"
+                           :placeholder="content.placeholders.firstName"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           required
+                           type="text" />
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="lastName">{{ content.lastName }}</label>
+                    <input id="lastName"
+                           ref="fieldLastName"
+                           :placeholder="content.placeholders.lastName"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="text" />
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="city">{{ content.city }}</label>
+                    <input id="city"
+                           ref="fieldCity"
+                           :placeholder="content.placeholders.city"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="text" />
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="phoneNumber">{{ content.phone }}</label>
+                    <input id="phoneNumber"
+                           ref="fieldPhone"
+                           :placeholder="content.placeholders.phone"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="tel" />
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <input id="tosConsent" ref="fieldCgu" class="mr-2" required type="checkbox" />
+                    <label class="text-sm" for="tosConsent">
+                        {{ content.agreementCgu[0] }} <a :href="`${langPrefix}cgu`"
+                                                         class="text-blue-500 hover:underline"
+                                                         target="_blank">{{ content.agreementCgu[1]
+                        }}</a> <span class="text-red-500">*</span>
+                    </label>
+                </div>
+                <div v-show="activeForm === 'register'" class="mb-4">
+                    <input id="privacyConsent" ref="fieldPrivacy" class="mr-2" required type="checkbox" />
+                    <label class="text-sm" for="privacyConsent">
+                        {{ content.agreementPrivacy[0] }} <a :href="`${langPrefix}privacy-policy`"
+                                                             class="text-blue-500 hover:underline"
+                                                             target="_blank">{{ content.agreementPrivacy[1]
+                        }}</a> <span class="text-red-500">*</span>
+                    </label>
+                </div>
+                <div v-if="activeForm === 'register' && noConsent" class="text-red-600">
+                    {{ content.consentNotGiven }}
+                </div>
+                <input ref="fieldBot" type="hidden" />
+                <div class="flex justify-center">
+                    <button v-show="activeForm === 'register'"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            @click="register">
+                        {{ content.register }}
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+    <Notifications ref="notifications"/>
 </template>
 
-<script setup lang="ts">
-import {isLogged, loggedIn, disconnect} from "public/ts/checkLogin";
+<script lang="ts" setup>
+import { isLogged, logout } from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 const nuxtApp = useNuxtApp();
-let content = ref(nuxtApp.$content.login);
+const content = ref(nuxtApp.$content.login);
+const notificationsContent = ref(nuxtApp.$content.notifications);
 const langPrefix = ref(nuxtApp.$langPrefix);
+const userID = ref<number | null>();
+const loading = ref(true);
+
+const activeForm = ref("login");
+
+const notifications = ref();
+
+const fieldEmail = useTemplateRef("fieldEmail");
+const fieldPassword = useTemplateRef("fieldPassword");
+const fieldFirstName = useTemplateRef("fieldFirstName");
+const fieldLastName = useTemplateRef("fieldLastName");
+const fieldCity = useTemplateRef("fieldCity");
+const fieldPhone = useTemplateRef("fieldPhone");
+const fieldPrivacy = useTemplateRef("fieldPrivacy");
+const fieldCgu = useTemplateRef("fieldCgu");
+const fieldBot = useTemplateRef("fieldBot");
+
+const noConsent = ref(false);
+const hiddenPassword = ref(true);
+
+const route = useRoute();
+const redirectUrl = ref(langPrefix.value + "profile");
 
 onMounted(async () => {
-    const userID = await isLogged();
-    if (userID) {
-        if (loggedIn) {
-            document.getElementById("login-register-wrapper").style.display = "none";
-            document.getElementById("user-form").style.display = "default";
-            document.getElementById("user-welcome-id").innerHTML = userID;
-        } else {
-            document.getElementById("login-register-wrapper").style.display = "default";
-            document.getElementById("user-form").style.display = "none";
-        }
-    } else {
-        document.getElementById("login-register-wrapper").style.display = "default";
-        document.getElementById("user-form").style.display = "none";
+    userID.value = await isLogged();
+    loading.value = false;
+
+    if (route.query["redirect"] && route.query["redirect"] !== "") {
+        redirectUrl.value = route.query["redirect"] as string;
     }
-    document.getElementById("forms-loading").style.display = "none";
-    document.getElementById("forms-wrapper").style.display = "flex";
+    console.log("redirect", redirectUrl);
 });
 
-const displayHTMLErrors = (result, response, type) => {
-    const errors = {
-        "email": document.getElementById(`email_errors_${type}`),
-        "password": document.getElementById(`password_errors_${type}`),
-        "password_confirm": document.getElementById(`password_confirm_errors_${type}`),
-        "first_name": document.getElementById(`first_name_errors_${type}`),
-        "last_name": document.getElementById(`last_name_errors_${type}`),
-        "city": document.getElementById(`city_errors_${type}`),
-        "phone": document.getElementById(`phone_errors_${type}`),
-        "general": document.getElementById(`general_errors_${type}`),
-        "success": document.getElementById(`general_success_${type}`)
-    }
-    Object.values(errors).forEach(error => {
-        if (error) {
-            error.innerHTML = "";
-        }
-    });
-
-    if (result.status === "OK") {
-        console.log("success");
-        const li = document.createElement("li");
-        li.innerHTML = result.description;
-        errors.success.appendChild(li);
-        if (type === "login") {
-            localStorage.setItem("userID", result.data["userID"]);
-        } else {
-            localStorage.setItem("userID", result.data["id"]);
-        }
-        localStorage.setItem("role", result.data["role"]);
-        location.href = langPrefix.value + "profile";
-    } else {
-        console.log("fail");
-        if (Array.isArray(result.message)) {
-            result.message.forEach(error => {
-                const split = error.split(" ");
-                const field = split[0];
-                split.shift();
-
-                const li = document.createElement("li");
-                li.innerHTML = split.join(" ");
-
-                if (Object.keys(errors).includes(field)) {
-                    errors[field].appendChild(li);
-                } else {
-                    errors.general.appendChild(li);
-                }
-            });
-        } else if (response.statusCode === 500 && result.message) {
-            const li = document.createElement("li");
-            if (result.message) {
-                li.innerHTML = result.message;
-            } else if (result.description) {
-                li.innerHTML = result.description;
-            } else {
-                li.innerHTML = "Unknown error";
-            }
-            errors.general.appendChild(li);
-        } else {
-            const li = document.createElement("li");
-            if (result.message) {
-                li.innerHTML = result.message;
-            } else if (result.description) {
-                li.innerHTML = result.description;
-            } else {
-                li.innerHTML = "Unknown error";
-            }
-            errors.general.appendChild(li);
-        }
-    }
-}
+const validateLogin = (): Boolean => {
+    let errors = 0;
+    if (!fieldEmail.value?.checkValidity()) errors++;
+    if (!fieldPassword.value?.checkValidity()) errors++;
+    return errors === 0;
+};
 
 const login = async () => {
-    const email_field = document.getElementById("email_login").value;
-    const password_field = document.getElementById("password_login").value;
+    if (!validateLogin()) {
+        notifications.value?.showError(notificationsContent.value.loginFailed);
+        return;
+    }
 
-    const response = await fetch('https://api.ardeco.app/login', {
-        method: 'POST',
+    const response = await fetch("https://api.ardeco.app/login", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
-        credentials: 'include',
-        body: JSON.stringify({email: email_field, password: password_field})
+        credentials: "include",
+        body: JSON.stringify({ email: fieldEmail.value?.value, password: fieldPassword.value?.value })
     });
 
     const result = await response.json();
     console.log(result);
 
-    displayHTMLErrors(result, response, "login");
-}
+    if (result.status === "OK") {
+        localStorage.setItem("userID", result.data["userID"]);
+        localStorage.setItem("role", result.data["role"]);
+        location.href = redirectUrl.value;
+    } else {
+        notifications.value?.showError(notificationsContent.value.loginFailed);
+    }
+};
+
+const validateRegister = (): Boolean => {
+    let errors = 0;
+    if (!fieldEmail.value?.checkValidity()) errors++;
+    if (!fieldPassword.value?.checkValidity()) errors++;
+    if (!fieldFirstName.value?.checkValidity()) errors++;
+    if (!fieldPrivacy.value?.checkValidity() || !fieldCgu.value?.checkValidity()) {
+        noConsent.value = true;
+        errors++;
+    } else {
+        noConsent.value = false;
+    }
+    return errors === 0;
+};
 
 const register = async () => {
-    const email_field = document.getElementById("email_register").value;
-    const password_field = document.getElementById("password_register").value;
-    const password_confirm_field = document.getElementById("password_confirm_register").value;
-    const first_name_field = document.getElementById("first_name_register").value;
-    const last_name_field = document.getElementById("last_name_register").value;
-    const city_field = document.getElementById("city_register").value;
-    const phone_field = document.getElementById("phone_register").value;
-
-    if (!document.getElementById("checkPolicy").checked || !document.getElementById("checkTOS").checked) {
-        const li = document.createElement("li");
-        li.innerHTML = content.value["consentNotGiven"];
-        document.getElementById("general_errors_register").replaceChildren(li);
+    if (!validateRegister()) {
+        notifications.value?.showError(notificationsContent.value.registrationFailed);
         return;
     }
 
-    const response = await fetch('https://api.ardeco.app/register', {
-        method: 'POST',
+    const response = await fetch("https://api.ardeco.app/register", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
-        credentials: 'include',
+        credentials: "include",
         body: JSON.stringify({
-            email: email_field,
-            password: password_field,
-            password_confirm: password_confirm_field,
-            first_name: first_name_field,
-            last_name: last_name_field,
-            city: city_field,
-            phone: phone_field
+            email: fieldEmail.value?.value,
+            password: fieldPassword.value?.value,
+            password_confirm: fieldPassword.value?.value,
+            first_name: fieldFirstName.value?.value,
+            last_name: fieldLastName.value?.value,
+            city: fieldCity.value?.value,
+            phone: fieldPhone.value?.value
         })
     });
 
     const result = await response.json();
     console.log(result);
 
-    displayHTMLErrors(result, response, "register");
-}
+    if (result.status === "OK") {
+        localStorage.setItem("userID", result.data["id"]);
+        localStorage.setItem("role", result.data["role"]);
+        location.reload();
+        location.href = redirectUrl.value;
+    } else {
+        notifications.value?.showError(notificationsContent.value.registrationFailed);
+    }
+};
 
-const logout = async () => {
-    const response = await fetch('https://api.ardeco.app/logout', {
-        method: 'GET',
-        credentials: 'include',
+const logoutUser = async () => {
+    await fetch("https://api.ardeco.app/logout", {
+        method: "GET",
+        credentials: "include"
     });
-    await disconnect();
-    localStorage.removeItem('lang');
-    const result = await response.text();
-    console.log(result);
-    location.href = langPrefix.value + "home";
-}
+    logout();
+    location.href = langPrefix.value;
+};
 </script>
 
-<style scoped lang="scss">
-#forms-container {
-    margin-top: 4rem;
-    margin-bottom: 1rem;
-}
-
-button {
-    outline-style: solid;
-    outline-width: thin;
-}
-
+<style lang="scss" scoped>
 #logout {
     outline-style: solid;
     outline-width: thin;
-}
-
-.gdpr_indication {
-    text-decoration: underline;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    border-radius: 15px;
-    padding: 25px;
-    background-color: #f4f4f4;
-    width: 30%;
-
-    div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 3px;
-        margin: 5px 0;
-    }
-
-    .typeTitle {
-        font-size: 1.5em;
-        font-weight: bold;
-        text-align: center;
-        margin-top: -15px;
-        margin-bottom: 5px;
-    }
-
-    .gdpr_consent {
-        div {
-            display: block;
-            /*padding: 3px;
-            margin: 5px 0;*/
-
-            label {
-                margin-left: 5px;
-            }
-        }
-        margin-top: -3%;
-        margin-bottom: -5%;
-    }
 }
 
 #user-form {
@@ -329,33 +294,7 @@ button {
     }
 }
 
-#forms-wrapper {
-    display: flex;
-    flex-direction: column;
-}
-
-.mandatory_fields {
-    background-color: #e0e0e0;
-    border-radius: 15px;
-}
-
-.optional_fields {
-    background-color: #e0e0e0;
-    border-radius: 15px;
-}
-
-.login-register-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.login-error {
-    color: red;
-}
-
-.login-success {
-    color: green;
+input {
+    @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
 }
 </style>

@@ -1,210 +1,421 @@
 <template>
-    <ProfileSettings id="profileSettings" style="display: none"></ProfileSettings>
-    <div id="profile-container">
-        <div id="profile-loading" style="top: 10%;" class="form">
+    <div class="mt-8 mb-4">
+        <div v-if="loading"
+             class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-6 w-1/3 mx-auto text-center rounded-lg">
             {{ content.loading }}
         </div>
-        <div class="profile-wrapper" style="display: none;">
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ info.firstName }}<span id="firstName"></span></div>
-                <div class="element2">{{ info.lastName }}<span id="lastName"></span></div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ info.email }}<span id="email"></span></div>
-                <div class="element2">{{ info.phone }}<span id="phone"></span></div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ info.city }}<span id="city"></span></div>
-                <div class="element2">{{ info.role }}<span id="role"></span></div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ info.savedItems }}<span id="savedItems"></span></div>
-                <div class="element2"><a id="yourFavoriteFurnitures" :href="`${langPrefix}orderHistory`" class="button">{{ info.commandsOrdered }}<span id="commandsOrdered"></span></a></div>
-            </div>
-            <div class="profile-edit-buttons-wrapper">
-                <button id="startEditButton" class="editProfileButton" @click="startEdit">{{ buttons.update }}</button>
-                <a id="deleteAccountButton" class="deleteAccountButton" :href="`${langPrefix}deleteAccount`">{{ buttons.delete }}</a>
-            </div>
-        </div>
+        <div v-else class="flex flex-col items-center justify-center">
+            <ProfileSettings id="profileSettings" class="mb-8"></ProfileSettings>
 
-        <div class="profile-wrapper" style="display: none;">
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <label id="firstName2" for="first_name_edit">{{ info.firstName }}</label>
-                    <input type="text" id="first_name_edit" name="first_name">
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.personalInformation }}</h2>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="email">
+                        {{ content.informations.email }} <span class="text-red-500">*</span>
+                    </label>
+                    <input id="email"
+                           ref="fieldEmail"
+                           v-model="emailVal"
+                           :placeholder="content.placeholders.email"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           required
+                           type="email" />
                 </div>
-                <div class="element2">
-                    <label id="lastName2" for="last_name_edit">{{ info.lastName }}</label>
-                    <input type="text" id="last_name_edit" name="last_name">
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="firstName">
+                        {{ content.informations.firstName }} <span class="text-red-500">*</span>
+                    </label>
+                    <input id="firstName"
+                           ref="fieldFirstName"
+                           v-model="firstNameVal"
+                           :placeholder="content.placeholders.firstName"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           required
+                           type="text" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="lastName">{{ content.informations.lastName
+                        }}</label>
+                    <input id="lastName"
+                           ref="fieldLastName"
+                           v-model="lastNameVal"
+                           :placeholder="content.placeholders.lastName"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="text" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="city">{{ content.informations.city }}</label>
+                    <input id="city"
+                           ref="fieldCity"
+                           v-model="cityVal"
+                           :placeholder="content.placeholders.city"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="text" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="phoneNumber">{{ content.informations.phone
+                        }}</label>
+                    <input id="phoneNumber"
+                           ref="fieldPhone"
+                           v-model="phoneVal"
+                           :placeholder="content.placeholders.phone"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           type="tel" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2"
+                           for="fieldRole">{{ content.informations.role }}</label>
+                    <input
+                        id="fieldRole"
+                        :value="roleVal"
+                        class="shadow appearance-none border rounded min-w-full py-2 px-3 leading-tight cursor-not-allowed"
+                        disabled readonly />
+                </div>
+                <div v-show="showPersonalInfoButtons" class="flex justify-evenly">
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        @click="resetPersonalData">
+                        {{ content.buttons.reset }}
+                    </button>
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        @click="editPersonalData">
+                        {{ content.buttons.confirm }}
+                    </button>
                 </div>
             </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <label id="email2" for="email_edit">{{ info.email }}</label>
-                    <input type="text" id="email_edit" name="email">
-                </div>
-                <div class="element2">
-                    <label id="phone2" for="phone_edit">{{ info.phone }}</label>
-                    <input type="tel" id="phone_edit" name="phone">
-                </div>
-            </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <label id="city2" for="city_edit">{{ info.city }}</label>
-                    <input type="text" id="city_edit" name="city">
-                </div>
-            </div>
-            <div class="profile-edit-buttons-wrapper">
-                <button id="cancelEditButton" class="editProfileButton" @click="cancelEdit">{{ buttons.cancel }}</button>
-                <button id="editProfile" class="editProfileButton" @click="confirmEdit">{{ buttons.confirm }}</button>
-            </div>
-        </div>
-
-        <div class="profile-wrapper-lower-buttons">
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <a id="yourFavoriteFurnitures" :href="`${langPrefix}favFurniture`" class="button">{{ content.yourFavoriteFurnitures }}</a>
-                </div>
-                <div class="element2">
-                    <a id="yourFavoriteGalleries" :href="`${langPrefix}favGallery`" class="button">{{ content.yourFavoriteGalleries }}</a>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.galleries }}</h2>
+                <div class="mb-4 flex flex-col md:flex-row justify-between">
+                    <div class="flex flex-col md:w-5/12 mb-4 md:mb-0">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.gallery.personal }}
+                        </span>
+                        <!--<a :href="`${langPrefix}personalGallery`"
+                               class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                                personal
+                        </a>-->
+                        <span
+                            class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ personalGalleries }}
+                        </span>
+                    </div>
+                    <div class="flex flex-col md:w-5/12">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.gallery.public }}
+                        </span>
+                        <a :href="`${langPrefix}gallery`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">
-                    <a id="galleryAccess" :href="`${langPrefix}gallery`" class="button">{{ content.gallery }}</a>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.favorites }}</h2>
+                <div class="mb-4 flex flex-col md:flex-row justify-between">
+                    <div class="flex flex-col md:w-5/12 mb-4 md:mb-0">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.favorite.gallery }}
+                        </span>
+                        <a :href="`${langPrefix}favGallery`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
+                    <div class="flex flex-col md:w-5/12">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.favorite.furniture }}
+                        </span>
+                        <a :href="`${langPrefix}favFurniture`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
                 </div>
-                <div class="element2">
-                    <a id="blockedUsersAccess" :href="`${langPrefix}blockedUsers`" class="button">{{ content.blockedUsers }}</a>
+            </div>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.orders }}</h2>
+                <div class="flex flex-col w-12/12 mb-4 md:mb-0">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.orderHistory }}
+                        </span>
+                    <a :href="`${langPrefix}orderHistory`"
+                       class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                        {{ orders }} {{ orders > 1 ? content.orderMul : content.orderSing }}
+                    </a>
+                </div>
+            </div>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.changePassword }}</h2>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="password">
+                        {{ content.informations.password }}
+                    </label>
+                    <div class="flex">
+                        <input id="password"
+                               ref="fieldPassword"
+                               v-model="passwordVal"
+                               :placeholder="content.placeholders.password"
+                               :type="hiddenPassword ? 'password' : 'text'"
+                               class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500" />
+                        <Icon :name="`material-symbols:visibility-${hiddenPassword ? 'off-' : ''}outline-rounded`"
+                              class="inline-flex w-1/12 justify-center self-center cursor-pointer ml-2"
+                              size="24"
+                              @click="hiddenPassword = !hiddenPassword"
+                        />
+                    </div>
+                </div>
+                <div v-show="passwordVal.length > 0" class="flex justify-evenly">
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        @click="passwordVal = ''">
+                        {{ content.buttons.cancel }}
+                    </button>
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        @click="editPassword">
+                        {{ content.buttons.confirm }}
+                    </button>
+                </div>
+            </div>
+            <div
+                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem]">
+                <h2 class="mb-4 font-bold text-xl">{{ content.title.confidentiality }}</h2>
+                <div class="mb-4 flex flex-col md:flex-row justify-between">
+                    <div class="flex flex-col md:w-5/12 mb-4 md:mb-0">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.blockedUsers }}
+                        </span>
+                        <a :href="`${langPrefix}blockedUsers`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
+                    <div class="flex flex-col md:w-5/12">
+                        <span class="block text-sm font-bold mb-2">
+                        {{ content.buttons.delete }}
+                        </span>
+                        <a :href="`${langPrefix}deleteAccount`"
+                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            {{ content.buttons.access }}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <Notifications ref="notifications" />
 </template>
 
-<script setup>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-import {onMounted, ref, provide} from "vue";
+<script lang="ts" setup>
+import { isLogged, logout, userID } from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
-
-let lang = ref("");
-let content = ref({});
-let info = ref({});
-let buttons = ref({});
-let settings = ref({});
-const langPrefix = ref("");
-const profile = ref({});
-provide('profile', profile);
 
 const nuxtApp = useNuxtApp();
 
-onMounted(async () => {
-    langPrefix.value = nuxtApp.$langPrefix;
-    lang.value = nuxtApp.$lang;
+const content = nuxtApp.$content.profile;
+const notificationsMessages = nuxtApp.$content.notifications;
+const roles = nuxtApp.$content.values.roles;
+const userId = ref(0);
+const loading = ref(true);
+const hiddenPassword = ref(true);
+const langPrefix = nuxtApp.$langPrefix;
+const profile = ref<{
+    id: number;
+    email: string,
+    firstname: string,
+    lastname: string,
+    city: string,
+    phone: string,
+}>();
+provide("profile", profile);
 
-    const userID = await isLogged();
-    if (!loggedIn) {
-        location.href = langPrefix.value + "login";
+const notifications = useTemplateRef("notifications");
+const fieldEmail = useTemplateRef("fieldEmail");
+const fieldFirstName = useTemplateRef("fieldFirstName");
+
+const emailVal = ref("");
+const firstNameVal = ref("");
+const lastNameVal = ref("");
+const cityVal = ref("");
+const phoneVal = ref("");
+const roleVal = ref("");
+
+const passwordVal = ref("");
+
+const showPersonalInfoButtons = computed(() => {
+    return emailVal.value !== profile.value?.email
+        || firstNameVal.value !== profile.value.firstname
+        || lastNameVal.value !== profile.value.lastname
+        || cityVal.value !== profile.value.city
+        || phoneVal.value !== profile.value.phone;
+});
+
+const personalGalleries = ref(0);
+const orders = ref(0);
+
+onMounted(async () => {
+    if (!userID) {
+        let userID_tmp = await isLogged();
+        if (!userID_tmp) {
+            location.href = `${langPrefix}login?redirect=${langPrefix}profile`;
+            return;
+        }
+        userId.value = userID_tmp;
+    } else {
+        userId.value = userID;
     }
 
-    // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.profile : fr.profile;
-    info.value = lang.value === 'en' ? en.profile.informations : fr.profile.informations;
-    buttons.value = lang.value === 'en' ? en.profile.buttons : fr.profile.buttons;
-    settings.value = lang.value === 'en' ? en.profile.settings : fr.profile.settings;
+    await getProfileElements();
+    loading.value = false;
+});
 
-    // get profile data
+const getProfileElements = async () => {
     const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
-        method: 'GET',
-        credentials: 'include',
+        method: "GET",
+        credentials: "include"
     });
     const data_profile = await response_profile.json();
     const result_profile = data_profile.data;
     profile.value = result_profile;
+    emailVal.value = result_profile.email;
+    firstNameVal.value = result_profile.firstname;
+    lastNameVal.value = result_profile.lastname;
+    cityVal.value = result_profile.city;
+    phoneVal.value = result_profile.phone;
 
-    // get gallery number data
     const response_gallery = await fetch(`https://api.ardeco.app/gallery/user/${userID}`, {
-        method: 'GET',
-        credentials: 'include',
+        method: "GET",
+        credentials: "include"
     });
     const data_gallery = await response_gallery.json();
     const result_gallery = data_gallery.data;
 
-    // get gallery number data
     const response_order_history = await fetch(`https://api.ardeco.app/order_history/user/${userID}`, {
-        method: 'GET',
-        credentials: 'include',
+        method: "GET",
+        credentials: "include"
     });
     const data_order_history = await response_order_history.json();
     const result_order_history = data_order_history.data;
 
-    document.getElementById("role").innerText = result_profile.role;
-    document.getElementById("firstName").innerHTML = result_profile.firstname;
-    document.getElementById("lastName").innerHTML = result_profile.lastname;
-    document.getElementById("email").innerHTML = result_profile.email;
-    document.getElementById("phone").innerHTML = result_profile.phone;
-    document.getElementById("city").innerHTML = result_profile.city;
-    document.getElementById("savedItems").innerHTML = result_gallery.length;
-    document.getElementById("commandsOrdered").innerHTML = result_order_history;
-    document.getElementById("first_name_edit").placeholder = result_profile.firstname;
-    document.getElementById("last_name_edit").placeholder = result_profile.lastname;
-    document.getElementById("email_edit").placeholder = result_profile.email;
-    document.getElementById("phone_edit").placeholder = result_profile.phone;
-    document.getElementById("city_edit").placeholder = result_profile.city;
+    roleVal.value = roles[result_profile.role as keyof typeof roles];
+    personalGalleries.value = result_gallery.length;
+    orders.value = result_order_history;
+};
 
-    // Remove loading and display profile
-    document.getElementById("profile-loading").style.display = "none";
-    document.getElementById("profileSettings").style.display = "block";
-    document.getElementsByClassName("profile-wrapper")[0].style.display = "block";
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block'
-});
+const validatePersonalData = (): Boolean => {
+    const errors = [];
+    if (!fieldEmail.value?.checkValidity()) errors.push("Une adresse email doit être renseignée"); // TODO : Translate
+    if (!fieldFirstName.value?.checkValidity()) errors.push("Un prénom doit être renseigné"); // TODO : Translate
+    if (errors.length > 0) {
+        errors.forEach(value => {
+            if (notifications.value) {
+                notifications.value.showError(value);
+            }
+        });
+        return false;
+    } else return true;
+};
 
-const confirmEdit = async () => {
-    document.getElementsByClassName("profile-wrapper")[0].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper")[1].style.display = 'none';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block';
-    const email_field = document.getElementById("email_edit").value;
-    const first_name_field = document.getElementById("first_name_edit").value;
-    const last_name_field = document.getElementById("last_name_edit").value;
-    const city_field = document.getElementById("city_edit").value;
-    const phone_field = document.getElementById("phone_edit").value;
+const editPersonalData = async () => {
+    if (!validatePersonalData()) return;
 
-    let json = {};
-    if (email_field !== "") json.email = email_field;
-    if (first_name_field !== "") json.first_name = first_name_field;
-    if (last_name_field !== "") json.last_name = last_name_field;
-    if (city_field !== "") json.city = city_field;
-    if (phone_field !== "") json.phone = phone_field;
+    let json: {
+        email?: string,
+        first_name?: string,
+        last_name?: string,
+        city?: string,
+        phone?: string
+    } = {};
 
-    const response = await fetch(`https://api.ardeco.app/user/${localStorage.getItem("userID")}`, {
-        method: 'PUT',
+    if (emailVal.value !== profile.value?.email) json.email = emailVal.value;
+    if (firstNameVal.value !== profile.value?.firstname) json.first_name = firstNameVal.value;
+    if (lastNameVal.value !== profile.value?.lastname) json.last_name = lastNameVal.value;
+    if (cityVal.value !== profile.value?.city) json.city = cityVal.value;
+    if (phoneVal.value !== profile.value?.phone) json.phone = phoneVal.value;
+
+    if (Object.keys(json).length > 0) {
+        const response = await fetch(`https://api.ardeco.app/user/${userId.value}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify(json)
+        });
+
+        const result = await response.json();
+        console.log(result);
+
+        if (result.status === "OK") {
+            profile.value = {
+                id: profile.value!.id,
+                email: emailVal.value,
+                firstname: firstNameVal.value,
+                lastname: lastNameVal.value,
+                city: cityVal.value,
+                phone: phoneVal.value
+            }; // Temporary update values with local ones
+            if (notifications.value) {
+                notifications.value.showSuccess(notificationsMessages.informationsUpdated);
+            }
+            await getProfileElements(); // Make sure all values are up to date
+        } else {
+            if (notifications.value) notifications.value.showError(notificationsMessages.informationsUpdateFailed);
+        }
+    }
+};
+
+const resetPersonalData = async () => {
+    const values = profile.value ? profile.value : undefined;
+
+    emailVal.value = values ? values.email : "";
+    firstNameVal.value = values ? values.firstname : "";
+    lastNameVal.value = values ? values.lastname : "";
+    cityVal.value = values ? values.city : "";
+    phoneVal.value = values ? values.phone : "";
+};
+
+const editPassword = async () => {
+    if (passwordVal.value.length === 0) {
+        if (notifications.value) notifications.value.showError(notificationsMessages.passwordCantBeEmpty);
+        return;
+    }
+
+    const response = await fetch(`https://api.ardeco.app/user/${userId.value}`, {
+        method: "PUT",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
-        credentials: 'include',
-        body: JSON.stringify(json)
+        credentials: "include",
+        body: JSON.stringify({
+            password: passwordVal.value
+        })
     });
 
     const result = await response.json();
     console.log(result);
-    location.reload();
-}
 
-const startEdit = async () => {
-    document.getElementsByClassName("profile-wrapper")[0].style.display = 'none';
-    document.getElementsByClassName("profile-wrapper")[1].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'none'
-}
-
-const cancelEdit = async () => {
-    document.getElementsByClassName("profile-wrapper")[0].style.display = 'block';
-    document.getElementsByClassName("profile-wrapper")[1].style.display = 'none';
-    document.getElementsByClassName("profile-wrapper-lower-buttons")[0].style.display = 'block'
-}
+    if (result.status === "OK") {
+        if (notifications.value) {
+            notifications.value.showSuccess(notificationsMessages.informationsUpdated);
+        }
+        logout();
+        location.href = `${langPrefix}login?redirect=${langPrefix}profile`;
+    } else {
+        if (notifications.value) notifications.value.showError(notificationsMessages.informationsUpdateFailed);
+    }
+};
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 #profile-container {
     display: flex;
     flex-direction: column;
@@ -241,11 +452,6 @@ const cancelEdit = async () => {
     justify-content: center;
 }
 
-.editProfileButton {
-    width: 10%;
-    border-radius: 5px;
-}
-
 .deleteAccountButton {
     width: 20%;
     margin-left: 5%;
@@ -258,10 +464,6 @@ const cancelEdit = async () => {
     text-align: center;
 }
 
-#startEditButton {
-    width: 20%;
-}
-
 .element {
     width: 47.5%;
     text-align: right;
@@ -271,14 +473,6 @@ const cancelEdit = async () => {
     margin-left: 5%;
     width: 45%;
     text-align: left;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 10% 0;
 }
 
 button {
@@ -294,4 +488,11 @@ button {
     background-color: #F4F4F4;
 }
 
+input {
+    @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
+}
+
+input[disabled] {
+    @apply bg-opacity-50 shadow-none border-0;
+}
 </style>

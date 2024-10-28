@@ -2,7 +2,7 @@
     <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
     <div id="order_history_loading">{{ content.loading }}</div>
     <div id="order_history_error">{{ errorMessage }}</div>
-    <div class="form" id="order_history_table" style="display: none">
+    <div id="order_history_table" class="form" style="display: none">
         <div class="grid">
             <div class="grid-header">
                 <div class="grid-item">{{ content.id }}</div>
@@ -26,14 +26,13 @@
 </template>
 
 <script setup>
-import {isLogged} from "public/ts/checkLogin";
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-import {onMounted, ref} from "vue";
+import { isLogged } from "public/ts/checkLogin";
+
+const nuxtApp = useNuxtApp();
 
 const route = useRoute();
 let lang = ref(route.params.lang);
-let content = ref({});
+let content = ref(nuxtApp.$content.orderHistory);
 let orderHistory = ref([]);
 let errorMessage = ref("");
 let successMessage = ref("");
@@ -41,28 +40,6 @@ const langPrefix = ref("/");
 const user_id = ref(0);
 
 onMounted(async () => {
-    // If lang selector is not passed in url, get the user's one or set it to french
-    if (lang.value !== 'en' && lang.value !== 'fr') {
-        const localStorageLang = localStorage.getItem('lang');
-        if (localStorageLang) {
-            lang.value = localStorageLang;
-        } else {
-            lang.value = 'fr';
-        }
-    }
-
-    console.log(lang.value);
-
-    // Set the content variable to the correct language
-    content.value = lang.value === 'en' ? en.orderHistory : fr.orderHistory;
-
-    // Prefix for links
-    if (location.href.includes("/fr/")) {
-        langPrefix.value = "/fr/";
-    } else if (location.href.includes("/en/")) {
-        langPrefix.value = "/en/";
-    }
-
     await checkLogin();
     await getOrderHistory();
 });
@@ -77,11 +54,11 @@ async function checkLogin() {
 
 async function getOrderHistory() {
     const response = await fetch(`https://api.ardeco.app/order_history/user/${user_id.value}?mode=details`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json"
         },
-        credentials: 'include',
+        credentials: "include"
     });
 
     if (!response.ok) {
@@ -110,14 +87,14 @@ async function getOrderHistory() {
 }
 
 async function downloadInvoice(id) {
-    errorMessage.value = '';
+    errorMessage.value = "";
 
     const response = await fetch(`https://api.ardeco.app/order_history/invoice/${id}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-            'Content-Type': 'application/pdf',
+            "Content-Type": "application/pdf"
         },
-        credentials: 'include',
+        credentials: "include"
     });
 
     if (!response.ok) {
@@ -133,14 +110,14 @@ async function downloadInvoice(id) {
         alert(result.description);
     } else {
         //const file = new Blob([result], {type: 'application/pdf'});
-        response.headers
+        response.headers;
         const file = URL.createObjectURL(result);
-        window.open(file, '_blank');
+        window.open(file, "_blank");
     }
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .form {
     display: flex;
     flex-direction: column;

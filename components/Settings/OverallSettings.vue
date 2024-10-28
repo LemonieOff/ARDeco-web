@@ -1,166 +1,191 @@
 <template>
-    <div class="text-center font-bold text-xl md:text-4xl my-8">{{content.title}}</div>
-    <div class="parameters">
-        <hr>
-        <div class="center-side-parameters">
-            <div class="currentUserSettings">
-                <div class="currentUserSettingsTitle" id="currentUserSettings">{{content.currentUserSettingsTitle}}</div>
-                <div class="optionOnOff">
-                    <span>{{content.language}} : </span>
-                    <span id="currentLang">OFF</span>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
+    <div class="flex flex-col lg:flex-row justify-evenly content-around items-center lg:items-start mb-8">
+        <div class="w-96 mb-8 p-2.5 rounded-xl bg-port-brown bg-opacity-20">
+            <div class="flex p-2.5 mx-5 items-center justify-between">
+                <div class="flex flex-col">
+                    <span class="text-stone-600 dark:text-stone-400">{{ content.notificationsActive }}</span>
+                    <span id="notifications_enabled" class="text-sm">Chargement</span>
                 </div>
-                <div class="optionOnOff">
-                    <span>Notifications : </span>
-                    <span id="currentNotifications">OFF</span>
-                </div>
+                <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
+                        @click="setSetting('notifications_enabled', !this.settings.notifications_enabled)">
+                    Modifier
+                </button>
             </div>
-            <div class="updateUserSettings">
-                <button id="setUserSettings" class="buttonSettings" @click="setSettings">{{content.setUserSettings}}</button>
-                <div class="settingsSetter">
-                    <span id="languageSetter">{{content.language}} : </span>
-                    <button class="optionSetter" id="languageSetterButton" @click="changeLanguageButton">FR</button>
+
+            <div class="flex p-2.5 mx-5 items-center justify-between">
+                <div class="flex flex-col">
+                    <span class="text-stone-600 dark:text-stone-400">{{ content.publicLastName }}</span>
+                    <span id="display_lastname_on_public" class="text-sm">Chargement</span>
                 </div>
-                <div class="settingsSetter">
-                    <span id="notificationsSetter">Notifications : </span>
-                    <button class="optionSetter" id="notificationsSetterButton" @click="changeNotificationsButton">ON</button>
-                </div>
+                <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
+                        @click="setSetting('display_lastname_on_public', !this.settings.display_lastname_on_public)">
+                    Modifier
+                </button>
             </div>
-            <button id="getUserGallery" class="buttonSettings" style="margin-top: 10%;" @click="getGallery">{{content.getUserGallery}}</button>
+
+            <div class="flex p-2.5 mx-5 items-center justify-between">
+                <div class="flex flex-col">
+                    <span class="text-stone-600 dark:text-stone-400">{{ content.publicEmailAddress }}</span>
+                    <span id="display_email_on_public" class="text-sm">Chargement</span>
+                </div>
+
+                <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
+                        @click="setSetting('display_email_on_public', !this.settings.display_email_on_public)">
+                    Modifier
+                </button>
+            </div>
+
+            <div class="flex p-2.5 mx-5 items-center justify-between">
+                <div class="flex flex-col">
+                    <span class="text-stone-600 dark:text-stone-400">{{ content.newGalleries }}</span>
+                    <span id="automatic_new_gallery_share" class="text-sm">Chargement</span>
+                </div>
+                <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
+                        @click="setSetting('automatic_new_gallery_share', !this.settings.automatic_new_gallery_share)">
+                    Modifier
+                </button>
+            </div>
         </div>
-        <div class="right-side-parameters">
-            <div id="reponseText" class="buttonSettingsResponse"></div>
+        <div>
+            <div class="flex justify-center mb-4 space-x-4">
+                <div style="font-weight: bold;">{{ content.sortBy }}</div>
+                <div id="dateFilter" style="cursor: pointer;" @click="handleFilters('dateFilter'); filterByDate()">
+                    {{ content.dateFilter }}
+                </div>
+                <div id="nameFilter" style="cursor: pointer;" @click="handleFilters('nameFilter'); filterByName()">
+                    {{ content.nameFilter }}
+                </div>
+                <div id="roomFilter" style="cursor: pointer;" @click="handleFilters('roomFilter'); filterByRoom()">
+                    {{ content.roomFilter }}
+                </div>
+                <div id="styleFilter" style="cursor: pointer;" @click="handleFilters('styleFilter'); filterByStyle()">
+                    {{ content.styleFilter }}
+                </div>
+            </div>
+            <table v-if="galleryData.length" class="w-96 border-[1px] rounded-md border-spacing-0 border-separate">
+                <thead>
+                <tr>
+                    <th class="p-2.5">{{ content.name }}</th>
+                    <th class="p-2.5">{{ content.room }}</th>
+                    <th class="p-2.5">{{ content.style }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="gallery in galleryData" :key="gallery.id"
+                        class="cursor-pointer odd:dark:bg-AR-Grey odd:bg-AR-Floral-White"
+                        @click="redirectToGallery(gallery.id)">
+                        <td class="p-2.5">{{ gallery.name }}</td>
+                        <td class="p-2.5">{{ gallery.room }}</td>
+                        <td class="p-2.5">{{ gallery.style }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p v-else>{{ content.galleryIsEmpty }}</p>
         </div>
     </div>
+    <Notifications ref="notifications" />
 </template>
 
 <script>
-import en from "~/src/lang/en.json";
-import fr from "~/src/lang/fr.json";
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
+import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "OverallSettings",
+    components: {
+        Notifications
+    },
     props: {
         urlLang: String | null
     },
     data() {
         return {
-            content: {},
-            placeholders: {},
-            langPrefix: "/"
-        }
+            content: this.$content.settings.users,
+            langPrefix: this.$langPrefix,
+            galleryData: [],
+            settings: [],
+            notificationMessages: this.$content.notifications
+        };
     },
     mounted() {
-        let lang = this.urlLang
-
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-
-        this.content = lang === 'en' ? en.settings.users : fr.settings.users;
-        this.placeholders = lang === 'en' ? en.settings.users.placeholders : fr.settings.users.placeholders;
-
+        this.getGallery();
+        document.getElementById("dateFilter").style.fontWeight = "bold";
         this.getSettings();
     },
     methods: {
-        async changeLanguageButton() {
+        async setSetting(optionName, optionEffect) {
             await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            console.log("document.getElementById('languageSetterButton').innerHTML = ", document.getElementById('languageSetterButton').innerHTML)
-            if (document.getElementById('languageSetterButton').innerHTML == "FR") {
-                document.getElementById('languageSetterButton').innerHTML = "EN";
-                document.getElementById('languageSetterButton').style.backgroundColor = "red";
-            } else {
-                document.getElementById('languageSetterButton').innerHTML = "FR";
-                document.getElementById('languageSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
-            }
-        },
-        async changeNotificationsButton() {
-            await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
-            console.log("document.getElementById('notificationsSetterButton').innerHTML = ", document.getElementById('notificationsSetterButton').innerHTML)
-            if (document.getElementById('notificationsSetterButton').innerHTML == "ON") {
-                document.getElementById('notificationsSetterButton').innerHTML = "OFF";
-                document.getElementById('notificationsSetterButton').style.backgroundColor = "red";
-            } else {
-                document.getElementById('notificationsSetterButton').innerHTML = "ON";
-                document.getElementById('notificationsSetterButton').style.backgroundColor = "rgb(0, 122, 0)";
-            }
-        },
-        async setSettings() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
-            let lang = 'fr';
-            let notifs = true;
-            if (document.querySelector('#languageSetterButton').innerHTML == "EN") {
-                lang = 'en';
-            }
-            if (document.querySelector('#notificationsSetterButton').innerHTML == "OFF") {
-                notifs = false;
-            }
-            console.log(lang, notifs, true, userID, 'https://api.ardeco.app/settings');
-            const response = await fetch('https://api.ardeco.app/settings', {
-                method: 'PUT',
+            console.log(optionName, optionEffect);
+
+            const response = await fetch("https://api.ardeco.app/settings", {
+                method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "language": lang,
-                    "notifications_enabled": notifs,
+                    [optionName]: optionEffect
                 }),
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
             console.log(result);
-            if (result.code == 200) {
-                document.getElementById('reponseText').innerHTML = result.description;
-                localStorage.setItem('lang', lang);
+            if (result.code === 200) {
+                this.$refs.notifications.showSuccess(this.notificationMessages.informationsUpdated);
+                if (optionEffect) {
+                    document.getElementById([optionName]).textContent = "Oui";
+                } else {
+                    document.getElementById([optionName]).textContent = "Non";
+                }
             } else {
-                document.getElementById('reponseText').innerHTML = result.description;
+                this.$refs.notifications.showError(this.notificationMessages.informationsUpdateFailed);
             }
-            location.reload()
+            await this.getSettings();
         },
         async getSettings() {
             await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            const response = await fetch('https://api.ardeco.app/settings', {
-                method: 'GET',
+            const response = await fetch("https://api.ardeco.app/settings", {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
+            this.settings = result.data;
 
             console.log(result);
-            if (result.code == 200) {
-                if (result.data.language == "fr") {
-                    document.getElementById('currentLang').innerHTML = "FR";
+            if (result.code === 200) {
+                if (this.settings.notifications_enabled === true) {
+                    document.getElementById("notifications_enabled").textContent = this.content.yes;
                 } else {
-                    document.getElementById('currentLang').innerHTML = "EN";
+                    document.getElementById("notifications_enabled").textContent = this.content.no;
                 }
-                if (result.data.notifications_enabled == true) {
-                    document.getElementById('currentNotifications').innerHTML = "ON";
+                if (this.settings.display_lastname_on_public === true) {
+                    document.getElementById("display_lastname_on_public").textContent = this.content.yes;
                 } else {
-                    document.getElementById('currentNotifications').innerHTML = "OFF";
+                    document.getElementById("display_lastname_on_public").textContent = this.content.no;
                 }
-                localStorage.setItem('dark_mode', result.data.dark_mode);
+                if (this.settings.display_email_on_public === true) {
+                    document.getElementById("display_email_on_public").textContent = this.content.yes;
+                } else {
+                    document.getElementById("display_email_on_public").textContent = this.content.no;
+                }
+                if (this.settings.automatic_new_gallery_share === true) {
+                    document.getElementById("automatic_new_gallery_share").textContent = this.content.yes;
+                } else {
+                    document.getElementById("automatic_new_gallery_share").textContent = this.content.no;
+                }
             } else {
-                document.getElementById('reponseText').innerHTML = result.description;
+                this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
         },
         async getGallery() {
@@ -168,135 +193,73 @@ export default {
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            const response = await fetch('https://api.ardeco.app/gallery/user/' + `${userID}`, {
-                method: 'GET',
+            const response = await fetch("https://api.ardeco.app/gallery/user/" + `${userID}`, {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
-            console.log(result);
-            document.getElementById('reponseText').innerHTML = '';
-            if (result.code == 200 && result.data.length == 0) {
-                document.getElementById('reponseText').innerHTML = 'Gallery empty';
-            } else {
-                for (let i = 0; i < result.data.length; i++) {
-                    document.getElementById('reponseText').innerHTML += 
-                        '<p>' + (i + 1) + '. ' + `${result.data[i].name}` +
-                        ' - ' + `${result.data[i].room_type}` + 
-                        ' - ' + `${result.data[i].description}` +
-                        ' - ' + `${result.data[i].id}` + '</p>';
-                }
+            this.galleryData = result.data;
+            console.log("this.galleryData : ", this.galleryData);
+            if (result.code === 200 && result.data.length === 0) {
+                this.$refs.notifications.showSuccess(this.notificationMessages.emptyGallery);
+            } else if (result.code !== 200) {
+                this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
+        },
+
+        async redirectToGallery(galleryId) {
+            this.$router.push(`${this.langPrefix}gallery/` + galleryId);
+        },
+
+        async handleFilters(id) {
+            const dateFilter = document.getElementById("dateFilter");
+            const nameFilter = document.getElementById("nameFilter");
+            const roomFilter = document.getElementById("roomFilter");
+            const styleFilter = document.getElementById("styleFilter");
+            const div = document.getElementById(id);
+
+            if (id === "dateFilter") {
+                div.style.fontWeight = "bold";
+                nameFilter.style.fontWeight = "normal";
+                roomFilter.style.fontWeight = "normal";
+                styleFilter.style.fontWeight = "normal";
+            } else if (id === "nameFilter") {
+                div.style.fontWeight = "bold";
+                dateFilter.style.fontWeight = "normal";
+                roomFilter.style.fontWeight = "normal";
+                styleFilter.style.fontWeight = "normal";
+            } else if (id === "roomFilter") {
+                div.style.fontWeight = "bold";
+                dateFilter.style.fontWeight = "normal";
+                nameFilter.style.fontWeight = "normal";
+                styleFilter.style.fontWeight = "normal";
+            } else if (id === "styleFilter") {
+                div.style.fontWeight = "bold";
+                dateFilter.style.fontWeight = "normal";
+                nameFilter.style.fontWeight = "normal";
+                roomFilter.style.fontWeight = "normal";
+            }
+        },
+
+        async filterByDate() {
+            return this.galleryData.sort((a, b) => a.id - b.id);
+        },
+
+        async filterByName() {
+            this.galleryData.sort((a, b) => a.name.localeCompare(b.name));
+        },
+
+        async filterByRoom() {
+            this.galleryData.sort((a, b) => a.room.localeCompare(b.room));
+        },
+
+        async filterByStyle() {
+            this.galleryData.sort((a, b) => a.style.localeCompare(b.style));
         }
     }
-}
+};
 </script>
-
-<style lang="scss" scoped>
-@import "@/styles/ProfileSettings.scss";
-
-.navbar-top-space {
-    height: 10vh;
-}
-
-.title {
-    font-weight: bold;
-    margin-bottom: 4%;
-}
-
-.parameters {
-    display: inline-flex;
-    min-height: 100%;
-    width: 50%;
-    margin-left: 25%;
-}
-
-.center-side-parameters {
-    width: 50%;
-    text-align: center;
-}
-
-.right-side-parameters {
-    width: 50%;
-}
-
-.currentUserSettings {
-    background-color: #F4F4F4;
-    margin-left: 20%;
-    width: 60%;
-    min-height: 15%;
-    align-self: center;
-    border-radius: 20px;
-}
-
-.currentUserSettingsTitle {
-    padding: 2%;
-    font-weight: bold;
-}
-
-.optionOnOff {
-    padding: 1%;
-}
-
-.updateUserSettings {
-    margin-top: 10%;
-    background-color: #F4F4F4;
-    margin-left: 20%;
-    width: 60%;
-    min-height: 15%;
-    align-self: center;
-    border-radius: 20px;
-}
-
-#setUserSettings {
-    font-weight: bold;
-    margin: 2%;
-}
-
-.settingsSetter {
-    padding: 1%;
-}
-
-.optionSetter {
-    border-radius: 5px;
-    font-weight: bold;
-    background-color: rgb(0, 122, 0);
-}
-
-.secondOptionSetter {
-    border-radius: 5px;
-    font-weight: bold;
-    background-color: red;
-}
-
-.addFurnitureDiv {
-    margin-top: 10%;
-}
-
-button {
-    background-color: #F4F4F4;
-    outline-style: solid;
-    outline-width: thin;
-    border-radius: 5px;
-}
-
-.buttonSettings {
-    width: 60%;
-    margin-top: 1%;
-    background-color: #F4F4F4;
-    text-align: center;
-}
-
-.buttonSettingsResponse {
-    background-color: #F4F4F4;
-    margin-left: 20%;
-    width: 60%;
-    height: 100%;
-    align-self: center;
-    border-radius: 20px;
-}
-
-</style>

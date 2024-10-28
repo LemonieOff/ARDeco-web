@@ -1,173 +1,187 @@
 <template>
-    <div class="text-center font-bold text-xl md:text-4xl my-8">Meubles favoris</div>
-    <div class="form">
-        <div class="grid">
-            <div class="grid-header">
-                <div class="grid-item">ID</div>
-                <div class="grid-item">Nom</div>
-                <div class="grid-item">Prix</div>
-                <div class="grid-item">Styles</div>
-                <div class="grid-item">Couleurs</div>
-                <div class="grid-item">Pièces</div>
-                <div class="grid-item">Dimensions</div>
-                <div class="grid-item">Entreprise</div>
-                <div class="grid-item">Actions</div>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
+    <div v-if="furnitureData.length > 0 && errorMessage === ''" class="flex flex-wrap justify-center gap-5 mb-8">
+        <div v-for="data in furnitureData" :key="data.favorite_furniture.id"
+             class="rounded-lg bg-AR-Floral-White dark:bg-AR-Grey h-fit flex flex-col p-5 min-w-56 max-w-56 sm:min-w-96 sm:max-w-96"
+             style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+            <div class="flex flex-row justify-between items-center mb-2">
+                <a v-if="data.furniture.active" :href="`${langPrefix}catalog/${data.furniture.id}`"
+                   class="font-bold underline text-xl cursor-pointer hover:opacity-75">{{ data.furniture.name }}</a>
+                <span v-else class="font-bold underline text-xl cursor-not-allowed">{{ data.furniture.name }}</span>
+                <Icon class="cursor-pointer text-amber-300 hover:text-AR-Extra-Light-Grey" mode="svg"
+                      name="material-symbols:star"
+                      size="24"
+                      tabindex="0"
+                      @click="deleteFurniture(data.furniture.id)" />
             </div>
-            <div v-for="(item, index) in furnitureData" :key="index" class="grid-row">
-                <div class="grid-item">{{ item.furniture.id }}</div>
-                <div class="grid-item">{{ item.furniture.name }}</div>
-                <div class="grid-item">{{ item.furniture.price }}</div>
-                <div class="grid-item">{{ item.furniture.styles }}</div>
-                <div class="grid-item">{{ item.furniture.colors }}</div>
-                <div class="grid-item">{{ item.furniture.rooms }}</div>
-                <div class="grid-item">{{ item.furniture.height }} x {{ item.furniture.width }} x
-                    {{ item.furniture.depth }}
-                </div>
-                <div class="grid-item">{{ item.furniture.company }}</div>
-                <div class="grid-item">
-                    <button class="custom-button" @click="deleteFurniture(item.furniture.id)">Supprimer</button>
-                </div>
+            <div class="flex flex-col sm:flex-row justify-between">
+                <span class="inline-flex items-center">
+                    <svg height="1.25em" viewBox="0 0 36 36"
+                         width="1.25em"
+                         xmlns="http://www.w3.org/2000/svg"><path
+                        d="M9.344 14.702h-2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5"
+                        fill="#a0041e" /><path
+                        d="M5 16L18 3l13 13v17H5z" fill="#ffe8b6" /><path d="M18 16h1v16h-1z" fill="#ffcc4d" /><path
+                        d="M31 17a1 1 0 0 1-.707-.293L18 4.414L5.707 16.707a.999.999 0 1 1-1.414-1.414l13-13a1 1 0 0 1 1.414 0l13 13A.999.999 0 0 1 31 17"
+                        fill="#66757f" /><path
+                        d="M18 17a.999.999 0 0 1-.707-1.707l6.5-6.5a.999.999 0 1 1 1.414 1.414l-6.5 6.5A1 1 0 0 1 18 17"
+                        fill="#66757f" /><path
+                        d="M10 26h4v6h-4z" fill="#c1694f" /><path d="M10 17h4v4h-4zm12.5 0h4v4h-4zm0 9h4v4h-4z"
+                                                                  fill="#55acee" /><path
+                        d="M33.5 33.5A1.5 1.5 0 0 1 32 35H4a1.5 1.5 0 0 1 0-3h28a1.5 1.5 0 0 1 1.5 1.5"
+                        fill="#5c913b" /></svg>
+                    <span class="ml-2">{{ data.furniture.rooms.length
+                        }} {{ data.furniture.rooms.length > 1 ? `${content.roomMul}` : `${content.roomSing}`
+                        }}</span>
+                </span>
+                <span class="inline-flex items-center">
+                    <svg height="1.25em" viewBox="0 0 36 36"
+                         width="1.25em"
+                         xmlns="http://www.w3.org/2000/svg"><path
+                        d="M35 30a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h30a2 2 0 0 1 2 2z" fill="#d79e84" /><path
+                        d="M33 4H3a2 2 0 0 0-2 2v24c0 .389.116.748.307 1.055l33.33-26.198A2 2 0 0 0 33 4"
+                        fill="#bf6952" /><path
+                        d="M31 22V9a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v13z" fill="#8ccaf7" /><path
+                        d="M6 28h13v-7H5v6a1 1 0 0 0 1 1"
+                        fill="#5dadec" /><path
+                        d="M19 21v7h11a1 1 0 0 0 1-1v-6z" fill="#292f33" /><path
+                        d="M20 19c-.613 0-.852 1.127-1.405 2c-.349.55-.822 1-1.595 1c-2 0-2 3-3 3c-1.256 0-2.512 1.578-3.273 3H19c.879-1.758 1.761-3.514 4-3.913A5.6 5.6 0 0 1 24 24c3 0 3.106-1.553 4-2c1.358-.679 2.251-.437 3-.211V19z"
+                        fill="#67757f" /><path
+                        d="m25 11l-4 4v4h8v-4z" fill="#e75a70" /><path
+                        d="M29 16a1 1 0 0 1-.707-.293L25 12.414l-3.293 3.293a.999.999 0 1 1-1.414-1.414l4-4a1 1 0 0 1 1.414 0l4 4A.999.999 0 0 1 29 16"
+                        fill="#292f33" /><path
+                        d="M23 16h2v3h-2z" fill="#bb1a34" /><path
+                        d="M17.219 14.125a1.874 1.874 0 0 0-1.875-1.875c-.079 0-.155.014-.232.023q.043-.193.044-.398A1.874 1.874 0 0 0 13.281 10a1.87 1.87 0 0 0-1.583.878a1.9 1.9 0 0 0-.667-.128a1.87 1.87 0 0 0-1.851 1.632a1.9 1.9 0 0 0-.68-.132a1.874 1.874 0 1 0 0 3.75c.041 0 .08-.01.121-.012l.004.012h6.75v-.003a1.873 1.873 0 0 0 1.844-1.872"
+                        fill="#fff" /></svg>
+                    <span class="ml-2">{{ data.furniture.styles.length
+                        }} {{ data.furniture.styles.length > 1 ? `${content.styleMul}` : `${content.styleSing}`
+                        }}</span>
+                </span>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-between mb-2">
+                <span class="inline-flex items-center">
+                <svg height="1.25em" viewBox="0 0 36 36" width="1.25em" xmlns="http://www.w3.org/2000/svg"><path
+                    d="M18 3.143c-9.941 0-18 6.908-18 15.428c0 1.066.126 2.107.367 3.112C2.146 24.744 3.377 22.812 9 20c5.727-2.864 0 4-2 8c-.615 1.23-.282 2.271.56 3.124C10.506 32.928 14.104 34 18 34c9.941 0 18-6.907 18-15.429c0-8.52-8.059-15.428-18-15.428m2.849 24.447c-.395 1.346-2.46 1.924-4.613 1.291c-2.153-.632-3.578-2.234-3.183-3.581s2.46-1.924 4.613-1.29c2.153.631 3.578 2.233 3.183 3.58"
+                    fill="#d99e82" /><circle cx="10" cy="11" fill="#5c913b" r="3" /><circle cx="20" cy="9" fill="#269"
+                                                                                            r="3" /><circle cx="29"
+                                                                                                            cy="15"
+                                                                                                            fill="#dd2e44"
+                                                                                                            r="3" /><circle
+                    cx="28" cy="24" fill="#ffcc4d" r="3" /></svg>
+                    <span class="ml-2">{{ data.furniture.colors.length
+                        }} {{ data.furniture.colors.length > 1 ? `${content.colorMul}` : `${content.colorSing}`
+                        }}</span>
+                </span>
+                <span class="opacity-50">{{ content.by }} {{ data.furniture.company }}</span>
+            </div>
+            <a v-if="data.furniture.active" :href="`${langPrefix}catalog/${data.furniture.id}`"
+               class="block text-[#086100] dark:text-[#ade5a8] border-2 border-[#086100] dark:border-[#ade5a8] hover:bg-AR-Beige hover:dark:bg-AR-Dark-Grey rounded text-center mt-2.5 py-2.5 px-5 duration-100 transition-colors">
+                {{ content.accessDetails }}
+            </a>
+            <div v-else
+                 class="block text-[#a91a1a] dark:text-[#ffc7c7] border-2 border-[#a91a1a] dark:border-[#ffc7c7] cursor-not-allowed rounded text-center mt-2.5 py-2.5 px-5 duration-100 transition-colors">
+                {{ content.inactive }}
             </div>
         </div>
     </div>
+    <p v-else class="text-center italic mt-5">
+        {{ errorMessage === "" ? content.loading : errorMessage }}
+    </p>
 </template>
 
-<script>
-import {isLogged} from "public/ts/checkLogin";
+<script lang="ts" setup>
+import { isLogged, userID } from "public/ts/checkLogin";
 
-export default {
-    name: "FavFourniture",
-    data() {
-        return {
-            furnitureData: [],
-            errorMessage: '',
-            successMessage: ''
-        };
+const nuxtApp = useNuxtApp();
+
+const content = nuxtApp.$content.favorite.furniture;
+const values = nuxtApp.$content.values;
+
+const furnitureData = ref<{
+    furniture: {
+        id: number,
+        name: string,
+        price: number,
+        height: number,
+        width: number,
+        depth: number,
+        company: string,
+        colors: (keyof typeof values.colors)[],
+        rooms: (keyof typeof values.rooms)[],
+        styles: (keyof typeof values.styles)[],
+        active: boolean
     },
-    created() {
-        this.checkLogin();
-        this.getFavFurniture();
-    },
-    methods: {
-        async checkLogin() {
-            const userID = await isLogged();
-            if (!userID) {
-                location.href = "/login";
-            }
-        },
+    favorite_furniture: {
+        furniture_id: number,
+        id: number,
+        timestamp: string,
+        user_id: number
+    }
+}[]>([]);
+const errorMessage = ref("");
+const langPrefix = nuxtApp.$langPrefix;
+const userId = ref(0);
 
-        async getFavFurniture() {
-            try {
-                const userID = localStorage.getItem('userID');
-                if (!userID) {
-                    throw new Error('No user found, redirecting to login');
-                }
+onBeforeMount(() => {
+    checkLogin();
+    getFavFurniture();
+});
 
-                const response = await fetch('https://api.ardeco.app/favorite/furniture', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data');
-                }
-
-                const result = await response.json();
-                this.furnitureData = result.data;
-            } catch (error) {
-                console.error(error.message);
-                this.errorMessage = error.message;
-            }
-        },
-        async deleteFurniture(id) {
-            try {
-                const response = await fetch(`https://api.ardeco.app/favorite/Furniture/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                });
-                if (response.ok) {
-                    this.successMessage = 'Furniture deleted successfully';
-                    this.furnitureData = this.furnitureData.filter(item => item.furniture.id !== id);
-                } else {
-                    throw new Error('Failed to delete furniture');
-                }
-            } catch (error) {
-                console.error(error);
-                this.errorMessage = 'An error occurred while deleting the furniture.';
-            }
+async function checkLogin() {
+    if (!userID) {
+        let userID_tmp = await isLogged();
+        if (!userID_tmp) {
+            location.href = `${langPrefix}login?redirect=${langPrefix}favFurniture`;
+            return;
         }
+        userId.value = userID_tmp;
+    } else {
+        userId.value = userID;
+    }
+}
+
+async function getFavFurniture() {
+    const response = await fetch("https://api.ardeco.app/favorite/furniture", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    });
+
+    if (response.type === "error") {
+        errorMessage.value = "Fail to fetch favorite furniture, network error";
+        return;
+    }
+
+    const result = await response.json();
+    console.debug(result);
+
+    if (!response.ok) {
+        if (response.status === 404) {
+            errorMessage.value = content.noItems;
+        } else {
+            errorMessage.value = "Fail to fetch data";
+        }
+        return;
+    }
+    furnitureData.value = result.data;
+}
+
+async function deleteFurniture(id: number) {
+    const response = await fetch(`https://api.ardeco.app/favorite/Furniture/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    });
+    if (response.ok) {
+        furnitureData.value = furnitureData.value.filter(item => item.furniture.id !== id);
+        if (furnitureData.value.length <= 0) errorMessage.value = content.noItems;
+    } else {
+        console.error("Failed to delete furniture");
+        errorMessage.value = "An error occurred while deleting the furniture.";
     }
 }
 </script>
-
-<style scoped lang="scss">
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 10% 0;
-}
-
-.edit-error {
-    color: red;
-}
-
-.edit-success {
-    color: green;
-}
-
-.custom-button {
-    padding: 5px 20px;
-    background-color: #F2EBDF;
-    color: rgb(62 64 63);
-    border: 2px solid rgb(62 64 63);
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.grid {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid #000;
-    border-radius: 5px;
-}
-
-.grid-header {
-    min-width: 1400px;
-    display: flex;
-    font-weight: bold;
-
-}
-
-.grid-row {
-    display: flex;
-}
-
-.grid-item {
-    flex: 1;
-    padding: 10px;
-    border-right: 1px solid #000;
-}
-
-.grid-item:last-child {
-    border-right: none;
-}
-
-.grid-row:hover {
-    background-color: rgb(191, 178, 170);
-}
-
-.grid-item {
-    flex: 1;
-    padding: 12px; /* Adjust padding */
-    border-right: 1px solid #ddd; /* Lighter border */
-    border-bottom: 1px solid #ddd; /* Add bottom border */
-}
-</style>
