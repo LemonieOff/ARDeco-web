@@ -25,9 +25,22 @@
 }
 
 .card {
-    border-radius: 2vw;
-    border: 5px solid #846700;
-    background: linear-gradient(156deg, rgba(255, 199, 0, 0.40) 0%, rgba(132, 103, 0, 0.00) 50%), linear-gradient(0deg, #FFC700 0%, rgba(242, 235, 223, 0.00) 50%);
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: linear-gradient(135deg, #F2EBDF 64.31%, #BFB2AA 100%);
+    box-shadow: 
+        0 2px 10px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.card:hover {
+    transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 
+        0 15px 30px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.6) inset;
 }
 
 .hobby {
@@ -64,16 +77,16 @@
 }
 
 .name {
-    margin-top: -17.5%;
-    font-size: 1.25vw;
+    font-size: 1.5rem;
     font-weight: bold;
+    color: #333;
 }
 
 .role {
-    margin-top: -10%;
+    margin-top: 0.5rem;
     color: #6C6C6C;
-    font-weight: bold;
-    font-size: 1.25vw;
+    font-weight: 500;
+    font-size: 1rem;
 }
 
 .timeline-content {
@@ -93,36 +106,45 @@
     }
 }
 
-.timeline-inactive {
+.timeline-inactive, .timeline-active {
     align-self: center;
-    width: 15%;
-    height: 0.417vw;
-    background: $timeline-inactive;
+    height: 0.25rem;
+    transition: all 0.3s ease;
+    border-radius: 0.125rem;
+}
+
+.timeline-inactive {
+    background: linear-gradient(90deg, $timeline-inactive, lighten($timeline-inactive, 10%));
 }
 
 .timeline-active {
-    align-self: center;
-    width: 15%;
-    height: 0.417vw;
-    background: $timeline-active;
+    background: linear-gradient(90deg, $timeline-active, lighten($timeline-active, 10%));
+}
+
+.timeline-active:hover {
+    height: 0.35rem;
+}
+
+.year-bubble-active, .year-bubble-inactive {
+    margin-top: -0.25vw;
+    margin-left: -0.25vw;
+    height: 1vw;
+    width: 1vw;
+    border-radius: 50%;
+    transition: all 0.3s ease;
 }
 
 .year-bubble-active {
-    margin-top: -0.25vw;
-    margin-left: -0.25vw;
-    height: 1vw;
-    width: 1vw;
     background-color: $timeline-active;
-    border-radius: 50%;
+    box-shadow: 0 0 10px rgba($timeline-active, 0.5);
 }
 
 .year-bubble-inactive {
-    margin-top: -0.25vw;
-    margin-left: -0.25vw;
-    height: 1vw;
-    width: 1vw;
     background-color: $timeline-inactive;
-    border-radius: 50%;
+}
+
+.year-bubble-active:hover, .year-bubble-inactive:hover {
+    transform: scale(1.2);
 }
 
 .end-year-bubble-active {
@@ -145,25 +167,38 @@
     border-bottom: 0.5vw solid transparent;
 }
 
-.year-2020 {
-    margin-top: 0.5%;
-    margin-right: 2vw;
+.year-2020, .year-2023 {
     align-self: center;
     font-weight: bold;
     font-size: 1.25vw;
+    transition: all 0.3s ease;
+}
+
+.year-2020 {
+    margin-top: 0.5%;
+    margin-right: 2vw;
 }
 
 .year-2023 {
     margin-top: 0.5%;
     margin-left: 3vw;
-    align-self: center;
-    font-weight: bold;
-    font-size: 1.25vw;
+}
+
+.year-2020:hover, .year-2023:hover {
+    color: $timeline-active;
+    transform: scale(1.1);
 }
 
 .internship-logo {
     margin: 2vh;
-    width: 3vw
+    width: 3vw;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+}
+
+.internship-logo:hover {
+    transform: translateY(-5px);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 .internship-role {
@@ -194,11 +229,11 @@
 }
 
 img {
-    transition: .3s ease-in-out;
+    transition: .1s ease-in-out;
 }
 
 img:hover {
-    transform: scale(1.25);
+    transform: scale(1.1);
 }
 
 @media screen and (max-width: 1181px) {
@@ -302,4 +337,18 @@ img:hover {
     .epitech-logo-timeline {
         display: none;
     }
+}
+
+.card .profile-picture,
+.card .name,
+.card .role,
+.card .hobby {
+    transition: transform 0.3s ease;
+}
+
+.card:hover .profile-picture,
+.card:hover .name,
+.card:hover .role,
+.card:hover .hobby {
+    transform: translateZ(20px);
 }

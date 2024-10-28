@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-page-content bottom-left-yellow-fade-background" id="hugo2-profile">
+    <div class="profile-page-content bg-AR-Beige dark:bg-AR-Dark-Grey" id="hugo2-profile">
         <div class="sub-content">
             <div class="personal-content card">
                 <img class="hobby" src="@/assets/images/profile-hobbies/croissant.png" alt="Croissant">

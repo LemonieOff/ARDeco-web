@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-page-content top-right-yellow-fade-background" id="evan-profile">
+    <div class="profile-page-content bg-gradient-to-b from-port-brown to-AR-Beige dark:from-AR-Dark-Grey dark:to-AR-Dark-Grey" id="evan-profile">
         <div class="sub-content">
             <div class="personal-content card">
                 <img class="hobby" src="../../assets/images/profile-hobbies/controller.png" alt="Video game controller">

@@ -1,5 +1,5 @@
 <template>
-    <div class="profile-page-content top-left-yellow-fade-background" id="valentin-profile">
+    <div class="profile-page-content bg-AR-Beige dark:bg-AR-Dark-Grey" id="valentin-profile">
         <div class="sub-content">
             <div class="personal-content card">
                 <img class="hobby" src="@/assets/images/profile-hobbies/football.png" alt="Football">

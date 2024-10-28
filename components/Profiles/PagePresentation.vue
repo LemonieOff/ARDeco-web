@@ -1,5 +1,5 @@
 <template>
-    <div class="page-presentation-content top-right-yellow-fade-background">
+    <div class="page-presentation-content bg-gradient-to-t from-port-brown to-AR-Beige dark:from-AR-Grey dark:to-AR-Dark-Grey">
         <div id="title" class="text-center font-bold py-8 text-xl md:text-4xl">{{ content.title }}</div>
         <div class="sub-content">
             <div class="team-content">
