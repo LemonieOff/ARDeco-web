@@ -596,6 +596,8 @@
     "rooms": "Rooms",
     "furnitureTable": "Furniture",
     "roomType": "Room type",
+    "room": "Room",
+    "style": "Style",
     "item": "Item",
     "noItems": "No item found.",
     "action": "Action",
