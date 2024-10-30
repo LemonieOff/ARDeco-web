@@ -1,44 +1,61 @@
 <template>
     <div id="newCommentSection" class="commentSection">
-        <NuxtImg width="50" height="50" class="icon" v-bind:src="imageSrc" alt="Own profile picture"/>
-        <input id="commentInput" type="text" :placeholder="`${content['writePlaceholder']}`">
-        <NuxtImg id="sendComment" class="icon" src="images/icons/send.webp" @click="postComment"/>
+        <NuxtImg alt="Own profile picture" class="icon" height="50" v-bind:src="imageSrc" width="50" />
+        <input id="commentInput" :placeholder="`${content['writePlaceholder']}`" type="text">
+        <NuxtImg id="sendComment" class="icon" src="images/icons/send.webp" @click="postComment" />
     </div>
     <div id="oldCommentSection" class="commentSection">
-        <div class="comment" v-for="singleComment in comments.slice().reverse()" :key="singleComment.id">
+        <div v-for="singleComment in comments.slice().reverse()" :key="singleComment.id" class="comment">
             <div class="topCommentSection">
-                <NuxtImg width="50" height="50" class="icon" v-bind:src="defaultUserPicture" v-if="Number(singleComment.user_id) !== Number(userId)" alt="User profile picture"/>
-                <NuxtImg width="50" height="50" class="icon" v-bind:src="imageSrc" v-if="Number(singleComment.user_id) === Number(userId)" alt="Own profile picture"/>
+                <NuxtImg :src="`https://api.ardeco.app/profile_pictures/${singleComment.user.profile_picture_id}.png`"
+                         alt="Author profile picture"
+                         class="icon"
+                         height="50" width="50" />
                 <div class="userInfoSection">
-                    <div id="commentUserName">{{ content.user }} {{ singleComment.user_id }} </div>
+                    <div id="commentUserName">{{ singleComment.user.first_name }} {{ singleComment.user.last_name }}
+                        ({{ singleComment.user_id }})
+                    </div>
                     <div id="commentDate">{{ singleComment.creation_date }}</div>
                 </div>
-                <NuxtImg :id="'modifyButton_' + singleComment.id" class="icon modifyButton" src="https://img.icons8.com/color/200/edit.png" alt="Modify" v-if="Number(singleComment.user_id) === Number(userId)" @click="modifyComment(singleComment.id)"/>
-                <NuxtImg :id="'finishModifyButton_' + singleComment.id" class="icon modifyButton" src="https://cdn-icons-png.flaticon.com/512/1538/1538471.png" alt="Modify" v-if="Number(singleComment.user_id) === Number(userId)" @click="modifyComment(singleComment.id)" hidden/>
-                <NuxtImg id="deleteButton" class="icon deleteButton" src="images/icons/trash.webp" alt="Delete" v-if="Number(singleComment.user_id) === Number(userId)" @click="deleteComment(singleComment.id)"/>
+                <NuxtImg v-if="Number(singleComment.user_id) === Number(userId)"
+                         :id="'modifyButton_' + singleComment.id"
+                         alt="Modify" class="icon modifyButton"
+                         src="https://img.icons8.com/color/200/edit.png"
+                         @click="modifyComment(singleComment.id)" />
+                <NuxtImg v-if="Number(singleComment.user_id) === Number(userId)"
+                         :id="'finishModifyButton_' + singleComment.id"
+                         alt="Modify" class="icon modifyButton"
+                         hidden
+                         src="https://cdn-icons-png.flaticon.com/512/1538/1538471.png"
+                         @click="modifyComment(singleComment.id)" />
+                <NuxtImg v-if="Number(singleComment.user_id) === Number(userId)" id="deleteButton" alt="Delete"
+                         class="icon deleteButton"
+                         src="images/icons/trash.webp"
+                         @click="deleteComment(singleComment.id)" />
             </div>
-            <div :id="'existingComment_' + singleComment.id" class="bottomCommentSection">{{ singleComment.comment }}</div>
-            <input :id="'modifiedComment_' + singleComment.id" class="bottomCommentSection" :placeholder="`${singleComment.comment}`" hidden>
+            <div :id="'existingComment_' + singleComment.id" class="bottomCommentSection">{{ singleComment.comment }}
+            </div>
+            <input :id="'modifiedComment_' + singleComment.id" :placeholder="`${singleComment.comment}`"
+                   class="bottomCommentSection" hidden>
         </div>
     </div>
-    <Notifications ref="notifications"/>
 </template>
 
 <script>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "CommentSection",
     components: {
-        Notifications,
+        Notifications
     },
     props: {
         galleryId: Number | null,
         notifications: {
             type: Object,
-            required: true,
-        },
+            required: true
+        }
     },
     data() {
         return {
@@ -49,45 +66,45 @@ export default {
             comments: [],
             userId: null,
             defaultUserPicture: "https://api.ardeco.app/profile_pictures/0.png"
-        }
+        };
     },
     mounted() {
-        this.userId = localStorage.getItem('userID')
+        this.userId = localStorage.getItem("userID");
     },
     watch: {
         galleryId() {
-            this.getComments()
-            this.getUserPicture()
+            this.getComments();
+            this.getUserPicture();
         }
     },
     inject: ["notifications"],
     methods: {
         async getUserPicture() {
             const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
-                method: 'GET',
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
             const result = await response.json();
-            console.log(result)
+            console.log(result);
             if (result.code == 400) {
                 this.notifications.showError(this.notificationMessages.infoNotReceived);
             }
-            this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data.id}.png`
+            this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data.id}.png`;
         },
         async getComments() {
             await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            const response = await fetch('https://api.ardeco.app/gallery/' + `${this.galleryId}` + '/comments', {
-                method: 'GET',
+            const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments", {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
@@ -95,7 +112,7 @@ export default {
             if (result.code == 400) {
                 this.notifications.showError(this.notificationMessages.infoNotReceived);
             }
-            this.comments = result.data
+            this.comments = result.data;
 
             console.log("Comments :", this.comments);
         },
@@ -105,17 +122,17 @@ export default {
                 location.href = this.langPrefix + "login";
             }
 
-            const textInput = document.getElementById('commentInput');
+            const textInput = document.getElementById("commentInput");
             const value = textInput.value;
-            const response = await fetch('https://api.ardeco.app/gallery/' + `${this.galleryId}` + '/comments', {
-                method: 'POST',
+            const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     "comment": value
                 }),
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
@@ -124,7 +141,7 @@ export default {
                 this.notifications.showError(this.notificationMessages.failedToPostComment);
             } else {
                 textInput.value = "";
-                await this.getComments()
+                await this.getComments();
             }
             console.log("POST :", result);
         },
@@ -134,12 +151,12 @@ export default {
                 location.href = this.langPrefix + "login";
             }
 
-            const response = await fetch('https://api.ardeco.app/gallery/' + `${this.galleryId}` + '/comments/' + `${commentId}`, {
-                method: 'DELETE',
+            const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments/" + `${commentId}`, {
+                method: "DELETE",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
@@ -147,16 +164,16 @@ export default {
             if (result.code !== 200) {
                 this.notifications.showError(this.notificationMessages.failedToDeleteComment);
             } else {
-                await this.getComments()
+                await this.getComments();
             }
             console.log("DELETE :", result);
         },
 
         async modifyComment(commentId) {
-            const modifyButton = document.getElementById('modifyButton_' + commentId);
-            const finishModifyButton = document.getElementById('finishModifyButton_' + commentId);
-            const existingComment = document.getElementById('existingComment_' + commentId);
-            const modifiedComment = document.getElementById('modifiedComment_' + commentId);
+            const modifyButton = document.getElementById("modifyButton_" + commentId);
+            const finishModifyButton = document.getElementById("finishModifyButton_" + commentId);
+            const existingComment = document.getElementById("existingComment_" + commentId);
+            const modifiedComment = document.getElementById("modifiedComment_" + commentId);
             const newMessage = modifiedComment.value;
             if (existingComment.hidden === false) {
                 modifiedComment.hidden = false;
@@ -165,15 +182,15 @@ export default {
                 finishModifyButton.hidden = false;
             } else {
                 if (newMessage.length != 0) {
-                    const response = await fetch('https://api.ardeco.app/gallery/' + `${this.galleryId}` + '/comments/' + `${commentId}`, {
-                        method: 'PUT',
+                    const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments/" + `${commentId}`, {
+                        method: "PUT",
                         headers: {
-                            'Content-Type': 'application/json',
+                            "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
                             "comment": newMessage
                         }),
-                        credentials: 'include',
+                        credentials: "include"
                     });
 
                     const result = await response.json();
@@ -182,7 +199,7 @@ export default {
                         this.notifications.showError(this.notificationMessages.failedToModifyComment);
                     } else {
                         this.notifications.showSuccess(this.notificationMessages.informationsUpdated);
-                        await this.getComments()
+                        await this.getComments();
                     }
                 }
                 modifiedComment.hidden = true;
@@ -191,11 +208,11 @@ export default {
                 finishModifyButton.hidden = true;
             }
         }
-    },
+    }
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import '@/styles/variables/ColorVariables.scss';
 
 .icon {
