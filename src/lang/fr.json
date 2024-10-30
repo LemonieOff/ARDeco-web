@@ -595,6 +595,8 @@
     "rooms": "Pièces",
     "furnitureTable": "Meubles",
     "roomType": "Type de pièce",
+    "room": "Pièce",
+    "style": "Style",
     "item": "Élément",
     "noItems": "Aucun élément trouvé.",
     "action": "Action",

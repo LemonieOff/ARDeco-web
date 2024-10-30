@@ -18,10 +18,10 @@
                         }}
                     </div>
                     <div class="card-item">
-                        <strong>{{ content.rooms }}:</strong> {{ GalleryData.room }}
+                        <strong>{{ content.room }}:</strong> {{ GalleryData.room }}
                     </div>
                     <div class="card-item">
-                        <strong>{{ content.furnitureTable }}:</strong> {{ GalleryData.style }}
+                        <strong>{{ content.style }}:</strong> {{ GalleryData.style }}
                     </div>
                 </div>
             </div>
