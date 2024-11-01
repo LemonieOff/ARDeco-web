@@ -59,7 +59,6 @@ export default {
     },
     mounted() {
         const body = document.body
-        body.style.backgroundColor = "#F4F4F4";
         let lang = this.urlLang
 
         if (lang !== 'en' && lang !== 'fr') {
