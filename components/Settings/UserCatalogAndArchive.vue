@@ -7,7 +7,7 @@
             {{ card.name }}
         </button>
     </div>
-    <div class="pageContent">
+    <div class="pageContent text-AR-Grey">
         <div class="buttonsArea">
             <button class="buttonSettings" style="margin-top: 0" @click="goToFurnitureCreation">
                 {{ content.buttons.createNewFurniture }}
@@ -15,7 +15,7 @@
             <button class="buttonSettings" @click="deleteArchive">{{ content.buttons.emptyCompagnyArchive }}</button>
             <button class="buttonSettings" @click="getApiToken">{{ content.buttons.resetCompagnyApiKey }}</button>
         </div>
-        <div class="listArea">
+        <div class="listArea text-AR-Grey">
             <div v-if="selectedCard === 0" class="catalog">
                 <div class="grid-header">
                     <div class="grid-item">{{ content.list.name }}</div>

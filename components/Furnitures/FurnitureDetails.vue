@@ -6,7 +6,7 @@
       <img src="~/.././assets/images/furnitures/furnitureDefault.png" class="w-full md:w-1/3 rounded-lg border-3 border-black mb-4 md:mb-0">
       
       <div class="flex flex-col justify-between w-full md:w-1/2 md:ml-4">
-        <div class="bg-white border-3 border-black p-4 rounded-lg h-80 flex flex-col">
+        <div class="bg-white border-3 border-black p-4 rounded-lg h-80 flex flex-col text-AR-Grey">
           <div class="text-xl">{{ catalogElement.rooms }}</div>
           <div class="text-xl mt-2">{{ catalogElement.styles }}</div>
           <div class="mt-4 text-lg">{{ content.dimensions }} {{ catalogElement.width }} / {{ catalogElement.height }} / {{ catalogElement.depth }}</div>
@@ -14,7 +14,7 @@
           <button class="mt-4 bg-black text-white py-2 rounded hover:bg-white hover:text-black hover:border transition duration-200">{{ content.addToCart }}</button>
         </div>
         
-        <div class="mt-4">
+        <div class="mt-4 text-AR-Grey">
           <button id="addToFavorite" class="bg-blue-300 rounded-lg py-2 px-4 w-full hover:bg-white transition duration-200" @click="addToFavorite">{{ content.addToFavorites }}</button>
           <button id="removeFromFavorite" class="bg-blue-300 rounded-lg py-2 px-4 w-full hover:bg-white transition duration-200" @click="removeFromFavorite" hidden>{{ content.removeFromFavorites }}</button>
           <div class="bg-green-300 text-center rounded-lg py-2 mt-2">{{ content.available }}</div>
