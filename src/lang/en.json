@@ -790,6 +790,8 @@
     "couldntRemoveFavorite": "Error : we couldn't remove this element from your favorites, please try again later.",
     "loginFailed": "Error: login failed, please check your email or password again.",
     "registrationFailed": "Error: registration failed, please check your informations again.",
+    "couldntAddToCart": "Error: we couldn't add this item to you cart, please try again later.",
+    "itemAddedToCart": "Item added to your cart !",
     "furnitureCreated": "Your furniture has been created successfully !",
     "informationsUpdated": "Informations updated",
     "emptyGallery": "Your gallery is currently empty.",

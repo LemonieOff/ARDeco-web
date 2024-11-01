@@ -789,6 +789,8 @@
     "couldntRemoveFavorite": "Erreur : nous n'avons pas pu retirer cet élement de vos favoris, veuillez réessayer plus tard.",
     "loginFailed": "Erreur: impossible de vous connecter, veuillez vérifier votre email ou votre mot de passe.",
     "registrationFailed": "Erreur: impossible de créer votre compte, veuillez vérifier vos informations à nouveau.",
+    "couldntAddToCart": "Erreur: nous n'avons pas pu ajouter ce meuble à votre panier, veuillez réessayer plus tard.",
+    "itemAddedToCart": "Meuble ajouté à votre panier !",
     "furnitureCreated": "Votre meuble a été créé avec succès !",
     "informationsUpdated": "Informations mises à jour.",
     "emptyGallery": "Votre galerie est actuellement vide.",

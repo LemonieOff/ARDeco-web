@@ -11,7 +11,7 @@
           <div class="text-xl mt-2">{{ catalogElement.styles }}</div>
           <div class="mt-4 text-lg">{{ content.dimensions }} {{ catalogElement.width }} / {{ catalogElement.height }} / {{ catalogElement.depth }}</div>
           <div class="mt-2 text-2xl font-bold">{{ catalogElement.price }}€</div>
-          <button class="mt-4 bg-black text-white py-2 rounded hover:bg-white hover:text-black hover:border transition duration-200">{{ content.addToCart }}</button>
+          <button class="mt-4 bg-black text-white py-2 rounded hover:bg-white hover:text-black hover:border transition duration-200" @click="addToCart">{{ content.addToCart }}</button>
         </div>
         
         <div class="mt-4 text-AR-Grey">
@@ -95,7 +95,6 @@ export default {
                 if (data_profile.data.role = "company") {
                     this.profileID = data_profile.data.id
                 }
-                console.log(data_profile)
             } catch (error) {
                 console.error(error.message);
                 errorMessage.value = error.message;
@@ -130,8 +129,6 @@ export default {
 
                 const companyActions = document.getElementsByClassName('companyAction');
 
-                console.log('this.profileID', this.profileID)
-                console.log('this.catalogElement.company', this.catalogElement.company)
                 if (this.profileID != this.catalogElement.company) {
                     for (const action of companyActions) {
                         action.hidden = true;
@@ -223,7 +220,6 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);
 
             const errorDiv = document.getElementById('errorText');
             const successDiv = document.getElementById('successText');
@@ -254,7 +250,6 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);
 
             const errorDiv = document.getElementById('errorText');
             const successDiv = document.getElementById('successText');
@@ -285,7 +280,6 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);
 
             const errorDiv = document.getElementById('errorText');
             const successDiv = document.getElementById('successText');
@@ -311,7 +305,6 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);
 
             if (result.code === 201) {
                 document.getElementById('addToFavorite').hidden = true;
@@ -331,7 +324,6 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);
 
             if (result.code === 200) {
                 document.getElementById('addToFavorite').hidden = false;
@@ -351,7 +343,6 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result.data)
 
             if (result.code === 200) {
                 for (let item of result.data) {
@@ -364,6 +355,28 @@ export default {
                 this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
         },
+
+        async addToCart() {
+            const FURNITURE_ID = this.$route.params.id;
+            const response = await fetch('https://api.ardeco.app/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "id": FURNITURE_ID
+                }),
+                credentials: 'include',
+            });
+
+            const result = await response.json();
+
+            if (result.code === 200) {
+                this.$refs.notifications.showSuccess(this.notificationMessages.itemAddedToCart);
+            } else if (result.code != 404) {
+                this.$refs.notifications.showError(this.notificationMessages.couldntAddToCart);
+            }
+        }
     }
 }
 </script>
