@@ -123,6 +123,8 @@ export default {
                     }
                 }
 
+                console.log("this.catalogElement", this.catalogElement)
+
                 if (this.elementIsNotArchived == false) {
                     this.lookIntoArchive();
                 }
@@ -357,21 +359,23 @@ export default {
         },
 
         async addToCart() {
-            const FURNITURE_ID = this.$route.params.id;
+            const FURNITURE_ID = Number(this.$route.params.id);
+            const MODEL_ID = Number(this.catalogElement.colors[0].model_id);
             const response = await fetch('https://api.ardeco.app/cart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    "id": FURNITURE_ID
-                }),
+                body: JSON.stringify([{
+                    "furniture_id": FURNITURE_ID,
+                    "model_id": MODEL_ID
+                }]),
                 credentials: 'include',
             });
 
             const result = await response.json();
 
-            if (result.code === 200) {
+            if (result.code === 201) {
                 this.$refs.notifications.showSuccess(this.notificationMessages.itemAddedToCart);
             } else if (result.code != 404) {
                 this.$refs.notifications.showError(this.notificationMessages.couldntAddToCart);
