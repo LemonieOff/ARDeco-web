@@ -54,7 +54,7 @@
                         <h6 class="font-manrope font-bold text-3xl lead-10 text-indigo-600">{{ subTotal }}€ </h6>
                     </div>
                 </div>
-                <div class="max-lg:max-w-lg max-lg:mx-auto">
+                <div class="max-lg:max-w-lg max-lg:mx-auto" @click="sendOrder">
                     <p class="font-normal text-base leading-7 text-gray-500 text-center mb-5 mt-6"> {{ content.shippingFeesIncluded }} </p>
                     <button class="rounded-full py-4 px-6 bg-indigo-600 text-white font-semibold text-lg w-full text-center transition-all duration-500 hover:bg-indigo-700 "> {{ content.buy }} </button>
                 </div>
@@ -168,5 +168,26 @@ async function removeItem(item) {
     }
 
     await getCartInformations();
+}
+
+async function sendOrder() {
+    const response = await fetch('https://api.ardeco.app/order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+    });
+
+    const result = await response.json();
+    if (result.code === 201) {
+        if (notifications.value) notifications.value.showSuccess(notificationMessages.orderSent);
+    } else if (result.code === 404) {
+        if (notifications.value) notifications.value.showError(notificationMessages.yourCartIsEmpty);
+    } else {
+        if (notifications.value) notifications.value.showError(notificationMessages.couldntSendYourOrder);
+    }
+
+    location.reload();
 }
 </script>
