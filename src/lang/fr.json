@@ -791,6 +791,7 @@
     "loginFailed": "Erreur: impossible de vous connecter, veuillez vérifier votre email ou votre mot de passe.",
     "registrationFailed": "Erreur: impossible de créer votre compte, veuillez vérifier vos informations à nouveau.",
     "couldntAddToCart": "Erreur: nous n'avons pas pu ajouter ce meuble à votre panier, veuillez réessayer plus tard.",
+    "couldntRemoveFromCart": "Erreur: nous n'avons pas pu retirer ce meuble de votre panier, veuillez réessayer plus tard.",
     "itemAddedToCart": "Meuble ajouté à votre panier !",
     "furnitureCreated": "Votre meuble a été créé avec succès !",
     "informationsUpdated": "Informations mises à jour.",
@@ -801,5 +802,11 @@
     "galleryBelongToUser": "Cette galerie est votre création !",
     "reportSuccessful": "Signalement effectué avec succès !",
     "pleaseReportDetails": "Nous écrire en détail la raison de votre signalement nous aiderai beaucoup !"
+  },
+  "cart": {
+    "title": "Panier d'achat",
+    "buy": "Acheter",
+    "shippingFeesIncluded": "Frais de port et réductions déjà inclus.",
+    "total": "Total"
   }
 }
