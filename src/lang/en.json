@@ -21,6 +21,7 @@
     "profile": "My profile",
     "settings": "Settings",
     "company": "Company",
+    "cart": "Cart",
     "catalog": "Catalog",
     "tickets": "Support",
     "darkmode": "Dark mode",
@@ -790,6 +791,12 @@
     "couldntRemoveFavorite": "Error : we couldn't remove this element from your favorites, please try again later.",
     "loginFailed": "Error: login failed, please check your email or password again.",
     "registrationFailed": "Error: registration failed, please check your informations again.",
+    "couldntAddToCart": "Error: we couldn't add this item to your cart, please try again later.",
+    "couldntRemoveFromCart": "Error: we couldn't remove this item from your cart, please try again later.",
+    "couldntSendYourOrder": "Error: we couldn't send your order, please try again later.",
+    "yourCartIsEmpty": "Error: your cart is empty, please add some items to it if you want to order them.",
+    "orderSent": "You order was successfull, thank you for you trust !",
+    "itemAddedToCart": "Item added to your cart !",
     "furnitureCreated": "Your furniture has been created successfully !",
     "informationsUpdated": "Informations updated",
     "emptyGallery": "Your gallery is currently empty.",
@@ -799,5 +806,11 @@
     "galleryBelongToUser": "This gallery is your creation !",
     "reportSuccessful": "Report sent !",
     "pleaseReportDetails": "Writing in details the reason of your report would help us a lot !"
+  },
+  "cart": {
+    "title": "Shopping cart",
+    "buy": "Buy",
+    "shippingFeesIncluded": "Shipping fees and discounts are included.",
+    "total": "Subtotal"
   }
 }

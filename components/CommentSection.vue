@@ -4,7 +4,7 @@
         <input id="commentInput" :placeholder="`${content['writePlaceholder']}`" type="text">
         <NuxtImg id="sendComment" class="icon" src="images/icons/send.webp" @click="postComment" />
     </div>
-    <div id="oldCommentSection" class="commentSection">
+    <div id="oldCommentSection" class="commentSection text-AR-Grey">
         <div v-for="singleComment in comments.slice().reverse()" :key="singleComment.id" class="comment">
             <div class="topCommentSection">
                 <NuxtImg :src="`https://api.ardeco.app/profile_pictures/${singleComment.user.profile_picture_id}.png`"

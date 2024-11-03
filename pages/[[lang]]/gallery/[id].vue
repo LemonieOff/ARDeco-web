@@ -93,6 +93,7 @@ export default {
         await this.getNumberOfLikes();
         await this.getLikeStatus();
         await this.getFavorites();
+        await this.checkGalleryReport();
         // console.log(this.galleryUserId, "/", this.userID)
 
         this.$nextTick(() => {
@@ -197,6 +198,18 @@ export default {
                 console.error("Error fetching user information:", error);
                 return "Unknown user";
             }
+        },
+
+        async checkGalleryReport() {
+            const response = await fetch(`https://api.ardeco.app/gallery_report/${this.GalleryData.id}/reports/list`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
+            const result = await response.json();
+            console.log("checkGalleryReport", result)
         },
 
         async setItemVisibility(itemInputID, activeOrNot) {
