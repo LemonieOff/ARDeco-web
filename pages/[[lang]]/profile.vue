@@ -94,11 +94,11 @@
                         {{ content.gallery.personal }}
                         </span>
                         <!--<a :href="`${langPrefix}personalGallery`"
-                               class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                               class="shadow border border-card-border dark:border-card-border-dark rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis bg-card-background dark:bg-card-background-dark text-AR-Grey dark:text-card-text-dark transition transform hover:bg-AR-Light-Blue dark:hover:bg-AR-Blue hover:-translate-y-1 hover:shadow-xl">
                                 personal
                         </a>-->
                         <span
-                            class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                            class="shadow border border-card-border dark:border-card-border-dark rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
                             {{ personalGalleries }}
                         </span>
                     </div>
@@ -107,7 +107,7 @@
                         {{ content.gallery.public }}
                         </span>
                         <a :href="`${langPrefix}gallery`"
-                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                           class="shadow border border-card-border dark:border-card-border-dark rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis bg-card-background dark:bg-card-background-dark text-AR-Grey dark:text-card-text-dark transition transform hover:bg-AR-Light-Blue dark:hover:bg-AR-Blue hover:-translate-y-1 hover:shadow-xl">
                             {{ content.buttons.access }}
                         </a>
                     </div>
@@ -122,7 +122,7 @@
                         {{ content.favorite.gallery }}
                         </span>
                         <a :href="`${langPrefix}favGallery`"
-                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                           class="shadow border border-card-border dark:border-card-border-dark rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis bg-card-background dark:bg-card-background-dark text-AR-Grey dark:text-card-text-dark transition transform hover:bg-AR-Light-Blue dark:hover:bg-AR-Blue hover:-translate-y-1 hover:shadow-xl">
                             {{ content.buttons.access }}
                         </a>
                     </div>
@@ -131,7 +131,7 @@
                         {{ content.favorite.furniture }}
                         </span>
                         <a :href="`${langPrefix}favFurniture`"
-                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                           class="shadow border border-card-border dark:border-card-border-dark rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis bg-card-background dark:bg-card-background-dark text-AR-Grey dark:text-card-text-dark transition transform hover:bg-AR-Light-Blue dark:hover:bg-AR-Blue hover:-translate-y-1 hover:shadow-xl">
                             {{ content.buttons.access }}
                         </a>
                     </div>
@@ -145,7 +145,7 @@
                         {{ content.orderHistory }}
                         </span>
                     <a :href="`${langPrefix}orderHistory`"
-                       class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                       class="shadow border border-card-border dark:border-card-border-dark rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis bg-card-background dark:bg-card-background-dark text-AR-Grey dark:text-card-text-dark transition transform hover:bg-AR-Light-Blue dark:hover:bg-AR-Blue hover:-translate-y-1 hover:shadow-xl">
                         {{ orders }} {{ orders > 1 ? content.orderMul : content.orderSing }}
                     </a>
                 </div>
@@ -193,7 +193,7 @@
                         {{ content.blockedUsers }}
                         </span>
                         <a :href="`${langPrefix}blockedUsers`"
-                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                           class="shadow border border-card-border dark:border-card-border-dark rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis bg-card-background dark:bg-card-background-dark text-AR-Grey dark:text-card-text-dark transition transform hover:bg-AR-Light-Blue dark:hover:bg-AR-Blue hover:-translate-y-1 hover:shadow-xl">
                             {{ content.buttons.access }}
                         </a>
                     </div>
@@ -202,7 +202,7 @@
                         {{ content.buttons.delete }}
                         </span>
                         <a :href="`${langPrefix}deleteAccount`"
-                           class="shadow border rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis">
+                           class="shadow border border-card-border dark:border-card-border-dark rounded py-2 px-3 leading-tight max-w-full text-nowrap overflow-hidden text-ellipsis bg-red-200 dark:bg-red-300 text-red-800 dark:text-red-900 transition transform hover:bg-red-300 dark:hover:bg-red-400 hover:-translate-y-1 hover:shadow-xl">
                             {{ content.buttons.access }}
                         </a>
                     </div>
