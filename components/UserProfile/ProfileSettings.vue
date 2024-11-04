@@ -5,28 +5,28 @@
             <span class="edit-icon">&#9998;</span>
         </div>
     </div>
-    <div id="profile_picture_modal">
+    <div v-if="display_modal" id="profile_picture_modal" ref="profile_picture_modal">
         <div id="profile_picture_div">
             <div id="profile_picture_select">
-                <label style="display: none">
+                <label>
                     <img alt="Default profile picture" src="https://api.ardeco.app/profile_pictures/0.png" />
-                    <input name="select_image" type="radio" value="0" />
+                    <input v-model="selected_picture" name="select_image" type="radio" value="0" />
                 </label>
                 <label>
                     <img alt="Profile picture 1" src="https://api.ardeco.app/profile_pictures/1.png" />
-                    <input name="select_image" type="radio" value="1" />
+                    <input v-model="selected_picture" name="select_image" type="radio" value="1" />
                 </label>
                 <label>
                     <img alt="Profile picture 2" src="https://api.ardeco.app/profile_pictures/2.png" />
-                    <input name="select_image" type="radio" value="2" />
+                    <input v-model="selected_picture" name="select_image" type="radio" value="2" />
                 </label>
                 <label>
                     <img alt="Profile picture 3" src="https://api.ardeco.app/profile_pictures/3.png" />
-                    <input name="select_image" type="radio" value="3" />
+                    <input v-model="selected_picture" name="select_image" type="radio" value="3" />
                 </label>
                 <label>
                     <img alt="Profile picture 4" src="https://api.ardeco.app/profile_pictures/4.png" />
-                    <input name="select_image" type="radio" value="4" />
+                    <input v-model="selected_picture" name="select_image" type="radio" value="4" />
                 </label>
             </div>
             <div id="profile_picture_info_text">
@@ -43,121 +43,116 @@
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import "@/assets/images/profile-settings/default-profile-picture.png";
 
-export default {
-    data() {
-        return {
-            imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
-            content: this.$content.profile
-        };
-    },
-    inject: ["profile"],
-    watch: {
-        profile() {
-            if (this.profile) {
-                this.imageSrc = `https://api.ardeco.app/profile_pictures/${this.profile.profile_picture_id}.png`;
-                document.querySelector(`input[name="select_image"][value="${this.profile.profile_picture_id}"]`).checked = true;
+const nuxtApp = useNuxtApp();
+const content = nuxtApp.$content.profile;
 
-                if (this.profile.profile_picture_id === 0) {
-                    // document.getElementById("profile_picture_button_reset").style.display = "none";
-                }
-            } else {
-                // document.getElementById("profile_picture_button_reset").style.display = "none";
-                document.querySelector("input[name=\"select_image\"][value=\"0\"]").checked = true;
-            }
-        }
-    },
-    mounted() {
-        const modal = document.getElementById("profile_picture_modal");
-        modal.style.display = "none";
-
-        const hideModal = this.hideModal;
-
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                hideModal();
-            }
-        };
-    },
-    methods: {
-        toggleModal() {
-            const modal = document.getElementById("profile_picture_modal");
-
-            if (modal.style.display === "none") {
-                this.showModal();
-            } else {
-                this.hideModal();
-            }
-        },
-        showModal() {
-            const modal = document.getElementById("profile_picture_modal");
-            modal.style.display = "block";
-        },
-        hideModal() {
-            const modal = document.getElementById("profile_picture_modal");
-            modal.style.display = "none";
-
-            if (this.profile.profile_picture_id) {
-                document.querySelector(`input[name="select_image"][value="${this.profile.profile_picture_id}"]`).checked = true;
-            } else {
-                document.querySelector("input[name=\"select_image\"][value=\"0\"]").checked = true;
-            }
-        },
-        resetSelection() {
-            document.getElementsByName("select_image")[0].checked = true;
-        },
-        async confirmNewPicture() {
-            const checked = document.querySelector("input[name=\"select_image\"]:checked");
-            if (checked) {
-                const value = checked.value;
-                if (value <= 0 || value > 4) {
-                    await this.resetProfilePictureRequest();
-                } else {
-                    await this.changeProfilePictureRequest(value);
-                }
-            } else {
-                await this.resetProfilePictureRequest();
-            }
-        },
-        async resetProfilePictureRequest() {
-            const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                credentials: "include"
-            });
-            const result = await response.json();
-            console.debug("Reset picture result : " + result);
-
-            location.reload();
-        },
-        async changeProfilePictureRequest(value) {
-            const number = Number(value);
-            if (Number.isNaN(number)) {
-                await this.resetProfilePictureRequest();
-                return;
-            }
-
-            const json = JSON.stringify({
-                "picture_id": Number(value)
-            });
-            const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                credentials: "include",
-                body: json
-            });
-            const result = await response.json();
-            console.debug("Change picture result : " + result);
-
-            location.reload();
-        }
+const props = defineProps({
+    profile: {
+        type: Object as PropType<{
+            id: number,
+            email: string,
+            firstname: string,
+            lastname: string,
+            city: string,
+            phone: string,
+            profile_picture_id: number
+        }>,
+        required: true
     }
+});
+
+const modal = useTemplateRef("profile_picture_modal");
+const display_modal = ref(false);
+const imageSrc = ref("https://api.ardeco.app/profile_pictures/0.png");
+const selected_picture = ref(props.profile.profile_picture_id);
+
+onMounted(() => {
+    window.onclick = function(event) {
+        if (event.target === modal.value) {
+            hideModal();
+        }
+    };
+    console.log(props.profile);
+
+    if (props.profile) {
+        imageSrc.value = `https://api.ardeco.app/profile_pictures/${props.profile.profile_picture_id}.png`;
+        console.log(props.profile.profile_picture_id);
+    } else {
+        selected_picture.value = 0;
+    }
+});
+
+const showModal = () => {
+    display_modal.value = true;
+};
+
+const hideModal = () => {
+    display_modal.value = false;
+    resetSelection();
+};
+
+const resetSelection = () => {
+    if (props.profile.profile_picture_id) {
+        selected_picture.value = props.profile.profile_picture_id;
+    } else {
+        selected_picture.value = 0;
+    }
+};
+
+const confirmNewPicture = async () => {
+    const value = selected_picture.value;
+    if (value === props.profile.profile_picture_id) {
+        hideModal();
+        return;
+    }
+
+    if (value <= 0 || value > 4) {
+        await resetProfilePictureRequest();
+        return;
+    }
+
+    await changeProfilePictureRequest(value);
+};
+
+const resetProfilePictureRequest = async () => {
+    const response = await fetch("https://api.ardeco.app/profile_picture/user", {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include"
+    });
+    const result = await response.json();
+    console.debug("Reset picture result : " + result);
+
+    location.reload();
+};
+
+const changeProfilePictureRequest = async (value: number) => {
+    const number = Number(value);
+    if (Number.isNaN(number)) {
+        await resetProfilePictureRequest();
+        return;
+    }
+
+    const json = JSON.stringify({
+        picture_id: number
+    });
+    const response = await fetch("https://api.ardeco.app/profile_picture/user", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: json
+    });
+    const result = await response.json();
+    console.debug("Change picture result : " + result);
+
+    location.reload();
 };
 </script>
 
@@ -165,7 +160,6 @@ export default {
 @import "@/styles/ProfileSettings.scss";
 
 #profile_picture_modal {
-    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
