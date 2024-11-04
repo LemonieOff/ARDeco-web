@@ -312,8 +312,8 @@ const getProfileElements = async () => {
 
 const validatePersonalData = (): Boolean => {
     const errors = [];
-    if (!fieldEmail.value?.checkValidity()) errors.push("Une adresse email doit être renseignée"); // TODO : Translate
-    if (!fieldFirstName.value?.checkValidity()) errors.push("Un prénom doit être renseigné"); // TODO : Translate
+    if (!fieldEmail.value?.checkValidity()) errors.push(content.errors.email);
+    if (!fieldFirstName.value?.checkValidity()) errors.push(content.errors.firstName);
     if (errors.length > 0) {
         errors.forEach(value => {
             if (notifications.value) {

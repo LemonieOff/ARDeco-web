@@ -231,10 +231,13 @@
       "email": "Email : ",
       "phone": "Phone : ",
       "city": "City : ",
-      "commandsOrdered": "Ordered command(s) : ",
-      "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)",
+      "editProfile": "Edit profile",
       "role": "Account type : ",
       "password": "Password : "
+    },
+    "errors": {
+      "firstName": "First name must be provided",
+      "email": "An email address must be provided"
     },
     "orderHistory": "Order history",
     "orderSing": "order",

@@ -231,9 +231,13 @@
       "email": "Adresse email : ",
       "phone": "Téléphone : ",
       "city": "Ville : ",
-      "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)",
+      "editProfile": "Mettre à jour le profil",
       "role": "Type de compte : ",
       "password": "Mot de passe : "
+    },
+    "errors": {
+      "firstName": "Un prénom doit être renseigné",
+      "email": "Une adresse email doit être renseignée"
     },
     "orderHistory": "Historique des commandes",
     "orderSing": "commande",
