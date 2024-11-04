@@ -5,7 +5,7 @@
             {{ content.loading }}
         </div>
         <div v-else class="flex flex-col items-center justify-center">
-            <ProfileSettings :profile=profile />
+            <ProfilePicture :profile=profile />
 
             <div
                 class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
@@ -216,7 +216,7 @@
 <script lang="ts" setup>
 import { isLogged, logout, userID } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
-import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
+import ProfilePicture from "~/components/UserProfile/ProfilePicture.vue";
 
 const nuxtApp = useNuxtApp();
 
@@ -237,7 +237,6 @@ const profile = ref<{
     role: string,
     profile_picture_id: number
 }>();
-provide("profile", profile);
 
 const notifications = useTemplateRef("notifications");
 const fieldEmail = useTemplateRef("fieldEmail");

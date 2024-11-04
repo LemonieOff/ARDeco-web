@@ -1,9 +1,7 @@
 <template>
-    <div class="content">
-        <div class="image-container profile-picture" @click="showModal">
-            <img alt="Profile picture" v-bind:src="imageSrc">
-            <span class="edit-icon">&#9998;</span>
-        </div>
+    <div class="image-container profile-picture" @click="showModal">
+        <img alt="Profile picture" v-bind:src="imageSrc">
+        <span class="edit-icon">&#9998;</span>
     </div>
     <div v-if="display_modal" id="profile_picture_modal" ref="profile_picture_modal">
         <div id="profile_picture_div">
@@ -58,8 +56,9 @@ const props = defineProps({
             lastname: string,
             city: string,
             phone: string,
+            role: string,
             profile_picture_id: number
-        }>,
+        } | undefined>,
         required: true
     }
 });
@@ -67,7 +66,7 @@ const props = defineProps({
 const modal = useTemplateRef("profile_picture_modal");
 const display_modal = ref(false);
 const imageSrc = ref("https://api.ardeco.app/profile_pictures/0.png");
-const selected_picture = ref(props.profile.profile_picture_id);
+const selected_picture = ref(props.profile ? props.profile.profile_picture_id : 0);
 
 onMounted(() => {
     window.onclick = function(event) {
@@ -75,11 +74,11 @@ onMounted(() => {
             hideModal();
         }
     };
-    console.log(props.profile);
+
+    console.debug(props.profile);
 
     if (props.profile) {
         imageSrc.value = `https://api.ardeco.app/profile_pictures/${props.profile.profile_picture_id}.png`;
-        console.log(props.profile.profile_picture_id);
     } else {
         selected_picture.value = 0;
     }
@@ -95,7 +94,7 @@ const hideModal = () => {
 };
 
 const resetSelection = () => {
-    if (props.profile.profile_picture_id) {
+    if (props.profile && props.profile.profile_picture_id) {
         selected_picture.value = props.profile.profile_picture_id;
     } else {
         selected_picture.value = 0;
@@ -104,7 +103,7 @@ const resetSelection = () => {
 
 const confirmNewPicture = async () => {
     const value = selected_picture.value;
-    if (value === props.profile.profile_picture_id) {
+    if (props.profile && value === props.profile.profile_picture_id) {
         hideModal();
         return;
     }
