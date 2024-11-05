@@ -1,40 +1,36 @@
 <template>
-    <div class="image-container profile-picture" @click="showModal">
-        <img alt="Profile picture" v-bind:src="imageSrc">
-        <span class="edit-icon">&#9998;</span>
+    <div class="relative hover:cursor-pointer group mb-8 w-24 h-24" @click="showModal">
+        <img alt="Profile picture" class="group-hover:brightness-[.3] transition duration-75" v-bind:src="imageSrc">
+        <span
+            class="hidden group-hover:block absolute top-1/2 left-1/2 text-[52px] cursor-pointer text-white -translate-x-1/2 -translate-y-1/2">&#9998;</span>
     </div>
-    <div v-if="display_modal" id="profile_picture_modal" ref="profile_picture_modal">
-        <div id="profile_picture_div">
-            <div id="profile_picture_select">
-                <label>
-                    <img alt="Default profile picture" src="https://api.ardeco.app/profile_pictures/0.png" />
-                    <input v-model="selected_picture" name="select_image" type="radio" value="0" />
-                </label>
-                <label>
-                    <img alt="Profile picture 1" src="https://api.ardeco.app/profile_pictures/1.png" />
-                    <input v-model="selected_picture" name="select_image" type="radio" value="1" />
-                </label>
-                <label>
-                    <img alt="Profile picture 2" src="https://api.ardeco.app/profile_pictures/2.png" />
-                    <input v-model="selected_picture" name="select_image" type="radio" value="2" />
-                </label>
-                <label>
-                    <img alt="Profile picture 3" src="https://api.ardeco.app/profile_pictures/3.png" />
-                    <input v-model="selected_picture" name="select_image" type="radio" value="3" />
-                </label>
-                <label>
-                    <img alt="Profile picture 4" src="https://api.ardeco.app/profile_pictures/4.png" />
-                    <input v-model="selected_picture" name="select_image" type="radio" value="4" />
+    <div v-if="display_modal" ref="profile_picture_modal"
+         class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 flex justify-center items-center">
+        <div id="profile_picture_div"
+             class="bg-AR-Beige dark:bg-AR-Dark-Grey p-2.5 rounded-sm shadow-xl flex flex-col justify-evenly w-3/4 h-1/2">
+            <div id="profile_picture_select"
+                 class="flex flex-col md:flex-row justify-around items-center overflow-auto">
+                <label v-for="i in 5" :key="i" class="flex flex-row-reverse md:flex-col w-fit">
+                    <img :alt="`Profile picture ${i - 1}`"
+                         :src="`https://api.ardeco.app/profile_pictures/${i - 1}.png`" class="w-24 h-24" />
+                    <input v-model="selected_picture" :value="i - 1" class="mr-2 md:mt-2" name="select_image"
+                           type="radio" />
                 </label>
             </div>
-            <div id="profile_picture_info_text">
-                <p>{{ content.picture.infoText }}</p><br />
-                <p>{{ content.picture.confirmText }}</p>
-            </div>
-            <div id="profile_picture_buttons">
-                <button id="profile_picture_button_reset" @click="resetSelection">{{ content.buttons.reset }}</button>
-                <button id="profile_picture_button_cancel" @click="hideModal">{{ content.buttons.cancel }}</button>
-                <button id="profile_picture_button_confirm" @click="confirmNewPicture">{{ content.buttons.confirm }}
+            <p class="text-center">{{ content.picture.confirmText }}</p>
+            <div id="profile_picture_buttons" class="flex flex-row justify-evenly">
+                <button id="profile_picture_button_reset"
+                        class="text-white rounded-md p-2 bg-[#4a4949] hover:bg-[#333333]"
+                        @click="resetSelection">
+                    {{ content.buttons.reset }}
+                </button>
+                <button id="profile_picture_button_cancel"
+                        class="text-white rounded-md p-2 bg-[#9e1d1d] hover:bg-[#751717]" @click="hideModal">
+                    {{ content.buttons.cancel }}
+                </button>
+                <button id="profile_picture_button_confirm"
+                        class="text-white rounded-md p-2 bg-[#4caf50] hover:bg-[#3b873e]"
+                        @click="confirmNewPicture">{{ content.buttons.confirm }}
                 </button>
             </div>
         </div>
@@ -42,8 +38,6 @@
 </template>
 
 <script lang="ts" setup>
-import "@/assets/images/profile-settings/default-profile-picture.png";
-
 const nuxtApp = useNuxtApp();
 const content = nuxtApp.$content.profile;
 
@@ -154,116 +148,3 @@ const changeProfilePictureRequest = async (value: number) => {
     location.reload();
 };
 </script>
-
-<style lang="scss" scoped>
-@import "@/styles/ProfileSettings.scss";
-
-#profile_picture_modal {
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-#profile_picture_modal #profile_picture_div {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 75%;
-    height: 45%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-
-    #profile_picture_select {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-
-        img {
-            width: 100px;
-            height: 100px;
-        }
-
-        label {
-            display: flex;
-            flex-direction: column;
-
-            input {
-                margin-top: 10px;
-            }
-        }
-    }
-
-    #profile_picture_info_text {
-        text-align: center;
-    }
-
-    #profile_picture_buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-
-        button {
-            border-radius: 5%;
-            padding: 7px;
-            color: white;
-
-            &#profile_picture_button_confirm {
-                background-color: #4caf50;
-
-                &:hover {
-                    background-color: #3b873e;
-                }
-            }
-
-            &#profile_picture_button_cancel {
-                background-color: #9e1d1d;
-
-                &:hover {
-                    background-color: #751717;
-                }
-            }
-
-            &#profile_picture_button_reset {
-                background-color: #4a4949;
-
-                &:hover {
-                    background-color: #333333;
-                }
-            }
-        }
-    }
-}
-
-.image-container {
-    position: relative;
-}
-
-.image-container:hover img {
-    filter: brightness(0.3); /* Assombrir l'image au survol */
-}
-
-.edit-icon {
-    display: none; /* Masquer l'icône par défaut */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centrer l'icône sur l'image */
-    font-size: 52px; /* Ajuster la taille de l'icône */
-    cursor: pointer; /* Afficher un curseur de pointeur au survol */
-    color: white; /* Couleur de l'icône */
-}
-
-.image-container:hover .edit-icon {
-    display: block; /* Afficher l'icône au survol */
-}
-</style>
