@@ -3,7 +3,8 @@
     "fields": {
       "empty": "This field cannot be empty.",
       "notFullyCompleted": "You must fill all the fields.",
-      "passwordsDoNotMatch": "Passwords do not match."
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "badFormattedEmail": "Email address must be correct."
     },
     "user": {
       "notConnected": "You are not connected.",

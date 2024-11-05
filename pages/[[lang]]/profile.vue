@@ -415,13 +415,3 @@ const editPassword = async () => {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-input {
-    @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
-}
-
-input[disabled] {
-    @apply bg-opacity-50 shadow-none border-0;
-}
-</style>
