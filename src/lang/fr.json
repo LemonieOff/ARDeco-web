@@ -3,7 +3,8 @@
     "fields": {
       "empty": "Ce champ ne peut pas être vide.",
       "notFullyCompleted": "Veuillez remplir tous les champs.",
-      "passwordsDoNotMatch": "Les mots de passe ne correspondent pas."
+      "passwordsDoNotMatch": "Les mots de passe ne correspondent pas.",
+      "badFormattedEmail": "L'adresse email doit être correcte."
     },
     "user": {
       "notConnected": "Vous n'êtes pas connecté.",
@@ -232,9 +233,13 @@
       "email": "Adresse email : ",
       "phone": "Téléphone : ",
       "city": "Ville : ",
-      "editProfile": "Mettre le profil à jour (les champs vides seront ignorés)",
+      "editProfile": "Mettre à jour le profil",
       "role": "Type de compte : ",
       "password": "Mot de passe : "
+    },
+    "errors": {
+      "firstName": "Un prénom doit être renseigné",
+      "email": "Une adresse email doit être renseignée"
     },
     "orderHistory": "Historique des commandes",
     "orderSing": "commande",

@@ -5,7 +5,7 @@
             {{ content.loading }}
         </div>
         <div v-else class="flex flex-col items-center justify-center">
-            <ProfileSettings id="profileSettings" class="mb-8"></ProfileSettings>
+            <ProfilePicture :profile=profile />
 
             <div
                 class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
@@ -216,7 +216,7 @@
 <script lang="ts" setup>
 import { isLogged, logout, userID } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
-import ProfileSettings from "~/components/UserProfile/ProfileSettings.vue";
+import ProfilePicture from "~/components/UserProfile/ProfilePicture.vue";
 
 const nuxtApp = useNuxtApp();
 
@@ -234,8 +234,9 @@ const profile = ref<{
     lastname: string,
     city: string,
     phone: string,
+    role: string,
+    profile_picture_id: number
 }>();
-provide("profile", profile);
 
 const notifications = useTemplateRef("notifications");
 const fieldEmail = useTemplateRef("fieldEmail");
@@ -312,8 +313,8 @@ const getProfileElements = async () => {
 
 const validatePersonalData = (): Boolean => {
     const errors = [];
-    if (!fieldEmail.value?.checkValidity()) errors.push("Une adresse email doit être renseignée"); // TODO : Translate
-    if (!fieldFirstName.value?.checkValidity()) errors.push("Un prénom doit être renseigné"); // TODO : Translate
+    if (!fieldEmail.value?.checkValidity()) errors.push(content.errors.email);
+    if (!fieldFirstName.value?.checkValidity()) errors.push(content.errors.firstName);
     if (errors.length > 0) {
         errors.forEach(value => {
             if (notifications.value) {
@@ -414,85 +415,3 @@ const editPassword = async () => {
     }
 };
 </script>
-
-<style lang="scss" scoped>
-#profile-container {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top: 5%;
-}
-
-.profile-wrapper {
-    //margin-left: 20%;
-    //margin-top: 5%;
-    background-color: #F4F4F4;
-    border-radius: 20px;
-    width: 90%;
-    height: 20%;
-}
-
-.profile-wrapper-lower-buttons {
-    margin: 2%;
-    //margin-left: 35%;
-    width: 90%;
-    height: 20%;
-}
-
-.profile-elements-wrapper {
-    display: flex;
-    padding: 1%;
-    text-align: center;
-}
-
-.profile-edit-buttons-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
-.deleteAccountButton {
-    width: 20%;
-    margin-left: 5%;
-    border-radius: 5px;
-    background-color: #9e1d1d;
-    color: white;
-}
-
-#deleteAccountButton {
-    text-align: center;
-}
-
-.element {
-    width: 47.5%;
-    text-align: right;
-}
-
-.element2 {
-    margin-left: 5%;
-    width: 45%;
-    text-align: left;
-}
-
-button {
-    outline-style: solid;
-    outline-width: thin;
-}
-
-.button {
-    outline-style: solid;
-    outline-width: thin;
-    border-radius: 5px;
-    padding: 1%;
-    background-color: #F4F4F4;
-}
-
-input {
-    @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
-}
-
-input[disabled] {
-    @apply bg-opacity-50 shadow-none border-0;
-}
-</style>

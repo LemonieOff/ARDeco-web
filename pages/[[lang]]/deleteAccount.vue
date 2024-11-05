@@ -1,69 +1,128 @@
 <template>
-    <div id="profile-container">
+    <div class="flex flex-col items-center justify-center">
         <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
-        <p class="warning-text">{{ content.text }}</p>
-        <div class="profile-wrapper">
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ content.email }}</div>
-                <input id="email" ref="fieldEmail" :placeholder="`${content.placeholders.email}`" class="element2"
+        <p class="text-center mb-8">{{ content.text }}</p>
+        <div
+            class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+            <div class="mb-4">
+                <label class="block text-sm font-bold mb-2" for="email">
+                    {{ content.email }} <span class="text-red-500">*</span>
+                </label>
+                <input id="email"
+                       ref="fieldEmail"
+                       v-model="emailVal"
+                       :placeholder="content.placeholders.email"
+                       class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                       required
                        type="email" />
             </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ content.password }}</div>
-                <input id="password" ref="fieldPassword" :placeholder="`${content.placeholders.password}`"
-                       class="element2"
-                       type="password" />
+            <div class="mb-4">
+                <label class="block text-sm font-bold mb-2" for="password">
+                    {{ content.password }} <span class="text-red-500">*</span>
+                </label>
+                <div class="flex">
+                    <input id="password"
+                           ref="fieldPassword"
+                           v-model="passwordVal"
+                           :placeholder="content.placeholders.password"
+                           :type="showPassword ? 'text' : 'password'"
+                           class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           required />
+                    <Icon :name="`material-symbols:visibility-${showPassword ? '' : 'off-'}outline-rounded`"
+                          class="inline-flex w-1/12 justify-center self-center cursor-pointer ml-2"
+                          size="24"
+                          @click="showPassword = !showPassword"
+                    />
+                </div>
             </div>
-            <div class="profile-elements-wrapper">
-                <div class="element">{{ content.passwordConfirm }}</div>
-                <input id="passwordConfirm" ref="fieldPasswordConfirm"
-                       :placeholder="`${content.placeholders.passwordConfirm}`"
-                       class="element2" type="password" />
+            <div class="mb-4">
+                <label class="block text-sm font-bold mb-2" for="passwordConfirm">
+                    {{ content.passwordConfirm }} <span class="text-red-500">*</span>
+                </label>
+                <div class="flex">
+                    <input id="passwordConfirm"
+                           ref="fieldPasswordConfirm"
+                           v-model="passwordConfirmVal"
+                           :placeholder="content.placeholders.passwordConfirm"
+                           :type="showPasswordConfirm ? 'text' : 'password'"
+                           class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           required />
+                    <Icon :name="`material-symbols:visibility-${showPasswordConfirm ? '' : 'off-'}outline-rounded`"
+                          class="inline-flex w-1/12 justify-center self-center cursor-pointer ml-2"
+                          size="24"
+                          @click="showPasswordConfirm = !showPasswordConfirm"
+                    />
+                </div>
             </div>
-            <div id="errors" ref="errorsDiv" class="profile-elements-wrapper"></div>
-            <div class="delete-actions-buttons-wrapper">
-                <button id="cancelButton" class="cancelButton" @click="cancel">{{ content.buttons.cancel }}</button>
-                <button id="deleteAccountButton" class="deleteAccountButton" @click="deleteAccount">
+            <div class="flex justify-evenly">
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    @click="cancel">
+                    {{ content.buttons.cancel }}
+                </button>
+                <button
+                    class="bg-[#9e1d1d] hover:bg-[#751717] text-white border-[#751717] font-bold py-2 px-4 rounded"
+                    @click="deleteAccount">
                     {{ content.buttons.delete }}
                 </button>
             </div>
         </div>
+        <Notifications ref="notifications" />
     </div>
 </template>
 
 <script lang="ts" setup>
+import Notifications from "@/components/Notifications.vue";
 import { isLogged, loggedIn } from "public/ts/checkLogin";
-import type { ShallowRef } from "vue";
-import fr from "@/src/lang/fr.json";
 
 const nuxtApp = useNuxtApp();
-const langPrefix = ref(nuxtApp.$langPrefix);
-let content = ref(nuxtApp.$content.deleteAccount);
-let errors = ref(nuxtApp.$content.errors);
+const langPrefix = nuxtApp.$langPrefix;
+const content = nuxtApp.$content.deleteAccount;
+const errors = nuxtApp.$content.errors;
 
-const fieldEmail: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldEmail");
-const fieldPassword: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPassword");
-const fieldPasswordConfirm: ShallowRef<HTMLInputElement | null> = useTemplateRef("fieldPasswordConfirm");
-const errorsDiv: ShallowRef<HTMLDivElement> = useTemplateRef("errorsDiv") as ShallowRef<HTMLDivElement>;
+const notifications = useTemplateRef("notifications");
+
+const emailRef = useTemplateRef("fieldEmail");
+const passwordRef = useTemplateRef("fieldPassword");
+const passwordConfirmRef = useTemplateRef("fieldPasswordConfirm");
+
+const emailVal = ref("");
+const passwordVal = ref("");
+const passwordConfirmVal = ref("");
+
+const showPassword = ref(false);
+const showPasswordConfirm = ref(false);
+
+onMounted(async () => {
+    await isLogged();
+    if (!loggedIn) {
+        location.href = langPrefix + "login?redirect=/deleteAccount";
+    }
+});
 
 const cancel = () => {
-    location.href = nuxtApp.$langPrefix + "profile";
+    location.href = langPrefix + "profile";
 };
 
 const deleteAccount = () => {
-    const email = fieldEmail.value ? fieldEmail.value.value : "";
-    const password = fieldPassword.value ? fieldPassword.value.value : "";
-    const passwordConfirm = fieldPasswordConfirm.value ? fieldPasswordConfirm.value.value : "";
+    let errorsCount = 0;
 
-    if (email === "" || password === "" || passwordConfirm === "") {
-        errorsDiv.value.innerHTML = `<p class="error">${errors.value.fields.notFullyCompleted}</p>`;
-        return;
+    if (emailVal.value === "" || passwordVal.value === "" || passwordConfirmVal.value === "") {
+        notifications.value?.showError(errors.fields.notFullyCompleted);
+        errorsCount++;
     }
 
-    if (password !== passwordConfirm) {
-        errorsDiv.value.innerHTML = `<p class="error">${errors.value.fields.passwordsDoNotMatch}</p>`;
-        return;
+    if (passwordVal.value !== passwordConfirmVal.value) {
+        notifications.value?.showError(errors.fields.passwordsDoNotMatch);
+        errorsCount++;
     }
+
+    if (!emailRef.value?.checkValidity()) {
+        notifications.value?.showError(errors.fields.badFormattedEmail);
+        errorsCount++;
+    }
+
+    if (errorsCount > 0) return;
 
     fetch("https://api.ardeco.app/close", {
         method: "DELETE",
@@ -71,127 +130,25 @@ const deleteAccount = () => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            email: email,
-            password: password,
-            password_confirm: passwordConfirm
+            email: emailVal.value,
+            password: passwordVal.value,
+            password_confirm: passwordConfirmVal.value
         }),
         credentials: "include"
     }).then((response) => response.json()).then((data) => {
-        console.log(data);
+        console.debug(data);
         if (data.code === 200) {
-            location.href = langPrefix.value + "login";
+            location.href = langPrefix + "login";
         } else {
             if (data.data) {
-                const [key, error]: ["user", keyof typeof fr.errors.user] = data["data"].split("_");
-                errorsDiv.value.innerHTML = `<p class="error">${errors.value[key][error]}</p>`;
+                const [key, error]: ["user", keyof typeof errors.user] = data["data"].split("_");
+                notifications.value?.showError(errors[key][error]);
             } else if (data.message) {
-                errorsDiv.value.innerHTML = `<p class="error">${data.message}</p>`;
+                notifications.value?.showError(data.message);
             } else {
-                errorsDiv.value.innerHTML = `<p class="error">${data}</p>`;
+                notifications.value?.showError(data);
             }
         }
     });
 };
-
-onMounted(async () => {
-    await isLogged();
-    if (!loggedIn) {
-        location.href = nuxtApp.$langPrefix + "login?redirect=/deleteAccount";
-    }
-});
 </script>
-
-<style lang="scss" scoped>
-.title {
-    text-align: center;
-    margin-top: 4rem;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.warning-text {
-    text-align: center;
-    margin-top: 1.5rem;
-}
-
-#errors {
-    display: block;
-    color: red;
-    text-align: center;
-}
-
-.profile-wrapper {
-    margin-left: 20%;
-    margin-top: 2%;
-    background-color: #F4F4F4;
-    border-radius: 20px;
-    width: 60%;
-    height: 20%;
-}
-
-.profile-elements-wrapper {
-    display: flex;
-    padding: 1%;
-    text-align: center;
-}
-
-.delete-actions-buttons-wrapper {
-    display: flex;
-    justify-content: center;
-    padding: 3%;
-}
-
-.cancelButton {
-    width: 10%;
-    border-radius: 5px;
-}
-
-.deleteAccountButton {
-    width: 20%;
-    margin-left: 5%;
-    border-radius: 5px;
-    background-color: #9e1d1d;
-    color: white;
-}
-
-#deleteAccountButton {
-    text-align: center;
-}
-
-#cancelButton {
-    width: 20%;
-}
-
-.element {
-    width: 47.5%;
-    text-align: right;
-}
-
-.element2 {
-    margin-left: 5%;
-    width: 45%;
-    text-align: left;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 10% 0;
-}
-
-button {
-    outline-style: solid;
-    outline-width: thin;
-}
-
-.button {
-    outline-style: solid;
-    outline-width: thin;
-    border-radius: 5px;
-    padding: 1%;
-    background-color: #F4F4F4;
-}
-
-</style>

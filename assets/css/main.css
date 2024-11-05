@@ -12,6 +12,14 @@
         @apply bg-AR-Beige dark:bg-AR-Dark-Grey text-AR-Grey dark:text-AR-Beige;
     }
 
+    input {
+        @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
+    }
+
+    input[disabled] {
+        @apply bg-opacity-50 shadow-none border-0;
+    }
+
     button {
         -webkit-tap-highlight-color: transparent;
     }

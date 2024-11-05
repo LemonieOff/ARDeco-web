@@ -3,7 +3,8 @@
     "fields": {
       "empty": "This field cannot be empty.",
       "notFullyCompleted": "You must fill all the fields.",
-      "passwordsDoNotMatch": "Passwords do not match."
+      "passwordsDoNotMatch": "Passwords do not match.",
+      "badFormattedEmail": "Email address must be correct."
     },
     "user": {
       "notConnected": "You are not connected.",
@@ -232,10 +233,13 @@
       "email": "Email : ",
       "phone": "Phone : ",
       "city": "City : ",
-      "commandsOrdered": "Ordered command(s) : ",
-      "editProfile": "Edit profile (only modified fields will be updated, empty ones will be ignored)",
+      "editProfile": "Edit profile",
       "role": "Account type : ",
       "password": "Password : "
+    },
+    "errors": {
+      "firstName": "First name must be provided",
+      "email": "An email address must be provided"
     },
     "orderHistory": "Order history",
     "orderSing": "order",
