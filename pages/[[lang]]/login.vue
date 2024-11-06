@@ -36,9 +36,10 @@
                     <input id="loginEmail"
                            ref="fieldEmail"
                            :placeholder="content.placeholders.email"
-                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight"
                            required
-                           type="email" />
+                           type="email"
+                           @input="event => inputValidity(event.target! as HTMLInputElement)" />
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-bold mb-2" for="loginPassword">
@@ -49,8 +50,9 @@
                                ref="fieldPassword"
                                :placeholder="content.placeholders.password"
                                :type="hiddenPassword ? 'password' : 'text'"
-                               class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
-                               required />
+                               class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight"
+                               required
+                               @input="event => inputValidity(event.target! as HTMLInputElement)" />
                         <Icon :name="`material-symbols:visibility-${hiddenPassword ? 'off-' : ''}outline-rounded`"
                               class="inline-flex w-1/12 justify-center self-center cursor-pointer ml-2"
                               size="24"
@@ -76,9 +78,10 @@
                     <input id="firstName"
                            ref="fieldFirstName"
                            :placeholder="content.placeholders.firstName"
-                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight"
                            required
-                           type="text" />
+                           type="text"
+                           @input="event => inputValidity(event.target! as HTMLInputElement)" />
                 </div>
                 <div v-show="activeForm === 'register'" class="mb-4">
                     <label class="block text-sm font-bold mb-2" for="lastName">{{ content.lastName }}</label>
@@ -136,7 +139,7 @@
             </div>
         </div>
     </div>
-    <Notifications ref="notifications"/>
+    <Notifications ref="notifications" />
 </template>
 
 <script lang="ts" setup>
@@ -144,9 +147,9 @@ import { isLogged, logout } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 const nuxtApp = useNuxtApp();
-const content = ref(nuxtApp.$content.login);
-const notificationsContent = ref(nuxtApp.$content.notifications);
-const langPrefix = ref(nuxtApp.$langPrefix);
+const content = nuxtApp.$content.login;
+const notificationsContent = nuxtApp.$content.notifications;
+const langPrefix = nuxtApp.$langPrefix;
 const userID = ref<number | null>();
 const loading = ref(true);
 
@@ -168,7 +171,7 @@ const noConsent = ref(false);
 const hiddenPassword = ref(true);
 
 const route = useRoute();
-const redirectUrl = ref(langPrefix.value + "profile");
+const redirectUrl = ref(langPrefix + "profile");
 
 onMounted(async () => {
     userID.value = await isLogged();
@@ -177,21 +180,28 @@ onMounted(async () => {
     if (route.query["redirect"] && route.query["redirect"] !== "") {
         redirectUrl.value = route.query["redirect"] as string;
     }
-    console.log("redirect", redirectUrl);
+    console.debug("redirect", redirectUrl);
 });
+
+const inputValidity = (target: HTMLInputElement) => {
+    target.checkValidity() ? target.classList.remove("invalid") : target.classList.add("invalid");
+};
 
 const validateLogin = (): Boolean => {
     let errors = 0;
-    if (!fieldEmail.value?.checkValidity()) errors++;
-    if (!fieldPassword.value?.checkValidity()) errors++;
+    if (!fieldEmail.value?.checkValidity()) {
+        notifications.value?.showError(notificationsContent.login.missingEmail);
+        errors++;
+    }
+    if (!fieldPassword.value?.checkValidity()) {
+        notifications.value?.showError(notificationsContent.login.missingPassword);
+        errors++;
+    }
     return errors === 0;
 };
 
 const login = async () => {
-    if (!validateLogin()) {
-        notifications.value?.showError(notificationsContent.value.loginFailed);
-        return;
-    }
+    if (!validateLogin()) return;
 
     const response = await fetch("https://api.ardeco.app/login", {
         method: "POST",
@@ -203,22 +213,40 @@ const login = async () => {
     });
 
     const result = await response.json();
-    console.log(result);
+    console.debug(result);
 
-    if (result.status === "OK") {
-        localStorage.setItem("userID", result.data["userID"]);
-        localStorage.setItem("role", result.data["role"]);
-        location.href = redirectUrl.value;
-    } else {
-        notifications.value?.showError(notificationsContent.value.loginFailed);
+    try {
+        if (result.status === "OK") {
+            localStorage.setItem("userID", result.data["userID"]);
+            localStorage.setItem("role", result.data["role"]);
+            location.href = redirectUrl.value;
+            return;
+        }
+        if (result.description === "Wrong email or password") {
+            notifications.value?.showError(notificationsContent.login.invalid);
+            return;
+        }
+        notifications.value?.showError(notificationsContent.loginFailed);
+    } catch (e) {
+        console.error(e);
+        notifications.value?.showError(notificationsContent.loginFailed);
     }
 };
 
 const validateRegister = (): Boolean => {
     let errors = 0;
-    if (!fieldEmail.value?.checkValidity()) errors++;
-    if (!fieldPassword.value?.checkValidity()) errors++;
-    if (!fieldFirstName.value?.checkValidity()) errors++;
+    if (!fieldEmail.value?.checkValidity()) {
+        notifications.value?.showError(notificationsContent.register.missingEmail);
+        errors++;
+    }
+    if (!fieldPassword.value?.checkValidity()) {
+        notifications.value?.showError(notificationsContent.register.missingPassword);
+        errors++;
+    }
+    if (!fieldFirstName.value?.checkValidity()) {
+        notifications.value?.showError(notificationsContent.register.missingFirstName);
+        errors++;
+    }
     if (!fieldPrivacy.value?.checkValidity() || !fieldCgu.value?.checkValidity()) {
         noConsent.value = true;
         errors++;
@@ -229,10 +257,7 @@ const validateRegister = (): Boolean => {
 };
 
 const register = async () => {
-    if (!validateRegister()) {
-        notifications.value?.showError(notificationsContent.value.registrationFailed);
-        return;
-    }
+    if (!validateRegister()) return;
 
     const response = await fetch("https://api.ardeco.app/register", {
         method: "POST",
@@ -252,15 +277,24 @@ const register = async () => {
     });
 
     const result = await response.json();
-    console.log(result);
+    console.debug(result);
 
-    if (result.status === "OK") {
-        localStorage.setItem("userID", result.data["id"]);
-        localStorage.setItem("role", result.data["role"]);
-        location.reload();
-        location.href = redirectUrl.value;
-    } else {
-        notifications.value?.showError(notificationsContent.value.registrationFailed);
+    try {
+        if (result.status === "OK") {
+            localStorage.setItem("userID", result.data["id"]);
+            localStorage.setItem("role", result.data["role"]);
+            location.reload();
+            location.href = redirectUrl.value;
+            return;
+        }
+        if (result.description === "E-mail already in use") {
+            notifications.value?.showError(notificationsContent.register.emailAlreadyInUse);
+            return;
+        }
+        notifications.value?.showError(notificationsContent.registrationFailed);
+    } catch (e) {
+        console.error(e);
+        notifications.value?.showError(notificationsContent.registrationFailed);
     }
 };
 
@@ -270,7 +304,7 @@ const logoutUser = async () => {
         credentials: "include"
     });
     logout();
-    location.href = langPrefix.value;
+    location.reload();
 };
 </script>
 
@@ -292,9 +326,5 @@ const logoutUser = async () => {
     div {
         display: block;
     }
-}
-
-input {
-    @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
 }
 </style>

@@ -16,6 +16,10 @@
         @apply bg-AR-Beige dark:bg-AR-Dark-Grey dark:text-port-brown
     }
 
+    input.invalid {
+        @apply border-red-500 focus:invalid:outline-red-500;
+    }
+
     input[disabled] {
         @apply bg-opacity-50 shadow-none border-0;
     }

@@ -12,9 +12,10 @@
                        ref="fieldEmail"
                        v-model="emailVal"
                        :placeholder="content.placeholders.email"
-                       class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
+                       class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight"
                        required
-                       type="email" />
+                       type="email"
+                       @input="event => inputValidity(event.target! as HTMLInputElement)" />
             </div>
             <div class="mb-4">
                 <label class="block text-sm font-bold mb-2" for="password">
@@ -26,8 +27,9 @@
                            v-model="passwordVal"
                            :placeholder="content.placeholders.password"
                            :type="showPassword ? 'text' : 'password'"
-                           class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
-                           required />
+                           class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight"
+                           required
+                           @input="event => inputValidity(event.target! as HTMLInputElement)" />
                     <Icon :name="`material-symbols:visibility-${showPassword ? '' : 'off-'}outline-rounded`"
                           class="inline-flex w-1/12 justify-center self-center cursor-pointer ml-2"
                           size="24"
@@ -45,8 +47,9 @@
                            v-model="passwordConfirmVal"
                            :placeholder="content.placeholders.passwordConfirm"
                            :type="showPasswordConfirm ? 'text' : 'password'"
-                           class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight focus:invalid:outline-red-500 invalid:border-red-500"
-                           required />
+                           class="shadow appearance-none border rounded w-11/12 py-2 px-3 leading-tight"
+                           required
+                           @input="event => inputValidity(event.target! as HTMLInputElement)" />
                     <Icon :name="`material-symbols:visibility-${showPasswordConfirm ? '' : 'off-'}outline-rounded`"
                           class="inline-flex w-1/12 justify-center self-center cursor-pointer ml-2"
                           size="24"
@@ -99,6 +102,10 @@ onMounted(async () => {
         location.href = langPrefix + "login?redirect=/deleteAccount";
     }
 });
+
+const inputValidity = (target: HTMLInputElement) => {
+    target.checkValidity() ? target.classList.remove("invalid") : target.classList.add("invalid");
+};
 
 const cancel = () => {
     location.href = langPrefix + "profile";

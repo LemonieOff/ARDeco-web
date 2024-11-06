@@ -793,8 +793,19 @@
     "galleryAlreadyReportedOrFailed": "Erreur : cette galerie a déjà été signalée ou le signalement a échoué, veuillez réessayer plus tard.",
     "couldntAddFavorite": "Erreur : nous n'avons pas pu ajouter cet élement à vos favoris, veuillez réessayer plus tard.",
     "couldntRemoveFavorite": "Erreur : nous n'avons pas pu retirer cet élement de vos favoris, veuillez réessayer plus tard.",
-    "loginFailed": "Erreur: impossible de vous connecter, veuillez vérifier votre email ou votre mot de passe.",
-    "registrationFailed": "Erreur: impossible de créer votre compte, veuillez vérifier vos informations à nouveau.",
+    "loginFailed": "Erreur : impossible de vous connecter, veuillez vérifier votre email ou votre mot de passe.",
+    "registrationFailed": "Erreur : impossible de créer votre compte, veuillez vérifier vos informations à nouveau.",
+    "register": {
+      "missingEmail": "Vous devez renseigner une adresse email valide",
+      "missingPassword": "Vous devez renseigner un mot de passe",
+      "missingFirstName": "Vous devez renseigner votre prénom",
+      "emailAlreadyInUse": "L'adresse email indiquée est déjà liée à un compte existant"
+    },
+    "login": {
+      "missingEmail": "Vous devez renseigner une adresse email valide",
+      "missingPassword": "Vous devez renseigner un mot de passe",
+      "invalid": "L'adresse email et le mot de passe ne correspondent pas"
+    },
     "couldntAddToCart": "Erreur: nous n'avons pas pu ajouter ce meuble à votre panier, veuillez réessayer plus tard.",
     "couldntRemoveFromCart": "Erreur: nous n'avons pas pu retirer ce meuble de votre panier, veuillez réessayer plus tard.",
     "couldntSendYourOrder": "Erreur: nous n'avons pas pu envoyer votre commande, veuillez réessayer plus tard.",
