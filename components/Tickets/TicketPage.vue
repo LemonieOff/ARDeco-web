@@ -116,17 +116,16 @@ export default {
             });
 
             const result = await response.json();
-            console.log(result);
+            console.debug(result);
 
             if (result.code === 200) {
                 this.$refs.notifications.showSuccess(this.notificationsMessages.ticketSuccessfullyCreated);
+                this.$refs.titleInput.value = "";
+                this.$refs.descriptionInput.value = "";
+                this.$refs.messageInput.value = "";
             } else {
                 this.$refs.notifications.showError(this.notificationsMessages.ticketCreationFailed);
             }
-
-            this.$refs.titleInput.value = "";
-            this.$refs.descriptionInput.value = "";
-            this.$refs.messageInput.value = "";
 
             await this.getUserTickets();
         },
@@ -148,13 +147,13 @@ export default {
             this.$refs.ticketCreator.style.display = "none";
 
             const result = await response.json();
-            console.log("result", result);
+            console.debug("result", result);
 
             if (result.code === 200) {
                 this.messages = result.data.messages;
                 this.currentTicketStatus = result.data.status;
-                console.log("messages", this.messages);
-                console.log("status", this.currentTicketStatus);
+                console.debug("messages", this.messages);
+                console.debug("status", this.currentTicketStatus);
             }
 
             this.currentTicketID = ticketID;
@@ -174,7 +173,7 @@ export default {
             });
 
             const result = await response.json();
-            console.log("result", result);
+            console.debug("result", result);
 
             if (result.code === 200) {
                 this.tickets = result.data;
@@ -199,7 +198,7 @@ export default {
             });
 
             const result = await response.json();
-            console.log("result", result);
+            console.debug("result", result);
 
             this.$refs.responseInput.value = "";
             await this.receiveTicketDetails(this.currentTicketID);
@@ -219,7 +218,7 @@ export default {
             });
 
             const result = await response.json();
-            console.log("result", result);
+            console.debug("result", result);
 
             if (result.code === 200) {
                 this.$refs.notifications.showSuccess(this.notificationsMessages.ticketSuccessfullyClosed);
