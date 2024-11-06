@@ -806,6 +806,11 @@
       "missingPassword": "You must provide a password",
       "invalid": "The email address and password do not match"
     },
+    "ticket": {
+      "missingTitle": "A title must be provided",
+      "missingDescription": "A description must be provided",
+      "missingMessage": "A message must be provided"
+    },
     "couldntAddToCart": "Error: we couldn't add this item to your cart, please try again later.",
     "couldntRemoveFromCart": "Error: we couldn't remove this item from your cart, please try again later.",
     "couldntSendYourOrder": "Error: we couldn't send your order, please try again later.",

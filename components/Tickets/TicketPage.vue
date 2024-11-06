@@ -20,11 +20,13 @@
              class="bg-port-brown bg-opacity-20 p-2 border border-gray-300 rounded-md w-full md:w-1/2 h-2/4 mb-4 md:mb-0">
             <input ref="titleInput" :placeholder="content.writeYourTitleHere"
                    class="w-full p-2 rounded-md border border-gray-400 mb-2 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"
-                   type="text">
+                   required type="text">
             <textarea ref="descriptionInput" :placeholder="content.shortDescriptionOfYourProblem"
-                      class="w-full p-2 rounded-md border border-gray-400 mb-2 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"></textarea>
+                      class="w-full p-2 rounded-md border border-gray-400 mb-2 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"
+                      required></textarea>
             <textarea ref="messageInput" :placeholder="content.writeYourProblemHere"
-                      class="w-full p-2 rounded-md border border-gray-400 mb-2 h-2/3 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"></textarea>
+                      class="w-full p-2 rounded-md border border-gray-400 mb-2 h-2/3 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"
+                      required></textarea>
             <button
                 class="bg-gray-300 hover:bg-gray-400 text-AR-Grey text-center py-2 px-4 rounded-md w-2/5 mx-auto block"
                 @click="createTicket">{{ content.createTicket }}
@@ -91,14 +93,40 @@ export default {
         async checkIfLogged() {
             await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}tickets`;
             }
+        },
+        validateCreateForm() {
+            let errors = 0;
+
+            const title = this.$refs.titleInput.checkValidity();
+            const description = this.$refs.descriptionInput.checkValidity();
+            const message = this.$refs.messageInput.checkValidity();
+
+            if (!title) {
+                this.$refs.notifications.showError(this.notificationsMessages.ticket.missingTitle);
+                errors++;
+            }
+            if (!description) {
+                this.$refs.notifications.showError(this.notificationsMessages.ticket.missingDescription);
+                errors++;
+            }
+            if (!message) {
+                this.$refs.notifications.showError(this.notificationsMessages.ticket.missingMessage);
+                errors++;
+            }
+
+            return errors;
         },
         async createTicket() {
             await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
+
+            const errors = this.validateCreateForm();
+            if (errors > 0) return;
+
             const title = this.$refs.titleInput.value;
             const description = this.$refs.descriptionInput.value;
             const message = this.$refs.messageInput.value;

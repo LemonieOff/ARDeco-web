@@ -806,6 +806,11 @@
       "missingPassword": "Vous devez renseigner un mot de passe",
       "invalid": "L'adresse email et le mot de passe ne correspondent pas"
     },
+    "ticket": {
+      "missingTitle": "Un titre doit être renseigné",
+      "missingDescription": "Une description doit être renseignée",
+      "missingMessage": "Un message doit être renseigné"
+    },
     "couldntAddToCart": "Erreur: nous n'avons pas pu ajouter ce meuble à votre panier, veuillez réessayer plus tard.",
     "couldntRemoveFromCart": "Erreur: nous n'avons pas pu retirer ce meuble de votre panier, veuillez réessayer plus tard.",
     "couldntSendYourOrder": "Erreur: nous n'avons pas pu envoyer votre commande, veuillez réessayer plus tard.",
