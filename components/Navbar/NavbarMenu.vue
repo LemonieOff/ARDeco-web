@@ -15,12 +15,6 @@
                     {{ content.settings }}
                 </NavbarMenuLink>
 
-                <NavbarMenuLink v-if="userId" id="cartMenuOption" :alt="content.cart" :page-lang="langPrefix"
-                                image-src="images/icons/cart.png"
-                                page-name="lang-cart" @click="menuToggle(false)">
-                    {{ content.cart }}
-                </NavbarMenuLink>
-
                 <NavbarMenuLink v-if="userId && role === 'company'" id="companyMenuOption" :alt="content.company"
                                 :page-lang="langPrefix"
                                 image-src="images/icons/company.webp" page-name="lang-company"
@@ -33,6 +27,12 @@
                                 image-src="images/icons/catalog.webp" page-name="lang-catalog"
                                 @click="menuToggle(false)">
                     {{ content.catalog }}
+                </NavbarMenuLink>
+
+                <NavbarMenuLink v-if="userId" id="cartMenuOption" :alt="content.cart" :page-lang="langPrefix"
+                                image-src="images/icons/cart.png"
+                                page-name="lang-cart" @click="menuToggle(false)">
+                    {{ content.cart }}
                 </NavbarMenuLink>
 
                 <NavbarMenuLink v-if="userId" id="ticketsMenuOption" :alt="content.tickets" :page-lang="langPrefix"
