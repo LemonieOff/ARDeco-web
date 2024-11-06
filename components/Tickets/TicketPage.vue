@@ -40,7 +40,9 @@
                      class="p-3 my-2 mx-4 rounded-md text-sm text-AR-Grey">
                     {{ message.content }}
                     <div class="text-xs text-gray-500 mt-1">
-                        <span>{{ message.sender }}</span> - <span>{{ formatDate(message.timestamp) }}</span>
+                        <span>{{ message.sender }}</span> -
+                        <span>{{ formatDate(message.timestamp.replaceAll(",", "").substring(0, 10))
+                            }}</span>
                     </div>
                 </div>
             </div>
