@@ -350,7 +350,7 @@
     }
   },
   "tickets": {
-    "title": "Support",
+    "title": "Assistance",
     "somethingWrong": "Quelque chose ne va pas ?",
     "askUs": "Demandez nous !",
     "writeYourTitleHere": "Écrivez le titre de votre problème ici",
@@ -360,7 +360,7 @@
     "createTicket": "Créer une demande",
     "updateTicket": "Mettre à jour ma demande",
     "typeYourTextHere": "Écrivez votre message ici",
-    "youCantReplyToAClosedTicket": "Vous ne pouvez pas répondre à un ticket fermé",
+    "youCantReplyToAClosedTicket": "Vous ne pouvez pas répondre à une demande fermée",
     "send": "ENVOYER",
     "close": "FERMER",
     "back": "RETOUR",
