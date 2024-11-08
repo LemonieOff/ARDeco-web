@@ -320,7 +320,8 @@
       "dateFilter": "Date",
       "nameFilter": "Name",
       "roomFilter": "Room",
-      "styleFilter": "Style"
+      "styleFilter": "Style",
+      "visibilityFilter": "Visibility"
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",
@@ -620,7 +621,9 @@
     "furnitureSing": "furniture",
     "furnitureMul": "furniture",
     "accessDetails": "Access details",
-    "you": "It's you"
+    "you": "It's you",
+    "successfullyBlocked": "The user has been successfully blocked",
+    "errorOnBlock": "Error when attempting to block the user"
   },
   "catalog": {
     "myCompany": "My company",
@@ -780,6 +783,9 @@
     "failedToPostComment": "Error: we couldn't post your comment, please try again later.",
     "failedToDeleteComment": "Error: we couldn't delete your comment, please try again later.",
     "failedToModifyComment": "Error: we couldn't modify your comment, please try again later.",
+    "sentComment": "Your comment has been sent successfully",
+    "deletedComment": "Your comment has been deleted successfully",
+    "modifiedComment": "Your comment has been modified successfully",
     "missingInformations": "Error: you didn't fill all the required informations, please try again.",
     "furnitureCreationFailed": "Error : something went wrong when creating your furniture, please try again later.",
     "informationsUpdateFailed": "Error : we couldn't update your informations, please try again later.",

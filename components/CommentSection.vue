@@ -4,7 +4,7 @@
         <input id="commentInput" :placeholder="`${content['writePlaceholder']}`" type="text">
         <NuxtImg id="sendComment" class="icon" src="images/icons/send.webp" @click="postComment" />
     </div>
-    <div id="oldCommentSection" class="commentSection text-AR-Grey">
+    <div id="oldCommentSection" class="commentSection">
         <div v-for="singleComment in comments.slice().reverse()" :key="singleComment.id" class="comment">
             <div class="topCommentSection">
                 <NuxtImg :src="`https://api.ardeco.app/profile_pictures/${singleComment.user.profile_picture_id}.png`"
@@ -35,27 +35,20 @@
             </div>
             <div :id="'existingComment_' + singleComment.id" class="bottomCommentSection">{{ singleComment.comment }}
             </div>
-            <input :id="'modifiedComment_' + singleComment.id" :placeholder="`${singleComment.comment}`"
+            <input :id="'modifiedComment_' + singleComment.id" :placeholder="singleComment.comment"
                    class="bottomCommentSection" hidden>
         </div>
     </div>
+    <Notifications ref="notifications" />
 </template>
 
 <script>
 import { isLogged, loggedIn } from "public/ts/checkLogin";
-import Notifications from "@/components/Notifications.vue";
 
 export default {
     name: "CommentSection",
-    components: {
-        Notifications
-    },
     props: {
-        galleryId: Number | null,
-        notifications: {
-            type: Object,
-            required: true
-        }
+        galleryId: Number | null
     },
     data() {
         return {
@@ -77,7 +70,6 @@ export default {
             this.getUserPicture();
         }
     },
-    inject: ["notifications"],
     methods: {
         async getUserPicture() {
             const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
@@ -90,7 +82,7 @@ export default {
             const result = await response.json();
             console.log(result);
             if (result.code == 400) {
-                this.notifications.showError(this.notificationMessages.infoNotReceived);
+                this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
             this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data.id}.png`;
         },
@@ -110,7 +102,7 @@ export default {
             const result = await response.json();
 
             if (result.code == 400) {
-                this.notifications.showError(this.notificationMessages.infoNotReceived);
+                this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
             this.comments = result.data;
 
@@ -138,9 +130,10 @@ export default {
             const result = await response.json();
 
             if (result.code !== 201) {
-                this.notifications.showError(this.notificationMessages.failedToPostComment);
+                this.$refs.notifications.showError(this.notificationMessages.failedToPostComment);
             } else {
                 textInput.value = "";
+                this.$refs.notifications.showSuccess(this.notificationMessages.sentComment);
                 await this.getComments();
             }
             console.log("POST :", result);
@@ -162,8 +155,9 @@ export default {
             const result = await response.json();
 
             if (result.code !== 200) {
-                this.notifications.showError(this.notificationMessages.failedToDeleteComment);
+                this.$refs.notifications.showError(this.notificationMessages.failedToDeleteComment);
             } else {
+                this.$refs.notifications.showSuccess(this.notificationMessages.deletedComment);
                 await this.getComments();
             }
             console.log("DELETE :", result);
@@ -196,9 +190,9 @@ export default {
                     const result = await response.json();
 
                     if (result.code !== 200) {
-                        this.notifications.showError(this.notificationMessages.failedToModifyComment);
+                        this.$refs.notifications.showError(this.notificationMessages.failedToModifyComment);
                     } else {
-                        this.notifications.showSuccess(this.notificationMessages.informationsUpdated);
+                        this.$refs.notifications.showSuccess(this.notificationMessages.modifiedComment);
                         await this.getComments();
                     }
                 }
@@ -303,7 +297,6 @@ export default {
 }
 
 .bottomCommentSection {
-    background-color: $secondary-white;
     width: 80%;
     margin-left: 70px;
     padding: 10px;
@@ -370,7 +363,6 @@ export default {
         height: auto;
         font-size: 12px;
     }
-
 }
 
 </style>

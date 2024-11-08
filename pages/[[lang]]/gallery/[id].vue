@@ -1,27 +1,30 @@
 <template>
     <div class="container">
-        <div class="text-center font-bold text-xl md:text-4xl my-8 title">{{ content.galleryDetailsTitle }}</div>
+        <h1 class="text-center font-bold text-xl md:text-4xl my-8 title">{{ content.galleryDetailsTitle }}</h1>
         <div style="display: inline-flex; width: 100%; margin-bottom: 20px">
-            <div class="card">
+            <div class="card bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige">
                 <div class="card-content">
-                    <div class="card-item">
-                        <strong>{{ content.id }}:</strong> {{ GalleryData.id }}
+                    <div v-if="false" class="card-item">
+                        <strong>{{ content.id }} :</strong> {{ GalleryData.id }}
                     </div>
                     <div class="card-item">
-                        <strong>{{ content.name }}:</strong> {{ GalleryData.name }}
+                        <strong>{{ content.name }} :</strong> {{ GalleryData.name }}
+                    </div>
+                    <div v-if="GalleryData.description" class="card-item">
+                        <strong>{{ content.description }} :</strong> {{ GalleryData.description }}
+                    </div>
+                    <div v-if="GalleryData.user" class="card-item">
+                        <strong>{{ content.author }} :</strong> {{ GalleryData.user.first_name }}
+                        {{ GalleryData.user.last_name }}
                     </div>
                     <div class="card-item">
-                        <strong>{{ content.description }}:</strong> {{ GalleryData.description }}
-                    </div>
-                    <div v-if="GalleryData.user_id" class="card-item">
-                        <strong>{{ content.author }}:</strong> {{ UserData.data.lastname }} {{ UserData.data.firstname
-                        }}
+                        <strong>{{ content.room }} :</strong> {{ values.rooms[GalleryData.room] }}
                     </div>
                     <div class="card-item">
-                        <strong>{{ content.room }}:</strong> {{ GalleryData.room }}
+                        <strong>{{ content.style }} :</strong> {{ values.styles[GalleryData.style] }}
                     </div>
-                    <div class="card-item">
-                        <strong>{{ content.style }}:</strong> {{ GalleryData.style }}
+                    <div v-if="GalleryData.model_data" class="card-item">
+                        <strong>{{ content.furnitureTable }} :</strong> {{ GalleryData.model_data.length }}
                     </div>
                 </div>
             </div>
@@ -50,7 +53,7 @@
         </button>
     </div>
     <Notifications ref="notifications" />
-    <CommentSection :galleryId="this.GalleryData.id" :notifications="this.$refs.notifications" />
+    <CommentSection :galleryId="this.GalleryData.id" />
 </template>
 
 <script>
@@ -70,11 +73,11 @@ export default {
             galleryUserId: 0,
             userID: 0,
             GalleryData: [],
-            UserData: [],
             errorMessage: "",
             successMessage: "",
             isLiked: false,
             content: this.$content.gallery,
+            values: this.$content.values,
             notificationsMessages: this.$content.notifications,
             urlLang: this.$urlLang,
             langPrefix: this.$langPrefix,
@@ -209,7 +212,7 @@ export default {
                 credentials: "include"
             });
             const result = await response.json();
-            console.log("checkGalleryReport", result)
+            console.log("checkGalleryReport", result);
         },
 
         async setItemVisibility(itemInputID, activeOrNot) {
@@ -380,8 +383,6 @@ export default {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(to bottom right, #f3f3f3, #e0e0e0);
-    color: #333;
 }
 
 .card-content {

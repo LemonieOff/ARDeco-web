@@ -62,6 +62,10 @@
                 <div id="styleFilter" style="cursor: pointer;" @click="handleFilters('styleFilter'); filterByStyle()">
                     {{ content.styleFilter }}
                 </div>
+                <div id="visibilityFilter" style="cursor: pointer;"
+                     @click="handleFilters('visibilityFilter'); filterByVisibility()">
+                    {{ content.visibilityFilter }}
+                </div>
             </div>
             <table v-if="galleryData.length" class="w-96 border-[1px] rounded-md border-spacing-0 border-separate">
                 <thead>
@@ -75,7 +79,10 @@
                     <tr v-for="gallery in galleryData" :key="gallery.id"
                         class="cursor-pointer odd:dark:bg-AR-Grey odd:bg-AR-Floral-White"
                         @click="redirectToGallery(gallery.id)">
-                        <td class="p-2.5">{{ gallery.name }}</td>
+                        <td class="p-2.5"><span
+                            :class="gallery.visibility ? 'bg-AR-Green' : 'bg-red-600'"
+                            class="w-2.5 h-2.5 inline-block rounded-full mr-2"></span>{{ gallery.name }}
+                        </td>
                         <td class="p-2.5">{{ gallery.room }}</td>
                         <td class="p-2.5">{{ gallery.style }}</td>
                     </tr>
@@ -102,6 +109,7 @@ export default {
     data() {
         return {
             content: this.$content.settings.users,
+            values: this.$content.values,
             langPrefix: this.$langPrefix,
             galleryData: [],
             settings: [],
@@ -202,7 +210,11 @@ export default {
             });
 
             const result = await response.json();
-            this.galleryData = result.data;
+            this.galleryData = result.data.map((item) => ({
+                ...item,
+                room: this.values.rooms[item.room],
+                style: this.values.styles[item.style]
+            }));
             console.log("this.galleryData : ", this.galleryData);
             if (result.code === 200 && result.data.length === 0) {
                 this.$refs.notifications.showSuccess(this.notificationMessages.emptyGallery);
@@ -211,15 +223,16 @@ export default {
             }
         },
 
-        async redirectToGallery(galleryId) {
+        redirectToGallery(galleryId) {
             this.$router.push(`${this.langPrefix}gallery/` + galleryId);
         },
 
-        async handleFilters(id) {
+        handleFilters(id) {
             const dateFilter = document.getElementById("dateFilter");
             const nameFilter = document.getElementById("nameFilter");
             const roomFilter = document.getElementById("roomFilter");
             const styleFilter = document.getElementById("styleFilter");
+            const visibilityFilter = document.getElementById("visibilityFilter");
             const div = document.getElementById(id);
 
             if (id === "dateFilter") {
@@ -227,38 +240,52 @@ export default {
                 nameFilter.style.fontWeight = "normal";
                 roomFilter.style.fontWeight = "normal";
                 styleFilter.style.fontWeight = "normal";
+                visibilityFilter.style.fontWeight = "normal";
             } else if (id === "nameFilter") {
                 div.style.fontWeight = "bold";
                 dateFilter.style.fontWeight = "normal";
                 roomFilter.style.fontWeight = "normal";
                 styleFilter.style.fontWeight = "normal";
+                visibilityFilter.style.fontWeight = "normal";
             } else if (id === "roomFilter") {
                 div.style.fontWeight = "bold";
                 dateFilter.style.fontWeight = "normal";
                 nameFilter.style.fontWeight = "normal";
                 styleFilter.style.fontWeight = "normal";
+                visibilityFilter.style.fontWeight = "normal";
             } else if (id === "styleFilter") {
                 div.style.fontWeight = "bold";
                 dateFilter.style.fontWeight = "normal";
                 nameFilter.style.fontWeight = "normal";
                 roomFilter.style.fontWeight = "normal";
+                visibilityFilter.style.fontWeight = "normal";
+            } else if (id === "visibilityFilter") {
+                div.style.fontWeight = "bold";
+                dateFilter.style.fontWeight = "normal";
+                nameFilter.style.fontWeight = "normal";
+                roomFilter.style.fontWeight = "normal";
+                styleFilter.style.fontWeight = "normal";
             }
         },
 
-        async filterByDate() {
+        filterByDate() {
             return this.galleryData.sort((a, b) => a.id - b.id);
         },
 
-        async filterByName() {
+        filterByName() {
             this.galleryData.sort((a, b) => a.name.localeCompare(b.name));
         },
 
-        async filterByRoom() {
+        filterByRoom() {
             this.galleryData.sort((a, b) => a.room.localeCompare(b.room));
         },
 
-        async filterByStyle() {
+        filterByStyle() {
             this.galleryData.sort((a, b) => a.style.localeCompare(b.style));
+        },
+
+        filterByVisibility() {
+            this.galleryData.sort((a, b) => a.visibility - b.visibility);
         }
     }
 };
