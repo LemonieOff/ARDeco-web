@@ -18,6 +18,7 @@
     <p v-else class="text-center italic mt-5">
         {{ errorMessage === "" ? content.loading : errorMessage }}
     </p>
+    <Notifications ref="notifications" />
 </template>
 
 <script lang="ts" setup>
@@ -36,10 +37,11 @@ interface User {
 
 const nuxtApp = useNuxtApp();
 
+const notifications = useTemplateRef("notifications");
+
 const userData = ref<User[]>([]);
 const errorMessage = ref("");
-const notificationMessage = ref("");
-const content = ref(nuxtApp.$content.blockedUsers);
+const content = nuxtApp.$content.blockedUsers;
 const langPrefix = nuxtApp.$langPrefix;
 const userId = ref(0);
 
@@ -71,8 +73,8 @@ async function getBlocked() {
     });
 
     if (!response.ok) {
-        console.error(content.value.fetchError, response);
-        errorMessage.value = content.value.fetchError;
+        console.error(content.fetchError, response);
+        errorMessage.value = content.fetchError;
         return;
     }
 
@@ -80,7 +82,7 @@ async function getBlocked() {
     console.debug(result);
 
     if (result.data.length === 0) {
-        errorMessage.value = content.value.noBlockedUsers;
+        errorMessage.value = content.noBlockedUsers;
         return;
     }
 
@@ -98,12 +100,12 @@ async function unblockUser(userId: number) {
 
     if (!response.ok) {
         console.error("Failed to unblock user " + userId, response);
-        notificationMessage.value = "Failed to unblock user " + userId;
+        notifications.value!.showError(content.failedUnblocking);
         return;
     }
 
+    notifications.value!.showSuccess(content.successfulUnblocking);
     userData.value = userData.value.filter(user => user.blocked_user_id !== userId);
-    notificationMessage.value = `User ${userId} unblocked successfully`;
-    if (userData.value.length === 0) errorMessage.value = content.value.noBlockedUsers;
+    if (userData.value.length === 0) errorMessage.value = content.noBlockedUsers;
 }
 </script>

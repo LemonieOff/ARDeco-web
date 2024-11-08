@@ -275,7 +275,9 @@
     "loading": "Chargement...",
     "fetchError": "Erreur du serveur lors de la récupération des données",
     "fetchUserError": "Erreur du serveur lors de la récupération des données d'un utilisateur bloqué",
-    "noBlockedUsers": "Aucun utilisateur bloqué"
+    "noBlockedUsers": "Aucun utilisateur bloqué",
+    "successfulUnblocking": "L'utilisateur a été débloqué avec succès",
+    "failedUnblocking": "Une erreur est survenue lors du déblocage de l'utilisateur"
   },
   "deleteAccount": {
     "title": "Suppression du compte",
