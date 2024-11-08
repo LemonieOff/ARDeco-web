@@ -4,18 +4,18 @@
         <div style="display: inline-flex; width: 100%; margin-bottom: 20px">
             <div class="card bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige">
                 <div class="card-content">
-                    <div class="card-item">
+                    <div v-if="false" class="card-item">
                         <strong>{{ content.id }} :</strong> {{ GalleryData.id }}
                     </div>
                     <div class="card-item">
                         <strong>{{ content.name }} :</strong> {{ GalleryData.name }}
                     </div>
-                    <div class="card-item">
+                    <div v-if="GalleryData.description" class="card-item">
                         <strong>{{ content.description }} :</strong> {{ GalleryData.description }}
                     </div>
-                    <div v-if="GalleryData.user_id" class="card-item">
-                        <strong>{{ content.author }} :</strong> {{ UserData.data.lastname }} {{ UserData.data.firstname
-                        }}
+                    <div v-if="GalleryData.user" class="card-item">
+                        <strong>{{ content.author }} :</strong> {{ GalleryData.user.first_name }}
+                        {{ GalleryData.user.last_name }}
                     </div>
                     <div class="card-item">
                         <strong>{{ content.room }} :</strong> {{ values.rooms[GalleryData.room] }}
@@ -53,7 +53,7 @@
         </button>
     </div>
     <Notifications ref="notifications" />
-    <CommentSection :galleryId="this.GalleryData.id" :notifications="this.$refs.notifications" />
+    <CommentSection :galleryId="this.GalleryData.id" />
 </template>
 
 <script>
@@ -73,7 +73,6 @@ export default {
             galleryUserId: 0,
             userID: 0,
             GalleryData: [],
-            UserData: [],
             errorMessage: "",
             successMessage: "",
             isLiked: false,
