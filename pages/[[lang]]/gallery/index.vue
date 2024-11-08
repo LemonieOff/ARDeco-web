@@ -73,6 +73,7 @@
     <p v-else class="text-center italic mt-5">
         {{ errorMessage === "" ? content.loading : errorMessage }}
     </p>
+    <Notifications ref="notifications" />
 </template>
 
 <script lang="ts" setup>
@@ -82,6 +83,8 @@ const nuxtApp = useNuxtApp();
 
 const content = nuxtApp.$content.gallery;
 const values = nuxtApp.$content.values;
+
+const notifications = useTemplateRef("notifications");
 
 const galleryData = ref<{
     id: number,
@@ -98,7 +101,6 @@ const galleryData = ref<{
     visibility: true
 }[]>([]);
 const errorMessage = ref("");
-const successMessage = ref("");
 const langPrefix = nuxtApp.$langPrefix;
 const userId = ref(0);
 
@@ -157,14 +159,13 @@ async function blockUser(userID: number) {
         credentials: "include"
     });
     const json = await response.json();
-    alert(json.description); // TODO : Notification system instead of alert
     if (response.ok) {
-        successMessage.value = "User blocked successfully";
+        notifications.value!.showSuccess(content.successfullyBlocked);
         galleryData.value = galleryData.value.filter(item => item.user.id !== userID);
         if (galleryData.value.length <= 0) errorMessage.value = content.noItems;
     } else {
         console.error(json.description);
-        errorMessage.value = "An error occurred while blocking the user.";
+        notifications.value!.showError(content.errorOnBlock);
     }
 }
 </script>

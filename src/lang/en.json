@@ -621,7 +621,9 @@
     "furnitureSing": "furniture",
     "furnitureMul": "furniture",
     "accessDetails": "Access details",
-    "you": "It's you"
+    "you": "It's you",
+    "successfullyBlocked": "The user has been successfully blocked",
+    "errorOnBlock": "Error when attempting to block the user"
   },
   "catalog": {
     "myCompany": "My company",
