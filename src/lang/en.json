@@ -320,7 +320,8 @@
       "dateFilter": "Date",
       "nameFilter": "Name",
       "roomFilter": "Room",
-      "styleFilter": "Style"
+      "styleFilter": "Style",
+      "visibilityFilter": "Visibility"
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",

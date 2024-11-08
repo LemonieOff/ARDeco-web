@@ -320,7 +320,8 @@
       "dateFilter": "Ancienneté",
       "nameFilter": "Nom",
       "roomFilter": "Pièce",
-      "styleFilter": "Style"
+      "styleFilter": "Style",
+      "visibilityFilter": "Visibilité"
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",
