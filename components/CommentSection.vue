@@ -141,6 +141,7 @@ export default {
                 this.notifications.showError(this.notificationMessages.failedToPostComment);
             } else {
                 textInput.value = "";
+                this.notifications.showSuccess(this.notificationMessages.sentComment);
                 await this.getComments();
             }
             console.log("POST :", result);
@@ -164,6 +165,7 @@ export default {
             if (result.code !== 200) {
                 this.notifications.showError(this.notificationMessages.failedToDeleteComment);
             } else {
+                this.notifications.showSuccess(this.notificationMessages.deletedComment);
                 await this.getComments();
             }
             console.log("DELETE :", result);
@@ -198,7 +200,7 @@ export default {
                     if (result.code !== 200) {
                         this.notifications.showError(this.notificationMessages.failedToModifyComment);
                     } else {
-                        this.notifications.showSuccess(this.notificationMessages.informationsUpdated);
+                        this.notifications.showSuccess(this.notificationMessages.modifiedComment);
                         await this.getComments();
                     }
                 }
