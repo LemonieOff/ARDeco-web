@@ -4,7 +4,7 @@
         <input id="commentInput" :placeholder="`${content['writePlaceholder']}`" type="text">
         <NuxtImg id="sendComment" class="icon" src="images/icons/send.webp" @click="postComment" />
     </div>
-    <div id="oldCommentSection" class="commentSection text-AR-Grey">
+    <div id="oldCommentSection" class="commentSection">
         <div v-for="singleComment in comments.slice().reverse()" :key="singleComment.id" class="comment">
             <div class="topCommentSection">
                 <NuxtImg :src="`https://api.ardeco.app/profile_pictures/${singleComment.user.profile_picture_id}.png`"
@@ -35,7 +35,7 @@
             </div>
             <div :id="'existingComment_' + singleComment.id" class="bottomCommentSection">{{ singleComment.comment }}
             </div>
-            <input :id="'modifiedComment_' + singleComment.id" :placeholder="`${singleComment.comment}`"
+            <input :id="'modifiedComment_' + singleComment.id" :placeholder="singleComment.comment"
                    class="bottomCommentSection" hidden>
         </div>
     </div>
@@ -297,7 +297,6 @@ export default {
 }
 
 .bottomCommentSection {
-    background-color: $secondary-white;
     width: 80%;
     margin-left: 70px;
     padding: 10px;
@@ -364,7 +363,6 @@ export default {
         height: auto;
         font-size: 12px;
     }
-
 }
 
 </style>
