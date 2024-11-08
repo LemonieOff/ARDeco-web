@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col absolute top-20 left-2.5 z-0">
+    <div class="flex flex-col fixed top-20 left-2.5 z-0">
         <TransitionGroup name="message">
             <div v-for="message in messages" :key="message.id" :class="message.type === 'success' ? 'success' : 'error'"
                  class="w-60 text-white rounded p-1 text-center mb-2">
