@@ -818,6 +818,16 @@
       "missingDescription": "Une description doit être renseignée",
       "missingMessage": "Un message doit être renseigné"
     },
+    "furniture": {
+      "missingName": "Un nom doit être renseigné",
+      "missingPrice": "Un prix doit être renseignée",
+      "missingStyle": "Au moins un style doit être renseigné",
+      "missingRoom": "Au moins un pièce doit être renseignée",
+      "missingHeight": "La hauteur doit être renseignée",
+      "missingWidth": "La largeur doit être renseignée",
+      "missingDepth": "La profondeur doit être renseignée",
+      "missingColor": "Au moins une couleur doit être renseignée"
+    },
     "couldntAddToCart": "Erreur: nous n'avons pas pu ajouter ce meuble à votre panier, veuillez réessayer plus tard.",
     "couldntRemoveFromCart": "Erreur: nous n'avons pas pu retirer ce meuble de votre panier, veuillez réessayer plus tard.",
     "couldntSendYourOrder": "Erreur: nous n'avons pas pu envoyer votre commande, veuillez réessayer plus tard.",

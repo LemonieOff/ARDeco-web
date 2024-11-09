@@ -62,6 +62,7 @@ export default {
         return {
             content: this.$content.settings.companies,
             notificationsMessages: this.$content.notifications,
+            notificationsMessagesFurniture: this.$content.notifications.furniture,
             placeholders: {},
             userID: 36,
             langPrefix: "/",
@@ -240,9 +241,29 @@ export default {
                 }
             }
 
-            if (furnitureName === "" || furniturePrice === null || furnitureStyles.length === 0 || furnitureRooms.length === 0 ||
-                furnitureHeight === null || furnitureWidth === null || furnitureDepth === null || furnitureColors.length === 0) {
-                this.$refs.notifications.showError(this.notificationsMessages.missingInformations);
+            if (furnitureName === "" ) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingName);
+                return;
+            } else if (furniturePrice === null) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingPrice);
+                return;
+            } else if (furnitureStyles.length === 0) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingStyle);
+                return;
+            } else if (urnitureRooms.length === 0) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingRoom);
+                return;
+            } else if (furnitureHeight === null) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingHeight);
+                return;
+            } else if (furnitureWidth === null) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingWidth);
+                return;
+            } else if (furnitureDepth === null) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingDepth);
+                return;
+            } else if (furnitureColors.length === 0) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingColor);
                 return;
             }
 
