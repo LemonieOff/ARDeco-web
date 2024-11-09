@@ -820,13 +820,14 @@
     },
     "furniture": {
       "missingName": "A name must be provided",
-      "missingPrice": "A price must be provided",
-      "missingStyle": "At least one style must be provided",
-      "missingRoom": "At least one room must be provided",
-      "missingHeight": "Height must be provided",
-      "missingWidth": "Width must be provided",
-      "missingDepth": "Depth must be provided",
-      "missingColor": "At least one color must be provided"
+      "missingPrice": "A price must be provided and can only contain numbers",
+      "missingStyle": "At least one style must be selected",
+      "missingRoom": "At least one room type must be selected",
+      "missingHeight": "Height must be provided and can only contain numbers",
+      "missingWidth": "Width must be provided and can only contain numbers",
+      "missingDepth": "Depth must be provided and can only contain numbers",
+      "missingColor": "At least one color must be selected",
+      "negativeNumber": "You cannot apply negative values to your furniture!"
     },
     "couldntAddToCart": "Error: we couldn't add this item to your cart, please try again later.",
     "couldntRemoveFromCart": "Error: we couldn't remove this item from your cart, please try again later.",

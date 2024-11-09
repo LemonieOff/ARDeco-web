@@ -183,26 +183,34 @@ export default {
                 }
             }
 
-            if (furnitureName === "" ) {
+            if (furnitureName === "") {
                 this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingName);
                 return;
-            } else if (furniturePrice === null) {
-                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingPrice);
+            } else if (furniturePrice === null || furniturePrice < 0) {
+                this.$refs.notifications.showError(furniturePrice === null 
+                    ? this.notificationsMessagesFurniture.missingPrice 
+                    : this.notificationsMessagesFurniture.negativeNumber);
                 return;
             } else if (furnitureStyles.length === 0) {
                 this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingStyle);
                 return;
-            } else if (urnitureRooms.length === 0) {
+            } else if (furnitureRooms.length === 0) {
                 this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingRoom);
                 return;
-            } else if (furnitureHeight === null) {
-                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingHeight);
+            } else if (furnitureHeight === null || furnitureHeight < 0) {
+                this.$refs.notifications.showError(furnitureHeight === null 
+                    ? this.notificationsMessagesFurniture.missingHeight 
+                    : this.notificationsMessagesFurniture.negativeNumber);
                 return;
-            } else if (furnitureWidth === null) {
-                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingWidth);
+            } else if (furnitureWidth === null || furnitureWidth < 0) {
+                this.$refs.notifications.showError(furnitureWidth === null 
+                    ? this.notificationsMessagesFurniture.missingWidth 
+                    : this.notificationsMessagesFurniture.negativeNumber);
                 return;
-            } else if (furnitureDepth === null) {
-                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingDepth);
+            } else if (furnitureDepth === null || furnitureDepth < 0) {
+                this.$refs.notifications.showError(furnitureDepth === null 
+                    ? this.notificationsMessagesFurniture.missingDepth 
+                    : this.notificationsMessagesFurniture.negativeNumber);
                 return;
             } else if (furnitureColors.length === 0) {
                 this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingColor);
