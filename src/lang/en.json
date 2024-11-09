@@ -613,6 +613,7 @@
     "delete": "Delete",
     "goBack": "Return",
     "report": "Report",
+    "reported": "Reported",
     "show": "Make public",
     "hide": "Make private",
     "confirm": "Confirm",

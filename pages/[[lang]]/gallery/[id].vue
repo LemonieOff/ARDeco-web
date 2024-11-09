@@ -38,9 +38,12 @@
                 </div>
             </div>
         </div>
-        <button class="custom-button" @click="goToGallery"> {{ content.goBack }}</button>
+        <button v-if="this.isReported===false" class="custom-button" @click="goToGallery"> {{ content.goBack }}</button>
         <button id="startReportButton" class="custom-button" style="margin-left: 2.5%" @click="startReport">
             {{ content.report }}
+        </button>
+        <button v-if="this.isReported" class="custom-button" style="margin-left: 2.5%">
+            {{ content.reported }}
         </button>
         <button v-if="this.galleryUserId === this.userID" class="custom-button" style="margin-left: 2.5%"
                 @click="setItemVisibility(this.GalleryData.id, this.GalleryData.visibility)">
@@ -76,6 +79,7 @@ export default {
             errorMessage: "",
             successMessage: "",
             isLiked: false,
+            isReported: false,
             content: this.$content.gallery,
             values: this.$content.values,
             notificationsMessages: this.$content.notifications,
@@ -188,8 +192,8 @@ export default {
                     credentials: "include"
                 });
                 const result = await response.json();
-                // console.log(result)
-                if (!response.ok) {
+                console.log(result)
+                if (result.code != 200 && result.code != 201) {
                     this.$refs.notifications.showError(this.notificationsMessages.galleryAlreadyReportedOrFailed);
                     throw new Error("Failed to report gallery");
                 } else {
@@ -204,7 +208,7 @@ export default {
         },
 
         async checkGalleryReport() {
-            const response = await fetch(`https://api.ardeco.app/gallery_report/${this.GalleryData.id}/reports/list`, {
+            const response = await fetch(`https://api.ardeco.app/gallery_report/${this.GalleryData.id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -213,6 +217,12 @@ export default {
             });
             const result = await response.json();
             console.log("checkGalleryReport", result);
+
+            if (result.data === null) {
+                this.$refs.notifications.showSuccess(this.notificationsMessages.infoNotReceived);
+            }
+
+            this.isReadonly = result.data;
         },
 
         async setItemVisibility(itemInputID, activeOrNot) {
