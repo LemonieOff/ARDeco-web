@@ -38,8 +38,8 @@
                 </div>
             </div>
         </div>
-        <button v-if="this.isReported===false" class="custom-button" @click="goToGallery"> {{ content.goBack }}</button>
-        <button id="startReportButton" class="custom-button" style="margin-left: 2.5%" @click="startReport">
+        <button class="custom-button" @click="goToGallery"> {{ content.goBack }}</button>
+        <button id="startReportButton" v-if="this.isReported===false" class="custom-button" style="margin-left: 2.5%" @click="startReport">
             {{ content.report }}
         </button>
         <button v-if="this.isReported" class="custom-button" style="margin-left: 2.5%">
@@ -200,6 +200,7 @@ export default {
                     await this.startReport();
                     document.getElementById("reportDescription").textContent = "";
                     this.$refs.notifications.showSuccess(this.notificationsMessages.reportSuccessful);
+                    this.isReported = true;
                 }
             } catch (error) {
                 console.error("Error fetching user information:", error);
@@ -219,10 +220,10 @@ export default {
             console.log("checkGalleryReport", result);
 
             if (result.data === null) {
-                this.$refs.notifications.showSuccess(this.notificationsMessages.infoNotReceived);
+                this.$refs.notifications.showError(this.notificationsMessages.infoNotReceived);
             }
 
-            this.isReadonly = result.data;
+            this.isReported = result.data;
         },
 
         async setItemVisibility(itemInputID, activeOrNot) {
