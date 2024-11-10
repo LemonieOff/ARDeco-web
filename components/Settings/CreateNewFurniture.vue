@@ -65,6 +65,7 @@ export default {
         return {
             content: this.$content.settings.companies,
             notificationsMessages: this.$content.notifications,
+            notificationsMessagesFurniture: this.$content.notifications.furniture,
             placeholders: {},
             langPrefix: "/",
             styles: {
@@ -182,9 +183,37 @@ export default {
                 }
             }
 
-            if (furnitureName === "" || furniturePrice === null || furnitureStyles.length === 0 || furnitureRooms.length === 0 ||
-                furnitureHeight === null || furnitureWidth === null || furnitureDepth === null || furnitureColors.length === 0) {
-                this.$refs.notifications.showError(this.notificationsMessages.missingInformations);
+            if (furnitureName === "") {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingName);
+                return;
+            } else if (furniturePrice === null || furniturePrice < 0) {
+                this.$refs.notifications.showError(furniturePrice === null 
+                    ? this.notificationsMessagesFurniture.missingPrice 
+                    : this.notificationsMessagesFurniture.negativeNumber);
+                return;
+            } else if (furnitureStyles.length === 0) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingStyle);
+                return;
+            } else if (furnitureRooms.length === 0) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingRoom);
+                return;
+            } else if (furnitureHeight === null || furnitureHeight < 0) {
+                this.$refs.notifications.showError(furnitureHeight === null 
+                    ? this.notificationsMessagesFurniture.missingHeight 
+                    : this.notificationsMessagesFurniture.negativeNumber);
+                return;
+            } else if (furnitureWidth === null || furnitureWidth < 0) {
+                this.$refs.notifications.showError(furnitureWidth === null 
+                    ? this.notificationsMessagesFurniture.missingWidth 
+                    : this.notificationsMessagesFurniture.negativeNumber);
+                return;
+            } else if (furnitureDepth === null || furnitureDepth < 0) {
+                this.$refs.notifications.showError(furnitureDepth === null 
+                    ? this.notificationsMessagesFurniture.missingDepth 
+                    : this.notificationsMessagesFurniture.negativeNumber);
+                return;
+            } else if (furnitureColors.length === 0) {
+                this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingColor);
                 return;
             }
 

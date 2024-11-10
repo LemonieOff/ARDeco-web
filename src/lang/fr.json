@@ -613,6 +613,7 @@
     "delete": "Supprimer",
     "goBack": "Retour",
     "report": "Signaler",
+    "reported": "Signalée",
     "show": "Rendre public",
     "hide": "Rendre privé",
     "confirm": "Confirmer",
@@ -816,6 +817,17 @@
       "missingTitle": "Un titre doit être renseigné",
       "missingDescription": "Une description doit être renseignée",
       "missingMessage": "Un message doit être renseigné"
+    },
+    "furniture": {
+      "missingName": "Un nom doit être renseigné",
+      "missingPrice": "Un prix doit être renseigné et ne peux être composé que de chiffres",
+      "missingStyle": "Au moins un style doit être choisie",
+      "missingRoom": "Au moins un type de pièce doit être choisie",
+      "missingHeight": "La hauteur doit être renseignée et ne peux être composée que de chiffres",
+      "missingWidth": "La largeur doit être renseignée et ne peux être composée que de chiffres",
+      "missingDepth": "La profondeur doit être renseignée et ne peux être composée que de chiffres",
+      "missingColor": "Au moins une couleur doit être choisie",
+      "negativeNumber": "Vous ne pouvez pas appliquer de valeurs négatives à votre meuble !"
     },
     "couldntAddToCart": "Erreur: nous n'avons pas pu ajouter ce meuble à votre panier, veuillez réessayer plus tard.",
     "couldntRemoveFromCart": "Erreur: nous n'avons pas pu retirer ce meuble de votre panier, veuillez réessayer plus tard.",

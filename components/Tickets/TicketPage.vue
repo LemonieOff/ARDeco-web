@@ -4,7 +4,8 @@
         <div>{{ content.somethingWrong }}</div>
         <div>{{ content.askUs }}</div>
     </div>
-    <div class="flex flex-col md:flex-row w-full px-4 h-[55dvh] justify-evenly">
+    <br>
+    <div class="flex flex-col md:flex-row w-full px-4 justify-evenly">
         <div
             class="overflow-y-auto bg-port-brown bg-opacity-20 p-2 border border-gray-300 rounded-md w-full md:w-1/3 mb-4 md:mb-0 md:mr-4 h-2/4 md:h-full">
             <div class="text-center">{{ content.pendingTickets }}</div>
@@ -25,7 +26,7 @@
                       class="w-full p-2 rounded-md border border-gray-400 mb-2 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"
                       required></textarea>
             <textarea ref="messageInput" :placeholder="content.writeYourProblemHere"
-                      class="w-full p-2 rounded-md border border-gray-400 mb-2 h-2/3 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"
+                      class="w-full h-[20dvh] p-2 rounded-md border border-gray-400 mb-2 h-2/3 bg-port-brown bg-opacity-40 placeholder-AR-Grey dark:placeholder-AR-Beige placeholder-opacity-60 dark:placeholder-opacity-60"
                       required></textarea>
             <button
                 class="bg-gray-300 hover:bg-gray-400 text-AR-Grey text-center py-2 px-4 rounded-md w-2/5 mx-auto block"
