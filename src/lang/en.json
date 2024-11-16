@@ -275,7 +275,9 @@
     "loading": "Loading...",
     "fetchError": "Server error while fetching the data",
     "fetchUserError": "Server error while fetching a blocked user data",
-    "noBlockedUsers": "No blocked users"
+    "noBlockedUsers": "No blocked users",
+    "successfulUnblocking": "User has been unblocked successfully",
+    "failedUnblocking": "An error occurred while unblocking the user"
   },
   "deleteAccount": {
     "title": "Delete account",
