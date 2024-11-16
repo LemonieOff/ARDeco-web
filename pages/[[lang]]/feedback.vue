@@ -141,9 +141,9 @@ async function sendForm() {
     console.log(result);
 
     if (result.code != 201) {
-        if (notifications.value) notifications.value.showError(notificationsMessages.formSent);
+        if (notifications.value) notifications.value.showError(notificationsMessages.failedToSendForm);
     } else {
-        if (notifications.value) notifications.value.showSuccess(notificationsMessages.failedToSendForm);
+        if (notifications.value) notifications.value.showSuccess(notificationsMessages.formSent);
         textInput.value.value = "";
     }
 
