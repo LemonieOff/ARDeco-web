@@ -34,7 +34,9 @@
             </button>
         </div>
         <div ref="ticketManage"
-             class="bg-port-brown bg-opacity-20 p-2 border border-gray-300 rounded-md w-full md:w-1/2 h-2/4 md:h-full hidden">
+            class="bg-port-brown bg-opacity-20 p-2 border border-gray-300 rounded-md w-full md:w-1/2 h-2/4 md:h-full hidden">
+            <div class="text-center font-bold text-xl md:text-xl my-4"> {{ this.currentTicketTitle }}</div>
+            <div class="text-center my-8" style="color: gray;"> {{ this.currentTicketDescription }}</div>
             <div class="h-2/3 overflow-y-auto border border-gray-400 rounded-md mb-4">
                 <div v-for="message in messages" :key="message.timestamp"
                      :class="{ 'bg-green-200': message.sender !== 'Support', 'bg-blue-100 text-right ml-auto mr-4 w-2/3': message.sender === 'Support' }"
@@ -85,7 +87,9 @@ export default {
             messages: [],
             langPrefix: this.$langPrefix,
             currentTicketID: null,
-            currentTicketStatus: null
+            currentTicketStatus: null,
+            currentTicketTitle: "",
+            currentTicketDescription: ""
         };
     },
     async mounted() {
@@ -178,13 +182,18 @@ export default {
             this.$refs.ticketCreator.style.display = "none";
 
             const result = await response.json();
+            console.log(result.data)
             console.debug("result", result);
 
             if (result.code === 200) {
                 this.messages = result.data.messages;
                 this.currentTicketStatus = result.data.status;
+                this.currentTicketTitle = result.data.title;
+                this.currentTicketDescription = result.data.description;
                 console.debug("messages", this.messages);
                 console.debug("status", this.currentTicketStatus);
+                console.debug("title", this.currentTicketTitle);
+                console.debug("description", this.currentTicketDescription);
             }
 
             this.currentTicketID = ticketID;
