@@ -804,7 +804,6 @@
     "couldntRemoveFavorite": "Erreur : nous n'avons pas pu retirer cet élement de vos favoris, veuillez réessayer plus tard.",
     "loginFailed": "Erreur : impossible de vous connecter, veuillez vérifier votre email ou votre mot de passe.",
     "registrationFailed": "Erreur : impossible de créer votre compte, veuillez vérifier vos informations à nouveau.",
-    "pleaseResetAPIKey": "Erreur : nous rencontrons un problème avec votre clé API, veuillez la réinitialiser depuis votre page paramètres.",
     "register": {
       "missingEmail": "Vous devez renseigner une adresse email valide",
       "missingPassword": "Vous devez renseigner un mot de passe",
