@@ -829,7 +829,7 @@
       "missingWidth": "Width must be provided and can only contain numbers",
       "missingDepth": "Depth must be provided and can only contain numbers",
       "missingColor": "At least one color must be selected",
-      "negativeNumber": "You cannot apply negative values to your furniture!"
+      "negativeNumber": "You cannot apply null or negative values to your furniture!"
     },
     "couldntAddToCart": "Error: we couldn't add this item to your cart, please try again later.",
     "couldntRemoveFromCart": "Error: we couldn't remove this item from your cart, please try again later.",
