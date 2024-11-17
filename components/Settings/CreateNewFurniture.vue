@@ -245,6 +245,8 @@ export default {
                 document.querySelector('#furnitureWidth').value = "";
                 document.querySelector('#furnitureDepth').value = "";
                 this.$refs.notifications.showSuccess(this.notificationsMessages.furnitureCreated);
+            } else if (result.code === 403) {
+                this.$refs.notifications.showError(this.notificationsMessages.pleaseResetAPIKey);
             } else {
                 this.$refs.notifications.showError(this.notificationsMessages.furnitureCreationFailed);
             }

@@ -298,6 +298,8 @@ export default {
             console.log(result);
             if (result.code === 200) {
                 this.$router.push(`${this.langPrefix}company`);
+            } else if (result.code === 403) {
+                this.$refs.notifications.showError(this.notificationsMessages.pleaseResetAPIKey);
             } else {
                 this.$refs.notifications.showError(this.notificationsMessages.informationsUpdateFailed);
             }
