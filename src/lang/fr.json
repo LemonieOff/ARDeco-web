@@ -830,7 +830,7 @@
       "missingDepth": "La profondeur doit être renseignée et ne peux être composée que de chiffres",
       "missingColor": "Au moins une couleur doit être choisie",
       "negativeNumber": "Vous ne pouvez pas appliquer de valeurs nulles ou négatives à votre meuble !",
-      "pleaseResetAPIKey": "Erreur : nous rencontrons un problème avec votre clé API, veuillez la réinitialiser depuis votre page paramètres."
+      "pleaseResetAPIKey": "Erreur : nous rencontrons un problème avec votre clé API, veuillez la réinitialiser depuis votre page entreprise."
     },
     "couldntAddToCart": "Erreur: nous n'avons pas pu ajouter ce meuble à votre panier, veuillez réessayer plus tard.",
     "couldntRemoveFromCart": "Erreur: nous n'avons pas pu retirer ce meuble de votre panier, veuillez réessayer plus tard.",
