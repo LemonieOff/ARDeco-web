@@ -186,8 +186,8 @@ export default {
             if (furnitureName === "") {
                 this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingName);
                 return;
-            } else if (furniturePrice === null || furniturePrice < 0) {
-                this.$refs.notifications.showError(furniturePrice === null 
+            } else if (isNaN(furniturePrice) || furniturePrice <= 0) {
+                this.$refs.notifications.showError(isNaN(furniturePrice) 
                     ? this.notificationsMessagesFurniture.missingPrice 
                     : this.notificationsMessagesFurniture.negativeNumber);
                 return;
@@ -197,18 +197,18 @@ export default {
             } else if (furnitureRooms.length === 0) {
                 this.$refs.notifications.showError(this.notificationsMessagesFurniture.missingRoom);
                 return;
-            } else if (furnitureHeight === null || furnitureHeight < 0) {
-                this.$refs.notifications.showError(furnitureHeight === null 
+            } else if (isNaN(furnitureHeight) || furnitureHeight <= 0) {
+                this.$refs.notifications.showError(isNaN(furnitureHeight)
                     ? this.notificationsMessagesFurniture.missingHeight 
                     : this.notificationsMessagesFurniture.negativeNumber);
                 return;
-            } else if (furnitureWidth === null || furnitureWidth < 0) {
-                this.$refs.notifications.showError(furnitureWidth === null 
+            } else if (isNaN(furnitureWidth) || furnitureWidth <= 0) {
+                this.$refs.notifications.showError(isNaN(furnitureWidth)
                     ? this.notificationsMessagesFurniture.missingWidth 
                     : this.notificationsMessagesFurniture.negativeNumber);
                 return;
-            } else if (furnitureDepth === null || furnitureDepth < 0) {
-                this.$refs.notifications.showError(furnitureDepth === null 
+            } else if (isNaN(furnitureDepth) || furnitureDepth <= 0) {
+                this.$refs.notifications.showError(isNaN(furnitureDepth)
                     ? this.notificationsMessagesFurniture.missingDepth 
                     : this.notificationsMessagesFurniture.negativeNumber);
                 return;
@@ -245,6 +245,8 @@ export default {
                 document.querySelector('#furnitureWidth').value = "";
                 document.querySelector('#furnitureDepth').value = "";
                 this.$refs.notifications.showSuccess(this.notificationsMessages.furnitureCreated);
+            } else if (result.code === 403) {
+                this.$refs.notifications.showError(this.notificationsMessages.pleaseResetAPIKey);
             } else {
                 this.$refs.notifications.showError(this.notificationsMessages.furnitureCreationFailed);
             }

@@ -35,8 +35,8 @@
             </div>
             <div :id="'existingComment_' + singleComment.id" class="bottomCommentSection">{{ singleComment.comment }}
             </div>
-            <input :id="'modifiedComment_' + singleComment.id" :placeholder="singleComment.comment"
-                   class="bottomCommentSection" hidden>
+            <input :id="'modifiedComment_' + singleComment.id" :value="singleComment.comment"
+                   class="bottomCommentSection" style="color: gray;" hidden>
         </div>
     </div>
     <Notifications ref="notifications" />
