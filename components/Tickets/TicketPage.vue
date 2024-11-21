@@ -41,7 +41,7 @@
                 <div v-for="message in messages" :key="message.timestamp"
                      :class="{ 'bg-green-200': message.sender !== 'Support', 'bg-blue-100 text-right ml-auto mr-4 w-2/3': message.sender === 'Support' }"
                      class="p-3 my-2 mx-4 rounded-md text-sm text-AR-Grey">
-                    {{ message.content }}
+                    <p v-html='message.content.replaceAll(/\n/g, "<br />")'></p>
                     <div class="text-xs text-gray-500 mt-1">
                         <span>{{ message.sender }}</span> -
                         <span>{{ formatDate(message.timestamp.replaceAll(",", "").substring(0, 10))
