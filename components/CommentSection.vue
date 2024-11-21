@@ -15,7 +15,15 @@
                     <div id="commentUserName">{{ singleComment.user.first_name }} {{ singleComment.user.last_name }}
                         ({{ singleComment.user_id }})
                     </div>
-                    <div id="commentDate">{{ singleComment.creation_date }}</div>
+                    <div id="commentDate">{{ new Date(singleComment.creation_date).toLocaleString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: false
+                    }) }}</div>
                 </div>
                 <NuxtImg v-if="Number(singleComment.user_id) === Number(userId)"
                          :id="'modifyButton_' + singleComment.id"
