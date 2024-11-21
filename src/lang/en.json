@@ -830,7 +830,7 @@
       "missingDepth": "Depth must be provided and can only contain numbers",
       "missingColor": "At least one color must be selected",
       "negativeNumber": "You cannot apply null or negative values to your furniture!",
-      "pleaseResetAPIKey": "Error : we have an issue with you API key, please reset it from your parameter page."
+      "pleaseResetAPIKey": "Error : we have an issue with you API key, please reset it from your company page."
     },
     "couldntAddToCart": "Error: we couldn't add this item to your cart, please try again later.",
     "couldntRemoveFromCart": "Error: we couldn't remove this item from your cart, please try again later.",
