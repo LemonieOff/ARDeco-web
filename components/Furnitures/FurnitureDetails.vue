@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }} - {{ catalogElement.name }}</Title>
+    </Head>
     <div class="navbar-top-space"></div>
     <div class="text-center text-3xl mb-9">{{ catalogElement.name }}</div>
     
@@ -26,7 +29,7 @@
     
     <div class="flex flex-wrap justify-center mt-4 md:px-10">
       <button class="bg-black text-white rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white hover:text-black transition duration-200" @click="goToCatalog">{{ content.goBack }}</button>
-      <button class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction adminAction" @click="archiveElement">{{ content.hide }}</button>
+<!--      <button class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction adminAction" @click="archiveElement">{{ content.hide }}</button>-->
       <button id="archiveButton" class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction" @click="archiveElement">{{ content.archive }}</button>
       <button id="restoreButton" class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction" @click="restoreElement" hidden>{{ content.restore }}</button>
       <button id="deleteButton" class="bg-red-600 text-white rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white hover:text-red-600 transition duration-200 deleteButton companyAction" @click="deleteElement" hidden>{{ content.delete }}</button>
@@ -72,9 +75,9 @@ export default {
                     location.href = `${this.langPrefix}login?redirect=${this.langPrefix}catalog/${this.$route.params.id}`;
                     return;
                 }
-                userId.value = userID_tmp;
+                userId = userID_tmp;
             } else {
-                userId.value = userID;
+                userId = userID;
             }
             return userId;
         },
@@ -211,7 +214,7 @@ export default {
             const userID = await this.checkLogin();
 
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${this.catalogElement.object_id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${this.catalogElement.id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -239,7 +242,7 @@ export default {
             const userID = await this.checkLogin();
 
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${this.catalogElement.object_id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${this.catalogElement.id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -267,7 +270,7 @@ export default {
             const userID = await this.checkLogin();
 
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '/' + `${this.catalogElement.object_id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '/' + `${this.catalogElement.id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,5 +1,8 @@
 <template>
-    <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.archiveTitle }}</div>
+    <Head>
+        <Title>ARDeco - {{ content.archiveTitle }}</Title>
+    </Head>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.archiveTitle }}</h1>
     <div class="form">
         <div class="grid">
             <div class="grid-header">
@@ -25,8 +28,11 @@
 </template>
 
 <script setup>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
-import {onMounted, ref} from "vue";
+import { isLogged, userID } from "public/ts/checkLogin";
+import { onMounted, ref } from "vue";
+import { useNuxtApp } from "#app";
+
+const nuxtApp = useNuxtApp();
 
 const route = useRoute();
 let lang = ref(route.params.lang);
@@ -34,41 +40,31 @@ const content = ref(nuxtApp.$content.catalog);
 const ArchiveData = ref([]);
 const errorMessage = ref("");
 const successMessage = ref("");
-const langPrefix = ref("/");
-const userID = ref(0);
+const langPrefix = nuxtApp.$langPrefix;
+const userId = ref(0);
 
 onMounted(async () => {
-    // If lang selector is not passed in url, get the user's one or set it to french
-    if (lang.value !== 'en' && lang.value !== 'fr') {
-        const localStorageLang = localStorage.getItem('lang');
-        if (localStorageLang) {
-            lang.value = localStorageLang;
-        } else {
-            lang.value = 'fr';
-        }
-    }
-
-    // Prefix for links
-    langPrefix.value = lang.value === 'en' ? '/en/' : '/fr/';
-
     await checkLogin();
     await getArchive();
     console.log(ArchiveData.value);
 });
 
 async function checkLogin() {
-    const userID_tmp = await isLogged();
-    if (!userID_tmp) {
-        location.href = "/login";
+    if (!userID) {
+        let userID_tmp = await isLogged();
+        if (!userID_tmp) {
+            location.href = `${langPrefix}login?redirect=${langPrefix}archive`;
+            return;
+        }
+        userId.value = userID_tmp;
+    } else {
+        userId.value = userID;
     }
-    userID.value = Number(userID_tmp);
 }
 
 async function getArchive() {
-    const userID = await isLogged();
-    if (!loggedIn) {
-        location.href = this.langPrefix + "login";
-    }
+    await checkLogin();
+
     const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
     try {
         const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
