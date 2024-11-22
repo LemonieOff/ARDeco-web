@@ -4,38 +4,66 @@
     </Head>
     <div class="navbar-top-space"></div>
     <div class="text-center text-3xl mb-9">{{ catalogElement.name }}</div>
-    
+
     <div class="flex flex-col md:flex-row md:justify-between w-full md:px-10">
-      <img src="~/.././assets/images/furnitures/furnitureDefault.png" class="w-full md:w-1/3 rounded-lg border-3 border-black mb-4 md:mb-0">
-      
-      <div class="flex flex-col justify-between w-full md:w-1/2 md:ml-4">
-        <div class="bg-white border-3 border-black p-4 rounded-lg h-80 flex flex-col text-AR-Grey">
-          <div class="text-xl">{{ catalogElement.rooms }}</div>
-          <div class="text-xl mt-2">{{ catalogElement.styles }}</div>
-          <div class="mt-4 text-lg">{{ content.dimensions }} {{ catalogElement.width }} / {{ catalogElement.height }} / {{ catalogElement.depth }}</div>
-          <div class="mt-2 text-2xl font-bold">{{ catalogElement.price }}€</div>
-          <button class="mt-4 bg-black text-white py-2 rounded hover:bg-white hover:text-black hover:border transition duration-200" @click="addToCart">{{ content.addToCart }}</button>
+        <img class="w-full md:w-1/3 rounded-lg border-3 border-black mb-4 md:mb-0"
+             src="~/.././assets/images/furnitures/furnitureDefault.png">
+
+        <div class="flex flex-col justify-between w-full md:w-1/2 md:ml-4">
+            <div class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige border-black p-4 rounded-lg h-80 flex flex-col">
+                <div class="text-xl"><span class="font-bold">{{ content.roomType }} : </span>
+                    {{ catalogElement.rooms }}
+                </div>
+                <div class="text-xl mt-2"><span class="font-bold">{{ content.styles }} : </span>
+                    {{ catalogElement.styles }}
+                </div>
+                <div class="mt-4 text-lg">{{ content.dimensions }} {{ catalogElement.width }} / {{ catalogElement.height
+                    }} / {{ catalogElement.depth }}
+                </div>
+                <div class="mt-2 text-2xl font-bold">{{ catalogElement.price }}€</div>
+                <button
+                    class="mt-4 bg-black text-white py-2 rounded hover:bg-white hover:text-black hover:border transition duration-200"
+                    @click="addToCart">{{ content.addToCart }}
+                </button>
+            </div>
+
+            <div class="mt-4 text-AR-Grey">
+                <button id="addToFavorite"
+                        class="bg-blue-300 rounded-lg py-2 px-4 w-full hover:bg-white transition duration-200"
+                        @click="addToFavorite">{{ content.addToFavorites }}
+                </button>
+                <button id="removeFromFavorite"
+                        class="bg-blue-300 rounded-lg py-2 px-4 w-full hover:bg-white transition duration-200"
+                        hidden @click="removeFromFavorite">{{ content.removeFromFavorites }}
+                </button>
+                <div class="bg-green-300 text-center rounded-lg py-2 mt-2">{{ content.available }}</div>
+                <div id="errorText" class="text-red-600 text-center mt-4 hidden"></div>
+                <div id="successText" class="text-green-600 text-center mt-4"></div>
+            </div>
         </div>
-        
-        <div class="mt-4 text-AR-Grey">
-          <button id="addToFavorite" class="bg-blue-300 rounded-lg py-2 px-4 w-full hover:bg-white transition duration-200" @click="addToFavorite">{{ content.addToFavorites }}</button>
-          <button id="removeFromFavorite" class="bg-blue-300 rounded-lg py-2 px-4 w-full hover:bg-white transition duration-200" @click="removeFromFavorite" hidden>{{ content.removeFromFavorites }}</button>
-          <div class="bg-green-300 text-center rounded-lg py-2 mt-2">{{ content.available }}</div>
-          <div id="errorText" class="text-red-600 text-center mt-4 hidden"></div>
-          <div id="successText" class="text-green-600 text-center mt-4"></div>
-        </div>
-      </div>
     </div>
-    
+
     <div class="flex flex-wrap justify-center mt-4 md:px-10">
-      <button class="bg-black text-white rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white hover:text-black transition duration-200" @click="goToCatalog">{{ content.goBack }}</button>
-<!--      <button class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction adminAction" @click="archiveElement">{{ content.hide }}</button>-->
-      <button id="archiveButton" class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction" @click="archiveElement">{{ content.archive }}</button>
-      <button id="restoreButton" class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction" @click="restoreElement" hidden>{{ content.restore }}</button>
-      <button id="deleteButton" class="bg-red-600 text-white rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white hover:text-red-600 transition duration-200 deleteButton companyAction" @click="deleteElement" hidden>{{ content.delete }}</button>
+        <button
+            class="bg-black text-white rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white hover:text-black transition duration-200"
+            @click="goToCatalog">{{ content.goBack }}
+        </button>
+        <!--      <button class="bg-blue-300 rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction adminAction" @click="archiveElement">{{ content.hide }}</button>-->
+        <button id="archiveButton"
+                class="bg-blue-300 text-AR-Grey rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction"
+                @click="archiveElement">{{ content.archive }}
+        </button>
+        <button id="restoreButton"
+                class="bg-blue-300 text-AR-Grey rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white transition duration-200 companyAction"
+                hidden @click="restoreElement">{{ content.restore }}
+        </button>
+        <button id="deleteButton"
+                class="bg-red-600 text-white rounded-lg py-2 px-4 mr-2 mb-2 hover:bg-white hover:text-red-600 transition duration-200 deleteButton companyAction"
+                hidden @click="deleteElement">{{ content.delete }}
+        </button>
     </div>
-    
-    <Notifications ref="notifications"/>
+
+    <Notifications ref="notifications" />
 </template>
 
 <script>
@@ -45,7 +73,7 @@ import Notifications from "@/components/Notifications.vue";
 export default {
     name: "FurnitureDetails",
     components: {
-        Notifications,
+        Notifications
     },
     props: {
         urlLang: String | null
@@ -58,7 +86,7 @@ export default {
             catalogElement: {},
             elementIsNotArchived: false,
             profileID: null
-        }
+        };
     },
     mounted() {
         this.getCatalogAndCompanyName().then(() => {
@@ -88,17 +116,17 @@ export default {
             try {
                 // Data du profil
                 const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
-                    method: 'GET',
-                    credentials: 'include',
+                    method: "GET",
+                    credentials: "include"
                 });
 
                 if (!response_profile.ok) {
-                    throw new Error('Failed to fetch data');
+                    throw new Error("Failed to fetch data");
                 }
 
                 const data_profile = await response_profile.json();
                 if (data_profile.data.role = "company") {
-                    this.profileID = data_profile.data.id
+                    this.profileID = data_profile.data.id;
                 }
             } catch (error) {
                 console.error(error.message);
@@ -107,34 +135,34 @@ export default {
 
             try {
                 // Data du catalog
-                const response = await fetch('https://api.ardeco.app/catalog', {
-                    method: 'GET',
+                const response = await fetch("https://api.ardeco.app/catalog", {
+                    method: "GET",
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json"
                     },
-                    credentials: 'include',
+                    credentials: "include"
                 });
 
                 if (!response.ok) {
-                    throw new Error('Failed to fetch data');
+                    throw new Error("Failed to fetch data");
                 }
 
                 const result = await response.json();
                 for (let item of result.data) {
                     if (item.id == this.$route.params.id) {
-                        this.catalogElement = item
+                        this.catalogElement = item;
                         this.elementIsNotArchived = true;
                         break;
                     }
                 }
 
-                console.log("this.catalogElement", this.catalogElement)
+                console.log("this.catalogElement", this.catalogElement);
 
                 if (this.elementIsNotArchived == false) {
                     this.lookIntoArchive();
                 }
 
-                const companyActions = document.getElementsByClassName('companyAction');
+                const companyActions = document.getElementsByClassName("companyAction");
 
                 if (this.profileID != this.catalogElement.company) {
                     for (const action of companyActions) {
@@ -148,20 +176,20 @@ export default {
         },
 
         async goToCatalog() {
-            this.$router.push('/catalog');
+            this.$router.push("/catalog");
         },
 
         async lookIntoArchive() {
             let elementFound = false;
             const userID = await this.checkLogin();
 
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'GET',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch("https://api.ardeco.app/archive/" + `${userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
@@ -173,8 +201,8 @@ export default {
                 }
             }
 
-            const errorDiv = document.getElementById('errorText');
-            const successDiv = document.getElementById('successText');
+            const errorDiv = document.getElementById("errorText");
+            const successDiv = document.getElementById("successText");
             if (!elementFound) {
                 console.error("No element with this ID has been found in the catalog or the archive.");
                 successDiv.hidden = true;
@@ -190,22 +218,22 @@ export default {
 
         async showDeleteOption() {
             if (this.elementIsNotArchived == false) {
-                document.getElementById('deleteButton').hidden = false;
-                document.getElementById('archiveButton').hidden = true;
-                document.getElementById('restoreButton').hidden = false;
+                document.getElementById("deleteButton").hidden = false;
+                document.getElementById("archiveButton").hidden = true;
+                document.getElementById("restoreButton").hidden = false;
             }
         },
 
         async switchButtonDeleteVisibility() {
             if (this.elementIsNotArchived == false) {
-                document.getElementById('deleteButton').hidden = true;
-                document.getElementById('archiveButton').hidden = false;
-                document.getElementById('restoreButton').hidden = true;
+                document.getElementById("deleteButton").hidden = true;
+                document.getElementById("archiveButton").hidden = false;
+                document.getElementById("restoreButton").hidden = true;
                 this.elementIsNotArchived = true;
             } else {
-                document.getElementById('deleteButton').hidden = false;
-                document.getElementById('archiveButton').hidden = true;
-                document.getElementById('restoreButton').hidden = false;
+                document.getElementById("deleteButton").hidden = false;
+                document.getElementById("archiveButton").hidden = true;
+                document.getElementById("restoreButton").hidden = false;
                 this.elementIsNotArchived = false;
             }
         },
@@ -213,19 +241,19 @@ export default {
         async archiveElement() {
             const userID = await this.checkLogin();
 
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${this.catalogElement.id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'DELETE',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch("https://api.ardeco.app/catalog/" + `${userID}` + "/remove/" + `${this.catalogElement.id}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "DELETE",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
 
-            const errorDiv = document.getElementById('errorText');
-            const successDiv = document.getElementById('successText');
+            const errorDiv = document.getElementById("errorText");
+            const successDiv = document.getElementById("successText");
             if (!response.ok) {
                 successDiv.hidden = true;
                 errorDiv.hidden = false;
@@ -241,19 +269,19 @@ export default {
         async restoreElement() {
             const userID = await this.checkLogin();
 
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${this.catalogElement.id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'PUT',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch("https://api.ardeco.app/archive/restore/" + `${userID}` + "/" + `${this.catalogElement.id}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "PUT",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
 
-            const errorDiv = document.getElementById('errorText');
-            const successDiv = document.getElementById('successText');
+            const errorDiv = document.getElementById("errorText");
+            const successDiv = document.getElementById("successText");
             if (!response.ok) {
                 successDiv.hidden = true;
                 errorDiv.hidden = false;
@@ -269,19 +297,19 @@ export default {
         async deleteElement() {
             const userID = await this.checkLogin();
 
-            const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '/' + `${this.catalogElement.id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
-                method: 'DELETE',
+            const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
+            const response = await fetch("https://api.ardeco.app/archive/" + `${userID}` + "/" + `${this.catalogElement.id}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+                method: "DELETE",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
 
-            const errorDiv = document.getElementById('errorText');
-            const successDiv = document.getElementById('successText');
+            const errorDiv = document.getElementById("errorText");
+            const successDiv = document.getElementById("successText");
             if (!response.ok) {
                 successDiv.hidden = true;
                 errorDiv.hidden = false;
@@ -297,19 +325,19 @@ export default {
         async addToFavorite() {
             await this.checkLogin();
 
-            const response = await fetch('https://api.ardeco.app/favorite/furniture/' + `${this.catalogElement.id}`, {
-                method: 'POST',
+            const response = await fetch("https://api.ardeco.app/favorite/furniture/" + `${this.catalogElement.id}`, {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
 
             if (result.code === 201) {
-                document.getElementById('addToFavorite').hidden = true;
-                document.getElementById('removeFromFavorite').hidden = false;
+                document.getElementById("addToFavorite").hidden = true;
+                document.getElementById("removeFromFavorite").hidden = false;
             } else {
                 this.refs.notifications.showError(this.notificationMessages.couldntAddFavorite);
             }
@@ -318,19 +346,19 @@ export default {
         async removeFromFavorite() {
             await this.checkLogin();
 
-            const response = await fetch('https://api.ardeco.app/favorite/furniture/' + `${this.catalogElement.id}`, {
-                method: 'DELETE',
+            const response = await fetch("https://api.ardeco.app/favorite/furniture/" + `${this.catalogElement.id}`, {
+                method: "DELETE",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
 
             if (result.code === 200) {
-                document.getElementById('addToFavorite').hidden = false;
-                document.getElementById('removeFromFavorite').hidden = true;
+                document.getElementById("addToFavorite").hidden = false;
+                document.getElementById("removeFromFavorite").hidden = true;
             } else {
                 this.$refs.notifications.showError(this.notificationMessages.couldntRemoveFavorite);
             }
@@ -339,12 +367,12 @@ export default {
         async isElementInFavorites() {
             await this.checkLogin();
 
-            const response = await fetch('https://api.ardeco.app/favorite/furniture/', {
-                method: 'GET',
+            const response = await fetch("https://api.ardeco.app/favorite/furniture/", {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include',
+                credentials: "include"
             });
 
             const result = await response.json();
@@ -352,8 +380,8 @@ export default {
             if (result.code === 200) {
                 for (let item of result.data) {
                     if (item.favorite_furniture.furniture_id == this.catalogElement.id) {
-                        document.getElementById('addToFavorite').hidden = true;
-                        document.getElementById('removeFromFavorite').hidden = false;
+                        document.getElementById("addToFavorite").hidden = true;
+                        document.getElementById("removeFromFavorite").hidden = false;
                     }
                 }
             } else if (result.code != 404) {
@@ -366,19 +394,21 @@ export default {
 
             const FURNITURE_ID = Number(this.$route.params.id);
             const MODEL_ID = Number(this.catalogElement.colors[0].model_id);
-            const response = await fetch('https://api.ardeco.app/cart', {
-                method: 'POST',
+            const response = await fetch("https://api.ardeco.app/cart", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify([{
                     "furniture_id": FURNITURE_ID,
                     "model_id": MODEL_ID
                 }]),
-                credentials: 'include',
+                credentials: "include"
             });
 
+            console.log(FURNITURE_ID, MODEL_ID);
             const result = await response.json();
+            console.log(result);
 
             if (result.code === 201) {
                 this.$refs.notifications.showSuccess(this.notificationMessages.itemAddedToCart);
@@ -387,7 +417,7 @@ export default {
             }
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
