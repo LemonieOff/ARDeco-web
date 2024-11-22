@@ -96,15 +96,16 @@ export default {
         };
     },
     async mounted() {
-        await this.checkIfLogged();
         await this.getUserTickets();
     },
     methods: {
         async checkIfLogged() {
-            await isLogged();
+            const userId = await isLogged();
             if (!loggedIn) {
                 location.href = `${this.langPrefix}login?redirect=${this.langPrefix}tickets`;
+                return -1;
             }
+            return userId;
         },
         validateCreateForm() {
             let errors = 0;
@@ -202,10 +203,7 @@ export default {
             this.currentTicketID = ticketID;
         },
         async getUserTickets() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            const userID = await this.checkIfLogged();
 
             const response = await fetch("https://api.ardeco.app/ticket/user/" + `${userID}`, {
                 method: "GET",
@@ -223,10 +221,7 @@ export default {
             }
         },
         async sendNewMessage() {
-            await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            await this.checkIfLogged();
 
             const message = this.$refs.responseInput.value;
             const response = await fetch("https://api.ardeco.app/ticket/write/" + `${this.currentTicketID}`, {
@@ -247,10 +242,7 @@ export default {
             await this.receiveTicketDetails(this.currentTicketID);
         },
         async closeTicket() {
-            await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            await this.checkIfLogged();
 
             const response = await fetch("https://api.ardeco.app/ticket/close/" + `${this.currentTicketID}`, {
                 method: "PUT",

@@ -128,7 +128,7 @@ export default {
         async setSetting(optionName, optionEffect) {
             await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}settings`;
             }
             console.log(optionName, optionEffect);
 
@@ -165,7 +165,7 @@ export default {
         async getSettings() {
             await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}settings`;
             }
             const response = await fetch("https://api.ardeco.app/settings", {
                 method: "GET",
@@ -207,7 +207,7 @@ export default {
         async getGallery() {
             const userID = await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}settings`;
             }
             const response = await fetch("https://api.ardeco.app/gallery/user/" + `${userID}`, {
                 method: "GET",

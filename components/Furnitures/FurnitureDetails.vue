@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { isLogged, loggedIn } from "public/ts/checkLogin";
+import { isLogged, userID } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
@@ -51,34 +51,36 @@ export default {
         return {
             content: this.$content.catalog,
             notificationMessages: this.$content.notifications,
-            langPrefix: "/",
+            langPrefix: this.$langPrefix,
             catalogElement: {},
             elementIsNotArchived: false,
             profileID: null
         }
     },
     mounted() {
-        const body = document.body
-        let lang = this.urlLang
-
-        if (lang !== 'en' && lang !== 'fr') {
-            if (localStorage.getItem('lang')) {
-                lang = localStorage.getItem('lang');
-            } else {
-                lang = 'fr';
-            }
-        }
-    
         this.getCatalogAndCompanyName().then(() => {
             this.isElementInFavorites();
         });
     },
     methods: {
-        async getCatalogAndCompanyName() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = langPrefix.value + "login";
+        async checkLogin() {
+            console.log("test");
+            let userId;
+            if (!userID) {
+                let userID_tmp = await isLogged();
+                if (!userID_tmp) {
+                    location.href = `${this.langPrefix}login?redirect=${this.langPrefix}catalog/${this.$route.params.id}`;
+                    return;
+                }
+                userId.value = userID_tmp;
+            } else {
+                userId.value = userID;
             }
+            return userId;
+        },
+
+        async getCatalogAndCompanyName() {
+            const userID = await this.checkLogin();
 
             try {
                 // Data du profil
@@ -148,10 +150,8 @@ export default {
 
         async lookIntoArchive() {
             let elementFound = false;
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            const userID = await this.checkLogin();
+
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'GET',
@@ -208,10 +208,8 @@ export default {
         },
 
         async archiveElement() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            const userID = await this.checkLogin();
+
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/remove/' + `${this.catalogElement.object_id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
@@ -238,10 +236,8 @@ export default {
         },
 
         async restoreElement() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            const userID = await this.checkLogin();
+
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/restore/' + `${userID}` + '/' + `${this.catalogElement.object_id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'PUT',
@@ -268,10 +264,8 @@ export default {
         },
 
         async deleteElement() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            const userID = await this.checkLogin();
+
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const response = await fetch('https://api.ardeco.app/archive/' + `${userID}` + '/' + `${this.catalogElement.object_id}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
@@ -298,6 +292,8 @@ export default {
         },
 
         async addToFavorite() {
+            await this.checkLogin();
+
             const response = await fetch('https://api.ardeco.app/favorite/furniture/' + `${this.catalogElement.id}`, {
                 method: 'POST',
                 headers: {
@@ -317,6 +313,8 @@ export default {
         },
 
         async removeFromFavorite() {
+            await this.checkLogin();
+
             const response = await fetch('https://api.ardeco.app/favorite/furniture/' + `${this.catalogElement.id}`, {
                 method: 'DELETE',
                 headers: {
@@ -336,6 +334,8 @@ export default {
         },
 
         async isElementInFavorites() {
+            await this.checkLogin();
+
             const response = await fetch('https://api.ardeco.app/favorite/furniture/', {
                 method: 'GET',
                 headers: {
@@ -359,6 +359,8 @@ export default {
         },
 
         async addToCart() {
+            await this.checkLogin();
+
             const FURNITURE_ID = Number(this.$route.params.id);
             const MODEL_ID = Number(this.catalogElement.colors[0].model_id);
             const response = await fetch('https://api.ardeco.app/cart', {

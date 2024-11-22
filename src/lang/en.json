@@ -323,7 +323,8 @@
       "nameFilter": "Name",
       "roomFilter": "Room",
       "styleFilter": "Style",
-      "visibilityFilter": "Visibility"
+      "visibilityFilter": "Visibility",
+      "loading": "Loading"
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",
@@ -846,7 +847,8 @@
     "formSent": "Form sent !",
     "galleryBelongToUser": "This gallery is your creation !",
     "reportSuccessful": "Report sent !",
-    "pleaseReportDetails": "Writing in details the reason of your report would help us a lot !"
+    "pleaseReportDetails": "Writing in details the reason of your report would help us a lot !",
+    "forbiddenNotificationChange": "Visual notifications on the site are now mandatory."
   },
   "cart": {
     "title": "Shopping cart",
