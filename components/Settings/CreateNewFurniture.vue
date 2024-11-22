@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.titleCreateFurniture }}</h1>
     <div class="flex flex-col md:flex-row justify-center md:space-x-8 my-8">
       <div class="furniturePictureArea flex justify-center">

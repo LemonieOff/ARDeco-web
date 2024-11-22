@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8"> {{ content.title }}</h1>
     <div
         class="flex flex-col w-11/12 sm:w-10/12 md:w-8/12 mb-8 justify-self-center bg-AR-Floral-White dark:bg-card-background-dark mt-8 rounded-xl border-2 border-AR-Blue dark:border-AR-Light-Blue">

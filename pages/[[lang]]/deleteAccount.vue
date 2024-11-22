@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <div class="flex flex-col items-center justify-center">
         <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
         <p class="text-center mb-8">{{ content.text }}</p>

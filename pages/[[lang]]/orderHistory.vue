@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
     <div id="order_history_loading">{{ content.loading }}</div>
     <div id="order_history_error">{{ errorMessage }}</div>

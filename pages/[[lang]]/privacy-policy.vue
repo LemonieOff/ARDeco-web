@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
     <Introduction :content="content.introduction"/>
     <Cookies :content="content.cookies"/>

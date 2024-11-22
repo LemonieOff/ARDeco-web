@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.myCompany }}</h1>
     <div class="listSelection flex justify-center mx-auto gap-10 sm:w-1/3">
         <button v-for="(card, index) in cards" :id="`card${index}`" :key="index"
