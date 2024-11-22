@@ -12,10 +12,10 @@
         <div class="flex flex-col justify-between w-full md:w-1/2 md:ml-4">
             <div class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige border-black p-4 rounded-lg h-80 flex flex-col">
                 <div class="text-xl"><span class="font-bold">{{ content.roomType }} : </span>
-                    {{ catalogElement.rooms }}
+                    {{ catalogElement.rooms ? catalogElement.rooms.map(room => values.rooms[room]).join(", ") : "" }}
                 </div>
                 <div class="text-xl mt-2"><span class="font-bold">{{ content.styles }} : </span>
-                    {{ catalogElement.styles }}
+                    {{ catalogElement.styles ? catalogElement.styles.map(style => values.styles[style]).join(", ") : "" }}
                 </div>
                 <div class="mt-4 text-lg">{{ content.dimensions }} {{ catalogElement.width }} / {{ catalogElement.height
                     }} / {{ catalogElement.depth }}
@@ -81,6 +81,7 @@ export default {
     data() {
         return {
             content: this.$content.catalog,
+            values: this.$content.values,
             notificationMessages: this.$content.notifications,
             langPrefix: this.$langPrefix,
             catalogElement: {},
