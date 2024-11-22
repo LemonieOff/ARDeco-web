@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
 
     <div v-if="catalogData.length > 0 && errorMessage === ''" class="flex flex-wrap justify-center gap-5 mb-8">

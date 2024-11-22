@@ -1,11 +1,14 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
     <div class="flex flex-col lg:flex-row justify-evenly content-around items-center lg:items-start mb-8">
         <div class="w-96 mb-8 p-2.5 rounded-xl bg-port-brown bg-opacity-20">
             <div class="flex p-2.5 mx-5 items-center justify-between">
                 <div class="flex flex-col">
                     <span class="text-stone-600 dark:text-stone-400">{{ content.notificationsActive }}</span>
-                    <span id="notifications_enabled" class="text-sm">Chargement</span>
+                    <span id="notifications_enabled" class="text-sm">{{ content.yes }}</span>
                 </div>
                 <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
                         @click="setSetting('notifications_enabled', !this.settings.notifications_enabled)">
@@ -16,7 +19,7 @@
             <div class="flex p-2.5 mx-5 items-center justify-between">
                 <div class="flex flex-col">
                     <span class="text-stone-600 dark:text-stone-400">{{ content.publicLastName }}</span>
-                    <span id="display_lastname_on_public" class="text-sm">Chargement</span>
+                    <span id="display_lastname_on_public" class="text-sm">{{ content.loading }}</span>
                 </div>
                 <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
                         @click="setSetting('display_lastname_on_public', !this.settings.display_lastname_on_public)">
@@ -27,7 +30,7 @@
             <div class="flex p-2.5 mx-5 items-center justify-between">
                 <div class="flex flex-col">
                     <span class="text-stone-600 dark:text-stone-400">{{ content.publicEmailAddress }}</span>
-                    <span id="display_email_on_public" class="text-sm">Chargement</span>
+                    <span id="display_email_on_public" class="text-sm">{{ content.loading }}</span>
                 </div>
 
                 <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
@@ -39,7 +42,7 @@
             <div class="flex p-2.5 mx-5 items-center justify-between">
                 <div class="flex flex-col">
                     <span class="text-stone-600 dark:text-stone-400">{{ content.newGalleries }}</span>
-                    <span id="automatic_new_gallery_share" class="text-sm">Chargement</span>
+                    <span id="automatic_new_gallery_share" class="text-sm">{{ content.loading }}</span>
                 </div>
                 <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
                         @click="setSetting('automatic_new_gallery_share', !this.settings.automatic_new_gallery_share)">
@@ -125,9 +128,14 @@ export default {
         async setSetting(optionName, optionEffect) {
             await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}settings`;
             }
             console.log(optionName, optionEffect);
+
+            if (optionName === "notifications_enabled") {
+                this.$refs.notifications.showError(this.notificationMessages.forbiddenNotificationChange);
+                return;
+            }
 
             const response = await fetch("https://api.ardeco.app/settings", {
                 method: "PUT",
@@ -145,9 +153,9 @@ export default {
             if (result.code === 200) {
                 this.$refs.notifications.showSuccess(this.notificationMessages.informationsUpdated);
                 if (optionEffect) {
-                    document.getElementById([optionName]).textContent = "Oui";
+                    document.getElementById([optionName]).textContent = this.content.yes;
                 } else {
-                    document.getElementById([optionName]).textContent = "Non";
+                    document.getElementById([optionName]).textContent = this.content.no;
                 }
             } else {
                 this.$refs.notifications.showError(this.notificationMessages.informationsUpdateFailed);
@@ -157,7 +165,7 @@ export default {
         async getSettings() {
             await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}settings`;
             }
             const response = await fetch("https://api.ardeco.app/settings", {
                 method: "GET",
@@ -172,11 +180,11 @@ export default {
 
             console.log(result);
             if (result.code === 200) {
-                if (this.settings.notifications_enabled === true) {
+                /*if (this.settings.notifications_enabled === true) {
                     document.getElementById("notifications_enabled").textContent = this.content.yes;
                 } else {
                     document.getElementById("notifications_enabled").textContent = this.content.no;
-                }
+                }*/
                 if (this.settings.display_lastname_on_public === true) {
                     document.getElementById("display_lastname_on_public").textContent = this.content.yes;
                 } else {
@@ -199,7 +207,7 @@ export default {
         async getGallery() {
             const userID = await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}settings`;
             }
             const response = await fetch("https://api.ardeco.app/gallery/user/" + `${userID}`, {
                 method: "GET",

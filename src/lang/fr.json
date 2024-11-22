@@ -315,7 +315,7 @@
       "style": "Style",
       "galleryIsEmpty": "Vous n'avez créé aucun aménagement, faites-en un depuis notre application mobile !",
       "notificationsActive": "Notifications actives",
-      "publicLastName": "Nom de famille publique",
+      "publicLastName": "Nom de famille public",
       "publicEmailAddress": "Adresse email publique",
       "newGalleries": "Nouvelles galleries publiques",
       "sortBy": "Trier par : ",
@@ -323,7 +323,8 @@
       "nameFilter": "Nom",
       "roomFilter": "Pièce",
       "styleFilter": "Style",
-      "visibilityFilter": "Visibilité"
+      "visibilityFilter": "Visibilité",
+      "loading": "Chargement"
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",
@@ -659,7 +660,7 @@
     "id": "ID",
     "name": "Nom et entreprise",
     "styles": "Styles",
-    "roomType": "Type de pièce",
+    "roomType": "Types de pièce",
     "item": "Élément",
     "noItems": "Aucun meuble trouvé.",
     "action": "Action",
@@ -667,7 +668,7 @@
     "actionSingOrPlu": "Action(s)",
     "details": "Détails",
     "delete": "Supprimer",
-    "dimensions": "Dimensions (cm): ",
+    "dimensions": "Dimensions (cm) : ",
     "addToCart": "Ajouter au panier",
     "addToFavorites": "Ajouter aux favoris",
     "removeFromFavorites": "Retirer des favoris",
@@ -846,7 +847,8 @@
     "formSent": "Formulaire envoyé !",
     "galleryBelongToUser": "Cette galerie est votre création !",
     "reportSuccessful": "Signalement effectué avec succès !",
-    "pleaseReportDetails": "Nous écrire en détail la raison de votre signalement nous aiderai beaucoup !"
+    "pleaseReportDetails": "Nous écrire en détail la raison de votre signalement nous aiderai beaucoup !",
+    "forbiddenNotificationChange": "Les notifications visuelles sur le site sont désormais obligatoires."
   },
   "cart": {
     "title": "Panier d'achat",

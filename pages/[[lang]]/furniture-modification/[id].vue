@@ -149,7 +149,7 @@ export default {
         async checkIfLogged() {
             const userID_TMP = await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}furniture-modification/${this.furnitureID}`;
             }
             this.userID = Number(userID_TMP);
         },
@@ -211,7 +211,7 @@ export default {
         async modifyFurniture() {
             const userID = await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}furniture-modification/${this.furnitureID}`;
             }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const furnitureName = document.querySelector('#furnitureName').value;

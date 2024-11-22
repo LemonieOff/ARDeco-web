@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.titleCreateFurniture }}</h1>
     <div class="flex flex-col md:flex-row justify-center md:space-x-8 my-8">
       <div class="furniturePictureArea flex justify-center">
@@ -146,14 +149,14 @@ export default {
         async checkIfLogged() {
             await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}furniture-creation`;
             }
         },
 
         async addFurniture() {
             const userID = await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}furniture-creation`;
             }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             const furnitureName = document.querySelector('#furnitureName').value;

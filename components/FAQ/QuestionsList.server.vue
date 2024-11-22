@@ -1,8 +1,11 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.projectDetailsTitle }}</Title>
+    </Head>
     <div class="mb-32">
-        <div id="projectDetailsTitle" class="text-center font-bold text-xl md:text-4xl my-8">
+        <h1 id="projectDetailsTitle" class="text-center font-bold text-xl md:text-4xl my-8">
             {{ content.projectDetailsTitle }}
-        </div>
+        </h1>
         <div class="mx-auto">
             <div class="faq-into-question mt-16 text-center md:text-2xl mx-auto">
                 <div id="findYourAnswersSubtitle" class="text-AR-Grey dark:text-AR-Beige">

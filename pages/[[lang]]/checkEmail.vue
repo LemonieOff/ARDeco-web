@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - Check email</Title>
+    </Head>
     <div>
         <div class="blocked-users">
             <div class="text-center font-bold text-xl md:text-4xl my-8">Check email address</div>

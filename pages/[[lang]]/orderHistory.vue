@@ -1,5 +1,8 @@
 <template>
-    <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
+    <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
     <div id="order_history_loading">{{ content.loading }}</div>
     <div id="order_history_error">{{ errorMessage }}</div>
     <div id="order_history_table" class="form" style="display: none">
@@ -47,7 +50,7 @@ onMounted(async () => {
 async function checkLogin() {
     const userID = await isLogged();
     if (!userID) {
-        location.href = langPrefix.value + "login";
+        location.href = `${langPrefix.value}login?redirect=${langPrefix.value}orderHistory`;
     }
     user_id.value = Number(userID);
 }
