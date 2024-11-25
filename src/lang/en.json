@@ -220,6 +220,7 @@
     },
     "blockedUsers": "Blocked users",
     "title": {
+      "profile": "Profile",
       "personalInformation": "Personal information",
       "galleries": "Designs",
       "favorites": "Favorites",

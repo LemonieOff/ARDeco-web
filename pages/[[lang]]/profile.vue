@@ -1,6 +1,6 @@
 <template>
     <Head>
-        <Title>ARDeco - {{ content.title }}</Title>
+        <Title>ARDeco - {{ content.title.profile }}</Title>
     </Head>
     <div class="mt-8 mb-4">
         <div v-if="loading"

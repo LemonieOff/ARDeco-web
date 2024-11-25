@@ -220,6 +220,7 @@
     },
     "blockedUsers": "Utilisateurs bloqués",
     "title": {
+      "profile": "Profil",
       "personalInformation": "Informations personnelles",
       "galleries": "Aménagements",
       "favorites": "Favoris",
