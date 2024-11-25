@@ -785,6 +785,7 @@
   },
   "notifications": {
     "infoNotReceived": "Erreur : nous n'avons pas pu recevoir certaines informations de la page, veuillez réessayer plus tard.",
+    "emptyComment": "Erreur : veuillez renseigner un commentaire",
     "failedToPostComment": "Erreur : nous n'avons pas pu poster votre commentaire, veuillez réessayer plus tard.",
     "failedToDeleteComment": "Erreur : nous n'avons pas pu supprimer votre commentaire, veuillez réessayer plus tard.",
     "failedToModifyComment": "Erreur : nous n'avons pas pu modifier votre commentaire, veuillez réessayer plus tard.",

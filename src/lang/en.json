@@ -785,6 +785,7 @@
   },
   "notifications": {
     "infoNotReceived": "Error: we couldn't receive some of the page's informations, please try again later.",
+    "missingComment": "Error: you must provide a comment",
     "failedToPostComment": "Error: we couldn't post your comment, please try again later.",
     "failedToDeleteComment": "Error: we couldn't delete your comment, please try again later.",
     "failedToModifyComment": "Error: we couldn't modify your comment, please try again later.",

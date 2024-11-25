@@ -124,6 +124,12 @@ export default {
 
             const textInput = document.getElementById("commentInput");
             const value = textInput.value;
+
+            if (value.trim().length === 0) {
+                this.$refs.notifications.showError(this.notificationMessages.missingComment);
+                return;
+            }
+
             const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments", {
                 method: "POST",
                 headers: {
