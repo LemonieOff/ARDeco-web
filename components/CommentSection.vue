@@ -119,7 +119,7 @@ export default {
         async postComment() {
             await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = this.langPrefix + "login?redirect=" + this.langPrefix + "gallery/" + `${this.galleryId}`;
             }
 
             const textInput = document.getElementById("commentInput");
