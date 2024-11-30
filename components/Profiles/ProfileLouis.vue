@@ -37,7 +37,7 @@
                     <img class="internship-logo" src="@/assets/images/compagny-logos/WorkingGameLogo.webp" alt="Working Game">
                     <div id="internshipRole3-louis" class="internship-role">{{ content.internshipRole3 }}</div>
                 </div>
-                <div class="year-2023">2023</div>
+                <div class="year-2023">2024</div>
             </div>
         </div>
     </div>
