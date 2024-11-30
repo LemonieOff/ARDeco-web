@@ -44,27 +44,29 @@
     },
     "evan": {
       "role": "App and AR developer",
-      "internshipRole1": "Junior Frontend Developer"
+      "internshipRole1": "Junior frontend developer"
     },
     "hugo": {
       "role": "Project leader, polyvalent developer",
       "internshipRole1": "Backend Developer",
-      "internshipRole2": "Video Game Developer"
+      "internshipRole2": "Video game developer"
     },
     "louis": {
       "role": "App and web developer",
-      "internshipRole1": "Junior Software Developer",
-      "internshipRole2": "Web Developer",
-      "internshipRole3": "Video Game Developer"
+      "internshipRole1": "Junior software developer",
+      "internshipRole2": "Web developer",
+      "internshipRole3": "Video game developer"
     },
     "valentin": {
       "role": "Web developer, designer",
-      "internshipRole1": "Tech and Web Support",
-      "internshipRole2": "Frontend Developer",
-      "internshipRole3": "Junior Frontend Developer"
+      "internshipRole1": "Tech and web Support",
+      "internshipRole2": "Frontend developer",
+      "internshipRole3": "Junior frontend developer"
     },
     "hugo2": {
-      "role": "App and AR developer, designer"
+      "role": "App and AR developer, designer",
+      "internshipRole1": "Fullstack developer",
+      "internshipRole2": "Video game developer"
     }
   },
   "productPages": {

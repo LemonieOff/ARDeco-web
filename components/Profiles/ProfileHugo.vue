@@ -17,7 +17,7 @@
                 <div class="timeline-inactive"></div>
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
-                    <img class="internship-logo" src="@/assets/images/compagny-logos/MyFlyingBoxLogo.png" alt="My Flying Box">
+                    <img class="internship-logo" src="@/assets/images/compagny-logos/MyFlyingBoxLogo.webp" alt="My Flying Box">
                     <div id="internshipRole1-hugo" class="internship-role">{{ content.internshipRole1 }}</div>
                 </div>
                 <div class="timeline-inactive">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
-                    <img class="internship-logo" src="@/assets/images/compagny-logos/WorkingGameLogo.png" alt="Working Game">
+                    <img class="internship-logo" src="@/assets/images/compagny-logos/WorkingGameLogo.webp" alt="Working Game">
                     <div id="internshipRole2-hugo" class="internship-role">{{ content.internshipRole2 }}</div>
                 </div>
                 <div class="year-2023">2023</div>

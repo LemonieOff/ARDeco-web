@@ -30,7 +30,7 @@
                 </div>
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
-                    <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.png" alt="Betao">
+                    <img class="internship-logo" src="../../assets/images/compagny-logos/BetaoLogo.webp" alt="Betao">
                     <div id="internshipRole1-evan" class="internship-role">{{ content.internshipRole1 }}</div>
                 </div>
                 <div class="year-2023">2023</div>
