@@ -327,7 +327,8 @@
       "roomFilter": "Pièce",
       "styleFilter": "Style",
       "visibilityFilter": "Visibilité",
-      "loading": "Chargement"
+      "loading": "Chargement",
+      "edit": "Modifier"
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",

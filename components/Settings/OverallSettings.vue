@@ -12,7 +12,7 @@
                 </div>
                 <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
                         @click="setSetting('notifications_enabled', !this.settings.notifications_enabled)">
-                    Modifier
+                    {{ content.edit }}
                 </button>
             </div>
 
@@ -23,7 +23,7 @@
                 </div>
                 <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
                         @click="setSetting('display_lastname_on_public', !this.settings.display_lastname_on_public)">
-                    Modifier
+                    {{ content.edit }}
                 </button>
             </div>
 
@@ -35,7 +35,7 @@
 
                 <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
                         @click="setSetting('display_email_on_public', !this.settings.display_email_on_public)">
-                    Modifier
+                    {{ content.edit }}
                 </button>
             </div>
 
@@ -46,7 +46,7 @@
                 </div>
                 <button class="p-1.5 rounded-md outline outline-1 outline-offset-2 hover:outline-offset-1"
                         @click="setSetting('automatic_new_gallery_share', !this.settings.automatic_new_gallery_share)">
-                    Modifier
+                    {{ content.edit }}
                 </button>
             </div>
         </div>

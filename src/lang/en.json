@@ -317,7 +317,7 @@
       "room": "Room",
       "style": "Style",
       "galleryIsEmpty": "Your haven't created a gallery yet, make one using our mobile app !",
-      "notificationsActive": "Notifications active",
+      "notificationsActive": "Active notifications",
       "publicLastName": "Last name is public",
       "publicEmailAddress": "Email is public",
       "newGalleries": "New galleries",
@@ -327,7 +327,8 @@
       "roomFilter": "Room",
       "styleFilter": "Style",
       "visibilityFilter": "Visibility",
-      "loading": "Loading"
+      "loading": "Loading",
+      "edit": "Edit"
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",
