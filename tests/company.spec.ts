@@ -3,6 +3,8 @@ const { test, expect } = require('@playwright/test');
 const BUSINESS_EMAIL = "valentin-company@ardeco.app";
 const PASSWORD = "123";
 
+const PLAYWRIGHT_TEST = "This is a text written by playwright";
+
 test.describe('Company user tests', () => {
     
     test.beforeEach(async ({ page }) => {
@@ -42,6 +44,98 @@ test.describe('Company user tests', () => {
         await expect(ticketsPageLink).toBeVisible()
         await expect(feedbackPageLink).toBeVisible()
         await expect(logoutPageLink).toBeVisible()
+    });
+
+    test('Go to settings page', async ({ page }) => {
+        const dropdownButton = page.locator('#user');
+
+        const settingsPageLink = page.locator('[href="/settings"]');
+
+        await page.waitForTimeout(500);
+        await dropdownButton.click();
+
+        await settingsPageLink.click();
+        await expect(page).toHaveURL(/.*settings/);
+    });
+
+    test('Go to company page', async ({ page }) => {
+        const dropdownButton = page.locator('#user');
+
+        const settingsPageLink = page.locator('[href="/company"]');
+
+        await page.waitForTimeout(500);
+        await dropdownButton.click();
+
+        await settingsPageLink.click();
+        await expect(page).toHaveURL(/.*company/);
+    });
+
+    test('Go to catalog page', async ({ page }) => {
+        const dropdownButton = page.locator('#user');
+
+        const settingsPageLink = page.locator('[href="/catalog"]');
+
+        await page.waitForTimeout(500);
+        await dropdownButton.click();
+
+        await settingsPageLink.click();
+        await expect(page).toHaveURL(/.*catalog/);
+    });
+
+    test('Go to cart page', async ({ page }) => {
+        const dropdownButton = page.locator('#user');
+
+        const settingsPageLink = page.locator('[href="/cart"]');
+
+        await page.waitForTimeout(500);
+        await dropdownButton.click();
+
+        await settingsPageLink.click();
+        await expect(page).toHaveURL(/.*cart/);
+    });
+
+    test('Go to tickets page && write a ticket', async ({ page }) => {
+        const dropdownButton = page.locator('#user');
+
+        const settingsPageLink = page.locator('[href="/tickets"]');
+        const ticketTitle = page.locator('[placeholder="Écrivez le titre de votre problème ici"]');
+        const ticketDescription = page.locator('[placeholder="Décrivez votre problème en quelques mots"]');
+        const ticketDetails = page.locator('[placeholder="Détaillez clairement votre problème ici"]');
+        const sendTicket = page.getByText("Créer une demande");
+        const ticketCreationConfirmation = page.getByText("Ticket créé avec succès !");
+
+        await page.waitForTimeout(500);
+        await dropdownButton.click();
+
+        await settingsPageLink.click();
+        await expect(page).toHaveURL(/.*tickets/);
+
+        await ticketTitle.fill(PLAYWRIGHT_TEST);
+        await ticketDescription.fill(PLAYWRIGHT_TEST);
+        await ticketDetails.fill(PLAYWRIGHT_TEST);
+
+        await sendTicket.click();
+        await expect(ticketCreationConfirmation).toBeVisible(5000);
+    });
+
+    test('Go to feedback page && write a feedback', async ({ page }) => {
+        const dropdownButton = page.locator('#user');
+
+        const settingsPageLink = page.locator('[href="/feedback"]');
+        const textInput = page.locator('#textInput')
+        const sendButton = page.locator('button:has-text("Envoyer")');
+        const confirmationNotification = page.getByText('Formulaire envoyé !')
+
+        await page.waitForTimeout(500);
+        await dropdownButton.click();
+
+        await settingsPageLink.click();
+        await expect(page).toHaveURL(/.*feedback/);
+        await textInput.fill(PLAYWRIGHT_TEST);
+
+        await sendButton.click();
+        await expect(confirmationNotification).toBeVisible(5000);
+
     });
 
 });
