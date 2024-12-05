@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.myCompany }}</h1>
     <div class="listSelection flex justify-center mx-auto gap-10 sm:w-1/3">
         <button v-for="(card, index) in cards" :id="`card${index}`" :key="index"
@@ -119,7 +122,7 @@ export default {
             content: this.$content.catalog,
             notificationsMessages: this.$content.notifications,
             userID: 0,
-            langPrefix: "/",
+            langPrefix: this.$langPrefix,
             selectedCard: 0,
             catalogList: [],
             archiveList: []
@@ -132,7 +135,7 @@ export default {
         async checkIfLogged() {
             const userID_TMP = await isLogged();
             if (!loggedIn) {
-                location.href = this.$langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}company`;
             }
             this.userID = Number(userID_TMP);
 
@@ -275,7 +278,7 @@ export default {
         },
 
         async goToFurnitureCreation() {
-            window.location.href = this.$langPrefix + "furniture-creation";
+            window.location.href = this.langPrefix + "furniture-creation";
         },
 
         async changeItemActiveness(CATALOG_ID, bool) {
@@ -305,7 +308,7 @@ export default {
         async deleteArchive() {
             const userID = await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = `${this.langPrefix}login?redirect=${this.langPrefix}company`;
             }
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
             const response = await fetch("https://api.ardeco.app/archive/" + `${userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {

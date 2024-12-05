@@ -1,6 +1,9 @@
 <template>
-    <div class="page-presentation-content bg-gradient-to-t from-port-brown to-AR-Beige dark:from-AR-Grey dark:to-AR-Dark-Grey">
-        <div id="title" class="text-center font-bold py-8 text-xl md:text-4xl">{{ content.title }}</div>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
+    <div class="page-presentation-content bg-gradient-to-t from-port-brown to-AR-Beige dark:from-AR-Dark-Grey dark:to-AR-Dark-Grey">
+        <h1 id="title" class="text-center font-bold py-8 text-xl md:text-4xl">{{ content.title }}</h1>
         <div class="sub-content">
             <div class="team-content">
                 <div id="picturesTitle" class="title">{{ content.picturesTitle }}</div>

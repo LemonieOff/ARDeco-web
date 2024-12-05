@@ -15,7 +15,15 @@
                     <div id="commentUserName">{{ singleComment.user.first_name }} {{ singleComment.user.last_name }}
                         ({{ singleComment.user_id }})
                     </div>
-                    <div id="commentDate">{{ singleComment.creation_date }}</div>
+                    <div id="commentDate">{{ new Date(singleComment.creation_date).toLocaleString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: false
+                    }) }}</div>
                 </div>
                 <NuxtImg v-if="Number(singleComment.user_id) === Number(userId)"
                          :id="'modifyButton_' + singleComment.id"
@@ -111,11 +119,17 @@ export default {
         async postComment() {
             await isLogged();
             if (!loggedIn) {
-                location.href = this.langPrefix + "login";
+                location.href = this.langPrefix + "login?redirect=" + this.langPrefix + "gallery/" + `${this.galleryId}`;
             }
 
             const textInput = document.getElementById("commentInput");
             const value = textInput.value;
+
+            if (value.trim().length === 0) {
+                this.$refs.notifications.showError(this.notificationMessages.missingComment);
+                return;
+            }
+
             const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments", {
                 method: "POST",
                 headers: {

@@ -44,27 +44,29 @@
     },
     "evan": {
       "role": "Développeur mobile et AR",
-      "internshipRole1": "Développeur Frontend Junior"
+      "internshipRole1": "Développeur frontend junior"
     },
     "hugo": {
       "role": "Chef de projet, développeur polyvalent",
-      "internshipRole1": "Développeur Backend",
+      "internshipRole1": "Développeur backend",
       "internshipRole2": "Développeur de jeux vidéo"
     },
     "louis": {
       "role": "Développeur mobile et web",
-      "internshipRole1": "Développeur logiciel Junior",
-      "internshipRole2": "Développeur Web",
+      "internshipRole1": "Développeur logiciel junior",
+      "internshipRole2": "Développeur web",
       "internshipRole3": "Développeur de jeux vidéo"
     },
     "valentin": {
       "role": "Développeur web, designer",
       "internshipRole1": "Support technique et Web",
-      "internshipRole2": "Développeur Frontend",
-      "internshipRole3": "Développeur Frontend Junior"
+      "internshipRole2": "Développeur frontend",
+      "internshipRole3": "Développeur frontend junior"
     },
     "hugo2": {
-      "role": "Développeur mobile et AR, designer"
+      "role": "Développeur mobile et AR, designer",
+      "internshipRole1": "Développeur fullstack",
+      "internshipRole2": "Développeur de jeux vidéo"
     }
   },
   "productPages": {
@@ -220,6 +222,7 @@
     },
     "blockedUsers": "Utilisateurs bloqués",
     "title": {
+      "profile": "Profil",
       "personalInformation": "Informations personnelles",
       "galleries": "Aménagements",
       "favorites": "Favoris",
@@ -315,7 +318,7 @@
       "style": "Style",
       "galleryIsEmpty": "Vous n'avez créé aucun aménagement, faites-en un depuis notre application mobile !",
       "notificationsActive": "Notifications actives",
-      "publicLastName": "Nom de famille publique",
+      "publicLastName": "Nom de famille public",
       "publicEmailAddress": "Adresse email publique",
       "newGalleries": "Nouvelles galleries publiques",
       "sortBy": "Trier par : ",
@@ -323,7 +326,9 @@
       "nameFilter": "Nom",
       "roomFilter": "Pièce",
       "styleFilter": "Style",
-      "visibilityFilter": "Visibilité"
+      "visibilityFilter": "Visibilité",
+      "loading": "Chargement",
+      "edit": "Modifier"
     },
     "companies": {
       "addFurnitureToCatalog": "Ajouter le meuble au catalogue",
@@ -659,7 +664,7 @@
     "id": "ID",
     "name": "Nom et entreprise",
     "styles": "Styles",
-    "roomType": "Type de pièce",
+    "roomType": "Types de pièce",
     "item": "Élément",
     "noItems": "Aucun meuble trouvé.",
     "action": "Action",
@@ -667,7 +672,7 @@
     "actionSingOrPlu": "Action(s)",
     "details": "Détails",
     "delete": "Supprimer",
-    "dimensions": "Dimensions (cm): ",
+    "dimensions": "Dimensions (cm) : ",
     "addToCart": "Ajouter au panier",
     "addToFavorites": "Ajouter aux favoris",
     "removeFromFavorites": "Retirer des favoris",
@@ -783,6 +788,7 @@
   },
   "notifications": {
     "infoNotReceived": "Erreur : nous n'avons pas pu recevoir certaines informations de la page, veuillez réessayer plus tard.",
+    "emptyComment": "Erreur : veuillez renseigner un commentaire",
     "failedToPostComment": "Erreur : nous n'avons pas pu poster votre commentaire, veuillez réessayer plus tard.",
     "failedToDeleteComment": "Erreur : nous n'avons pas pu supprimer votre commentaire, veuillez réessayer plus tard.",
     "failedToModifyComment": "Erreur : nous n'avons pas pu modifier votre commentaire, veuillez réessayer plus tard.",
@@ -846,7 +852,8 @@
     "formSent": "Formulaire envoyé !",
     "galleryBelongToUser": "Cette galerie est votre création !",
     "reportSuccessful": "Signalement effectué avec succès !",
-    "pleaseReportDetails": "Nous écrire en détail la raison de votre signalement nous aiderai beaucoup !"
+    "pleaseReportDetails": "Nous écrire en détail la raison de votre signalement nous aiderai beaucoup !",
+    "forbiddenNotificationChange": "Les notifications visuelles sur le site sont désormais obligatoires."
   },
   "cart": {
     "title": "Panier d'achat",

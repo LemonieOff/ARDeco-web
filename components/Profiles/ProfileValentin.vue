@@ -19,7 +19,7 @@
                 <div class="timeline-inactive"></div>
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
-                    <img class="internship-logo" src="@/assets/images/compagny-logos/BetaoLogo.png" alt="Betao">
+                    <img class="internship-logo" src="@/assets/images/compagny-logos/BetaoLogo.webp" alt="Betao">
                     <div id="internshipRole1-valentin" class="internship-role">{{ content.internshipRole1 }}</div>
                 </div>
                 <div class="timeline-inactive">
@@ -29,15 +29,15 @@
                 </div>
                 <div class="timeline-active">
                     <div class="year-bubble-active"></div>
-                    <img class="internship-logo" src="@/assets/images/compagny-logos/MathaLogo.png" alt="Matha">
+                    <img class="internship-logo" src="@/assets/images/compagny-logos/MathaLogo.webp" alt="Matha">
                     <div id="internshipRole2-valentin" class="internship-role">{{ content.internshipRole2 }}</div>
                 </div>
                 <div class="timeline-active">
                     <div class="end-year-bubble-active"></div>
-                    <img class="internship-logo" src="@/assets/images/compagny-logos/BetaoLogo.png" alt="Betao">
+                    <img class="internship-logo" src="@/assets/images/compagny-logos/BetaoLogo.webp" alt="Betao">
                     <div id="internshipRole3-valentin" class="internship-role">{{ content.internshipRole3 }}</div>
                 </div>
-                <div class="year-2023">2023</div>
+                <div class="year-2023">2024</div>
             </div>
         </div>
     </div>

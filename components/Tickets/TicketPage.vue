@@ -1,6 +1,9 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <div class="flex flex-col items-center px-4">
-        <div class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</div>
+        <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
         <div>{{ content.somethingWrong }}</div>
         <div>{{ content.askUs }}</div>
     </div>
@@ -41,7 +44,7 @@
                 <div v-for="message in messages" :key="message.timestamp"
                      :class="{ 'bg-green-200': message.sender !== 'Support', 'bg-blue-100 text-right ml-auto mr-4 w-2/3': message.sender === 'Support' }"
                      class="p-3 my-2 mx-4 rounded-md text-sm text-AR-Grey">
-                    {{ message.content }}
+                    <p v-html='message.content.replaceAll(/\n/g, "<br />")'></p>
                     <div class="text-xs text-gray-500 mt-1">
                         <span>{{ message.sender }}</span> -
                         <span>{{ formatDate(message.timestamp.replaceAll(",", "").substring(0, 10))
@@ -93,15 +96,16 @@ export default {
         };
     },
     async mounted() {
-        await this.checkIfLogged();
         await this.getUserTickets();
     },
     methods: {
         async checkIfLogged() {
-            await isLogged();
+            const userId = await isLogged();
             if (!loggedIn) {
                 location.href = `${this.langPrefix}login?redirect=${this.langPrefix}tickets`;
+                return -1;
             }
+            return userId;
         },
         validateCreateForm() {
             let errors = 0;
@@ -199,10 +203,7 @@ export default {
             this.currentTicketID = ticketID;
         },
         async getUserTickets() {
-            const userID = await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            const userID = await this.checkIfLogged();
 
             const response = await fetch("https://api.ardeco.app/ticket/user/" + `${userID}`, {
                 method: "GET",
@@ -220,10 +221,7 @@ export default {
             }
         },
         async sendNewMessage() {
-            await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            await this.checkIfLogged();
 
             const message = this.$refs.responseInput.value;
             const response = await fetch("https://api.ardeco.app/ticket/write/" + `${this.currentTicketID}`, {
@@ -244,10 +242,7 @@ export default {
             await this.receiveTicketDetails(this.currentTicketID);
         },
         async closeTicket() {
-            await isLogged();
-            if (!loggedIn) {
-                location.href = this.langPrefix + "login";
-            }
+            await this.checkIfLogged();
 
             const response = await fetch("https://api.ardeco.app/ticket/close/" + `${this.currentTicketID}`, {
                 method: "PUT",

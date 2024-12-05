@@ -44,27 +44,29 @@
     },
     "evan": {
       "role": "App and AR developer",
-      "internshipRole1": "Junior Frontend Developer"
+      "internshipRole1": "Junior frontend developer"
     },
     "hugo": {
       "role": "Project leader, polyvalent developer",
       "internshipRole1": "Backend Developer",
-      "internshipRole2": "Video Game Developer"
+      "internshipRole2": "Video game developer"
     },
     "louis": {
       "role": "App and web developer",
-      "internshipRole1": "Junior Software Developer",
-      "internshipRole2": "Web Developer",
-      "internshipRole3": "Video Game Developer"
+      "internshipRole1": "Junior software developer",
+      "internshipRole2": "Web developer",
+      "internshipRole3": "Video game developer"
     },
     "valentin": {
       "role": "Web developer, designer",
-      "internshipRole1": "Tech and Web Support",
-      "internshipRole2": "Frontend Developer",
-      "internshipRole3": "Junior Frontend Developer"
+      "internshipRole1": "Tech and web Support",
+      "internshipRole2": "Frontend developer",
+      "internshipRole3": "Junior frontend developer"
     },
     "hugo2": {
-      "role": "App and AR developer, designer"
+      "role": "App and AR developer, designer",
+      "internshipRole1": "Fullstack developer",
+      "internshipRole2": "Video game developer"
     }
   },
   "productPages": {
@@ -220,6 +222,7 @@
     },
     "blockedUsers": "Blocked users",
     "title": {
+      "profile": "Profile",
       "personalInformation": "Personal information",
       "galleries": "Designs",
       "favorites": "Favorites",
@@ -314,7 +317,7 @@
       "room": "Room",
       "style": "Style",
       "galleryIsEmpty": "Your haven't created a gallery yet, make one using our mobile app !",
-      "notificationsActive": "Notifications active",
+      "notificationsActive": "Active notifications",
       "publicLastName": "Last name is public",
       "publicEmailAddress": "Email is public",
       "newGalleries": "New galleries",
@@ -323,7 +326,9 @@
       "nameFilter": "Name",
       "roomFilter": "Room",
       "styleFilter": "Style",
-      "visibilityFilter": "Visibility"
+      "visibilityFilter": "Visibility",
+      "loading": "Loading",
+      "edit": "Edit"
     },
     "companies": {
       "addFurnitureToCatalog": "Add the furniture to the catalog",
@@ -667,7 +672,7 @@
     "actionSingOrPlu": "Action(s)",
     "details": "Details",
     "delete": "Delete",
-    "dimensions": "Dimensions (cm): ",
+    "dimensions": "Dimensions (cm) : ",
     "addToCart": "Add to cart",
     "addToFavorites": "Add to favorites",
     "removeFromFavorites": "Remove from favorites",
@@ -783,6 +788,7 @@
   },
   "notifications": {
     "infoNotReceived": "Error: we couldn't receive some of the page's informations, please try again later.",
+    "missingComment": "Error: you must provide a comment",
     "failedToPostComment": "Error: we couldn't post your comment, please try again later.",
     "failedToDeleteComment": "Error: we couldn't delete your comment, please try again later.",
     "failedToModifyComment": "Error: we couldn't modify your comment, please try again later.",
@@ -846,7 +852,8 @@
     "formSent": "Form sent !",
     "galleryBelongToUser": "This gallery is your creation !",
     "reportSuccessful": "Report sent !",
-    "pleaseReportDetails": "Writing in details the reason of your report would help us a lot !"
+    "pleaseReportDetails": "Writing in details the reason of your report would help us a lot !",
+    "forbiddenNotificationChange": "Visual notifications on the site are now mandatory."
   },
   "cart": {
     "title": "Shopping cart",

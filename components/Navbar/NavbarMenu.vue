@@ -109,7 +109,7 @@ async function logoutUser() {
     });
     imageSrc.value = nuxtApp.$changeProfilePicture().url;
     logout();
-    location.href = langPrefix;
+    location.reload();
 }
 
 async function getUSerPicture() {

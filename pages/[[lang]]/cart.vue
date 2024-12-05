@@ -1,14 +1,17 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <section class="py-24 relative">
         <div class="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
-            <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black"> {{ content.title }}</h2>
-                <div v-for="(item) in cartElements" class="rounded-3xl border-2 border-gray-200 p-4 lg:p-8 grid grid-cols-12 mb-8 max-lg:max-w-lg max-lg:mx-auto gap-y-4 ">
+            <h2 class="title font-manrope font-bold text-4xl leading-10 mb-8 text-center"> {{ content.title }}</h2>
+                <div v-for="(item) in cartElements" class="rounded-3xl border-2 border-gray-600 dark:border-gray-200 p-4 lg:p-8 grid grid-cols-12 mb-8 max-lg:max-w-lg max-lg:mx-auto gap-y-4 ">
                     <div class="col-span-12 lg:col-span-2 img box">
                         <img src="https://img.freepik.com/photos-premium/design-elegant-fauteuil-meuble-dans-piece-elegante-inspiration-interieur-moderne_947814-118218.jpg?semt=ais_hybrid" alt="speaker image" class="max-lg:w-full lg:w-[180px] rounded-lg object-cover">
                     </div>
                     <div class="col-span-12 lg:col-span-10 detail w-full lg:pl-3">
                         <div class="flex items-center justify-between w-full mb-4">
-                            <h5 class="font-manrope font-bold text-2xl leading-9 text-gray-900"> {{ item.furniture.name }}</h5>
+                            <h5 class="font-manrope font-bold text-2xl leading-9"> {{ item.furniture.name }}</h5>
                             <button v-if="item.quantity === 1" class="rounded-full group flex items-center justify-center focus-within:outline-red-500" @click="removeItem(item)">
                                 <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle class="fill-red-50 transition-all duration-500 group-hover:fill-red-400" cx="17" cy="17" r="17" fill="" />
@@ -21,7 +24,7 @@
                         <br><br><br>
                         <div class="flex justify-between items-center">
                             <div class="flex items-center gap-4">
-                                <button v-if="item.quantity > 1" class="group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300"
+                                <button v-if="item.quantity > 1" class="group rounded-[50px] border border-gray-600 dark:border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300"
                                 @click="removeItem(item)">
                                     <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                         width="18" height="19" viewBox="0 0 18 19" fill="none"
@@ -31,9 +34,9 @@
                                     </svg>
                                 </button>
                                 <input type="text" id="number"
-                                    class="border border-gray-200 rounded-full w-10 aspect-square outline-none text-gray-900 font-semibold text-sm py-1.5 px-3 bg-gray-100  text-center"
+                                    class="border border-gray-600 dark:border-gray-200 rounded-full w-10 aspect-square outline-none font-semibold text-sm py-1.5 px-3 bg-gray-100  text-center"
                                     :placeholder="`${item.quantity}`">
-                                <button class="group rounded-[50px] border border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300"
+                                <button class="group rounded-[50px] border border-gray-600 dark:border-gray-200 shadow-sm shadow-transparent p-2.5 flex items-center justify-center bg-white transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-300 focus-within:outline-gray-300"
                                 @click="addItem(item)">
                                     <svg class="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                         width="18" height="19" viewBox="0 0 18 19" fill="none"
@@ -47,8 +50,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col md:flex-row items-center md:items-center justify-between lg:px-6 pb-6 border-b border-gray-200 max-lg:max-w-lg max-lg:mx-auto">
-                    <h5 class="text-gray-900 font-manrope font-semibold text-2xl leading-9 w-full max-md:text-center max-md:mb-4"> {{ content.total }} </h5>
+                <div class="flex flex-col md:flex-row items-center md:items-center justify-between lg:px-6 pb-6 border-b border-gray-600 dark:border-gray-200 max-lg:max-w-lg max-lg:mx-auto">
+                    <h5 class="font-manrope font-semibold text-2xl leading-9 w-full max-md:text-center max-md:mb-4"> {{ content.total }} </h5>
 
                     <div class="flex items-center justify-between gap-5 ">
                         <h6 class="font-manrope font-bold text-3xl lead-10 text-indigo-600">{{ subTotal }}€ </h6>
@@ -86,7 +89,7 @@ async function checkLogin() {
     if (!userID) {
         let userID_tmp = await isLogged();
         if (!userID_tmp) {
-            location.href = `${langPrefix}login?redirect=${langPrefix}favGallery`;
+            location.href = `${langPrefix}login?redirect=${langPrefix}cart`;
             return;
         }
         userId.value = userID_tmp;

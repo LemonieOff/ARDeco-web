@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <Title>ARDeco - {{ content.title }}</Title>
+    </Head>
     <h1 class="text-center font-bold text-xl md:text-4xl my-8">{{ content.title }}</h1>
     <div v-if="userData.length > 0 && errorMessage === ''" class="flex flex-wrap justify-center gap-5">
         <div v-for="userData in userData" :key="userData.blocked_user_id"
@@ -54,7 +57,7 @@ async function checkLogin() {
     if (!userID) {
         let userID_tmp = await isLogged();
         if (!userID_tmp) {
-            location.href = `${langPrefix}login?redirect=${langPrefix}favGallery`;
+            location.href = `${langPrefix}login?redirect=${langPrefix}blockedUsers`;
             return;
         }
         userId.value = userID_tmp;

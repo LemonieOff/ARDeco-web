@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { isLogged, loggedIn } from "public/ts/checkLogin";
+import { isLogged, loggedIn, userID } from "public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 import CommentSection from "@/components/CommentSection.vue";
 import $ from "jquery";
@@ -94,14 +94,13 @@ export default {
         };
     },
     async mounted() {
-        await this.checkLogin();
         const id = this.$route.params.id;
+        await this.checkLogin();
         await this.getGallery(id);
         await this.getNumberOfLikes();
         await this.getLikeStatus();
         await this.getFavorites();
         await this.checkGalleryReport();
-        // console.log(this.galleryUserId, "/", this.userID)
 
         this.$nextTick(() => {
             this.notifications = this.$refs.notifications;
@@ -119,11 +118,16 @@ export default {
     },
     methods: {
         async checkLogin() {
-            const userID_TMP = await isLogged();
-            if (!loggedIn) {
-                location.href = this.$langPrefix + "login";
+            if (!userID) {
+                let userID_tmp = await isLogged();
+                if (!userID_tmp) {
+                    location.href = `${this.langPrefix}login?redirect=${this.langPrefix}gallery/${this.$route.params.id}`;
+                    return;
+                }
+                this.userID = userID_tmp;
+            } else {
+                this.userID = userID;
             }
-            this.userID = Number(userID_TMP);
         },
 
         async getGallery(id) {
@@ -149,7 +153,6 @@ export default {
                 console.log("RESULT : ", result);
                 this.GalleryData = result.data;
                 this.galleryUserId = this.GalleryData.user.id;
-                // console.log(this.galleryUserId, "/", this.userID)
             } catch (error) {
                 console.error(error.message);
                 this.errorMessage = error.message;
