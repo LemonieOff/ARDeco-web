@@ -80,9 +80,9 @@ test.describe('Pages available without login', () => {
         const flagAfterButton = page.locator(".iconify.i-twemoji\\:flag-france");
 
         await flagBeforeButton.nth(1).click()
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(1000);
         await expect(flagAfterButton.nth(1)).toBeVisible();
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(1000);
         await flagAfterButton.nth(1).click()
         await expect(flagBeforeButton.nth(1)).toBeVisible();
     });

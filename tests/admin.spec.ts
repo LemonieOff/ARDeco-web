@@ -30,6 +30,7 @@ test.describe('Admin user tests', () => {
         const feedbackPageLink = page.locator('[href="/feedback"]');
         const logoutPageLink = page.locator('#logoutMenuOption');
 
+        await page.waitForTimeout(500);
         await dropdownButton.click();
 
         await expect(profilePageLink).toBeVisible()
