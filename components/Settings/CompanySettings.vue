@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import {isLogged, loggedIn} from "@/public/ts/checkLogin";
 
 export default {
     name: "CompanySettings",

@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { isLogged, loggedIn, userID } from "public/ts/checkLogin";
+import { isLogged, loggedIn, userID } from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 import CommentSection from "@/components/CommentSection.vue";
 import $ from "jquery";

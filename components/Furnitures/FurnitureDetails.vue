@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { isLogged, userID } from "public/ts/checkLogin";
+import { isLogged, userID } from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {

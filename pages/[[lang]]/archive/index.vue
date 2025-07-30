@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { isLogged, userID } from "public/ts/checkLogin";
+import { isLogged, userID } from "@/public/ts/checkLogin";
 import { onMounted, ref } from "vue";
 import { useNuxtApp } from "#app";
 

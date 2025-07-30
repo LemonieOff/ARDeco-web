@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts" setup>
-import { isLogged, userID } from "public/ts/checkLogin";
+import { isLogged, userID } from "@/public/ts/checkLogin";
 import Notifications from "~/components/Notifications.vue";
 
 const notifications = useTemplateRef("notifications");
