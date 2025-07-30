@@ -125,7 +125,8 @@ export default {
             langPrefix: this.$langPrefix,
             selectedCard: 0,
             catalogList: [],
-            archiveList: []
+            archiveList: [],
+            backendHost: this.$config.public.backendHost,
         };
     },
     mounted() {
@@ -150,8 +151,8 @@ export default {
 
         async getCatalog() {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            console.log(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`)
-            const response = await fetch(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
+            console.log(`${this.backendHost}/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`)
+            const response = await fetch(`${this.backendHost}/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -171,7 +172,7 @@ export default {
 
         async getArchive() {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch(`https://api.ardeco.app/archive/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -191,7 +192,7 @@ export default {
 
         async archiveItem(itemInputID) {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/catalog/" + `${this.userID}` + "/remove/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/catalog/` + `${this.userID}` + "/remove/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -216,7 +217,7 @@ export default {
 
         async deleteArchivedItem(itemInputID) {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/" + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/` + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -237,7 +238,7 @@ export default {
 
         async restoreItem(itemInputID) {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/restore/" + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/restore/` + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -257,7 +258,7 @@ export default {
         },
 
         async getApiToken() {
-            const response = await fetch("https://api.ardeco.app/company/requestToken", {
+            const response = await fetch(`${this.backendHost}/company/requestToken`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -283,8 +284,8 @@ export default {
 
         async changeItemActiveness(CATALOG_ID, bool) {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            console.log("https://api.ardeco.app/catalog/" + `${this.userID}` + "/edit/" + `${CATALOG_ID}`);
-            const response = await fetch("https://api.ardeco.app/catalog/" + `${this.userID}` + "/edit/" + `${CATALOG_ID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            console.log(`${this.backendHost}/catalog/` + `${this.userID}` + "/edit/" + `${CATALOG_ID}`);
+            const response = await fetch(`${this.backendHost}/catalog/` + `${this.userID}` + "/edit/" + `${CATALOG_ID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -311,7 +312,7 @@ export default {
                 location.href = `${this.langPrefix}login?redirect=${this.langPrefix}company`;
             }
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/" + `${userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/` + `${userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"

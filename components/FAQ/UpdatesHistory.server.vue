@@ -34,6 +34,9 @@ const updatesData = ref<{
 }[]>([]);
 const content = nuxtApp.$content.productPages;
 
+const config = useRuntimeConfig();
+const backendHost = config.public.backendHost;
+
 const error = ref(content.updatesHistoryLoading);
 
 onMounted(async () => {
@@ -41,7 +44,7 @@ onMounted(async () => {
 });
 
 async function getUpdates() {
-    const response = await fetch("https://api.ardeco.app/changelog", {
+    const response = await fetch(`${backendHost}/changelog`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"

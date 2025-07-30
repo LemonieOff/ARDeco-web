@@ -92,7 +92,8 @@ export default {
             currentTicketID: null,
             currentTicketStatus: null,
             currentTicketTitle: "",
-            currentTicketDescription: ""
+            currentTicketDescription: "",
+            backendHost: this.$config.public.backendHost,
         };
     },
     async mounted() {
@@ -141,7 +142,7 @@ export default {
             const title = this.$refs.titleInput.value;
             const description = this.$refs.descriptionInput.value;
             const message = this.$refs.messageInput.value;
-            const response = await fetch("https://api.ardeco.app/ticket/create?mode=id", {
+            const response = await fetch(`${this.backendHost}/ticket/create?mode=id`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -174,7 +175,7 @@ export default {
                 location.href = this.langPrefix + "login";
             }
 
-            const response = await fetch("https://api.ardeco.app/ticket/" + `${ticketID}`, {
+            const response = await fetch(`${this.backendHost}/ticket/${ticketID}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -205,7 +206,7 @@ export default {
         async getUserTickets() {
             const userID = await this.checkIfLogged();
 
-            const response = await fetch("https://api.ardeco.app/ticket/user/" + `${userID}`, {
+            const response = await fetch(`${this.backendHost}/ticket/user/` + `${userID}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -224,7 +225,7 @@ export default {
             await this.checkIfLogged();
 
             const message = this.$refs.responseInput.value;
-            const response = await fetch("https://api.ardeco.app/ticket/write/" + `${this.currentTicketID}`, {
+            const response = await fetch(`${this.backendHost}/ticket/write/` + `${this.currentTicketID}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -244,7 +245,7 @@ export default {
         async closeTicket() {
             await this.checkIfLogged();
 
-            const response = await fetch("https://api.ardeco.app/ticket/close/" + `${this.currentTicketID}`, {
+            const response = await fetch(`${this.backendHost}/ticket/close/` + `${this.currentTicketID}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"

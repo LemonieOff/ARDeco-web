@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts" setup>
-import { isLogged, loggedIn, logout } from "public/ts/checkLogin";
+import { isLogged, loggedIn, logout } from "@/public/ts/checkLogin";
 
 const nuxtApp = useNuxtApp();
 const route = useRoute();
@@ -77,6 +77,9 @@ const content = nuxtApp.$content.navBar;
 const userId = ref<number | undefined | null>(null);
 const role = ref<string | null>("");
 const imageSrc = ref(nuxtApp.$profilePicture.url);
+
+const config = useRuntimeConfig();
+const backendHost = config.public.backendHost;
 
 const divRef = useTemplateRef("navbarDiv");
 const menuRef = useTemplateRef("navbarMenu");
@@ -103,7 +106,7 @@ function handleClickOutside(event: MouseEvent) {
 }
 
 async function logoutUser() {
-    await fetch("https://api.ardeco.app/logout", {
+    await fetch("${backendHost}/logout", {
         method: "GET",
         credentials: "include"
     });
@@ -119,7 +122,7 @@ async function getUSerPicture() {
         return;
     }
 
-    const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
+    const response = await fetch(`${backendHost}/profile_picture/user`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"

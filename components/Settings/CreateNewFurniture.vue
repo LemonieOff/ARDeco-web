@@ -135,7 +135,8 @@ export default {
                 brown: { name: "brown", hex: "#523C20", selected: false },
                 navy: { name: "navy", hex: "#000080", selected: false },
                 black: { name: "black", hex: "#2A303D", selected: false }
-            }
+            },
+            backendHost: this.$config.public.backendHost,
         }
     },
     mounted() {
@@ -220,8 +221,8 @@ export default {
                 return;
             }
 
-            console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`);
-            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            console.log(`${this.backendHost}/catalog/` + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`);
+            const response = await fetch(`${this.backendHost}/catalog/` + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
