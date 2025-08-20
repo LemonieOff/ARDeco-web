@@ -56,7 +56,7 @@
   
 
 <script>
-import {isLogged, loggedIn} from "public/ts/checkLogin";
+import {isLogged, loggedIn} from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
@@ -135,7 +135,8 @@ export default {
                 brown: { name: "brown", hex: "#523C20", selected: false },
                 navy: { name: "navy", hex: "#000080", selected: false },
                 black: { name: "black", hex: "#2A303D", selected: false }
-            }
+            },
+            backendHost: this.$config.public.backendHost,
         }
     },
     mounted() {
@@ -220,8 +221,7 @@ export default {
                 return;
             }
 
-            console.log('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`);
-            const response = await fetch('https://api.ardeco.app/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/catalog/${userID}/add?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -259,8 +259,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/ProfileSettings.scss";
-@import '@/styles/variables/ColorVariables.scss';
+@use "@/styles/ProfileSettings.scss";
+@use '@/styles/variables/ColorVariables.scss';
 
 .navbar-top-space {
     height: 10vh;
@@ -279,7 +279,7 @@ export default {
 }
 
 #furnitureImg {
-    border: 2px solid $primary-black;
+    border: 2px solid ColorVariables.$primary-black;
     height: 100%;
     width: auto;
     border-radius: 10px;
@@ -302,7 +302,7 @@ export default {
 
 .basicButton {
     text-align: center;
-    border: 1px solid $primary-black;
+    border: 1px solid ColorVariables.$primary-black;
     border-radius: 5px;
     height: 10%;
     width: 80%;
@@ -339,7 +339,7 @@ export default {
     font-size: 10px;
     cursor: pointer;
     display: inline-block;
-    border: 1px solid $primary-black;
+    border: 1px solid ColorVariables.$primary-black;
     border-radius: 5px;
     padding: 5px;
     margin: 5px 5px 10px;
@@ -348,12 +348,12 @@ export default {
 }
 
 .option label:hover {
-    background-color: $primary-black;
+    background-color: ColorVariables.$primary-black;
     color: white;
 }
 
 .option label.selected {
-    background-color: $primary-black;
+    background-color: ColorVariables.$primary-black;
     color: white;
 }
 

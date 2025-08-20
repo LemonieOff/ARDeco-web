@@ -66,8 +66,8 @@
     <Notifications ref="notifications" />
 </template>
 
-<script>
-import { isLogged, userID } from "public/ts/checkLogin";
+<script lang="ts">
+import { isLogged, userID } from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
@@ -86,7 +86,8 @@ export default {
             langPrefix: this.$langPrefix,
             catalogElement: {},
             elementIsNotArchived: false,
-            profileID: null
+            profileID: null,
+            backendHost: this.$config.public.backendHost,
         };
     },
     mounted() {
@@ -116,7 +117,7 @@ export default {
 
             try {
                 // Data du profil
-                const response_profile = await fetch(`https://api.ardeco.app/user/${userID}`, {
+                const response_profile = await fetch(`${this.backendHost}/user/${userID}`, {
                     method: "GET",
                     credentials: "include"
                 });
@@ -126,7 +127,7 @@ export default {
                 }
 
                 const data_profile = await response_profile.json();
-                if (data_profile.data.role = "company") {
+                if (data_profile.data.role === "company") {
                     this.profileID = data_profile.data.id;
                 }
             } catch (error) {
@@ -136,7 +137,7 @@ export default {
 
             try {
                 // Data du catalog
-                const response = await fetch("https://api.ardeco.app/catalog", {
+                const response = await fetch(`${this.backendHost}/catalog`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -159,7 +160,7 @@ export default {
 
                 console.log("this.catalogElement", this.catalogElement);
 
-                if (this.elementIsNotArchived == false) {
+                if (!this.elementIsNotArchived) {
                     this.lookIntoArchive();
                 }
 
@@ -185,7 +186,7 @@ export default {
             const userID = await this.checkLogin();
 
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/" + `${userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/${userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -218,7 +219,7 @@ export default {
         },
 
         async showDeleteOption() {
-            if (this.elementIsNotArchived == false) {
+            if (!this.elementIsNotArchived) {
                 document.getElementById("deleteButton").hidden = false;
                 document.getElementById("archiveButton").hidden = true;
                 document.getElementById("restoreButton").hidden = false;
@@ -226,7 +227,7 @@ export default {
         },
 
         async switchButtonDeleteVisibility() {
-            if (this.elementIsNotArchived == false) {
+            if (!this.elementIsNotArchived) {
                 document.getElementById("deleteButton").hidden = true;
                 document.getElementById("archiveButton").hidden = false;
                 document.getElementById("restoreButton").hidden = true;
@@ -243,7 +244,7 @@ export default {
             const userID = await this.checkLogin();
 
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/catalog/" + `${userID}` + "/remove/" + `${this.catalogElement.id}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/catalog/${userID}/remove/${this.catalogElement.id}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -271,7 +272,7 @@ export default {
             const userID = await this.checkLogin();
 
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/restore/" + `${userID}` + "/" + `${this.catalogElement.id}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/restore/` + `${userID}` + "/" + `${this.catalogElement.id}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -299,7 +300,7 @@ export default {
             const userID = await this.checkLogin();
 
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/" + `${userID}` + "/" + `${this.catalogElement.id}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/` + `${userID}` + "/" + `${this.catalogElement.id}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -326,7 +327,7 @@ export default {
         async addToFavorite() {
             await this.checkLogin();
 
-            const response = await fetch("https://api.ardeco.app/favorite/furniture/" + `${this.catalogElement.id}`, {
+            const response = await fetch(`${this.backendHost}/favorite/furniture/` + `${this.catalogElement.id}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -347,7 +348,7 @@ export default {
         async removeFromFavorite() {
             await this.checkLogin();
 
-            const response = await fetch("https://api.ardeco.app/favorite/furniture/" + `${this.catalogElement.id}`, {
+            const response = await fetch(`${this.backendHost}/favorite/furniture/` + `${this.catalogElement.id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -368,7 +369,7 @@ export default {
         async isElementInFavorites() {
             await this.checkLogin();
 
-            const response = await fetch("https://api.ardeco.app/favorite/furniture/", {
+            const response = await fetch(`${this.backendHost}/favorite/furniture/`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -395,7 +396,7 @@ export default {
 
             const FURNITURE_ID = Number(this.$route.params.id);
             const MODEL_ID = Number(this.catalogElement.colors[0].model_id);
-            const response = await fetch("https://api.ardeco.app/cart", {
+            const response = await fetch(`${this.backendHost}/cart`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -422,10 +423,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/variables/ColorVariables.scss';
+@use '@/styles/variables/ColorVariables.scss';
 
 .solidBorders {
-    border: 3px solid $primary-black;
+    border: 3px solid ColorVariables.$primary-black;
 }
 
 .roundedBorders {
@@ -433,25 +434,25 @@ export default {
 }
 
 .primaryButton {
-    background-color: $primary-black;
-    color: $primary-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$primary-white;
     transition: 0.25s;
 }
 
 .primaryButton:hover {
-    background-color: $primary-white;
-    color: $primary-black;
+    background-color: ColorVariables.$primary-white;
+    color: ColorVariables.$primary-black;
 }
 
 .secondaryButton {
-    background-color: $primary-light-blue;
+    background-color: ColorVariables.$primary-light-blue;
     transition: 0.25s;
 }
 
 .secondaryButton:hover {
-    background-color: $primary-white;
-    color: $secondary-blue;
-    border-color: $secondary-blue;
+    background-color: ColorVariables.$primary-white;
+    color: ColorVariables.$secondary-blue;
+    border-color: ColorVariables.$secondary-blue;
 }
 
 .deleteButton {
@@ -460,20 +461,20 @@ export default {
 }
 
 .deleteButton:hover {
-    background-color: $primary-white;
+    background-color: ColorVariables.$primary-white;
     color: #860000;
     border-color: #860000;
 }
 
 .statusElement {
-    background-color: $primary-green;
+    background-color: ColorVariables.$primary-green;
     transition: 0.25s;
 }
 
 .statusElement:hover {
-    background-color: $primary-white;
-    color: $primary-green;
-    border-color: $primary-green;
+    background-color: ColorVariables.$primary-white;
+    color: ColorVariables.$primary-green;
+    border-color: ColorVariables.$primary-green;
 }
 
 .adminButton {
@@ -496,14 +497,14 @@ export default {
 .errorHandler {
     font-style: normal;
     font-weight: bold;
-    color: $primary-red;
+    color: ColorVariables.$primary-red;
     text-align: center;
 }
 
 .successHandler {
     font-style: normal;
     font-weight: bold;
-    color: $primary-green;
+    color: ColorVariables.$primary-green;
     text-align: center;
 }
 
@@ -535,7 +536,7 @@ export default {
 
 .furnitureDetails {
     padding: 10%;
-    background-color: $secondary-white;
+    background-color: ColorVariables.$secondary-white;
     height: 35vh;
 
 }
@@ -598,20 +599,20 @@ export default {
 }
 
 .deleteButton {
-    background-color: $primary-red;
+    background-color: ColorVariables.$primary-red;
     transition: 0.25s;
 }
 
 .deleteButton:hover {
-    color: $primary-red;
-    background-color: $primary-white;
-    border-color: $primary-red;
+    color: ColorVariables.$primary-red;
+    background-color: ColorVariables.$primary-white;
+    border-color: ColorVariables.$primary-red;
 }
 
 @media screen and (max-width: 768px) {
 
     .solidBorders {
-        border: 1px solid $primary-black;
+        border: 1px solid ColorVariables.$primary-black;
     }
 
     .roundedBorders {

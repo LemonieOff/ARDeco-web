@@ -12,7 +12,7 @@
                  class="flex flex-col md:flex-row justify-around items-center overflow-auto">
                 <label v-for="i in 5" :key="i" class="flex flex-row-reverse md:flex-col w-fit">
                     <img :alt="`Profile picture ${i - 1}`"
-                         :src="`https://api.ardeco.app/profile_pictures/${i - 1}.png`" class="w-24 h-24" />
+                         :src="`${backendHost}/profile_pictures/${i - 1}.png`" class="w-24 h-24" />
                     <input v-model="selected_picture" :value="i - 1" class="mr-2 md:mt-2" name="select_image"
                            type="radio" />
                 </label>
@@ -41,6 +41,9 @@
 const nuxtApp = useNuxtApp();
 const content = nuxtApp.$content.profile;
 
+const config = useRuntimeConfig();
+const backendHost = config.public.backendHost;
+
 const props = defineProps({
     profile: {
         type: Object as PropType<{
@@ -59,7 +62,7 @@ const props = defineProps({
 
 const modal = useTemplateRef("profile_picture_modal");
 const display_modal = ref(false);
-const imageSrc = ref("https://api.ardeco.app/profile_pictures/0.png");
+const imageSrc = ref(`${backendHost}/profile_pictures/0.png`);
 const selected_picture = ref(props.profile ? props.profile.profile_picture_id : 0);
 
 onMounted(() => {
@@ -72,7 +75,7 @@ onMounted(() => {
     console.debug(props.profile);
 
     if (props.profile) {
-        imageSrc.value = `https://api.ardeco.app/profile_pictures/${props.profile.profile_picture_id}.png`;
+        imageSrc.value = `${backendHost}/profile_pictures/${props.profile.profile_picture_id}.png`;
     } else {
         selected_picture.value = 0;
     }
@@ -111,7 +114,7 @@ const confirmNewPicture = async () => {
 };
 
 const resetProfilePictureRequest = async () => {
-    const response = await fetch("https://api.ardeco.app/profile_picture/user", {
+    const response = await fetch(`${backendHost}/profile_picture/user`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
@@ -134,7 +137,7 @@ const changeProfilePictureRequest = async (value: number) => {
     const json = JSON.stringify({
         picture_id: number
     });
-    const response = await fetch("https://api.ardeco.app/profile_picture/user", {
+    const response = await fetch(`${backendHost}/profile_picture/user`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

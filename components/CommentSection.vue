@@ -7,7 +7,7 @@
     <div id="oldCommentSection" class="commentSection">
         <div v-for="singleComment in comments.slice().reverse()" :key="singleComment.id" class="comment">
             <div class="topCommentSection">
-                <NuxtImg :src="`https://api.ardeco.app/profile_pictures/${singleComment.user.profile_picture_id}.png`"
+                <NuxtImg :src="`${backendHost}/profile_pictures/${singleComment.user.profile_picture_id}.png`"
                          alt="Author profile picture"
                          class="icon"
                          height="50" width="50" />
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { isLogged, loggedIn } from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "@/public/ts/checkLogin";
 
 export default {
     name: "CommentSection",
@@ -60,13 +60,14 @@ export default {
     },
     data() {
         return {
-            imageSrc: "https://api.ardeco.app/profile_pictures/0.png",
+            imageSrc: `${this.$config.public.backendHost}/profile_pictures/0.png`,
             content: this.$content.comments,
             notificationMessages: this.$content.notifications,
             langPrefix: this.$langPrefix,
             comments: [],
             userId: null,
-            defaultUserPicture: "https://api.ardeco.app/profile_pictures/0.png"
+            defaultUserPicture: `${this.$config.public.backendHost}/profile_pictures/0.png`,
+            backendHost: this.$config.public.backendHost,
         };
     },
     mounted() {
@@ -80,7 +81,7 @@ export default {
     },
     methods: {
         async getUserPicture() {
-            const response = await fetch(`https://api.ardeco.app/profile_picture/user`, {
+            const response = await fetch(`${this.backendHost}/profile_picture/user`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -89,17 +90,17 @@ export default {
             });
             const result = await response.json();
             console.log(result);
-            if (result.code == 400) {
+            if (result.code === 400) {
                 this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
-            this.imageSrc = `https://api.ardeco.app/profile_pictures/${result.data.id}.png`;
+            this.imageSrc = `${this.backendHost}/profile_pictures/${result.data.id}.png`;
         },
         async getComments() {
             await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments", {
+            const response = await fetch(`${this.backendHost}/gallery/${this.galleryId}/comments`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -109,7 +110,7 @@ export default {
 
             const result = await response.json();
 
-            if (result.code == 400) {
+            if (result.code === 400) {
                 this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
             this.comments = result.data;
@@ -130,7 +131,7 @@ export default {
                 return;
             }
 
-            const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments", {
+            const response = await fetch(`${this.backendHost}/gallery/${this.galleryId}/comments`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -158,7 +159,7 @@ export default {
                 location.href = this.langPrefix + "login";
             }
 
-            const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments/" + `${commentId}`, {
+            const response = await fetch(`${this.backendHost}/gallery/${this.galleryId}/comments/${commentId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -189,8 +190,8 @@ export default {
                 modifyButton.hidden = true;
                 finishModifyButton.hidden = false;
             } else {
-                if (newMessage.length != 0) {
-                    const response = await fetch("https://api.ardeco.app/gallery/" + `${this.galleryId}` + "/comments/" + `${commentId}`, {
+                if (newMessage.length !== 0) {
+                    const response = await fetch(`${this.backendHost}/gallery/${this.galleryId}/comments/${commentId}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
@@ -221,13 +222,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/variables/ColorVariables.scss';
+@use '@/styles/variables/ColorVariables.scss';
 
 .icon {
     margin: 10px;
     max-height: 50px;
     border-radius: 50%;
-    border: 1px outset $primary-black;
+    border: 1px outset ColorVariables.$primary-black;
 }
 
 #newCommentSection {
@@ -247,7 +248,7 @@ export default {
 }
 
 #commentInput {
-    border: 1px outset $primary-black;
+    border: 1px outset ColorVariables.$primary-black;
     border-radius: 5px;
     width: 70%;
     margin-left: 2.5%;
@@ -264,7 +265,7 @@ export default {
     padding: 5px;
     max-height: 50px;
     border-radius: 10px;
-    background-color: $secondary-white;
+    background-color: ColorVariables.$secondary-white;
 }
 
 #sendComment:hover {
@@ -279,7 +280,7 @@ export default {
 }
 
 #Error {
-    color: $primary-red;
+    color: ColorVariables.$primary-red;
 }
 
 #Success {
@@ -316,7 +317,7 @@ export default {
     padding: 10px;
     border-radius: 5px;
     font-size: 14px;
-    border: 2px outset $primary-black;
+    border: 2px outset ColorVariables.$primary-black;
 }
 
 .deleteButton {
