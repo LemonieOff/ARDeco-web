@@ -222,13 +222,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/variables/ColorVariables.scss';
+@use '@/styles/variables/ColorVariables.scss';
 
 .icon {
     margin: 10px;
     max-height: 50px;
     border-radius: 50%;
-    border: 1px outset $primary-black;
+    border: 1px outset ColorVariables.$primary-black;
 }
 
 #newCommentSection {
@@ -248,7 +248,7 @@ export default {
 }
 
 #commentInput {
-    border: 1px outset $primary-black;
+    border: 1px outset ColorVariables.$primary-black;
     border-radius: 5px;
     width: 70%;
     margin-left: 2.5%;
@@ -265,7 +265,7 @@ export default {
     padding: 5px;
     max-height: 50px;
     border-radius: 10px;
-    background-color: $secondary-white;
+    background-color: ColorVariables.$secondary-white;
 }
 
 #sendComment:hover {
@@ -280,7 +280,7 @@ export default {
 }
 
 #Error {
-    color: $primary-red;
+    color: ColorVariables.$primary-red;
 }
 
 #Success {
@@ -317,7 +317,7 @@ export default {
     padding: 10px;
     border-radius: 5px;
     font-size: 14px;
-    border: 2px outset $primary-black;
+    border: 2px outset ColorVariables.$primary-black;
 }
 
 .deleteButton {

@@ -260,8 +260,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/ProfileSettings.scss";
-@import '@/styles/variables/ColorVariables.scss';
+@use "@/styles/ProfileSettings.scss";
+@use '@/styles/variables/ColorVariables.scss';
 
 .navbar-top-space {
     height: 10vh;
@@ -280,7 +280,7 @@ export default {
 }
 
 #furnitureImg {
-    border: 2px solid $primary-black;
+    border: 2px solid ColorVariables.$primary-black;
     height: 100%;
     width: auto;
     border-radius: 10px;
@@ -303,7 +303,7 @@ export default {
 
 .basicButton {
     text-align: center;
-    border: 1px solid $primary-black;
+    border: 1px solid ColorVariables.$primary-black;
     border-radius: 5px;
     height: 10%;
     width: 80%;
@@ -340,7 +340,7 @@ export default {
     font-size: 10px;
     cursor: pointer;
     display: inline-block;
-    border: 1px solid $primary-black;
+    border: 1px solid ColorVariables.$primary-black;
     border-radius: 5px;
     padding: 5px;
     margin: 5px 5px 10px;
@@ -349,12 +349,12 @@ export default {
 }
 
 .option label:hover {
-    background-color: $primary-black;
+    background-color: ColorVariables.$primary-black;
     color: white;
 }
 
 .option label.selected {
-    background-color: $primary-black;
+    background-color: ColorVariables.$primary-black;
     color: white;
 }
 

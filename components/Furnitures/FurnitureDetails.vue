@@ -66,7 +66,7 @@
     <Notifications ref="notifications" />
 </template>
 
-<script>
+<script lang="ts">
 import { isLogged, userID } from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
@@ -160,7 +160,7 @@ export default {
 
                 console.log("this.catalogElement", this.catalogElement);
 
-                if (this.elementIsNotArchived == false) {
+                if (!this.elementIsNotArchived) {
                     this.lookIntoArchive();
                 }
 
@@ -219,7 +219,7 @@ export default {
         },
 
         async showDeleteOption() {
-            if (this.elementIsNotArchived == false) {
+            if (!this.elementIsNotArchived) {
                 document.getElementById("deleteButton").hidden = false;
                 document.getElementById("archiveButton").hidden = true;
                 document.getElementById("restoreButton").hidden = false;
@@ -227,7 +227,7 @@ export default {
         },
 
         async switchButtonDeleteVisibility() {
-            if (this.elementIsNotArchived == false) {
+            if (!this.elementIsNotArchived) {
                 document.getElementById("deleteButton").hidden = true;
                 document.getElementById("archiveButton").hidden = false;
                 document.getElementById("restoreButton").hidden = true;
@@ -423,10 +423,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/variables/ColorVariables.scss';
+@use '@/styles/variables/ColorVariables.scss';
 
 .solidBorders {
-    border: 3px solid $primary-black;
+    border: 3px solid ColorVariables.$primary-black;
 }
 
 .roundedBorders {
@@ -434,25 +434,25 @@ export default {
 }
 
 .primaryButton {
-    background-color: $primary-black;
-    color: $primary-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$primary-white;
     transition: 0.25s;
 }
 
 .primaryButton:hover {
-    background-color: $primary-white;
-    color: $primary-black;
+    background-color: ColorVariables.$primary-white;
+    color: ColorVariables.$primary-black;
 }
 
 .secondaryButton {
-    background-color: $primary-light-blue;
+    background-color: ColorVariables.$primary-light-blue;
     transition: 0.25s;
 }
 
 .secondaryButton:hover {
-    background-color: $primary-white;
-    color: $secondary-blue;
-    border-color: $secondary-blue;
+    background-color: ColorVariables.$primary-white;
+    color: ColorVariables.$secondary-blue;
+    border-color: ColorVariables.$secondary-blue;
 }
 
 .deleteButton {
@@ -461,20 +461,20 @@ export default {
 }
 
 .deleteButton:hover {
-    background-color: $primary-white;
+    background-color: ColorVariables.$primary-white;
     color: #860000;
     border-color: #860000;
 }
 
 .statusElement {
-    background-color: $primary-green;
+    background-color: ColorVariables.$primary-green;
     transition: 0.25s;
 }
 
 .statusElement:hover {
-    background-color: $primary-white;
-    color: $primary-green;
-    border-color: $primary-green;
+    background-color: ColorVariables.$primary-white;
+    color: ColorVariables.$primary-green;
+    border-color: ColorVariables.$primary-green;
 }
 
 .adminButton {
@@ -497,14 +497,14 @@ export default {
 .errorHandler {
     font-style: normal;
     font-weight: bold;
-    color: $primary-red;
+    color: ColorVariables.$primary-red;
     text-align: center;
 }
 
 .successHandler {
     font-style: normal;
     font-weight: bold;
-    color: $primary-green;
+    color: ColorVariables.$primary-green;
     text-align: center;
 }
 
@@ -536,7 +536,7 @@ export default {
 
 .furnitureDetails {
     padding: 10%;
-    background-color: $secondary-white;
+    background-color: ColorVariables.$secondary-white;
     height: 35vh;
 
 }
@@ -599,20 +599,20 @@ export default {
 }
 
 .deleteButton {
-    background-color: $primary-red;
+    background-color: ColorVariables.$primary-red;
     transition: 0.25s;
 }
 
 .deleteButton:hover {
-    color: $primary-red;
-    background-color: $primary-white;
-    border-color: $primary-red;
+    color: ColorVariables.$primary-red;
+    background-color: ColorVariables.$primary-white;
+    border-color: ColorVariables.$primary-red;
 }
 
 @media screen and (max-width: 768px) {
 
     .solidBorders {
-        border: 1px solid $primary-black;
+        border: 1px solid ColorVariables.$primary-black;
     }
 
     .roundedBorders {

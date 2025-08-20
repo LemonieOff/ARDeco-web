@@ -60,5 +60,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/PagePresentation.scss";
+@use "@/styles/PagePresentation.scss";
 </style>

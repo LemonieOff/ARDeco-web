@@ -335,8 +335,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/ProfileSettings.scss";
-@import '@/styles/variables/ColorVariables.scss';
+@use "@/styles/ProfileSettings.scss";
+@use '@/styles/variables/ColorVariables.scss';
 
 .listSelection {
     margin-top: 5vh;
@@ -345,7 +345,7 @@ export default {
 }
 
 .showListButton {
-    border: 1px outset $primary-black;
+    border: 1px outset ColorVariables.$primary-black;
     border-radius: 5px;
     min-width: 35%;
     height: 100%;
@@ -354,8 +354,8 @@ export default {
 }
 
 .showListButton:hover {
-    background-color: $primary-black;
-    color: $absolute-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$absolute-white;
 }
 
 .placementRight {
@@ -363,8 +363,8 @@ export default {
 }
 
 .showListButton.active {
-    background-color: $primary-black;
-    color: $absolute-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$absolute-white;
 }
 
 .pageContent {
@@ -385,16 +385,16 @@ export default {
     margin-left: 5%;
     margin-top: 10%;
     min-height: 7.5%;
-    background-color: $primary-white;
-    border: 2px solid $primary-black;
+    background-color: ColorVariables.$primary-white;
+    border: 2px solid ColorVariables.$primary-black;
     border-radius: 5px;
     text-align: center;
     transition: 0.3s;
 }
 
 .buttonSettings:hover {
-    background-color: $primary-black;
-    color: $primary-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$primary-white;
 }
 
 .listArea {
@@ -406,25 +406,25 @@ export default {
 
 .catalog, .archive {
     text-align: center;
-    border: 2px solid $primary-black;
+    border: 2px solid ColorVariables.$primary-black;
     border-radius: 5px;
     width: 65vw;
-    background-color: $secondary-white;
+    background-color: ColorVariables.$secondary-white;
 }
 
 .grid-header {
     display: flex;
     font-weight: bold;
-    background-color: $primary-black;
-    color: $primary-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$primary-white;
 }
 
 .grid-item {
     flex: 1;
     padding-top: 15px;
     padding-bottom: 15px;
-    border-right: 1px solid $primary-gray;
-    border-bottom: 1px solid $primary-gray;
+    border-right: 1px solid ColorVariables.$primary-gray;
+    border-bottom: 1px solid ColorVariables.$primary-gray;
 }
 
 .no-right-border {
@@ -432,9 +432,9 @@ export default {
 }
 
 .actionButton {
-    color: $secondary-white;
+    color: ColorVariables.$secondary-white;
     padding: 5px;
-    border: 1px solid $primary-black;
+    border: 1px solid ColorVariables.$primary-black;
     border-radius: 5px;
     font-size: 12px;
 }
@@ -444,7 +444,7 @@ export default {
 }
 
 .redBackground {
-    background-color: $primary-red;
+    background-color: ColorVariables.$primary-red;
 }
 
 .greenBackground {

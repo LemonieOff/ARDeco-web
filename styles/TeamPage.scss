@@ -1,4 +1,5 @@
-@import 'variables/ColorVariables.scss';
+@use 'variables/ColorVariables.scss';
+@use 'sass:color';
 
 .profile-page-content {
     height: 100vh;
@@ -72,7 +73,7 @@
     margin-left: 40%;
     width: 20%;
     height: 0.417vw;
-    background: $timeline-active;
+    background: ColorVariables.$timeline-active;
     border-radius: 2.5vw;
 }
 
@@ -114,11 +115,11 @@
 }
 
 .timeline-inactive {
-    background: linear-gradient(90deg, $timeline-inactive, lighten($timeline-inactive, 10%));
+    background: linear-gradient(90deg, ColorVariables.$timeline-inactive, color.adjust(ColorVariables.$timeline-inactive, $lightness: 10%));
 }
 
 .timeline-active {
-    background: linear-gradient(90deg, $timeline-active, lighten($timeline-active, 10%));
+    background: linear-gradient(90deg, ColorVariables.$timeline-active, color.adjust(ColorVariables.$timeline-active, $lightness: 10%));
 }
 
 .timeline-active:hover {
@@ -135,12 +136,12 @@
 }
 
 .year-bubble-active {
-    background-color: $timeline-active;
-    box-shadow: 0 0 10px rgba($timeline-active, 0.5);
+    background-color: ColorVariables.$timeline-active;
+    box-shadow: 0 0 10px rgba(ColorVariables.$timeline-active, 0.5);
 }
 
 .year-bubble-inactive {
-    background-color: $timeline-inactive;
+    background-color: ColorVariables.$timeline-inactive;
 }
 
 .year-bubble-active:hover, .year-bubble-inactive:hover {
@@ -153,7 +154,7 @@
     width: 0;
     height: 0;
     border-top: 0.5vw solid transparent;
-    border-left: 1vw solid $timeline-active;
+    border-left: 1vw solid ColorVariables.$timeline-active;
     border-bottom: 0.5vw solid transparent;
 }
 
@@ -163,7 +164,7 @@
     width: 0;
     height: 0;
     border-top: 0.5vw solid transparent;
-    border-left: 1vw solid $timeline-inactive;
+    border-left: 1vw solid ColorVariables.$timeline-inactive;
     border-bottom: 0.5vw solid transparent;
 }
 
@@ -185,7 +186,7 @@
 }
 
 .year-2020:hover, .year-2023:hover {
-    color: $timeline-active;
+    color: ColorVariables.$timeline-active;
     transform: scale(1.1);
 }
 

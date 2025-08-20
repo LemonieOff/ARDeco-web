@@ -42,7 +42,7 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/variables/ColorVariables.scss';
+@use '@/styles/variables/ColorVariables.scss';
 
 .message-move,
 .message-enter-active,
@@ -57,10 +57,10 @@ defineExpose({
 }
 
 .success {
-    background: $primary-green;
+    background: ColorVariables.$primary-green;
 }
 
 .error {
-    background: $primary-red;
+    background: ColorVariables.$primary-red;
 }
 </style>
