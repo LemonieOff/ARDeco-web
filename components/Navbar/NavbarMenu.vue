@@ -106,7 +106,7 @@ function handleClickOutside(event: MouseEvent) {
 }
 
 async function logoutUser() {
-    await fetch("${backendHost}/logout", {
+    await fetch(`${backendHost}/logout`, {
         method: "GET",
         credentials: "include"
     });
