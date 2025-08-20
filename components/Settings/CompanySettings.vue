@@ -116,7 +116,7 @@ export default {
             const itemInputID = document.getElementById('itemInputID').value;
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
             console.log(`${this.backendHost}/catalog/` + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`);
-            const response = await fetch('${backendHost}/catalog/' + `${userID}` + '/remove/' + `${itemInputID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/catalog/${userID}/remove/${itemInputID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ export default {
 
             const result = await response.json();
             console.log(result);
-            if (result.code == 200) {
+            if (result.code === 200) {
                 document.getElementById('reponseText').innerHTML = result.description;
             } else {
                 document.getElementById('reponseText').innerHTML = result.description;
@@ -224,7 +224,7 @@ export default {
                 return;
             }
             console.log(`${this.backendHost}/catalog/` + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`);
-            const response = await fetch('${backendHost}/catalog/' + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/catalog/${userID}/add?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

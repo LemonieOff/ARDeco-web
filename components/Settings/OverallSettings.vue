@@ -210,7 +210,7 @@ export default {
             if (!loggedIn) {
                 location.href = `${this.langPrefix}login?redirect=${this.langPrefix}settings`;
             }
-            const response = await fetch(`${this.backendHost}/gallery/user/` + `${userID}`, {
+            const response = await fetch(`${this.backendHost}/gallery/user/${userID}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

@@ -206,7 +206,7 @@ export default {
         async getUserTickets() {
             const userID = await this.checkIfLogged();
 
-            const response = await fetch(`${this.backendHost}/ticket/user/` + `${userID}`, {
+            const response = await fetch(`${this.backendHost}/ticket/user/${userID}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
