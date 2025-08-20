@@ -81,7 +81,7 @@ export default {
     },
     methods: {
         async getUserPicture() {
-            const response = await fetch(`${backendHost}/profile_picture/user`, {
+            const response = await fetch(`${this.backendHost}/profile_picture/user`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -93,14 +93,14 @@ export default {
             if (result.code === 400) {
                 this.$refs.notifications.showError(this.notificationMessages.infoNotReceived);
             }
-            this.imageSrc = `${backendHost}/profile_pictures/${result.data.id}.png`;
+            this.imageSrc = `${this.backendHost}/profile_pictures/${result.data.id}.png`;
         },
         async getComments() {
             await isLogged();
             if (!loggedIn) {
                 location.href = this.langPrefix + "login";
             }
-            const response = await fetch("${backendHost}/gallery/" + `${this.galleryId}` + "/comments", {
+            const response = await fetch(`${this.backendHost}/gallery/${this.galleryId}/comments`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -131,7 +131,7 @@ export default {
                 return;
             }
 
-            const response = await fetch("${backendHost}/gallery/" + `${this.galleryId}` + "/comments", {
+            const response = await fetch(`${this.backendHost}/gallery/${this.galleryId}/comments`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -159,7 +159,7 @@ export default {
                 location.href = this.langPrefix + "login";
             }
 
-            const response = await fetch("${backendHost}/gallery/" + `${this.galleryId}` + "/comments/" + `${commentId}`, {
+            const response = await fetch(`${this.backendHost}/gallery/${this.galleryId}/comments/${commentId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -191,7 +191,7 @@ export default {
                 finishModifyButton.hidden = false;
             } else {
                 if (newMessage.length !== 0) {
-                    const response = await fetch("${backendHost}/gallery/" + `${this.galleryId}` + "/comments/" + `${commentId}`, {
+                    const response = await fetch(`${this.backendHost}/gallery/${this.galleryId}/comments/${commentId}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json"
