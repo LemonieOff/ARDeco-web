@@ -221,8 +221,7 @@ export default {
                 return;
             }
 
-            console.log(`${this.backendHost}/catalog/` + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`);
-            const response = await fetch(`${this.backendHost}/catalog/` + `${userID}` + '/add?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/catalog/${userID}/add?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

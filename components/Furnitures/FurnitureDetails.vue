@@ -186,7 +186,7 @@ export default {
             const userID = await this.checkLogin();
 
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch(`${this.backendHost}/archive/` + `${userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/${userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
