@@ -217,7 +217,7 @@
 </template>
 
 <script lang="ts" setup>
-import { isLogged, logout, userID } from "public/ts/checkLogin";
+import { isLogged, logout, userID } from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 import ProfilePicture from "~/components/UserProfile/ProfilePicture.vue";
 

@@ -79,7 +79,7 @@
 
 <script lang="ts" setup>
 import Notifications from "@/components/Notifications.vue";
-import { isLogged, loggedIn } from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "@/public/ts/checkLogin";
 
 const nuxtApp = useNuxtApp();
 const langPrefix = nuxtApp.$langPrefix;

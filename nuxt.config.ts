@@ -48,5 +48,11 @@ export default defineNuxtConfig({
         display: "swap",
         download: false
     },
-    compatibilityDate: "2024-10-16"
+    compatibilityDate: "2024-10-16",
+    runtimeConfig: {
+        public: {
+            frontendHost: process.env.FRONTEND_HOST,
+            backendHost: process.env.BACKEND_HOST
+        }
+    }
 });

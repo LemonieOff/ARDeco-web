@@ -146,7 +146,7 @@
 </template>
 
 <script lang="ts" setup>
-import { isLogged, logout } from "public/ts/checkLogin";
+import { isLogged, logout } from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 const nuxtApp = useNuxtApp();

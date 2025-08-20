@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { isLogged } from "public/ts/checkLogin";
+import { isLogged } from "@/public/ts/checkLogin";
 
 const nuxtApp = useNuxtApp();
 

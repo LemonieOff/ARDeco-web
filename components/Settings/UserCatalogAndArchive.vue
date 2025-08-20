@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { isLogged, loggedIn } from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
@@ -125,7 +125,8 @@ export default {
             langPrefix: this.$langPrefix,
             selectedCard: 0,
             catalogList: [],
-            archiveList: []
+            archiveList: [],
+            backendHost: this.$config.public.backendHost,
         };
     },
     mounted() {
@@ -150,8 +151,8 @@ export default {
 
         async getCatalog() {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            console.log(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`)
-            const response = await fetch(`https://api.ardeco.app/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
+            console.log(`${this.backendHost}/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`)
+            const response = await fetch(`${this.backendHost}/catalog/company/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -171,7 +172,7 @@ export default {
 
         async getArchive() {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch(`https://api.ardeco.app/archive/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/${this.userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -191,7 +192,7 @@ export default {
 
         async archiveItem(itemInputID) {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/catalog/" + `${this.userID}` + "/remove/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/catalog/${this.userID}/remove/${itemInputID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -216,7 +217,7 @@ export default {
 
         async deleteArchivedItem(itemInputID) {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/" + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/` + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -237,7 +238,7 @@ export default {
 
         async restoreItem(itemInputID) {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/restore/" + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/restore/` + `${this.userID}` + "/" + `${itemInputID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -257,7 +258,7 @@ export default {
         },
 
         async getApiToken() {
-            const response = await fetch("https://api.ardeco.app/company/requestToken", {
+            const response = await fetch(`${this.backendHost}/company/requestToken`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -283,8 +284,8 @@ export default {
 
         async changeItemActiveness(CATALOG_ID, bool) {
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            console.log("https://api.ardeco.app/catalog/" + `${this.userID}` + "/edit/" + `${CATALOG_ID}`);
-            const response = await fetch("https://api.ardeco.app/catalog/" + `${this.userID}` + "/edit/" + `${CATALOG_ID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            console.log(`${this.backendHost}/catalog/` + `${this.userID}` + "/edit/" + `${CATALOG_ID}`);
+            const response = await fetch(`${this.backendHost}/catalog/` + `${this.userID}` + "/edit/" + `${CATALOG_ID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -311,7 +312,7 @@ export default {
                 location.href = `${this.langPrefix}login?redirect=${this.langPrefix}company`;
             }
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch("https://api.ardeco.app/archive/" + `${userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/` + `${userID}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"
@@ -334,8 +335,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/styles/ProfileSettings.scss";
-@import '@/styles/variables/ColorVariables.scss';
+@use "@/styles/ProfileSettings.scss";
+@use '@/styles/variables/ColorVariables.scss';
 
 .listSelection {
     margin-top: 5vh;
@@ -344,7 +345,7 @@ export default {
 }
 
 .showListButton {
-    border: 1px outset $primary-black;
+    border: 1px outset ColorVariables.$primary-black;
     border-radius: 5px;
     min-width: 35%;
     height: 100%;
@@ -353,8 +354,8 @@ export default {
 }
 
 .showListButton:hover {
-    background-color: $primary-black;
-    color: $absolute-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$absolute-white;
 }
 
 .placementRight {
@@ -362,8 +363,8 @@ export default {
 }
 
 .showListButton.active {
-    background-color: $primary-black;
-    color: $absolute-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$absolute-white;
 }
 
 .pageContent {
@@ -384,16 +385,16 @@ export default {
     margin-left: 5%;
     margin-top: 10%;
     min-height: 7.5%;
-    background-color: $primary-white;
-    border: 2px solid $primary-black;
+    background-color: ColorVariables.$primary-white;
+    border: 2px solid ColorVariables.$primary-black;
     border-radius: 5px;
     text-align: center;
     transition: 0.3s;
 }
 
 .buttonSettings:hover {
-    background-color: $primary-black;
-    color: $primary-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$primary-white;
 }
 
 .listArea {
@@ -405,25 +406,25 @@ export default {
 
 .catalog, .archive {
     text-align: center;
-    border: 2px solid $primary-black;
+    border: 2px solid ColorVariables.$primary-black;
     border-radius: 5px;
     width: 65vw;
-    background-color: $secondary-white;
+    background-color: ColorVariables.$secondary-white;
 }
 
 .grid-header {
     display: flex;
     font-weight: bold;
-    background-color: $primary-black;
-    color: $primary-white;
+    background-color: ColorVariables.$primary-black;
+    color: ColorVariables.$primary-white;
 }
 
 .grid-item {
     flex: 1;
     padding-top: 15px;
     padding-bottom: 15px;
-    border-right: 1px solid $primary-gray;
-    border-bottom: 1px solid $primary-gray;
+    border-right: 1px solid ColorVariables.$primary-gray;
+    border-bottom: 1px solid ColorVariables.$primary-gray;
 }
 
 .no-right-border {
@@ -431,9 +432,9 @@ export default {
 }
 
 .actionButton {
-    color: $secondary-white;
+    color: ColorVariables.$secondary-white;
     padding: 5px;
-    border: 1px solid $primary-black;
+    border: 1px solid ColorVariables.$primary-black;
     border-radius: 5px;
     font-size: 12px;
 }
@@ -443,7 +444,7 @@ export default {
 }
 
 .redBackground {
-    background-color: $primary-red;
+    background-color: ColorVariables.$primary-red;
 }
 
 .greenBackground {

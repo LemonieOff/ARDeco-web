@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { isLogged, loggedIn } from "public/ts/checkLogin";
+import { isLogged, loggedIn } from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 
 export default {
@@ -116,7 +116,8 @@ export default {
             langPrefix: this.$langPrefix,
             galleryData: [],
             settings: [],
-            notificationMessages: this.$content.notifications
+            notificationMessages: this.$content.notifications,
+            backendHost: this.$config.public.backendHost,
         };
     },
     mounted() {
@@ -137,7 +138,7 @@ export default {
                 return;
             }
 
-            const response = await fetch("https://api.ardeco.app/settings", {
+            const response = await fetch(`${this.backendHost}/settings`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -167,7 +168,7 @@ export default {
             if (!loggedIn) {
                 location.href = `${this.langPrefix}login?redirect=${this.langPrefix}settings`;
             }
-            const response = await fetch("https://api.ardeco.app/settings", {
+            const response = await fetch(`${this.backendHost}/settings`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -209,7 +210,7 @@ export default {
             if (!loggedIn) {
                 location.href = `${this.langPrefix}login?redirect=${this.langPrefix}settings`;
             }
-            const response = await fetch("https://api.ardeco.app/gallery/user/" + `${userID}`, {
+            const response = await fetch(`${this.backendHost}/gallery/user/${userID}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

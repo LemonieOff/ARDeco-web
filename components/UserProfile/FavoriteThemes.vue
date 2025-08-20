@@ -20,5 +20,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~/styles/ProfileSettings.scss";
+@use "@/styles/ProfileSettings.scss";
 </style>

@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { isLogged, loggedIn, userID } from "public/ts/checkLogin";
+import { isLogged, loggedIn, userID } from "@/public/ts/checkLogin";
 import Notifications from "@/components/Notifications.vue";
 import CommentSection from "@/components/CommentSection.vue";
 import $ from "jquery";
@@ -380,7 +380,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/variables/ColorVariables.scss';
+@use '@/styles/variables/ColorVariables.scss';
 
 .title {
     text-align: center;
@@ -432,13 +432,13 @@ export default {
 }
 
 #confirmReport {
-    background-color: $primary-red;
+    background-color: ColorVariables.$primary-red;
 }
 
 #confirmReport:hover {
     background-color: #F4F4F4;
-    border: 1px solid $primary-red;
-    color: $primary-red;
+    border: 1px solid ColorVariables.$primary-red;
+    color: ColorVariables.$primary-red;
 }
 
 .yourCreation {
