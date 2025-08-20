@@ -244,7 +244,7 @@ export default {
             const userID = await this.checkLogin();
 
             const COMPANY_API_TOKEN = localStorage.getItem("COMPANY_API_TOKEN");
-            const response = await fetch(`${this.backendHost}/catalog/` + `${userID}` + "/remove/" + `${this.catalogElement.id}` + "?company_api_key=" + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/catalog/${userID}/remove/${this.catalogElement.id}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json"

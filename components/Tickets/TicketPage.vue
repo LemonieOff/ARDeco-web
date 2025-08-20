@@ -225,7 +225,7 @@ export default {
             await this.checkIfLogged();
 
             const message = this.$refs.responseInput.value;
-            const response = await fetch(`${this.backendHost}/ticket/write/` + `${this.currentTicketID}`, {
+            const response = await fetch(`${this.backendHost}/ticket/write/${this.currentTicketID}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"

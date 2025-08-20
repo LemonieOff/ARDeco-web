@@ -66,7 +66,7 @@ export default {
                 location.href = this.langPrefix + "login";
             }
             const COMPANY_API_TOKEN = localStorage.getItem('COMPANY_API_TOKEN');
-            const response = await fetch(`${this.backendHost}/archive/` + `${userID}` + '?company_api_key=' + `${COMPANY_API_TOKEN}`, {
+            const response = await fetch(`${this.backendHost}/archive/${userID}?company_api_key=${COMPANY_API_TOKEN}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
