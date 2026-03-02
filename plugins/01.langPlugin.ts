@@ -69,14 +69,16 @@ export default defineNuxtPlugin(async () => {
     const content = lang === "en" ? await import('@/src/lang/en.json') : await import('@/src/lang/fr.json');
 
     const result = {
-        urlLang: urlLang,
-        langPrefix: langPrefix,
-        rawLangPrefix: rawLangPrefix,
-        lang: lang,
+        urlLang,
+        langPrefix,
+        rawLangPrefix,
+        lang,
         langCookieValue: langCookie.value,
-        changeLang: changeLang,
-        content: content
+        changeLang,
+        content
     };
+
+    console.log(result);
 
     if (import.meta.client) console.debug("Lang plugin result :", result);
 
