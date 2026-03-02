@@ -2,7 +2,7 @@
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
-    modules: ["@nuxtjs/tailwindcss", "@nuxt/image", "@nuxt/icon", "@nuxtjs/google-fonts"],
+    modules: ["@nuxt/image", "@nuxt/icon", "@nuxtjs/google-fonts"],
     icon: {
         serverBundle: {
             collections: []
@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     css: ["@/assets/css/main.css"],
     postcss: {
         plugins: {
-            tailwindcss: {},
+            "@tailwindcss/postcss": {},
             autoprefixer: {},
             cssnano: {}
         }

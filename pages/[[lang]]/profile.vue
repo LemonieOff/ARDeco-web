@@ -4,14 +4,14 @@
     </Head>
     <div class="mt-8 mb-4">
         <div v-if="loading"
-             class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-6 w-1/3 mx-auto text-center rounded-lg">
+             class="bg-port-brown/20 text-AR-Grey dark:text-AR-Beige p-6 w-1/3 mx-auto text-center rounded-lg">
             {{ content.loading }}
         </div>
         <div v-else class="flex flex-col items-center justify-center">
             <ProfilePicture :profile=profile />
 
             <div
-                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                class="bg-port-brown/20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
                 <h2 class="mb-4 font-bold text-xl">{{ content.title.personalInformation }}</h2>
                 <div class="mb-4">
                     <label class="block text-sm font-bold mb-2" for="email">
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div
-                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                class="bg-port-brown/20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
                 <h2 class="mb-4 font-bold text-xl">{{ content.title.galleries }}</h2>
                 <div class="mb-4 flex flex-col md:flex-row justify-between">
                     <div class="flex flex-col md:w-5/12 mb-4 md:mb-0">
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div
-                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                class="bg-port-brown/20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
                 <h2 class="mb-4 font-bold text-xl">{{ content.title.favorites }}</h2>
                 <div class="mb-4 flex flex-col md:flex-row justify-between">
                     <div class="flex flex-col md:w-5/12 mb-4 md:mb-0">
@@ -141,7 +141,7 @@
                 </div>
             </div>
             <div
-                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                class="bg-port-brown/20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
                 <h2 class="mb-4 font-bold text-xl">{{ content.title.orders }}</h2>
                 <div class="flex flex-col w-12/12 mb-4 md:mb-0">
                         <span class="block text-sm font-bold mb-2">
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div
-                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
+                class="bg-port-brown/20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem] mb-8">
                 <h2 class="mb-4 font-bold text-xl">{{ content.title.changePassword }}</h2>
                 <div class="mb-4">
                     <label class="block text-sm font-bold mb-2" for="password">
@@ -188,7 +188,7 @@
                 </div>
             </div>
             <div
-                class="bg-port-brown bg-opacity-20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem]">
+                class="bg-port-brown/20 text-AR-Grey dark:text-AR-Beige p-8 rounded-lg shadow-md w-80 sm:w-[32rem] lg:w-[48rem]">
                 <h2 class="mb-4 font-bold text-xl">{{ content.title.confidentiality }}</h2>
                 <div class="mb-4 flex flex-col md:flex-row justify-between">
                     <div class="flex flex-col md:w-5/12 mb-4 md:mb-0">
@@ -365,7 +365,8 @@ const editPersonalData = async () => {
                 firstname: firstNameVal.value,
                 lastname: lastNameVal.value,
                 city: cityVal.value,
-                phone: phoneVal.value
+                phone: phoneVal.value,
+
             }; // Temporary update values with local ones
             if (notifications.value) {
                 notifications.value.showSuccess(notificationsMessages.informationsUpdated);

@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.js";
 
 @layer base {
     html {
@@ -21,7 +20,7 @@
     }
 
     input[disabled] {
-        @apply bg-opacity-50 shadow-none border-0;
+        @apply bg-AR-Beige/50 dark:bg-AR-Dark-Grey/50 shadow-none border-0;
     }
 
     button {
